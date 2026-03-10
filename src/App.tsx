@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import Faq from "./pages/Faq";
 import MentionsLegales from "./pages/MentionsLegales";
 import Realisations from "./pages/Realisations";
+import PlanDuSite from "./pages/PlanDuSite";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/mentions-legales" element={<MentionsLegales />} />
+          <Route path="/plan-du-site" element={<PlanDuSite />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

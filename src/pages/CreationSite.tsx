@@ -1,26 +1,32 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Monitor, Smartphone, TrendingUp, Zap, Building2, User, Wrench, ShoppingCart, ChevronRight } from "lucide-react";
+import { Monitor, Smartphone, TrendingUp, Zap, Building2, User, Wrench, ShoppingCart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import heroCreation from "@/assets/hero-creation-site.png";
 
 const CreationSite = () => (
   <PageLayout>
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mx-auto max-w-3xl text-center">
-          <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-            Créez un site web qui <span className="text-gradient">attire des clients</span>
-          </h1>
-          <p className="mb-8 text-lg text-muted-foreground">
-            Nous concevons des sites modernes, rapides et optimisés SEO pour les PME et indépendants.
-          </p>
-          <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
-            <Link to="/contact">Obtenir un devis gratuit</Link>
-          </Button>
-        </motion.div>
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+            <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
+              Créez un site web qui <span className="text-gradient">attire des clients</span>
+            </h1>
+            <p className="mb-8 text-lg text-muted-foreground">
+              Nous concevons des sites modernes, rapides et optimisés SEO pour les PME et indépendants.
+            </p>
+            <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+              <Link to="/contact">Devis création de site</Link>
+            </Button>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
+            <img src={heroCreation} alt="Création de site web professionnel" className="w-full max-w-lg drop-shadow-2xl" />
+          </motion.div>
+        </div>
       </div>
     </section>
 
@@ -74,7 +80,7 @@ const CreationSite = () => (
         <h2 className="mb-4 text-3xl font-extrabold text-primary-foreground">Prêt à lancer votre projet ?</h2>
         <p className="mb-8 text-primary-foreground/80">Demandez un devis gratuit et sans engagement.</p>
         <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
-          <Link to="/contact">Demander un devis gratuit</Link>
+          <Link to="/contact">Devis création de site</Link>
         </Button>
       </div>
     </section>

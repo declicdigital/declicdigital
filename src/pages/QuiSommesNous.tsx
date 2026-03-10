@@ -4,20 +4,26 @@ import { Heart, Target, Rocket } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import heroAbout from "@/assets/hero-about.png";
 
 const QuiSommesNous = () => (
   <PageLayout>
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mx-auto max-w-3xl text-center">
-          <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-            L'histoire de <span className="text-gradient">Déclic Digital</span>
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Une agence fondée par la passion du web et la conviction que chaque entreprise mérite d'être visible.
-          </p>
-        </motion.div>
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+            <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
+              L'histoire de <span className="text-gradient">Déclic Digital</span>
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Une agence fondée par la passion du web et la conviction que chaque entreprise mérite d'être visible.
+            </p>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
+            <img src={heroAbout} alt="L'équipe Déclic Digital" className="w-full max-w-lg drop-shadow-2xl" />
+          </motion.div>
+        </div>
       </div>
     </section>
 
