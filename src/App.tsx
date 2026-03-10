@@ -11,6 +11,7 @@ import QuiSommesNous from "./pages/QuiSommesNous";
 import Contact from "./pages/Contact";
 import Faq from "./pages/Faq";
 import MentionsLegales from "./pages/MentionsLegales";
+import Realisations from "./pages/Realisations";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/audit-seo-gratuit" element={<AuditSeo />} />
           <Route path="/creation-site-web" element={<CreationSite />} />
           <Route path="/referencement-seo" element={<ReferencementSeo />} />
+          <Route path="/realisations" element={<Realisations />} />
           <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />

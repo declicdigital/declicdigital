@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Phone, Mail } from "lucide-react";
 import logo from "@/assets/logo-declic-digital.png";
 
 const Footer = () => (
@@ -11,6 +12,14 @@ const Footer = () => (
           <p className="text-sm text-primary-foreground/70 leading-relaxed">
             Déclic Digital accompagne les PME et petites entreprises partout en France pour développer leur visibilité en ligne.
           </p>
+          <div className="space-y-2 text-sm text-primary-foreground/70">
+            <a href="tel:0602228939" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
+              <Phone size={14} /> 06.02.22.89.39
+            </a>
+            <a href="mailto:contact@declicdigital.net" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
+              <Mail size={14} /> contact@declicdigital.net
+            </a>
+          </div>
         </div>
 
         {/* Services */}
@@ -24,13 +33,18 @@ const Footer = () => (
           </ul>
         </div>
 
-        {/* Pages */}
+        {/* Sitemap */}
         <div>
-          <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-primary-foreground/50">Pages</h3>
+          <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-primary-foreground/50">Plan du site</h3>
           <ul className="space-y-2 text-sm">
+            <li><Link to="/" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Accueil</Link></li>
+            <li><Link to="/creation-site-web" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Création de site</Link></li>
+            <li><Link to="/referencement-seo" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Référencement SEO</Link></li>
+            <li><Link to="/audit-seo-gratuit" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Audit SEO gratuit</Link></li>
+            <li><Link to="/realisations" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Réalisations</Link></li>
             <li><Link to="/qui-sommes-nous" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Qui sommes-nous</Link></li>
-            <li><Link to="/faq" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">FAQ</Link></li>
             <li><Link to="/contact" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Contact</Link></li>
+            <li><Link to="/faq" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">FAQ</Link></li>
           </ul>
         </div>
 
