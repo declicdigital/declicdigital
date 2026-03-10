@@ -25,7 +25,7 @@ const faqItems = [
   { q: "Proposez-vous la création de contenu ?", a: "Oui, nous pouvons rédiger des textes optimisés SEO pour votre site, vos pages de services et vos articles de blog." },
   { q: "Comment se passe la collaboration ?", a: "Nous commençons par un échange pour comprendre vos besoins. Puis nous proposons une maquette, développons le site et l'optimisons pour le SEO." },
   { q: "Pourquoi choisir Déclic Digital ?", a: "Nous sommes spécialisés dans l'accompagnement des PME. Notre approche est transparente, orientée résultats et adaptée aux budgets des petites entreprises." },
-  { q: "Y a-t-il un engagement de durée ?", a: "Non, nous ne proposons pas de contrats avec engagement. Vous êtes libre de continuer ou d'arrêter notre collaboration à tout moment." },
+  { q: "Y a-t-il un engagement de durée ?", a: "Oui, nous proposons un engagement de 6 mois renouvelable. Cette durée permet de mettre en place une stratégie efficace et d'obtenir des résultats concrets et mesurables." },
 ];
 
 const Faq = () => (
