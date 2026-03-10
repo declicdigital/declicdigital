@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import heroFaq from "@/assets/hero-faq.png";
 
 const faqItems = [
   { q: "Combien coûte un site web ?", a: "Le prix varie selon la complexité du projet. Un site vitrine professionnel commence à partir de quelques centaines d'euros. Nous adaptons chaque devis à vos besoins et votre budget." },
@@ -31,15 +32,20 @@ const faqItems = [
 const Faq = () => (
   <PageLayout>
     <section className="gradient-hero py-16 md:py-24">
-      <div className="container text-center">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
-            Questions <span className="text-gradient">fréquentes</span>
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Retrouvez les réponses aux questions les plus posées sur la création de site web et le référencement SEO.
-          </p>
-        </motion.div>
+      <div className="container">
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+            <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
+              Questions <span className="text-gradient">fréquentes</span>
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Retrouvez les réponses aux questions les plus posées sur la création de site web et le référencement SEO.
+            </p>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
+            <img src={heroFaq} alt="Questions fréquentes" className="w-full max-w-lg drop-shadow-2xl" />
+          </motion.div>
+        </div>
       </div>
     </section>
 

@@ -54,7 +54,7 @@ const Index = () => {
                   <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="rounded-full px-8 font-semibold">
-                  <Link to="/contact">Obtenir un devis gratuit</Link>
+                  <Link to="/contact">Devis création de site</Link>
                 </Button>
               </div>
             </motion.div>

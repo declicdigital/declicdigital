@@ -54,11 +54,7 @@ const Realisations = () => {
       {/* Hero */}
       <section className="gradient-hero py-16 md:py-24">
         <div className="container text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">
               Portfolio
             </span>
@@ -156,13 +152,13 @@ const Realisations = () => {
             Votre projet sera le prochain ?
           </h2>
           <p className="mx-auto mb-8 max-w-lg text-primary-foreground/80">
-            Contactez-nous pour discuter de votre projet et obtenir un devis gratuit.
+            Contactez-nous pour discuter de votre projet et obtenir un devis.
           </p>
           <a
             href="/contact"
             className="inline-block gradient-primary rounded-full px-8 py-3 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity"
           >
-            Demander un devis
+            Devis création de site
           </a>
         </div>
       </section>

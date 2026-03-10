@@ -35,6 +35,7 @@ const App = () => (
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />
           <Route path="/mentions-legales" element={<MentionsLegales />} />
+          <Route path="/plan-du-site" element={<PlanDuSite />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

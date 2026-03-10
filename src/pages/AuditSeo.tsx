@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Search, FileText, Users, Lightbulb, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -6,26 +5,32 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import heroAudit from "@/assets/hero-audit.png";
 
 const AuditSeo = () => (
   <PageLayout>
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
-      <div className="container text-center">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">
-            100% gratuit · Sans engagement
-          </span>
-          <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-            Recevez votre <span className="text-gradient">audit SEO gratuit</span>
-          </h1>
-          <p className="mx-auto mb-8 max-w-2xl text-lg text-muted-foreground">
-            Découvrez pourquoi votre site n'apparaît pas sur Google et comment améliorer votre visibilité.
-          </p>
-          <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
-            <a href="#formulaire-audit">Demander mon audit SEO</a>
-          </Button>
-        </motion.div>
+      <div className="container">
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+            <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">
+              100% gratuit · Sans engagement
+            </span>
+            <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
+              Recevez votre <span className="text-gradient">audit SEO gratuit</span>
+            </h1>
+            <p className="mb-8 max-w-2xl text-lg text-muted-foreground">
+              Découvrez pourquoi votre site n'apparaît pas sur Google et comment améliorer votre visibilité.
+            </p>
+            <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+              <a href="#formulaire-audit">Demander mon audit SEO</a>
+            </Button>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
+            <img src={heroAudit} alt="Audit SEO gratuit" className="w-full max-w-lg drop-shadow-2xl" />
+          </motion.div>
+        </div>
       </div>
     </section>
 

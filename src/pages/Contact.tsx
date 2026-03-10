@@ -5,20 +5,26 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import heroContact from "@/assets/hero-contact.png";
 
 const Contact = () => (
   <PageLayout>
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
-      <div className="container text-center">
-        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
-            Parlez-nous de votre <span className="text-gradient">projet</span>
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé.
-          </p>
-        </motion.div>
+      <div className="container">
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+            <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
+              Parlez-nous de votre <span className="text-gradient">projet</span>
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé.
+            </p>
+          </motion.div>
+          <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
+            <img src={heroContact} alt="Contactez Déclic Digital" className="w-full max-w-lg drop-shadow-2xl" />
+          </motion.div>
+        </div>
       </div>
     </section>
 
@@ -26,7 +32,7 @@ const Contact = () => (
     <SectionWrapper>
       <div className="grid gap-12 lg:grid-cols-5">
         <div className="lg:col-span-3">
-          <h2 className="mb-6 text-2xl font-extrabold">Demandez votre devis gratuit</h2>
+          <h2 className="mb-6 text-2xl font-extrabold">Demandez votre devis pour création de site</h2>
           <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
             <div className="grid gap-4 sm:grid-cols-2">
               <Input placeholder="Votre nom" className="rounded-xl" required />
@@ -38,7 +44,7 @@ const Contact = () => (
             </div>
             <Textarea placeholder="Décrivez votre projet..." className="rounded-xl min-h-[120px]" required />
             <Button type="submit" size="lg" className="w-full gradient-primary rounded-full text-primary-foreground font-semibold shadow-lg hover:opacity-90">
-              <CheckCircle size={18} className="mr-2" /> Obtenir un devis gratuit
+              <CheckCircle size={18} className="mr-2" /> Obtenir mon devis création de site
             </Button>
           </form>
         </div>
