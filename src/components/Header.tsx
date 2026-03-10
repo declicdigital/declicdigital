@@ -20,7 +20,7 @@ const Header = () => {
   return (
     <>
       {/* Top bar with contact info */}
-      <div className="hidden border-b border-border bg-foreground text-primary-foreground text-xs md:block">
+      <div className="hidden border-b border-border gradient-miami text-primary-foreground text-xs md:block">
         <div className="container flex h-9 items-center justify-end gap-6">
           <a href="tel:0602228939" className="flex items-center gap-1.5 hover:text-accent transition-colors">
             <Phone size={13} /> 06.02.22.89.39
