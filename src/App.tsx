@@ -29,6 +29,7 @@ const App = () => (
           <Route path="/audit-seo-gratuit" element={<AuditSeo />} />
           <Route path="/creation-site-web" element={<CreationSite />} />
           <Route path="/referencement-seo" element={<ReferencementSeo />} />
+          <Route path="/realisations" element={<Realisations />} />
           <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />
