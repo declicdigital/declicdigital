@@ -15,7 +15,7 @@ const faqItems = [
   { q: "Mon site actuel peut-il être amélioré ?", a: "Dans la plupart des cas, oui. Notre audit gratuit analyse votre site et identifie les axes d'amélioration prioritaires." },
   { q: "Proposez-vous la maintenance du site ?", a: "Oui, nous proposons des forfaits de maintenance incluant les mises à jour, la sécurité et le suivi des performances." },
   { q: "Travaillez-vous avec des PME de toute la France ?", a: "Oui, nous accompagnons des entreprises partout en France. Nos échanges se font par visioconférence, email et téléphone." },
-  { q: "Quelles technologies utilisez-vous ?", a: "Nous utilisons WordPress, Shopify, Webflow et des technologies sur mesure selon les besoins du projet. Chaque solution est choisie pour ses performances." },
+  { q: "Quelles technologies utilisez-vous ?", a: "Nous utilisons WordPress, Shopify, Lovable, Base44 et des technologies sur mesure selon les besoins du projet. Chaque solution est choisie pour ses performances." },
   { q: "Le site sera-t-il adapté au mobile ?", a: "Tous nos sites sont responsive : ils s'adaptent parfaitement aux smartphones, tablettes et ordinateurs de bureau." },
   { q: "Que comprend l'audit SEO gratuit ?", a: "L'audit inclut une analyse technique, une étude des mots clés, une analyse concurrentielle et des recommandations concrètes d'amélioration." },
   { q: "Puis-je modifier mon site moi-même ?", a: "Oui, nous créons des sites faciles à gérer. Nous vous formons à l'utilisation de votre site pour que vous puissiez le mettre à jour en autonomie." },
@@ -25,7 +25,7 @@ const faqItems = [
   { q: "Proposez-vous la création de contenu ?", a: "Oui, nous pouvons rédiger des textes optimisés SEO pour votre site, vos pages de services et vos articles de blog." },
   { q: "Comment se passe la collaboration ?", a: "Nous commençons par un échange pour comprendre vos besoins. Puis nous proposons une maquette, développons le site et l'optimisons pour le SEO." },
   { q: "Pourquoi choisir Déclic Digital ?", a: "Nous sommes spécialisés dans l'accompagnement des PME. Notre approche est transparente, orientée résultats et adaptée aux budgets des petites entreprises." },
-  { q: "Y a-t-il un engagement de durée ?", a: "Non, nous ne proposons pas de contrats avec engagement. Vous êtes libre de continuer ou d'arrêter notre collaboration à tout moment." },
+  { q: "Y a-t-il un engagement de durée ?", a: "Oui, nous proposons un engagement de 6 mois renouvelable. Cette durée permet de mettre en place une stratégie efficace et d'obtenir des résultats concrets et mesurables." },
 ];
 
 const Faq = () => (

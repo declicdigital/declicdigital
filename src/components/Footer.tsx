@@ -49,8 +49,9 @@ const Footer = () => (
         </div>
       </div>
 
-      <div className="mt-10 border-t border-primary-foreground/10 pt-6 text-center text-xs text-primary-foreground/40">
-        © {new Date().getFullYear()} Déclic Digital. Tous droits réservés.
+      <div className="mt-10 border-t border-primary-foreground/10 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-primary-foreground/40">
+        <span>© {new Date().getFullYear()} Déclic Digital. Tous droits réservés.</span>
+        <Link to="/mentions-legales" className="hover:text-primary-foreground transition-colors">Mentions légales</Link>
       </div>
     </div>
   </footer>

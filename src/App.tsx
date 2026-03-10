@@ -10,6 +10,7 @@ import ReferencementSeo from "./pages/ReferencementSeo";
 import QuiSommesNous from "./pages/QuiSommesNous";
 import Contact from "./pages/Contact";
 import Faq from "./pages/Faq";
+import MentionsLegales from "./pages/MentionsLegales";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />
+          <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
