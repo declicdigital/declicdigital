@@ -18,8 +18,19 @@ const Header = () => {
   const location = useLocation();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-lg">
-      <div className="container flex h-16 items-center justify-between md:h-20">
+    <>
+      {/* Top bar with contact info */}
+      <div className="hidden border-b border-border bg-foreground text-primary-foreground text-xs md:block">
+        <div className="container flex h-9 items-center justify-end gap-6">
+          <a href="tel:0602228939" className="flex items-center gap-1.5 hover:text-accent transition-colors">
+            <Phone size={13} /> 06.02.22.89.39
+          </a>
+          <a href="mailto:contact@declicdigital.net" className="flex items-center gap-1.5 hover:text-accent transition-colors">
+            <Mail size={13} /> contact@declicdigital.net
+          </a>
+        </div>
+      </div>
+      <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-lg">
         <Link to="/" className="flex items-center gap-2">
           <img src={logo} alt="Déclic Digital" className="h-10 w-auto md:h-12" />
         </Link>
