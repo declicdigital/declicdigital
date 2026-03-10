@@ -7,7 +7,7 @@ const Footer = () => (
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
         {/* Brand */}
         <div className="space-y-4">
-          <img src={logo} alt="Déclic Digital" className="h-10 brightness-0 invert" />
+          <img src="/lovable-uploads/f8f234eb-f386-4910-a498-0700da88027e.png" alt="Déclic Digital" className="h-10" />
           <p className="text-sm text-primary-foreground/70 leading-relaxed">
             Déclic Digital accompagne les PME et petites entreprises partout en France pour développer leur visibilité en ligne.
           </p>
