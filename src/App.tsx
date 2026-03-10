@@ -10,6 +10,7 @@ import ReferencementSeo from "./pages/ReferencementSeo";
 import QuiSommesNous from "./pages/QuiSommesNous";
 import Contact from "./pages/Contact";
 import Faq from "./pages/Faq";
+import MentionsLegales from "./pages/MentionsLegales";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
