@@ -46,8 +46,8 @@ const Contact = () => (
           <h2 className="text-2xl font-extrabold">Nos coordonnées</h2>
           <div className="space-y-4">
             {[
-              { icon: Mail, label: "Email", value: "contact@declic-digital.fr" },
-              { icon: Phone, label: "Téléphone", value: "Sur rendez-vous" },
+              { icon: Mail, label: "Email", value: "contact@declicdigital.net" },
+              { icon: Phone, label: "Téléphone", value: "06.02.22.89.39" },
               { icon: MapPin, label: "Localisation", value: "France entière" },
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-4">

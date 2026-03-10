@@ -20,7 +20,7 @@ const testimonials = [
   { name: "Laurent Garcia", role: "PME industrielle", text: "Notre visibilité a considérablement augmenté. L'audit SEO initial nous a ouvert les yeux sur nos lacunes." },
 ];
 
-const techLogos = ["WordPress", "Shopify", "Webflow", "Semrush", "Google Analytics", "Search Console", "HTML", "CSS"];
+const techLogos = ["WordPress", "Shopify", "Lovable", "Base44", "Claude AI", "Semrush", "Google Analytics", "Search Console"];
 
 const Index = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
