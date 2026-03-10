@@ -34,7 +34,7 @@ const Header = () => {
       <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-lg">
         <div className="container flex h-16 items-center justify-between md:h-20">
           <Link to="/" className="flex items-center gap-2">
-            <img src={logo} alt="Déclic Digital" className="h-28 w-auto md:h-32" />
+            <img src={logo} alt="Déclic Digital" className="h-14 w-auto md:h-16" />
           </Link>
 
           {/* Desktop nav */}
