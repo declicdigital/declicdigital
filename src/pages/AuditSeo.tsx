@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Search, FileText, Users, Lightbulb, CheckCircle } from "lucide-react";
+import { Search, FileText, Users, Lightbulb, CheckCircle, BarChart3, Settings, TrendingUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -20,8 +20,8 @@ const AuditSeo = () => (
             <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
               Recevez votre <span className="text-gradient">audit SEO gratuit</span>
             </h1>
-            <p className="mb-8 max-w-2xl text-lg text-muted-foreground">
-              Découvrez pourquoi votre site n'apparaît pas sur Google et comment améliorer votre visibilité.
+            <p className="mb-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
+              Découvrez pourquoi votre site n'apparaît pas sur Google et recevez des recommandations concrètes pour améliorer votre visibilité. Notre audit est complet, personnalisé et sans engagement.
             </p>
             <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
               <a href="#formulaire-audit">Demander mon audit SEO</a>
@@ -36,15 +36,18 @@ const AuditSeo = () => (
 
     {/* Contenu audit */}
     <SectionWrapper className="bg-card">
-      <div className="text-center mb-10">
+      <div className="text-center mb-4">
         <h2 className="text-3xl font-extrabold md:text-4xl">Ce que contient votre audit</h2>
       </div>
+      <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
+        Notre audit SEO est une analyse approfondie de votre site web. Il couvre tous les aspects qui influencent votre positionnement sur Google et vous donne une feuille de route claire pour progresser.
+      </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          { icon: Search, title: "Analyse SEO technique", desc: "Performance, vitesse, erreurs techniques de votre site." },
-          { icon: FileText, title: "Analyse des mots clés", desc: "Positionnement actuel et opportunités de mots clés." },
-          { icon: Users, title: "Analyse concurrentielle", desc: "Comparaison avec vos concurrents directs." },
-          { icon: Lightbulb, title: "Recommandations concrètes", desc: "Actions prioritaires pour améliorer votre visibilité." },
+          { icon: Search, title: "Analyse SEO technique", desc: "Performance, vitesse de chargement, compatibilité mobile, architecture du site, erreurs d'indexation et sécurité HTTPS." },
+          { icon: FileText, title: "Analyse des mots clés", desc: "Étude de votre positionnement actuel et identification des mots clés à fort potentiel pour votre activité." },
+          { icon: Users, title: "Analyse concurrentielle", desc: "Comparaison avec vos concurrents directs pour identifier les stratégies qui fonctionnent dans votre secteur." },
+          { icon: Lightbulb, title: "Recommandations concrètes", desc: "Plan d'action priorisé avec des actions précises à mettre en place pour améliorer votre visibilité rapidement." },
         ].map((item, i) => (
           <div key={i} className="rounded-2xl bg-background p-6 shadow-card text-center">
             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
@@ -57,15 +60,51 @@ const AuditSeo = () => (
       </div>
     </SectionWrapper>
 
+    {/* Comment fonctionne un audit SEO */}
+    <SectionWrapper>
+      <div className="mx-auto max-w-3xl space-y-6">
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center">Comment fonctionne un audit SEO ?</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          Un audit SEO est une analyse complète de votre site web qui évalue sa capacité à être bien référencé sur Google. Il identifie les points forts, les faiblesses et les opportunités d'amélioration de votre présence en ligne.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          Concrètement, nous analysons la structure technique de votre site (vitesse, mobile, sécurité), la qualité de votre contenu (mots clés, balises, textes), et votre positionnement par rapport à vos concurrents. À l'issue de l'audit, vous recevez un rapport détaillé avec des recommandations classées par priorité.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          L'audit est la première étape indispensable pour toute stratégie SEO efficace. Sans diagnostic précis, il est impossible de savoir quelles actions vont réellement améliorer votre visibilité. C'est pourquoi nous proposons cet audit gratuitement : nous voulons que chaque PME puisse comprendre sa situation et prendre les bonnes décisions.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          Après avoir reçu votre audit, vous pouvez choisir de mettre en œuvre les recommandations vous-même ou de nous confier l'optimisation de votre site. Dans tous les cas, l'audit vous appartient et vous n'avez aucune obligation.
+        </p>
+      </div>
+    </SectionWrapper>
+
+    {/* Pourquoi c'est gratuit */}
+    <SectionWrapper className="bg-card">
+      <div className="mx-auto max-w-3xl text-center">
+        <h2 className="text-3xl font-extrabold md:text-4xl mb-6">Pourquoi l'audit est-il gratuit ?</h2>
+        <p className="text-muted-foreground leading-relaxed mb-4">
+          Nous croyons que chaque entreprise mérite de comprendre pourquoi son site ne génère pas de résultats. L'audit gratuit est notre façon de vous montrer notre expertise et de vous aider à y voir plus clair, sans aucun engagement.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          C'est aussi un premier pas vers une relation de confiance. Si nos recommandations vous convainquent, vous pouvez choisir de nous confier l'optimisation de votre site. Mais la décision vous appartient entièrement.
+        </p>
+      </div>
+    </SectionWrapper>
+
     {/* Formulaire */}
     <SectionWrapper id="formulaire-audit">
       <div className="mx-auto max-w-xl">
-        <h2 className="mb-8 text-center text-3xl font-extrabold">Demandez votre audit gratuit</h2>
+        <h2 className="mb-4 text-center text-3xl font-extrabold">Demandez votre audit gratuit</h2>
+        <p className="text-center text-muted-foreground mb-8">
+          Remplissez le formulaire ci-dessous et recevez votre audit SEO personnalisé sous 48 heures.
+        </p>
         <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
           <Input placeholder="Votre nom" className="rounded-xl" required />
           <Input placeholder="Nom de votre entreprise" className="rounded-xl" required />
           <Input placeholder="URL de votre site web" type="url" className="rounded-xl" required />
           <Input placeholder="Votre email" type="email" className="rounded-xl" required />
+          <Input placeholder="Votre téléphone (optionnel)" type="tel" className="rounded-xl" />
           <Textarea placeholder="Votre message (optionnel)" className="rounded-xl min-h-[100px]" />
           <Button type="submit" size="lg" className="w-full gradient-primary rounded-full text-primary-foreground font-semibold shadow-lg hover:opacity-90">
             <CheckCircle size={18} className="mr-2" /> Recevoir mon audit SEO gratuit
