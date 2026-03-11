@@ -18,7 +18,7 @@ const Contact = () => (
               Parlez-nous de votre <span className="text-gradient">projet</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé.
+              Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé. Nous répondons sous 24 à 48 heures ouvrées.
             </p>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
@@ -33,6 +33,9 @@ const Contact = () => (
       <div className="grid gap-12 lg:grid-cols-5">
         <div className="lg:col-span-3">
           <h2 className="mb-6 text-2xl font-extrabold">Demandez votre devis pour création de site</h2>
+          <p className="mb-6 text-muted-foreground">
+            Que vous ayez besoin d'un site vitrine, d'un site e-commerce ou d'une refonte complète, nous sommes là pour vous accompagner. Décrivez votre projet et nous vous proposerons une solution adaptée à vos objectifs et à votre budget.
+          </p>
           <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
             <div className="grid gap-4 sm:grid-cols-2">
               <Input placeholder="Votre nom" className="rounded-xl" required />
@@ -42,9 +45,10 @@ const Contact = () => (
               <Input placeholder="Votre email" type="email" className="rounded-xl" required />
               <Input placeholder="Votre téléphone" type="tel" className="rounded-xl" />
             </div>
-            <Textarea placeholder="Décrivez votre projet..." className="rounded-xl min-h-[120px]" required />
+            <Input placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" />
+            <Textarea placeholder="Décrivez votre projet : type de site souhaité, objectifs, fonctionnalités..." className="rounded-xl min-h-[120px]" required />
             <Button type="submit" size="lg" className="w-full gradient-primary rounded-full text-primary-foreground font-semibold shadow-lg hover:opacity-90">
-              <CheckCircle size={18} className="mr-2" /> Obtenir mon devis création de site
+              <CheckCircle size={18} className="mr-2" /> Envoyer ma demande
             </Button>
           </form>
         </div>
@@ -70,10 +74,55 @@ const Contact = () => (
           <div className="rounded-2xl bg-card p-6 shadow-card">
             <h3 className="mb-2 font-bold">Réponse rapide</h3>
             <p className="text-sm text-muted-foreground">
-              Nous répondons à toutes les demandes sous 24 à 48 heures ouvrées.
+              Nous répondons à toutes les demandes sous 24 à 48 heures ouvrées. Chaque projet fait l'objet d'un échange personnalisé pour comprendre vos besoins.
             </p>
           </div>
+          <div className="rounded-2xl bg-card p-6 shadow-card">
+            <h3 className="mb-2 font-bold">Pourquoi nous choisir ?</h3>
+            <ul className="text-sm text-muted-foreground space-y-2">
+              <li>✅ Spécialistes des PME et petites entreprises</li>
+              <li>✅ Sites optimisés SEO dès la conception</li>
+              <li>✅ Tarifs adaptés aux petits budgets</li>
+              <li>✅ Accompagnement personnalisé</li>
+            </ul>
+          </div>
         </div>
+      </div>
+    </SectionWrapper>
+
+    {/* Google Maps */}
+    <SectionWrapper className="bg-card">
+      <div className="text-center mb-8">
+        <h2 className="text-3xl font-extrabold md:text-4xl">Notre localisation</h2>
+        <p className="mt-4 text-muted-foreground">Nous intervenons partout en France, en présentiel ou à distance.</p>
+      </div>
+      <div className="mx-auto max-w-4xl rounded-2xl overflow-hidden shadow-card">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11672947.047489712!2d-4.8451795!3d46.6034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd54a02933785731%3A0x6bfd3f96c747d9f7!2sFrance!5e0!3m2!1sfr!2sfr!4v1710000000000!5m2!1sfr!2sfr"
+          width="100%"
+          height="400"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Localisation Déclic Digital"
+        />
+      </div>
+    </SectionWrapper>
+
+    {/* Contenu SEO complémentaire */}
+    <SectionWrapper>
+      <div className="mx-auto max-w-3xl space-y-6">
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center">Pourquoi faire appel à une agence web pour votre site ?</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          Créer un site web professionnel ne se résume pas à assembler quelques pages. Il faut penser à l'expérience utilisateur, au design, à la vitesse de chargement, à l'optimisation pour les moteurs de recherche et à la compatibilité mobile. Une agence web comme Déclic Digital prend en charge l'ensemble de ces aspects pour vous livrer un site qui travaille pour vous.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          Pour une PME ou un indépendant, un site web bien conçu est un investissement rentable. Il vous permet d'être trouvé par vos clients potentiels sur Google, de présenter vos services de manière professionnelle et de générer des demandes de devis ou des prises de contact automatiquement. C'est votre meilleur commercial, disponible 24h/24.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          Chez Déclic Digital, nous comprenons les contraintes des petites entreprises. C'est pourquoi nous proposons des solutions accessibles, sans jargon technique, avec un accompagnement humain à chaque étape. Du premier échange à la mise en ligne, en passant par le référencement SEO, nous sommes à vos côtés pour faire de votre présence en ligne un véritable levier de croissance.
+        </p>
       </div>
     </SectionWrapper>
   </PageLayout>

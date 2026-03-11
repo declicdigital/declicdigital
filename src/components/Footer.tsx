@@ -1,19 +1,9 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, Gift } from "lucide-react";
+import { Phone, Mail } from "lucide-react";
 import logo from "@/assets/logo-declic-digital.png";
 
 const Footer = () => (
   <footer className="border-t border-border">
-    {/* Promo banner */}
-    <div className="gradient-miami py-4">
-      <div className="container flex items-center justify-center gap-3 text-center">
-        <Gift size={20} className="text-primary-foreground shrink-0" />
-        <p className="text-sm md:text-base font-semibold text-primary-foreground">
-          🎉 Pour notre lancement, on crée votre site pour <span className="underline">100€ seulement</span> ! Offre valable du 10 mars au 10 avril 2026.
-        </p>
-      </div>
-    </div>
-
     <div className="bg-foreground text-primary-foreground">
       <div className="container py-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
