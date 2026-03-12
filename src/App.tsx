@@ -10,6 +10,7 @@ import ReferencementSeo from "./pages/ReferencementSeo";
 import QuiSommesNous from "./pages/QuiSommesNous";
 import Contact from "./pages/Contact";
 import Faq from "./pages/Faq";
+import Tarifs from "./pages/Tarifs";
 import MentionsLegales from "./pages/MentionsLegales";
 import Realisations from "./pages/Realisations";
 import PlanDuSite from "./pages/PlanDuSite";
@@ -34,6 +35,7 @@ const App = () => (
           <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/faq" element={<Faq />} />
+          <Route path="/tarifs" element={<Tarifs />} />
           <Route path="/mentions-legales" element={<MentionsLegales />} />
           <Route path="/plan-du-site" element={<PlanDuSite />} />
           <Route path="*" element={<NotFound />} />

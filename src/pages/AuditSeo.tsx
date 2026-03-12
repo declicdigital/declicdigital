@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
-import { Search, FileText, Users, Lightbulb, CheckCircle, BarChart3, Settings, TrendingUp } from "lucide-react";
+import { Search, FileText, Users, Lightbulb, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
-import heroAudit from "@/assets/hero-audit.png";
+import heroAudit from "@/assets/audit-seo-gratuit-site-web.png";
 
 const AuditSeo = () => (
   <PageLayout>
@@ -28,7 +28,7 @@ const AuditSeo = () => (
             </Button>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroAudit} alt="Audit SEO gratuit" className="w-full max-w-lg drop-shadow-2xl" />
+            <img src={heroAudit} alt="Audit SEO gratuit pour site web PME" className="w-full max-w-lg drop-shadow-2xl" />
           </motion.div>
         </div>
       </div>
@@ -74,7 +74,7 @@ const AuditSeo = () => (
           L'audit est la première étape indispensable pour toute stratégie SEO efficace. Sans diagnostic précis, il est impossible de savoir quelles actions vont réellement améliorer votre visibilité. C'est pourquoi nous proposons cet audit gratuitement : nous voulons que chaque PME puisse comprendre sa situation et prendre les bonnes décisions.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Après avoir reçu votre audit, vous pouvez choisir de mettre en œuvre les recommandations vous-même ou de nous confier l'optimisation de votre site. Dans tous les cas, l'audit vous appartient et vous n'avez aucune obligation.
+          Après avoir reçu votre audit, vous pouvez choisir de mettre en oeuvre les recommandations vous-même ou de nous confier l'optimisation de votre site. Dans tous les cas, l'audit vous appartient et vous n'avez aucune obligation.
         </p>
       </div>
     </SectionWrapper>
@@ -87,7 +87,7 @@ const AuditSeo = () => (
           Nous croyons que chaque entreprise mérite de comprendre pourquoi son site ne génère pas de résultats. L'audit gratuit est notre façon de vous montrer notre expertise et de vous aider à y voir plus clair, sans aucun engagement.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          C'est aussi un premier pas vers une relation de confiance. Si nos recommandations vous convainquent, vous pouvez choisir de nous confier l'optimisation de votre site. Mais la décision vous appartient entièrement.
+          C'est aussi un premier pas vers une relation de confiance. Si nos recommandations vous convainquent, vous pouvez choisir de nous confier l'optimisation de votre site.
         </p>
       </div>
     </SectionWrapper>

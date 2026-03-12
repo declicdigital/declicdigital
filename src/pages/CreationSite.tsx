@@ -4,7 +4,7 @@ import { Monitor, Smartphone, TrendingUp, Zap, Building2, User, Wrench, Shopping
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
-import heroCreation from "@/assets/hero-creation-site.png";
+import heroCreation from "@/assets/creation-site-internet-professionnel.png";
 
 const CreationSite = () => (
   <PageLayout>
@@ -24,7 +24,7 @@ const CreationSite = () => (
             </Button>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroCreation} alt="Création de site web professionnel" className="w-full max-w-lg drop-shadow-2xl" />
+            <img src={heroCreation} alt="Création de site internet professionnel pour PME" className="w-full max-w-lg drop-shadow-2xl" />
           </motion.div>
         </div>
       </div>
@@ -62,10 +62,10 @@ const CreationSite = () => (
       </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          { icon: Search, title: "1. Échange & analyse", desc: "Nous commençons par comprendre votre activité, vos objectifs et votre cible. Cette étape est essentielle pour créer un site qui répond à vos besoins réels." },
-          { icon: Monitor, title: "2. Maquette & design", desc: "Nous créons une maquette visuelle de votre site. Vous validez le design avant le développement pour être sûr que le résultat vous correspond." },
-          { icon: Zap, title: "3. Développement", desc: "Nous développons votre site avec les meilleures technologies. Chaque page est optimisée pour le SEO, la vitesse et l'expérience mobile." },
-          { icon: CheckCircle, title: "4. Mise en ligne & suivi", desc: "Après vos retours et validations, nous mettons votre site en ligne. Nous assurons ensuite un suivi pour garantir ses performances." },
+          { icon: Search, title: "1. Échange et analyse", desc: "Nous commençons par comprendre votre activité, vos objectifs et votre cible. Cette étape est essentielle pour créer un site adapté." },
+          { icon: Monitor, title: "2. Maquette et design", desc: "Nous créons une maquette visuelle de votre site. Vous validez le design avant le développement pour être sûr du résultat." },
+          { icon: Zap, title: "3. Développement", desc: "Nous développons votre site avec les meilleures technologies. Chaque page est optimisée pour le SEO, la vitesse et le mobile." },
+          { icon: CheckCircle, title: "4. Mise en ligne et suivi", desc: "Après vos retours et validations, nous mettons votre site en ligne. Nous assurons ensuite un suivi pour garantir ses performances." },
         ].map((item, i) => (
           <div key={i} className="rounded-2xl bg-card p-6 shadow-card">
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-miami text-primary-foreground">
@@ -82,7 +82,7 @@ const CreationSite = () => (
     <SectionWrapper className="bg-card">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Pour qui ?</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-        Nos solutions s'adaptent à tous les profils d'entreprises. Que vous soyez artisan, commerçant, profession libérale ou dirigeant de PME, nous concevons un site adapté à votre métier et à vos objectifs commerciaux.
+        Nos solutions s'adaptent à tous les profils d'entreprises. Que vous soyez artisan, commerçant, profession libérale ou dirigeant de PME, nous concevons un site adapté à votre métier.
       </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
@@ -115,10 +115,10 @@ const CreationSite = () => (
           Chaque page doit être pensée pour répondre à une intention de recherche précise. Par exemple, si vous êtes plombier à Bordeaux, votre site doit apparaître quand un internaute tape "plombier Bordeaux" dans Google. C'est le rôle du référencement naturel, et c'est ce que nous intégrons dès la conception de chaque projet.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Chez Déclic Digital, nous créons des sites orientés résultats. Cela signifie que chaque élément — le design, les textes, les appels à l'action, la navigation — est conçu pour maximiser vos chances de transformer un visiteur en prospect. Nous ne livrons pas simplement un site, nous livrons un outil commercial.
+          Chez Déclic Digital, nous créons des sites orientés résultats. Cela signifie que chaque élément, le design, les textes, les appels à l'action, la navigation, est conçu pour maximiser vos chances de transformer un visiteur en prospect. Nous ne livrons pas simplement un site, nous livrons un outil commercial.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Nos sites incluent systématiquement : un design professionnel sur mesure, une optimisation SEO complète, une compatibilité mobile parfaite, une vitesse de chargement optimisée, et un formulaire de contact pour capturer vos prospects. Nous vous accompagnons également après la mise en ligne pour assurer le suivi et l'évolution de votre site.
+          Nos sites incluent systématiquement : un design professionnel sur mesure, une optimisation SEO complète, une compatibilité mobile parfaite, une vitesse de chargement optimisée, et un formulaire de contact pour capturer vos prospects.
         </p>
       </div>
     </SectionWrapper>
