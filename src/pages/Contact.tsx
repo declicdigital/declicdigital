@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
-import heroContact from "@/assets/hero-contact.png";
+import heroContact from "@/assets/contact-agence-web.png";
 
 const Contact = () => (
   <PageLayout>
@@ -22,7 +22,7 @@ const Contact = () => (
             </p>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroContact} alt="Contactez Déclic Digital" className="w-full max-w-lg drop-shadow-2xl" />
+            <img src={heroContact} alt="Contactez Déclic Digital agence web" className="w-full max-w-lg drop-shadow-2xl" />
           </motion.div>
         </div>
       </div>
@@ -80,37 +80,61 @@ const Contact = () => (
           <div className="rounded-2xl bg-card p-6 shadow-card">
             <h3 className="mb-2 font-bold">Pourquoi nous choisir ?</h3>
             <ul className="text-sm text-muted-foreground space-y-2">
+              <li>✅ Expert Produit Google certifié</li>
               <li>✅ Spécialistes des PME et petites entreprises</li>
               <li>✅ Sites optimisés SEO dès la conception</li>
               <li>✅ Tarifs adaptés aux petits budgets</li>
-              <li>✅ Accompagnement personnalisé</li>
             </ul>
           </div>
         </div>
       </div>
     </SectionWrapper>
 
-    {/* Google Maps */}
+    {/* Google Maps + Fiche Google */}
     <SectionWrapper className="bg-card">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-extrabold md:text-4xl">Notre localisation</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl">Retrouvez-nous</h2>
         <p className="mt-4 text-muted-foreground">Nous intervenons partout en France, en présentiel ou à distance.</p>
       </div>
-      <div className="mx-auto max-w-4xl rounded-2xl overflow-hidden shadow-card">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11672947.047489712!2d-4.8451795!3d46.6034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd54a02933785731%3A0x6bfd3f96c747d9f7!2sFrance!5e0!3m2!1sfr!2sfr!4v1710000000000!5m2!1sfr!2sfr"
-          width="100%"
-          height="400"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Localisation Déclic Digital"
-        />
+      <div className="mx-auto max-w-5xl grid gap-8 lg:grid-cols-2">
+        <div className="rounded-2xl overflow-hidden shadow-card">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11672947.047489712!2d-4.8451795!3d46.6034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd54a02933785731%3A0x6bfd3f96c747d9f7!2sFrance!5e0!3m2!1sfr!2sfr!4v1710000000000!5m2!1sfr!2sfr"
+            width="100%"
+            height="350"
+            style={{ border: 0 }}
+            allowFullScreen
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            title="Localisation Déclic Digital en France"
+          />
+        </div>
+        <div className="rounded-2xl bg-background p-6 shadow-card flex flex-col justify-center">
+          <h3 className="text-xl font-bold mb-4">Notre fiche Google</h3>
+          <p className="text-muted-foreground text-sm mb-6">
+            Retrouvez toutes nos informations, nos avis clients et nos coordonnées directement sur Google.
+          </p>
+          <a
+            href="https://share.google/OobjHzt84cH9YkyYR"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block gradient-primary rounded-full px-6 py-3 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity text-center"
+          >
+            Voir notre fiche Google
+          </a>
+          <a
+            href="https://www.google.com/search?sa=X&sca_esv=517629e0db3c0ca4"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-3 inline-block rounded-full border border-border px-6 py-3 font-semibold text-foreground hover:bg-secondary transition-colors text-center"
+          >
+            Voir nos avis Google
+          </a>
+        </div>
       </div>
     </SectionWrapper>
 
-    {/* Contenu SEO complémentaire */}
+    {/* Contenu SEO */}
     <SectionWrapper>
       <div className="mx-auto max-w-3xl space-y-6">
         <h2 className="text-3xl font-extrabold md:text-4xl text-center">Pourquoi faire appel à une agence web pour votre site ?</h2>
@@ -118,7 +142,7 @@ const Contact = () => (
           Créer un site web professionnel ne se résume pas à assembler quelques pages. Il faut penser à l'expérience utilisateur, au design, à la vitesse de chargement, à l'optimisation pour les moteurs de recherche et à la compatibilité mobile. Une agence web comme Déclic Digital prend en charge l'ensemble de ces aspects pour vous livrer un site qui travaille pour vous.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Pour une PME ou un indépendant, un site web bien conçu est un investissement rentable. Il vous permet d'être trouvé par vos clients potentiels sur Google, de présenter vos services de manière professionnelle et de générer des demandes de devis ou des prises de contact automatiquement. C'est votre meilleur commercial, disponible 24h/24.
+          Pour une PME ou un indépendant, un site web bien conçu est un investissement rentable. Il vous permet d'être trouvé par vos clients potentiels sur Google, de présenter vos services de manière professionnelle et de générer des demandes de devis automatiquement.
         </p>
         <p className="text-muted-foreground leading-relaxed">
           Chez Déclic Digital, nous comprenons les contraintes des petites entreprises. C'est pourquoi nous proposons des solutions accessibles, sans jargon technique, avec un accompagnement humain à chaque étape. Du premier échange à la mise en ligne, en passant par le référencement SEO, nous sommes à vos côtés pour faire de votre présence en ligne un véritable levier de croissance.

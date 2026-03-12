@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Eye, Users, TrendingUp, Search, Settings, FileText, BarChart3, Target, Shield, Lightbulb, Globe } from "lucide-react";
+import { Eye, Users, TrendingUp, Search, Settings, FileText, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
-import heroSeo from "@/assets/hero-seo.png";
+import heroSeo from "@/assets/referencement-seo-google.png";
 
 const ReferencementSeo = () => (
   <PageLayout>
@@ -17,14 +17,14 @@ const ReferencementSeo = () => (
               Soyez <span className="text-gradient">visible sur Google</span>
             </h1>
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-              Le référencement SEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre site pour qu'il apparaisse en première page Google sur les mots clés recherchés par vos prospects. Le SEO, c'est un investissement durable qui travaille pour vous 24h/24.
+              Le référencement SEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre site pour qu'il apparaisse en première page Google sur les mots clés recherchés par vos prospects.
             </p>
             <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
               <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
             </Button>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroSeo} alt="Référencement SEO Google" className="w-full max-w-lg drop-shadow-2xl" />
+            <img src={heroSeo} alt="Référencement SEO Google pour PME" className="w-full max-w-lg drop-shadow-2xl" />
           </motion.div>
         </div>
       </div>
@@ -64,7 +64,7 @@ const ReferencementSeo = () => (
           Le référencement naturel repose sur trois piliers fondamentaux. Le premier est la technique : vitesse de chargement, architecture du site, compatibilité mobile, sécurité HTTPS. Le deuxième est le contenu : des textes pertinents, bien structurés et optimisés pour les mots clés recherchés par votre cible. Le troisième est la popularité : les liens provenant d'autres sites qui renforcent l'autorité de votre domaine aux yeux de Google.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Pour une PME, le SEO est particulièrement puissant car il permet de rivaliser avec des entreprises plus grandes en se positionnant sur des mots clés locaux ou de niche. Un plombier à Lyon, un coach sportif à Nantes ou un restaurant à Marseille peuvent tous apparaître en première page Google grâce à une stratégie SEO bien menée.
+          Pour une PME, le SEO est particulièrement puissant car il permet de rivaliser avec des entreprises plus grandes en se positionnant sur des mots clés locaux ou de niche.
         </p>
       </div>
     </SectionWrapper>
@@ -73,14 +73,14 @@ const ReferencementSeo = () => (
     <SectionWrapper className="bg-card">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre méthode SEO</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-        Notre approche est méthodique et transparente. Nous suivons un processus éprouvé pour optimiser votre visibilité sur Google et vous accompagnons à chaque étape.
+        Notre approche est méthodique et transparente. Nous suivons un processus éprouvé pour optimiser votre visibilité sur Google.
       </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
           { icon: Search, title: "Audit SEO", desc: "Analyse complète de votre site : technique, contenu, mots clés, concurrence. Nous identifions toutes les opportunités d'amélioration." },
           { icon: Settings, title: "Optimisation technique", desc: "Correction des erreurs techniques, amélioration de la vitesse, optimisation de l'architecture et des balises pour faciliter l'indexation." },
           { icon: FileText, title: "Contenu optimisé", desc: "Création et optimisation de contenus pertinents pour vos mots clés stratégiques. Chaque page est pensée pour répondre à une intention de recherche." },
-          { icon: BarChart3, title: "Suivi & rapports", desc: "Rapports réguliers sur l'évolution de votre positionnement, du trafic et des conversions. Ajustements continus pour maximiser les résultats." },
+          { icon: BarChart3, title: "Suivi et rapports", desc: "Rapports réguliers sur l'évolution de votre positionnement, du trafic et des conversions. Ajustements continus pour maximiser les résultats." },
         ].map((item, i) => (
           <div key={i} className="rounded-2xl bg-background p-6 shadow-card">
             <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-miami text-primary-foreground">
@@ -101,7 +101,7 @@ const ReferencementSeo = () => (
           La publicité payante (Google Ads, Facebook Ads) peut générer du trafic rapidement, mais elle s'arrête dès que vous coupez le budget. Le SEO, en revanche, est un investissement qui continue de porter ses fruits sur le long terme. Une fois bien positionné, votre site attire des visiteurs gratuitement, jour après jour.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Pour les PME avec des budgets marketing limités, le SEO est souvent la stratégie la plus rentable. Les premiers résultats apparaissent généralement entre 3 et 6 mois, mais les gains s'accumulent et se renforcent avec le temps. C'est un cercle vertueux : plus votre site est optimisé, plus il attire de trafic, plus Google le considère comme pertinent.
+          Pour les PME avec des budgets marketing limités, le SEO est souvent la stratégie la plus rentable. Les premiers résultats apparaissent généralement entre 3 et 6 mois, mais les gains s'accumulent et se renforcent avec le temps.
         </p>
       </div>
     </SectionWrapper>

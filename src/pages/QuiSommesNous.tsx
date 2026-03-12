@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Heart, Target, Rocket, Users, Award, Globe } from "lucide-react";
+import { Heart, Target, Rocket, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
-import heroAbout from "@/assets/hero-about.png";
+import heroAbout from "@/assets/agence-creation-site-web.png";
 
 const QuiSommesNous = () => (
   <PageLayout>
@@ -13,15 +13,18 @@ const QuiSommesNous = () => (
       <div className="container">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+            <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">
+              Expert Produit Google
+            </span>
             <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
               L'histoire de <span className="text-gradient">Déclic Digital</span>
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Une agence fondée par la passion du web et la conviction que chaque entreprise, quelle que soit sa taille, mérite d'être visible en ligne et d'attirer des clients grâce à un site web professionnel.
+              Une agence fondée par un Expert Produit Google, avec la conviction que chaque entreprise, quelle que soit sa taille, mérite d'être visible en ligne et d'attirer des clients grâce à un site web professionnel.
             </p>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroAbout} alt="L'équipe Déclic Digital" className="w-full max-w-lg drop-shadow-2xl" />
+            <img src={heroAbout} alt="Agence création de site web Déclic Digital" className="w-full max-w-lg drop-shadow-2xl" />
           </motion.div>
         </div>
       </div>
@@ -31,14 +34,25 @@ const QuiSommesNous = () => (
     <SectionWrapper>
       <div className="mx-auto max-w-3xl space-y-6 text-lg leading-relaxed text-muted-foreground">
         <p>
-          <strong className="text-foreground">Déclic Digital</strong> a été fondé par <strong className="text-foreground">Geoffrey</strong>, 28 ans, diplômé d'une licence en marketing digital et intelligence artificielle.
+          <strong className="text-foreground">Déclic Digital</strong> a été fondé par <strong className="text-foreground">Geoffrey</strong>, 28 ans, diplômé d'une licence en marketing digital et intelligence artificielle, et certifié <strong className="text-foreground">Expert Produit Google</strong>.
         </p>
         <p>
           Passionné par le web depuis plus de 8 ans, il a commencé en aidant son père à développer la visibilité de son entreprise de BTP. Puis il a accompagné un artiste dans la création de son site internet. Ces deux expériences lui ont fait prendre conscience d'un constat : la plupart des petites entreprises n'ont pas les moyens ni les connaissances pour créer un site qui génère réellement des clients.
         </p>
         <p>
-          C'est de ce constat qu'est née Déclic Digital : une agence web pensée pour les PME, les artisans et les indépendants. L'idée est simple — proposer des sites web professionnels, performants et optimisés pour le référencement Google, à des tarifs accessibles.
+          C'est de ce constat qu'est née Déclic Digital : une agence web pensée pour les PME, les artisans et les indépendants. L'idée est simple : proposer des sites web professionnels, performants et optimisés pour le référencement Google, à des tarifs accessibles.
         </p>
+        <div className="rounded-2xl bg-card p-6 shadow-card flex items-start gap-4">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
+            <Award size={24} />
+          </div>
+          <div>
+            <h3 className="font-bold text-foreground mb-1">Expert Produit Google</h3>
+            <p className="text-base">
+              Geoffrey est certifié Expert Produit Google, une reconnaissance officielle de ses compétences sur l'écosystème Google (Search, Business Profile, Analytics). Cette expertise garantit à nos clients des stratégies alignées avec les meilleures pratiques Google.
+            </p>
+          </div>
+        </div>
         <blockquote className="border-l-4 border-primary pl-6 py-2 text-xl font-semibold text-foreground italic">
           "Les petites entreprises ont besoin d'outils simples et efficaces pour trouver des clients en ligne."
         </blockquote>
@@ -46,7 +60,7 @@ const QuiSommesNous = () => (
           Aujourd'hui, Déclic Digital accompagne des PME et indépendants partout en France. Chaque projet est abordé avec la même rigueur et la même passion : comprendre les besoins du client, concevoir un site qui lui ressemble, l'optimiser pour Google et mesurer les résultats.
         </p>
         <p>
-          Notre force, c'est la proximité. Nous ne sommes pas une grande agence impersonnelle. Nous prenons le temps d'échanger avec chaque client, de comprendre son métier et de proposer des solutions sur mesure. C'est cette approche humaine et orientée résultats qui fait la différence.
+          Notre force, c'est la proximité. Nous ne sommes pas une grande agence impersonnelle. Nous prenons le temps d'échanger avec chaque client, de comprendre son métier et de proposer des solutions sur mesure.
         </p>
       </div>
     </SectionWrapper>
@@ -84,10 +98,10 @@ const QuiSommesNous = () => (
           Chez Déclic Digital, nous croyons en la transparence totale. Pas de contrat obscur, pas de jargon incompréhensible, pas de promesses irréalistes. Nous vous expliquons clairement ce que nous faisons, pourquoi nous le faisons, et quels résultats vous pouvez attendre.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Nous croyons aussi que la technologie doit être au service de l'humain. Un site web n'est qu'un outil. Ce qui compte, c'est ce qu'il apporte à votre entreprise et à vos clients. C'est pourquoi nous concevons chaque site avec un objectif clair : vous aider à grandir.
+          Nous croyons aussi que la technologie doit être au service de l'humain. Un site web n'est qu'un outil. Ce qui compte, c'est ce qu'il apporte à votre entreprise et à vos clients.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Enfin, nous croyons en la relation de long terme. Nous ne disparaissons pas après la mise en ligne. Nous restons à vos côtés pour suivre les performances, ajuster la stratégie et vous accompagner dans la durée. Votre réussite est notre meilleure publicité.
+          Enfin, nous croyons en la relation de long terme. Nous ne disparaissons pas après la mise en ligne. Nous restons à vos côtés pour suivre les performances, ajuster la stratégie et vous accompagner dans la durée.
         </p>
       </div>
     </SectionWrapper>

@@ -8,6 +8,7 @@ const links = [
   { label: "Création de site web", to: "/creation-site-web" },
   { label: "Référencement SEO", to: "/referencement-seo" },
   { label: "Audit SEO gratuit", to: "/audit-seo-gratuit" },
+  { label: "Nos tarifs", to: "/tarifs" },
   { label: "Réalisations", to: "/realisations" },
   { label: "Qui sommes-nous", to: "/qui-sommes-nous" },
   { label: "Contact", to: "/contact" },

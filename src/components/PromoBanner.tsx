@@ -1,10 +1,10 @@
 import { Gift } from "lucide-react";
 
 const PromoBanner = () => (
-  <div className="gradient-miami py-3">
+  <div className="bg-destructive py-3">
     <div className="container flex flex-wrap items-center justify-center gap-2 text-center">
-      <Gift size={18} className="text-primary-foreground shrink-0" />
-      <p className="text-sm md:text-base font-semibold text-primary-foreground">
+      <Gift size={18} className="text-destructive-foreground shrink-0" />
+      <p className="text-sm md:text-base font-semibold text-destructive-foreground">
         🎉 Pour notre lancement, on crée votre site pour <span className="underline">100€ seulement</span> ! Offre valable du 10 mars au 10 avril 2026.
       </p>
       <a

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
-import heroFaq from "@/assets/hero-faq.png";
+import heroFaq from "@/assets/questions-frequentes-creation-site.png";
 
 const faqItems = [
   { q: "Combien coûte un site web ?", a: "Le prix varie selon la complexité du projet. Un site vitrine professionnel commence à partir de quelques centaines d'euros. Nous adaptons chaque devis à vos besoins et votre budget." },
@@ -25,8 +25,8 @@ const faqItems = [
   { q: "Qu'est-ce qu'un bon site web ?", a: "Un bon site web est rapide, responsive, bien référencé, avec un design professionnel et une navigation intuitive qui guide vers la conversion." },
   { q: "Proposez-vous la création de contenu ?", a: "Oui, nous pouvons rédiger des textes optimisés SEO pour votre site, vos pages de services et vos articles de blog." },
   { q: "Comment se passe la collaboration ?", a: "Nous commençons par un échange pour comprendre vos besoins. Puis nous proposons une maquette, développons le site et l'optimisons pour le SEO." },
-  { q: "Pourquoi choisir Déclic Digital ?", a: "Nous sommes spécialisés dans l'accompagnement des PME. Notre approche est transparente, orientée résultats et adaptée aux budgets des petites entreprises." },
-  { q: "Y a-t-il un engagement de durée ?", a: "Oui, nous proposons un engagement de 6 mois renouvelable. Cette durée permet de mettre en place une stratégie efficace et d'obtenir des résultats concrets et mesurables." },
+  { q: "Pourquoi choisir Déclic Digital ?", a: "Nous sommes spécialisés dans l'accompagnement des PME. Notre fondateur est Expert Produit Google. Approche transparente, orientée résultats et adaptée aux petits budgets." },
+  { q: "Y a-t-il un engagement de durée ?", a: "Oui, nous proposons un engagement de 6 mois renouvelable. Cette durée permet de mettre en place une stratégie efficace et d'obtenir des résultats concrets." },
 ];
 
 const Faq = () => (
@@ -43,7 +43,7 @@ const Faq = () => (
             </p>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroFaq} alt="Questions fréquentes" className="w-full max-w-lg drop-shadow-2xl" />
+            <img src={heroFaq} alt="Questions fréquentes sur la création de site web" className="w-full max-w-lg drop-shadow-2xl" />
           </motion.div>
         </div>
       </div>
