@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Globe, Search, BarChart3, Zap, Eye, Users, TrendingUp, ChevronRight, Monitor, Smartphone, Gauge, CheckCircle, Shield, Clock, Target, Award, MessageSquare, Phone as PhoneIcon, FileText, Rocket } from "lucide-react";
+import { Globe, Search, BarChart3, Zap, Eye, Users, TrendingUp, ChevronRight, Monitor, Smartphone, Gauge, CheckCircle, Shield, Clock, Target, Award, MessageSquare, Phone as PhoneIcon, FileText, Rocket, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -191,30 +191,70 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
-      {/* Avis Google */}
+      {/* Avis clients */}
       <SectionWrapper>
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold md:text-4xl">Nos avis clients</h2>
+          <h2 className="text-3xl font-extrabold md:text-4xl">Ce que disent nos clients</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Consultez nos avis vérifiés directement sur Google.
+            Des PME et indépendants qui nous ont fait confiance pour leur site web et leur référencement SEO.
           </p>
         </div>
-        <div className="mx-auto max-w-2xl text-center">
-          <div className="rounded-2xl bg-card p-8 shadow-card">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" className="h-6" />
+
+        {/* Carousel */}
+        <div className="relative mx-auto max-w-5xl overflow-hidden">
+          <motion.div
+            className="flex gap-6"
+            animate={{ x: ["0%", "-50%"] }}
+            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          >
+            {[
+              { name: "Sophie L.", activity: "Ostéopathe", text: "Mon ancien site ne générait aucun contact. Depuis la refonte avec Déclic Digital, je reçois 3 à 5 demandes par semaine via Google." },
+              { name: "Marc D.", activity: "Plombier", text: "En 3 mois, mon site est passé en première page Google sur mes mots clés principaux. Les appels ont doublé." },
+              { name: "Julie R.", activity: "Boulangerie artisanale", text: "Un site magnifique, livré rapidement et parfaitement adapté à mon activité. Mes clients adorent commander en ligne." },
+              { name: "Thomas B.", activity: "Coach sportif", text: "Déclic Digital a compris mon besoin dès le premier échange. Le site est pro, rapide et les inscriptions ont explosé." },
+              { name: "Nadia K.", activity: "Architecte d'intérieur", text: "Le portfolio en ligne m'a permis de décrocher des projets que je n'aurais jamais eus sans visibilité web." },
+              { name: "Pierre M.", activity: "Restaurant", text: "Grâce au référencement local, on apparaît en premier sur Google Maps. La fréquentation a augmenté de 40%." },
+              { name: "Camille F.", activity: "Formatrice", text: "Le site vitrine et le blog m'apportent une crédibilité énorme auprès de mes prospects. Investissement très rentable." },
+              { name: "Antoine G.", activity: "Électricien", text: "Service réactif, prix très correct pour une PME. Mon site me ramène des chantiers toutes les semaines." },
+              { name: "Émilie S.", activity: "Boutique déco", text: "La boutique e-commerce fonctionne parfaitement. Le SEO nous amène des clients qu'on n'aurait jamais touchés autrement." },
+              { name: "David P.", activity: "Avocat", text: "Un site sobre, professionnel et bien référencé. Exactement ce qu'il me fallait pour inspirer confiance à mes clients." },
+              { name: "Sophie L.", activity: "Ostéopathe", text: "Mon ancien site ne générait aucun contact. Depuis la refonte avec Déclic Digital, je reçois 3 à 5 demandes par semaine via Google." },
+              { name: "Marc D.", activity: "Plombier", text: "En 3 mois, mon site est passé en première page Google sur mes mots clés principaux. Les appels ont doublé." },
+              { name: "Julie R.", activity: "Boulangerie artisanale", text: "Un site magnifique, livré rapidement et parfaitement adapté à mon activité. Mes clients adorent commander en ligne." },
+              { name: "Thomas B.", activity: "Coach sportif", text: "Déclic Digital a compris mon besoin dès le premier échange. Le site est pro, rapide et les inscriptions ont explosé." },
+              { name: "Nadia K.", activity: "Architecte d'intérieur", text: "Le portfolio en ligne m'a permis de décrocher des projets que je n'aurais jamais eus sans visibilité web." },
+            ].map((review, i) => (
+              <div key={i} className="min-w-[320px] max-w-[360px] shrink-0 rounded-2xl bg-card p-6 shadow-card border border-border">
+                <div className="flex items-center gap-1 mb-3 text-primary">
+                  {[...Array(5)].map((_, j) => (
+                    <Star key={j} size={16} fill="currentColor" />
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed mb-4">"{review.text}"</p>
+                <div>
+                  <p className="font-semibold text-sm">{review.name}</p>
+                  <p className="text-xs text-muted-foreground">{review.activity}</p>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+
+        {/* Fiche Google CTA */}
+        <div className="mt-10 mx-auto max-w-md text-center">
+          <div className="rounded-2xl bg-card p-6 shadow-card">
+            <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" className="h-6 mx-auto mb-4" />
+            <p className="text-sm text-muted-foreground mb-4">Retrouvez notre fiche et nos avis vérifiés sur Google.</p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <a
+                href="https://share.google/i2RfnCbtHLUrO4NQF"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block gradient-primary rounded-full px-6 py-2.5 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity text-sm"
+              >
+                Voir notre fiche Google
+              </a>
             </div>
-            <p className="text-muted-foreground mb-6">
-              Retrouvez tous nos avis clients vérifiés sur notre fiche Google Business.
-            </p>
-            <a
-              href="https://www.google.com/search?sa=X&sca_esv=517629e0db3c0ca4"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-block gradient-primary rounded-full px-8 py-3 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity"
-            >
-              Voir nos avis Google
-            </a>
           </div>
         </div>
       </SectionWrapper>

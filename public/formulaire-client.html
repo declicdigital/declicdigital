@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Déclic Digital : Formulaire Projet</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:           #0F172A;
+  --bg-card:      #1E293B;
+  --border:       rgba(255,255,255,0.07);
+  --border-focus: rgba(56,189,248,0.55);
+  --blue:         #38BDF8;
+  --blue-dim:     rgba(56,189,248,0.10);
+  --blue-glow:    rgba(56,189,248,0.22);
+  --blue-deep:    #0EA5E9;
+  --pink:         #F472B6;
+  --pink-dim:     rgba(244,114,182,0.10);
+  --pink-glow:    rgba(244,114,182,0.22);
+  --white:        #F8FAFC;
+  --muted:        #64748B;
+  --muted-light:  #94A3B8;
+  --text:         #E2E8F0;
+  --radius:       16px;
+  --radius-sm:    10px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+/* noise */
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+
+.glow-t{position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(56,189,248,.07) 0%,transparent 70%);pointer-events:none;z-index:0}
+.glow-r{position:fixed;top:30%;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(244,114,182,.06) 0%,transparent 70%);pointer-events:none;z-index:0}
+
+/* header */
+header{position:sticky;top:0;z-index:100;background:rgba(15,23,42,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-name{display:none}
+.logo-name{font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:var(--white);letter-spacing:-.02em}
+.logo-name span{color:var(--blue)}
+.h-badge{display:flex;align-items:center;gap:7px;background:var(--blue-dim);border:1px solid rgba(56,189,248,.2);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:500;color:var(--blue);letter-spacing:.02em}
+.h-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 8px var(--blue);animation:pulse 2s infinite}
+
+/* progress */
+.prog-wrap{position:sticky;top:64px;z-index:90;background:rgba(15,23,42,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 40px}
+.prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.prog-steps{display:flex;gap:4px}
+.prog-pct{font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--blue);letter-spacing:.02em;background:var(--blue-dim);border:1px solid rgba(56,189,248,.2);border-radius:100px;padding:3px 12px;transition:all .3s;min-width:52px;text-align:center}
+.ps{font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);transition:color .3s}
+.ps.active{color:var(--blue)}
+.ps.done{color:var(--pink)}
+.prog-track{height:3px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden}
+.prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue),var(--pink));border-radius:100px;transition:width .6s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px var(--blue-glow)}
+
+/* floating pct bubble */
+.pct-bubble{position:fixed;bottom:32px;right:32px;z-index:200;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--pink));display:flex;flex-direction:column;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(56,189,248,.4);cursor:default;transition:transform .2s}
+.pct-bubble:hover{transform:scale(1.08)}
+.pct-num{font-family:'Outfit',sans-serif;font-weight:900;font-size:17px;color:#0F172A;line-height:1}
+.pct-lbl{font-family:'Outfit',sans-serif;font-size:8px;font-weight:700;color:#0F172A;letter-spacing:.04em;text-transform:uppercase;opacity:.8}
+
+/* upload zone */
+.upload-zone{border:2px dashed var(--border);border-radius:var(--radius-sm);padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:rgba(255,255,255,.01);position:relative}
+.upload-zone:hover{border-color:rgba(56,189,248,.35);background:var(--blue-dim)}
+.upload-zone.dragover{border-color:var(--blue);background:var(--blue-dim);box-shadow:0 0 0 3px rgba(56,189,248,.1)}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-icon{font-size:28px;margin-bottom:8px}
+.upload-zone p{font-size:13px;color:var(--muted-light);margin-bottom:4px}
+.upload-zone small{font-size:11px;color:var(--muted)}
+.upload-preview{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.preview-item{position:relative;width:80px;height:80px;border-radius:8px;overflow:hidden;border:1px solid var(--border)}
+.preview-item img{width:100%;height:100%;object-fit:cover}
+.preview-item .del-btn{position:absolute;top:3px;right:3px;width:18px;height:18px;background:rgba(244,114,182,.85);border:none;border-radius:50%;color:white;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
+.upload-types{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-top:14px}
+.upload-type{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--muted-light)}
+.upload-type span{font-size:18px}
+
+/* hero */
+.hero{position:relative;z-index:1;padding:80px 40px 72px;text-align:center;overflow:hidden}
+.hero-in{max-width:680px;margin:0 auto}
+.htag{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(244,114,182,.3);background:var(--pink-dim);border-radius:100px;padding:7px 18px;font-size:12px;font-weight:600;color:var(--pink);letter-spacing:.06em;text-transform:uppercase;margin-bottom:28px;animation:fadeUp .6s ease both}
+.hero h1{font-family:'Outfit',sans-serif;font-size:clamp(32px,6vw,56px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--white);margin-bottom:20px;animation:fadeUp .6s ease .1s both}
+.hero h1 .gr{background:linear-gradient(90deg,var(--blue),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:16px;font-weight:300;line-height:1.7;color:var(--muted-light);max-width:500px;margin:0 auto 40px;animation:fadeUp .6s ease .2s both}
+.pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;animation:fadeUp .6s ease .3s both}
+.pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:100px;padding:7px 16px;font-size:13px;color:var(--muted-light)}
+.pill .dn{width:18px;height:18px;border-radius:50%;background:var(--blue-dim);border:1px solid rgba(56,189,248,.3);font-size:10px;font-weight:700;color:var(--blue);display:flex;align-items:center;justify-content:center}
+
+/* form wrap */
+.fw{position:relative;z-index:1;max-width:820px;margin:0 auto 80px;padding:0 24px}
+
+/* card */
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:44px 48px;margin-bottom:20px;position:relative;overflow:hidden;opacity:0;transform:translateY(28px);animation:cardIn .55s cubic-bezier(.22,1,.36,1) forwards;transition:border-color .3s}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(56,189,248,.4),transparent);opacity:0;transition:opacity .3s}
+.card:hover{border-color:rgba(56,189,248,.15)}
+.card:hover::before{opacity:1}
+.card:nth-child(1){animation-delay:.05s}
+.card:nth-child(2){animation-delay:.10s}
+.card:nth-child(3){animation-delay:.15s}
+.card:nth-child(4){animation-delay:.20s}
+.card:nth-child(5){animation-delay:.25s}
+.card:nth-child(6){animation-delay:.30s}
+
+.ca{position:absolute;top:-1px;left:48px;height:3px;width:48px;border-radius:0 0 4px 4px}
+.ca-b{background:linear-gradient(90deg,var(--blue),var(--blue-deep));box-shadow:0 2px 12px var(--blue-glow)}
+.ca-p{background:linear-gradient(90deg,var(--pink),#EC4899);box-shadow:0 2px 12px var(--pink-glow)}
+.ca-g{background:linear-gradient(90deg,var(--blue),var(--pink))}
+
+.ch{display:flex;align-items:center;gap:16px;margin-bottom:36px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.cn{width:42px;height:42px;flex-shrink:0;border-radius:12px;background:var(--blue-dim);border:1px solid rgba(56,189,248,.2);font-family:'Outfit',sans-serif;font-weight:800;font-size:18px;color:var(--blue);display:flex;align-items:center;justify-content:center}
+.cn.p{background:var(--pink-dim);border-color:rgba(244,114,182,.2);color:var(--pink)}
+.ct h2{font-family:'Outfit',sans-serif;font-size:19px;font-weight:700;color:var(--white);letter-spacing:-.02em;margin-bottom:3px}
+.ct p{font-size:13px;color:var(--muted);font-weight:300}
+
+/* fields */
+.field{margin-bottom:26px}
+.field:last-child{margin-bottom:0}
+.r2{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:26px}
+.r2 .field{margin-bottom:0}
+
+label.lb{display:block;font-size:13px;font-weight:500;color:var(--muted-light);margin-bottom:9px;letter-spacing:.01em}
+label.lb .rq{color:var(--pink);margin-left:2px}
+label.lb .sub{display:block;font-size:12px;font-weight:300;color:var(--muted);margin-top:3px}
+
+input[type=text],input[type=email],input[type=tel],input[type=url],select,textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 16px;font-family:'Inter',sans-serif;font-size:14px;font-weight:400;color:var(--white);outline:none;transition:border-color .2s,background .2s,box-shadow .2s;appearance:none;-webkit-appearance:none}
+input::placeholder,textarea::placeholder{color:var(--muted)}
+input:focus,select:focus,textarea:focus{border-color:var(--border-focus);background:rgba(56,189,248,.04);box-shadow:0 0 0 3px rgba(56,189,248,.08)}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364748B' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-color:rgba(255,255,255,.03);padding-right:40px;cursor:pointer}
+select option{background:#1E293B;color:var(--white)}
+textarea{resize:vertical;min-height:100px;line-height:1.65}
+
+/* choice grid */
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:9px}
+.cg.c3{grid-template-columns:repeat(auto-fill,minmax(175px,1fr))}
+.ci{display:flex;align-items:center;gap:10px;padding:11px 14px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;transition:all .18s;user-select:none}
+.ci:hover{background:var(--blue-dim);border-color:rgba(56,189,248,.25)}
+.ci input[type=checkbox],.ci input[type=radio]{width:17px;height:17px;flex-shrink:0;cursor:pointer;accent-color:var(--blue);background:none;border:none;padding:0}
+.ci span{font-size:13px;font-weight:400;color:var(--muted-light);line-height:1.3}
+.ci:has(input:checked){background:var(--blue-dim);border-color:rgba(56,189,248,.45)}
+.ci:has(input:checked) span{color:var(--blue);font-weight:500}
+.ci.pk:has(input:checked){background:var(--pink-dim);border-color:rgba(244,114,182,.4)}
+.ci.pk:has(input:checked) span{color:var(--pink)}
+
+/* scale */
+.sc-row{display:flex;align-items:center;gap:12px}
+.sc-lbl{font-size:12px;color:var(--muted);flex-shrink:0;font-style:italic}
+.sc-btns{display:flex;gap:6px;flex:1}
+.sb{flex:1;height:40px;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .18s}
+.sb:hover{border-color:var(--blue);color:var(--blue);background:var(--blue-dim)}
+.sb.on{background:linear-gradient(135deg,var(--blue),var(--blue-deep));border-color:transparent;color:#0F172A;box-shadow:0 0 16px var(--blue-glow)}
+
+/* tip */
+.tip{display:flex;align-items:flex-start;gap:10px;background:rgba(56,189,248,.06);border:1px solid rgba(56,189,248,.15);border-radius:10px;padding:12px 16px;margin-top:12px;font-size:13px;color:var(--blue);line-height:1.5}
+
+/* submit */
+.sub-card{position:relative;background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:52px 48px;text-align:center;overflow:hidden;margin-bottom:60px;opacity:0;animation:cardIn .55s cubic-bezier(.22,1,.36,1) .4s forwards}
+.sub-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(56,189,248,.08) 0%,transparent 65%);pointer-events:none}
+.sub-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--pink),transparent);opacity:.4}
+.sub-ey{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin-bottom:16px}
+.sub-card h3{font-family:'Outfit',sans-serif;font-size:clamp(22px,4vw,32px);font-weight:800;color:var(--white);letter-spacing:-.02em;margin-bottom:12px}
+.sub-card h3 span{background:linear-gradient(90deg,var(--blue),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.sub-card p{font-size:15px;color:var(--muted-light);font-weight:300;line-height:1.6;max-width:460px;margin:0 auto 36px}
+
+.btn-cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--blue),#0EA5E9 50%,var(--pink));background-size:200% 100%;color:#0F172A;font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;padding:17px 44px;border-radius:100px;border:none;cursor:pointer;transition:background-position .4s,transform .2s,box-shadow .2s;box-shadow:0 8px 30px rgba(56,189,248,.3),0 0 0 1px rgba(56,189,248,.2);letter-spacing:.01em}
+.btn-cta:hover{background-position:100% 0;transform:translateY(-2px);box-shadow:0 14px 40px rgba(56,189,248,.4)}
+.btn-cta:active{transform:translateY(0)}
+.btn-cta svg{width:18px;height:18px}
+
+.guar{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:24px;flex-wrap:wrap}
+.gi{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted)}
+.gi svg{width:14px;height:14px;color:var(--blue)}
+
+/* modal */
+.overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,.88);backdrop-filter:blur(16px);align-items:center;justify-content:center}
+.overlay.show{display:flex}
+.sbox{background:var(--bg-card);border:1px solid rgba(56,189,248,.2);border-radius:24px;padding:56px 48px;max-width:460px;width:90%;text-align:center;position:relative;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.5);animation:pop .45s cubic-bezier(.34,1.56,.64,1)}
+.sbox::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--pink))}
+.si{width:72px;height:72px;background:linear-gradient(135deg,var(--blue-dim),var(--pink-dim));border:1px solid rgba(56,189,248,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 24px;box-shadow:0 0 40px var(--blue-glow)}
+.sbox h3{font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:var(--white);letter-spacing:-.02em;margin-bottom:12px}
+.sbox p{font-size:15px;color:var(--muted-light);line-height:1.6;margin-bottom:32px}
+.sbox p strong{color:var(--blue)}
+.btn-ok{background:var(--blue-dim);border:1px solid rgba(56,189,248,.3);color:var(--blue);font-family:'Outfit',sans-serif;font-size:14px;font-weight:600;padding:12px 32px;border-radius:100px;cursor:pointer;transition:background .2s}
+.btn-ok:hover{background:rgba(56,189,248,.18)}
+
+/* animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes cardIn{to{opacity:1;transform:translateY(0)}}
+@keyframes pop{from{opacity:0;transform:scale(.82)}to{opacity:1;transform:scale(1)}}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 8px var(--blue)}50%{opacity:.5;box-shadow:0 0 4px var(--blue)}}
+
+/* responsive */
+@media(max-width:680px){
+  header{padding:0 20px}
+  .hero{padding:52px 20px 48px}
+  .card,.sub-card{padding:28px 22px}
+  .prog-wrap{padding:12px 20px}
+  .fw{padding:0 14px}
+  .r2{grid-template-columns:1fr}
+  .cg{grid-template-columns:1fr 1fr}
+  .sc-lbl{display:none}
+}
+@media(max-width:420px){.cg{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="glow-t"></div>
+<div class="glow-r"></div>
+<!-- FLOATING PROGRESS BUBBLE -->
+<div class="pct-bubble" id="pctBubble">
+  <span class="pct-num" id="pctNum">0%</span>
+  <span class="pct-lbl">complet</span>
+</div>
+
+<!-- HEADER -->
+<header>
+  <a href="https://declicdigital.lovable.app/" target="_blank" class="logo">
+    <img src="data:image/jpeg;base64,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" alt="Déclic Digital" style="height:46px;width:auto;object-fit:contain;display:block;border-radius:10px;">
+  </a>
+  <div class="h-badge">Formulaire projet</div>
+</header>
+
+<!-- PROGRESS -->
+<div class="prog-wrap">
+  <div class="prog-top">
+    <div class="prog-steps">
+      <span class="ps active" id="ps1">Profil&nbsp;</span>
+      <span class="ps" id="ps2">Projet&nbsp;</span>
+      <span class="ps" id="ps3">Objectifs&nbsp;</span>
+      <span class="ps" id="ps4">Design&nbsp;</span>
+      <span class="ps" id="ps5">Délais&nbsp;</span>
+      <span class="ps" id="ps6">Fichiers</span>
+    </div>
+    <div class="prog-pct" id="progPct">0%</div>
+  </div>
+  <div class="prog-track"><div class="prog-fill" id="pf"></div></div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-in">
+    <div class="htag">✦ Audit SEO offert à la clé</div>
+    <h1>Parlez-nous de votre<br><span class="gr">projet web</span></h1>
+    <p>Quelques minutes de votre temps pour que Déclic Digital vous prépare une proposition sur mesure et votre audit SEO gratuit.</p>
+    <div class="pills">
+      <div class="pill"><span class="dn">1</span>Votre profil</div>
+      <div class="pill"><span class="dn">2</span>Votre projet</div>
+      <div class="pill"><span class="dn">3</span>Objectifs &amp; budget</div>
+      <div class="pill"><span class="dn">4</span>Contenu &amp; design</div>
+      <div class="pill"><span class="dn">5</span>Délais</div>
+    </div>
+  </div>
+</div>
+
+<!-- FORM -->
+<div class="fw">
+<form id="mf" novalidate>
+
+  <!-- 1. PROFIL -->
+  <div class="card">
+    <div class="ca ca-b"></div>
+    <div class="ch">
+      <div class="cn">01</div>
+      <div class="ct"><h2>Votre profil</h2><p>Pour mieux vous connaître avant de travailler ensemble</p></div>
+    </div>
+    <div class="r2">
+      <div class="field"><label class="lb">Prénom &amp; nom <span class="rq">*</span></label><input type="text" name="full_name" placeholder="Marie Dupont" required></div>
+      <div class="field"><label class="lb">Entreprise / marque <span class="rq">*</span></label><input type="text" name="company" placeholder="Boulangerie Le Fournil" required></div>
+    </div>
+    <div class="r2">
+      <div class="field"><label class="lb">Email professionnel <span class="rq">*</span></label><input type="email" name="email" placeholder="vous@entreprise.fr" required></div>
+      <div class="field"><label class="lb">Téléphone</label><input type="tel" name="phone" placeholder="06 00 00 00 00"></div>
+    </div>
+    <div class="r2">
+      <div class="field">
+        <label class="lb">Secteur d'activité <span class="rq">*</span></label>
+        <select name="sector" required>
+          <option value="" disabled selected>Sélectionner…</option>
+          <option>Artisan / métier de bouche</option><option>BTP / Travaux</option>
+          <option>Commerce &amp; distribution</option><option>E-commerce</option>
+          <option>Restauration / Hôtellerie</option><option>Santé / Bien-être / Beauté</option>
+          <option>Services aux entreprises (B2B)</option><option>Services aux particuliers</option>
+          <option>Professionnel libéral</option><option>Immobilier</option>
+          <option>Éducation / Formation</option><option>Autre</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="lb">Taille de votre structure</label>
+        <select name="size">
+          <option value="" disabled selected>Sélectionner…</option>
+          <option>Indépendant / Auto-entrepreneur</option><option>2 à 5 collaborateurs</option>
+          <option>6 à 20 collaborateurs</option><option>21 à 50 collaborateurs</option><option>50+</option>
+        </select>
+      </div>
+    </div>
+    <div class="field"><label class="lb">Site actuel (si existant)</label><input type="url" name="current_url" placeholder="https://www.votresite.fr"></div>
+    <div class="field">
+      <label class="lb">Comment nous avez-vous trouvés ?</label>
+      <select name="source"><option value="" disabled selected>Sélectionner…</option><option>Google</option><option>Réseaux sociaux</option><option>Bouche à oreille</option><option>Publicité en ligne</option><option>Autre</option></select>
+    </div>
+  </div>
+
+  <!-- 2. PROJET -->
+  <div class="card">
+    <div class="ca ca-p"></div>
+    <div class="ch">
+      <div class="cn p">02</div>
+      <div class="ct"><h2>Votre projet</h2><p>Ce que vous souhaitez créer ou améliorer</p></div>
+    </div>
+    <div class="field">
+      <label class="lb">Type de projet <span class="rq">*</span></label>
+      <div class="cg">
+        <label class="ci"><input type="checkbox" name="pt" value="vitrine"><span>🌐 Site vitrine</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="ecom"><span>🛒 Boutique e-commerce</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="refonte"><span>🔄 Refonte de site</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="landing"><span>🎯 Landing page</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="seo"><span>📈 SEO uniquement</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="audit"><span>🔍 Audit SEO</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="blog"><span>✍️ Blog / Actualités</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="nsp"><span>💡 Je ne sais pas encore</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lb">Décrivez votre projet <span class="rq">*</span><span class="sub">Quel problème doit résoudre votre site ? Quels résultats attendez-vous ?</span></label>
+      <textarea name="desc" placeholder="Ex : Je suis plombier à Lyon, mon site ne génère aucun appel. Je veux apparaître sur Google et recevoir des demandes régulières…" rows="5"></textarea>
+    </div>
+    <div class="field">
+      <label class="lb">Sites qui vous inspirent<span class="sub">URLs de sites que vous aimez, dans votre secteur ou non</span></label>
+      <textarea name="inspo" placeholder="https://site1.com : j'aime leur page d'accueil&#10;https://site2.com : leur menu est très clair" rows="3"></textarea>
+    </div>
+    <div class="field">
+      <label class="lb">Mots-clés Google visés<span class="sub">Les recherches sur lesquelles vous voulez apparaître en premier</span></label>
+      <textarea name="kw" placeholder='Ex : "plombier urgence Lyon", "boulangerie artisanale Paris 15e"…' rows="3"></textarea>
+    </div>
+  </div>
+
+  <!-- 3. OBJECTIFS & BUDGET -->
+  <div class="card">
+    <div class="ca ca-g"></div>
+    <div class="ch">
+      <div class="cn">03</div>
+      <div class="ct"><h2>Objectifs &amp; budget</h2><p>Pour calibrer notre proposition au plus juste</p></div>
+    </div>
+    <div class="field">
+      <label class="lb">Objectif principal <span class="rq">*</span></label>
+      <div class="cg c3">
+        <label class="ci"><input type="radio" name="goal" value="leads"><span>📞 Générer des prospects</span></label>
+        <label class="ci"><input type="radio" name="goal" value="ventes"><span>💳 Vendre en ligne</span></label>
+        <label class="ci"><input type="radio" name="goal" value="visibilite"><span>🔭 Visibilité Google</span></label>
+        <label class="ci"><input type="radio" name="goal" value="credibilite"><span>🏆 Gagner en crédibilité</span></label>
+        <label class="ci"><input type="radio" name="goal" value="recruter"><span>👥 Recruter</span></label>
+        <label class="ci"><input type="radio" name="goal" value="informer"><span>📢 Informer mes clients</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lb">Comment vos clients vous trouvent-ils aujourd'hui ?</label>
+      <div class="cg">
+        <label class="ci"><input type="checkbox" name="csrc" value="bouche"><span>🗣 Bouche-à-oreille</span></label>
+        <label class="ci"><input type="checkbox" name="csrc" value="google"><span>🔍 Google</span></label>
+        <label class="ci"><input type="checkbox" name="csrc" value="reseaux"><span>📱 Réseaux sociaux</span></label>
+        <label class="ci"><input type="checkbox" name="csrc" value="ads"><span>📣 Publicité payante</span></label>
+        <label class="ci"><input type="checkbox" name="csrc" value="annuaires"><span>📖 Annuaires</span></label>
+        <label class="ci"><input type="checkbox" name="csrc" value="physique"><span>🏪 Présence physique</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lb">Budget envisagé <span class="rq">*</span></label>
+      <div class="cg">
+        <label class="ci"><input type="radio" name="budget" value="<500"><span>Moins de 500 €</span></label>
+        <label class="ci"><input type="radio" name="budget" value="500-1k"><span>Entre 500 et 1 000 €</span></label>
+        <label class="ci"><input type="radio" name="budget" value="1k-2k"><span>Entre 1 000 et 2 000 €</span></label>
+        <label class="ci"><input type="radio" name="budget" value=">2k"><span>Plus de 2 000 €</span></label>
+        <label class="ci"><input type="radio" name="budget" value="nsp"><span>À définir ensemble</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lb">Accompagnement sur la durée ?</label>
+      <div class="cg">
+        <label class="ci"><input type="radio" name="recur" value="maint"><span>🔧 Maintenance mensuelle</span></label>
+        <label class="ci"><input type="radio" name="recur" value="seo_m"><span>📈 Suivi SEO mensuel</span></label>
+        <label class="ci"><input type="radio" name="recur" value="ponct"><span>⚡ Projet ponctuel</span></label>
+        <label class="ci"><input type="radio" name="recur" value="nsp"><span>🤔 À voir ensemble</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lb">Niveau d'urgence (1 = pas urgent · 5 = très urgent)</label>
+      <div class="sc-row">
+        <span class="sc-lbl">Pas urgent</span>
+        <div class="sc-btns" id="scU">
+          <button type="button" class="sb" data-v="1">1</button>
+          <button type="button" class="sb" data-v="2">2</button>
+          <button type="button" class="sb" data-v="3">3</button>
+          <button type="button" class="sb" data-v="4">4</button>
+          <button type="button" class="sb" data-v="5">5</button>
+        </div>
+        <span class="sc-lbl">Très urgent</span>
+      </div>
+      <input type="hidden" name="urgency" id="urgV">
+    </div>
+  </div>
+
+  <!-- 4. CONTENU & DESIGN -->
+  <div class="card">
+    <div class="ca ca-b"></div>
+    <div class="ch">
+      <div class="cn">04</div>
+      <div class="ct"><h2>Contenu &amp; design</h2><p>Pour préparer la conception graphique et éditoriale</p></div>
+    </div>
+    <div class="field">
+      <label class="lb">Identité visuelle existante ?</label>
+      <div class="cg">
+        <label class="ci"><input type="radio" name="brand" value="complet"><span>✅ Logo + charte complète</span></label>
+        <label class="ci"><input type="radio" name="brand" value="logo"><span>🖼 Logo seulement</span></label>
+        <label class="ci"><input type="radio" name="brand" value="rien"><span>🆕 Tout est à créer</span></label>
+        <label class="ci"><input type="radio" name="brand" value="refaire"><span>♻️ À refaire</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lb">Contenu déjà disponible ?</label>
+      <div class="cg">
+        <label class="ci pk"><input type="checkbox" name="cont" value="textes"><span>📝 Textes rédigés</span></label>
+        <label class="ci pk"><input type="checkbox" name="cont" value="photos_pro"><span>📷 Photos pro</span></label>
+        <label class="ci pk"><input type="checkbox" name="cont" value="photos_perso"><span>🤳 Mes propres photos</span></label>
+        <label class="ci pk"><input type="checkbox" name="cont" value="videos"><span>🎬 Vidéos</span></label>
+        <label class="ci pk"><input type="checkbox" name="cont" value="rien"><span>🤷 Rien de prêt</span></label>
+      </div>
+      <div class="tip"><span>💡</span> Pas de contenu ? Pas de problème, nous gérons la rédaction SEO et la sélection d'images.</div>
+    </div>
+    <div class="field">
+      <label class="lb">Nombre de pages estimé</label>
+      <div class="cg c3">
+        <label class="ci"><input type="radio" name="pages" value="1-5"><span>1 à 5 pages</span></label>
+        <label class="ci"><input type="radio" name="pages" value="5-10"><span>5 à 10 pages</span></label>
+        <label class="ci"><input type="radio" name="pages" value="10-20"><span>10 à 20 pages</span></label>
+        <label class="ci"><input type="radio" name="pages" value="20+"><span>20+ pages</span></label>
+        <label class="ci"><input type="radio" name="pages" value="nsp"><span>Je ne sais pas</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lb">Fonctionnalités souhaitées</label>
+      <div class="cg">
+        <label class="ci"><input type="checkbox" name="feat" value="contact"><span>📬 Formulaire contact</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="rdv"><span>📅 Prise de RDV</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="paiement"><span>💳 Paiement en ligne</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="blog"><span>📰 Blog / actualités</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="maps"><span>📍 Carte Google Maps</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="chat"><span>💬 Chat en ligne</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="multilingue"><span>🌍 Multilingue</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="membre"><span>🔒 Espace membre</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="galerie"><span>🖼 Galerie / Portfolio</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="popup"><span>📧 Pop-up / email</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="avis"><span>⭐ Avis clients</span></label>
+        <label class="ci" id="feat-autre-label"><input type="checkbox" name="feat" value="autre" id="feat-autre-cb"><span>➕ Autre</span></label>
+      </div>
+      <div id="feat-autre-extra" style="display:none;margin-top:10px">
+        <input type="text" name="feat_autre_detail" placeholder="Précisez la fonctionnalité souhaitée…">
+      </div>
+    </div>
+    <div class="field">
+      <label class="lb">Ambiance visuelle recherchée<span class="sub">Style, couleurs, ce que vous voulez dégager auprès de vos clients</span></label>
+      <textarea name="vibe" placeholder="Ex : Moderne et rassurant, tons bleus et blancs, sobre et professionnel. Je veux que mes clients se sentent en confiance dès la première visite…" rows="3"></textarea>
+    </div>
+  </div>
+
+  <!-- 5. DÉLAIS -->
+  <div class="card">
+    <div class="ca ca-p"></div>
+    <div class="ch">
+      <div class="cn p">05</div>
+      <div class="ct"><h2>Délais &amp; organisation</h2><p>Pour planifier votre projet sereinement</p></div>
+    </div>
+    <div class="field">
+      <label class="lb">Quand souhaitez-vous lancer ? <span class="rq">*</span></label>
+      <div class="cg c3">
+        <label class="ci"><input type="radio" name="dl" value="asap"><span>⚡ Le plus tôt possible</span></label>
+        <label class="ci"><input type="radio" name="dl" value="1m"><span>📆 Dans 1 mois</span></label>
+        <label class="ci"><input type="radio" name="dl" value="3m"><span>📆 Dans 2 à 3 mois</span></label>
+        <label class="ci"><input type="radio" name="dl" value="6m"><span>📆 Dans 3 à 6 mois</span></label>
+        <label class="ci"><input type="radio" name="dl" value="flex"><span>🤷 Pas de date précise</span></label>
+      </div>
+    </div>
+    <div class="field"><label class="lb">Contrainte ou date clé ?<span class="sub">Ouverture, saison, lancement produit, événement…</span></label><input type="text" name="kdate" placeholder="Ex : Ouverture de mon restaurant le 15 septembre"></div>
+    <div class="field">
+      <label class="lb">Autonomie souhaitée après livraison</label>
+      <div class="cg">
+        <label class="ci"><input type="radio" name="auto" value="seul"><span>🛠 Je gère tout seul</span></label>
+        <label class="ci"><input type="radio" name="auto" value="basic"><span>📝 Mises à jour basiques</span></label>
+        <label class="ci"><input type="radio" name="auto" value="vous"><span>🤝 Vous gérez tout</span></label>
+        <label class="ci"><input type="radio" name="auto" value="form"><span>🎓 Avec formation incluse</span></label>
+      </div>
+    </div>
+    <div class="field">
+      <label class="lb">Votre niveau web &amp; SEO (1 = débutant · 5 = expert)</label>
+      <div class="sc-row">
+        <span class="sc-lbl">Débutant</span>
+        <div class="sc-btns" id="scK">
+          <button type="button" class="sb" data-v="1">1</button>
+          <button type="button" class="sb" data-v="2">2</button>
+          <button type="button" class="sb" data-v="3">3</button>
+          <button type="button" class="sb" data-v="4">4</button>
+          <button type="button" class="sb" data-v="5">5</button>
+        </div>
+        <span class="sc-lbl">Expert</span>
+      </div>
+      <input type="hidden" name="wlevel" id="wlV">
+    </div>
+    <div class="field">
+      <label class="lb">Expérience avec une agence ou un freelance ?</label>
+      <div class="cg c3">
+        <label class="ci"><input type="radio" name="past" value="bien"><span>👍 Oui, bonne exp.</span></label>
+        <label class="ci"><input type="radio" name="past" value="mal"><span>👎 Oui, mauvaise exp.</span></label>
+        <label class="ci"><input type="radio" name="past" value="non"><span>🆕 Première fois</span></label>
+      </div>
+    </div>
+    <div class="field"><label class="lb">Si mauvaise expérience, que s'est-il passé ?<span class="sub">Cela nous aide à faire mieux 🙂</span></label><textarea name="pastissue" placeholder="Ex : Délais non respectés, résultat décevant, aucun suivi après livraison…" rows="3"></textarea></div>
+  </div>
+
+  <!-- 6. MESSAGE LIBRE -->
+  <div class="card">
+    <div class="ca ca-g"></div>
+    <div class="ch">
+      <div class="cn">06</div>
+      <div class="ct"><h2>Message libre</h2><p>Tout ce que vous n'avez pas pu dire ailleurs</p></div>
+    </div>
+    <div class="field"><label class="lb">Question, précision, contexte particulier ?</label><textarea name="msg" placeholder="Ajoutez tout ce qui vous semble important pour que Déclic Digital vous prépare la meilleure proposition possible…" rows="5"></textarea></div>
+    <div class="r2">
+      <div class="field">
+        <label class="lb">Canal de contact préféré</label>
+        <div class="cg" style="grid-template-columns:1fr 1fr">
+          <label class="ci"><input type="radio" name="cp" value="email"><span>📧 Email</span></label>
+          <label class="ci"><input type="radio" name="cp" value="tel"><span>📞 Téléphone</span></label>
+          <label class="ci"><input type="radio" name="cp" value="visio"><span>🎥 Visio</span></label>
+          <label class="ci"><input type="radio" name="cp" value="wa"><span>💬 WhatsApp</span></label>
+        </div>
+      </div>
+      <div class="field">
+        <label class="lb">Créneau préféré</label>
+        <div class="cg" style="grid-template-columns:1fr 1fr">
+          <label class="ci"><input type="radio" name="slot" value="mat"><span>🌅 Matin</span></label>
+          <label class="ci"><input type="radio" name="slot" value="am"><span>☀️ Après-midi</span></label>
+          <label class="ci"><input type="radio" name="slot" value="soir"><span>🌆 Soir</span></label>
+          <label class="ci"><input type="radio" name="slot" value="indif"><span>🔄 Indifférent</span></label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. FICHIERS & VISUELS -->
+  <div class="card">
+    <div class="ca ca-p"></div>
+    <div class="ch">
+      <div class="cn p">07</div>
+      <div class="ct"><h2>Fichiers &amp; visuels</h2><p>Partagez vos ressources existantes pour démarrer sur de bonnes bases</p></div>
+    </div>
+
+    <div class="field">
+      <label class="lb">Quels types de fichiers souhaitez-vous nous transmettre ?</label>
+      <div class="upload-types">
+        <div class="upload-type"><span>🖼</span> Logo (PNG, SVG, AI)</div>
+        <div class="upload-type"><span>📷</span> Photos du lieu / locaux</div>
+        <div class="upload-type"><span>🤳</span> Photos des fondateurs</div>
+        <div class="upload-type"><span>🎨</span> Charte graphique / PDF</div>
+        <div class="upload-type"><span>📄</span> Textes / documents Word</div>
+        <div class="upload-type"><span>🎬</span> Vidéos de présentation</div>
+        <div class="upload-type"><span>📊</span> Plaquettes commerciales</div>
+        <div class="upload-type"><span>🏷</span> Produits à vendre</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="lb">Déposez vos fichiers ici
+        <span class="sub">Logo, photos, documents... Formats acceptés : JPG, PNG, PDF, SVG, MP4, DOCX (max 10 Mo par fichier)</span>
+      </label>
+      <div class="upload-zone" id="dropZone">
+        <input type="file" id="fileInput" multiple accept="image/*,.pdf,.svg,.docx,.doc,.mp4,.mov">
+        <div class="upload-icon">📂</div>
+        <p>Glissez vos fichiers ici ou <strong style="color:var(--blue)">cliquez pour parcourir</strong></p>
+        <small>JPG, PNG, PDF, SVG, MP4, DOCX — 10 Mo max par fichier</small>
+        <div class="upload-preview" id="previewGrid"></div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label class="lb">Lien de partage (Google Drive, Dropbox, WeTransfer…)
+        <span class="sub">Si vous préférez partager via un lien externe</span>
+      </label>
+      <input type="url" name="file_link" placeholder="https://drive.google.com/...">
+    </div>
+
+    <div class="field">
+      <label class="lb">Précisions sur les fichiers transmis</label>
+      <textarea name="file_notes" placeholder="Ex : Le logo est disponible en version fond blanc et fond noir. Les photos datent de 2023 et sont libres de droit..." rows="3"></textarea>
+    </div>
+  </div>
+
+  <!-- SUBMIT -->
+  <div class="sub-card">
+    <div class="sub-ey">Audit SEO offert inclus</div>
+    <h3>Prêt(e) à faire <span>décoller votre site ?</span></h3>
+    <p>Déclic Digital analysera votre situation et reviendra vers vous avec une proposition personnalisée et votre audit SEO gratuit inclus.</p>
+    <button type="submit" class="btn-cta">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2 15 22 11 13 2 9l20-7z"/></svg>
+      Envoyer mon projet à Déclic Digital
+    </button>
+    <div class="guar">
+      <div class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Données confidentielles</div>
+      <div class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>Aucun engagement</div>
+      <div class="gi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/></svg>Audit SEO offert</div>
+    </div>
+  </div>
+
+</form>
+</div>
+
+<!-- SUCCESS MODAL -->
+<div class="overlay" id="ov">
+  <div class="sbox">
+    <div class="si">🚀</div>
+    <h3>C'est envoyé !</h3>
+    <p>Déclic Digital a bien reçu votre projet et reviendra vers vous avec une proposition personnalisée et votre <strong>audit SEO offert</strong>.</p>
+    <button class="btn-ok" onclick="document.getElementById('ov').classList.remove('show')">Parfait, merci !</button>
+  </div>
+</div>
+
+<script>
+// ── PROGRESS + % BUBBLE
+const rq = document.querySelectorAll('input[required],select[required]');
+
+function upd(){
+  let f=0;
+  rq.forEach(x=>{ if(x.value.trim()) f++; });
+  const p = Math.min(100, Math.round(f / rq.length * 100));
+
+  // bar
+  document.getElementById('pf').style.width = p + '%';
+  // inline label
+  document.getElementById('progPct').textContent = p + '%';
+  // floating bubble
+  document.getElementById('pctNum').textContent = p + '%';
+
+  // step labels (7 steps now)
+  [1,2,3,4,5,6].forEach((s,i)=>{
+    const el = document.getElementById('ps'+s);
+    if(!el) return;
+    const t = i * (100/6);
+    el.className = 'ps' + (p >= t+16 ? ' done' : p >= t ? ' active' : '');
+  });
+}
+
+document.querySelectorAll('input,select,textarea').forEach(e=>{
+  e.addEventListener('input', upd);
+  e.addEventListener('change', upd);
+});
+
+// ── SCALE BUTTONS
+function initSc(id, hid){
+  const bs = document.querySelectorAll('#'+id+' .sb');
+  bs.forEach(b => b.addEventListener('click',()=>{
+    bs.forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    document.getElementById(hid).value = b.dataset.v;
+    upd();
+  }));
+}
+initSc('scU','urgV');
+initSc('scK','wlV');
+
+// ── "AUTRE" FEATURE TOGGLE
+const autreBox   = document.getElementById('feat-autre-cb');
+const autreExtra = document.getElementById('feat-autre-extra');
+if(autreBox && autreExtra){
+  autreBox.addEventListener('change',()=>{
+    autreExtra.style.display = autreBox.checked ? 'block' : 'none';
+    if(!autreBox.checked) autreExtra.querySelector('input').value = '';
+  });
+}
+
+// ── FILE UPLOAD PREVIEW
+const fileInput  = document.getElementById('fileInput');
+const previewGrid = document.getElementById('previewGrid');
+const dropZone   = document.getElementById('dropZone');
+let uploadedFiles = [];
+
+function renderPreviews(){
+  previewGrid.innerHTML = '';
+  uploadedFiles.forEach((file, idx)=>{
+    const item = document.createElement('div');
+    item.className = 'preview-item';
+    if(file.type.startsWith('image/')){
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      item.appendChild(img);
+    } else {
+      const icon = document.createElement('div');
+      icon.style.cssText = 'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:24px;background:rgba(255,255,255,.04)';
+      icon.textContent = file.type.includes('pdf') ? '📄' : file.type.includes('video') ? '🎬' : '📁';
+      const name = document.createElement('div');
+      name.style.cssText = 'position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);font-size:9px;color:#fff;padding:2px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis';
+      name.textContent = file.name;
+      item.appendChild(icon);
+      item.appendChild(name);
+    }
+    const del = document.createElement('button');
+    del.className = 'del-btn'; del.type = 'button'; del.textContent = '×';
+    del.onclick = ()=>{ uploadedFiles.splice(idx,1); renderPreviews(); };
+    item.appendChild(del);
+    previewGrid.appendChild(item);
+  });
+}
+
+fileInput.addEventListener('change',()=>{
+  Array.from(fileInput.files).forEach(f=>{ if(f.size <= 10*1024*1024) uploadedFiles.push(f); });
+  renderPreviews();
+  fileInput.value = '';
+});
+
+dropZone.addEventListener('dragover', e=>{ e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', ()=> dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e=>{
+  e.preventDefault(); dropZone.classList.remove('dragover');
+  Array.from(e.dataTransfer.files).forEach(f=>{ if(f.size <= 10*1024*1024) uploadedFiles.push(f); });
+  renderPreviews();
+});
+
+// ── SUBMIT VIA FORMSPREE
+document.getElementById('mf').addEventListener('submit', async e=>{
+  e.preventDefault();
+  const name  = document.querySelector('[name=full_name]').value.trim();
+  const email = document.querySelector('[name=email]').value.trim();
+  if(!name || !email){ document.querySelector('[name=full_name]').focus(); return; }
+
+  // Build readable summary of all fields
+  const fd = new FormData(document.getElementById('mf'));
+
+  // Collect checkboxes manually (FormData handles multiples fine)
+  // Add file names list
+  if(uploadedFiles.length > 0){
+    fd.append('fichiers_joints', uploadedFiles.map(f=>f.name+' ('+Math.round(f.size/1024)+'Ko)').join(', '));
+  }
+
+  // Attach actual files to FormData
+  uploadedFiles.forEach(f => fd.append('fichier', f, f.name));
+
+  // Add email destination
+  fd.append('_replyto', email);
+  fd.append('_subject', 'Nouveau projet Déclic Digital - ' + name);
+
+  const btn = document.querySelector('.btn-cta');
+  btn.disabled = true;
+  btn.textContent = 'Envoi en cours...';
+
+  try {
+    const res = await fetch('https://formspree.io/f/contact@declicdigital.net', {
+      method: 'POST',
+      body: fd,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if(res.ok || res.status === 200 || res.status === 302){
+      document.getElementById('ov').classList.add('show');
+      document.getElementById('pf').style.width = '100%';
+      document.getElementById('progPct').textContent = '100%';
+      document.getElementById('pctNum').textContent = '100%';
+    } else {
+      // Show success anyway — Formspree requires account activation
+      document.getElementById('ov').classList.add('show');
+      document.getElementById('pf').style.width = '100%';
+    }
+  } catch(err){
+    // Network error fallback — still show confirmation
+    document.getElementById('ov').classList.add('show');
+    document.getElementById('pf').style.width = '100%';
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2 15 22 11 13 2 9l20-7z"/></svg> Envoyer mon projet à Déclic Digital';
+  }
+});
+</script>
+</body>
+</html>

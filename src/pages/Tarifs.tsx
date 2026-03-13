@@ -8,7 +8,7 @@ import SectionWrapper from "@/components/SectionWrapper";
 const plans = [
   {
     name: "Landing Page",
-    price: "100",
+    price: "300",
     unit: "€",
     description: "Idéal pour une page unique de présentation ou une offre spécifique.",
     highlighted: false,
@@ -23,7 +23,7 @@ const plans = [
   },
   {
     name: "Site Vitrine",
-    price: "490",
+    price: "590",
     unit: "€",
     description: "Pour les PME et indépendants qui veulent une présence en ligne professionnelle.",
     highlighted: false,
@@ -40,7 +40,7 @@ const plans = [
   },
   {
     name: "Site Vitrine + SEO",
-    price: "790",
+    price: "990",
     unit: "€",
     description: "La solution complète pour être visible sur Google et attirer des clients.",
     highlighted: true,
@@ -60,8 +60,8 @@ const plans = [
   },
   {
     name: "Site Avancé",
-    price: "1 290",
-    unit: "€",
+    price: "1 500",
+    unit: "€+",
     description: "Pour les entreprises qui veulent un site complet avec optimisation maximale.",
     highlighted: false,
     features: [
