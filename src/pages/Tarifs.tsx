@@ -8,7 +8,7 @@ import SectionWrapper from "@/components/SectionWrapper";
 const plans = [
   {
     name: "Landing Page",
-    price: "100",
+    price: "300",
     unit: "€",
     description: "Idéal pour une page unique de présentation ou une offre spécifique.",
     highlighted: false,
