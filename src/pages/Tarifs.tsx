@@ -23,7 +23,7 @@ const plans = [
   },
   {
     name: "Site Vitrine",
-    price: "490",
+    price: "590",
     unit: "€",
     description: "Pour les PME et indépendants qui veulent une présence en ligne professionnelle.",
     highlighted: false,
