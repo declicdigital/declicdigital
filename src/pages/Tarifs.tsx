@@ -40,7 +40,7 @@ const plans = [
   },
   {
     name: "Site Vitrine + SEO",
-    price: "790",
+    price: "990",
     unit: "€",
     description: "La solution complète pour être visible sur Google et attirer des clients.",
     highlighted: true,
