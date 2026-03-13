@@ -115,7 +115,7 @@ const Contact = () => (
             Retrouvez toutes nos informations, nos avis clients et nos coordonnées directement sur Google.
           </p>
           <a
-            href="https://share.google/OobjHzt84cH9YkyYR"
+            href="https://share.google/i2RfnCbtHLUrO4NQF"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block gradient-primary rounded-full px-6 py-3 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity text-center"
