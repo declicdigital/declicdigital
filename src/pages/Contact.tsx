@@ -123,7 +123,7 @@ const Contact = () => (
             Voir notre fiche Google
           </a>
           <a
-            href="https://www.google.com/search?sa=X&sca_esv=517629e0db3c0ca4"
+            href="https://share.google/i2RfnCbtHLUrO4NQF"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-3 inline-block rounded-full border border-border px-6 py-3 font-semibold text-foreground hover:bg-secondary transition-colors text-center"
