@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Globe, Search, BarChart3, Zap, Eye, Users, TrendingUp, ChevronRight, Monitor, Smartphone, Gauge, CheckCircle, Shield, Clock, Target, Award, MessageSquare, Phone as PhoneIcon, FileText, Rocket } from "lucide-react";
+import { Globe, Search, BarChart3, Zap, Eye, Users, TrendingUp, ChevronRight, Monitor, Smartphone, Gauge, CheckCircle, Shield, Clock, Target, Award, MessageSquare, Phone as PhoneIcon, FileText, Rocket, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
