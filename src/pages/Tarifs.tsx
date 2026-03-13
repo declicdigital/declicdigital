@@ -60,8 +60,8 @@ const plans = [
   },
   {
     name: "Site Avancé",
-    price: "1 290",
-    unit: "€",
+    price: "1 500",
+    unit: "€+",
     description: "Pour les entreprises qui veulent un site complet avec optimisation maximale.",
     highlighted: false,
     features: [
