@@ -723,54 +723,69 @@ dropZone.addEventListener('drop', e=>{
   renderPreviews();
 });
 
-// ── SUBMIT VIA FORMSPREE
+// ── SUBMIT VIA EDGE FUNCTION
 document.getElementById('mf').addEventListener('submit', async e=>{
   e.preventDefault();
   const name  = document.querySelector('[name=full_name]').value.trim();
   const email = document.querySelector('[name=email]').value.trim();
   if(!name || !email){ document.querySelector('[name=full_name]').focus(); return; }
 
-  // Build readable summary of all fields
+  // Collect all form data as JSON
+  const formData = {};
   const fd = new FormData(document.getElementById('mf'));
-
-  // Collect checkboxes manually (FormData handles multiples fine)
-  // Add file names list
-  if(uploadedFiles.length > 0){
-    fd.append('fichiers_joints', uploadedFiles.map(f=>f.name+' ('+Math.round(f.size/1024)+'Ko)').join(', '));
+  
+  // Handle multi-value fields
+  const multiFields = {};
+  for(const [key, val] of fd.entries()){
+    if(multiFields[key]){
+      if(Array.isArray(formData[key])) formData[key].push(val);
+      else formData[key] = [formData[key], val];
+    } else {
+      formData[key] = val;
+      multiFields[key] = true;
+    }
   }
 
-  // Attach actual files to FormData
-  uploadedFiles.forEach(f => fd.append('fichier', f, f.name));
-
-  // Add email destination
-  fd.append('_replyto', email);
-  fd.append('_subject', 'Nouveau projet Déclic Digital - ' + name);
+  // Add file names
+  if(uploadedFiles.length > 0){
+    formData.fichiers_joints = uploadedFiles.map(f=>f.name+' ('+Math.round(f.size/1024)+'Ko)').join(', ');
+  }
 
   const btn = document.querySelector('.btn-cta');
   btn.disabled = true;
   btn.textContent = 'Envoi en cours...';
 
   try {
-    const res = await fetch('https://formspree.io/f/contact@declicdigital.net', {
+    const SUPABASE_URL = 'https://ubtdhicbbwasabgokzje.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVidGRoaWNiYndhc2FiZ29remplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNzU0ODEsImV4cCI6MjA4ODk1MTQ4MX0.eRYVU013OtLUUELTPKxLaCDOEQBXngfnReqz_148Wb4';
+    
+    const res = await fetch(SUPABASE_URL + '/functions/v1/send-form', {
       method: 'POST',
-      body: fd,
-      headers: { 'Accept': 'application/json' }
+      body: JSON.stringify(formData),
+      headers: { 
+        'Content-Type': 'application/json',
+        'apikey': SUPABASE_KEY
+      }
     });
 
-    if(res.ok || res.status === 200 || res.status === 302){
+    if(res.ok){
       document.getElementById('ov').classList.add('show');
       document.getElementById('pf').style.width = '100%';
       document.getElementById('progPct').textContent = '100%';
       document.getElementById('pctNum').textContent = '100%';
     } else {
-      // Show success anyway — Formspree requires account activation
+      // Fallback: open mailto
+      const subject = encodeURIComponent('Nouveau projet - ' + name);
+      const body = encodeURIComponent('Nom: ' + name + '\nEmail: ' + email + '\nEntreprise: ' + (formData.company||'') + '\n\nMerci de me recontacter.');
+      window.open('mailto:contact@declicdigital.net?subject=' + subject + '&body=' + body);
       document.getElementById('ov').classList.add('show');
-      document.getElementById('pf').style.width = '100%';
     }
   } catch(err){
-    // Network error fallback — still show confirmation
+    // Fallback mailto
+    const subject = encodeURIComponent('Nouveau projet - ' + name);
+    const body = encodeURIComponent('Nom: ' + name + '\nEmail: ' + email);
+    window.open('mailto:contact@declicdigital.net?subject=' + subject + '&body=' + body);
     document.getElementById('ov').classList.add('show');
-    document.getElementById('pf').style.width = '100%';
   } finally {
     btn.disabled = false;
     btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2 15 22 11 13 2 9l20-7z"/></svg> Envoyer mon projet à Déclic Digital';
