@@ -59,6 +59,9 @@ const Footer = () => (
             >
               Audit SEO gratuit
             </Link>
+            <a href="/formulaire-client.html" className="mt-3 inline-block text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+              Formulaire client
+            </a>
           </div>
         </div>
 
