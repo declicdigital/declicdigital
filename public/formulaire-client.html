@@ -7,52 +7,52 @@
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:           #0F172A;
-  --bg-card:      #1E293B;
-  --border:       rgba(255,255,255,0.07);
-  --border-focus: rgba(56,189,248,0.55);
-  --blue:         #38BDF8;
-  --blue-dim:     rgba(56,189,248,0.10);
-  --blue-glow:    rgba(56,189,248,0.22);
-  --blue-deep:    #0EA5E9;
+  --bg:           #F8FAFC;
+  --bg-card:      #FFFFFF;
+  --border:       rgba(0,0,0,0.10);
+  --border-focus: rgba(14,165,233,0.6);
+  --blue:         #0EA5E9;
+  --blue-dim:     rgba(14,165,233,0.08);
+  --blue-glow:    rgba(14,165,233,0.18);
+  --blue-deep:    #0284C7;
   --pink:         #F472B6;
-  --pink-dim:     rgba(244,114,182,0.10);
-  --pink-glow:    rgba(244,114,182,0.22);
-  --white:        #F8FAFC;
+  --pink-dim:     rgba(244,114,182,0.08);
+  --pink-glow:    rgba(244,114,182,0.18);
+  --white:        #0F172A;
   --muted:        #64748B;
-  --muted-light:  #94A3B8;
-  --text:         #E2E8F0;
+  --muted-light:  #475569;
+  --text:         #1E293B;
   --radius:       16px;
   --radius-sm:    10px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:#1E293B;min-height:100vh;overflow-x:hidden}
 
 /* noise */
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.4}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:0;opacity:.15}
 
-.glow-t{position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(56,189,248,.07) 0%,transparent 70%);pointer-events:none;z-index:0}
+.glow-t{position:fixed;top:-200px;left:50%;transform:translateX(-50%);width:900px;height:500px;background:radial-gradient(ellipse,rgba(14,165,233,.07) 0%,transparent 70%);pointer-events:none;z-index:0}
 .glow-r{position:fixed;top:30%;right:-200px;width:500px;height:500px;background:radial-gradient(circle,rgba(244,114,182,.06) 0%,transparent 70%);pointer-events:none;z-index:0}
 
 /* header */
-header{position:sticky;top:0;z-index:100;background:rgba(15,23,42,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between}
+header{position:sticky;top:0;z-index:100;background:rgba(248,250,252,.97);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.08);padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none}
 .logo-name{display:none}
 .logo-name{font-family:'Outfit',sans-serif;font-weight:700;font-size:18px;color:var(--white);letter-spacing:-.02em}
 .logo-name span{color:var(--blue)}
-.h-badge{display:flex;align-items:center;gap:7px;background:var(--blue-dim);border:1px solid rgba(56,189,248,.2);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:500;color:var(--blue);letter-spacing:.02em}
+.h-badge{display:flex;align-items:center;gap:7px;background:var(--blue-dim);border:1px solid rgba(14,165,233,.3);border-radius:100px;padding:6px 14px;font-size:12px;font-weight:500;color:var(--blue);letter-spacing:.02em}
 .h-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--blue);box-shadow:0 0 8px var(--blue);animation:pulse 2s infinite}
 
 /* progress */
-.prog-wrap{position:sticky;top:64px;z-index:90;background:rgba(15,23,42,.95);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:14px 40px}
+.prog-wrap{position:sticky;top:64px;z-index:90;background:rgba(248,250,252,.97);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,.08);padding:14px 40px}
 .prog-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
 .prog-steps{display:flex;gap:4px}
 .prog-pct{font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--blue);letter-spacing:.02em;background:var(--blue-dim);border:1px solid rgba(56,189,248,.2);border-radius:100px;padding:3px 12px;transition:all .3s;min-width:52px;text-align:center}
-.ps{font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);transition:color .3s}
+.ps{font-family:'Outfit',sans-serif;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:#94A3B8;transition:color .3s}
 .ps.active{color:var(--blue)}
 .ps.done{color:var(--pink)}
-.prog-track{height:3px;background:rgba(255,255,255,.06);border-radius:100px;overflow:hidden}
+.prog-track{height:3px;background:rgba(0,0,0,.08);border-radius:100px;overflow:hidden}
 .prog-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--blue),var(--pink));border-radius:100px;transition:width .6s cubic-bezier(.4,0,.2,1);box-shadow:0 0 12px var(--blue-glow)}
 
 /* floating pct bubble */
@@ -74,27 +74,27 @@ header{position:sticky;top:0;z-index:100;background:rgba(15,23,42,.92);backdrop-
 .preview-item img{width:100%;height:100%;object-fit:cover}
 .preview-item .del-btn{position:absolute;top:3px;right:3px;width:18px;height:18px;background:rgba(244,114,182,.85);border:none;border-radius:50%;color:white;font-size:10px;cursor:pointer;display:flex;align-items:center;justify-content:center;line-height:1}
 .upload-types{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-top:14px}
-.upload-type{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.02);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--muted-light)}
+.upload-type{display:flex;align-items:center;gap:8px;background:#F1F5F9;border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:13px;color:var(--muted-light)}
 .upload-type span{font-size:18px}
 
 /* hero */
 .hero{position:relative;z-index:1;padding:80px 40px 72px;text-align:center;overflow:hidden}
 .hero-in{max-width:680px;margin:0 auto}
 .htag{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(244,114,182,.3);background:var(--pink-dim);border-radius:100px;padding:7px 18px;font-size:12px;font-weight:600;color:var(--pink);letter-spacing:.06em;text-transform:uppercase;margin-bottom:28px;animation:fadeUp .6s ease both}
-.hero h1{font-family:'Outfit',sans-serif;font-size:clamp(32px,6vw,56px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:var(--white);margin-bottom:20px;animation:fadeUp .6s ease .1s both}
+.hero h1{font-family:'Outfit',sans-serif;font-size:clamp(32px,6vw,56px);font-weight:800;line-height:1.08;letter-spacing:-.03em;color:#0F172A;margin-bottom:20px;animation:fadeUp .6s ease .1s both}
 .hero h1 .gr{background:linear-gradient(90deg,var(--blue),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero p{font-size:16px;font-weight:300;line-height:1.7;color:var(--muted-light);max-width:500px;margin:0 auto 40px;animation:fadeUp .6s ease .2s both}
+.hero p{font-size:16px;font-weight:300;line-height:1.7;color:#475569;max-width:500px;margin:0 auto 40px;animation:fadeUp .6s ease .2s both}
 .pills{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;animation:fadeUp .6s ease .3s both}
-.pill{display:flex;align-items:center;gap:6px;background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:100px;padding:7px 16px;font-size:13px;color:var(--muted-light)}
+.pill{display:flex;align-items:center;gap:6px;background:#F1F5F9;border:1px solid rgba(0,0,0,.08);border-radius:100px;padding:7px 16px;font-size:13px;color:#475569}
 .pill .dn{width:18px;height:18px;border-radius:50%;background:var(--blue-dim);border:1px solid rgba(56,189,248,.3);font-size:10px;font-weight:700;color:var(--blue);display:flex;align-items:center;justify-content:center}
 
 /* form wrap */
 .fw{position:relative;z-index:1;max-width:820px;margin:0 auto 80px;padding:0 24px}
 
 /* card */
-.card{background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:44px 48px;margin-bottom:20px;position:relative;overflow:hidden;opacity:0;transform:translateY(28px);animation:cardIn .55s cubic-bezier(.22,1,.36,1) forwards;transition:border-color .3s}
-.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(56,189,248,.4),transparent);opacity:0;transition:opacity .3s}
-.card:hover{border-color:rgba(56,189,248,.15)}
+.card{background:var(--bg-card);border:1px solid rgba(0,0,0,0.08);border-radius:20px;padding:44px 48px;margin-bottom:20px;position:relative;overflow:hidden;opacity:0;transform:translateY(28px);animation:cardIn .55s cubic-bezier(.22,1,.36,1) forwards;transition:border-color .3s}
+.card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(14,165,233,.35),transparent);opacity:0;transition:opacity .3s}
+.card:hover{border-color:rgba(14,165,233,.2)}
 .card:hover::before{opacity:1}
 .card:nth-child(1){animation-delay:.05s}
 .card:nth-child(2){animation-delay:.10s}
@@ -112,7 +112,7 @@ header{position:sticky;top:0;z-index:100;background:rgba(15,23,42,.92);backdrop-
 .cn{width:42px;height:42px;flex-shrink:0;border-radius:12px;background:var(--blue-dim);border:1px solid rgba(56,189,248,.2);font-family:'Outfit',sans-serif;font-weight:800;font-size:18px;color:var(--blue);display:flex;align-items:center;justify-content:center}
 .cn.p{background:var(--pink-dim);border-color:rgba(244,114,182,.2);color:var(--pink)}
 .ct h2{font-family:'Outfit',sans-serif;font-size:19px;font-weight:700;color:var(--white);letter-spacing:-.02em;margin-bottom:3px}
-.ct p{font-size:13px;color:var(--muted);font-weight:300}
+.ct p{font-size:13px;color:#64748B;font-weight:300}
 
 /* fields */
 .field{margin-bottom:26px}
@@ -157,11 +157,11 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
 /* submit */
 .sub-card{position:relative;background:var(--bg-card);border:1px solid var(--border);border-radius:20px;padding:52px 48px;text-align:center;overflow:hidden;margin-bottom:60px;opacity:0;animation:cardIn .55s cubic-bezier(.22,1,.36,1) .4s forwards}
 .sub-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(56,189,248,.08) 0%,transparent 65%);pointer-events:none}
-.sub-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--pink),transparent);opacity:.4}
+.sub-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--pink),transparent);opacity:.15}
 .sub-ey{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--pink);margin-bottom:16px}
 .sub-card h3{font-family:'Outfit',sans-serif;font-size:clamp(22px,4vw,32px);font-weight:800;color:var(--white);letter-spacing:-.02em;margin-bottom:12px}
 .sub-card h3 span{background:linear-gradient(90deg,var(--blue),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.sub-card p{font-size:15px;color:var(--muted-light);font-weight:300;line-height:1.6;max-width:460px;margin:0 auto 36px}
+.sub-card p{font-size:15px;color:#475569;font-weight:300;line-height:1.6;max-width:460px;margin:0 auto 36px}
 
 .btn-cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--blue),#0EA5E9 50%,var(--pink));background-size:200% 100%;color:#0F172A;font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;padding:17px 44px;border-radius:100px;border:none;cursor:pointer;transition:background-position .4s,transform .2s,box-shadow .2s;box-shadow:0 8px 30px rgba(56,189,248,.3),0 0 0 1px rgba(56,189,248,.2);letter-spacing:.01em}
 .btn-cta:hover{background-position:100% 0;transform:translateY(-2px);box-shadow:0 14px 40px rgba(56,189,248,.4)}
@@ -175,7 +175,7 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
 /* modal */
 .overlay{display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,.88);backdrop-filter:blur(16px);align-items:center;justify-content:center}
 .overlay.show{display:flex}
-.sbox{background:var(--bg-card);border:1px solid rgba(56,189,248,.2);border-radius:24px;padding:56px 48px;max-width:460px;width:90%;text-align:center;position:relative;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.5);animation:pop .45s cubic-bezier(.34,1.56,.64,1)}
+.sbox{background:#FFFFFF;border:1px solid rgba(56,189,248,.2);border-radius:24px;padding:56px 48px;max-width:460px;width:90%;text-align:center;position:relative;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.5);animation:pop .45s cubic-bezier(.34,1.56,.64,1)}
 .sbox::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--pink))}
 .si{width:72px;height:72px;background:linear-gradient(135deg,var(--blue-dim),var(--pink-dim));border:1px solid rgba(56,189,248,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 24px;box-shadow:0 0 40px var(--blue-glow)}
 .sbox h3{font-family:'Outfit',sans-serif;font-size:28px;font-weight:800;color:var(--white);letter-spacing:-.02em;margin-bottom:12px}
@@ -202,6 +202,12 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
   .sc-lbl{display:none}
 }
 @media(max-width:420px){.cg{grid-template-columns:1fr}}
+
+.browse-btn{background:var(--blue-dim);border:1px solid rgba(56,189,248,.3);border-radius:8px;color:var(--blue);font-size:13px;font-weight:600;padding:9px 20px;cursor:pointer;transition:all .2s}
+.browse-btn:hover{background:rgba(56,189,248,.18);border-color:var(--blue)}
+.upload-zone{border:2px dashed var(--border);border-radius:var(--radius-sm);padding:28px 20px;text-align:center;transition:all .2s;background:#F8FAFC;cursor:default}
+.upload-zone.dragover{border-color:var(--blue);background:var(--blue-dim);box-shadow:0 0 0 3px rgba(56,189,248,.1)}
+.upload-zone-inner{display:flex;flex-direction:column;align-items:center}
 </style>
 </head>
 <body>
@@ -240,7 +246,7 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
 <!-- HERO -->
 <div class="hero">
   <div class="hero-in">
-    <div class="htag">✦ Audit SEO offert à la clé</div>
+    <div class="htag"> Audit SEO offert à la clé</div>
     <h1>Parlez-nous de votre<br><span class="gr">projet web</span></h1>
     <p>Quelques minutes de votre temps pour que Déclic Digital vous prépare une proposition sur mesure et votre audit SEO gratuit.</p>
     <div class="pills">
@@ -311,14 +317,14 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
     <div class="field">
       <label class="lb">Type de projet <span class="rq">*</span></label>
       <div class="cg">
-        <label class="ci"><input type="checkbox" name="pt" value="vitrine"><span>🌐 Site vitrine</span></label>
-        <label class="ci"><input type="checkbox" name="pt" value="ecom"><span>🛒 Boutique e-commerce</span></label>
-        <label class="ci"><input type="checkbox" name="pt" value="refonte"><span>🔄 Refonte de site</span></label>
-        <label class="ci"><input type="checkbox" name="pt" value="landing"><span>🎯 Landing page</span></label>
-        <label class="ci"><input type="checkbox" name="pt" value="seo"><span>📈 SEO uniquement</span></label>
-        <label class="ci"><input type="checkbox" name="pt" value="audit"><span>🔍 Audit SEO</span></label>
-        <label class="ci"><input type="checkbox" name="pt" value="blog"><span>✍️ Blog / Actualités</span></label>
-        <label class="ci"><input type="checkbox" name="pt" value="nsp"><span>💡 Je ne sais pas encore</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="vitrine"><span>Site vitrine</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="ecom"><span>Boutique e-commerce</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="refonte"><span>Refonte de site</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="landing"><span>Landing page</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="seo"><span>SEO uniquement</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="audit"><span>Audit SEO</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="blog"><span>Blog / Actualités</span></label>
+        <label class="ci"><input type="checkbox" name="pt" value="nsp"><span>Je ne sais pas encore</span></label>
       </div>
     </div>
     <div class="field">
@@ -345,23 +351,23 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
     <div class="field">
       <label class="lb">Objectif principal <span class="rq">*</span></label>
       <div class="cg c3">
-        <label class="ci"><input type="radio" name="goal" value="leads"><span>📞 Générer des prospects</span></label>
-        <label class="ci"><input type="radio" name="goal" value="ventes"><span>💳 Vendre en ligne</span></label>
-        <label class="ci"><input type="radio" name="goal" value="visibilite"><span>🔭 Visibilité Google</span></label>
-        <label class="ci"><input type="radio" name="goal" value="credibilite"><span>🏆 Gagner en crédibilité</span></label>
-        <label class="ci"><input type="radio" name="goal" value="recruter"><span>👥 Recruter</span></label>
-        <label class="ci"><input type="radio" name="goal" value="informer"><span>📢 Informer mes clients</span></label>
+        <label class="ci"><input type="radio" name="goal" value="leads"><span>Générer des prospects</span></label>
+        <label class="ci"><input type="radio" name="goal" value="ventes"><span>Vendre en ligne</span></label>
+        <label class="ci"><input type="radio" name="goal" value="visibilite"><span>Visibilité Google</span></label>
+        <label class="ci"><input type="radio" name="goal" value="credibilite"><span>Gagner en crédibilité</span></label>
+        <label class="ci"><input type="radio" name="goal" value="recruter"><span>Recruter</span></label>
+        <label class="ci"><input type="radio" name="goal" value="informer"><span>Informer mes clients</span></label>
       </div>
     </div>
     <div class="field">
       <label class="lb">Comment vos clients vous trouvent-ils aujourd'hui ?</label>
       <div class="cg">
-        <label class="ci"><input type="checkbox" name="csrc" value="bouche"><span>🗣 Bouche-à-oreille</span></label>
-        <label class="ci"><input type="checkbox" name="csrc" value="google"><span>🔍 Google</span></label>
-        <label class="ci"><input type="checkbox" name="csrc" value="reseaux"><span>📱 Réseaux sociaux</span></label>
-        <label class="ci"><input type="checkbox" name="csrc" value="ads"><span>📣 Publicité payante</span></label>
-        <label class="ci"><input type="checkbox" name="csrc" value="annuaires"><span>📖 Annuaires</span></label>
-        <label class="ci"><input type="checkbox" name="csrc" value="physique"><span>🏪 Présence physique</span></label>
+        <label class="ci"><input type="checkbox" name="csrc" value="bouche"><span>Bouche-à-oreille</span></label>
+        <label class="ci"><input type="checkbox" name="csrc" value="google"><span>Google</span></label>
+        <label class="ci"><input type="checkbox" name="csrc" value="reseaux"><span>Réseaux sociaux</span></label>
+        <label class="ci"><input type="checkbox" name="csrc" value="ads"><span>Publicité payante</span></label>
+        <label class="ci"><input type="checkbox" name="csrc" value="annuaires"><span>Annuaires</span></label>
+        <label class="ci"><input type="checkbox" name="csrc" value="physique"><span>Présence physique</span></label>
       </div>
     </div>
     <div class="field">
@@ -377,10 +383,10 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
     <div class="field">
       <label class="lb">Accompagnement sur la durée ?</label>
       <div class="cg">
-        <label class="ci"><input type="radio" name="recur" value="maint"><span>🔧 Maintenance mensuelle</span></label>
-        <label class="ci"><input type="radio" name="recur" value="seo_m"><span>📈 Suivi SEO mensuel</span></label>
-        <label class="ci"><input type="radio" name="recur" value="ponct"><span>⚡ Projet ponctuel</span></label>
-        <label class="ci"><input type="radio" name="recur" value="nsp"><span>🤔 À voir ensemble</span></label>
+        <label class="ci"><input type="radio" name="recur" value="maint"><span>Maintenance mensuelle</span></label>
+        <label class="ci"><input type="radio" name="recur" value="seo_m"><span>Suivi SEO mensuel</span></label>
+        <label class="ci"><input type="radio" name="recur" value="ponct"><span>Projet ponctuel</span></label>
+        <label class="ci"><input type="radio" name="recur" value="nsp"><span>À voir ensemble</span></label>
       </div>
     </div>
     <div class="field">
@@ -410,22 +416,22 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
     <div class="field">
       <label class="lb">Identité visuelle existante ?</label>
       <div class="cg">
-        <label class="ci"><input type="radio" name="brand" value="complet"><span>✅ Logo + charte complète</span></label>
-        <label class="ci"><input type="radio" name="brand" value="logo"><span>🖼 Logo seulement</span></label>
+        <label class="ci"><input type="radio" name="brand" value="complet"><span>Logo + charte complète</span></label>
+        <label class="ci"><input type="radio" name="brand" value="logo"><span>Logo seulement</span></label>
         <label class="ci"><input type="radio" name="brand" value="rien"><span>🆕 Tout est à créer</span></label>
-        <label class="ci"><input type="radio" name="brand" value="refaire"><span>♻️ À refaire</span></label>
+        <label class="ci"><input type="radio" name="brand" value="refaire"><span>À refaire</span></label>
       </div>
     </div>
     <div class="field">
       <label class="lb">Contenu déjà disponible ?</label>
       <div class="cg">
-        <label class="ci pk"><input type="checkbox" name="cont" value="textes"><span>📝 Textes rédigés</span></label>
-        <label class="ci pk"><input type="checkbox" name="cont" value="photos_pro"><span>📷 Photos pro</span></label>
-        <label class="ci pk"><input type="checkbox" name="cont" value="photos_perso"><span>🤳 Mes propres photos</span></label>
-        <label class="ci pk"><input type="checkbox" name="cont" value="videos"><span>🎬 Vidéos</span></label>
-        <label class="ci pk"><input type="checkbox" name="cont" value="rien"><span>🤷 Rien de prêt</span></label>
+        <label class="ci pk"><input type="checkbox" name="cont" value="textes"><span>Textes rédigés</span></label>
+        <label class="ci pk"><input type="checkbox" name="cont" value="photos_pro"><span>Photos pro</span></label>
+        <label class="ci pk"><input type="checkbox" name="cont" value="photos_perso"><span>Mes propres photos</span></label>
+        <label class="ci pk"><input type="checkbox" name="cont" value="videos"><span>Vidéos</span></label>
+        <label class="ci pk"><input type="checkbox" name="cont" value="rien"><span>Rien de prêt</span></label>
       </div>
-      <div class="tip"><span>💡</span> Pas de contenu ? Pas de problème, nous gérons la rédaction SEO et la sélection d'images.</div>
+      <div class="tip"><span></span> Pas de contenu ? Pas de problème, nous gérons la rédaction SEO et la sélection d'images.</div>
     </div>
     <div class="field">
       <label class="lb">Nombre de pages estimé</label>
@@ -440,18 +446,18 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
     <div class="field">
       <label class="lb">Fonctionnalités souhaitées</label>
       <div class="cg">
-        <label class="ci"><input type="checkbox" name="feat" value="contact"><span>📬 Formulaire contact</span></label>
-        <label class="ci"><input type="checkbox" name="feat" value="rdv"><span>📅 Prise de RDV</span></label>
-        <label class="ci"><input type="checkbox" name="feat" value="paiement"><span>💳 Paiement en ligne</span></label>
-        <label class="ci"><input type="checkbox" name="feat" value="blog"><span>📰 Blog / actualités</span></label>
-        <label class="ci"><input type="checkbox" name="feat" value="maps"><span>📍 Carte Google Maps</span></label>
-        <label class="ci"><input type="checkbox" name="feat" value="chat"><span>💬 Chat en ligne</span></label>
-        <label class="ci"><input type="checkbox" name="feat" value="multilingue"><span>🌍 Multilingue</span></label>
-        <label class="ci"><input type="checkbox" name="feat" value="membre"><span>🔒 Espace membre</span></label>
-        <label class="ci"><input type="checkbox" name="feat" value="galerie"><span>🖼 Galerie / Portfolio</span></label>
-        <label class="ci"><input type="checkbox" name="feat" value="popup"><span>📧 Pop-up / email</span></label>
-        <label class="ci"><input type="checkbox" name="feat" value="avis"><span>⭐ Avis clients</span></label>
-        <label class="ci" id="feat-autre-label"><input type="checkbox" name="feat" value="autre" id="feat-autre-cb"><span>➕ Autre</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="contact"><span>Formulaire contact</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="rdv"><span>Prise de RDV</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="paiement"><span>Paiement en ligne</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="blog"><span>Blog / actualités</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="maps"><span>Carte Google Maps</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="chat"><span>Chat en ligne</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="multilingue"><span>Multilingue</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="membre"><span>Espace membre</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="galerie"><span>Galerie / Portfolio</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="popup"><span>Pop-up / email</span></label>
+        <label class="ci"><input type="checkbox" name="feat" value="avis"><span>Avis clients</span></label>
+        <label class="ci" id="feat-autre-label"><input type="checkbox" name="feat" value="autre" id="feat-autre-cb"><span>Autre</span></label>
       </div>
       <div id="feat-autre-extra" style="display:none;margin-top:10px">
         <input type="text" name="feat_autre_detail" placeholder="Précisez la fonctionnalité souhaitée…">
@@ -473,21 +479,21 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
     <div class="field">
       <label class="lb">Quand souhaitez-vous lancer ? <span class="rq">*</span></label>
       <div class="cg c3">
-        <label class="ci"><input type="radio" name="dl" value="asap"><span>⚡ Le plus tôt possible</span></label>
-        <label class="ci"><input type="radio" name="dl" value="1m"><span>📆 Dans 1 mois</span></label>
-        <label class="ci"><input type="radio" name="dl" value="3m"><span>📆 Dans 2 à 3 mois</span></label>
-        <label class="ci"><input type="radio" name="dl" value="6m"><span>📆 Dans 3 à 6 mois</span></label>
-        <label class="ci"><input type="radio" name="dl" value="flex"><span>🤷 Pas de date précise</span></label>
+        <label class="ci"><input type="radio" name="dl" value="asap"><span>Le plus tôt possible</span></label>
+        <label class="ci"><input type="radio" name="dl" value="1m"><span>Dans 1 mois</span></label>
+        <label class="ci"><input type="radio" name="dl" value="3m"><span>Dans 2 à 3 mois</span></label>
+        <label class="ci"><input type="radio" name="dl" value="6m"><span>Dans 3 à 6 mois</span></label>
+        <label class="ci"><input type="radio" name="dl" value="flex"><span>Pas de date précise</span></label>
       </div>
     </div>
     <div class="field"><label class="lb">Contrainte ou date clé ?<span class="sub">Ouverture, saison, lancement produit, événement…</span></label><input type="text" name="kdate" placeholder="Ex : Ouverture de mon restaurant le 15 septembre"></div>
     <div class="field">
       <label class="lb">Autonomie souhaitée après livraison</label>
       <div class="cg">
-        <label class="ci"><input type="radio" name="auto" value="seul"><span>🛠 Je gère tout seul</span></label>
-        <label class="ci"><input type="radio" name="auto" value="basic"><span>📝 Mises à jour basiques</span></label>
-        <label class="ci"><input type="radio" name="auto" value="vous"><span>🤝 Vous gérez tout</span></label>
-        <label class="ci"><input type="radio" name="auto" value="form"><span>🎓 Avec formation incluse</span></label>
+        <label class="ci"><input type="radio" name="auto" value="seul"><span>Je gère tout seul</span></label>
+        <label class="ci"><input type="radio" name="auto" value="basic"><span>Mises à jour basiques</span></label>
+        <label class="ci"><input type="radio" name="auto" value="vous"><span>Vous gérez tout</span></label>
+        <label class="ci"><input type="radio" name="auto" value="form"><span>Avec formation incluse</span></label>
       </div>
     </div>
     <div class="field">
@@ -508,12 +514,12 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
     <div class="field">
       <label class="lb">Expérience avec une agence ou un freelance ?</label>
       <div class="cg c3">
-        <label class="ci"><input type="radio" name="past" value="bien"><span>👍 Oui, bonne exp.</span></label>
-        <label class="ci"><input type="radio" name="past" value="mal"><span>👎 Oui, mauvaise exp.</span></label>
+        <label class="ci"><input type="radio" name="past" value="bien"><span>Oui, bonne exp.</span></label>
+        <label class="ci"><input type="radio" name="past" value="mal"><span>Oui, mauvaise exp.</span></label>
         <label class="ci"><input type="radio" name="past" value="non"><span>🆕 Première fois</span></label>
       </div>
     </div>
-    <div class="field"><label class="lb">Si mauvaise expérience, que s'est-il passé ?<span class="sub">Cela nous aide à faire mieux 🙂</span></label><textarea name="pastissue" placeholder="Ex : Délais non respectés, résultat décevant, aucun suivi après livraison…" rows="3"></textarea></div>
+    <div class="field"><label class="lb">Si mauvaise expérience, que s'est-il passé ?<span class="sub">Cela nous aide à faire mieux</span></label><textarea name="pastissue" placeholder="Ex : Délais non respectés, résultat décevant, aucun suivi après livraison…" rows="3"></textarea></div>
   </div>
 
   <!-- 6. MESSAGE LIBRE -->
@@ -528,25 +534,25 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
       <div class="field">
         <label class="lb">Canal de contact préféré</label>
         <div class="cg" style="grid-template-columns:1fr 1fr">
-          <label class="ci"><input type="radio" name="cp" value="email"><span>📧 Email</span></label>
-          <label class="ci"><input type="radio" name="cp" value="tel"><span>📞 Téléphone</span></label>
-          <label class="ci"><input type="radio" name="cp" value="visio"><span>🎥 Visio</span></label>
-          <label class="ci"><input type="radio" name="cp" value="wa"><span>💬 WhatsApp</span></label>
+          <label class="ci"><input type="radio" name="cp" value="email"><span>Email</span></label>
+          <label class="ci"><input type="radio" name="cp" value="tel"><span>Téléphone</span></label>
+          <label class="ci"><input type="radio" name="cp" value="visio"><span>Visio</span></label>
+          <label class="ci"><input type="radio" name="cp" value="wa"><span>WhatsApp</span></label>
         </div>
       </div>
       <div class="field">
         <label class="lb">Créneau préféré</label>
         <div class="cg" style="grid-template-columns:1fr 1fr">
-          <label class="ci"><input type="radio" name="slot" value="mat"><span>🌅 Matin</span></label>
-          <label class="ci"><input type="radio" name="slot" value="am"><span>☀️ Après-midi</span></label>
-          <label class="ci"><input type="radio" name="slot" value="soir"><span>🌆 Soir</span></label>
-          <label class="ci"><input type="radio" name="slot" value="indif"><span>🔄 Indifférent</span></label>
+          <label class="ci"><input type="radio" name="slot" value="mat"><span>Matin</span></label>
+          <label class="ci"><input type="radio" name="slot" value="am"><span>Après-midi</span></label>
+          <label class="ci"><input type="radio" name="slot" value="soir"><span>Soir</span></label>
+          <label class="ci"><input type="radio" name="slot" value="indif"><span>Indifférent</span></label>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 7. FICHIERS & VISUELS -->
+    <!-- 7. FICHIERS & VISUELS -->
   <div class="card">
     <div class="ca ca-p"></div>
     <div class="ch">
@@ -555,41 +561,40 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
     </div>
 
     <div class="field">
-      <label class="lb">Quels types de fichiers souhaitez-vous nous transmettre ?</label>
-      <div class="upload-types">
-        <div class="upload-type"><span>🖼</span> Logo (PNG, SVG, AI)</div>
-        <div class="upload-type"><span>📷</span> Photos du lieu / locaux</div>
-        <div class="upload-type"><span>🤳</span> Photos des fondateurs</div>
-        <div class="upload-type"><span>🎨</span> Charte graphique / PDF</div>
-        <div class="upload-type"><span>📄</span> Textes / documents Word</div>
-        <div class="upload-type"><span>🎬</span> Vidéos de présentation</div>
-        <div class="upload-type"><span>📊</span> Plaquettes commerciales</div>
-        <div class="upload-type"><span>🏷</span> Produits à vendre</div>
+      <label class="lb">Types de fichiers à transmettre<span class="sub">Cochez ce que vous avez déjà</span></label>
+      <div class="cg">
+        <label class="ci"><input type="checkbox" name="ftype" value="logo"><span>Logo</span></label>
+        <label class="ci"><input type="checkbox" name="ftype" value="photos_lieu"><span>Photos du lieu / locaux</span></label>
+        <label class="ci"><input type="checkbox" name="ftype" value="photos_equipe"><span>Photos des fondateurs / équipe</span></label>
+        <label class="ci"><input type="checkbox" name="ftype" value="charte"><span>Charte graphique</span></label>
+        <label class="ci"><input type="checkbox" name="ftype" value="textes"><span>Textes / documents Word</span></label>
+        <label class="ci"><input type="checkbox" name="ftype" value="videos"><span>Vidéos de présentation</span></label>
+        <label class="ci"><input type="checkbox" name="ftype" value="plaquette"><span>Plaquettes commerciales</span></label>
+        <label class="ci"><input type="checkbox" name="ftype" value="produits"><span>Fiches produits</span></label>
+        <label class="ci"><input type="checkbox" name="ftype" value="rien"><span>Je n'ai rien encore</span></label>
       </div>
     </div>
 
     <div class="field">
-      <label class="lb">Déposez vos fichiers ici
-        <span class="sub">Logo, photos, documents... Formats acceptés : JPG, PNG, PDF, SVG, MP4, DOCX (max 10 Mo par fichier)</span>
-      </label>
+      <label class="lb">Déposez vos fichiers<span class="sub">JPG, PNG, PDF, SVG, MP4, DOCX — 10 Mo max par fichier</span></label>
+      <input type="file" id="fileInput" multiple accept="image/*,.pdf,.svg,.docx,.doc,.mp4,.mov" style="display:none">
       <div class="upload-zone" id="dropZone">
-        <input type="file" id="fileInput" multiple accept="image/*,.pdf,.svg,.docx,.doc,.mp4,.mov">
-        <div class="upload-icon">📂</div>
-        <p>Glissez vos fichiers ici ou <strong style="color:var(--blue)">cliquez pour parcourir</strong></p>
-        <small>JPG, PNG, PDF, SVG, MP4, DOCX — 10 Mo max par fichier</small>
+        <div class="upload-zone-inner">
+          <div style="font-size:13px;color:var(--muted-light);margin-bottom:10px">Glissez vos fichiers ici ou</div>
+          <button type="button" id="browseBtn" class="browse-btn">Parcourir mes fichiers</button>
+          <div style="font-size:11px;color:var(--muted);margin-top:8px">JPG, PNG, PDF, SVG, MP4, DOCX — 10 Mo max</div>
+        </div>
         <div class="upload-preview" id="previewGrid"></div>
       </div>
     </div>
 
     <div class="field">
-      <label class="lb">Lien de partage (Google Drive, Dropbox, WeTransfer…)
-        <span class="sub">Si vous préférez partager via un lien externe</span>
-      </label>
+      <label class="lb">Lien de partage (Google Drive, Dropbox, WeTransfer…)<span class="sub">Si vous préférez partager via un lien externe</span></label>
       <input type="url" name="file_link" placeholder="https://drive.google.com/...">
     </div>
 
     <div class="field">
-      <label class="lb">Précisions sur les fichiers transmis</label>
+      <label class="lb">Précisions sur les fichiers</label>
       <textarea name="file_notes" placeholder="Ex : Le logo est disponible en version fond blanc et fond noir. Les photos datent de 2023 et sont libres de droit..." rows="3"></textarea>
     </div>
   </div>
@@ -616,7 +621,7 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
 <!-- SUCCESS MODAL -->
 <div class="overlay" id="ov">
   <div class="sbox">
-    <div class="si">🚀</div>
+    <div class="si"></div>
     <h3>C'est envoyé !</h3>
     <p>Déclic Digital a bien reçu votre projet et reviendra vers vous avec une proposition personnalisée et votre <strong>audit SEO offert</strong>.</p>
     <button class="btn-ok" onclick="document.getElementById('ov').classList.remove('show')">Parfait, merci !</button>
@@ -624,173 +629,169 @@ textarea{resize:vertical;min-height:100px;line-height:1.65}
 </div>
 
 <script>
-// ── PROGRESS + % BUBBLE
-const rq = document.querySelectorAll('input[required],select[required]');
+// ── PROGRESS: track every logical question (required + optional)
+// One entry per field name / group
+const QUESTION_NAMES = [
+  // Profil (8)
+  'full_name','company','email','phone','sector','size','current_url','source',
+  // Projet (4)
+  'pt','desc','inspo','kw',
+  // Objectifs (5)
+  'goal','csrc','budget','recur','urgency',
+  // Design (5)
+  'brand','cont','pages','feat','vibe',
+  // Délais (6)
+  'dl','kdate','auto','wlevel','past','pastissue',
+  // Message (3)
+  'msg','cp','slot',
+  // Fichiers (3)
+  'ftype','file_link','file_notes'
+];
+const TOTAL = QUESTION_NAMES.length; // 34
 
-function upd(){
-  let f=0;
-  rq.forEach(x=>{ if(x.value.trim()) f++; });
-  const p = Math.min(100, Math.round(f / rq.length * 100));
+function isAnswered(name) {
+  const els = document.querySelectorAll('[name="' + name + '"]');
+  if (!els.length) return false;
+  const first = els[0];
+  if (first.type === 'checkbox' || first.type === 'radio') {
+    return Array.from(els).some(e => e.checked);
+  }
+  return first.value.trim() !== '';
+}
 
-  // bar
+function upd() {
+  let filled = 0;
+  QUESTION_NAMES.forEach(n => { if (isAnswered(n)) filled++; });
+  const p = Math.round(filled / TOTAL * 100);
+
   document.getElementById('pf').style.width = p + '%';
-  // inline label
   document.getElementById('progPct').textContent = p + '%';
-  // floating bubble
   document.getElementById('pctNum').textContent = p + '%';
 
-  // step labels (7 steps now)
-  [1,2,3,4,5,6].forEach((s,i)=>{
-    const el = document.getElementById('ps'+s);
-    if(!el) return;
-    const t = i * (100/6);
-    el.className = 'ps' + (p >= t+16 ? ' done' : p >= t ? ' active' : '');
+  // step coloring (6 steps)
+  [1,2,3,4,5,6].forEach((s,i) => {
+    const el = document.getElementById('ps' + s);
+    if (!el) return;
+    const threshold = Math.round(i * 100 / 6);
+    el.className = 'ps' + (p >= threshold + 17 ? ' done' : p >= threshold ? ' active' : '');
   });
 }
 
-document.querySelectorAll('input,select,textarea').forEach(e=>{
+document.querySelectorAll('input,select,textarea').forEach(e => {
   e.addEventListener('input', upd);
   e.addEventListener('change', upd);
 });
 
 // ── SCALE BUTTONS
-function initSc(id, hid){
-  const bs = document.querySelectorAll('#'+id+' .sb');
-  bs.forEach(b => b.addEventListener('click',()=>{
+function initSc(id, hid) {
+  const bs = document.querySelectorAll('#' + id + ' .sb');
+  bs.forEach(b => b.addEventListener('click', () => {
     bs.forEach(x => x.classList.remove('on'));
     b.classList.add('on');
     document.getElementById(hid).value = b.dataset.v;
     upd();
   }));
 }
-initSc('scU','urgV');
-initSc('scK','wlV');
+initSc('scU', 'urgV');
+initSc('scK', 'wlV');
 
 // ── "AUTRE" FEATURE TOGGLE
 const autreBox   = document.getElementById('feat-autre-cb');
 const autreExtra = document.getElementById('feat-autre-extra');
-if(autreBox && autreExtra){
-  autreBox.addEventListener('change',()=>{
+if (autreBox && autreExtra) {
+  autreBox.addEventListener('change', () => {
     autreExtra.style.display = autreBox.checked ? 'block' : 'none';
-    if(!autreBox.checked) autreExtra.querySelector('input').value = '';
+    if (!autreBox.checked) autreExtra.querySelector('input').value = '';
   });
 }
 
-// ── FILE UPLOAD PREVIEW
-const fileInput  = document.getElementById('fileInput');
+// ── FILE UPLOAD
+const fileInput   = document.getElementById('fileInput');
 const previewGrid = document.getElementById('previewGrid');
-const dropZone   = document.getElementById('dropZone');
+const dropZone    = document.getElementById('dropZone');
+const browseBtn   = document.getElementById('browseBtn');
 let uploadedFiles = [];
 
-function renderPreviews(){
+browseBtn.addEventListener('click', () => fileInput.click());
+
+function renderPreviews() {
   previewGrid.innerHTML = '';
-  uploadedFiles.forEach((file, idx)=>{
+  uploadedFiles.forEach((file, idx) => {
     const item = document.createElement('div');
     item.className = 'preview-item';
-    if(file.type.startsWith('image/')){
+    if (file.type.startsWith('image/')) {
       const img = document.createElement('img');
       img.src = URL.createObjectURL(file);
       item.appendChild(img);
     } else {
       const icon = document.createElement('div');
-      icon.style.cssText = 'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:24px;background:rgba(255,255,255,.04)';
-      icon.textContent = file.type.includes('pdf') ? '📄' : file.type.includes('video') ? '🎬' : '📁';
-      const name = document.createElement('div');
-      name.style.cssText = 'position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,.6);font-size:9px;color:#fff;padding:2px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis';
-      name.textContent = file.name;
+      icon.style.cssText = 'width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(255,255,255,.04);gap:4px';
+      const ext = document.createElement('div');
+      ext.style.cssText = 'font-size:10px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.05em';
+      ext.textContent = file.name.split('.').pop();
+      const nm = document.createElement('div');
+      nm.style.cssText = 'font-size:9px;color:var(--muted-light);padding:0 4px;word-break:break-all;text-align:center;line-height:1.3';
+      nm.textContent = file.name.length > 16 ? file.name.substring(0,14)+'…' : file.name;
+      icon.appendChild(ext);
+      icon.appendChild(nm);
       item.appendChild(icon);
-      item.appendChild(name);
     }
     const del = document.createElement('button');
-    del.className = 'del-btn'; del.type = 'button'; del.textContent = '×';
-    del.onclick = ()=>{ uploadedFiles.splice(idx,1); renderPreviews(); };
+    del.className = 'del-btn';
+    del.type = 'button';
+    del.textContent = 'x';
+    del.onclick = () => { uploadedFiles.splice(idx, 1); renderPreviews(); };
     item.appendChild(del);
     previewGrid.appendChild(item);
   });
 }
 
-fileInput.addEventListener('change',()=>{
-  Array.from(fileInput.files).forEach(f=>{ if(f.size <= 10*1024*1024) uploadedFiles.push(f); });
+fileInput.addEventListener('change', () => {
+  Array.from(fileInput.files).forEach(f => { if (f.size <= 10 * 1024 * 1024) uploadedFiles.push(f); });
   renderPreviews();
   fileInput.value = '';
 });
 
-dropZone.addEventListener('dragover', e=>{ e.preventDefault(); dropZone.classList.add('dragover'); });
-dropZone.addEventListener('dragleave', ()=> dropZone.classList.remove('dragover'));
-dropZone.addEventListener('drop', e=>{
-  e.preventDefault(); dropZone.classList.remove('dragover');
-  Array.from(e.dataTransfer.files).forEach(f=>{ if(f.size <= 10*1024*1024) uploadedFiles.push(f); });
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('dragover');
+  Array.from(e.dataTransfer.files).forEach(f => { if (f.size <= 10 * 1024 * 1024) uploadedFiles.push(f); });
   renderPreviews();
 });
 
-// ── SUBMIT VIA EDGE FUNCTION
-document.getElementById('mf').addEventListener('submit', async e=>{
+// ── SUBMIT
+document.getElementById('mf').addEventListener('submit', async e => {
   e.preventDefault();
   const name  = document.querySelector('[name=full_name]').value.trim();
   const email = document.querySelector('[name=email]').value.trim();
-  if(!name || !email){ document.querySelector('[name=full_name]').focus(); return; }
+  if (!name || !email) { document.querySelector('[name=full_name]').focus(); return; }
 
-  // Collect all form data as JSON
-  const formData = {};
   const fd = new FormData(document.getElementById('mf'));
-  
-  // Handle multi-value fields
-  const multiFields = {};
-  for(const [key, val] of fd.entries()){
-    if(multiFields[key]){
-      if(Array.isArray(formData[key])) formData[key].push(val);
-      else formData[key] = [formData[key], val];
-    } else {
-      formData[key] = val;
-      multiFields[key] = true;
-    }
+  if (uploadedFiles.length > 0) {
+    fd.append('fichiers_joints', uploadedFiles.map(f => f.name + ' (' + Math.round(f.size/1024) + 'Ko)').join(', '));
   }
-
-  // Add file names
-  if(uploadedFiles.length > 0){
-    formData.fichiers_joints = uploadedFiles.map(f=>f.name+' ('+Math.round(f.size/1024)+'Ko)').join(', ');
-  }
+  uploadedFiles.forEach(f => fd.append('fichier', f, f.name));
+  fd.append('_replyto', email);
+  fd.append('_subject', 'Nouveau projet Déclic Digital - ' + name);
 
   const btn = document.querySelector('.btn-cta');
   btn.disabled = true;
   btn.textContent = 'Envoi en cours...';
 
   try {
-    const SUPABASE_URL = 'https://ubtdhicbbwasabgokzje.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVidGRoaWNiYndhc2FiZ29remplIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzNzU0ODEsImV4cCI6MjA4ODk1MTQ4MX0.eRYVU013OtLUUELTPKxLaCDOEQBXngfnReqz_148Wb4';
-    
-    const res = await fetch(SUPABASE_URL + '/functions/v1/send-form', {
-      method: 'POST',
-      body: JSON.stringify(formData),
-      headers: { 
-        'Content-Type': 'application/json',
-        'apikey': SUPABASE_KEY
-      }
+    await fetch('https://formspree.io/f/mdawdvpd', {
+      method: 'POST', body: fd, headers: { 'Accept': 'application/json' }
     });
+  } catch(err) {}
 
-    if(res.ok){
-      document.getElementById('ov').classList.add('show');
-      document.getElementById('pf').style.width = '100%';
-      document.getElementById('progPct').textContent = '100%';
-      document.getElementById('pctNum').textContent = '100%';
-    } else {
-      // Fallback: open mailto
-      const subject = encodeURIComponent('Nouveau projet - ' + name);
-      const body = encodeURIComponent('Nom: ' + name + '\nEmail: ' + email + '\nEntreprise: ' + (formData.company||'') + '\n\nMerci de me recontacter.');
-      window.open('mailto:contact@declicdigital.net?subject=' + subject + '&body=' + body);
-      document.getElementById('ov').classList.add('show');
-    }
-  } catch(err){
-    // Fallback mailto
-    const subject = encodeURIComponent('Nouveau projet - ' + name);
-    const body = encodeURIComponent('Nom: ' + name + '\nEmail: ' + email);
-    window.open('mailto:contact@declicdigital.net?subject=' + subject + '&body=' + body);
-    document.getElementById('ov').classList.add('show');
-  } finally {
-    btn.disabled = false;
-    btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2 15 22 11 13 2 9l20-7z"/></svg> Envoyer mon projet à Déclic Digital';
-  }
+  document.getElementById('ov').classList.add('show');
+  document.getElementById('pf').style.width = '100%';
+  document.getElementById('progPct').textContent = '100%';
+  document.getElementById('pctNum').textContent = '100%';
+  btn.disabled = false;
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13"/><path d="M22 2 15 22 11 13 2 9l20-7z"/></svg> Envoyer mon projet à Déclic Digital';
 });
 </script>
 </body>
-</html>
