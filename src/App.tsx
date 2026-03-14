@@ -14,6 +14,8 @@ import Tarifs from "./pages/Tarifs";
 import MentionsLegales from "./pages/MentionsLegales";
 import Realisations from "./pages/Realisations";
 import PlanDuSite from "./pages/PlanDuSite";
+import FormulaireClient from "./pages/FormulaireClient";
+import AdminSoumissions from "./pages/AdminSoumissions";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
