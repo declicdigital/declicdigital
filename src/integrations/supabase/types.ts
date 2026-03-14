@@ -14,7 +14,27 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      form_submissions: {
+        Row: {
+          created_at: string
+          data: Json
+          file_paths: string[] | null
+          id: string
+        }
+        Insert: {
+          created_at?: string
+          data?: Json
+          file_paths?: string[] | null
+          id?: string
+        }
+        Update: {
+          created_at?: string
+          data?: Json
+          file_paths?: string[] | null
+          id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

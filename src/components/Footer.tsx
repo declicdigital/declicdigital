@@ -60,12 +60,12 @@ const Footer = () => (
               >
                 Audit SEO gratuit
               </Link>
-              <a
-                href="/formulaire-client.html"
+              <Link
+                to="/formulaire-client"
                 className="inline-block rounded-full border border-primary-foreground/30 px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:bg-primary-foreground/10 transition-colors"
               >
                 Formulaire client
-              </a>
+              </Link>
             </div>
           </div>
         </div>
