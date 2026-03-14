@@ -18,16 +18,19 @@ export type Database = {
         Row: {
           created_at: string
           data: Json
+          file_paths: string[] | null
           id: string
         }
         Insert: {
           created_at?: string
           data?: Json
+          file_paths?: string[] | null
           id?: string
         }
         Update: {
           created_at?: string
           data?: Json
+          file_paths?: string[] | null
           id?: string
         }
         Relationships: []
