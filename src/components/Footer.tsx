@@ -44,7 +44,6 @@ const Footer = () => (
               <li><Link to="/qui-sommes-nous" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Qui sommes-nous</Link></li>
               <li><Link to="/faq" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">FAQ</Link></li>
               <li><Link to="/plan-du-site" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Plan du site</Link></li>
-              <li><a href="/formulaire-client.html" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Formulaire client</a></li>
             </ul>
           </div>
 
@@ -60,6 +59,9 @@ const Footer = () => (
             >
               Audit SEO gratuit
             </Link>
+            <a href="/formulaire-client.html" className="mt-3 inline-block text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors">
+              Formulaire client
+            </a>
           </div>
         </div>
 

@@ -4,7 +4,7 @@ import { Monitor, Smartphone, TrendingUp, Zap, Building2, User, Wrench, Shopping
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
-import heroCreation from "@/assets/creation-site-internet-professionnel.png";
+import heroCreation from "@/assets/screenshot-declic-digital.png";
 
 const CreationSite = () => (
   <PageLayout>
