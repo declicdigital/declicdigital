@@ -31,7 +31,7 @@ const Index = () => {
                 <span className="text-gradient">clients</span>
               </h1>
               <p className="mb-8 max-w-lg text-lg text-muted-foreground leading-relaxed">
-                Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des sites performants et optimisés SEO pour que les PME et indépendants attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
+                Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour que les PME et indépendants attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
