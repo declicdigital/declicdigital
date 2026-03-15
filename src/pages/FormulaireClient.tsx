@@ -249,7 +249,7 @@ const FormulaireClient = () => {
         <div className="container text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-5 py-2 text-xs font-semibold text-accent uppercase tracking-wider mb-6">
-              Audit SEO offert à la clé
+              Formulaire de brief client
             </span>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-5">
               Parlez-nous de votre <span className="text-gradient">projet web</span>
