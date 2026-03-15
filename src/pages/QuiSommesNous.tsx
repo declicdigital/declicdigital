@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import heroAbout from "@/assets/agence-creation-site-web.png";
+import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 
 const QuiSommesNous = () => (
   <PageLayout>
@@ -30,38 +31,58 @@ const QuiSommesNous = () => (
       </div>
     </section>
 
-    {/* Storytelling */}
+    {/* Geoffrey */}
     <SectionWrapper>
-      <div className="mx-auto max-w-3xl space-y-6 text-lg leading-relaxed text-muted-foreground">
-        <p>
-          <strong className="text-foreground">Déclic Digital</strong> a été fondé par <strong className="text-foreground">Geoffrey</strong>, 28 ans, diplômé d'une licence en marketing digital et intelligence artificielle, et certifié <strong className="text-foreground">Expert Produit Google</strong>.
-        </p>
-        <p>
-          Passionné par le web depuis plus de 8 ans, il a commencé en aidant son père à développer la visibilité de son entreprise de BTP. Puis il a accompagné un artiste dans la création de son site internet. Ces deux expériences lui ont fait prendre conscience d'un constat : la plupart des petites entreprises n'ont pas les moyens ni les connaissances pour créer un site qui génère réellement des clients.
-        </p>
-        <p>
-          C'est de ce constat qu'est née Déclic Digital : une agence web pensée pour les PME, les artisans et les indépendants. L'idée est simple : proposer des sites web professionnels, performants et optimisés pour le référencement Google, à des tarifs accessibles.
-        </p>
-        <div className="rounded-2xl bg-card p-6 shadow-card flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
-            <Award size={24} />
-          </div>
-          <div>
-            <h3 className="font-bold text-foreground mb-1">Expert Produit Google</h3>
-            <p className="text-base">
-              Geoffrey est certifié Expert Produit Google, une reconnaissance officielle de ses compétences sur l'écosystème Google (Search, Business Profile, Analytics). Cette expertise garantit à nos clients des stratégies alignées avec les meilleures pratiques Google.
+      <div className="mx-auto max-w-3xl">
+        <div className="flex flex-col md:flex-row items-center gap-8 mb-10">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="shrink-0"
+          >
+            <img
+              src={geoffreyPhoto}
+              alt="Geoffrey, fondateur de Déclic Digital, Expert Produit Google"
+              className="w-40 h-40 rounded-2xl object-cover shadow-card border-4 border-primary/20"
+            />
+            <p className="text-center mt-3 font-bold text-foreground">Geoffrey</p>
+            <p className="text-center text-xs text-muted-foreground">Fondateur, Expert Produit Google</p>
+          </motion.div>
+          <div className="space-y-4 text-lg leading-relaxed text-muted-foreground">
+            <p>
+              <strong className="text-foreground">Déclic Digital</strong> a été fondé par <strong className="text-foreground">Geoffrey</strong>, 28 ans, diplômé d'une licence en marketing digital et intelligence artificielle, et certifié <strong className="text-foreground">Expert Produit Google</strong>.
+            </p>
+            <p>
+              Passionné par le web depuis plus de 8 ans, il a commencé en aidant son père à développer la visibilité de son entreprise de BTP. Puis il a accompagné un artiste dans la création de son site internet. Ces deux expériences lui ont fait prendre conscience d'un constat : la plupart des petites entreprises n'ont pas les moyens ni les connaissances pour créer un site qui génère réellement des clients.
             </p>
           </div>
         </div>
-        <blockquote className="border-l-4 border-primary pl-6 py-2 text-xl font-semibold text-foreground italic">
-          "Les petites entreprises ont besoin d'outils simples et efficaces pour trouver des clients en ligne."
-        </blockquote>
-        <p>
-          Aujourd'hui, Déclic Digital accompagne des PME et indépendants partout en France. Chaque projet est abordé avec la même rigueur et la même passion : comprendre les besoins du client, concevoir un site qui lui ressemble, l'optimiser pour Google et mesurer les résultats.
-        </p>
-        <p>
-          Notre force, c'est la proximité. Nous ne sommes pas une grande agence impersonnelle. Nous prenons le temps d'échanger avec chaque client, de comprendre son métier et de proposer des solutions sur mesure.
-        </p>
+        <div className="space-y-6 text-lg leading-relaxed text-muted-foreground">
+          <p>
+            C'est de ce constat qu'est née Déclic Digital : une agence web pensée pour les PME, les artisans et les indépendants. L'idée est simple : proposer des sites web professionnels, performants et optimisés pour le référencement Google, à des tarifs accessibles.
+          </p>
+          <div className="rounded-2xl bg-card p-6 shadow-card flex items-start gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
+              <Award size={24} />
+            </div>
+            <div>
+              <h3 className="font-bold text-foreground mb-1">Expert Produit Google</h3>
+              <p className="text-base">
+                Geoffrey est certifié Expert Produit Google, une reconnaissance officielle de ses compétences sur l'écosystème Google (Search, Business Profile, Analytics). Cette expertise garantit à nos clients des stratégies alignées avec les meilleures pratiques Google.
+              </p>
+            </div>
+          </div>
+          <blockquote className="border-l-4 border-primary pl-6 py-2 text-xl font-semibold text-foreground italic">
+            "Les petites entreprises ont besoin d'outils simples et efficaces pour trouver des clients en ligne."
+          </blockquote>
+          <p>
+            Aujourd'hui, Déclic Digital accompagne des PME et indépendants partout en France. Chaque projet est abordé avec la même rigueur et la même passion : comprendre les besoins du client, concevoir un site qui lui ressemble, l'optimiser pour Google et mesurer les résultats.
+          </p>
+          <p>
+            Notre force, c'est la proximité. Nous ne sommes pas une grande agence impersonnelle. Nous prenons le temps d'échanger avec chaque client, de comprendre son métier et de proposer des solutions sur mesure.
+          </p>
+        </div>
       </div>
     </SectionWrapper>
 
