@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import { cities } from "@/data/cities";
+import { blogArticles } from "@/data/blogArticles";
 
 const links = [
   { label: "Accueil", to: "/" },
