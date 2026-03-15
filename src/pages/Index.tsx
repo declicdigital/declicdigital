@@ -95,7 +95,7 @@ const Index = () => {
             <span className="text-gradient">machine à clients</span>
           </h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Chez Déclic Digital, nous ne créons pas simplement des sites web. Nous concevons des outils de génération de clients, pensés pour les PME et optimisés pour Google.
+            Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">Déclic Digital</Link>, nous ne créons pas simplement des sites web. Nous concevons des outils de génération de clients, pensés pour les PME et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> adaptés aux petits budgets.
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
