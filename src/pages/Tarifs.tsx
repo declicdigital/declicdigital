@@ -111,7 +111,7 @@ const Tarifs = () => (
             Nos <span className="text-gradient">tarifs</span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Des offres claires et adaptées aux budgets des PME et indépendants. Chaque prestation est pensée pour générer un retour sur investissement concret.
+            Des offres claires et adaptées aux budgets des PME et indépendants. Chaque prestation, de la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link> au <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>, est pensée pour générer un retour sur investissement concret.
           </p>
         </motion.div>
       </div>
@@ -176,7 +176,7 @@ const Tarifs = () => (
       <div className="mt-12 mx-auto max-w-2xl text-center">
         <div className="rounded-2xl bg-secondary p-6">
           <p className="text-muted-foreground text-sm leading-relaxed">
-            Engagement de 6 mois renouvelable. Toutes les prestations peuvent être adaptées et réalisées sur mesure selon vos besoins. Chaque projet est unique, contactez-nous pour un devis personnalisé.
+            Engagement de 6 mois renouvelable. Toutes les prestations peuvent être adaptées selon vos besoins. Chaque projet est unique, <Link to="/contact" className="text-primary font-semibold hover:underline">contactez-nous</Link> pour un devis personnalisé. Vous pouvez aussi commencer par un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link>.
           </p>
         </div>
       </div>

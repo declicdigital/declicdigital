@@ -19,7 +19,7 @@ const CreationSite = () => (
               Création de site web à Paris qui <span className="text-gradient">attire des clients</span>
             </h1>
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-              Nous concevons des sites modernes, rapides et optimisés SEO pour les PME et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects et développer votre activité en ligne.
+              Nous concevons des sites modernes, rapides et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour les PME et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou demandez un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link>.
             </p>
             <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
               <Link to="/contact">Devis création de site</Link>
@@ -36,7 +36,7 @@ const CreationSite = () => (
     <SectionWrapper className="bg-card">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Les avantages d'un site professionnel</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-        Un site web professionnel ne se limite pas à une simple vitrine en ligne. C'est un outil stratégique qui renforce votre crédibilité, attire de nouveaux clients et vous différencie de vos concurrents.
+        Un site web professionnel ne se limite pas à une simple vitrine en ligne. C'est un outil stratégique qui renforce votre crédibilité, attire de nouveaux clients grâce au <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement naturel</Link> et vous différencie de vos concurrents.
       </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
@@ -84,7 +84,7 @@ const CreationSite = () => (
     <SectionWrapper className="bg-card">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Pour qui ?</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-        Nos solutions s'adaptent à tous les profils d'entreprises. Que vous soyez artisan, commerçant, profession libérale ou dirigeant de PME, nous concevons un site adapté à votre métier.
+        Nos solutions s'adaptent à tous les profils d'entreprises. Que vous soyez artisan, commerçant, profession libérale ou dirigeant de PME, nous concevons un site adapté à votre métier et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement Google</Link>.
       </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[

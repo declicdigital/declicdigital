@@ -31,7 +31,7 @@ const Index = () => {
                 <span className="text-gradient">clients</span>
               </h1>
               <p className="mb-8 max-w-lg text-lg text-muted-foreground leading-relaxed">
-                Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des sites performants et optimisés SEO pour que les PME et indépendants attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
+                Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour que les PME et indépendants attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
@@ -95,7 +95,7 @@ const Index = () => {
             <span className="text-gradient">machine à clients</span>
           </h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Chez Déclic Digital, nous ne créons pas simplement des sites web. Nous concevons des outils de génération de clients, pensés pour les PME et optimisés pour Google.
+            Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">Déclic Digital</Link>, nous ne créons pas simplement des sites web. Nous concevons des outils de génération de clients, pensés pour les PME et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> adaptés aux petits budgets.
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
@@ -123,7 +123,7 @@ const Index = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold md:text-4xl">Notre méthode</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Un processus simple et transparent pour vous accompagner de A à Z dans la réussite de votre projet digital.
+            Un processus simple et transparent pour vous accompagner de A à Z. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link> et <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-5">
@@ -160,8 +160,8 @@ const Index = () => {
             {[
               { icon: Clock, title: "Disponible 24h/24", desc: "Contrairement à un commerce physique, votre site travaille pour vous en permanence. Vos prospects peuvent vous découvrir et vous contacter à tout moment." },
               { icon: Target, title: "Attirez des clients ciblés", desc: "Un site bien référencé attire des visiteurs qui recherchent activement vos services. Ce sont des prospects qualifiés prêts à passer à l'action." },
-              { icon: Shield, title: "Renforcez votre crédibilité", desc: "En 2026, ne pas avoir de site web professionnel peut nuire à votre image. Un site soigné rassure vos prospects et vous positionne comme un acteur sérieux." },
-              { icon: TrendingUp, title: "Rentabilité sur le long terme", desc: "Contrairement à la publicité payante, le référencement naturel génère du trafic durable. Une fois bien positionné, votre site attire des visiteurs sans coût supplémentaire." },
+              { icon: Shield, title: "Renforcez votre crédibilité", desc: "En 2026, ne pas avoir de site web professionnel peut nuire à votre image. Un site soigné rassure vos prospects." },
+              { icon: TrendingUp, title: "Rentabilité sur le long terme", desc: "Contrairement à la publicité payante, le référencement naturel génère du trafic durable sans coût par clic." },
             ].map((item, i) => (
               <div key={i} className="rounded-2xl bg-card p-6 shadow-card">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-miami text-primary-foreground">
@@ -180,7 +180,7 @@ const Index = () => {
         <div className="text-center mb-10">
           <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Nos outils et technologies</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Nous utilisons des outils professionnels reconnus pour créer des sites performants et optimisés SEO.
+            Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link>.
           </p>
         </div>
         <div className="flex flex-wrap items-center justify-center gap-6">

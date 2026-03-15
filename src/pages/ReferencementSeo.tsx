@@ -18,7 +18,7 @@ const ReferencementSeo = () => (
               Référencement SEO à Paris : soyez <span className="text-gradient">visible sur Google</span>
             </h1>
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-              Le référencement SEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre site pour qu'il apparaisse en première page Google sur les mots clés recherchés par vos prospects.
+              Le référencement SEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour qu'il apparaisse en première page Google. Commencez par un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit gratuit</Link>.
             </p>
             <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
               <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
@@ -35,7 +35,7 @@ const ReferencementSeo = () => (
     <SectionWrapper className="bg-card">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Les bénéfices du SEO pour les PME</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-        Le référencement naturel est la stratégie la plus rentable pour développer votre activité en ligne. Contrairement à la publicité payante, les résultats du SEO sont durables et s'amplifient avec le temps.
+        Le référencement naturel est la stratégie la plus rentable pour développer votre activité en ligne. Contrairement à la publicité payante, les résultats du SEO sont durables. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou consultez <Link to="/faq" className="text-primary font-semibold hover:underline">notre FAQ</Link>.
       </p>
       <div className="grid gap-6 md:grid-cols-3">
         {[
@@ -74,7 +74,7 @@ const ReferencementSeo = () => (
     <SectionWrapper className="bg-card">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre méthode SEO</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-        Notre approche est méthodique et transparente. Nous suivons un processus éprouvé pour optimiser votre visibilité sur Google.
+        Notre approche est méthodique et transparente. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link> et notre processus éprouvé pour optimiser votre visibilité sur Google.
       </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[

@@ -75,7 +75,7 @@ const QuiSommesNous = () => (
       <div className="text-center mb-10">
         <h2 className="text-3xl font-extrabold md:text-4xl">Notre mission</h2>
         <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-          Rendre la visibilité en ligne accessible à toutes les entreprises. Nous croyons que chaque PME mérite un site web qui travaille pour elle et qui attire des clients de manière régulière.
+          Rendre la visibilité en ligne accessible à toutes les entreprises grâce à la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de sites web</Link> et le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>. Nous croyons que chaque PME mérite un site qui attire des clients.
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-3 max-w-4xl mx-auto">
@@ -100,7 +100,7 @@ const QuiSommesNous = () => (
       <div className="mx-auto max-w-3xl space-y-6">
         <h2 className="text-3xl font-extrabold md:text-4xl text-center">Nos valeurs</h2>
         <p className="text-muted-foreground leading-relaxed">
-          Chez Déclic Digital, nous croyons en la transparence totale. Pas de contrat obscur, pas de termes compliqués, pas de promesses irréalistes. Nous vous expliquons clairement ce que nous faisons, pourquoi nous le faisons, et quels résultats vous pouvez attendre.
+          Chez <Link to="/faq" className="text-primary font-semibold hover:underline">Déclic Digital</Link>, nous croyons en la transparence totale. Pas de contrat obscur, pas de termes compliqués, pas de promesses irréalistes. Nous vous expliquons clairement ce que nous faisons, pourquoi nous le faisons, et quels résultats vous pouvez attendre. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link>.
         </p>
         <p className="text-muted-foreground leading-relaxed">
           Nous croyons aussi que la technologie doit être au service de l'humain. Un site web n'est qu'un outil. Ce qui compte, c'est ce qu'il apporte à votre entreprise et à vos clients.
