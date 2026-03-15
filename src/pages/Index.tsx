@@ -251,7 +251,7 @@ const Index = () => {
             <p className="text-sm text-muted-foreground mb-4">Retrouvez notre fiche et nos avis vérifiés sur Google.</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="https://share.google/8Ifh8V9cpPGinQXkY"
+                href="https://www.google.com/maps/search/?api=1&query=D%C3%A9clic+Digital+57+Rue+d%27Alleray+75015+Paris"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block gradient-primary rounded-full px-6 py-2.5 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity text-sm"

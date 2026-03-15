@@ -124,7 +124,7 @@ const Contact = () => (
             Retrouvez toutes nos informations et nos coordonnées directement sur Google.
           </p>
           <a
-            href="https://share.google/8Ifh8V9cpPGinQXkY"
+            href="https://www.google.com/maps/search/?api=1&query=D%C3%A9clic+Digital+57+Rue+d%27Alleray+75015+Paris"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block gradient-primary rounded-full px-6 py-3 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity text-center"
