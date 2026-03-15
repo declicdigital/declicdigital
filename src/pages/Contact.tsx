@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import heroContact from "@/assets/contact-agence-web.png";
+import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 
 const Contact = () => (
   <PageLayout>
