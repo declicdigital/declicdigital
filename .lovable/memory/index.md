@@ -9,3 +9,4 @@ Design rules and constraints for Déclic Digital website
 - City SEO pages: silo structure under /creation-site-web/:ville and /referencement-seo/:ville
 - Cities data in src/data/cities.ts
 - Google Search Console verification TXT: google-site-verification=65wfvUjqfC5QqaqfSi42zOsEt9AFBTmzklzBdYqNUjU
+- SIRET: 102 436 664 00019 (shown in footer, mentions légales, Schema.org)
