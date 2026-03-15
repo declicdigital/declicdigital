@@ -115,20 +115,12 @@ const Contact = () => (
             Retrouvez toutes nos informations, nos avis clients et nos coordonnées directement sur Google.
           </p>
           <a
-            href="https://share.google/w9cwHP0IYLAg7tBaA"
+            href="https://share.google/8Ifh8V9cpPGinQXkY"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block gradient-primary rounded-full px-6 py-3 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity text-center"
           >
             Voir notre fiche Google
-          </a>
-          <a
-            href="https://share.google/w9cwHP0IYLAg7tBaA"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-3 inline-block rounded-full border border-border px-6 py-3 font-semibold text-foreground hover:bg-secondary transition-colors text-center"
-          >
-            Voir nos avis Google
           </a>
         </div>
       </div>
