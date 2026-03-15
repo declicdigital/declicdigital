@@ -20,7 +20,7 @@ const QuiSommesNous = () => (
               L'histoire de <span className="text-gradient">Déclic Digital</span>
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Une agence fondée par un Expert Produit Google, avec la conviction que chaque entreprise, quelle que soit sa taille, mérite d'être visible en ligne et d'attirer des clients grâce à un site web professionnel.
+              Une agence fondée par un Expert Produit Google, avec la conviction que chaque entreprise, quelle que soit sa taille, mérite d'être visible en ligne et d'attirer des clients grâce à un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web professionnel</Link>.
             </p>
           </motion.div>
       </div>
@@ -45,7 +45,7 @@ const QuiSommesNous = () => (
           Passionné par le web depuis plus de 8 ans, il a commencé en aidant son père à développer la visibilité de son entreprise de BTP. Puis il a accompagné un artiste dans la création de son site internet. Ces deux expériences lui ont fait prendre conscience d'un constat : la plupart des petites entreprises n'ont pas les moyens ni les connaissances pour créer un site qui génère réellement des clients.
         </p>
         <p>
-          C'est de ce constat qu'est née Déclic Digital : une agence web pensée pour les PME, les artisans et les indépendants. L'idée est simple : proposer des sites web professionnels, performants et optimisés pour le référencement Google, à des tarifs accessibles.
+          C'est de ce constat qu'est née Déclic Digital : une agence web pensée pour les PME, les artisans et les indépendants. L'idée est simple : proposer des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites web professionnels</Link>, performants et optimisés pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement Google</Link>, à des <Link to="/tarifs" className="text-primary font-semibold hover:underline">tarifs accessibles</Link>.
         </p>
         <div className="rounded-2xl bg-card p-6 shadow-card flex items-start gap-4">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
@@ -62,10 +62,10 @@ const QuiSommesNous = () => (
           "Les petites entreprises ont besoin d'outils simples et efficaces pour trouver des clients en ligne."
         </blockquote>
         <p>
-          Aujourd'hui, Déclic Digital accompagne des PME et indépendants partout en France. Chaque projet est abordé avec la même rigueur et la même passion : comprendre les besoins du client, concevoir un site qui lui ressemble, l'optimiser pour Google et mesurer les résultats.
+          Aujourd'hui, Déclic Digital accompagne des PME et indépendants <Link to="/nos-villes" className="text-primary font-semibold hover:underline">à Paris et dans les Hauts-de-Seine</Link>. Chaque projet est abordé avec la même rigueur et la même passion : comprendre les besoins du client, concevoir un site qui lui ressemble, l'optimiser pour Google et mesurer les résultats.
         </p>
         <p>
-          Notre force, c'est la proximité. Nous ne sommes pas une grande agence impersonnelle. Nous prenons le temps d'échanger avec chaque client, de comprendre son métier et de proposer des solutions sur mesure.
+          Notre force, c'est la proximité. Nous ne sommes pas une grande agence impersonnelle. Nous prenons le temps d'échanger avec chaque client, de comprendre son métier et de proposer des solutions sur mesure. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
         </p>
       </div>
     </SectionWrapper>
@@ -111,14 +111,49 @@ const QuiSommesNous = () => (
       </div>
     </SectionWrapper>
 
+    {/* Maillage */}
+    <SectionWrapper className="bg-card">
+      <div className="mx-auto max-w-3xl text-center">
+        <h2 className="text-2xl font-extrabold mb-4">Nos services</h2>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link to="/creation-site-web" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Création de site web
+          </Link>
+          <Link to="/referencement-seo" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Référencement SEO
+          </Link>
+          <Link to="/audit-seo-gratuit" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Audit SEO gratuit
+          </Link>
+          <Link to="/tarifs" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Nos tarifs
+          </Link>
+          <Link to="/realisations" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Nos réalisations
+          </Link>
+          <Link to="/nos-villes" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Nos villes
+          </Link>
+          <Link to="/faq" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Questions fréquentes
+          </Link>
+        </div>
+      </div>
+    </SectionWrapper>
+
     {/* CTA */}
     <section className="gradient-miami py-16">
       <div className="container text-center">
         <h2 className="mb-4 text-3xl font-extrabold text-primary-foreground">Parlons de votre projet</h2>
         <p className="mb-8 text-primary-foreground/80">Nous serions ravis d'échanger sur vos besoins et de vous accompagner dans votre transformation digitale.</p>
-        <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
-          <Link to="/contact">Parler de votre projet</Link>
-        </Button>
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
+            <Link to="/contact">Parler de votre projet</Link>
+          </Button>
+          <Link to="/tarifs" className="inline-flex items-center justify-center rounded-full border-2 border-primary-foreground/40 bg-transparent px-8 py-3 font-semibold text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
+            Voir nos tarifs
+          </Link>
+        </div>
       </div>
     </section>
   </PageLayout>

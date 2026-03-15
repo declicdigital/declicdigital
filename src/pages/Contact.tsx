@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,9 +34,9 @@ const Contact = () => (
     <SectionWrapper>
       <div className="grid gap-12 lg:grid-cols-5">
         <div className="lg:col-span-3">
-          <h2 className="mb-6 text-2xl font-extrabold">Demandez votre devis pour création de site</h2>
+          <h2 className="mb-6 text-2xl font-extrabold">Demandez votre devis pour <Link to="/creation-site-web" className="text-primary hover:underline">création de site</Link></h2>
           <p className="mb-6 text-muted-foreground">
-            Que vous ayez besoin d'un site vitrine, d'un site e-commerce ou d'une refonte complète, nous sommes là pour vous accompagner. Décrivez votre projet et nous vous proposerons une solution adaptée à vos objectifs et à votre budget.
+            Que vous ayez besoin d'un site vitrine, d'un site e-commerce ou d'une refonte complète, nous sommes là pour vous accompagner. Décrivez votre projet et nous vous proposerons une solution adaptée à vos objectifs et à votre budget. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> pour une première idée.
           </p>
           <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
             <div className="grid gap-4 sm:grid-cols-2">
@@ -102,7 +103,7 @@ const Contact = () => (
     <SectionWrapper className="bg-card">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-extrabold md:text-4xl">Retrouvez-nous</h2>
-        <p className="mt-4 text-muted-foreground">Nous intervenons partout en France, en présentiel ou à distance.</p>
+        <p className="mt-4 text-muted-foreground">Nous intervenons <Link to="/nos-villes" className="text-primary font-semibold hover:underline">à Paris et dans le 92</Link>, en présentiel ou à distance.</p>
       </div>
       <div className="mx-auto max-w-5xl grid gap-8 lg:grid-cols-2">
         <div className="rounded-2xl overflow-hidden shadow-card">
@@ -139,14 +140,41 @@ const Contact = () => (
       <div className="mx-auto max-w-3xl space-y-6">
         <h2 className="text-3xl font-extrabold md:text-4xl text-center">Pourquoi faire appel à une agence web pour votre site ?</h2>
         <p className="text-muted-foreground leading-relaxed">
-          Créer un site web professionnel ne se résume pas à assembler quelques pages. Il faut penser à l'expérience utilisateur, au design, à la vitesse de chargement, à l'optimisation pour les moteurs de recherche et à la compatibilité mobile. Une agence web comme Déclic Digital prend en charge l'ensemble de ces aspects pour vous livrer un site qui travaille pour vous.
+          Créer un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web professionnel</Link> ne se résume pas à assembler quelques pages. Il faut penser à l'expérience utilisateur, au design, à la vitesse de chargement, à l'optimisation pour les moteurs de recherche et à la compatibilité mobile. Une agence web comme Déclic Digital prend en charge l'ensemble de ces aspects pour vous livrer un site qui travaille pour vous.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Pour une PME ou un indépendant, un site web bien conçu est un investissement rentable. Il vous permet d'être trouvé par vos clients potentiels sur Google, de présenter vos services de manière professionnelle et de générer des demandes de devis automatiquement.
+          Pour une PME ou un indépendant, un site web bien conçu est un investissement rentable. Il vous permet d'être trouvé par vos clients potentiels sur Google, de présenter vos services de manière professionnelle et de générer des demandes de devis automatiquement. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Chez Déclic Digital, nous comprenons les contraintes des petites entreprises. C'est pourquoi nous proposons des solutions accessibles, avec des explications simples et un accompagnement humain à chaque étape. Du premier échange à la mise en ligne, en passant par le référencement SEO, nous sommes à vos côtés pour faire de votre présence en ligne un véritable levier de croissance.
+          Chez Déclic Digital, nous comprenons les contraintes des petites entreprises. C'est pourquoi nous proposons des solutions accessibles, avec des explications simples et un accompagnement humain à chaque étape. Du premier échange à la mise en ligne, en passant par le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>, nous sommes à vos côtés pour faire de votre présence en ligne un véritable levier de croissance.
         </p>
+      </div>
+    </SectionWrapper>
+
+    {/* Maillage */}
+    <SectionWrapper className="bg-card">
+      <div className="mx-auto max-w-3xl text-center">
+        <h2 className="text-2xl font-extrabold mb-4">Nos services</h2>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link to="/creation-site-web" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Création de site web
+          </Link>
+          <Link to="/referencement-seo" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Référencement SEO
+          </Link>
+          <Link to="/audit-seo-gratuit" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Audit SEO gratuit
+          </Link>
+          <Link to="/tarifs" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Nos tarifs
+          </Link>
+          <Link to="/nos-villes" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Nos villes
+          </Link>
+          <Link to="/faq" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Questions fréquentes
+          </Link>
+        </div>
       </div>
     </SectionWrapper>
   </PageLayout>
