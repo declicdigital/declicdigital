@@ -30,7 +30,7 @@ const Index = () => {
                 <span className="text-gradient">clients</span>
               </h1>
               <p className="mb-8 max-w-lg text-lg text-muted-foreground leading-relaxed">
-                Déclic Digital aide les PME et petites entreprises à obtenir plus de visibilité et plus de prospects grâce à la création de sites performants et au référencement SEO. Fondée par un Expert Produit Google, notre agence vous garantit une approche professionnelle et orientée résultats.
+                Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des sites performants et optimisés SEO pour que les PME et indépendants attirent enfin les bons clients, sans jargon et sans budget démesuré.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
@@ -247,7 +247,7 @@ const Index = () => {
             <p className="text-sm text-muted-foreground mb-4">Retrouvez notre fiche et nos avis vérifiés sur Google.</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="https://share.google/i2RfnCbtHLUrO4NQF"
+                href="https://share.google/8Ifh8V9cpPGinQXkY"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block gradient-primary rounded-full px-6 py-2.5 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity text-sm"

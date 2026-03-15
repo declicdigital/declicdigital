@@ -7,8 +7,8 @@ import SectionWrapper from "@/components/SectionWrapper";
 import heroFaq from "@/assets/questions-frequentes-creation-site.png";
 
 const faqItems = [
-  { q: "Combien coûte un site web ?", a: "Le prix varie selon la complexité du projet. Un site vitrine professionnel commence à partir de quelques centaines d'euros. Nous adaptons chaque devis à vos besoins et votre budget." },
-  { q: "Combien de temps pour créer un site ?", a: "En moyenne, un site vitrine est livré en 2 à 4 semaines. Un site e-commerce peut prendre 4 à 8 semaines selon le nombre de produits et fonctionnalités." },
+  { q: "Combien coûte un site web ?", a: "Nos tarifs commencent à partir de 50€ par mois + un premier mois de mise en service. Chaque devis est adapté à vos besoins et votre budget. Consultez notre page tarifs pour le détail." },
+  { q: "Combien de temps pour créer un site ?", a: "Un site vitrine est livré en 1 à 2 semaines. Un site plus avancé ou e-commerce peut prendre 2 à 4 semaines selon le nombre de pages et fonctionnalités." },
   { q: "Pourquoi faire du référencement SEO ?", a: "Le SEO permet d'attirer des visiteurs qualifiés gratuitement depuis Google. C'est un investissement durable qui génère des clients sur le long terme." },
   { q: "Combien de temps pour apparaître sur Google ?", a: "Les premiers résultats SEO apparaissent généralement entre 3 et 6 mois. Certaines améliorations techniques peuvent avoir un impact plus rapide." },
   { q: "Un site peut-il vraiment générer des clients ?", a: "Absolument. Un site bien conçu et bien référencé devient un véritable outil commercial qui attire des prospects qualifiés 24h/24." },

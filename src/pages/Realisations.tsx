@@ -95,31 +95,6 @@ const Realisations = () => (
       </div>
     </SectionWrapper>
 
-    {/* Avis Google */}
-    <SectionWrapper className="bg-card">
-      <div className="text-center mb-10">
-        <h2 className="text-3xl font-extrabold md:text-4xl">Nos avis clients</h2>
-        <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-          Consultez les avis vérifiés de nos clients directement sur Google.
-        </p>
-      </div>
-      <div className="mx-auto max-w-lg text-center">
-        <div className="rounded-2xl bg-background p-8 shadow-card">
-          <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" className="h-6 mx-auto mb-4" />
-          <p className="text-muted-foreground mb-6">
-            Tous nos avis sont vérifiés et consultables sur notre fiche Google Business.
-          </p>
-          <a
-            href="https://www.google.com/search?sa=X&sca_esv=517629e0db3c0ca4"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block gradient-primary rounded-full px-8 py-3 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity"
-          >
-            Voir nos avis Google
-          </a>
-        </div>
-      </div>
-    </SectionWrapper>
 
     {/* CTA */}
     <section className="gradient-miami py-16 text-center">
