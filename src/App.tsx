@@ -20,6 +20,8 @@ import AdminSoumissions from "./pages/AdminSoumissions";
 import VilleCreationSite from "./pages/VilleCreationSite";
 import VilleReferencementSeo from "./pages/VilleReferencementSeo";
 import NosVilles from "./pages/NosVilles";
+import Blog from "./pages/Blog";
+import BlogArticle from "./pages/BlogArticle";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -49,6 +51,8 @@ const App = () => (
             <Route path="/mentions-legales" element={<MentionsLegales />} />
             <Route path="/plan-du-site" element={<PlanDuSite />} />
             <Route path="/formulaire-client" element={<FormulaireClient />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogArticle />} />
             <Route path="/admin/soumissions" element={<AdminSoumissions />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

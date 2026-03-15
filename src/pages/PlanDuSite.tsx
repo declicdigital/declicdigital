@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import { cities } from "@/data/cities";
+import { blogArticles } from "@/data/blogArticles";
 
 const links = [
   { label: "Accueil", to: "/" },
@@ -15,6 +16,7 @@ const links = [
   { label: "Qui sommes-nous", to: "/qui-sommes-nous" },
   { label: "Contact", to: "/contact" },
   { label: "FAQ", to: "/faq" },
+  { label: "Blog", to: "/blog" },
   { label: "Formulaire client", to: "/formulaire-client" },
   { label: "Mentions légales", to: "/mentions-legales" },
   { label: "Plan du site", to: "/plan-du-site" },
