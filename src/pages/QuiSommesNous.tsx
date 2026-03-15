@@ -12,8 +12,7 @@ const QuiSommesNous = () => (
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
-          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="mx-auto max-w-3xl text-center">
             <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">
               Expert Produit Google
             </span>
@@ -24,10 +23,6 @@ const QuiSommesNous = () => (
               Une agence fondée par un Expert Produit Google, avec la conviction que chaque entreprise, quelle que soit sa taille, mérite d'être visible en ligne et d'attirer des clients grâce à un site web professionnel.
             </p>
           </motion.div>
-          <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroAbout} alt="Agence création de site web Déclic Digital" className="w-full max-w-lg drop-shadow-2xl" />
-          </motion.div>
-        </div>
       </div>
     </section>
 
