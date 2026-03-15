@@ -34,6 +34,15 @@ const QuiSommesNous = () => (
     {/* Storytelling */}
     <SectionWrapper>
       <div className="mx-auto max-w-3xl space-y-6 text-lg leading-relaxed text-muted-foreground">
+        <div className="flex flex-col items-center mb-8">
+          <img
+            src={geoffreyPhoto}
+            alt="Geoffrey, fondateur de Déclic Digital, Expert Produit Google"
+            className="w-40 h-40 rounded-2xl object-cover shadow-card mb-3"
+          />
+          <p className="font-bold text-foreground text-lg">Geoffrey</p>
+          <p className="text-sm text-muted-foreground">Fondateur de Déclic Digital</p>
+        </div>
         <p>
           <strong className="text-foreground">Déclic Digital</strong> a été fondé par <strong className="text-foreground">Geoffrey</strong>, 28 ans, diplômé d'une licence en marketing digital et intelligence artificielle, et certifié <strong className="text-foreground">Expert Produit Google</strong>.
         </p>
