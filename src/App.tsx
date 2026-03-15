@@ -19,6 +19,7 @@ import FormulaireClient from "./pages/FormulaireClient";
 import AdminSoumissions from "./pages/AdminSoumissions";
 import VilleCreationSite from "./pages/VilleCreationSite";
 import VilleReferencementSeo from "./pages/VilleReferencementSeo";
+import NosVilles from "./pages/NosVilles";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -39,6 +40,7 @@ const App = () => (
             <Route path="/creation-site-web/:ville" element={<VilleCreationSite />} />
             <Route path="/referencement-seo" element={<ReferencementSeo />} />
             <Route path="/referencement-seo/:ville" element={<VilleReferencementSeo />} />
+            <Route path="/nos-villes" element={<NosVilles />} />
             <Route path="/realisations" element={<Realisations />} />
             <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
             <Route path="/contact" element={<Contact />} />

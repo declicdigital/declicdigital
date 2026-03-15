@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import heroSeo from "@/assets/referencement-seo-google.png";
+import { cities } from "@/data/cities";
 
 const ReferencementSeo = () => (
   <PageLayout>
@@ -64,7 +65,7 @@ const ReferencementSeo = () => (
           Le référencement naturel repose sur trois piliers fondamentaux. Le premier est la technique : vitesse de chargement, architecture du site, compatibilité mobile, sécurité HTTPS. Le deuxième est le contenu : des textes pertinents, bien structurés et optimisés pour les mots clés recherchés par votre cible. Le troisième est la popularité : les liens provenant d'autres sites qui renforcent l'autorité de votre domaine aux yeux de Google.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Pour une PME, le SEO est particulièrement puissant car il permet de rivaliser avec des entreprises plus grandes en se positionnant sur des mots clés locaux ou de niche.
+          Pour une PME, le SEO est particulièrement puissant car il permet de rivaliser avec des entreprises plus grandes en se positionnant sur des mots clés locaux ou de niche. Découvrez <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">nos offres de création de site</Link> intégrant le SEO dès la conception.
         </p>
       </div>
     </SectionWrapper>
@@ -101,8 +102,35 @@ const ReferencementSeo = () => (
           La publicité payante (Google Ads, Facebook Ads) peut générer du trafic rapidement, mais elle s'arrête dès que vous coupez le budget. Le SEO, en revanche, est un investissement qui continue de porter ses fruits sur le long terme. Une fois bien positionné, votre site attire des visiteurs gratuitement, jour après jour.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Pour les PME avec des budgets marketing limités, le SEO est souvent la stratégie la plus rentable. Les premiers résultats apparaissent généralement entre 3 et 6 mois, mais les gains s'accumulent et se renforcent avec le temps.
+          Pour les PME avec des budgets marketing limités, le SEO est souvent la stratégie la plus rentable. Les premiers résultats apparaissent généralement entre 3 et 6 mois, mais les gains s'accumulent et se renforcent avec le temps. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou <Link to="/faq" className="text-primary font-semibold hover:underline">notre FAQ</Link> pour en savoir plus.
         </p>
+      </div>
+    </SectionWrapper>
+
+    {/* Villes maillage */}
+    <SectionWrapper className="bg-card">
+      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">
+        Référencement SEO par ville
+      </h2>
+      <p className="text-center text-muted-foreground mb-8">
+        Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold hover:underline">référencement SEO local</Link> à Paris et dans les Hauts-de-Seine.
+      </p>
+      <div className="flex flex-wrap justify-center gap-3">
+        {cities.slice(0, 12).map((c) => (
+          <Link
+            key={c.slug}
+            to={`/referencement-seo/${c.slug}`}
+            className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors"
+          >
+            SEO {c.nameShort}
+          </Link>
+        ))}
+        <Link
+          to="/nos-villes"
+          className="rounded-full gradient-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+        >
+          Voir toutes les villes →
+        </Link>
       </div>
     </SectionWrapper>
 
@@ -111,9 +139,14 @@ const ReferencementSeo = () => (
       <div className="container text-center">
         <h2 className="mb-4 text-3xl font-extrabold text-primary-foreground">Prêt à booster votre visibilité ?</h2>
         <p className="mb-8 text-primary-foreground/80">Recevez un audit gratuit de votre site en 48h et découvrez comment améliorer votre référencement.</p>
-        <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
-          <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
-        </Button>
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
+            <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="rounded-full px-8 font-semibold border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
+            <Link to="/qui-sommes-nous">Qui sommes-nous</Link>
+          </Button>
+        </div>
       </div>
     </section>
   </PageLayout>

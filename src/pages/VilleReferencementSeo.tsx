@@ -6,6 +6,7 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 import { getCityBySlug, cities } from "@/data/cities";
+import { cityContent } from "@/data/cityContent";
 import { Helmet } from "react-helmet-async";
 
 const VilleReferencementSeo = () => {
@@ -14,6 +15,7 @@ const VilleReferencementSeo = () => {
 
   if (!city) return <Navigate to="/referencement-seo" replace />;
 
+  const content = cityContent[city.slug];
   const nearCities = cities
     .filter((c) => c.region === city.region && c.slug !== city.slug)
     .slice(0, 6);
@@ -39,7 +41,7 @@ const VilleReferencementSeo = () => {
                 <span className="text-gradient">{city.nameShort}</span>
               </h1>
               <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-                Votre entreprise {city.description} mérite d'être visible sur Google. Notre agence SEO optimise votre site pour attirer des clients qualifiés et développer votre activité grâce au référencement naturel.
+                {content?.seoIntro || `Votre entreprise ${city.description} mérite d'être visible sur Google. Notre agence SEO optimise votre site pour attirer des clients qualifiés et développer votre activité grâce au référencement naturel.`}
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
@@ -68,7 +70,7 @@ const VilleReferencementSeo = () => {
           Pourquoi investir dans le SEO à {city.nameShort} ?
         </h2>
         <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-          Le référencement local est essentiel pour les entreprises {city.description}. Il vous permet d'apparaitre devant vos clients au moment où ils recherchent vos services.
+          {content?.seoWhyText || `Le référencement local est essentiel pour les entreprises ${city.description}. Il vous permet d'apparaitre devant vos clients au moment où ils recherchent vos services.`}
         </p>
         <div className="grid gap-6 md:grid-cols-3">
           {[
@@ -117,6 +119,52 @@ const VilleReferencementSeo = () => {
               </ul>
             </motion.div>
           ))}
+        </div>
+      </SectionWrapper>
+
+      {/* Contenu SEO unique */}
+      {content && (
+        <SectionWrapper className="bg-card">
+          <div className="mx-auto max-w-3xl space-y-6">
+            <h2 className="text-3xl font-extrabold md:text-4xl text-center">
+              Le SEO local à {city.nameShort}
+            </h2>
+            <p className="text-muted-foreground leading-relaxed">{content.seoLocalText}</p>
+            <div className="rounded-2xl bg-background p-6 shadow-card">
+              <p className="text-sm font-semibold text-primary mb-1">Le saviez-vous ?</p>
+              <p className="text-muted-foreground text-sm">{content.localFact}</p>
+            </div>
+          </div>
+        </SectionWrapper>
+      )}
+
+      {/* Liens services */}
+      <SectionWrapper>
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-2xl font-extrabold mb-4">Découvrez aussi nos autres services</h2>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link to="/creation-site-web" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Création de site web
+            </Link>
+            <Link to={`/creation-site-web/${city.slug}`} className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Site web à {city.nameShort}
+            </Link>
+            <Link to="/audit-seo-gratuit" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Audit SEO gratuit
+            </Link>
+            <Link to="/tarifs" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Nos tarifs
+            </Link>
+            <Link to="/realisations" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Nos réalisations
+            </Link>
+            <Link to="/faq" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Questions fréquentes
+            </Link>
+            <Link to="/nos-villes" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Toutes nos villes
+            </Link>
+          </div>
         </div>
       </SectionWrapper>
 

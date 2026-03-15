@@ -145,7 +145,7 @@ const Contact = () => (
           Pour une PME ou un indépendant, un site web bien conçu est un investissement rentable. Il vous permet d'être trouvé par vos clients potentiels sur Google, de présenter vos services de manière professionnelle et de générer des demandes de devis automatiquement.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Chez Déclic Digital, nous comprenons les contraintes des petites entreprises. C'est pourquoi nous proposons des solutions accessibles, sans jargon technique, avec un accompagnement humain à chaque étape. Du premier échange à la mise en ligne, en passant par le référencement SEO, nous sommes à vos côtés pour faire de votre présence en ligne un véritable levier de croissance.
+          Chez Déclic Digital, nous comprenons les contraintes des petites entreprises. C'est pourquoi nous proposons des solutions accessibles, avec des explications simples et un accompagnement humain à chaque étape. Du premier échange à la mise en ligne, en passant par le référencement SEO, nous sommes à vos côtés pour faire de votre présence en ligne un véritable levier de croissance.
         </p>
       </div>
     </SectionWrapper>

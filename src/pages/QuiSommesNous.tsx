@@ -82,7 +82,7 @@ const QuiSommesNous = () => (
         {[
           { icon: Heart, title: "Passion", desc: "Le web est notre métier et notre passion depuis toujours. Nous aimons ce que nous faisons et cela se reflète dans la qualité de chaque projet." },
           { icon: Target, title: "Résultats", desc: "Chaque action est orientée vers un objectif concret : générer des clients pour votre entreprise. Nous mesurons tout pour optimiser en continu." },
-          { icon: Rocket, title: "Accessibilité", desc: "Des solutions adaptées aux budgets des PME et petites entreprises. Pas de jargon, pas de surprise. Des prix clairs et un accompagnement humain." },
+          { icon: Rocket, title: "Accessibilité", desc: "Des solutions adaptées aux budgets des PME et petites entreprises. Des explications claires, pas de surprise. Des prix transparents et un accompagnement humain." },
         ].map((item, i) => (
           <div key={i} className="rounded-2xl bg-background p-6 shadow-card text-center">
             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
@@ -100,7 +100,7 @@ const QuiSommesNous = () => (
       <div className="mx-auto max-w-3xl space-y-6">
         <h2 className="text-3xl font-extrabold md:text-4xl text-center">Nos valeurs</h2>
         <p className="text-muted-foreground leading-relaxed">
-          Chez Déclic Digital, nous croyons en la transparence totale. Pas de contrat obscur, pas de jargon incompréhensible, pas de promesses irréalistes. Nous vous expliquons clairement ce que nous faisons, pourquoi nous le faisons, et quels résultats vous pouvez attendre.
+          Chez Déclic Digital, nous croyons en la transparence totale. Pas de contrat obscur, pas de termes compliqués, pas de promesses irréalistes. Nous vous expliquons clairement ce que nous faisons, pourquoi nous le faisons, et quels résultats vous pouvez attendre.
         </p>
         <p className="text-muted-foreground leading-relaxed">
           Nous croyons aussi que la technologie doit être au service de l'humain. Un site web n'est qu'un outil. Ce qui compte, c'est ce qu'il apporte à votre entreprise et à vos clients.
