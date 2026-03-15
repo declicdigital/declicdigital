@@ -121,13 +121,13 @@ const NosVilles = () => (
       <div className="mx-auto max-w-3xl space-y-6">
         <h2 className="text-3xl font-extrabold md:text-4xl text-center">Pourquoi le référencement local est essentiel ?</h2>
         <p className="text-muted-foreground leading-relaxed">
-          Le référencement local permet à votre entreprise d'apparaître dans les résultats de recherche quand un internaute effectue une recherche géolocalisée. Par exemple, "plombier Boulogne-Billancourt" ou "restaurant Paris 15". C'est un levier puissant pour les PME qui ciblent une clientèle de proximité.
+          Le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement local</Link> permet à votre entreprise d'apparaître dans les résultats de recherche quand un internaute effectue une recherche géolocalisée. Par exemple, "plombier Boulogne-Billancourt" ou "restaurant Paris 15". C'est un levier puissant pour les PME qui ciblent une clientèle de proximité.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Chez Déclic Digital, nous optimisons chaque site pour le référencement local : fiche Google Business Profile, pages dédiées par ville, contenu géolocalisé et citations sur les annuaires locaux. Cette approche vous permet de dominer les résultats Google dans votre zone de chalandise.
+          Chez Déclic Digital, nous optimisons chaque <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour le référencement local : fiche Google Business Profile, pages dédiées par ville, contenu géolocalisé et citations sur les annuaires locaux. Cette approche vous permet de dominer les résultats Google dans votre zone de chalandise. Demandez votre <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour évaluer votre situation.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Que vous soyez situé à Paris, Boulogne-Billancourt, Issy-les-Moulineaux ou Neuilly-sur-Seine, nous adaptons notre stratégie à votre marché local. Chaque ville a ses spécificités et nous les connaissons.
+          Que vous soyez situé à Paris, Boulogne-Billancourt, Issy-les-Moulineaux ou Neuilly-sur-Seine, nous adaptons notre stratégie à votre marché local. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link>.
         </p>
       </div>
     </SectionWrapper>
@@ -143,12 +143,12 @@ const NosVilles = () => (
           <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
             <Link to="/creation-site-web">Création de site web</Link>
           </Button>
-          <Button asChild size="lg" variant="outline" className="rounded-full px-8 font-semibold">
-            <Link to="/referencement-seo">Référencement SEO</Link>
-          </Button>
-          <Button asChild size="lg" variant="outline" className="rounded-full px-8 font-semibold">
-            <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
-          </Button>
+          <Link to="/referencement-seo" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
+            Référencement SEO
+          </Link>
+          <Link to="/audit-seo-gratuit" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
+            Audit SEO gratuit
+          </Link>
         </div>
       </div>
     </SectionWrapper>
@@ -166,9 +166,9 @@ const NosVilles = () => (
           <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
             <Link to="/contact">Demander un devis</Link>
           </Button>
-          <Button asChild size="lg" variant="outline" className="rounded-full px-8 font-semibold border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
-            <Link to="/tarifs">Voir nos tarifs</Link>
-          </Button>
+          <Link to="/tarifs" className="inline-flex items-center justify-center rounded-full border-2 border-primary-foreground/40 bg-transparent px-8 py-3 font-semibold text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
+            Voir nos tarifs
+          </Link>
         </div>
       </div>
     </section>

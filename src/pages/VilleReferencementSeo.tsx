@@ -47,9 +47,9 @@ const VilleReferencementSeo = () => {
                 <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
                   <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="rounded-full px-8 font-semibold">
-                  <Link to="/contact">Nous contacter</Link>
-                </Button>
+                <Link to="/contact" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
+                  Nous contacter
+                </Link>
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
@@ -130,6 +130,9 @@ const VilleReferencementSeo = () => {
               Le SEO local à {city.nameShort}
             </h2>
             <p className="text-muted-foreground leading-relaxed">{content.seoLocalText}</p>
+            <p className="text-muted-foreground leading-relaxed">
+              Complétez votre stratégie avec un <Link to={`/creation-site-web/${city.slug}`} className="text-primary font-semibold hover:underline">site web professionnel à {city.nameShort}</Link>. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+            </p>
             <div className="rounded-2xl bg-background p-6 shadow-card">
               <p className="text-sm font-semibold text-primary mb-1">Le saviez-vous ?</p>
               <p className="text-muted-foreground text-sm">{content.localFact}</p>
@@ -177,26 +180,25 @@ const VilleReferencementSeo = () => {
           <p className="text-center text-muted-foreground mb-8">
             Notre agence SEO intervient également dans les villes voisines.
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {nearCities.map((c) => (
-              <Link
-                key={c.slug}
-                to={`/referencement-seo/${c.slug}`}
-                className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors"
-              >
-                SEO {c.nameShort}
-              </Link>
-            ))}
-          </div>
-          <div className="flex flex-wrap justify-center gap-3 mt-4">
-            {nearCities.map((c) => (
-              <Link
-                key={c.slug}
-                to={`/creation-site-web/${c.slug}`}
-                className="rounded-full border bg-background px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary transition-colors"
-              >
-                Site web {c.nameShort}
-              </Link>
+              <div key={c.slug} className="rounded-2xl bg-background p-4 shadow-card">
+                <h3 className="font-bold mb-2">{c.nameShort}</h3>
+                <div className="flex flex-wrap gap-2">
+                  <Link
+                    to={`/referencement-seo/${c.slug}`}
+                    className="rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/20 transition-colors"
+                  >
+                    SEO
+                  </Link>
+                  <Link
+                    to={`/creation-site-web/${c.slug}`}
+                    className="rounded-full bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/20 transition-colors"
+                  >
+                    Création de site
+                  </Link>
+                </div>
+              </div>
             ))}
           </div>
         </SectionWrapper>
@@ -215,9 +217,9 @@ const VilleReferencementSeo = () => {
             <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
               <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full px-8 font-semibold border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
-              <Link to="/contact">Nous contacter</Link>
-            </Button>
+            <Link to="/contact" className="inline-flex items-center justify-center rounded-full border-2 border-primary-foreground/40 bg-transparent px-8 py-3 font-semibold text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
+              Nous contacter
+            </Link>
           </div>
         </div>
       </section>
