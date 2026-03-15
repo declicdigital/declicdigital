@@ -6,7 +6,7 @@ const Footer = () => (
   <footer className="border-t border-border">
     <div className="bg-foreground text-primary-foreground">
       <div className="container py-12 md:py-16">
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-5">
           {/* Brand */}
           <div className="space-y-4">
             <img src={logo} alt="Déclic Digital" className="h-10" />
@@ -35,36 +35,42 @@ const Footer = () => (
             </ul>
           </div>
 
-          {/* Villes */}
+          {/* Villes Paris */}
           <div>
-            <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-primary-foreground/50">Nos villes</h3>
+            <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-primary-foreground/50">Paris</h3>
             <ul className="space-y-2 text-sm">
               <li><Link to="/creation-site-web/paris-15eme" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Site web Paris 15</Link></li>
-              <li><Link to="/creation-site-web/boulogne-billancourt" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Site web Boulogne</Link></li>
-              <li><Link to="/creation-site-web/issy-les-moulineaux" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Site web Issy</Link></li>
-              <li><Link to="/referencement-seo/paris-15eme" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">SEO Paris 15</Link></li>
-              <li><Link to="/referencement-seo/neuilly-sur-seine" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">SEO Neuilly</Link></li>
+              <li><Link to="/creation-site-web/paris-16eme" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Site web Paris 16</Link></li>
+              <li><Link to="/creation-site-web/paris-17eme" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Site web Paris 17</Link></li>
+              <li><Link to="/referencement-seo/paris-8eme" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">SEO Paris 8</Link></li>
+              <li><Link to="/referencement-seo/paris-9eme" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">SEO Paris 9</Link></li>
+              <li><Link to="/nos-villes" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors font-semibold">Toutes nos villes →</Link></li>
             </ul>
           </div>
 
-          {/* Navigation */}
+          {/* Villes 92 */}
+          <div>
+            <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-primary-foreground/50">Hauts-de-Seine</h3>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/creation-site-web/boulogne-billancourt" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Site web Boulogne</Link></li>
+              <li><Link to="/creation-site-web/issy-les-moulineaux" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Site web Issy</Link></li>
+              <li><Link to="/referencement-seo/neuilly-sur-seine" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">SEO Neuilly</Link></li>
+              <li><Link to="/referencement-seo/levallois-perret" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">SEO Levallois</Link></li>
+              <li><Link to="/creation-site-web/nanterre" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Site web Nanterre</Link></li>
+              <li><Link to="/referencement-seo/courbevoie" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">SEO Courbevoie</Link></li>
+            </ul>
+          </div>
+
+          {/* Navigation + CTA */}
           <div>
             <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-primary-foreground/50">Navigation</h3>
-            <ul className="space-y-2 text-sm">
+            <ul className="space-y-2 text-sm mb-6">
               <li><Link to="/" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Accueil</Link></li>
               <li><Link to="/realisations" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Réalisations</Link></li>
               <li><Link to="/qui-sommes-nous" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Qui sommes-nous</Link></li>
               <li><Link to="/faq" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">FAQ</Link></li>
               <li><Link to="/plan-du-site" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Plan du site</Link></li>
             </ul>
-          </div>
-
-          {/* CTA */}
-          <div>
-            <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-primary-foreground/50">Contact</h3>
-            <p className="text-sm text-primary-foreground/70 mb-4">
-              Prêt à développer votre visibilité en ligne ?
-            </p>
             <div className="flex flex-col items-start gap-3">
               <Link
                 to="/audit-seo-gratuit"

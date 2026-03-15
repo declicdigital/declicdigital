@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone, Mail } from "lucide-react";
+import { Menu, X, Phone, Mail, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo-declic-digital.png";
 
@@ -11,6 +11,7 @@ const navLinks = [
   { label: "Audit SEO gratuit", to: "/audit-seo-gratuit" },
   { label: "Nos tarifs", to: "/tarifs" },
   { label: "Réalisations", to: "/realisations" },
+  { label: "Nos villes", to: "/nos-villes" },
   { label: "Qui sommes-nous", to: "/qui-sommes-nous" },
   { label: "Contact", to: "/contact" },
   { label: "FAQ", to: "/faq" },
@@ -46,7 +47,7 @@ const Header = () => {
                 key={l.to}
                 to={l.to}
                 className={`rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-secondary ${
-                  location.pathname === l.to
+                  location.pathname === l.to || (l.to !== "/" && location.pathname.startsWith(l.to))
                     ? "text-primary"
                     : "text-muted-foreground"
                 }`}
@@ -82,7 +83,7 @@ const Header = () => {
                   to={l.to}
                   onClick={() => setMobileOpen(false)}
                   className={`rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-secondary ${
-                    location.pathname === l.to
+                    location.pathname === l.to || (l.to !== "/" && location.pathname.startsWith(l.to))
                       ? "text-primary bg-secondary"
                       : "text-muted-foreground"
                   }`}

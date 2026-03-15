@@ -100,7 +100,7 @@ const QuiSommesNous = () => (
       <div className="mx-auto max-w-3xl space-y-6">
         <h2 className="text-3xl font-extrabold md:text-4xl text-center">Nos valeurs</h2>
         <p className="text-muted-foreground leading-relaxed">
-          Chez Déclic Digital, nous croyons en la transparence totale. Pas de contrat obscur, pas de jargon incompréhensible, pas de promesses irréalistes. Nous vous expliquons clairement ce que nous faisons, pourquoi nous le faisons, et quels résultats vous pouvez attendre.
+          Chez Déclic Digital, nous croyons en la transparence totale. Pas de contrat obscur, pas de termes compliqués, pas de promesses irréalistes. Nous vous expliquons clairement ce que nous faisons, pourquoi nous le faisons, et quels résultats vous pouvez attendre.
         </p>
         <p className="text-muted-foreground leading-relaxed">
           Nous croyons aussi que la technologie doit être au service de l'humain. Un site web n'est qu'un outil. Ce qui compte, c'est ce qu'il apporte à votre entreprise et à vos clients.

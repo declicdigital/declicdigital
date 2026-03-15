@@ -6,6 +6,7 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import heroCreation from "@/assets/screenshot-declic-digital.png";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
+import { cities } from "@/data/cities";
 
 const CreationSite = () => (
   <PageLayout>
@@ -113,14 +114,41 @@ const CreationSite = () => (
           Un bon site web pour une PME, c'est avant tout un site qui remplit son objectif : attirer des visiteurs et les convertir en clients. Il ne suffit pas d'avoir un site "joli". Il doit être rapide, bien structuré, adapté aux mobiles et surtout visible sur Google.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Chaque page doit être pensée pour répondre à une intention de recherche précise. Par exemple, si vous êtes plombier à Bordeaux, votre site doit apparaître quand un internaute tape "plombier Bordeaux" dans Google. C'est le rôle du référencement naturel, et c'est ce que nous intégrons dès la conception de chaque projet.
+          Chaque page doit être pensée pour répondre à une intention de recherche précise. Par exemple, si vous êtes plombier à Bordeaux, votre site doit apparaître quand un internaute tape "plombier Bordeaux" dans Google. C'est le rôle du <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement naturel</Link>, et c'est ce que nous intégrons dès la conception de chaque projet.
         </p>
         <p className="text-muted-foreground leading-relaxed">
           Chez Déclic Digital, nous créons des sites orientés résultats. Cela signifie que chaque élément, le design, les textes, les appels à l'action, la navigation, est conçu pour maximiser vos chances de transformer un visiteur en prospect. Nous ne livrons pas simplement un site, nous livrons un outil commercial.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Nos sites incluent systématiquement : un design professionnel sur mesure, une optimisation SEO complète, une compatibilité mobile parfaite, une vitesse de chargement optimisée, et un formulaire de contact pour capturer vos prospects.
+          Nos sites incluent systématiquement : un design professionnel sur mesure, une <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">optimisation SEO complète</Link>, une compatibilité mobile parfaite, une vitesse de chargement optimisée, et un formulaire de contact pour capturer vos prospects. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> pour en savoir plus.
         </p>
+      </div>
+    </SectionWrapper>
+
+    {/* Villes maillage */}
+    <SectionWrapper className="bg-card">
+      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">
+        Création de site web par ville
+      </h2>
+      <p className="text-center text-muted-foreground mb-8">
+        Nous intervenons à Paris et dans les Hauts-de-Seine pour la <Link to="/nos-villes" className="text-primary font-semibold hover:underline">création de sites web professionnels</Link>.
+      </p>
+      <div className="flex flex-wrap justify-center gap-3">
+        {cities.slice(0, 12).map((c) => (
+          <Link
+            key={c.slug}
+            to={`/creation-site-web/${c.slug}`}
+            className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors"
+          >
+            Site web {c.nameShort}
+          </Link>
+        ))}
+        <Link
+          to="/nos-villes"
+          className="rounded-full gradient-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+        >
+          Voir toutes les villes →
+        </Link>
       </div>
     </SectionWrapper>
 
@@ -131,9 +159,14 @@ const CreationSite = () => (
         <p className="text-sm font-semibold text-primary-foreground mb-2">Geoffrey, Expert Produit Google</p>
         <h2 className="mb-4 text-3xl font-extrabold text-primary-foreground">Prêt à lancer votre projet ?</h2>
         <p className="mb-8 text-primary-foreground/80">Demandez un devis gratuit et sans engagement pour la création de votre site web.</p>
-        <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
-          <Link to="/contact">Devis création de site</Link>
-        </Button>
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
+            <Link to="/contact">Devis création de site</Link>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="rounded-full px-8 font-semibold border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
+            <Link to="/faq">Questions fréquentes</Link>
+          </Button>
+        </div>
       </div>
     </section>
   </PageLayout>

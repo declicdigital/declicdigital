@@ -40,6 +40,7 @@ const App = () => (
             <Route path="/creation-site-web/:ville" element={<VilleCreationSite />} />
             <Route path="/referencement-seo" element={<ReferencementSeo />} />
             <Route path="/referencement-seo/:ville" element={<VilleReferencementSeo />} />
+            <Route path="/nos-villes" element={<NosVilles />} />
             <Route path="/realisations" element={<Realisations />} />
             <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
             <Route path="/contact" element={<Contact />} />
