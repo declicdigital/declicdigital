@@ -143,12 +143,12 @@ const NosVilles = () => (
           <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
             <Link to="/creation-site-web">Création de site web</Link>
           </Button>
-          <Button asChild size="lg" variant="outline" className="rounded-full px-8 font-semibold">
-            <Link to="/referencement-seo">Référencement SEO</Link>
-          </Button>
-          <Button asChild size="lg" variant="outline" className="rounded-full px-8 font-semibold">
-            <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
-          </Button>
+          <Link to="/referencement-seo" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
+            Référencement SEO
+          </Link>
+          <Link to="/audit-seo-gratuit" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
+            Audit SEO gratuit
+          </Link>
         </div>
       </div>
     </SectionWrapper>
