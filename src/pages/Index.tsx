@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import heroDashboard from "@/assets/tableau-bord-seo-professionnel.png";
+import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 
 const techLogos = ["WordPress", "Shopify", "Lovable", "Base44", "Claude AI", "Semrush", "Google Analytics", "Search Console"];
 
@@ -288,17 +289,20 @@ const Index = () => {
 
       {/* CTA Final */}
       <section className="gradient-miami py-16 md:py-24">
-        <div className="container text-center">
+        <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="flex flex-col items-center text-center"
           >
+            <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-primary-foreground/30 shadow-lg mb-4" />
+            <p className="text-sm font-semibold text-primary-foreground mb-1">Geoffrey, Expert Produit Google</p>
             <h2 className="mb-4 text-3xl font-extrabold text-primary-foreground md:text-4xl">
               Et si votre site devenait votre meilleur commercial ?
             </h2>
-            <p className="mb-8 text-lg text-primary-foreground/80">
+            <p className="mb-8 text-lg text-primary-foreground/80 max-w-2xl">
               Un site optimisé peut générer des prospects tous les jours. Ne laissez plus vos concurrents capter les clients qui vous cherchent sur Google.
             </p>
             <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
