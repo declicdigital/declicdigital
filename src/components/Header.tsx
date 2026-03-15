@@ -11,6 +11,7 @@ const navLinks = [
   { label: "Audit SEO gratuit", to: "/audit-seo-gratuit" },
   { label: "Nos tarifs", to: "/tarifs" },
   { label: "Réalisations", to: "/realisations" },
+  { label: "Blog", to: "/blog" },
   { label: "Nos villes", to: "/nos-villes" },
   { label: "Qui sommes-nous", to: "/qui-sommes-nous" },
   { label: "Contact", to: "/contact" },
