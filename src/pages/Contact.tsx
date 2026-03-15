@@ -108,7 +108,7 @@ const Contact = () => (
       <div className="mx-auto max-w-5xl grid gap-8 lg:grid-cols-2">
         <div className="rounded-2xl overflow-hidden shadow-card">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.0!2d2.3004!3d48.8393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6703e9c3fb8a5%3A0x0!2s57+Rue+d&#39;Alleray%2C+75015+Paris!5e0!3m2!1sfr!2sfr"
+            src="https://www.google.com/maps?q=D%C3%A9clic+Digital%2C+57+Rue+d%27Alleray%2C+75015+Paris&output=embed"
             width="100%"
             height="350"
             style={{ border: 0 }}
