@@ -19,7 +19,7 @@ const CreationSite = () => (
               Création de site web à Paris qui <span className="text-gradient">attire des clients</span>
             </h1>
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-              Nous concevons des sites modernes, rapides et optimisés SEO pour les PME et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects et développer votre activité en ligne.
+              Nous concevons des sites modernes, rapides et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour les PME et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou demandez un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link>.
             </p>
             <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
               <Link to="/contact">Devis création de site</Link>
