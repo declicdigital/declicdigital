@@ -15,7 +15,7 @@ const CreationSite = () => (
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
             <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-              Créez un site web qui <span className="text-gradient">attire des clients</span>
+              Création de site web à Paris qui <span className="text-gradient">attire des clients</span>
             </h1>
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
               Nous concevons des sites modernes, rapides et optimisés SEO pour les PME et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects et développer votre activité en ligne.
