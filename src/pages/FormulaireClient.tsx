@@ -665,7 +665,7 @@ const FormulaireClient = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
             <div className="relative">
-              <p className="text-xs font-bold uppercase tracking-widest text-accent mb-4">Audit SEO offert inclus</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-accent mb-4">Réponse sous 24 à 48h</p>
               <h3 className="text-2xl md:text-3xl font-extrabold mb-3">
                 Prêt(e) à faire <span className="text-gradient">décoller votre site ?</span>
               </h3>
