@@ -224,7 +224,7 @@ const FormulaireClient = () => {
               </div>
               <h1 className="text-3xl font-extrabold mb-4">C'est envoyé !</h1>
               <p className="text-muted-foreground text-lg mb-8">
-                Déclic Digital a bien reçu votre projet et reviendra vers vous avec une proposition personnalisée et votre <strong className="text-primary">audit SEO offert</strong>.
+                Déclic Digital a bien reçu votre projet et reviendra vers vous avec une proposition personnalisée.
               </p>
               <Button onClick={() => window.location.href = "/"} className="rounded-full gradient-primary text-primary-foreground">
                 Retour à l'accueil
