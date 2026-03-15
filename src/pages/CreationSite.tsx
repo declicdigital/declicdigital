@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import heroCreation from "@/assets/screenshot-declic-digital.png";
+import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 
 const CreationSite = () => (
   <PageLayout>
