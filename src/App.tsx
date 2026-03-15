@@ -19,6 +19,7 @@ import FormulaireClient from "./pages/FormulaireClient";
 import AdminSoumissions from "./pages/AdminSoumissions";
 import VilleCreationSite from "./pages/VilleCreationSite";
 import VilleReferencementSeo from "./pages/VilleReferencementSeo";
+import NosVilles from "./pages/NosVilles";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
