@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { Search, FileText, Users, Lightbulb, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -71,10 +72,10 @@ const AuditSeo = () => (
           Concrètement, nous analysons la structure technique de votre site (vitesse, mobile, sécurité), la qualité de votre contenu (mots clés, balises, textes), et votre positionnement par rapport à vos concurrents. À l'issue de l'audit, vous recevez un rapport détaillé avec des recommandations classées par priorité.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          L'audit est la première étape indispensable pour toute stratégie SEO efficace. Sans diagnostic précis, il est impossible de savoir quelles actions vont réellement améliorer votre visibilité. C'est pourquoi nous proposons cet audit gratuitement : nous voulons que chaque PME puisse comprendre sa situation et prendre les bonnes décisions.
+          L'audit est la première étape indispensable pour toute stratégie de <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link> efficace. Sans diagnostic précis, il est impossible de savoir quelles actions vont réellement améliorer votre visibilité. C'est pourquoi nous proposons cet audit gratuitement : nous voulons que chaque PME puisse comprendre sa situation et prendre les bonnes décisions.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Après avoir reçu votre audit, vous pouvez choisir de mettre en oeuvre les recommandations vous-même ou de nous confier l'optimisation de votre site. Dans tous les cas, l'audit vous appartient et vous n'avez aucune obligation.
+          Après avoir reçu votre audit, vous pouvez choisir de mettre en oeuvre les recommandations vous-même ou de nous confier l'optimisation de votre site. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> pour découvrir nos offres. Dans tous les cas, l'audit vous appartient et vous n'avez aucune obligation.
         </p>
       </div>
     </SectionWrapper>
@@ -84,16 +85,43 @@ const AuditSeo = () => (
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="text-3xl font-extrabold md:text-4xl mb-6">Pourquoi l'audit est-il gratuit ?</h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
-          Nous croyons que chaque entreprise mérite de comprendre pourquoi son site ne génère pas de résultats. L'audit gratuit est notre façon de vous montrer notre expertise et de vous aider à y voir plus clair, sans aucun engagement.
+          Nous croyons que chaque entreprise mérite de comprendre pourquoi son site ne génère pas de résultats. L'audit gratuit est notre façon de vous montrer <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre expertise</Link> et de vous aider à y voir plus clair, sans aucun engagement.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          C'est aussi un premier pas vers une relation de confiance. Si nos recommandations vous convainquent, vous pouvez choisir de nous confier l'optimisation de votre site.
+          C'est aussi un premier pas vers une relation de confiance. Si nos recommandations vous convainquent, vous pouvez choisir de nous confier la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création ou l'optimisation de votre site</Link>.
         </p>
       </div>
     </SectionWrapper>
 
+    {/* Maillage */}
+    <SectionWrapper>
+      <div className="mx-auto max-w-3xl text-center">
+        <h2 className="text-2xl font-extrabold mb-4">Découvrez nos services</h2>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link to="/creation-site-web" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Création de site web
+          </Link>
+          <Link to="/referencement-seo" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Référencement SEO
+          </Link>
+          <Link to="/tarifs" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Nos tarifs
+          </Link>
+          <Link to="/realisations" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Nos réalisations
+          </Link>
+          <Link to="/faq" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Questions fréquentes
+          </Link>
+          <Link to="/nos-villes" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Nos villes
+          </Link>
+        </div>
+      </div>
+    </SectionWrapper>
+
     {/* Formulaire */}
-    <SectionWrapper id="formulaire-audit">
+    <SectionWrapper className="bg-card" id="formulaire-audit">
       <div className="mx-auto max-w-xl">
         <h2 className="mb-4 text-center text-3xl font-extrabold">Demandez votre audit gratuit</h2>
         <p className="text-center text-muted-foreground mb-8">

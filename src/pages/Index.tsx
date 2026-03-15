@@ -61,7 +61,7 @@ const Index = () => {
             Pourquoi votre site ne vous apporte pas de clients ?
           </h2>
           <p className="mb-8 text-muted-foreground max-w-2xl mx-auto">
-            De nombreuses PME investissent dans un site web, mais celui-ci reste invisible sur Google. Sans stratégie de référencement, sans optimisation technique et sans contenu adapté, votre site ne peut pas attirer de visiteurs qualifiés. Résultat : zéro contact, zéro prospect, zéro retour sur investissement.
+            De nombreuses PME investissent dans un site web, mais celui-ci reste invisible sur Google. Sans stratégie de <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement</Link>, sans optimisation technique et sans contenu adapté, votre site ne peut pas attirer de visiteurs qualifiés. Résultat : zéro contact, zéro prospect, zéro retour sur investissement.
           </p>
           <div className="grid gap-4 sm:grid-cols-2 mt-8">
             {[
@@ -197,7 +197,7 @@ const Index = () => {
         <div className="text-center mb-10">
           <h2 className="text-3xl font-extrabold md:text-4xl">Ce que disent nos clients</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Des PME et indépendants qui nous ont fait confiance pour leur site web et leur référencement SEO.
+            Des PME et indépendants qui nous ont fait confiance pour leur <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> et leur <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>.
           </p>
         </div>
 
@@ -244,7 +244,10 @@ const Index = () => {
         {/* Fiche Google CTA */}
         <div className="mt-10 mx-auto max-w-md text-center">
           <div className="rounded-2xl bg-card p-6 shadow-card">
-            <img src="https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png" alt="Google" className="h-6 mx-auto mb-4" />
+            <div className="flex items-center justify-center gap-2 mb-4">
+              <span className="text-2xl font-bold text-foreground">Google</span>
+              <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">Avis vérifiés</span>
+            </div>
             <p className="text-sm text-muted-foreground mb-4">Retrouvez notre fiche et nos avis vérifiés sur Google.</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
@@ -260,13 +263,47 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
-      {/* Formulaire de contact */}
+      {/* Maillage interne */}
       <SectionWrapper className="bg-card">
+        <div className="mx-auto max-w-3xl text-center">
+          <h2 className="text-2xl font-extrabold mb-4">Explorez nos services</h2>
+          <p className="text-muted-foreground mb-6">Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link to="/creation-site-web" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Création de site web
+            </Link>
+            <Link to="/referencement-seo" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Référencement SEO
+            </Link>
+            <Link to="/audit-seo-gratuit" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Audit SEO gratuit
+            </Link>
+            <Link to="/tarifs" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Nos tarifs
+            </Link>
+            <Link to="/realisations" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Nos réalisations
+            </Link>
+            <Link to="/qui-sommes-nous" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Qui sommes-nous
+            </Link>
+            <Link to="/nos-villes" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Nos villes
+            </Link>
+            <Link to="/faq" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Questions fréquentes
+            </Link>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* Formulaire de contact */}
+      <SectionWrapper>
         <div className="mx-auto max-w-2xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-extrabold md:text-4xl">Parlez-nous de votre projet</h2>
             <p className="mt-4 text-muted-foreground">
-              Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé pour la création de votre site web.
+              Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de votre site web</Link>.
             </p>
           </div>
           <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
@@ -305,9 +342,14 @@ const Index = () => {
             <p className="mb-8 text-lg text-primary-foreground/80 max-w-2xl">
               Un site optimisé peut générer des prospects tous les jours. Ne laissez plus vos concurrents capter les clients qui vous cherchent sur Google.
             </p>
-            <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
-              <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
-            </Button>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
+                <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+              </Button>
+              <Link to="/tarifs" className="inline-flex items-center justify-center rounded-full border-2 border-primary-foreground/40 bg-transparent px-8 py-3 font-semibold text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
+                Voir nos tarifs
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>

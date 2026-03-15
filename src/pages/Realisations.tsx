@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
@@ -95,6 +96,33 @@ const Realisations = () => (
       </div>
     </SectionWrapper>
 
+    {/* Maillage */}
+    <SectionWrapper className="bg-card">
+      <div className="mx-auto max-w-3xl text-center">
+        <h2 className="text-2xl font-extrabold mb-4">Nos services</h2>
+        <p className="text-muted-foreground mb-6">Vous aussi, vous voulez un site qui attire des clients ? Découvrez nos solutions.</p>
+        <div className="flex flex-wrap justify-center gap-3">
+          <Link to="/creation-site-web" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Création de site web
+          </Link>
+          <Link to="/referencement-seo" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Référencement SEO
+          </Link>
+          <Link to="/audit-seo-gratuit" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Audit SEO gratuit
+          </Link>
+          <Link to="/tarifs" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Nos tarifs
+          </Link>
+          <Link to="/nos-villes" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Nos villes
+          </Link>
+          <Link to="/faq" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            Questions fréquentes
+          </Link>
+        </div>
+      </div>
+    </SectionWrapper>
 
     {/* CTA */}
     <section className="gradient-miami py-16 text-center">
@@ -105,12 +133,17 @@ const Realisations = () => (
         <p className="mx-auto mb-8 max-w-lg text-primary-foreground/80">
           Contactez-nous pour discuter de votre projet et obtenir un devis.
         </p>
-        <a
-          href="/contact"
-          className="inline-block gradient-primary rounded-full px-8 py-3 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity"
-        >
-          Devis création de site
-        </a>
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Link
+            to="/contact"
+            className="inline-block gradient-primary rounded-full px-8 py-3 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity"
+          >
+            Devis création de site
+          </Link>
+          <Link to="/qui-sommes-nous" className="inline-flex items-center justify-center rounded-full border-2 border-primary-foreground/40 bg-transparent px-8 py-3 font-semibold text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
+            Qui sommes-nous
+          </Link>
+        </div>
       </div>
     </section>
   </PageLayout>
