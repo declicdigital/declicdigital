@@ -106,7 +106,7 @@ const Contact = () => (
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="Déclic Digital — 57 rue d'Alleray 75015 Paris"
+            title="Déclic Digital - 57 rue d'Alleray 75015 Paris"
           />
         </div>
         <div className="rounded-2xl bg-background p-6 shadow-card flex flex-col justify-center">

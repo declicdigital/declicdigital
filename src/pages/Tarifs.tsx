@@ -176,7 +176,7 @@ const Tarifs = () => (
       <div className="mt-12 mx-auto max-w-2xl text-center">
         <div className="rounded-2xl bg-secondary p-6">
           <p className="text-muted-foreground text-sm leading-relaxed">
-            Toutes les prestations peuvent être adaptées et réalisées sur mesure selon vos besoins. Chaque projet est unique, contactez-nous pour un devis personnalisé.
+            Engagement de 6 mois renouvelable. Toutes les prestations peuvent être adaptées et réalisées sur mesure selon vos besoins. Chaque projet est unique, contactez-nous pour un devis personnalisé.
           </p>
         </div>
       </div>
