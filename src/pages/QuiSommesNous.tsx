@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import heroAbout from "@/assets/agence-creation-site-web.png";
+import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 
 const QuiSommesNous = () => (
   <PageLayout>
