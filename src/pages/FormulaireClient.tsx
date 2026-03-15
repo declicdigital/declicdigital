@@ -670,7 +670,7 @@ const FormulaireClient = () => {
                 Prêt(e) à faire <span className="text-gradient">décoller votre site ?</span>
               </h3>
               <p className="text-muted-foreground max-w-md mx-auto mb-8">
-                Déclic Digital analysera votre situation et reviendra vers vous avec une proposition personnalisée et votre audit SEO gratuit inclus.
+                Déclic Digital analysera votre situation et reviendra vers vous avec une proposition personnalisée.
               </p>
               <Button
                 type="submit"
