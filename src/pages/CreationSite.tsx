@@ -36,7 +36,7 @@ const CreationSite = () => (
     <SectionWrapper className="bg-card">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Les avantages d'un site professionnel</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-        Un site web professionnel ne se limite pas à une simple vitrine en ligne. C'est un outil stratégique qui renforce votre crédibilité, attire de nouveaux clients et vous différencie de vos concurrents.
+        Un site web professionnel ne se limite pas à une simple vitrine en ligne. C'est un outil stratégique qui renforce votre crédibilité, attire de nouveaux clients grâce au <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement naturel</Link> et vous différencie de vos concurrents.
       </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
