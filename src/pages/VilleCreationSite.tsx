@@ -235,9 +235,9 @@ const VilleCreationSite = () => {
             <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
               <Link to="/contact">Demander un devis</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full px-8 font-semibold border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10">
-              <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
-            </Button>
+            <Link to="/audit-seo-gratuit" className="inline-flex items-center justify-center rounded-full border-2 border-primary-foreground/40 bg-transparent px-8 py-3 font-semibold text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
+              Audit SEO gratuit
+            </Link>
           </div>
         </div>
       </section>
