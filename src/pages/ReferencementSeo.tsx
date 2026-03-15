@@ -74,7 +74,7 @@ const ReferencementSeo = () => (
     <SectionWrapper className="bg-card">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre méthode SEO</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-        Notre approche est méthodique et transparente. Nous suivons un processus éprouvé pour optimiser votre visibilité sur Google.
+        Notre approche est méthodique et transparente. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link> et notre processus éprouvé pour optimiser votre visibilité sur Google.
       </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[

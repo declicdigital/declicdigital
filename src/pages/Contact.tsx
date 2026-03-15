@@ -20,7 +20,7 @@ const Contact = () => (
               Parlez-nous de votre <span className="text-gradient">projet</span>
             </h1>
             <p className="text-lg text-muted-foreground">
-              Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé. Nous répondons sous 24 à 48 heures ouvrées.
+              Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link> ou le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>. Nous répondons sous 24 à 48 heures ouvrées.
             </p>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">

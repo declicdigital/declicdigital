@@ -26,7 +26,7 @@ const faqItems = [
   { q: "Proposez-vous la création de contenu ?", a: <>Oui, nous pouvons rédiger des textes optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour votre site, vos pages de services et vos articles de blog.</> },
   { q: "Comment se passe la collaboration ?", a: <>Nous commençons par un échange pour comprendre vos besoins. Puis nous proposons une maquette, développons le <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site</Link> et l'optimisons pour le SEO. <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">En savoir plus sur notre équipe</Link>.</> },
   { q: "Pourquoi choisir Déclic Digital ?", a: <>Nous sommes spécialisés dans l'accompagnement des PME. Notre fondateur est Expert Produit Google. Approche transparente, orientée résultats et adaptée aux petits budgets. <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">Découvrez notre histoire</Link>.</> },
-  { q: "Y a-t-il un engagement de durée ?", a: "Oui, nous proposons un engagement de 6 mois renouvelable. Cette durée permet de mettre en place une stratégie efficace et d'obtenir des résultats concrets." },
+  { q: "Y a-t-il un engagement de durée ?", a: <>Oui, nous proposons un engagement de 6 mois renouvelable. Cette durée permet de mettre en place une stratégie efficace. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> pour le détail.</> },
 ];
 
 const Faq = () => (
