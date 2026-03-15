@@ -247,7 +247,7 @@ const Index = () => {
             <p className="text-sm text-muted-foreground mb-4">Retrouvez notre fiche et nos avis vérifiés sur Google.</p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
-                href="https://share.google/i2RfnCbtHLUrO4NQF"
+                href="https://share.google/8Ifh8V9cpPGinQXkY"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block gradient-primary rounded-full px-6 py-2.5 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity text-sm"

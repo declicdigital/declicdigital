@@ -13,6 +13,8 @@ const links = [
   { label: "Qui sommes-nous", to: "/qui-sommes-nous" },
   { label: "Contact", to: "/contact" },
   { label: "FAQ", to: "/faq" },
+  { label: "Formulaire client", to: "/formulaire-client" },
+  { label: "Plan du site", to: "/plan-du-site" },
   { label: "Mentions légales", to: "/mentions-legales" },
 ];
 

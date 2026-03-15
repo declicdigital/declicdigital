@@ -174,7 +174,8 @@ const Tarifs = () => (
       </div>
 
       <div className="mt-12 mx-auto max-w-2xl text-center">
-        <div className="rounded-2xl bg-secondary p-6">
+        <div className="rounded-2xl bg-secondary p-6 space-y-2">
+          <p className="text-foreground font-semibold text-sm">Engagement de 6 mois renouvelable sur toutes les formules.</p>
           <p className="text-muted-foreground text-sm leading-relaxed">
             Toutes les prestations peuvent être adaptées et réalisées sur mesure selon vos besoins. Chaque projet est unique, contactez-nous pour un devis personnalisé.
           </p>
