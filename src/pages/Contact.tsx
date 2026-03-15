@@ -79,7 +79,14 @@ const Contact = () => (
             </p>
           </div>
           <div className="rounded-2xl bg-card p-6 shadow-card">
-            <h3 className="mb-2 font-bold">Pourquoi nous choisir ?</h3>
+            <div className="flex items-center gap-4 mb-4">
+              <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital" className="w-14 h-14 rounded-full object-cover shadow-md" />
+              <div>
+                <p className="font-bold text-sm">Geoffrey</p>
+                <p className="text-xs text-muted-foreground">Fondateur, Expert Produit Google</p>
+              </div>
+            </div>
+            <p className="text-sm text-muted-foreground italic mb-4">"Chaque projet est unique. Je prends le temps d'échanger avec vous pour comprendre vos besoins et vous proposer la meilleure solution."</p>
             <ul className="text-sm text-muted-foreground space-y-2">
               <li>✅ Expert Produit Google certifié</li>
               <li>✅ Spécialistes des PME et petites entreprises</li>
