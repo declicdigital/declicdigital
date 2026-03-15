@@ -255,7 +255,7 @@ const FormulaireClient = () => {
               Parlez-nous de votre <span className="text-gradient">projet web</span>
             </h1>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-8">
-              Quelques minutes de votre temps pour que Déclic Digital vous prépare une proposition sur mesure et votre audit SEO gratuit.
+              Quelques minutes de votre temps pour que Déclic Digital vous prépare une proposition sur mesure.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               {["Votre profil", "Votre projet", "Objectifs & budget", "Contenu & design", "Délais", "Fichiers"].map((s, i) => (
