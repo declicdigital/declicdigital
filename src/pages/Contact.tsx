@@ -99,14 +99,14 @@ const Contact = () => (
       <div className="mx-auto max-w-5xl grid gap-8 lg:grid-cols-2">
         <div className="rounded-2xl overflow-hidden shadow-card">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11672947.047489712!2d-4.8451795!3d46.6034!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd54a02933785731%3A0x6bfd3f96c747d9f7!2sFrance!5e0!3m2!1sfr!2sfr!4v1710000000000!5m2!1sfr!2sfr"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.0!2d2.3004!3d48.8393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6703e9c3fb8a5%3A0x0!2s57+Rue+d&#39;Alleray%2C+75015+Paris!5e0!3m2!1sfr!2sfr"
             width="100%"
             height="350"
             style={{ border: 0 }}
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
-            title="Localisation Déclic Digital en France"
+            title="Déclic Digital — 57 rue d'Alleray 75015 Paris"
           />
         </div>
         <div className="rounded-2xl bg-background p-6 shadow-card flex flex-col justify-center">
@@ -115,7 +115,7 @@ const Contact = () => (
             Retrouvez toutes nos informations, nos avis clients et nos coordonnées directement sur Google.
           </p>
           <a
-            href="https://share.google/i2RfnCbtHLUrO4NQF"
+            href="https://share.google/w9cwHP0IYLAg7tBaA"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block gradient-primary rounded-full px-6 py-3 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity text-center"
@@ -123,7 +123,7 @@ const Contact = () => (
             Voir notre fiche Google
           </a>
           <a
-            href="https://share.google/i2RfnCbtHLUrO4NQF"
+            href="https://share.google/w9cwHP0IYLAg7tBaA"
             target="_blank"
             rel="noopener noreferrer"
             className="mt-3 inline-block rounded-full border border-border px-6 py-3 font-semibold text-foreground hover:bg-secondary transition-colors text-center"

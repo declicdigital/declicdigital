@@ -224,7 +224,7 @@ const FormulaireClient = () => {
               </div>
               <h1 className="text-3xl font-extrabold mb-4">C'est envoyé !</h1>
               <p className="text-muted-foreground text-lg mb-8">
-                Déclic Digital a bien reçu votre projet et reviendra vers vous avec une proposition personnalisée et votre <strong className="text-primary">audit SEO offert</strong>.
+                Déclic Digital a bien reçu votre projet et reviendra vers vous avec une proposition personnalisée.
               </p>
               <Button onClick={() => window.location.href = "/"} className="rounded-full gradient-primary text-primary-foreground">
                 Retour à l'accueil
@@ -249,13 +249,13 @@ const FormulaireClient = () => {
         <div className="container text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-5 py-2 text-xs font-semibold text-accent uppercase tracking-wider mb-6">
-              Audit SEO offert à la clé
+              Formulaire de brief client
             </span>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-5">
               Parlez-nous de votre <span className="text-gradient">projet web</span>
             </h1>
             <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-8">
-              Quelques minutes de votre temps pour que Déclic Digital vous prépare une proposition sur mesure et votre audit SEO gratuit.
+              Quelques minutes de votre temps pour que Déclic Digital vous prépare une proposition sur mesure.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               {["Votre profil", "Votre projet", "Objectifs & budget", "Contenu & design", "Délais", "Fichiers"].map((s, i) => (
@@ -665,12 +665,12 @@ const FormulaireClient = () => {
           >
             <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
             <div className="relative">
-              <p className="text-xs font-bold uppercase tracking-widest text-accent mb-4">Audit SEO offert inclus</p>
+              <p className="text-xs font-bold uppercase tracking-widest text-accent mb-4">Réponse sous 24 à 48h</p>
               <h3 className="text-2xl md:text-3xl font-extrabold mb-3">
                 Prêt(e) à faire <span className="text-gradient">décoller votre site ?</span>
               </h3>
               <p className="text-muted-foreground max-w-md mx-auto mb-8">
-                Déclic Digital analysera votre situation et reviendra vers vous avec une proposition personnalisée et votre audit SEO gratuit inclus.
+                Déclic Digital analysera votre situation et reviendra vers vous avec une proposition personnalisée.
               </p>
               <Button
                 type="submit"
@@ -684,7 +684,7 @@ const FormulaireClient = () => {
               <div className="flex flex-wrap items-center justify-center gap-5 mt-6 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1.5"><Shield className="h-4 w-4 text-primary" /> Données confidentielles</span>
                 <span className="flex items-center gap-1.5"><CheckCircle className="h-4 w-4 text-primary" /> Aucun engagement</span>
-                <span className="flex items-center gap-1.5"><Plus className="h-4 w-4 text-primary" /> Audit SEO offert</span>
+                <span className="flex items-center gap-1.5"><Plus className="h-4 w-4 text-primary" /> Réponse rapide</span>
               </div>
             </div>
           </motion.div>
