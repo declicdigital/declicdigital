@@ -127,6 +127,9 @@ const VilleCreationSite = () => {
             {content.creationSeoText.map((text, i) => (
               <p key={i} className="text-muted-foreground leading-relaxed">{text}</p>
             ))}
+            <p className="text-muted-foreground leading-relaxed">
+              Découvrez nos <Link to="/tarifs" className="text-primary font-semibold hover:underline">tarifs adaptés aux PME</Link>, nos <Link to="/realisations" className="text-primary font-semibold hover:underline">réalisations</Link> ou demandez un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour évaluer votre visibilité actuelle.
+            </p>
             <div className="rounded-2xl bg-background p-6 shadow-card">
               <p className="text-sm font-semibold text-primary mb-1">Le saviez-vous ?</p>
               <p className="text-muted-foreground text-sm">{content.localFact}</p>

@@ -130,6 +130,9 @@ const VilleReferencementSeo = () => {
               Le SEO local à {city.nameShort}
             </h2>
             <p className="text-muted-foreground leading-relaxed">{content.seoLocalText}</p>
+            <p className="text-muted-foreground leading-relaxed">
+              Complétez votre stratégie avec un <Link to={`/creation-site-web/${city.slug}`} className="text-primary font-semibold hover:underline">site web professionnel à {city.nameShort}</Link>. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+            </p>
             <div className="rounded-2xl bg-background p-6 shadow-card">
               <p className="text-sm font-semibold text-primary mb-1">Le saviez-vous ?</p>
               <p className="text-muted-foreground text-sm">{content.localFact}</p>

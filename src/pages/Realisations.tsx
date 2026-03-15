@@ -44,7 +44,7 @@ const Realisations = () => (
             Nos <span className="text-gradient">réalisations</span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Découvrez les sites que nous avons créés pour nos clients. Chaque projet est unique et conçu pour répondre aux besoins spécifiques de chaque entreprise.
+            Découvrez les sites que nous avons créés pour nos clients. Chaque projet est unique, conçu pour répondre aux besoins spécifiques de chaque entreprise et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>.
           </p>
         </motion.div>
       </div>
