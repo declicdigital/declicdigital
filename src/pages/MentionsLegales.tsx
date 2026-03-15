@@ -16,6 +16,7 @@ const MentionsLegales = () => (
           <h2 className="mb-4 text-2xl font-extrabold text-foreground">Éditeur du site</h2>
           <ul className="space-y-1">
             <li><strong className="text-foreground">Nom :</strong> Déclic Digital</li>
+            <li><strong className="text-foreground">SIRET :</strong> 102 436 664 00019</li>
             <li><strong className="text-foreground">Responsable de la publication :</strong> Geoffrey</li>
             <li><strong className="text-foreground">Email :</strong> contact@declicdigital.net</li>
             <li><strong className="text-foreground">Téléphone :</strong> 06.02.22.89.39</li>
