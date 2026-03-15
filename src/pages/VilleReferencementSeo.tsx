@@ -177,26 +177,25 @@ const VilleReferencementSeo = () => {
           <p className="text-center text-muted-foreground mb-8">
             Notre agence SEO intervient également dans les villes voisines.
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {nearCities.map((c) => (
-              <Link
-                key={c.slug}
-                to={`/referencement-seo/${c.slug}`}
-                className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors"
-              >
-                SEO {c.nameShort}
-              </Link>
-            ))}
-          </div>
-          <div className="flex flex-wrap justify-center gap-3 mt-4">
-            {nearCities.map((c) => (
-              <Link
-                key={c.slug}
-                to={`/creation-site-web/${c.slug}`}
-                className="rounded-full border bg-background px-4 py-2 text-sm font-medium text-muted-foreground hover:bg-secondary transition-colors"
-              >
-                Site web {c.nameShort}
-              </Link>
+              <div key={c.slug} className="rounded-2xl bg-background p-4 shadow-card">
+                <h3 className="font-bold mb-2">{c.nameShort}</h3>
+                <div className="flex flex-wrap gap-2">
+                  <Link
+                    to={`/referencement-seo/${c.slug}`}
+                    className="rounded-full bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary hover:bg-primary/20 transition-colors"
+                  >
+                    SEO
+                  </Link>
+                  <Link
+                    to={`/creation-site-web/${c.slug}`}
+                    className="rounded-full bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/20 transition-colors"
+                  >
+                    Création de site
+                  </Link>
+                </div>
+              </div>
             ))}
           </div>
         </SectionWrapper>
