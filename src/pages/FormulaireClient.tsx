@@ -606,7 +606,7 @@ const FormulaireClient = () => {
               </div>
               <div>
                 <Label className="text-sm text-muted-foreground mb-2 block">Déposez vos fichiers
-                  <span className="block text-xs text-muted-foreground/70 mt-1">JPG, PNG, PDF, SVG, MP4, DOCX (10 Mo max par fichier)</span>
+                  <span className="block text-xs text-muted-foreground/70 mt-1">JPG, PNG, PDF, SVG, MP4, DOCX — 10 Mo max par fichier</span>
                 </Label>
                 <input
                   ref={fileRef}

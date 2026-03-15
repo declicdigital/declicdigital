@@ -57,7 +57,7 @@ const AdminSoumissions = () => {
         <div className="border-b border-border bg-card">
           <div className="container py-4 flex items-center gap-4">
             <Button variant="ghost" size="sm" onClick={() => setSelected(null)}>← Retour</Button>
-            <h1 className="text-lg font-bold">Soumission de {d.full_name || "N/A"}</h1>
+            <h1 className="text-lg font-bold">Soumission de {d.full_name || "—"}</h1>
             <span className="text-xs text-muted-foreground ml-auto">
               {new Date(selected.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}
             </span>
