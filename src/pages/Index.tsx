@@ -23,7 +23,7 @@ const Index = () => {
               transition={{ duration: 0.7 }}
             >
               <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">
-                Expert Produit Google · Agence digitale PME
+                Expert Produit Google · Agence digitale
               </span>
               <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
                 Un site web qui vous apporte des{" "}

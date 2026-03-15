@@ -684,7 +684,7 @@ const FormulaireClient = () => {
               <div className="flex flex-wrap items-center justify-center gap-5 mt-6 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1.5"><Shield className="h-4 w-4 text-primary" /> Données confidentielles</span>
                 <span className="flex items-center gap-1.5"><CheckCircle className="h-4 w-4 text-primary" /> Aucun engagement</span>
-                <span className="flex items-center gap-1.5"><Plus className="h-4 w-4 text-primary" /> Audit SEO offert</span>
+                <span className="flex items-center gap-1.5"><Plus className="h-4 w-4 text-primary" /> Réponse rapide</span>
               </div>
             </div>
           </motion.div>
