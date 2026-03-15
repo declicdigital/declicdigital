@@ -111,7 +111,7 @@ const Tarifs = () => (
             Nos <span className="text-gradient">tarifs</span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Des offres claires et adaptées aux budgets des PME et indépendants. Chaque prestation est pensée pour générer un retour sur investissement concret.
+            Des offres claires et adaptées aux budgets des PME et indépendants. Chaque prestation, de la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link> au <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>, est pensée pour générer un retour sur investissement concret.
           </p>
         </motion.div>
       </div>
