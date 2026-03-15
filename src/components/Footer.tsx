@@ -75,7 +75,7 @@ const Footer = () => (
         <div className="mt-10 border-t border-primary-foreground/10 pt-6 space-y-4">
           <p className="text-xs text-primary-foreground/40 italic">* Offre à 100€ valable uniquement pour les sites vitrine.</p>
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-primary-foreground/40">
-            <span>© {new Date().getFullYear()} Déclic Digital. Tous droits réservés.</span>
+            <span>© {new Date().getFullYear()} Déclic Digital. SIRET 102 436 664 00019. Tous droits réservés.</span>
             <Link to="/mentions-legales" className="hover:text-primary-foreground transition-colors">Mentions légales</Link>
           </div>
         </div>
