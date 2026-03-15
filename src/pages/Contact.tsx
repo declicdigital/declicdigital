@@ -99,39 +99,23 @@ const Contact = () => (
       </div>
     </SectionWrapper>
 
-    {/* Google Maps + Fiche Google */}
+    {/* Google Maps */}
     <SectionWrapper className="bg-card">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-extrabold md:text-4xl">Retrouvez-nous</h2>
         <p className="mt-4 text-muted-foreground">Nous intervenons <Link to="/nos-villes" className="text-primary font-semibold hover:underline">à Paris et dans le 92</Link>, en présentiel ou à distance.</p>
       </div>
-      <div className="mx-auto max-w-5xl grid gap-8 lg:grid-cols-2">
-        <div className="rounded-2xl overflow-hidden shadow-card">
-          <iframe
-            src="https://www.google.com/maps?q=D%C3%A9clic+Digital%2C+57+Rue+d%27Alleray%2C+75015+Paris&output=embed"
-            width="100%"
-            height="350"
-            style={{ border: 0 }}
-            allowFullScreen
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Déclic Digital - 57 rue d'Alleray 75015 Paris"
-          />
-        </div>
-        <div className="rounded-2xl bg-background p-6 shadow-card flex flex-col justify-center">
-          <h3 className="text-xl font-bold mb-4">Notre fiche Google</h3>
-          <p className="text-muted-foreground text-sm mb-6">
-            Retrouvez toutes nos informations et nos coordonnées directement sur Google.
-          </p>
-          <a
-            href="https://www.google.com/maps/search/?api=1&query=D%C3%A9clic+Digital+57+Rue+d%27Alleray+75015+Paris"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-block gradient-primary rounded-full px-6 py-3 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity text-center"
-          >
-            Voir notre fiche Google
-          </a>
-        </div>
+      <div className="mx-auto max-w-3xl rounded-2xl overflow-hidden shadow-card">
+        <iframe
+          src="https://www.google.com/maps?q=D%C3%A9clic+Digital%2C+57+Rue+d%27Alleray%2C+75015+Paris&output=embed"
+          width="100%"
+          height="350"
+          style={{ border: 0 }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Déclic Digital - 57 rue d'Alleray 75015 Paris"
+        />
       </div>
     </SectionWrapper>
 

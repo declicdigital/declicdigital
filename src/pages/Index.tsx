@@ -241,26 +241,6 @@ const Index = () => {
           </motion.div>
         </div>
 
-        {/* Fiche Google CTA */}
-        <div className="mt-10 mx-auto max-w-md text-center">
-          <div className="rounded-2xl bg-card p-6 shadow-card">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <span className="text-2xl font-bold text-foreground">Google</span>
-              <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">Avis vérifiés</span>
-            </div>
-            <p className="text-sm text-muted-foreground mb-4">Retrouvez notre fiche et nos avis vérifiés sur Google.</p>
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <a
-                href="https://www.google.com/maps/search/?api=1&query=D%C3%A9clic+Digital+57+Rue+d%27Alleray+75015+Paris"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block gradient-primary rounded-full px-6 py-2.5 font-semibold text-primary-foreground shadow-lg hover:opacity-90 transition-opacity text-sm"
-              >
-                Voir notre fiche Google
-              </a>
-            </div>
-          </div>
-        </div>
       </SectionWrapper>
 
       {/* Maillage interne */}
