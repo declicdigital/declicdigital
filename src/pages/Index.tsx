@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import heroDashboard from "@/assets/tableau-bord-seo-professionnel.png";
+import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 
 const techLogos = ["WordPress", "Shopify", "Lovable", "Base44", "Claude AI", "Semrush", "Google Analytics", "Search Console"];
 
