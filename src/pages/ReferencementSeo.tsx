@@ -14,7 +14,7 @@ const ReferencementSeo = () => (
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
             <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-              Soyez <span className="text-gradient">visible sur Google</span>
+              Référencement SEO à Paris : soyez <span className="text-gradient">visible sur Google</span>
             </h1>
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
               Le référencement SEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre site pour qu'il apparaisse en première page Google sur les mots clés recherchés par vos prospects.

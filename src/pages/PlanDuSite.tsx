@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import { cities } from "@/data/cities";
 
 const links = [
   { label: "Accueil", to: "/" },
@@ -31,8 +32,9 @@ const PlanDuSite = () => (
     </section>
 
     <SectionWrapper>
-      <div className="mx-auto max-w-xl">
-        <ul className="space-y-3">
+      <div className="mx-auto max-w-3xl">
+        <h2 className="text-2xl font-bold mb-4">Pages principales</h2>
+        <ul className="space-y-3 mb-10">
           {links.map((link) => (
             <li key={link.to}>
               <Link
@@ -41,6 +43,36 @@ const PlanDuSite = () => (
               >
                 <span className="h-2 w-2 rounded-full gradient-primary shrink-0" />
                 {link.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <h2 className="text-2xl font-bold mb-4">Création de site web par ville</h2>
+        <ul className="space-y-2 mb-10">
+          {cities.map((city) => (
+            <li key={city.slug}>
+              <Link
+                to={`/creation-site-web/${city.slug}`}
+                className="flex items-center gap-3 rounded-lg bg-card p-3 text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                <span className="h-1.5 w-1.5 rounded-full gradient-primary shrink-0" />
+                Création site web {city.nameShort}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <h2 className="text-2xl font-bold mb-4">Référencement SEO par ville</h2>
+        <ul className="space-y-2">
+          {cities.map((city) => (
+            <li key={city.slug}>
+              <Link
+                to={`/referencement-seo/${city.slug}`}
+                className="flex items-center gap-3 rounded-lg bg-card p-3 text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                <span className="h-1.5 w-1.5 rounded-full gradient-primary shrink-0" />
+                Référencement SEO {city.nameShort}
               </Link>
             </li>
           ))}

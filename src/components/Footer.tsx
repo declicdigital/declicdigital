@@ -35,6 +35,18 @@ const Footer = () => (
             </ul>
           </div>
 
+          {/* Villes */}
+          <div>
+            <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-primary-foreground/50">Nos villes</h3>
+            <ul className="space-y-2 text-sm">
+              <li><Link to="/creation-site-web/paris-15eme" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Site web Paris 15</Link></li>
+              <li><Link to="/creation-site-web/boulogne-billancourt" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Site web Boulogne</Link></li>
+              <li><Link to="/creation-site-web/issy-les-moulineaux" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">Site web Issy</Link></li>
+              <li><Link to="/referencement-seo/paris-15eme" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">SEO Paris 15</Link></li>
+              <li><Link to="/referencement-seo/neuilly-sur-seine" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors">SEO Neuilly</Link></li>
+            </ul>
+          </div>
+
           {/* Navigation */}
           <div>
             <h3 className="mb-4 text-sm font-bold uppercase tracking-wider text-primary-foreground/50">Navigation</h3>

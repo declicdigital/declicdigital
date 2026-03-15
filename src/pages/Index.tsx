@@ -27,7 +27,7 @@ const Index = () => {
                 Expert Produit Google · Agence digitale
               </span>
               <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
-                Un site web qui vous apporte des{" "}
+                Création de site web à Paris qui vous apporte des{" "}
                 <span className="text-gradient">clients</span>
               </h1>
               <p className="mb-8 max-w-lg text-lg text-muted-foreground leading-relaxed">

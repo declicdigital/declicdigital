@@ -18,7 +18,7 @@ const AuditSeo = () => (
               100% gratuit · Sans engagement
             </span>
             <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-              Recevez votre <span className="text-gradient">audit SEO gratuit</span>
+              Audit SEO gratuit à Paris : recevez votre <span className="text-gradient">analyse complète</span>
             </h1>
             <p className="mb-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
               Découvrez pourquoi votre site n'apparaît pas sur Google et recevez des recommandations concrètes pour améliorer votre visibilité. Notre audit est complet, personnalisé et sans engagement.

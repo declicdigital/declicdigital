@@ -13,6 +13,7 @@ const navLinks = [
   { label: "Réalisations", to: "/realisations" },
   { label: "Qui sommes-nous", to: "/qui-sommes-nous" },
   { label: "Contact", to: "/contact" },
+  { label: "FAQ", to: "/faq" },
 ];
 
 const Header = () => {
