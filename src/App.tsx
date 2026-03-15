@@ -20,6 +20,8 @@ import AdminSoumissions from "./pages/AdminSoumissions";
 import VilleCreationSite from "./pages/VilleCreationSite";
 import VilleReferencementSeo from "./pages/VilleReferencementSeo";
 import NosVilles from "./pages/NosVilles";
+import Blog from "./pages/Blog";
+import BlogArticle from "./pages/BlogArticle";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
