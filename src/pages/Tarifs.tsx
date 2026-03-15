@@ -211,7 +211,7 @@ const Tarifs = () => (
               C'est normal et c'est le signe d'une stratégie sérieuse.
             </p>
             <p className="font-semibold text-foreground">
-              Nous construisons une visibilité pérenne et durable — pas un pic de trafic artificiel qui s'effondre le mois suivant.
+              Nous construisons une visibilité pérenne et durable, pas un pic de trafic artificiel qui s'effondre le mois suivant.
             </p>
           </div>
         </motion.div>
