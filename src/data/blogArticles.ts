@@ -1,6 +1,6 @@
 import hebergementImg from "@/assets/hebergement-web-serveur-professionnel.webp";
 import webDesignImg from "@/assets/tendances-web-design-2026.webp";
-import vitesseImg from "@/assets/vitesse-site-web-performance.webp";
+import vitesseImg from "@/assets/vitesse-site-web-performance.jpg";
 import campagneImg from "@/assets/knafo-campagne-digitale-municipales-paris.jpg";
 
 export interface BlogArticle {
