@@ -260,7 +260,7 @@ Le parallèle avec le monde de l'entreprise est direct. Si un candidat politique
 
 Ce que montre le cas Knafo aux municipales de Paris, c'est que le digital est un égaliseur de chances. Avec un budget maîtrisé mais une stratégie intelligente, il est possible de se rendre visible et de convaincre. C'est exactement ce que nous observons chaque jour avec nos clients PME à Paris et dans les Hauts-de-Seine.
 
-Un artisan du [15ème arrondissement](/creation-site-internet-paris-15), un restaurant à [Boulogne-Billancourt](/creation-site-internet-boulogne-billancourt) ou un cabinet à [Neuilly-sur-Seine](/creation-site-internet-neuilly-sur-seine) peuvent tous bénéficier des mêmes principes : un site rapide, bien référencé, avec du contenu de qualité.
+Un artisan du [15ème arrondissement](/creation-site-web/paris-15eme), un restaurant à [Boulogne-Billancourt](/creation-site-web/boulogne-billancourt) ou un cabinet à [Neuilly-sur-Seine](/creation-site-web/neuilly-sur-seine) peuvent tous bénéficier des mêmes principes : un site rapide, bien référencé, avec du contenu de qualité.
 
 ## Conclusion
 
