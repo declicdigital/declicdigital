@@ -63,7 +63,7 @@ const AdminSoumissions = () => {
             </span>
           </div>
         </div>
-        <div className="container py-8 max-w-3xl">
+        <div className="container py-8 max-w-5xl">
           <div className="rounded-2xl border border-border bg-card shadow-card overflow-hidden">
             <div className="gradient-miami p-6">
               <h2 className="text-xl font-extrabold text-primary-foreground">{d.full_name}</h2>
@@ -73,10 +73,21 @@ const AdminSoumissions = () => {
               {Object.entries(d).map(([key, value]) => {
                 if (!value || (Array.isArray(value) && value.length === 0) || (typeof value === "string" && !value.trim())) return null;
                 const display = Array.isArray(value) ? value.join(", ") : String(value);
+                const urlRegex = /(https?:\/\/[^\s,]+)/g;
+                const renderValue = (text: string) => {
+                  const parts = text.split(urlRegex);
+                  return parts.map((part, i) =>
+                    urlRegex.test(part) ? (
+                      <a key={i} href={part} target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80 break-all">{part}</a>
+                    ) : (
+                      <span key={i}>{part}</span>
+                    )
+                  );
+                };
                 return (
                   <div key={key} className="flex gap-4 px-6 py-4">
-                    <span className="text-sm font-semibold text-foreground w-40 shrink-0">{FIELD_LABELS[key] || key}</span>
-                    <span className="text-sm text-muted-foreground whitespace-pre-wrap">{display}</span>
+                    <span className="text-sm font-semibold text-foreground w-48 shrink-0">{FIELD_LABELS[key] || key}</span>
+                    <span className="text-sm text-muted-foreground whitespace-pre-wrap break-words min-w-0">{renderValue(display)}</span>
                   </div>
                 );
               })}
