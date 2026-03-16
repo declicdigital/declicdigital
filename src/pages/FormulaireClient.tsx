@@ -755,8 +755,8 @@ const FormulaireClient = () => {
             </div>
           </SectionCard>
 
-          {/* 7. FICHIERS */}
-          <SectionCard num="07" title="Fichiers & visuels" sub="Partagez vos ressources existantes" accent="accent">
+          {/* 8. FICHIERS */}
+          <SectionCard num="08" title="Fichiers & visuels" sub="Partagez vos ressources existantes" accent="accent">
             <div className="space-y-5">
               <div>
                 <Label className="text-sm text-muted-foreground mb-3 block">Types de fichiers à transmettre
