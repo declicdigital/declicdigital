@@ -1,11 +1,117 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FileText, Calendar, User, Building2, Mail, ChevronRight, Download } from "lucide-react";
+import { FileText, Calendar, User, Building2, Mail, ChevronRight, Download, Copy, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import jsPDF from "jspdf";
 import logoSrc from "@/assets/logo-declic-digital.png";
+
+const generateBriefPrompt = (d: any): string => {
+  const lines: string[] = [];
+
+  lines.push(`Agis comme un directeur UX, copywriter senior, expert SEO et web designer. Tu dois créer un site web complet pour le client suivant.\n`);
+
+  // Client info
+  lines.push(`CLIENT`);
+  if (d.full_name) lines.push(`Nom : ${d.full_name}`);
+  if (d.company) lines.push(`Entreprise : ${d.company}`);
+  if (d.email) lines.push(`Email : ${d.email}`);
+  if (d.phone) lines.push(`Téléphone : ${d.phone}`);
+  if (d.sector) lines.push(`Secteur d'activité : ${d.sector}`);
+  if (d.size) lines.push(`Taille de l'entreprise : ${d.size}`);
+  if (d.current_url) lines.push(`Site actuel : ${d.current_url}`);
+  lines.push('');
+
+  // Project type
+  const pt = Array.isArray(d.pt) ? d.pt.join(", ") : d.pt;
+  if (pt) lines.push(`TYPE DE PROJET\n${pt}\n`);
+
+  // Description
+  if (d.desc) lines.push(`DESCRIPTION DU PROJET\n${d.desc}\n`);
+
+  // Objectives
+  if (d.goal) lines.push(`OBJECTIF PRINCIPAL\n${d.goal}\n`);
+
+  // Target audience / client sources
+  const csrc = Array.isArray(d.csrc) ? d.csrc.join(", ") : d.csrc;
+  if (csrc) lines.push(`SOURCES DE CLIENTS ACTUELLES\n${csrc}\n`);
+
+  // SEO & Keywords
+  if (d.kw) lines.push(`MOTS-CLES SEO CIBLES\nIntègre ces mots-clés dans la structure du site, les titres, le contenu et les meta descriptions :\n${d.kw}\n`);
+
+  // Pages
+  if (d.pages) lines.push(`NOMBRE DE PAGES SOUHAITE\n${d.pages}\n`);
+
+  // Features
+  const feat = Array.isArray(d.feat) ? d.feat.join(", ") : d.feat;
+  if (feat) {
+    lines.push(`FONCTIONNALITES REQUISES`);
+    lines.push(feat);
+    if (d.feat_autre_detail) lines.push(`Détail supplémentaire : ${d.feat_autre_detail}`);
+    lines.push('');
+  }
+
+  // Visual identity & branding
+  if (d.brand) lines.push(`IDENTITE VISUELLE EXISTANTE\n${d.brand}\n`);
+  if (d.vibe) lines.push(`AMBIANCE VISUELLE SOUHAITEE\n${d.vibe}\n`);
+
+  // Inspiration
+  if (d.inspo) lines.push(`SITES D'INSPIRATION\nAnalyse ces sites et inspire-toi de leurs points forts :\n${d.inspo}\n`);
+
+  // Content
+  const cont = Array.isArray(d.cont) ? d.cont.join(", ") : d.cont;
+  if (cont) lines.push(`CONTENU DISPONIBLE\n${cont}\n`);
+
+  // Budget
+  if (d.budget) lines.push(`BUDGET\n${d.budget}\n`);
+
+  // Timeline
+  if (d.urgency) lines.push(`NIVEAU D'URGENCE\n${d.urgency}`);
+  if (d.dl) lines.push(`DELAI SOUHAITE\n${d.dl}`);
+  if (d.kdate) lines.push(`DATE CLE\n${d.kdate}`);
+  if (d.dl || d.urgency || d.kdate) lines.push('');
+
+  // Recurring / maintenance
+  if (d.recur) lines.push(`ACCOMPAGNEMENT SOUHAITE\n${d.recur}\n`);
+
+  // Autonomy
+  if (d.auto) lines.push(`AUTONOMIE SOUHAITEE\nLe client souhaite : ${d.auto}\n`);
+
+  // Web level
+  if (d.wlevel) lines.push(`NIVEAU WEB DU CLIENT\n${d.wlevel}\n`);
+
+  // Past experience
+  if (d.past) lines.push(`EXPERIENCE PASSEE\n${d.past}`);
+  if (d.pastissue) lines.push(`PROBLEMES RENCONTRES\n${d.pastissue}`);
+  if (d.past || d.pastissue) lines.push('');
+
+  // Free message
+  if (d.msg) lines.push(`MESSAGE LIBRE DU CLIENT\n${d.msg}\n`);
+
+  // Communication preferences
+  if (d.cp) lines.push(`CANAL DE COMMUNICATION PREFERE : ${d.cp}`);
+  if (d.slot) lines.push(`CRENEAU DE DISPONIBILITE : ${d.slot}`);
+  if (d.cp || d.slot) lines.push('');
+
+  // Files
+  if (d.file_link) lines.push(`LIEN VERS FICHIERS : ${d.file_link}`);
+  if (d.file_notes) lines.push(`NOTES FICHIERS : ${d.file_notes}`);
+  if (d.file_link || d.file_notes) lines.push('');
+
+  // Final instructions
+  lines.push(`INSTRUCTIONS DE REALISATION`);
+  lines.push(`- Le site doit être responsive mobile et desktop avec une UX moderne.`);
+  lines.push(`- Optimisation SEO : structure logique, mots-clés intégrés, balises Hn cohérentes, meta descriptions.`);
+  lines.push(`- Chaque section : titres H1/H2, paragraphes courts, bullet points, CTA visibles.`);
+  lines.push(`- Design : professionnel, moderne, sections aérées, animations légères.`);
+  lines.push(`- Conversion : CTA contrastés, parcours utilisateur fluide, formulaire de contact.`);
+  lines.push(`- Le site doit inspirer confiance, expertise et professionnalisme.`);
+  lines.push(`- Prends en compte TOUTES les informations ci-dessus sans rien oublier.`);
+
+  return lines.join('\n');
+};
+
 
 interface Submission {
   id: string;
