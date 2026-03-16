@@ -80,7 +80,36 @@ interface Submission {
   file_paths: string[];
 }
 
+const ALL_FORM_KEYS = [
+  "full_name", "company", "email", "phone", "sector", "size", "current_url", "source",
+  "pt", "desc", "inspo", "kw", "goal", "csrc", "budget", "recur", "urgency",
+  "brand", "cont", "pages", "feat", "feat_autre_detail", "vibe",
+  "dl", "kdate", "auto", "wlevel", "past", "pastissue",
+  "msg", "cp", "slot", "ftype", "file_link", "file_notes",
+];
+
+const getCompletionPercent = (data: any): number => {
+  if (!data) return 0;
+  const answered = ALL_FORM_KEYS.filter((k) => {
+    const v = data[k];
+    if (v == null) return false;
+    if (Array.isArray(v)) return v.length > 0;
+    return String(v).trim().length > 0;
+  }).length;
+  return Math.round((answered / ALL_FORM_KEYS.length) * 100);
+};
+
 const FIELD_LABELS: Record<string, string> = {
+  full_name: "Nom", company: "Entreprise", email: "Email", phone: "Téléphone",
+  sector: "Secteur", size: "Taille", current_url: "Site actuel", source: "Source",
+  pt: "Type de projet", desc: "Description", inspo: "Sites inspiration", kw: "Mots-clés",
+  goal: "Objectif", csrc: "Sources clients", budget: "Budget", recur: "Accompagnement",
+  urgency: "Urgence", brand: "Identité visuelle", cont: "Contenu disponible", pages: "Nombre de pages",
+  feat: "Fonctionnalités", feat_autre_detail: "Fonctionnalité autre", vibe: "Ambiance visuelle",
+  dl: "Délai", kdate: "Date clé", auto: "Autonomie", wlevel: "Niveau web", past: "Expérience passée",
+  pastissue: "Problème passé", msg: "Message libre", cp: "Canal préféré", slot: "Créneau",
+  ftype: "Types fichiers", file_link: "Lien fichiers", file_notes: "Notes fichiers",
+};
   full_name: "Nom", company: "Entreprise", email: "Email", phone: "Téléphone",
   sector: "Secteur", size: "Taille", current_url: "Site actuel", source: "Source",
   pt: "Type de projet", desc: "Description", inspo: "Sites inspiration", kw: "Mots-clés",
