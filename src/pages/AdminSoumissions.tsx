@@ -306,9 +306,17 @@ const AdminSoumissions = () => {
               <p className="text-primary-foreground/80 text-sm">{d.company} · {d.email}</p>
             </div>
             <div className="divide-y divide-border">
-              {Object.entries(d).map(([key, value]) => {
-                if (!value || (Array.isArray(value) && value.length === 0) || (typeof value === "string" && !value.trim())) return null;
-                const display = Array.isArray(value) ? value.join(", ") : String(value);
+              {[
+                { title: "Votre profil", keys: ["full_name", "company", "email", "phone", "sector", "size", "current_url", "source"] },
+                { title: "Votre projet", keys: ["pt", "desc", "inspo", "kw"] },
+                { title: "Objectifs & budget", keys: ["goal", "csrc", "budget", "recur", "urgency"] },
+                { title: "Contenu & design", keys: ["brand", "cont", "pages", "feat", "feat_autre_detail", "vibe"] },
+                { title: "Délais & organisation", keys: ["dl", "kdate", "auto", "wlevel", "past", "pastissue"] },
+                { title: "Message libre", keys: ["msg", "cp", "slot"] },
+                { title: "Fichiers & visuels", keys: ["ftype", "file_link", "file_notes"] },
+              ].map((section) => {
+                const entries = section.keys.filter((k) => d[k] && !(Array.isArray(d[k]) && d[k].length === 0) && !(typeof d[k] === "string" && !d[k].trim()));
+                if (entries.length === 0) return null;
                 const urlRegex = /(https?:\/\/[^\s,]+)/g;
                 const renderValue = (text: string) => {
                   const parts = text.split(urlRegex);
@@ -321,9 +329,20 @@ const AdminSoumissions = () => {
                   );
                 };
                 return (
-                  <div key={key} className="flex gap-4 px-6 py-4">
-                    <span className="text-sm font-semibold text-foreground w-48 shrink-0">{FIELD_LABELS[key] || key}</span>
-                    <span className="text-sm text-muted-foreground whitespace-pre-wrap break-words min-w-0">{renderValue(display)}</span>
+                  <div key={section.title}>
+                    <div className="px-6 py-3 bg-muted/30 border-b border-border">
+                      <h3 className="text-xs font-bold text-foreground uppercase tracking-wider">{section.title}</h3>
+                    </div>
+                    {entries.map((key) => {
+                      const value = d[key];
+                      const display = Array.isArray(value) ? value.join(", ") : String(value);
+                      return (
+                        <div key={key} className="flex gap-4 px-6 py-4">
+                          <span className="text-sm font-semibold text-foreground w-48 shrink-0">{FIELD_LABELS[key] || key}</span>
+                          <span className="text-sm text-muted-foreground whitespace-pre-wrap break-words min-w-0">{renderValue(display)}</span>
+                        </div>
+                      );
+                    })}
                   </div>
                 );
               })}
