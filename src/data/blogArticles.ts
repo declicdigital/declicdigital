@@ -92,7 +92,7 @@ Ne choisissez jamais votre hébergement uniquement sur le prix. Un site lent ou 
     content: `
 ## Le web design en 2026 : entre audace et simplicité
 
-Le design web évolue sans cesse. Cette année, les tendances confirment un virage vers des expériences plus immersives tout en gardant l'utilisateur au centre. Voici les 7 tendances qui marquent 2026.
+Le [design web](/creation-site-internet) évolue sans cesse. Cette année, les tendances confirment un virage vers des expériences plus immersives tout en gardant l'utilisateur au centre. Voici les 7 tendances qui marquent 2026.
 
 ## 1. Le minimalisme audacieux
 
