@@ -12,15 +12,12 @@ const generateBriefPrompt = (d: any): string => {
 
   lines.push(`Agis comme un directeur UX, copywriter senior, expert SEO et web designer. Tu dois créer un site web complet pour le client suivant.\n`);
 
-  // Client info
+  // Client info (only company, email, phone, sector)
   lines.push(`CLIENT`);
-  if (d.full_name) lines.push(`Nom : ${d.full_name}`);
   if (d.company) lines.push(`Entreprise : ${d.company}`);
   if (d.email) lines.push(`Email : ${d.email}`);
   if (d.phone) lines.push(`Téléphone : ${d.phone}`);
   if (d.sector) lines.push(`Secteur d'activité : ${d.sector}`);
-  if (d.size) lines.push(`Taille de l'entreprise : ${d.size}`);
-  if (d.current_url) lines.push(`Site actuel : ${d.current_url}`);
   lines.push('');
 
   // Project type
@@ -32,10 +29,6 @@ const generateBriefPrompt = (d: any): string => {
 
   // Objectives
   if (d.goal) lines.push(`OBJECTIF PRINCIPAL\n${d.goal}\n`);
-
-  // Target audience / client sources
-  const csrc = Array.isArray(d.csrc) ? d.csrc.join(", ") : d.csrc;
-  if (csrc) lines.push(`SOURCES DE CLIENTS ACTUELLES\n${csrc}\n`);
 
   // SEO & Keywords
   if (d.kw) lines.push(`MOTS-CLES SEO CIBLES\nIntègre ces mots-clés dans la structure du site, les titres, le contenu et les meta descriptions :\n${d.kw}\n`);
@@ -63,41 +56,8 @@ const generateBriefPrompt = (d: any): string => {
   const cont = Array.isArray(d.cont) ? d.cont.join(", ") : d.cont;
   if (cont) lines.push(`CONTENU DISPONIBLE\n${cont}\n`);
 
-  // Budget
-  if (d.budget) lines.push(`BUDGET\n${d.budget}\n`);
-
-  // Timeline
-  if (d.urgency) lines.push(`NIVEAU D'URGENCE\n${d.urgency}`);
-  if (d.dl) lines.push(`DELAI SOUHAITE\n${d.dl}`);
-  if (d.kdate) lines.push(`DATE CLE\n${d.kdate}`);
-  if (d.dl || d.urgency || d.kdate) lines.push('');
-
-  // Recurring / maintenance
-  if (d.recur) lines.push(`ACCOMPAGNEMENT SOUHAITE\n${d.recur}\n`);
-
-  // Autonomy
-  if (d.auto) lines.push(`AUTONOMIE SOUHAITEE\nLe client souhaite : ${d.auto}\n`);
-
-  // Web level
-  if (d.wlevel) lines.push(`NIVEAU WEB DU CLIENT\n${d.wlevel}\n`);
-
-  // Past experience
-  if (d.past) lines.push(`EXPERIENCE PASSEE\n${d.past}`);
-  if (d.pastissue) lines.push(`PROBLEMES RENCONTRES\n${d.pastissue}`);
-  if (d.past || d.pastissue) lines.push('');
-
   // Free message
   if (d.msg) lines.push(`MESSAGE LIBRE DU CLIENT\n${d.msg}\n`);
-
-  // Communication preferences
-  if (d.cp) lines.push(`CANAL DE COMMUNICATION PREFERE : ${d.cp}`);
-  if (d.slot) lines.push(`CRENEAU DE DISPONIBILITE : ${d.slot}`);
-  if (d.cp || d.slot) lines.push('');
-
-  // Files
-  if (d.file_link) lines.push(`LIEN VERS FICHIERS : ${d.file_link}`);
-  if (d.file_notes) lines.push(`NOTES FICHIERS : ${d.file_notes}`);
-  if (d.file_link || d.file_notes) lines.push('');
 
   // Final instructions
   lines.push(`INSTRUCTIONS DE REALISATION`);
