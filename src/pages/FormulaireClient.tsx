@@ -294,7 +294,7 @@ const FormulaireClient = () => {
               Quelques minutes de votre temps pour que Déclic Digital vous prépare une proposition sur mesure.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              {["Votre profil", "Votre projet", "Objectifs & budget", "Contenu & design", "Délais", "Fichiers"].map((s, i) => (
+              {["Votre profil", "Votre projet", "Objectifs & budget", "Contenu & design", "L'équipe", "Délais", "Message", "Fichiers"].map((s, i) => (
                 <div key={i} className="flex items-center gap-2 rounded-full bg-secondary border border-border px-4 py-2 text-sm text-muted-foreground">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary">{i + 1}</span>
                   {s}
