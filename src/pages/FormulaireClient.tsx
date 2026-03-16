@@ -727,8 +727,8 @@ const FormulaireClient = () => {
             </div>
           </SectionCard>
 
-          {/* 6. MESSAGE LIBRE */}
-          <SectionCard num="06" title="Message libre" sub="Tout ce que vous n'avez pas pu dire ailleurs" accent="gradient">
+          {/* 7. MESSAGE LIBRE */}
+          <SectionCard num="07" title="Message libre" sub="Tout ce que vous n'avez pas pu dire ailleurs" accent="gradient">
             <div className="space-y-5">
               <div>
                 <Label className="text-sm text-muted-foreground mb-2 block">Question, précision, contexte particulier ?</Label>
