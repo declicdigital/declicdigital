@@ -66,7 +66,7 @@ const AdminSoumissions = () => {
     const logoLoaded = new Promise<void>((resolve) => {
       logoImg.onload = () => resolve();
       logoImg.onerror = () => resolve();
-      logoImg.src = (await import("@/assets/logo-declic-digital.png")).default;
+      logoImg.src = logoSrc;
     });
     await logoLoaded;
 
