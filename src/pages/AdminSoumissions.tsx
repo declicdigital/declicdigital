@@ -387,6 +387,33 @@ const AdminSoumissions = () => {
                 </div>
               </div>
             )}
+
+            {/* Brief Prompt Recap */}
+            <div className="border-t border-border">
+              <div className="px-6 py-5 bg-muted/30">
+                <div className="flex items-center justify-between mb-3">
+                  <h3 className="text-sm font-bold text-foreground flex items-center gap-2">
+                    <FileText className="h-4 w-4 text-primary" />
+                    Récap Brief Client (Prompt)
+                  </h3>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      navigator.clipboard.writeText(generateBriefPrompt(selected.data));
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    }}
+                  >
+                    {copied ? <Check className="h-3.5 w-3.5 mr-1" /> : <Copy className="h-3.5 w-3.5 mr-1" />}
+                    {copied ? "Copié !" : "Copier le prompt"}
+                  </Button>
+                </div>
+                <pre className="text-xs text-muted-foreground whitespace-pre-wrap bg-background rounded-lg border border-border p-4 max-h-[500px] overflow-y-auto font-mono leading-relaxed">
+                  {generateBriefPrompt(selected.data)}
+                </pre>
+              </div>
+            </div>
           </div>
         </div>
       </div>
