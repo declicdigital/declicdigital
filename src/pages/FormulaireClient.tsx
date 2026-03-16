@@ -230,7 +230,7 @@ const FormulaireClient = () => {
       // Save to DB
       const { error } = await supabase.from("form_submissions").insert({
         id: submissionId,
-        data: f as any,
+        data: { ...f, team: teamData } as any,
         file_paths: filePaths,
       } as any);
 
