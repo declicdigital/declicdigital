@@ -246,8 +246,8 @@ Le blog de campagne publiait des articles de fond sur les enjeux parisiens, posi
 
 Le parallèle avec le monde de l'entreprise est direct. Si un candidat politique peut gagner 10% des voix grâce à une stratégie digitale bien menée, imaginez l'impact pour une PME ou un indépendant à Paris :
 
-- **Un site web professionnel inspire confiance** : que vous soyez candidat ou commerçant, la première impression en ligne est décisive
-- **Le SEO local fonctionne** : se positionner sur des requêtes géolocalisées (Paris, arrondissements, quartiers) attire une audience qualifiée
+- **Un [site web professionnel](/creation-site-internet) inspire confiance** : que vous soyez candidat ou commerçant, la première impression en ligne est décisive
+- **Le [SEO local](/referencement-seo) fonctionne** : se positionner sur des requêtes géolocalisées (Paris, arrondissements, quartiers) attire une audience qualifiée
 - **Le contenu régulier renforce l'autorité** : publier des articles pertinents positionne votre expertise sur Google
 - **L'écosystème digital doit être cohérent** : site web, réseaux sociaux et newsletter doivent travailler ensemble
 
