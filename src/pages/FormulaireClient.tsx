@@ -310,8 +310,8 @@ const FormulaireClient = () => {
         <div className="container">
           <div className="flex items-center justify-between mb-2">
             <div className="flex gap-1 text-[11px] font-semibold uppercase tracking-wider">
-              {["Profil", "Projet", "Objectifs", "Design", "Délais", "Fichiers"].map((s, i) => (
-                <span key={i} className={pct >= ((i + 1) / 6) * 100 ? "text-accent" : pct >= (i / 6) * 100 ? "text-primary" : "text-muted-foreground/50"}>
+              {["Profil", "Projet", "Objectifs", "Design", "Équipe", "Délais", "Message", "Fichiers"].map((s, i) => (
+                <span key={i} className={pct >= ((i + 1) / 8) * 100 ? "text-accent" : pct >= (i / 8) * 100 ? "text-primary" : "text-muted-foreground/50"}>
                   {s}&nbsp;
                 </span>
               ))}
