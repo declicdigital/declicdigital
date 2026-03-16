@@ -541,8 +541,140 @@ const FormulaireClient = () => {
             </div>
           </SectionCard>
 
-          {/* 5. DÉLAIS */}
-          <SectionCard num="05" title="Délais & organisation" sub="Pour planifier votre projet sereinement" accent="accent">
+          {/* 5. L'ÉQUIPE */}
+          <SectionCard num="05" title="L'équipe" sub="Présentez les membres clés de votre entreprise" accent="accent">
+            <div className="space-y-5">
+              <label className={`flex items-center gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-all text-sm ${
+                f.team_enabled
+                  ? "bg-primary/10 border-primary/40 text-primary font-medium"
+                  : "border-border hover:bg-primary/5 hover:border-primary/20 text-muted-foreground"
+              }`}>
+                <input
+                  type="checkbox"
+                  checked={f.team_enabled}
+                  onChange={() => set("team_enabled", !f.team_enabled)}
+                  className="accent-primary w-4 h-4 shrink-0"
+                />
+                <span>Souhaite mettre en avant l'équipe</span>
+              </label>
+
+              <div className={`space-y-5 transition-opacity ${f.team_enabled ? "opacity-100" : "opacity-40 pointer-events-none"}`}>
+
+                {f.team_enabled && (
+                  <label className={`flex items-center gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-all text-sm ${
+                    f.team_photos_enabled
+                      ? "bg-accent/10 border-accent/40 text-accent font-medium"
+                      : "border-border hover:bg-primary/5 hover:border-primary/20 text-muted-foreground"
+                  }`}>
+                    <input
+                      type="checkbox"
+                      checked={f.team_photos_enabled}
+                      onChange={() => set("team_photos_enabled", !f.team_photos_enabled)}
+                      className="accent-primary w-4 h-4 shrink-0"
+                    />
+                    <span>Souhaite partager les photos de l'équipe</span>
+                  </label>
+                )}
+
+                {teamMembers.map((member, idx) => (
+                  <div key={idx} className="rounded-xl border border-border bg-secondary/30 p-5 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Users className="h-4 w-4 text-primary" />
+                        <span className="text-sm font-bold text-foreground">Membre {idx + 1}</span>
+                      </div>
+                      {teamMembers.length > 1 && (
+                        <button type="button" onClick={() => removeTeamMember(idx)} className="text-accent hover:text-accent/80 transition-colors">
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      )}
+                    </div>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <Label className="text-sm text-muted-foreground mb-2 block">Nom complet</Label>
+                        <Input
+                          value={member.name}
+                          onChange={e => updateTeamMember(idx, "name", e.target.value)}
+                          placeholder="Prénom Nom"
+                          className="rounded-xl"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-sm text-muted-foreground mb-2 block">Fonction dans l'entreprise</Label>
+                        <Input
+                          value={member.role}
+                          onChange={e => updateTeamMember(idx, "role", e.target.value)}
+                          placeholder="Ex : Fondateur, Responsable commercial…"
+                          className="rounded-xl"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <Label className="text-sm text-muted-foreground mb-2 block">Courte présentation</Label>
+                      <Textarea
+                        value={member.bio}
+                        onChange={e => updateTeamMember(idx, "bio", e.target.value)}
+                        placeholder="Quelques lignes sur cette personne, son parcours, son expertise…"
+                        className="rounded-xl"
+                        rows={3}
+                      />
+                    </div>
+                    {f.team_photos_enabled && (
+                      <div>
+                        <Label className="text-sm text-muted-foreground mb-2 block">Photo (JPG ou PNG)</Label>
+                        <input
+                          ref={el => { teamPhotoRefs.current[idx] = el; }}
+                          type="file"
+                          accept=".jpg,.jpeg,.png"
+                          className="hidden"
+                          onChange={e => {
+                            const file = e.target.files?.[0] || null;
+                            updateTeamMember(idx, "photo", file);
+                            e.target.value = "";
+                          }}
+                        />
+                        {member.photo ? (
+                          <div className="flex items-center gap-3 rounded-lg border border-border bg-secondary/50 px-3 py-2 text-xs">
+                            <FileText className="h-4 w-4 text-primary" />
+                            <span className="truncate max-w-[180px]">{member.photo.name}</span>
+                            <span className="text-muted-foreground">({Math.round(member.photo.size / 1024)} Ko)</span>
+                            <button type="button" onClick={() => updateTeamMember(idx, "photo", null)} className="ml-auto text-accent hover:text-accent/80">
+                              <X className="h-3 w-3" />
+                            </button>
+                          </div>
+                        ) : (
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => teamPhotoRefs.current[idx]?.click()}
+                            className="rounded-lg"
+                          >
+                            <Upload className="h-4 w-4 mr-2" />
+                            Choisir une photo
+                          </Button>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={addTeamMember}
+                  className="rounded-lg w-full border-dashed"
+                >
+                  <Plus className="h-4 w-4 mr-2" />
+                  Ajouter un membre
+                </Button>
+              </div>
+            </div>
+          </SectionCard>
+
+          {/* 6. DÉLAIS */}
+          <SectionCard num="06" title="Délais & organisation" sub="Pour planifier votre projet sereinement" accent="accent">
             <div className="space-y-5">
               <div>
                 <Label className="text-sm text-muted-foreground mb-3 block">Quand souhaitez-vous lancer ? <span className="text-accent">*</span></Label>
