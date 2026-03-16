@@ -69,88 +69,74 @@ Deno.serve(async (req) => {
       });
     }
 
-    const { email, full_name, project_name } = await req.json();
+    const { action, user_id, email, full_name } = await req.json();
 
-    if (!email || !full_name) {
-      return new Response(JSON.stringify({ error: "Email et nom requis" }), {
+    if (!action || !user_id) {
+      return new Response(JSON.stringify({ error: "action et user_id requis" }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
 
-    const normalizedEmail = String(email).trim().toLowerCase();
-    const appUrl = getAppUrl(req);
-    const redirectTo = `${appUrl}/connexion`;
-
-    let invitedUserId: string | null = null;
-
-    const { data: inviteData, error: inviteError } = await adminClient.auth.admin.inviteUserByEmail(normalizedEmail, {
-      data: { full_name },
-      redirectTo,
-    });
-
-    if (inviteError) {
-      const alreadyExists = inviteError.message.toLowerCase().includes("already") || inviteError.message.toLowerCase().includes("registered");
-
-      if (!alreadyExists) {
-        return new Response(JSON.stringify({ error: inviteError.message }), {
+    if (action === "update_email") {
+      if (!email) {
+        return new Response(JSON.stringify({ error: "Nouvel email requis" }), {
           status: 400,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
 
-      const { data: usersPage, error: usersError } = await adminClient.auth.admin.listUsers({ page: 1, perPage: 1000 });
-      if (usersError) {
-        return new Response(JSON.stringify({ error: usersError.message }), {
+      const normalizedEmail = String(email).trim().toLowerCase();
+
+      const { error: updateAuthError } = await adminClient.auth.admin.updateUserById(user_id, {
+        email: normalizedEmail,
+        email_confirm: true,
+        user_metadata: full_name ? { full_name } : undefined,
+      });
+
+      if (updateAuthError) {
+        return new Response(JSON.stringify({ error: updateAuthError.message }), {
           status: 400,
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
 
-      const existingUser = usersPage.users.find((u) => (u.email || "").toLowerCase() === normalizedEmail);
-      if (!existingUser) {
-        return new Response(JSON.stringify({ error: "Utilisateur existant introuvable" }), {
-          status: 400,
-          headers: { ...corsHeaders, "Content-Type": "application/json" },
-        });
-      }
+      const updates: Record<string, string> = { email: normalizedEmail };
+      if (full_name) updates.full_name = full_name;
 
-      invitedUserId = existingUser.id;
+      await adminClient.from("profiles").update(updates).eq("id", user_id);
 
-      await adminClient.auth.resetPasswordForEmail(normalizedEmail, { redirectTo });
-    } else {
-      invitedUserId = inviteData.user.id;
+      return new Response(JSON.stringify({ success: true, message: "Compte client mis à jour" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
-    const userId = invitedUserId;
-
-    await adminClient.from("user_roles").upsert(
-      { user_id: userId, role: "client" },
-      { onConflict: "user_id,role", ignoreDuplicates: true },
-    );
-
-    await adminClient.from("profiles").update({ full_name, email: normalizedEmail }).eq("id", userId);
-
-    if (project_name) {
-      const { data: existingProject } = await adminClient
-        .from("projects")
-        .select("id")
-        .eq("client_id", userId)
-        .limit(1);
-
-      if (!existingProject || existingProject.length === 0) {
-        await adminClient.from("projects").insert({
-          client_id: userId,
-          name: project_name,
+    if (action === "send_reset_password") {
+      if (!email) {
+        return new Response(JSON.stringify({ error: "Email requis" }), {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
+
+      const normalizedEmail = String(email).trim().toLowerCase();
+      const redirectTo = `${getAppUrl(req)}/connexion`;
+      const { error: resetError } = await adminClient.auth.resetPasswordForEmail(normalizedEmail, { redirectTo });
+
+      if (resetError) {
+        return new Response(JSON.stringify({ error: resetError.message }), {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+
+      return new Response(JSON.stringify({ success: true, message: "Email de réinitialisation envoyé" }), {
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
     }
 
-    return new Response(JSON.stringify({
-      success: true,
-      user_id: userId,
-      message: "Invitation envoyée. Si le compte existe déjà, un email de réinitialisation a été envoyé.",
-    }), {
+    return new Response(JSON.stringify({ error: "Action non supportée" }), {
+      status: 400,
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (err) {

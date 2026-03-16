@@ -110,16 +110,24 @@ const AdminClients = () => {
     });
 
     setInviting(false);
-    if (error) {
-      toast({ title: "Erreur", description: error.message, variant: "destructive" });
-    } else {
-      toast({ title: "Client invite", description: `Un email d'invitation a ete envoye a ${inviteEmail}.` });
-      setDialogOpen(false);
-      setInviteEmail("");
-      setInviteName("");
-      setInviteProjectName("");
-      loadClients();
+    if (error || !data?.success) {
+      toast({
+        title: "Erreur",
+        description: data?.error || error?.message || "Impossible d'inviter ce client.",
+        variant: "destructive",
+      });
+      return;
     }
+
+    toast({
+      title: "Client invité",
+      description: data?.message || `Invitation envoyée à ${inviteEmail}.`,
+    });
+    setDialogOpen(false);
+    setInviteEmail("");
+    setInviteName("");
+    setInviteProjectName("");
+    loadClients();
   };
 
   const filtered = clients.filter(
