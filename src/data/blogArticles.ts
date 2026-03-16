@@ -215,7 +215,7 @@ Les élections municipales de Paris en 2026 ont mis en lumière un phénomène q
 
 ## Le site web de Knafo : une vitrine politique efficace
 
-La campagne de Knafo s'est distinguée par un site web professionnel, rapide et optimisé pour le référencement. Contrairement à d'autres candidats qui se sont contentés de pages basiques, le site de campagne de Knafo cochait toutes les cases d'un site performant :
+La campagne de Knafo s'est distinguée par un site web professionnel, rapide et optimisé pour le [référencement](/referencement-seo). Contrairement à d'autres candidats qui se sont contentés de pages basiques, le site de campagne de Knafo cochait toutes les cases d'un [site performant](/blog/vitesse-site-web-impact-chiffre-affaires) :
 
 - **Design moderne et responsive** : une navigation fluide sur mobile comme sur desktop
 - **Temps de chargement rapide** : moins de 2 secondes, un critère technique souvent négligé en politique
