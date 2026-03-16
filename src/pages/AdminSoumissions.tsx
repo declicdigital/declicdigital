@@ -167,38 +167,8 @@ const AdminSoumissions = () => {
     const margin = 16;
     const contentWidth = pageWidth - margin * 2;
 
-    // Load logo
-    const logoImg = new Image();
-    logoImg.crossOrigin = "anonymous";
-    const logoLoaded = new Promise<void>((resolve) => {
-      logoImg.onload = () => resolve();
-      logoImg.onerror = () => resolve();
-      logoImg.src = logoSrc;
-    });
-    await logoLoaded;
-
-    const drawHeader = (isFirstPage: boolean = false) => {
-      // Gradient band: blue to pink (miami style)
-      const bandH = isFirstPage ? 6 : 4;
-      // Blue half
-      doc.setFillColor(56, 189, 248);
-      doc.rect(0, 0, pageWidth / 2, bandH, "F");
-      // Pink half
-      doc.setFillColor(244, 114, 182);
-      doc.rect(pageWidth / 2, 0, pageWidth / 2, bandH, "F");
-
-      if (isFirstPage) {
-        // Logo at natural scale (approx 120x40 original, scale to ~30x10)
-        try { doc.addImage(logoImg, "PNG", margin, bandH + 6, 30, 10); } catch {}
-
-        // Contact info right aligned
-        doc.setTextColor(100, 100, 115);
-        doc.setFontSize(7.5);
-        doc.setFont("helvetica", "normal");
-        doc.text("declicdigital.net | contact@declicdigital.net | 06.02.22.89.39", pageWidth - margin, bandH + 12, { align: "right" });
-      }
-    };
-
+    // No logo needed anymore
+    
     const drawFooter = (pageNum: number) => {
       doc.setTextColor(160, 160, 170);
       doc.setFontSize(7);
@@ -208,21 +178,15 @@ const AdminSoumissions = () => {
     };
 
     let pageNum = 1;
-    drawHeader(true);
 
-    // Presentation block
-    let y = 26;
+    // First page: simple presentation
+    let y = 16;
     doc.setFontSize(16);
     doc.setFont("helvetica", "bold");
     doc.setTextColor(23, 25, 35);
     doc.text("Fiche Client", margin, y);
-    y += 6;
-    doc.setDrawColor(56, 189, 248);
-    doc.setLineWidth(0.5);
-    doc.line(margin, y, margin + 40, y);
     y += 8;
 
-    // Quick info: Nom, Entreprise, Type de projet, Date
     const quickInfo: [string, string][] = [];
     if (d.full_name) quickInfo.push(["Nom", d.full_name]);
     if (d.company) quickInfo.push(["Entreprise", d.company]);
@@ -242,23 +206,14 @@ const AdminSoumissions = () => {
       y += 6;
     });
 
-    y += 6;
-
-    // Section groups
-    const sections: { title: string; keys: string[] }[] = [
-      { title: "Informations", keys: ["full_name", "company", "email", "phone", "sector", "size", "current_url", "source"] },
-      { title: "Projet", keys: ["pt", "desc", "inspo", "kw", "goal", "csrc", "budget", "recur", "urgency", "pages", "feat", "feat_autre_detail", "vibe", "dl", "kdate"] },
-      { title: "Profil & Préférences", keys: ["brand", "cont", "auto", "wlevel", "past", "pastissue", "msg", "cp", "slot"] },
-      { title: "Fichiers", keys: ["ftype", "file_link", "file_notes"] },
-    ];
+    y += 8;
 
     const checkNewPage = (needed: number) => {
       if (y + needed > pageHeight - 16) {
         drawFooter(pageNum);
         doc.addPage();
         pageNum++;
-        drawHeader(false);
-        y = 14;
+        y = 16;
       }
     };
 
