@@ -20,18 +20,21 @@ export type Database = {
           data: Json
           file_paths: string[] | null
           id: string
+          status: string
         }
         Insert: {
           created_at?: string
           data?: Json
           file_paths?: string[] | null
           id?: string
+          status?: string
         }
         Update: {
           created_at?: string
           data?: Json
           file_paths?: string[] | null
           id?: string
+          status?: string
         }
         Relationships: []
       }
