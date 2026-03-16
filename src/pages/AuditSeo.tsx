@@ -16,7 +16,7 @@ const AuditSeo = () => (
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
             <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">
-              100% gratuit · Sans engagement
+              Audit SEO gratuit · Analyse complète de votre site
             </span>
             <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
               Audit SEO gratuit à Paris : recevez votre <span className="text-gradient">analyse complète</span>
