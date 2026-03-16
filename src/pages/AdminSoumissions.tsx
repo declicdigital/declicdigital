@@ -217,6 +217,13 @@ const AdminSoumissions = () => {
       }
     };
 
+    const sections: { title: string; keys: string[] }[] = [
+      { title: "Informations", keys: ["full_name", "company", "email", "phone", "sector", "size", "current_url", "source"] },
+      { title: "Projet", keys: ["pt", "desc", "inspo", "kw", "goal", "csrc", "budget", "recur", "urgency", "pages", "feat", "feat_autre_detail", "vibe", "dl", "kdate"] },
+      { title: "Profil & Préférences", keys: ["brand", "cont", "auto", "wlevel", "past", "pastissue", "msg", "cp", "slot"] },
+      { title: "Fichiers", keys: ["ftype", "file_link", "file_notes"] },
+    ];
+
     sections.forEach((section) => {
       const entries = section.keys
         .filter((k) => d[k] && !(Array.isArray(d[k]) && d[k].length === 0) && !(typeof d[k] === "string" && !d[k].trim()))
