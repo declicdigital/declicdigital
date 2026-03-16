@@ -333,6 +333,7 @@ const AdminSoumissions = () => {
             <div className="gradient-miami p-6">
               <h2 className="text-xl font-extrabold text-primary-foreground">{d.full_name}</h2>
               <p className="text-primary-foreground/80 text-sm">{d.company} · {d.email}</p>
+              <p className="text-primary-foreground/70 text-xs mt-1">{getCompletionPercent(d)}% des questions répondues</p>
             </div>
             <div className="divide-y divide-border">
               {[
