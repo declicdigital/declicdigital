@@ -29,7 +29,7 @@ export const blogArticles: BlogArticle[] = [
     content: `
 ## Pourquoi le choix de l'hébergement est crucial
 
-Votre hébergement web est la fondation de votre présence en ligne. Un mauvais choix peut entraîner des temps de chargement lents, des pannes fréquentes et une perte de visiteurs. En 2026, les exigences ont évolué : les Core Web Vitals de Google font désormais partie intégrante du classement SEO.
+Votre hébergement web est la fondation de votre [présence en ligne](/creation-site-internet). Un mauvais choix peut entraîner des [temps de chargement lents](/blog/vitesse-site-web-impact-chiffre-affaires), des pannes fréquentes et une perte de visiteurs. En 2026, les exigences ont évolué : les Core Web Vitals de Google font désormais partie intégrante du [classement SEO](/referencement-seo).
 
 ## Les types d'hébergement disponibles
 
