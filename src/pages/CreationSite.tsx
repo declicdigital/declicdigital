@@ -158,7 +158,7 @@ const CreationSite = () => (
         <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-16 h-16 rounded-full object-cover border-2 border-primary-foreground/30 shadow-lg mb-3" />
         <p className="text-sm font-semibold text-primary-foreground mb-2">Geoffrey, Expert Produit Google</p>
         <h2 className="mb-4 text-3xl font-extrabold text-primary-foreground">Prêt à lancer votre projet ?</h2>
-        <p className="mb-8 text-primary-foreground/80">Demandez un devis gratuit et sans engagement pour la création de votre site web.</p>
+        <p className="mb-8 text-primary-foreground/80">Demandez un devis gratuit pour la création de votre site web professionnel.</p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
             <Link to="/contact">Devis création de site</Link>
