@@ -17,6 +17,7 @@ import {
 import {
   Loader2, ArrowLeft, Plus, Trash2, FileText, Upload, Send,
   CheckCircle2, Clock, AlertCircle, Play, Users, LogOut, MessageSquare,
+  KeyRound, Mail,
 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital.webp";
 
@@ -55,6 +56,12 @@ const AdminClientDetail = () => {
   const [newProjectName, setNewProjectName] = useState("");
   const [newProjectDesc, setNewProjectDesc] = useState("");
   const [creatingProject, setCreatingProject] = useState(false);
+
+  // Account management
+  const [emailDraft, setEmailDraft] = useState("");
+  const [nameDraft, setNameDraft] = useState("");
+  const [savingAccount, setSavingAccount] = useState(false);
+  const [sendingReset, setSendingReset] = useState(false);
 
   // Comments
   const [newComment, setNewComment] = useState<Record<string, string>>({});
