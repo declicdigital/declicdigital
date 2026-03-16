@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { Calendar, Clock, ArrowRight, Tag } from "lucide-react";
+import { Calendar, Clock, ArrowRight, Tag, Sparkles } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import { blogArticles } from "@/data/blogArticles";
 
@@ -9,20 +9,21 @@ const categoryColors: Record<string, string> = {
   Technique: "bg-primary/10 text-primary",
   Design: "bg-accent/10 text-accent",
   "SEO & Performance": "bg-emerald-500/10 text-emerald-600",
+  "Stratégie digitale": "bg-violet-500/10 text-violet-600",
 };
 
+const sorted = [...blogArticles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
 const Blog = () => {
-  const featured = blogArticles[0];
-  const rest = blogArticles.slice(1);
+  const featured = sorted[0];
+  const rest = sorted.slice(1);
+  const newestDate = featured.date;
 
   return (
-    <PageLayout>
+    <PageLayout hideBlogCarousel>
       <Helmet>
         <title>Blog web, SEO et tech pour PME | Déclic Digital</title>
-        <meta
-          name="description"
-          content="Conseils, tendances et guides pratiques sur la création de sites web, le SEO et la tech pour les PME. Blog par Déclic Digital."
-        />
+        <meta name="description" content="Conseils, tendances et guides pratiques sur la création de sites web, le SEO et la tech pour les PME. Blog par Déclic Digital." />
         <link rel="canonical" href="https://declic-digital.fr/blog" />
         <meta property="og:title" content="Blog web, SEO et tech | Déclic Digital" />
         <meta property="og:description" content="Conseils, tendances et guides pratiques sur la création de sites web, le SEO et la tech pour les PME." />
@@ -34,10 +35,7 @@ const Blog = () => {
             name: "Blog Déclic Digital",
             description: "Conseils web, SEO et tech pour PME",
             url: "https://declic-digital.fr/blog",
-            publisher: {
-              "@type": "Organization",
-              name: "Déclic Digital",
-            },
+            publisher: { "@type": "Organization", name: "Déclic Digital" },
           })}
         </script>
       </Helmet>
@@ -48,19 +46,10 @@ const Blog = () => {
           backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
         }} />
         <div className="container relative py-20 md:py-28">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="max-w-2xl"
-          >
-            <span className="mb-4 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider">
-              Blog
-            </span>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-2xl">
+            <span className="mb-4 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider">Blog</span>
             <h1 className="text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
-              Veille web, SEO
-              <br />
-              <span className="text-gradient">& tech</span>
+              Veille web, SEO<br /><span className="text-gradient">& tech</span>
             </h1>
             <p className="mt-6 text-lg text-primary-foreground/70 leading-relaxed max-w-lg">
               Des articles pratiques pour comprendre le web, améliorer votre visibilité et faire les bons choix pour votre entreprise.
@@ -78,33 +67,21 @@ const Blog = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="grid overflow-hidden rounded-2xl bg-card shadow-elevated md:grid-cols-2"
           >
-            <div className="aspect-[16/10] md:aspect-auto overflow-hidden">
-              <img
-                src={featured.image}
-                alt={featured.title}
-                className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
+            <div className="aspect-[16/10] md:aspect-auto overflow-hidden relative">
+              <img src={featured.image} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-1.5 text-xs font-bold text-primary-foreground shadow-lg">
+                <Sparkles size={14} /> Nouvel article
+              </span>
             </div>
             <div className="flex flex-col justify-center p-8 md:p-12">
               <span className={`mb-4 inline-block w-fit rounded-full px-3 py-1 text-xs font-semibold ${categoryColors[featured.category] || "bg-secondary text-secondary-foreground"}`}>
                 {featured.category}
               </span>
-              <h2 className="text-2xl font-bold leading-snug md:text-3xl group-hover:text-primary transition-colors">
-                {featured.title}
-              </h2>
-              <p className="mt-4 text-muted-foreground leading-relaxed">
-                {featured.excerpt}
-              </p>
+              <h2 className="text-2xl font-bold leading-snug md:text-3xl group-hover:text-primary transition-colors">{featured.title}</h2>
+              <p className="mt-4 text-muted-foreground leading-relaxed">{featured.excerpt}</p>
               <div className="mt-6 flex items-center gap-4 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1.5">
-                  <Calendar size={14} />
-                  {new Date(featured.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <Clock size={14} />
-                  {featured.readTime}
-                </span>
+                <span className="flex items-center gap-1.5"><Calendar size={14} />{new Date(featured.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}</span>
+                <span className="flex items-center gap-1.5"><Clock size={14} />{featured.readTime}</span>
               </div>
               <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary group-hover:gap-3 transition-all">
                 Lire l'article <ArrowRight size={16} />
@@ -117,58 +94,55 @@ const Blog = () => {
       {/* Other articles */}
       <section className="container pb-20">
         <div className="grid gap-8 md:grid-cols-2">
-          {rest.map((article, i) => (
-            <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
-              <motion.article
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-elevated transition-shadow"
-              >
-                <div className="aspect-[16/9] overflow-hidden">
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-                <div className="p-6 md:p-8">
-                  <div className="flex items-center gap-3 mb-4">
-                    <span className={`rounded-full px-3 py-1 text-xs font-semibold ${categoryColors[article.category] || "bg-secondary text-secondary-foreground"}`}>
-                      {article.category}
-                    </span>
-                    <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <Clock size={12} /> {article.readTime}
-                    </span>
-                  </div>
-                  <h2 className="text-xl font-bold leading-snug group-hover:text-primary transition-colors">
-                    {article.title}
-                  </h2>
-                  <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-                    {article.excerpt}
-                  </p>
-                  <div className="mt-4 flex flex-wrap gap-2">
-                    {article.tags.slice(0, 3).map((tag) => (
-                      <span key={tag} className="flex items-center gap-1 rounded-md bg-secondary px-2 py-0.5 text-xs text-muted-foreground">
-                        <Tag size={10} /> {tag}
+          {rest.map((article, i) => {
+            const isNew = article.date === newestDate;
+            return (
+              <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
+                <motion.article
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.1 }}
+                  className="overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-elevated transition-shadow"
+                >
+                  <div className="aspect-[16/9] overflow-hidden relative">
+                    <img src={article.image} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    {isNew && (
+                      <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-[11px] font-bold text-primary-foreground shadow-md">
+                        <Sparkles size={12} /> Nouvel article
                       </span>
-                    ))}
+                    )}
                   </div>
-                  <div className="mt-5 flex items-center justify-between text-sm">
-                    <span className="flex items-center gap-1.5 text-muted-foreground">
-                      <Calendar size={14} />
-                      {new Date(article.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
-                    </span>
-                    <span className="inline-flex items-center gap-1 font-semibold text-primary group-hover:gap-2 transition-all">
-                      Lire <ArrowRight size={14} />
-                    </span>
+                  <div className="p-6 md:p-8">
+                    <div className="flex items-center gap-3 mb-4">
+                      <span className={`rounded-full px-3 py-1 text-xs font-semibold ${categoryColors[article.category] || "bg-secondary text-secondary-foreground"}`}>
+                        {article.category}
+                      </span>
+                      <span className="flex items-center gap-1 text-xs text-muted-foreground"><Clock size={12} /> {article.readTime}</span>
+                    </div>
+                    <h2 className="text-xl font-bold leading-snug group-hover:text-primary transition-colors">{article.title}</h2>
+                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{article.excerpt}</p>
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {article.tags.slice(0, 3).map((tag) => (
+                        <span key={tag} className="flex items-center gap-1 rounded-md bg-secondary px-2 py-0.5 text-xs text-muted-foreground">
+                          <Tag size={10} /> {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="mt-5 flex items-center justify-between text-sm">
+                      <span className="flex items-center gap-1.5 text-muted-foreground">
+                        <Calendar size={14} />
+                        {new Date(article.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
+                      </span>
+                      <span className="inline-flex items-center gap-1 font-semibold text-primary group-hover:gap-2 transition-all">
+                        Lire <ArrowRight size={14} />
+                      </span>
+                    </div>
                   </div>
-                </div>
-              </motion.article>
-            </Link>
-          ))}
+                </motion.article>
+              </Link>
+            );
+          })}
         </div>
       </section>
 
