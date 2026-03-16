@@ -1,3 +1,8 @@
+import hebergementImg from "@/assets/hebergement-web-serveur-professionnel.webp";
+import webDesignImg from "@/assets/tendances-web-design-2026.webp";
+import vitesseImg from "@/assets/vitesse-site-web-performance.webp";
+import campagneImg from "@/assets/campagne-digitale-municipales-paris.webp";
+
 export interface BlogArticle {
   slug: string;
   title: string;
@@ -24,7 +29,7 @@ export const blogArticles: BlogArticle[] = [
     readTime: "6 min",
     category: "Technique",
     tags: ["hébergement web", "serveur", "performance", "sécurité"],
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
+    image: hebergementImg,
     relatedSlugs: ["vitesse-site-web-impact-chiffre-affaires", "tendances-web-design-2026"],
     content: `
 ## Pourquoi le choix de l'hébergement est crucial
@@ -87,7 +92,7 @@ Ne choisissez jamais votre hébergement uniquement sur le prix. Un site lent ou 
     readTime: "5 min",
     category: "Design",
     tags: ["web design", "tendances", "UX", "UI"],
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+    image: webDesignImg,
     relatedSlugs: ["comment-choisir-hebergement-web-2026", "vitesse-site-web-impact-chiffre-affaires"],
     content: `
 ## Le web design en 2026 : entre audace et simplicité
@@ -139,7 +144,7 @@ L'essentiel reste la cohérence : un design qui reflète votre identité et faci
     readTime: "7 min",
     category: "SEO & Performance",
     tags: ["performance web", "vitesse", "SEO", "conversion"],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+    image: vitesseImg,
     relatedSlugs: ["comment-choisir-hebergement-web-2026", "tendances-web-design-2026"],
     content: `
 ## La vitesse, facteur invisible de votre réussite en ligne
@@ -206,7 +211,7 @@ La vitesse n'est pas un luxe technique, c'est un levier commercial. Un site qui 
     readTime: "6 min",
     category: "Stratégie digitale",
     tags: ["municipales Paris", "campagne digitale", "site web politique", "Knafo", "stratégie web", "élections"],
-    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80",
+    image: campagneImg,
     relatedSlugs: ["tendances-web-design-2026", "vitesse-site-web-impact-chiffre-affaires"],
     content: `
 ## Municipales Paris 2026 : le digital comme levier électoral
