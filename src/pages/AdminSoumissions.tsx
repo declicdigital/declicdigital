@@ -80,6 +80,25 @@ interface Submission {
   file_paths: string[];
 }
 
+const ALL_FORM_KEYS = [
+  "full_name", "company", "email", "phone", "sector", "size", "current_url", "source",
+  "pt", "desc", "inspo", "kw", "goal", "csrc", "budget", "recur", "urgency",
+  "brand", "cont", "pages", "feat", "feat_autre_detail", "vibe",
+  "dl", "kdate", "auto", "wlevel", "past", "pastissue",
+  "msg", "cp", "slot", "ftype", "file_link", "file_notes",
+];
+
+const getCompletionPercent = (data: any): number => {
+  if (!data) return 0;
+  const answered = ALL_FORM_KEYS.filter((k) => {
+    const v = data[k];
+    if (v == null) return false;
+    if (Array.isArray(v)) return v.length > 0;
+    return String(v).trim().length > 0;
+  }).length;
+  return Math.round((answered / ALL_FORM_KEYS.length) * 100);
+};
+
 const FIELD_LABELS: Record<string, string> = {
   full_name: "Nom", company: "Entreprise", email: "Email", phone: "Téléphone",
   sector: "Secteur", size: "Taille", current_url: "Site actuel", source: "Source",
@@ -304,6 +323,7 @@ const AdminSoumissions = () => {
             <div className="gradient-miami p-6">
               <h2 className="text-xl font-extrabold text-primary-foreground">{d.full_name}</h2>
               <p className="text-primary-foreground/80 text-sm">{d.company} · {d.email}</p>
+              <p className="text-primary-foreground/70 text-xs mt-1">{getCompletionPercent(d)}% des questions répondues</p>
             </div>
             <div className="divide-y divide-border">
               {[
@@ -436,6 +456,7 @@ const AdminSoumissions = () => {
                       <Calendar className="h-3 w-3" />
                       {new Date(s.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}
                     </span>
+                    <span className="font-medium text-primary">{getCompletionPercent(s.data)}%</span>
                   </div>
                 </div>
                 <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
