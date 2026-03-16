@@ -47,7 +47,6 @@ const AdminClients = () => {
   const loadClients = async () => {
     setLoading(true);
 
-    // Get all client profiles (users with role 'client')
     const { data: roles } = await supabase
       .from("user_roles")
       .select("user_id")
@@ -61,21 +60,14 @@ const AdminClients = () => {
 
     const clientIds = roles.map((r: any) => r.user_id);
 
-    const { data: profiles } = await supabase
-      .from("profiles")
-      .select("*")
-      .in("id", clientIds);
-
-    // Get projects for these clients
-    const { data: projects } = await supabase
-      .from("projects")
-      .select("*")
-      .in("client_id", clientIds);
+    // Parallel fetch
+    const [{ data: profiles }, { data: projects }] = await Promise.all([
+      supabase.from("profiles").select("*").in("id", clientIds),
+      supabase.from("projects").select("*").in("client_id", clientIds),
+    ]);
 
     const projectMap: Record<string, any> = {};
-    (projects || []).forEach((p: any) => {
-      projectMap[p.client_id] = p;
-    });
+    (projects || []).forEach((p: any) => { projectMap[p.client_id] = p; });
 
     const clientList: Client[] = (profiles || []).map((p: any) => ({
       id: p.id,
