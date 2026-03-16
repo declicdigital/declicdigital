@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
-import { Send, Shield, CheckCircle, Plus, X, Upload, FileText } from "lucide-react";
+import { Send, Shield, CheckCircle, Plus, X, Upload, FileText, Users, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -11,6 +11,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 /* ───── types ───── */
+interface TeamMember {
+  name: string;
+  role: string;
+  bio: string;
+  photo: File | null;
+}
+
 interface FormData {
   full_name: string;
   company: string;
@@ -35,6 +42,8 @@ interface FormData {
   feat: string[];
   feat_autre_detail: string;
   vibe: string;
+  team_enabled: boolean;
+  team_photos_enabled: boolean;
   dl: string;
   kdate: string;
   auto: string;
@@ -53,7 +62,9 @@ const initial: FormData = {
   full_name: "", company: "", email: "", phone: "", sector: "", size: "",
   current_url: "", source: "", pt: [], desc: "", inspo: "", kw: "", goal: "",
   csrc: [], budget: "", recur: "", urgency: "", brand: "", cont: [], pages: "",
-  feat: [], feat_autre_detail: "", vibe: "", dl: "", kdate: "", auto: "",
+  feat: [], feat_autre_detail: "", vibe: "",
+  team_enabled: false, team_photos_enabled: false,
+  dl: "", kdate: "", auto: "",
   wlevel: "", past: "", pastissue: "", msg: "", cp: "", slot: "", ftype: [],
   file_link: "", file_notes: "",
 };
@@ -142,9 +153,11 @@ const FieldGroup = ({ children, cols = 1 }: { children: React.ReactNode; cols?: 
 const FormulaireClient = () => {
   const [f, setF] = useState<FormData>(initial);
   const [files, setFiles] = useState<File[]>([]);
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([{ name: "", role: "", bio: "", photo: null }]);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const teamPhotoRefs = useRef<(HTMLInputElement | null)[]>([]);
   const { toast } = useToast();
 
   const set = <K extends keyof FormData>(k: K, v: FormData[K]) => setF(prev => ({ ...prev, [k]: v }));
@@ -159,6 +172,13 @@ const FormulaireClient = () => {
   };
 
   const removeFile = (idx: number) => setFiles(prev => prev.filter((_, i) => i !== idx));
+
+  // Team members
+  const addTeamMember = () => setTeamMembers(prev => [...prev, { name: "", role: "", bio: "", photo: null }]);
+  const removeTeamMember = (idx: number) => setTeamMembers(prev => prev.filter((_, i) => i !== idx));
+  const updateTeamMember = (idx: number, field: keyof TeamMember, value: string | File | null) => {
+    setTeamMembers(prev => prev.map((m, i) => i === idx ? { ...m, [field]: value } : m));
+  };
 
   // Progress
   const FIELDS: (keyof FormData)[] = [
@@ -191,10 +211,26 @@ const FormulaireClient = () => {
         if (!error) filePaths.push(path);
       }
 
+      // Upload team photos
+      if (f.team_enabled && f.team_photos_enabled) {
+        for (const member of teamMembers) {
+          if (member.photo) {
+            const path = `${submissionId}/equipe/${member.photo.name}`;
+            const { error } = await supabase.storage.from("form-files").upload(path, member.photo);
+            if (!error) filePaths.push(path);
+          }
+        }
+      }
+
+      // Prepare team data (without File objects)
+      const teamData = f.team_enabled
+        ? teamMembers.map(m => ({ name: m.name, role: m.role, bio: m.bio, photo_name: m.photo?.name || "" }))
+        : [];
+
       // Save to DB
       const { error } = await supabase.from("form_submissions").insert({
         id: submissionId,
-        data: f as any,
+        data: { ...f, team: teamData } as any,
         file_paths: filePaths,
       } as any);
 
@@ -258,7 +294,7 @@ const FormulaireClient = () => {
               Quelques minutes de votre temps pour que Déclic Digital vous prépare une proposition sur mesure.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
-              {["Votre profil", "Votre projet", "Objectifs & budget", "Contenu & design", "Délais", "Fichiers"].map((s, i) => (
+              {["Votre profil", "Votre projet", "Objectifs & budget", "Contenu & design", "L'équipe", "Délais", "Message", "Fichiers"].map((s, i) => (
                 <div key={i} className="flex items-center gap-2 rounded-full bg-secondary border border-border px-4 py-2 text-sm text-muted-foreground">
                   <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary">{i + 1}</span>
                   {s}
@@ -274,8 +310,8 @@ const FormulaireClient = () => {
         <div className="container">
           <div className="flex items-center justify-between mb-2">
             <div className="flex gap-1 text-[11px] font-semibold uppercase tracking-wider">
-              {["Profil", "Projet", "Objectifs", "Design", "Délais", "Fichiers"].map((s, i) => (
-                <span key={i} className={pct >= ((i + 1) / 6) * 100 ? "text-accent" : pct >= (i / 6) * 100 ? "text-primary" : "text-muted-foreground/50"}>
+              {["Profil", "Projet", "Objectifs", "Design", "Équipe", "Délais", "Message", "Fichiers"].map((s, i) => (
+                <span key={i} className={pct >= ((i + 1) / 8) * 100 ? "text-accent" : pct >= (i / 8) * 100 ? "text-primary" : "text-muted-foreground/50"}>
                   {s}&nbsp;
                 </span>
               ))}
@@ -505,8 +541,140 @@ const FormulaireClient = () => {
             </div>
           </SectionCard>
 
-          {/* 5. DÉLAIS */}
-          <SectionCard num="05" title="Délais & organisation" sub="Pour planifier votre projet sereinement" accent="accent">
+          {/* 5. L'ÉQUIPE */}
+          <SectionCard num="05" title="L'équipe" sub="Présentez les membres clés de votre entreprise" accent="accent">
+            <div className="space-y-5">
+              <label className={`flex items-center gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-all text-sm ${
+                f.team_enabled
+                  ? "bg-primary/10 border-primary/40 text-primary font-medium"
+                  : "border-border hover:bg-primary/5 hover:border-primary/20 text-muted-foreground"
+              }`}>
+                <input
+                  type="checkbox"
+                  checked={f.team_enabled}
+                  onChange={() => set("team_enabled", !f.team_enabled)}
+                  className="accent-primary w-4 h-4 shrink-0"
+                />
+                <span>Souhaite mettre en avant l'équipe</span>
+              </label>
+
+              <div className={`space-y-5 transition-opacity ${f.team_enabled ? "opacity-100" : "opacity-40 pointer-events-none"}`}>
+
+                {f.team_enabled && (
+                  <label className={`flex items-center gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-all text-sm ${
+                    f.team_photos_enabled
+                      ? "bg-accent/10 border-accent/40 text-accent font-medium"
+                      : "border-border hover:bg-primary/5 hover:border-primary/20 text-muted-foreground"
+                  }`}>
+                    <input
+                      type="checkbox"
+                      checked={f.team_photos_enabled}
+                      onChange={() => set("team_photos_enabled", !f.team_photos_enabled)}
+                      className="accent-primary w-4 h-4 shrink-0"
+                    />
+                    <span>Souhaite partager les photos de l'équipe</span>
+                  </label>
+                )}
+
+                {teamMembers.map((member, idx) => (
+                  <div key={idx} className="rounded-xl border border-border bg-secondary/30 p-5 space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2">
+                        <Users className="h-4 w-4 text-primary" />
+                        <span className="text-sm font-bold text-foreground">Membre {idx + 1}</span>
+                      </div>
+                      {teamMembers.length > 1 && (
+                        <button type="button" onClick={() => removeTeamMember(idx)} className="text-accent hover:text-accent/80 transition-colors">
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      )}
+                    </div>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <div>
+                        <Label className="text-sm text-muted-foreground mb-2 block">Nom complet</Label>
+                        <Input
+                          value={member.name}
+                          onChange={e => updateTeamMember(idx, "name", e.target.value)}
+                          placeholder="Prénom Nom"
+                          className="rounded-xl"
+                        />
+                      </div>
+                      <div>
+                        <Label className="text-sm text-muted-foreground mb-2 block">Fonction dans l'entreprise</Label>
+                        <Input
+                          value={member.role}
+                          onChange={e => updateTeamMember(idx, "role", e.target.value)}
+                          placeholder="Ex : Fondateur, Responsable commercial…"
+                          className="rounded-xl"
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <Label className="text-sm text-muted-foreground mb-2 block">Courte présentation</Label>
+                      <Textarea
+                        value={member.bio}
+                        onChange={e => updateTeamMember(idx, "bio", e.target.value)}
+                        placeholder="Quelques lignes sur cette personne, son parcours, son expertise…"
+                        className="rounded-xl"
+                        rows={3}
+                      />
+                    </div>
+                    {f.team_photos_enabled && (
+                      <div>
+                        <Label className="text-sm text-muted-foreground mb-2 block">Photo (JPG ou PNG)</Label>
+                        <input
+                          ref={el => { teamPhotoRefs.current[idx] = el; }}
+                          type="file"
+                          accept=".jpg,.jpeg,.png"
+                          className="hidden"
+                          onChange={e => {
+                            const file = e.target.files?.[0] || null;
+                            updateTeamMember(idx, "photo", file);
+                            e.target.value = "";
+                          }}
+                        />
+                        {member.photo ? (
+                          <div className="flex items-center gap-3 rounded-lg border border-border bg-secondary/50 px-3 py-2 text-xs">
+                            <FileText className="h-4 w-4 text-primary" />
+                            <span className="truncate max-w-[180px]">{member.photo.name}</span>
+                            <span className="text-muted-foreground">({Math.round(member.photo.size / 1024)} Ko)</span>
+                            <button type="button" onClick={() => updateTeamMember(idx, "photo", null)} className="ml-auto text-accent hover:text-accent/80">
+                              <X className="h-3 w-3" />
+                            </button>
+                          </div>
+                        ) : (
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => teamPhotoRefs.current[idx]?.click()}
+                            className="rounded-lg"
+                          >
+                            <Upload className="h-4 w-4 mr-2" />
+                            Choisir une photo
+                          </Button>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                ))}
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="sm"
+                  onClick={addTeamMember}
+                  className="rounded-lg w-full border-dashed"
+                >
+                  <Plus className="h-4 w-4 mr-2" />
+                  Ajouter un membre
+                </Button>
+              </div>
+            </div>
+          </SectionCard>
+
+          {/* 6. DÉLAIS */}
+          <SectionCard num="06" title="Délais & organisation" sub="Pour planifier votre projet sereinement" accent="accent">
             <div className="space-y-5">
               <div>
                 <Label className="text-sm text-muted-foreground mb-3 block">Quand souhaitez-vous lancer ? <span className="text-accent">*</span></Label>
@@ -559,8 +727,8 @@ const FormulaireClient = () => {
             </div>
           </SectionCard>
 
-          {/* 6. MESSAGE LIBRE */}
-          <SectionCard num="06" title="Message libre" sub="Tout ce que vous n'avez pas pu dire ailleurs" accent="gradient">
+          {/* 7. MESSAGE LIBRE */}
+          <SectionCard num="07" title="Message libre" sub="Tout ce que vous n'avez pas pu dire ailleurs" accent="gradient">
             <div className="space-y-5">
               <div>
                 <Label className="text-sm text-muted-foreground mb-2 block">Question, précision, contexte particulier ?</Label>
@@ -587,8 +755,8 @@ const FormulaireClient = () => {
             </div>
           </SectionCard>
 
-          {/* 7. FICHIERS */}
-          <SectionCard num="07" title="Fichiers & visuels" sub="Partagez vos ressources existantes" accent="accent">
+          {/* 8. FICHIERS */}
+          <SectionCard num="08" title="Fichiers & visuels" sub="Partagez vos ressources existantes" accent="accent">
             <div className="space-y-5">
               <div>
                 <Label className="text-sm text-muted-foreground mb-3 block">Types de fichiers à transmettre
