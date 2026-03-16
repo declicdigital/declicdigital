@@ -29,7 +29,7 @@ export const blogArticles: BlogArticle[] = [
     readTime: "6 min",
     category: "Technique",
     tags: ["hébergement web", "serveur", "performance", "sécurité"],
-    image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80",
+    image: hebergementImg,
     relatedSlugs: ["vitesse-site-web-impact-chiffre-affaires", "tendances-web-design-2026"],
     content: `
 ## Pourquoi le choix de l'hébergement est crucial
