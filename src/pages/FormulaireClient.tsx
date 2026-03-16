@@ -173,6 +173,13 @@ const FormulaireClient = () => {
 
   const removeFile = (idx: number) => setFiles(prev => prev.filter((_, i) => i !== idx));
 
+  // Team members
+  const addTeamMember = () => setTeamMembers(prev => [...prev, { name: "", role: "", bio: "", photo: null }]);
+  const removeTeamMember = (idx: number) => setTeamMembers(prev => prev.filter((_, i) => i !== idx));
+  const updateTeamMember = (idx: number, field: keyof TeamMember, value: string | File | null) => {
+    setTeamMembers(prev => prev.map((m, i) => i === idx ? { ...m, [field]: value } : m));
+  };
+
   // Progress
   const FIELDS: (keyof FormData)[] = [
     "full_name","company","email","phone","sector","size","current_url","source",
