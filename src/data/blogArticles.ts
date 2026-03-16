@@ -264,7 +264,7 @@ Un artisan du [15ème arrondissement](/creation-site-web/paris-15eme), un restau
 
 ## Conclusion
 
-Les municipales de Paris 2026 confirment que la présence digitale n'est plus optionnelle. Knafo a démontré qu'un [site web performant](/creation-site-internet), combiné à une stratégie de contenu et de [référencement](/referencement-seo), peut faire la différence. Pour les entreprises parisiennes, la leçon est claire : investir dans votre site web et votre SEO, c'est investir dans votre visibilité et votre croissance. [Demandez votre audit SEO gratuit](/audit-seo-gratuit).
+Les municipales de Paris 2026 confirment que la présence digitale n'est plus optionnelle. Knafo a démontré qu'un [site web performant](/creation-site-web), combiné à une stratégie de contenu et de [référencement](/referencement-seo), peut faire la différence. Pour les entreprises parisiennes, la leçon est claire : investir dans votre site web et votre SEO, c'est investir dans votre visibilité et votre croissance. [Demandez votre audit SEO gratuit](/audit-seo-gratuit).
     `,
   },
 ];
