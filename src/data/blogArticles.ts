@@ -173,7 +173,7 @@ C'est la cause numéro 1. Des images en PNG de 5 Mo au lieu de WebP compressées
 Chaque plugin, chaque tracker, chaque widget ajoute du poids. Auditez régulièrement vos scripts et supprimez l'inutile.
 
 ### Hébergement inadapté
-Un hébergement mutualisé à 3 euros par mois ne tiendra pas la charge si votre site génère du trafic. Investissez dans un hébergement performant.
+Un [hébergement mutualisé](/blog/comment-choisir-hebergement-web-2026) à 3 euros par mois ne tiendra pas la charge si votre site génère du trafic. Investissez dans un hébergement performant.
 
 ### Absence de mise en cache
 Sans cache navigateur et serveur, chaque visite recharge l'intégralité du site. Configurez des en-têtes de cache adaptés.
