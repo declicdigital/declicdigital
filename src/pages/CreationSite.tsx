@@ -65,7 +65,7 @@ const CreationSite = () => (
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
           { icon: Search, title: "1. Échange et analyse", desc: "Nous commençons par comprendre votre activité, vos objectifs et votre cible. Cette étape est essentielle pour créer un site adapté." },
-          { icon: Monitor, title: "2. Maquette et design", desc: "Nous créons une maquette visuelle de votre site. Vous validez le design avant le développement pour être sûr du résultat." },
+          { icon: Monitor, title: "2. Conception et design", desc: "Nous définissons l'arborescence, le design et la structure de votre site. Vous validez chaque étape avant le développement." },
           { icon: Zap, title: "3. Développement", desc: "Nous développons votre site avec les meilleures technologies. Chaque page est optimisée pour le SEO, la vitesse et le mobile." },
           { icon: CheckCircle, title: "4. Mise en ligne et suivi", desc: "Après vos retours et validations, nous mettons votre site en ligne. Nous assurons ensuite un suivi pour garantir ses performances." },
         ].map((item, i) => (
