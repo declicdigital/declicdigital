@@ -211,7 +211,7 @@ La vitesse n'est pas un luxe technique, c'est un levier commercial. Un site qui 
     content: `
 ## Municipales Paris 2026 : le digital comme levier électoral
 
-Les élections municipales de Paris en 2026 ont mis en lumière un phénomène que les professionnels du web observent depuis longtemps : un site internet bien conçu et une stratégie digitale cohérente peuvent transformer la visibilité d'un candidat. Le cas de Knafo, qui a atteint environ 10% des suffrages, illustre parfaitement cette réalité.
+Les élections municipales de Paris en 2026 ont mis en lumière un phénomène que les professionnels du web observent depuis longtemps : un [site internet bien conçu](/creation-site-internet) et une stratégie digitale cohérente peuvent transformer la visibilité d'un candidat. Le cas de Knafo, qui a atteint environ 10% des suffrages, illustre parfaitement cette réalité.
 
 ## Le site web de Knafo : une vitrine politique efficace
 
