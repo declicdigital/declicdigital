@@ -81,32 +81,30 @@ const AdminClientDetail = () => {
   const loadAll = async () => {
     setLoading(true);
 
-    const { data: profile } = await supabase
-      .from("profiles")
-      .select("*")
-      .eq("id", clientId)
-      .single();
+    // Step 1: profile + project in parallel
+    const [{ data: profile }, { data: projects }] = await Promise.all([
+      supabase.from("profiles").select("*").eq("id", clientId).single(),
+      supabase.from("projects").select("*").eq("client_id", clientId).limit(1),
+    ]);
+
     setClient(profile);
     setEmailDraft(profile?.email || "");
     setNameDraft(profile?.full_name || "");
-
-    const { data: projects } = await supabase
-      .from("projects")
-      .select("*")
-      .eq("client_id", clientId)
-      .limit(1);
 
     const proj = projects?.[0] || null;
     setProject(proj);
 
     if (proj) {
-      const { data: tasksData } = await supabase
-        .from("project_tasks")
-        .select("*")
-        .eq("project_id", proj.id)
-        .order("sort_order", { ascending: true });
-      setTasks(tasksData || []);
+      // Step 2: tasks + documents in parallel
+      const [{ data: tasksData }, { data: docsData }] = await Promise.all([
+        supabase.from("project_tasks").select("*").eq("project_id", proj.id).order("sort_order", { ascending: true }),
+        supabase.from("project_documents").select("*").eq("project_id", proj.id).order("created_at", { ascending: false }),
+      ]);
 
+      setTasks(tasksData || []);
+      setDocuments(docsData || []);
+
+      // Step 3: comments if tasks exist
       if (tasksData && tasksData.length > 0) {
         const taskIds = tasksData.map((t: any) => t.id);
         const { data: commentsData } = await supabase
@@ -122,13 +120,6 @@ const AdminClientDetail = () => {
         });
         setComments(grouped);
       }
-
-      const { data: docsData } = await supabase
-        .from("project_documents")
-        .select("*")
-        .eq("project_id", proj.id)
-        .order("created_at", { ascending: false });
-      setDocuments(docsData || []);
     }
 
     setLoading(false);
