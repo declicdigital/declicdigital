@@ -253,12 +253,12 @@ const AdminSoumissions = () => {
     ];
 
     const checkNewPage = (needed: number) => {
-      if (y + needed > pageHeight - 22) {
+      if (y + needed > pageHeight - 16) {
         drawFooter(pageNum);
         doc.addPage();
         pageNum++;
-        drawHeader();
-        y = 54;
+        drawHeader(false);
+        y = 14;
       }
     };
 
