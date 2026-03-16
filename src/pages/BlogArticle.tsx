@@ -53,7 +53,8 @@ const BlogArticle = () => {
   };
 
   const renderInline = (text: string) => {
-    const parts = text.split(/(\*\*[^*]+\*\*)/g);
+    // Split on **bold** and [link](url) patterns
+    const parts = text.split(/(\*\*[^*]+\*\*|\[[^\]]+\]\([^)]+\))/g);
     return parts.map((part, i) => {
       if (part.startsWith("**") && part.endsWith("**"))
         return (
@@ -61,6 +62,21 @@ const BlogArticle = () => {
             {part.slice(2, -2)}
           </strong>
         );
+      const linkMatch = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+      if (linkMatch) {
+        const [, linkText, url] = linkMatch;
+        const isExternal = url.startsWith("http");
+        return (
+          <Link
+            key={i}
+            to={url}
+            className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
+            {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+          >
+            {linkText}
+          </Link>
+        );
+      }
       return part;
     });
   };

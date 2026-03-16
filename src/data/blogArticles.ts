@@ -74,7 +74,7 @@ Pour un [site vitrine professionnel](/creation-site-internet), un hébergement c
 
 ## À retenir
 
-Ne choisissez jamais votre hébergement uniquement sur le prix. Un site lent ou indisponible coûte bien plus cher en clients perdus qu'un hébergement de qualité. Investir 20 à 50 euros par mois dans un bon hébergement, c'est protéger votre activité en ligne.
+Ne choisissez jamais votre hébergement uniquement sur le prix. Un site lent ou indisponible coûte bien plus cher en clients perdus qu'un hébergement de qualité. Investir 20 à 50 euros par mois dans un bon hébergement, c'est protéger votre activité en ligne. [Demandez un audit gratuit](/audit-seo-gratuit) pour vérifier les performances de votre site.
     `,
   },
   {
