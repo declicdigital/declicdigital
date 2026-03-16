@@ -11,6 +11,13 @@ import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
 /* ───── types ───── */
+interface TeamMember {
+  name: string;
+  role: string;
+  bio: string;
+  photo: File | null;
+}
+
 interface FormData {
   full_name: string;
   company: string;
@@ -35,6 +42,8 @@ interface FormData {
   feat: string[];
   feat_autre_detail: string;
   vibe: string;
+  team_enabled: boolean;
+  team_photos_enabled: boolean;
   dl: string;
   kdate: string;
   auto: string;
@@ -53,7 +62,9 @@ const initial: FormData = {
   full_name: "", company: "", email: "", phone: "", sector: "", size: "",
   current_url: "", source: "", pt: [], desc: "", inspo: "", kw: "", goal: "",
   csrc: [], budget: "", recur: "", urgency: "", brand: "", cont: [], pages: "",
-  feat: [], feat_autre_detail: "", vibe: "", dl: "", kdate: "", auto: "",
+  feat: [], feat_autre_detail: "", vibe: "",
+  team_enabled: false, team_photos_enabled: false,
+  dl: "", kdate: "", auto: "",
   wlevel: "", past: "", pastissue: "", msg: "", cp: "", slot: "", ftype: [],
   file_link: "", file_notes: "",
 };
