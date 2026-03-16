@@ -153,9 +153,11 @@ const FieldGroup = ({ children, cols = 1 }: { children: React.ReactNode; cols?: 
 const FormulaireClient = () => {
   const [f, setF] = useState<FormData>(initial);
   const [files, setFiles] = useState<File[]>([]);
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([{ name: "", role: "", bio: "", photo: null }]);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const fileRef = useRef<HTMLInputElement>(null);
+  const teamPhotoRefs = useRef<(HTMLInputElement | null)[]>([]);
   const { toast } = useToast();
 
   const set = <K extends keyof FormData>(k: K, v: FormData[K]) => setF(prev => ({ ...prev, [k]: v }));
