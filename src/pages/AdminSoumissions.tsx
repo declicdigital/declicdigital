@@ -136,6 +136,7 @@ const AdminSoumissions = () => {
   const [subs, setSubs] = useState<Submission[]>([]);
   const [selected, setSelected] = useState<Submission | null>(null);
   const [loading, setLoading] = useState(true);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     supabase
