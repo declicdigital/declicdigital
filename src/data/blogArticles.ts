@@ -194,7 +194,7 @@ Sans cache navigateur et serveur, chaque visite recharge l'intégralité du site
 
 ## L'impact SEO direct
 
-Google ne se contente pas de mesurer la vitesse : il la pondère dans son algorithme. Un site rapide a plus de chances d'apparaître en première page qu'un site lent, à contenu égal. C'est un avantage compétitif concret, surtout sur des requêtes locales comme "[création site web Paris](/creation-site-internet-paris)".
+Google ne se contente pas de mesurer la vitesse : il la pondère dans son algorithme. Un site rapide a plus de chances d'apparaître en première page qu'un site lent, à contenu égal. C'est un avantage compétitif concret, surtout sur des requêtes locales comme "[création site web Paris](/creation-site-web)".
 
 ## Conclusion
 
