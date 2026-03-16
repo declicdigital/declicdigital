@@ -177,69 +177,72 @@ const AdminSoumissions = () => {
     });
     await logoLoaded;
 
-    const drawHeader = () => {
-      // Dark background matching site foreground
-      doc.setFillColor(23, 25, 35);
-      doc.rect(0, 0, pageWidth, 44, "F");
-      // Accent line (primary blue)
-      doc.setFillColor(14, 165, 233);
-      doc.rect(0, 44, pageWidth, 2, "F");
+    const drawHeader = (isFirstPage: boolean = false) => {
+      // Gradient band: blue to pink (miami style)
+      const bandH = isFirstPage ? 6 : 4;
+      // Blue half
+      doc.setFillColor(56, 189, 248);
+      doc.rect(0, 0, pageWidth / 2, bandH, "F");
+      // Pink half
+      doc.setFillColor(244, 114, 182);
+      doc.rect(pageWidth / 2, 0, pageWidth / 2, bandH, "F");
 
-      // Logo
-      try { doc.addImage(logoImg, "PNG", margin, 8, 36, 12); } catch {}
+      if (isFirstPage) {
+        // Logo at natural scale (approx 120x40 original, scale to ~30x10)
+        try { doc.addImage(logoImg, "PNG", margin, bandH + 6, 30, 10); } catch {}
 
-      // Company info right
-      doc.setTextColor(255, 255, 255);
-      doc.setFontSize(8);
-      doc.setFont("helvetica", "normal");
-      doc.text("declicdigital.net", pageWidth - margin, 14, { align: "right" });
-      doc.text("contact@declicdigital.net", pageWidth - margin, 20, { align: "right" });
-      doc.text("06.02.22.89.39", pageWidth - margin, 26, { align: "right" });
-      doc.setFontSize(7);
-      doc.setTextColor(180, 180, 190);
-      doc.text("SIRET 102 436 664 00019", pageWidth - margin, 34, { align: "right" });
+        // Contact info right aligned
+        doc.setTextColor(100, 100, 115);
+        doc.setFontSize(7.5);
+        doc.setFont("helvetica", "normal");
+        doc.text("declicdigital.net | contact@declicdigital.net | 06.02.22.89.39", pageWidth - margin, bandH + 12, { align: "right" });
+      }
     };
 
     const drawFooter = (pageNum: number) => {
-      doc.setFillColor(23, 25, 35);
-      doc.rect(0, pageHeight - 14, pageWidth, 14, "F");
-      doc.setTextColor(140, 140, 155);
+      doc.setTextColor(160, 160, 170);
       doc.setFontSize(7);
       doc.setFont("helvetica", "normal");
-      doc.text("Déclic Digital - Fiche Client Confidentielle", margin, pageHeight - 5);
-      doc.text(`Page ${pageNum}`, pageWidth - margin, pageHeight - 5, { align: "right" });
+      doc.text("Déclic Digital - Fiche Client Confidentielle", margin, pageHeight - 8);
+      doc.text(`Page ${pageNum}`, pageWidth - margin, pageHeight - 8, { align: "right" });
     };
 
     let pageNum = 1;
-    drawHeader();
+    drawHeader(true);
 
-    // Title section
-    let y = 56;
-    doc.setFillColor(240, 245, 250);
-    doc.roundedRect(margin, y, contentWidth, 28, 3, 3, "F");
-    doc.setFontSize(14);
+    // Presentation block
+    let y = 26;
+    doc.setFontSize(16);
     doc.setFont("helvetica", "bold");
     doc.setTextColor(23, 25, 35);
-    doc.text("Fiche Client", margin + 8, y + 11);
-    doc.setFontSize(9);
-    doc.setFont("helvetica", "normal");
-    doc.setTextColor(100, 100, 115);
-    const dateStr = new Date(sub.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" });
-    doc.text(dateStr, margin + 8, y + 21);
-    if (d.full_name) {
-      doc.setFontSize(11);
-      doc.setFont("helvetica", "bold");
-      doc.setTextColor(14, 165, 233);
-      doc.text(d.full_name, pageWidth - margin - 8, y + 11, { align: "right" });
-      if (d.company) {
-        doc.setFontSize(9);
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor(100, 100, 115);
-        doc.text(d.company, pageWidth - margin - 8, y + 21, { align: "right" });
-      }
-    }
+    doc.text("Fiche Client", margin, y);
+    y += 6;
+    doc.setDrawColor(56, 189, 248);
+    doc.setLineWidth(0.5);
+    doc.line(margin, y, margin + 40, y);
+    y += 8;
 
-    y += 38;
+    // Quick info: Nom, Entreprise, Type de projet, Date
+    const quickInfo: [string, string][] = [];
+    if (d.full_name) quickInfo.push(["Nom", d.full_name]);
+    if (d.company) quickInfo.push(["Entreprise", d.company]);
+    const pt = Array.isArray(d.pt) ? d.pt.join(", ") : d.pt;
+    if (pt) quickInfo.push(["Type de projet", pt]);
+    const dateStr = new Date(sub.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" });
+    quickInfo.push(["Date", dateStr]);
+
+    quickInfo.forEach(([label, value]) => {
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(80, 80, 95);
+      doc.text(label + " :", margin, y);
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(23, 25, 35);
+      doc.text(value, margin + 36, y);
+      y += 6;
+    });
+
+    y += 6;
 
     // Section groups
     const sections: { title: string; keys: string[] }[] = [
