@@ -126,7 +126,7 @@ Les chatbots intelligents, la personnalisation du contenu en temps réel et les 
 
 Ne suivez pas toutes les tendances en même temps. Choisissez celles qui correspondent à votre marque et à votre audience. Un artisan local n'a pas les mêmes besoins visuels qu'une startup tech.
 
-L'essentiel reste la cohérence : un design qui reflète votre identité et facilite la conversion de vos visiteurs en clients.
+L'essentiel reste la cohérence : un design qui reflète votre identité et facilite la conversion de vos visiteurs en clients. [Découvrez nos réalisations](/realisations) pour voir comment nous appliquons ces tendances. Besoin d'un avis sur votre site ? [Demandez un audit SEO gratuit](/audit-seo-gratuit).
     `,
   },
   {
