@@ -144,7 +144,7 @@ L'essentiel reste la cohérence : un design qui reflète votre identité et faci
     content: `
 ## La vitesse, facteur invisible de votre réussite en ligne
 
-Quand un entrepreneur investit dans un site web, il pense au design, au contenu, peut-être au SEO. Mais la vitesse de chargement est souvent négligée. C'est pourtant l'un des facteurs les plus impactants sur votre chiffre d'affaires.
+Quand un entrepreneur investit dans un [site web](/creation-site-internet), il pense au design, au contenu, peut-être au [SEO](/referencement-seo). Mais la vitesse de chargement est souvent négligée. C'est pourtant l'un des facteurs les plus impactants sur votre chiffre d'affaires.
 
 ## Les chiffres qui parlent
 
