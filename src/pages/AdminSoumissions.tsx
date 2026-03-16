@@ -1,42 +1,26 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FileText, Calendar, User, Building2, Mail, ChevronRight, Download, Copy, Check } from "lucide-react";
+import { FileText, Calendar, User, Building2, Mail, ChevronRight, Download, Copy, Check, Trash2, Clock, Eye, CheckCircle2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import jsPDF from "jspdf";
-import logoSrc from "@/assets/logo-declic-digital.png";
 
 const generateBriefPrompt = (d: any): string => {
   const lines: string[] = [];
-
   lines.push(`Agis comme un directeur UX, copywriter senior, expert SEO et web designer. Tu dois créer un site web complet pour le client suivant.\n`);
-
-  // Client info (only company, email, phone, sector)
   lines.push(`CLIENT`);
   if (d.company) lines.push(`Entreprise : ${d.company}`);
   if (d.email) lines.push(`Email : ${d.email}`);
   if (d.phone) lines.push(`Téléphone : ${d.phone}`);
   if (d.sector) lines.push(`Secteur d'activité : ${d.sector}`);
   lines.push('');
-
-  // Project type
   const pt = Array.isArray(d.pt) ? d.pt.join(", ") : d.pt;
   if (pt) lines.push(`TYPE DE PROJET\n${pt}\n`);
-
-  // Description
   if (d.desc) lines.push(`DESCRIPTION DU PROJET\n${d.desc}\n`);
-
-  // Objectives
   if (d.goal) lines.push(`OBJECTIF PRINCIPAL\n${d.goal}\n`);
-
-  // SEO & Keywords
   if (d.kw) lines.push(`MOTS-CLES SEO CIBLES\nIntègre ces mots-clés dans la structure du site, les titres, le contenu et les meta descriptions :\n${d.kw}\n`);
-
-  // Pages
   if (d.pages) lines.push(`NOMBRE DE PAGES SOUHAITE\n${d.pages}\n`);
-
-  // Features
   const feat = Array.isArray(d.feat) ? d.feat.join(", ") : d.feat;
   if (feat) {
     lines.push(`FONCTIONNALITES REQUISES`);
@@ -44,22 +28,12 @@ const generateBriefPrompt = (d: any): string => {
     if (d.feat_autre_detail) lines.push(`Détail supplémentaire : ${d.feat_autre_detail}`);
     lines.push('');
   }
-
-  // Visual identity & branding
   if (d.brand) lines.push(`IDENTITE VISUELLE EXISTANTE\n${d.brand}\n`);
   if (d.vibe) lines.push(`AMBIANCE VISUELLE SOUHAITEE\n${d.vibe}\n`);
-
-  // Inspiration
   if (d.inspo) lines.push(`SITES D'INSPIRATION\nAnalyse ces sites et inspire-toi de leurs points forts :\n${d.inspo}\n`);
-
-  // Content
   const cont = Array.isArray(d.cont) ? d.cont.join(", ") : d.cont;
   if (cont) lines.push(`CONTENU DISPONIBLE\n${cont}\n`);
-
-  // Free message
   if (d.msg) lines.push(`MESSAGE LIBRE DU CLIENT\n${d.msg}\n`);
-
-  // Final instructions
   lines.push(`INSTRUCTIONS DE REALISATION`);
   lines.push(`- Le site doit être responsive mobile et desktop avec une UX moderne.`);
   lines.push(`- Optimisation SEO : structure logique, mots-clés intégrés, balises Hn cohérentes, meta descriptions.`);
@@ -68,17 +42,26 @@ const generateBriefPrompt = (d: any): string => {
   lines.push(`- Conversion : CTA contrastés, parcours utilisateur fluide, formulaire de contact.`);
   lines.push(`- Le site doit inspirer confiance, expertise et professionnalisme.`);
   lines.push(`- Prends en compte TOUTES les informations ci-dessus sans rien oublier.`);
-
   return lines.join('\n');
 };
-
 
 interface Submission {
   id: string;
   created_at: string;
   data: any;
   file_paths: string[];
+  status: string;
 }
+
+type StatusType = "en_attente" | "lu" | "termine";
+
+const STATUS_CONFIG: Record<StatusType, { label: string; icon: any; color: string; badgeClass: string }> = {
+  en_attente: { label: "En attente", icon: Clock, color: "text-amber-500", badgeClass: "bg-amber-500/10 text-amber-600 border-amber-500/20" },
+  lu: { label: "Lu", icon: Eye, color: "text-blue-500", badgeClass: "bg-blue-500/10 text-blue-600 border-blue-500/20" },
+  termine: { label: "Terminé", icon: CheckCircle2, color: "text-emerald-500", badgeClass: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" },
+};
+
+const STATUSES: StatusType[] = ["en_attente", "lu", "termine"];
 
 const ALL_FORM_KEYS = [
   "full_name", "company", "email", "phone", "sector", "size", "current_url", "source",
@@ -116,8 +99,9 @@ const AdminSoumissions = () => {
   const [selected, setSelected] = useState<Submission | null>(null);
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [filterStatus, setFilterStatus] = useState<StatusType | "all">("all");
 
-  useEffect(() => {
+  const fetchSubs = () => {
     supabase
       .from("form_submissions")
       .select("*")
@@ -126,7 +110,22 @@ const AdminSoumissions = () => {
         setSubs((data as any) || []);
         setLoading(false);
       });
-  }, []);
+  };
+
+  useEffect(() => { fetchSubs(); }, []);
+
+  const updateStatus = async (id: string, status: StatusType) => {
+    await supabase.from("form_submissions").update({ status } as any).eq("id", id);
+    setSubs((prev) => prev.map((s) => (s.id === id ? { ...s, status } : s)));
+    if (selected?.id === id) setSelected((prev) => prev ? { ...prev, status } : prev);
+  };
+
+  const deleteSub = async (id: string) => {
+    if (!confirm("Supprimer cette soumission ? Cette action est irréversible.")) return;
+    await supabase.from("form_submissions").delete().eq("id", id);
+    setSubs((prev) => prev.filter((s) => s.id !== id));
+    if (selected?.id === id) setSelected(null);
+  };
 
   const getFileUrl = (path: string) => {
     const { data } = supabase.storage.from("form-files").getPublicUrl(path);
@@ -146,8 +145,6 @@ const AdminSoumissions = () => {
     const margin = 16;
     const contentWidth = pageWidth - margin * 2;
 
-    // No logo needed anymore
-    
     const drawFooter = (pageNum: number) => {
       doc.setTextColor(160, 160, 170);
       doc.setFontSize(7);
@@ -157,8 +154,6 @@ const AdminSoumissions = () => {
     };
 
     let pageNum = 1;
-
-    // First page: simple presentation
     let y = 16;
     doc.setFontSize(16);
     doc.setFont("helvetica", "bold");
@@ -213,8 +208,6 @@ const AdminSoumissions = () => {
       if (entries.length === 0) return;
 
       checkNewPage(20);
-
-      // Section title
       doc.setFillColor(14, 165, 233);
       doc.rect(margin, y, 3, 8, "F");
       doc.setFontSize(10);
@@ -228,7 +221,6 @@ const AdminSoumissions = () => {
         const rowH = Math.max(lines.length * 4.5, 6) + 4;
         checkNewPage(rowH + 2);
 
-        // Zebra row
         doc.setFillColor(248, 249, 252);
         doc.rect(margin, y - 3, contentWidth, rowH + 2, "F");
 
@@ -245,7 +237,6 @@ const AdminSoumissions = () => {
       y += 6;
     });
 
-    // Attached files
     if (sub.file_paths && sub.file_paths.length > 0) {
       checkNewPage(20);
       doc.setFillColor(14, 165, 233);
@@ -265,7 +256,6 @@ const AdminSoumissions = () => {
       });
     }
 
-    // Brief prompt recap
     y += 4;
     checkNewPage(30);
     doc.setFillColor(14, 165, 233);
@@ -285,7 +275,6 @@ const AdminSoumissions = () => {
       doc.setFontSize(7);
       doc.setFont("helvetica", "normal");
       doc.setTextColor(60, 60, 75);
-      // Bold section headers (ALL CAPS lines)
       if (line === line.toUpperCase() && line.trim().length > 2 && !/^[-•]/.test(line)) {
         doc.setFont("helvetica", "bold");
         doc.setTextColor(23, 25, 35);
@@ -300,30 +289,71 @@ const AdminSoumissions = () => {
     doc.save(`fiche_${name}.pdf`);
   };
 
+  const filteredSubs = filterStatus === "all" ? subs : subs.filter((s) => s.status === filterStatus);
+
+  const statusCounts = {
+    all: subs.length,
+    en_attente: subs.filter((s) => s.status === "en_attente").length,
+    lu: subs.filter((s) => s.status === "lu").length,
+    termine: subs.filter((s) => s.status === "termine").length,
+  };
+
+  // ==================== DETAIL VIEW ====================
   if (selected) {
     const d = selected.data;
+    const currentStatus = (selected.status || "en_attente") as StatusType;
+    const StatusIcon = STATUS_CONFIG[currentStatus].icon;
+
     return (
       <div className="min-h-screen bg-background">
         <div className="border-b border-border bg-card">
-          <div className="container py-4 flex items-center gap-4">
+          <div className="container py-4 flex items-center gap-4 flex-wrap">
             <Button variant="ghost" size="sm" onClick={() => setSelected(null)}>← Retour</Button>
             <h1 className="text-lg font-bold">Soumission de {d.full_name || "Inconnu"}</h1>
-            <div className="ml-auto flex items-center gap-3">
+            <div className="ml-auto flex items-center gap-2 flex-wrap">
+              {/* Status buttons */}
+              <div className="flex items-center gap-1 border border-border rounded-lg p-1 bg-muted/30">
+                {STATUSES.map((st) => {
+                  const cfg = STATUS_CONFIG[st];
+                  const Icon = cfg.icon;
+                  const isActive = currentStatus === st;
+                  return (
+                    <button
+                      key={st}
+                      onClick={() => updateStatus(selected.id, st)}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+                        isActive ? cfg.badgeClass + " shadow-sm" : "text-muted-foreground hover:bg-muted"
+                      }`}
+                    >
+                      <Icon className="h-3.5 w-3.5" />
+                      {cfg.label}
+                    </button>
+                  );
+                })}
+              </div>
               <Button variant="outline" size="sm" onClick={() => downloadPdf(selected)}>
-                <Download className="h-4 w-4 mr-1" /> Télécharger PDF
+                <Download className="h-4 w-4 mr-1" /> PDF
               </Button>
-              <span className="text-xs text-muted-foreground">
-                {new Date(selected.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}
-              </span>
+              <Button variant="destructive" size="sm" onClick={() => deleteSub(selected.id)}>
+                <Trash2 className="h-4 w-4 mr-1" /> Supprimer
+              </Button>
             </div>
           </div>
         </div>
         <div className="container py-8 max-w-5xl">
           <div className="rounded-2xl border border-border bg-card shadow-card overflow-hidden">
             <div className="gradient-miami p-6">
-              <h2 className="text-xl font-extrabold text-primary-foreground">{d.full_name}</h2>
-              <p className="text-primary-foreground/80 text-sm">{d.company} · {d.email}</p>
-              <p className="text-primary-foreground/70 text-xs mt-1">{getCompletionPercent(d)}% des questions répondues</p>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h2 className="text-xl font-extrabold text-primary-foreground">{d.full_name}</h2>
+                  <p className="text-primary-foreground/80 text-sm">{d.company} · {d.email}</p>
+                  <p className="text-primary-foreground/70 text-xs mt-1">{getCompletionPercent(d)}% des questions répondues</p>
+                </div>
+                <div className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold ${STATUS_CONFIG[currentStatus].badgeClass}`}>
+                  <StatusIcon className="h-4 w-4" />
+                  {STATUS_CONFIG[currentStatus].label}
+                </div>
+              </div>
             </div>
             <div className="divide-y divide-border">
               {[
@@ -417,6 +447,7 @@ const AdminSoumissions = () => {
     );
   }
 
+  // ==================== LIST VIEW ====================
   return (
     <div className="min-h-screen bg-background">
       <div className="border-b border-border bg-card">
@@ -426,42 +457,105 @@ const AdminSoumissions = () => {
         </div>
       </div>
       <div className="container py-8 max-w-4xl">
+        {/* Status filter tabs */}
+        <div className="flex items-center gap-2 mb-6 flex-wrap">
+          {(["all", ...STATUSES] as const).map((st) => {
+            const isAll = st === "all";
+            const label = isAll ? "Toutes" : STATUS_CONFIG[st].label;
+            const Icon = isAll ? FileText : STATUS_CONFIG[st].icon;
+            const count = statusCounts[st];
+            const isActive = filterStatus === st;
+            return (
+              <button
+                key={st}
+                onClick={() => setFilterStatus(st)}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all border ${
+                  isActive
+                    ? isAll
+                      ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                      : STATUS_CONFIG[st as StatusType].badgeClass + " shadow-sm"
+                    : "bg-card text-muted-foreground border-border hover:bg-muted"
+                }`}
+              >
+                <Icon className="h-4 w-4" />
+                {label}
+                <span className={`text-xs font-bold rounded-full px-2 py-0.5 ${isActive ? "bg-white/20" : "bg-muted"}`}>{count}</span>
+              </button>
+            );
+          })}
+        </div>
+
         {loading ? (
           <div className="text-center text-muted-foreground py-16">Chargement…</div>
-        ) : subs.length === 0 ? (
-          <div className="text-center text-muted-foreground py-16">Aucune soumission pour le moment.</div>
+        ) : filteredSubs.length === 0 ? (
+          <div className="text-center text-muted-foreground py-16">Aucune soumission {filterStatus !== "all" ? `avec le statut "${STATUS_CONFIG[filterStatus as StatusType]?.label}"` : ""}</div>
         ) : (
           <div className="space-y-3">
-            {subs.map((s, i) => (
-              <motion.div
-                key={s.id}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
-                onClick={() => setSelected(s)}
-                className="flex items-center gap-4 rounded-xl border border-border bg-card p-5 shadow-card hover:shadow-elevated hover:border-primary/20 cursor-pointer transition-all group"
-              >
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-primary-foreground">
-                  <FileText className="h-5 w-5" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-center gap-2">
-                    <User className="h-3.5 w-3.5 text-muted-foreground" />
-                    <span className="font-semibold text-sm truncate">{s.data?.full_name || "Sans nom"}</span>
+            {filteredSubs.map((s, i) => {
+              const status = (s.status || "en_attente") as StatusType;
+              const cfg = STATUS_CONFIG[status];
+              const StatusIcon = cfg.icon;
+              return (
+                <motion.div
+                  key={s.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  className="flex items-center gap-4 rounded-xl border border-border bg-card p-5 shadow-card hover:shadow-elevated hover:border-primary/20 transition-all group"
+                >
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-primary-foreground">
+                    <FileText className="h-5 w-5" />
                   </div>
-                  <div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
-                    {s.data?.company && <span className="flex items-center gap-1"><Building2 className="h-3 w-3" />{s.data.company}</span>}
-                    {s.data?.email && <span className="flex items-center gap-1"><Mail className="h-3 w-3" />{s.data.email}</span>}
-                    <span className="flex items-center gap-1">
-                      <Calendar className="h-3 w-3" />
-                      {new Date(s.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}
-                    </span>
-                    <span className="font-medium text-primary">{getCompletionPercent(s.data)}%</span>
+                  <div className="flex-1 min-w-0 cursor-pointer" onClick={() => setSelected(s)}>
+                    <div className="flex items-center gap-2">
+                      <User className="h-3.5 w-3.5 text-muted-foreground" />
+                      <span className="font-semibold text-sm truncate">{s.data?.full_name || "Sans nom"}</span>
+                      <span className={`inline-flex items-center gap-1 text-[11px] font-medium rounded-full px-2 py-0.5 border ${cfg.badgeClass}`}>
+                        <StatusIcon className="h-3 w-3" />
+                        {cfg.label}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
+                      {s.data?.company && <span className="flex items-center gap-1"><Building2 className="h-3 w-3" />{s.data.company}</span>}
+                      {s.data?.email && <span className="flex items-center gap-1"><Mail className="h-3 w-3" />{s.data.email}</span>}
+                      <span className="flex items-center gap-1">
+                        <Calendar className="h-3 w-3" />
+                        {new Date(s.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}
+                      </span>
+                      <span className="font-medium text-primary">{getCompletionPercent(s.data)}%</span>
+                    </div>
                   </div>
-                </div>
-                <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
-              </motion.div>
-            ))}
+                  <div className="flex items-center gap-1">
+                    {/* Quick status toggle */}
+                    {STATUSES.map((st) => {
+                      const stCfg = STATUS_CONFIG[st];
+                      const StIcon = stCfg.icon;
+                      const isActive = status === st;
+                      return (
+                        <button
+                          key={st}
+                          title={stCfg.label}
+                          onClick={(e) => { e.stopPropagation(); updateStatus(s.id, st); }}
+                          className={`p-1.5 rounded-md transition-all ${
+                            isActive ? stCfg.color + " bg-current/10" : "text-muted-foreground/40 hover:text-muted-foreground"
+                          }`}
+                        >
+                          <StIcon className="h-4 w-4" />
+                        </button>
+                      );
+                    })}
+                    <button
+                      title="Supprimer"
+                      onClick={(e) => { e.stopPropagation(); deleteSub(s.id); }}
+                      className="p-1.5 rounded-md text-muted-foreground/40 hover:text-destructive transition-all ml-1"
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </button>
+                    <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors ml-1 cursor-pointer" onClick={() => setSelected(s)} />
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         )}
       </div>
