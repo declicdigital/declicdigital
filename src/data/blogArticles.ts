@@ -208,7 +208,7 @@ La vitesse n'est pas un luxe technique, c'est un levier commercial. Un site qui 
     tags: ["municipales Paris", "campagne digitale", "site web politique", "Knafo", "stratégie web", "élections"],
     image: "/src/assets/knafo-campagne-digitale-municipales-paris.jpg",
     relatedSlugs: ["tendances-web-design-2026", "vitesse-site-web-impact-chiffre-affaires"],
-    content: \`
+    content: `
 ## Municipales Paris 2026 : le digital comme levier électoral
 
 Les élections municipales de Paris en 2026 ont mis en lumière un phénomène que les professionnels du web observent depuis longtemps : un site internet bien conçu et une stratégie digitale cohérente peuvent transformer la visibilité d'un candidat. Le cas de Knafo, qui a atteint environ 10% des suffrages, illustre parfaitement cette réalité.
@@ -260,7 +260,7 @@ Un artisan du 15ème arrondissement, un restaurant à Boulogne-Billancourt ou un
 ## Conclusion
 
 Les municipales de Paris 2026 confirment que la présence digitale n'est plus optionnelle. Knafo a démontré qu'un site web performant, combiné à une stratégie de contenu et de référencement, peut faire la différence. Pour les entreprises parisiennes, la leçon est claire : investir dans votre site web et votre SEO, c'est investir dans votre visibilité et votre croissance.
-    \`,
+    `,
   },
 ];
 
