@@ -178,10 +178,13 @@ const AdminSoumissions = () => {
     };
 
     const sections: { title: string; keys: string[] }[] = [
-      { title: "Informations", keys: ["full_name", "company", "email", "phone", "sector", "size", "current_url", "source"] },
-      { title: "Projet", keys: ["pt", "desc", "inspo", "kw", "goal", "csrc", "budget", "recur", "urgency", "pages", "feat", "feat_autre_detail", "vibe", "dl", "kdate"] },
-      { title: "Profil & Préférences", keys: ["brand", "cont", "auto", "wlevel", "past", "pastissue", "msg", "cp", "slot"] },
-      { title: "Fichiers", keys: ["ftype", "file_link", "file_notes"] },
+      { title: "Votre profil", keys: ["full_name", "company", "email", "phone", "sector", "size", "current_url", "source"] },
+      { title: "Votre projet", keys: ["pt", "desc", "inspo", "kw"] },
+      { title: "Objectifs & budget", keys: ["goal", "csrc", "budget", "recur", "urgency"] },
+      { title: "Contenu & design", keys: ["brand", "cont", "pages", "feat", "feat_autre_detail", "vibe"] },
+      { title: "Délais & organisation", keys: ["dl", "kdate", "auto", "wlevel", "past", "pastissue"] },
+      { title: "Message libre", keys: ["msg", "cp", "slot"] },
+      { title: "Fichiers & visuels", keys: ["ftype", "file_link", "file_notes"] },
     ];
 
     sections.forEach((section) => {
