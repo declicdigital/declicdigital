@@ -51,6 +51,63 @@ const AdminSoumissions = () => {
     if (data?.signedUrl) window.open(data.signedUrl, "_blank");
   };
 
+  const downloadPdf = (sub: Submission) => {
+    const d = sub.data;
+    const doc = new jsPDF();
+    const pageWidth = doc.internal.pageSize.getWidth();
+    let y = 20;
+
+    // Header
+    doc.setFillColor(56, 189, 248);
+    doc.rect(0, 0, pageWidth, 35, "F");
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(18);
+    doc.setFont("helvetica", "bold");
+    doc.text("Declic Digital - Fiche Client", 14, 16);
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "normal");
+    doc.text(new Date(sub.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" }), 14, 28);
+
+    y = 45;
+    doc.setTextColor(0, 0, 0);
+
+    Object.entries(d).forEach(([key, value]) => {
+      if (!value || (Array.isArray(value) && value.length === 0) || (typeof value === "string" && !value.trim())) return;
+      const label = FIELD_LABELS[key] || key;
+      const display = Array.isArray(value) ? value.join(", ") : String(value);
+
+      if (y > 270) { doc.addPage(); y = 20; }
+
+      doc.setFontSize(9);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(80, 80, 80);
+      doc.text(label, 14, y);
+
+      doc.setFont("helvetica", "normal");
+      doc.setTextColor(30, 30, 30);
+      const lines = doc.splitTextToSize(display, pageWidth - 70);
+      doc.text(lines, 60, y);
+      y += Math.max(lines.length * 5, 7) + 3;
+    });
+
+    if (sub.file_paths && sub.file_paths.length > 0) {
+      if (y > 260) { doc.addPage(); y = 20; }
+      doc.setFont("helvetica", "bold");
+      doc.setFontSize(9);
+      doc.text("Fichiers joints :", 14, y);
+      y += 6;
+      doc.setFont("helvetica", "normal");
+      sub.file_paths.forEach((p) => {
+        if (y > 280) { doc.addPage(); y = 20; }
+        doc.text("- " + (p.split("/").pop() || p), 18, y);
+        y += 5;
+      });
+    }
+
+    const name = (d.full_name || "soumission").replace(/\s+/g, "_");
+    doc.save(`fiche_${name}.pdf`);
+  };
+
   if (selected) {
     const d = selected.data;
     return (
@@ -59,9 +116,14 @@ const AdminSoumissions = () => {
           <div className="container py-4 flex items-center gap-4">
             <Button variant="ghost" size="sm" onClick={() => setSelected(null)}>← Retour</Button>
             <h1 className="text-lg font-bold">Soumission de {d.full_name || "Inconnu"}</h1>
-            <span className="text-xs text-muted-foreground ml-auto">
-              {new Date(selected.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}
-            </span>
+            <div className="ml-auto flex items-center gap-3">
+              <Button variant="outline" size="sm" onClick={() => downloadPdf(selected)}>
+                <Download className="h-4 w-4 mr-1" /> Télécharger PDF
+              </Button>
+              <span className="text-xs text-muted-foreground">
+                {new Date(selected.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}
+              </span>
+            </div>
           </div>
         </div>
         <div className="container py-8 max-w-5xl">
