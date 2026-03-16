@@ -5,6 +5,7 @@ import { FileText, Calendar, User, Building2, Mail, ChevronRight, Download } fro
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import jsPDF from "jspdf";
+import logoSrc from "@/assets/logo-declic-digital.png";
 
 interface Submission {
   id: string;
