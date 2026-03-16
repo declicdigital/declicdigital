@@ -211,6 +211,22 @@ const FormulaireClient = () => {
         if (!error) filePaths.push(path);
       }
 
+      // Upload team photos
+      if (f.team_enabled && f.team_photos_enabled) {
+        for (const member of teamMembers) {
+          if (member.photo) {
+            const path = `${submissionId}/equipe/${member.photo.name}`;
+            const { error } = await supabase.storage.from("form-files").upload(path, member.photo);
+            if (!error) filePaths.push(path);
+          }
+        }
+      }
+
+      // Prepare team data (without File objects)
+      const teamData = f.team_enabled
+        ? teamMembers.map(m => ({ name: m.name, role: m.role, bio: m.bio, photo_name: m.photo?.name || "" }))
+        : [];
+
       // Save to DB
       const { error } = await supabase.from("form_submissions").insert({
         id: submissionId,
