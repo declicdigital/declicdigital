@@ -341,6 +341,40 @@ const AdminClientDetail = () => {
           </CardContent>
         </Card>
 
+        {/* Gestion du compte client */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Mail className="h-5 w-5 text-primary" />
+              Compte client
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid gap-3 md:grid-cols-2">
+              <div className="space-y-2">
+                <Label>Nom du client</Label>
+                <Input value={nameDraft} onChange={(e) => setNameDraft(e.target.value)} placeholder="Nom complet" />
+              </div>
+              <div className="space-y-2">
+                <Label>Email de connexion</Label>
+                <Input type="email" value={emailDraft} onChange={(e) => setEmailDraft(e.target.value)} placeholder="client@email.com" />
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <Button onClick={updateClientAccount} disabled={savingAccount}>
+                {savingAccount ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+                Mettre à jour email/nom
+              </Button>
+
+              <Button variant="outline" onClick={sendClientResetPassword} disabled={sendingReset}>
+                {sendingReset ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <KeyRound className="h-4 w-4 mr-2" />}
+                Envoyer lien de mot de passe
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* Project */}
         {!project ? (
           <Card>
