@@ -134,6 +134,64 @@ const AdminClientDetail = () => {
     setLoading(false);
   };
 
+  const updateClientAccount = async () => {
+    if (!clientId || !emailDraft.trim()) {
+      toast({ title: "Erreur", description: "Email requis", variant: "destructive" });
+      return;
+    }
+
+    setSavingAccount(true);
+    const { data, error } = await supabase.functions.invoke("admin-manage-client", {
+      body: {
+        action: "update_email",
+        user_id: clientId,
+        email: emailDraft.trim(),
+        full_name: nameDraft.trim(),
+      },
+    });
+    setSavingAccount(false);
+
+    if (error || !data?.success) {
+      toast({
+        title: "Erreur",
+        description: data?.error || error?.message || "Impossible de mettre à jour le compte client.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({ title: "Compte client mis à jour" });
+    loadAll();
+  };
+
+  const sendClientResetPassword = async () => {
+    if (!clientId || !emailDraft.trim()) {
+      toast({ title: "Erreur", description: "Email client requis", variant: "destructive" });
+      return;
+    }
+
+    setSendingReset(true);
+    const { data, error } = await supabase.functions.invoke("admin-manage-client", {
+      body: {
+        action: "send_reset_password",
+        user_id: clientId,
+        email: emailDraft.trim(),
+      },
+    });
+    setSendingReset(false);
+
+    if (error || !data?.success) {
+      toast({
+        title: "Erreur",
+        description: data?.error || error?.message || "Impossible d'envoyer l'email de réinitialisation.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({ title: "Email envoyé", description: "Le client a reçu un lien pour définir son mot de passe." });
+  };
+
   const createProject = async () => {
     if (!newProjectName.trim()) return;
     setCreatingProject(true);
