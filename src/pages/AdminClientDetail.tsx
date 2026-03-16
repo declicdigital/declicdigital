@@ -87,6 +87,8 @@ const AdminClientDetail = () => {
       .eq("id", clientId)
       .single();
     setClient(profile);
+    setEmailDraft(profile?.email || "");
+    setNameDraft(profile?.full_name || "");
 
     const { data: projects } = await supabase
       .from("projects")
