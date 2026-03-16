@@ -16,13 +16,13 @@ const AuditSeo = () => (
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
             <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">
-              100% gratuit · Sans engagement
+              Audit SEO gratuit · Analyse complète de votre site
             </span>
             <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
               Audit SEO gratuit à Paris : recevez votre <span className="text-gradient">analyse complète</span>
             </h1>
             <p className="mb-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-              Découvrez pourquoi votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> n'apparaît pas sur Google et recevez des recommandations concrètes pour améliorer votre visibilité. Notre audit est complet, personnalisé et sans engagement. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link>.
+              Découvrez pourquoi votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> n'apparaît pas sur Google et recevez des recommandations concrètes pour améliorer votre visibilité. Notre audit est complet et personnalisé. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link>.
             </p>
             <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
               <a href="#formulaire-audit">Demander mon audit SEO</a>
