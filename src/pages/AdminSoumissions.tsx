@@ -110,16 +110,6 @@ const FIELD_LABELS: Record<string, string> = {
   pastissue: "Problème passé", msg: "Message libre", cp: "Canal préféré", slot: "Créneau",
   ftype: "Types fichiers", file_link: "Lien fichiers", file_notes: "Notes fichiers",
 };
-  full_name: "Nom", company: "Entreprise", email: "Email", phone: "Téléphone",
-  sector: "Secteur", size: "Taille", current_url: "Site actuel", source: "Source",
-  pt: "Type de projet", desc: "Description", inspo: "Sites inspiration", kw: "Mots-clés",
-  goal: "Objectif", csrc: "Sources clients", budget: "Budget", recur: "Accompagnement",
-  urgency: "Urgence", brand: "Identité visuelle", cont: "Contenu disponible", pages: "Nombre de pages",
-  feat: "Fonctionnalités", feat_autre_detail: "Fonctionnalité autre", vibe: "Ambiance visuelle",
-  dl: "Délai", kdate: "Date clé", auto: "Autonomie", wlevel: "Niveau web", past: "Expérience passée",
-  pastissue: "Problème passé", msg: "Message libre", cp: "Canal préféré", slot: "Créneau",
-  ftype: "Types fichiers", file_link: "Lien fichiers", file_notes: "Notes fichiers",
-};
 
 const AdminSoumissions = () => {
   const [subs, setSubs] = useState<Submission[]>([]);
