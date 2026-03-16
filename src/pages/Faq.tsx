@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
-import heroFaq from "@/assets/questions-frequentes-creation-site.png";
+import heroFaq from "@/assets/questions-frequentes-creation-site.webp";
 
 const faqItems = [
   { q: "Combien coûte un site web ?", a: <>Nos tarifs commencent à partir de 50€ par mois + un premier mois de mise en service. Chaque devis est adapté à vos besoins et votre budget. <Link to="/tarifs" className="text-primary font-semibold hover:underline">Consultez notre page tarifs</Link> pour le détail.</> },

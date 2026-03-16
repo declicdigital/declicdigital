@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Phone, Mail, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo-declic-digital.png";
+import logo from "@/assets/logo-declic-digital.webp";
 
 const navLinks = [
   { label: "Création de site", to: "/creation-site-web" },
