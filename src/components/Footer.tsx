@@ -11,7 +11,7 @@ const Footer = () => (
           <div className="space-y-4">
             <img src={logo} alt="Déclic Digital" className="h-10" />
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
-              Déclic Digital accompagne les PME et petites entreprises partout en France pour développer leur visibilité en ligne. Fondée par un Expert Produit Google.
+              Déclic Digital accompagne les PME et petites entreprises à Paris et dans les Hauts-de-Seine (92) pour développer leur visibilité en ligne. Fondée par un Expert Produit Google.
             </p>
             <div className="space-y-2 text-sm text-primary-foreground/70">
               <a href="tel:0602228939" className="flex items-center gap-2 hover:text-primary-foreground transition-colors">
