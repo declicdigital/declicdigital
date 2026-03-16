@@ -2,3 +2,6 @@ project_id = "ubtdhicbbwasabgokzje"
 
 [functions.send-form]
 verify_jwt = false
+
+[functions.invite-client]
+verify_jwt = false
