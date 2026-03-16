@@ -466,6 +466,7 @@ const AdminSoumissions = () => {
                       <Calendar className="h-3 w-3" />
                       {new Date(s.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}
                     </span>
+                    <span className="font-medium text-primary">{getCompletionPercent(s.data)}%</span>
                   </div>
                 </div>
                 <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors" />
