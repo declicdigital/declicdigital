@@ -92,7 +92,7 @@ Ne choisissez jamais votre hébergement uniquement sur le prix. Un site lent ou 
     readTime: "5 min",
     category: "Design",
     tags: ["web design", "tendances", "UX", "UI"],
-    image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80",
+    image: webDesignImg,
     relatedSlugs: ["comment-choisir-hebergement-web-2026", "vitesse-site-web-impact-chiffre-affaires"],
     content: `
 ## Le web design en 2026 : entre audace et simplicité
