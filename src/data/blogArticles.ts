@@ -194,6 +194,7 @@ Google ne se contente pas de mesurer la vitesse : il la pondère dans son algori
 ## Conclusion
 
 La vitesse n'est pas un luxe technique, c'est un levier commercial. Un site qui charge en moins de 2 secondes inspire confiance, retient les visiteurs et convertit mieux. C'est l'un des meilleurs investissements que vous puissiez faire pour votre entreprise. [Testez la vitesse de votre site avec notre audit gratuit](/audit-seo-gratuit).
+    `,
   },
   {
     slug: "knafo-municipales-paris-campagne-digitale-site-web",
