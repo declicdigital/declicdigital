@@ -232,7 +232,7 @@ La campagne de Knafo a utilisé les réseaux sociaux de manière stratégique, a
 
 ### 2. Référencement local sur Paris
 
-Le site était optimisé pour les recherches liées aux municipales de Paris, aux arrondissements ciblés et aux thématiques de campagne. Cette stratégie SEO a permis de capter les électeurs qui se renseignaient en ligne.
+Le site était optimisé pour les recherches liées aux municipales de Paris, aux arrondissements ciblés et aux thématiques de campagne. Cette [stratégie SEO](/referencement-seo) a permis de capter les électeurs qui se renseignaient en ligne.
 
 ### 3. Newsletter et collecte de contacts
 
