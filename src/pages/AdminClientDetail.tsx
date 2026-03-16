@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
+
 import { toast } from "@/hooks/use-toast";
 import {
   Select, SelectContent, SelectItem, SelectTrigger, SelectValue,
@@ -17,6 +17,7 @@ import {
 import {
   Loader2, ArrowLeft, Plus, Trash2, FileText, Upload, Send,
   CheckCircle2, Clock, AlertCircle, Play, Users, LogOut, MessageSquare,
+  KeyRound, Mail,
 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital.webp";
 
@@ -56,6 +57,12 @@ const AdminClientDetail = () => {
   const [newProjectDesc, setNewProjectDesc] = useState("");
   const [creatingProject, setCreatingProject] = useState(false);
 
+  // Account management
+  const [emailDraft, setEmailDraft] = useState("");
+  const [nameDraft, setNameDraft] = useState("");
+  const [savingAccount, setSavingAccount] = useState(false);
+  const [sendingReset, setSendingReset] = useState(false);
+
   // Comments
   const [newComment, setNewComment] = useState<Record<string, string>>({});
   const [expandedTask, setExpandedTask] = useState<string | null>(null);
@@ -80,6 +87,8 @@ const AdminClientDetail = () => {
       .eq("id", clientId)
       .single();
     setClient(profile);
+    setEmailDraft(profile?.email || "");
+    setNameDraft(profile?.full_name || "");
 
     const { data: projects } = await supabase
       .from("projects")
@@ -123,6 +132,64 @@ const AdminClientDetail = () => {
     }
 
     setLoading(false);
+  };
+
+  const updateClientAccount = async () => {
+    if (!clientId || !emailDraft.trim()) {
+      toast({ title: "Erreur", description: "Email requis", variant: "destructive" });
+      return;
+    }
+
+    setSavingAccount(true);
+    const { data, error } = await supabase.functions.invoke("admin-manage-client", {
+      body: {
+        action: "update_email",
+        user_id: clientId,
+        email: emailDraft.trim(),
+        full_name: nameDraft.trim(),
+      },
+    });
+    setSavingAccount(false);
+
+    if (error || !data?.success) {
+      toast({
+        title: "Erreur",
+        description: data?.error || error?.message || "Impossible de mettre à jour le compte client.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({ title: "Compte client mis à jour" });
+    loadAll();
+  };
+
+  const sendClientResetPassword = async () => {
+    if (!clientId || !emailDraft.trim()) {
+      toast({ title: "Erreur", description: "Email client requis", variant: "destructive" });
+      return;
+    }
+
+    setSendingReset(true);
+    const { data, error } = await supabase.functions.invoke("admin-manage-client", {
+      body: {
+        action: "send_reset_password",
+        user_id: clientId,
+        email: emailDraft.trim(),
+      },
+    });
+    setSendingReset(false);
+
+    if (error || !data?.success) {
+      toast({
+        title: "Erreur",
+        description: data?.error || error?.message || "Impossible d'envoyer l'email de réinitialisation.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    toast({ title: "Email envoyé", description: "Le client a reçu un lien pour définir son mot de passe." });
   };
 
   const createProject = async () => {
@@ -270,6 +337,40 @@ const AdminClientDetail = () => {
               <p className="text-xs text-muted-foreground">
                 Client depuis le {new Date(client?.created_at).toLocaleDateString("fr-FR")}
               </p>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Gestion du compte client */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Mail className="h-5 w-5 text-primary" />
+              Compte client
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div className="grid gap-3 md:grid-cols-2">
+              <div className="space-y-2">
+                <Label>Nom du client</Label>
+                <Input value={nameDraft} onChange={(e) => setNameDraft(e.target.value)} placeholder="Nom complet" />
+              </div>
+              <div className="space-y-2">
+                <Label>Email de connexion</Label>
+                <Input type="email" value={emailDraft} onChange={(e) => setEmailDraft(e.target.value)} placeholder="client@email.com" />
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-2">
+              <Button onClick={updateClientAccount} disabled={savingAccount}>
+                {savingAccount ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+                Mettre à jour email/nom
+              </Button>
+
+              <Button variant="outline" onClick={sendClientResetPassword} disabled={sendingReset}>
+                {sendingReset ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <KeyRound className="h-4 w-4 mr-2" />}
+                Envoyer lien de mot de passe
+              </Button>
             </div>
           </CardContent>
         </Card>
