@@ -34,7 +34,7 @@ export const blogArticles: BlogArticle[] = [
     content: `
 ## Pourquoi le choix de l'hébergement est crucial
 
-Votre hébergement web est la fondation de votre [présence en ligne](/creation-site-internet). Un mauvais choix peut entraîner des [temps de chargement lents](/blog/vitesse-site-web-impact-chiffre-affaires), des pannes fréquentes et une perte de visiteurs. En 2026, les exigences ont évolué : les Core Web Vitals de Google font désormais partie intégrante du [classement SEO](/referencement-seo).
+Votre hébergement web est la fondation de votre [présence en ligne](/creation-site-web). Un mauvais choix peut entraîner des [temps de chargement lents](/blog/vitesse-site-web-impact-chiffre-affaires), des pannes fréquentes et une perte de visiteurs. En 2026, les exigences ont évolué : les Core Web Vitals de Google font désormais partie intégrante du [classement SEO](/referencement-seo).
 
 ## Les types d'hébergement disponibles
 
@@ -75,7 +75,7 @@ Un support réactif en français, disponible 24/7, peut vous sauver en cas de pr
 
 ## Notre recommandation pour les PME
 
-Pour un [site vitrine professionnel](/creation-site-internet), un hébergement cloud managé comme Vercel, Netlify ou un VPS chez OVH offre le meilleur rapport qualité-prix. Si vous gérez un [e-commerce](/creation-site-internet), orientez-vous vers une solution cloud avec CDN intégré.
+Pour un [site vitrine professionnel](/creation-site-web), un hébergement cloud managé comme Vercel, Netlify ou un VPS chez OVH offre le meilleur rapport qualité-prix. Si vous gérez un [e-commerce](/creation-site-web), orientez-vous vers une solution cloud avec CDN intégré.
 
 ## À retenir
 
@@ -97,7 +97,7 @@ Ne choisissez jamais votre hébergement uniquement sur le prix. Un site lent ou 
     content: `
 ## Le web design en 2026 : entre audace et simplicité
 
-Le [design web](/creation-site-internet) évolue sans cesse. Cette année, les tendances confirment un virage vers des expériences plus immersives tout en gardant l'utilisateur au centre. Voici les 7 tendances qui marquent 2026.
+Le [design web](/creation-site-web) évolue sans cesse. Cette année, les tendances confirment un virage vers des expériences plus immersives tout en gardant l'utilisateur au centre. Voici les 7 tendances qui marquent 2026.
 
 ## 1. Le minimalisme audacieux
 
@@ -149,7 +149,7 @@ L'essentiel reste la cohérence : un design qui reflète votre identité et faci
     content: `
 ## La vitesse, facteur invisible de votre réussite en ligne
 
-Quand un entrepreneur investit dans un [site web](/creation-site-internet), il pense au design, au contenu, peut-être au [SEO](/referencement-seo). Mais la vitesse de chargement est souvent négligée. C'est pourtant l'un des facteurs les plus impactants sur votre chiffre d'affaires.
+Quand un entrepreneur investit dans un [site web](/creation-site-web), il pense au design, au contenu, peut-être au [SEO](/referencement-seo). Mais la vitesse de chargement est souvent négligée. C'est pourtant l'un des facteurs les plus impactants sur votre chiffre d'affaires.
 
 ## Les chiffres qui parlent
 
@@ -194,7 +194,7 @@ Sans cache navigateur et serveur, chaque visite recharge l'intégralité du site
 
 ## L'impact SEO direct
 
-Google ne se contente pas de mesurer la vitesse : il la pondère dans son algorithme. Un site rapide a plus de chances d'apparaître en première page qu'un site lent, à contenu égal. C'est un avantage compétitif concret, surtout sur des requêtes locales comme "[création site web Paris](/creation-site-internet-paris)".
+Google ne se contente pas de mesurer la vitesse : il la pondère dans son algorithme. Un site rapide a plus de chances d'apparaître en première page qu'un site lent, à contenu égal. C'est un avantage compétitif concret, surtout sur des requêtes locales comme "[création site web Paris](/creation-site-web)".
 
 ## Conclusion
 
@@ -216,7 +216,7 @@ La vitesse n'est pas un luxe technique, c'est un levier commercial. Un site qui 
     content: `
 ## Municipales Paris 2026 : le digital comme levier électoral
 
-Les élections municipales de Paris en 2026 ont mis en lumière un phénomène que les professionnels du web observent depuis longtemps : un [site internet bien conçu](/creation-site-internet) et une stratégie digitale cohérente peuvent transformer la visibilité d'un candidat. Le cas de Knafo, qui a atteint environ 10% des suffrages, illustre parfaitement cette réalité.
+Les élections municipales de Paris en 2026 ont mis en lumière un phénomène que les professionnels du web observent depuis longtemps : un [site internet bien conçu](/creation-site-web) et une stratégie digitale cohérente peuvent transformer la visibilité d'un candidat. Le cas de Knafo, qui a atteint environ 10% des suffrages, illustre parfaitement cette réalité.
 
 ## Le site web de Knafo : une vitrine politique efficace
 
@@ -251,7 +251,7 @@ Le blog de campagne publiait des articles de fond sur les enjeux parisiens, posi
 
 Le parallèle avec le monde de l'entreprise est direct. Si un candidat politique peut gagner 10% des voix grâce à une stratégie digitale bien menée, imaginez l'impact pour une PME ou un indépendant à Paris :
 
-- **Un [site web professionnel](/creation-site-internet) inspire confiance** : que vous soyez candidat ou commerçant, la première impression en ligne est décisive
+- **Un [site web professionnel](/creation-site-web) inspire confiance** : que vous soyez candidat ou commerçant, la première impression en ligne est décisive
 - **Le [SEO local](/referencement-seo) fonctionne** : se positionner sur des requêtes géolocalisées (Paris, arrondissements, quartiers) attire une audience qualifiée
 - **Le contenu régulier renforce l'autorité** : publier des articles pertinents positionne votre expertise sur Google
 - **L'écosystème digital doit être cohérent** : site web, réseaux sociaux et newsletter doivent travailler ensemble
@@ -260,11 +260,11 @@ Le parallèle avec le monde de l'entreprise est direct. Si un candidat politique
 
 Ce que montre le cas Knafo aux municipales de Paris, c'est que le digital est un égaliseur de chances. Avec un budget maîtrisé mais une stratégie intelligente, il est possible de se rendre visible et de convaincre. C'est exactement ce que nous observons chaque jour avec nos clients PME à Paris et dans les Hauts-de-Seine.
 
-Un artisan du [15ème arrondissement](/creation-site-internet-paris-15), un restaurant à [Boulogne-Billancourt](/creation-site-internet-boulogne-billancourt) ou un cabinet à [Neuilly-sur-Seine](/creation-site-internet-neuilly-sur-seine) peuvent tous bénéficier des mêmes principes : un site rapide, bien référencé, avec du contenu de qualité.
+Un artisan du [15ème arrondissement](/creation-site-web/paris-15eme), un restaurant à [Boulogne-Billancourt](/creation-site-web/boulogne-billancourt) ou un cabinet à [Neuilly-sur-Seine](/creation-site-web/neuilly-sur-seine) peuvent tous bénéficier des mêmes principes : un site rapide, bien référencé, avec du contenu de qualité.
 
 ## Conclusion
 
-Les municipales de Paris 2026 confirment que la présence digitale n'est plus optionnelle. Knafo a démontré qu'un [site web performant](/creation-site-internet), combiné à une stratégie de contenu et de [référencement](/referencement-seo), peut faire la différence. Pour les entreprises parisiennes, la leçon est claire : investir dans votre site web et votre SEO, c'est investir dans votre visibilité et votre croissance. [Demandez votre audit SEO gratuit](/audit-seo-gratuit).
+Les municipales de Paris 2026 confirment que la présence digitale n'est plus optionnelle. Knafo a démontré qu'un [site web performant](/creation-site-web), combiné à une stratégie de contenu et de [référencement](/referencement-seo), peut faire la différence. Pour les entreprises parisiennes, la leçon est claire : investir dans votre site web et votre SEO, c'est investir dans votre visibilité et votre croissance. [Demandez votre audit SEO gratuit](/audit-seo-gratuit).
     `,
   },
 ];
