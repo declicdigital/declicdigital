@@ -5,6 +5,7 @@ import { FileText, Calendar, User, Building2, Mail, ChevronRight, Download } fro
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import jsPDF from "jspdf";
+import logoSrc from "@/assets/logo-declic-digital.png";
 
 interface Submission {
   id: string;
@@ -51,59 +52,166 @@ const AdminSoumissions = () => {
     if (data?.signedUrl) window.open(data.signedUrl, "_blank");
   };
 
-  const downloadPdf = (sub: Submission) => {
+  const downloadPdf = async (sub: Submission) => {
     const d = sub.data;
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
-    let y = 20;
+    const pageHeight = doc.internal.pageSize.getHeight();
+    const margin = 16;
+    const contentWidth = pageWidth - margin * 2;
 
-    // Header
-    doc.setFillColor(56, 189, 248);
-    doc.rect(0, 0, pageWidth, 35, "F");
-    doc.setTextColor(255, 255, 255);
-    doc.setFontSize(18);
-    doc.setFont("helvetica", "bold");
-    doc.text("Declic Digital - Fiche Client", 14, 16);
-    doc.setFontSize(10);
-    doc.setFont("helvetica", "normal");
-    doc.text(new Date(sub.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" }), 14, 28);
+    // Load logo
+    const logoImg = new Image();
+    logoImg.crossOrigin = "anonymous";
+    const logoLoaded = new Promise<void>((resolve) => {
+      logoImg.onload = () => resolve();
+      logoImg.onerror = () => resolve();
+      logoImg.src = logoSrc;
+    });
+    await logoLoaded;
 
-    y = 45;
-    doc.setTextColor(0, 0, 0);
+    const drawHeader = () => {
+      // Dark background matching site foreground
+      doc.setFillColor(23, 25, 35);
+      doc.rect(0, 0, pageWidth, 44, "F");
+      // Accent line (primary blue)
+      doc.setFillColor(14, 165, 233);
+      doc.rect(0, 44, pageWidth, 2, "F");
 
-    Object.entries(d).forEach(([key, value]) => {
-      if (!value || (Array.isArray(value) && value.length === 0) || (typeof value === "string" && !value.trim())) return;
-      const label = FIELD_LABELS[key] || key;
-      const display = Array.isArray(value) ? value.join(", ") : String(value);
+      // Logo
+      try { doc.addImage(logoImg, "PNG", margin, 8, 36, 12); } catch {}
 
-      if (y > 270) { doc.addPage(); y = 20; }
-
-      doc.setFontSize(9);
-      doc.setFont("helvetica", "bold");
-      doc.setTextColor(80, 80, 80);
-      doc.text(label, 14, y);
-
+      // Company info right
+      doc.setTextColor(255, 255, 255);
+      doc.setFontSize(8);
       doc.setFont("helvetica", "normal");
-      doc.setTextColor(30, 30, 30);
-      const lines = doc.splitTextToSize(display, pageWidth - 70);
-      doc.text(lines, 60, y);
-      y += Math.max(lines.length * 5, 7) + 3;
+      doc.text("declicdigital.net", pageWidth - margin, 14, { align: "right" });
+      doc.text("contact@declicdigital.net", pageWidth - margin, 20, { align: "right" });
+      doc.text("06.02.22.89.39", pageWidth - margin, 26, { align: "right" });
+      doc.setFontSize(7);
+      doc.setTextColor(180, 180, 190);
+      doc.text("SIRET 102 436 664 00019", pageWidth - margin, 34, { align: "right" });
+    };
+
+    const drawFooter = (pageNum: number) => {
+      doc.setFillColor(23, 25, 35);
+      doc.rect(0, pageHeight - 14, pageWidth, 14, "F");
+      doc.setTextColor(140, 140, 155);
+      doc.setFontSize(7);
+      doc.setFont("helvetica", "normal");
+      doc.text("Déclic Digital - Fiche Client Confidentielle", margin, pageHeight - 5);
+      doc.text(`Page ${pageNum}`, pageWidth - margin, pageHeight - 5, { align: "right" });
+    };
+
+    let pageNum = 1;
+    drawHeader();
+
+    // Title section
+    let y = 56;
+    doc.setFillColor(240, 245, 250);
+    doc.roundedRect(margin, y, contentWidth, 28, 3, 3, "F");
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.setTextColor(23, 25, 35);
+    doc.text("Fiche Client", margin + 8, y + 11);
+    doc.setFontSize(9);
+    doc.setFont("helvetica", "normal");
+    doc.setTextColor(100, 100, 115);
+    const dateStr = new Date(sub.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" });
+    doc.text(dateStr, margin + 8, y + 21);
+    if (d.full_name) {
+      doc.setFontSize(11);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(14, 165, 233);
+      doc.text(d.full_name, pageWidth - margin - 8, y + 11, { align: "right" });
+      if (d.company) {
+        doc.setFontSize(9);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(100, 100, 115);
+        doc.text(d.company, pageWidth - margin - 8, y + 21, { align: "right" });
+      }
+    }
+
+    y += 38;
+
+    // Section groups
+    const sections: { title: string; keys: string[] }[] = [
+      { title: "Informations", keys: ["full_name", "company", "email", "phone", "sector", "size", "current_url", "source"] },
+      { title: "Projet", keys: ["pt", "desc", "inspo", "kw", "goal", "csrc", "budget", "recur", "urgency", "pages", "feat", "feat_autre_detail", "vibe", "dl", "kdate"] },
+      { title: "Profil & Préférences", keys: ["brand", "cont", "auto", "wlevel", "past", "pastissue", "msg", "cp", "slot"] },
+      { title: "Fichiers", keys: ["ftype", "file_link", "file_notes"] },
+    ];
+
+    const checkNewPage = (needed: number) => {
+      if (y + needed > pageHeight - 22) {
+        drawFooter(pageNum);
+        doc.addPage();
+        pageNum++;
+        drawHeader();
+        y = 54;
+      }
+    };
+
+    sections.forEach((section) => {
+      const entries = section.keys
+        .filter((k) => d[k] && !(Array.isArray(d[k]) && d[k].length === 0) && !(typeof d[k] === "string" && !d[k].trim()))
+        .map((k) => ({ key: k, label: FIELD_LABELS[k] || k, value: Array.isArray(d[k]) ? d[k].join(", ") : String(d[k]) }));
+      if (entries.length === 0) return;
+
+      checkNewPage(20);
+
+      // Section title
+      doc.setFillColor(14, 165, 233);
+      doc.rect(margin, y, 3, 8, "F");
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(23, 25, 35);
+      doc.text(section.title, margin + 7, y + 6);
+      y += 14;
+
+      entries.forEach(({ label, value }) => {
+        const lines = doc.splitTextToSize(value, contentWidth - 58);
+        const rowH = Math.max(lines.length * 4.5, 6) + 4;
+        checkNewPage(rowH + 2);
+
+        // Zebra row
+        doc.setFillColor(248, 249, 252);
+        doc.rect(margin, y - 3, contentWidth, rowH + 2, "F");
+
+        doc.setFontSize(8);
+        doc.setFont("helvetica", "bold");
+        doc.setTextColor(80, 80, 95);
+        doc.text(label, margin + 4, y + 1);
+
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(30, 30, 40);
+        doc.text(lines, margin + 54, y + 1);
+        y += rowH + 1;
+      });
+      y += 6;
     });
 
+    // Attached files
     if (sub.file_paths && sub.file_paths.length > 0) {
-      if (y > 260) { doc.addPage(); y = 20; }
+      checkNewPage(20);
+      doc.setFillColor(14, 165, 233);
+      doc.rect(margin, y, 3, 8, "F");
+      doc.setFontSize(10);
       doc.setFont("helvetica", "bold");
-      doc.setFontSize(9);
-      doc.text("Fichiers joints :", 14, y);
-      y += 6;
+      doc.setTextColor(23, 25, 35);
+      doc.text("Fichiers joints", margin + 7, y + 6);
+      y += 14;
       doc.setFont("helvetica", "normal");
+      doc.setFontSize(8);
+      doc.setTextColor(30, 30, 40);
       sub.file_paths.forEach((p) => {
-        if (y > 280) { doc.addPage(); y = 20; }
-        doc.text("- " + (p.split("/").pop() || p), 18, y);
+        checkNewPage(7);
+        doc.text("• " + (p.split("/").pop() || p), margin + 6, y);
         y += 5;
       });
     }
 
+    drawFooter(pageNum);
     const name = (d.full_name || "soumission").replace(/\s+/g, "_");
     doc.save(`fiche_${name}.pdf`);
   };
