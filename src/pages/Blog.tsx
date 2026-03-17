@@ -94,6 +94,22 @@ const Blog = () => {
         </Link>
       </section>
 
+      {/* Categories */}
+      <section className="container mb-10">
+        <h2 className="text-lg font-bold mb-4">Parcourir par catégorie</h2>
+        <div className="flex flex-wrap gap-2">
+          {blogCategories.map((cat) => (
+            <Link
+              key={cat}
+              to={`/blog/categorie/${getCategorySlug(cat)}`}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors hover:opacity-80 ${categoryColors[cat] || "bg-secondary text-secondary-foreground"}`}
+            >
+              {cat}
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Other articles */}
       <section className="container pb-20">
         <div className="grid gap-8 md:grid-cols-2">

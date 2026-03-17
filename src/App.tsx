@@ -61,6 +61,7 @@ const App = () => (
               <Route path="/plan-du-site" element={<PlanDuSite />} />
               <Route path="/formulaire-client" element={<FormulaireClient />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/categorie/:categorySlug" element={<BlogCategory />} />
               <Route path="/blog/:slug" element={<BlogArticle />} />
               <Route path="/connexion" element={<Connexion />} />
               <Route path="/espace-client" element={<EspaceClient />} />
