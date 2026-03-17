@@ -36,6 +36,8 @@ const GoogleReviewsSection = ({
   const [rating, setRating] = useState(4.9);
   const [totalReviews, setTotalReviews] = useState(47);
   const [loading, setLoading] = useState(true);
+  const [reviewsUrl, setReviewsUrl] = useState(FALLBACK_REVIEWS_URL);
+  const [writeReviewUrl, setWriteReviewUrl] = useState(FALLBACK_WRITE_REVIEW_URL);
 
   useEffect(() => {
     const fetchReviews = async () => {
