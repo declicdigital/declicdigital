@@ -4,6 +4,7 @@ import { Eye, Users, TrendingUp, Search, Settings, FileText, BarChart3 } from "l
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 import heroSeo from "@/assets/referencement-seo-google.png";
 import { cities } from "@/data/cities";
 
