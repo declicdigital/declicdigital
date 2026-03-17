@@ -388,8 +388,6 @@ const AdminClientDetail = () => {
               </CardContent>
             </Card>
 
-            {/* Messagerie */}
-            <ProjectChat projectId={project.id} userId={user?.id || ""} isAdmin />
 
             {/* Documents */}
             <Card>
