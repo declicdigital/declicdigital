@@ -7,10 +7,8 @@ import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { getArticleBySlug, getRelatedArticles, getCategorySlug, type BlogArticle as BlogArticleType } from "@/data/blogArticles";
 
-const OG_FUNCTION_URL = `https://ubtdhicbbwasabgokzje.supabase.co/functions/v1/og-meta`;
-
 const getShareUrl = (slug: string) =>
-  `${OG_FUNCTION_URL}?path=/blog/${slug}`;
+  `https://declicdigital.net/blog/${slug}`;
 
 const ShareBar = ({ article, formattedDate }: { article: BlogArticleType; formattedDate: string }) => {
   const [copied, setCopied] = useState(false);
