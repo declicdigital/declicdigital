@@ -19,22 +19,17 @@ const ReferencementSeo = () => (
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
-          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
-            <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-              Référencement SEO à Paris : soyez <span className="text-gradient">visible sur Google</span>
-            </h1>
-            <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-              Le référencement SEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour qu'il apparaisse en première page Google. Commencez par un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit gratuit</Link>.
-            </p>
-            <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
-              <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
-            </Button>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroSeo} alt="Référencement SEO Google pour PME" className="w-full max-w-lg drop-shadow-2xl" />
-          </motion.div>
-        </div>
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="mx-auto max-w-3xl text-center">
+          <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
+            Référencement SEO à Paris : soyez <span className="text-gradient">visible sur Google</span>
+          </h1>
+          <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
+            Le référencement SEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour qu'il apparaisse en première page Google. Commencez par un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit gratuit</Link>.
+          </p>
+          <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+            <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+          </Button>
+        </motion.div>
       </div>
     </section>
 
