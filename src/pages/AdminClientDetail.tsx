@@ -54,6 +54,7 @@ const AdminClientDetail = () => {
   const [newComment, setNewComment] = useState<Record<string, string>>({});
   const [expandedTask, setExpandedTask] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [websiteUrl, setWebsiteUrl] = useState("");
 
   useEffect(() => {
     if (!authLoading && (!user || !isAdmin)) navigate("/connexion", { replace: true });
