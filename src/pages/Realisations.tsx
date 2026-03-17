@@ -14,7 +14,7 @@ const projects = [
     description: "Site vitrine pour un artiste musical. Design sombre et immersif avec intégration Spotify.",
     url: "https://offg.lovable.app/",
     image: portfolioOffg,
-    tags: ["Site vitrine", "Musique", "Lovable"],
+    tags: ["Site vitrine", "Musique"],
   },
   {
     name: "Domidel & Didier",
