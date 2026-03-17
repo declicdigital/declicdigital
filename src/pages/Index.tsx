@@ -57,8 +57,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Avis clients Google */}
-      <GoogleReviewsSection />
 
       {/* Problème */}
       <SectionWrapper className="bg-card">
