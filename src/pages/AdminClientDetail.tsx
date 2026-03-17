@@ -388,8 +388,6 @@ const AdminClientDetail = () => {
               </CardContent>
             </Card>
 
-            {/* Messagerie */}
-            <ProjectChat projectId={project.id} userId={user?.id || ""} isAdmin />
 
             {/* Documents */}
             <Card>
@@ -422,6 +420,17 @@ const AdminClientDetail = () => {
           </>
         )}
       </div>
+
+      {/* Floating chat */}
+      {project && (
+        <ProjectChat
+          projectId={project.id}
+          userId={user?.id || ""}
+          isAdmin
+          contactName={client?.full_name || "Client"}
+          contactInitials={client?.full_name?.split(" ").map((w: string) => w[0]).join("").toUpperCase().slice(0, 2) || "CL"}
+        />
+      )}
     </div>
   );
 };
