@@ -11,6 +11,7 @@ import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, Check
 import logoImg from "@/assets/logo-declic-transparent.png";
 import ProjectTimeline from "@/components/espace-client/ProjectTimeline";
 import ProjectInvoices from "@/components/espace-client/ProjectInvoices";
+import ProjectChat from "@/components/espace-client/ProjectChat";
 
 const STATUS_CFG: Record<string, { label: string; icon: any; color: string }> = {
   a_faire: { label: "A faire", icon: AlertCircle, color: "bg-muted text-muted-foreground" },
