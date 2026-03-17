@@ -62,6 +62,7 @@ const App = () => (
               <Route path="/blog/:slug" element={<BlogArticle />} />
               <Route path="/connexion" element={<Connexion />} />
               <Route path="/espace-client" element={<EspaceClient />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/admin/clients" element={<AdminClients />} />
               <Route path="/admin/client/:clientId" element={<AdminClientDetail />} />
               <Route path="/admin/soumissions" element={<AdminSoumissions />} />
