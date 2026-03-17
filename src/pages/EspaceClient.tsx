@@ -297,16 +297,22 @@ const EspaceClient = () => {
                             {(attachments[task.id] || []).length > 0 && (
                               <div className="space-y-1">
                                 {(attachments[task.id] || []).map((att: any) => (
-                                  <button
-                                    key={att.id}
-                                    onClick={async () => {
-                                      const { data } = await supabase.storage.from("project-documents").createSignedUrl(att.file_path, 3600);
-                                      if (data?.signedUrl) window.open(data.signedUrl, "_blank");
-                                    }}
-                                    className="flex items-center gap-2 text-xs text-primary hover:underline"
-                                  >
-                                    <Paperclip className="h-3 w-3" /> {att.file_name}
-                                  </button>
+                                  <div key={att.id} className="flex items-center gap-2">
+                                    <button
+                                      onClick={async () => {
+                                        const { data } = await supabase.storage.from("project-documents").createSignedUrl(att.file_path, 3600);
+                                        if (data?.signedUrl) window.open(data.signedUrl, "_blank");
+                                      }}
+                                      className="flex items-center gap-2 text-xs text-primary hover:underline"
+                                    >
+                                      <Paperclip className="h-3 w-3" /> {att.file_name}
+                                    </button>
+                                    <Button variant="ghost" size="icon" className="h-6 w-6 text-destructive" onClick={async () => {
+                                      await supabase.storage.from("project-documents").remove([att.file_path]);
+                                      await (supabase.from("task_attachments" as any) as any).delete().eq("id", att.id);
+                                      loadData();
+                                    }}><Trash2 className="h-3 w-3" /></Button>
+                                  </div>
                                 ))}
                               </div>
                             )}
