@@ -17,6 +17,7 @@ const Connexion = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [isRecovery, setIsRecovery] = useState(false);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
 
   // Redirect if already logged in
