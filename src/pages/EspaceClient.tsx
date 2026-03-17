@@ -33,6 +33,7 @@ const EspaceClient = () => {
   const [project, setProject] = useState<any>(null);
   const [tasks, setTasks] = useState<any[]>([]);
   const [comments, setComments] = useState<Record<string, any[]>>({});
+  const [attachments, setAttachments] = useState<Record<string, any[]>>({});
   const [documents, setDocuments] = useState<any[]>([]);
   const [milestones, setMilestones] = useState<any[]>([]);
   const [invoices, setInvoices] = useState<any[]>([]);
