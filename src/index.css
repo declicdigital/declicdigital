@@ -42,6 +42,7 @@
     --gradient-miami: linear-gradient(135deg, hsl(199, 89%, 48%), hsl(340, 82%, 62%));
     --shadow-card: 0 4px 24px -4px hsl(220 25% 10% / 0.08);
     --shadow-elevated: 0 12px 40px -8px hsl(220 25% 10% / 0.12);
+    --footer-bg: 270 40% 15%;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;

@@ -54,6 +54,7 @@ export default {
           DEFAULT: "hsl(340, 82%, 62%)",
           light: "hsl(340, 82%, 90%)",
         },
+        "footer-bg": "hsl(var(--footer-bg))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
