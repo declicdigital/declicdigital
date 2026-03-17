@@ -76,7 +76,7 @@ Un support réactif en français, disponible 24/7, peut vous sauver en cas de pr
 
 ## Notre recommandation pour les PME
 
-Pour un [site vitrine professionnel](/creation-site-web), un hébergement cloud managé comme Vercel, Netlify ou un VPS chez OVH offre le meilleur rapport qualité-prix. Si vous gérez un [e-commerce](/creation-site-web), orientez-vous vers une solution cloud avec CDN intégré.
+Pour un [site vitrine professionnel](/creation-site-web), un hébergement cloud managé comme Vercel, Netlify ou un VPS chez OVH offre le meilleur rapport qualité-prix. Si vous gérez un [e-commerce](/creation-site-web), orientez-vous vers une solution cloud avec CDN intégré. La connectivité permanente est aussi un enjeu pour les [objets connectés comme les montres Garmin](/blog/whatsapp-montres-garmin-evolution-usage), qui dépendent d'infrastructures serveur fiables.
 
 ## À retenir
 
