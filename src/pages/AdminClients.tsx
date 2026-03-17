@@ -3,31 +3,19 @@ import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/hooks/use-toast";
-import {
-  Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Loader2, Plus, Users, FileText, LogOut, ChevronRight, Search,
-} from "lucide-react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Loader2, Plus, Users, FileText, LogOut, ChevronRight, Search } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital.webp";
-
-interface Client {
-  id: string;
-  email: string;
-  full_name: string;
-  created_at: string;
-  project?: { id: string; name: string; status: string };
-}
 
 const AdminClients = () => {
   const { user, isAdmin, loading: authLoading, signOut } = useAuth();
   const navigate = useNavigate();
-  const [clients, setClients] = useState<Client[]>([]);
+  const [clients, setClients] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -37,7 +25,7 @@ const AdminClients = () => {
   const [inviting, setInviting] = useState(false);
 
   useEffect(() => {
-    if (!authLoading && (!user || !isAdmin)) navigate("/connexion");
+    if (!authLoading && (!user || !isAdmin)) navigate("/connexion", { replace: true });
   }, [user, isAdmin, authLoading, navigate]);
 
   useEffect(() => {
@@ -46,42 +34,26 @@ const AdminClients = () => {
 
   const loadClients = async () => {
     setLoading(true);
+    try {
+      const { data: roles } = await supabase.from("user_roles").select("user_id").eq("role", "client");
+      if (!roles || roles.length === 0) { setClients([]); setLoading(false); return; }
 
-    const { data: roles } = await supabase
-      .from("user_roles")
-      .select("user_id")
-      .eq("role", "client");
+      const clientIds = roles.map((r: any) => r.user_id);
+      const [{ data: profiles }, { data: projects }] = await Promise.all([
+        supabase.from("profiles").select("*").in("id", clientIds),
+        supabase.from("projects").select("*").in("client_id", clientIds),
+      ]);
 
-    if (!roles || roles.length === 0) {
-      setClients([]);
-      setLoading(false);
-      return;
+      const projectMap: Record<string, any> = {};
+      (projects || []).forEach((p: any) => { projectMap[p.client_id] = p; });
+
+      setClients((profiles || []).map((p: any) => ({
+        id: p.id, email: p.email, full_name: p.full_name, created_at: p.created_at,
+        project: projectMap[p.id] ? { id: projectMap[p.id].id, name: projectMap[p.id].name, status: projectMap[p.id].status } : undefined,
+      })));
+    } catch (err) {
+      console.error("loadClients error:", err);
     }
-
-    const clientIds = roles.map((r: any) => r.user_id);
-
-    // Parallel fetch
-    const [{ data: profiles }, { data: projects }] = await Promise.all([
-      supabase.from("profiles").select("*").in("id", clientIds),
-      supabase.from("projects").select("*").in("client_id", clientIds),
-    ]);
-
-    const projectMap: Record<string, any> = {};
-    (projects || []).forEach((p: any) => { projectMap[p.client_id] = p; });
-
-    const clientList: Client[] = (profiles || []).map((p: any) => ({
-      id: p.id,
-      email: p.email,
-      full_name: p.full_name,
-      created_at: p.created_at,
-      project: projectMap[p.id] ? {
-        id: projectMap[p.id].id,
-        name: projectMap[p.id].name,
-        status: projectMap[p.id].status,
-      } : undefined,
-    }));
-
-    setClients(clientList);
     setLoading(false);
   };
 
@@ -91,41 +63,22 @@ const AdminClients = () => {
       return;
     }
     setInviting(true);
-
-    // Call edge function to invite client
     const { data, error } = await supabase.functions.invoke("invite-client", {
-      body: {
-        email: inviteEmail.trim(),
-        full_name: inviteName.trim(),
-        project_name: inviteProjectName.trim() || undefined,
-      },
+      body: { email: inviteEmail.trim(), full_name: inviteName.trim(), project_name: inviteProjectName.trim() || undefined },
     });
-
     setInviting(false);
     if (error || !data?.success) {
-      toast({
-        title: "Erreur",
-        description: data?.error || error?.message || "Impossible d'inviter ce client.",
-        variant: "destructive",
-      });
+      toast({ title: "Erreur", description: data?.error || error?.message || "Impossible d'inviter ce client.", variant: "destructive" });
       return;
     }
-
-    toast({
-      title: "Client invité",
-      description: data?.message || `Invitation envoyée à ${inviteEmail}.`,
-    });
+    toast({ title: "Client invite", description: `Invitation envoyee a ${inviteEmail}.` });
     setDialogOpen(false);
-    setInviteEmail("");
-    setInviteName("");
-    setInviteProjectName("");
+    setInviteEmail(""); setInviteName(""); setInviteProjectName("");
     loadClients();
   };
 
-  const filtered = clients.filter(
-    (c) =>
-      c.full_name.toLowerCase().includes(search.toLowerCase()) ||
-      c.email.toLowerCase().includes(search.toLowerCase())
+  const filtered = clients.filter((c) =>
+    c.full_name.toLowerCase().includes(search.toLowerCase()) || c.email.toLowerCase().includes(search.toLowerCase())
   );
 
   if (authLoading || loading) {
@@ -166,9 +119,7 @@ const AdminClients = () => {
               <Button><Plus className="h-4 w-4 mr-1" /> Inviter un client</Button>
             </DialogTrigger>
             <DialogContent>
-              <DialogHeader>
-                <DialogTitle>Inviter un nouveau client</DialogTitle>
-              </DialogHeader>
+              <DialogHeader><DialogTitle>Inviter un nouveau client</DialogTitle></DialogHeader>
               <div className="space-y-4 pt-4">
                 <div className="space-y-2">
                   <Label>Email du client *</Label>
@@ -183,8 +134,7 @@ const AdminClients = () => {
                   <Input placeholder="Site vitrine entreprise" value={inviteProjectName} onChange={(e) => setInviteProjectName(e.target.value)} />
                 </div>
                 <Button onClick={inviteClient} disabled={inviting} className="w-full">
-                  {inviting ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
-                  Envoyer l'invitation
+                  {inviting && <Loader2 className="h-4 w-4 animate-spin mr-2" />} Envoyer l'invitation
                 </Button>
               </div>
             </DialogContent>
@@ -198,36 +148,22 @@ const AdminClients = () => {
 
         <div className="space-y-2">
           {filtered.length === 0 ? (
-            <Card>
-              <CardContent className="py-12 text-center text-muted-foreground">
-                Aucun client pour le moment. Invitez votre premier client !
+            <Card><CardContent className="py-12 text-center text-muted-foreground">Aucun client pour le moment.</CardContent></Card>
+          ) : filtered.map((client) => (
+            <Card key={client.id} className="cursor-pointer hover:border-primary/30 transition-colors" onClick={() => navigate(`/admin/client/${client.id}`)}>
+              <CardContent className="flex items-center gap-4 py-4">
+                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
+                  {client.full_name.charAt(0).toUpperCase()}
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="font-semibold text-foreground">{client.full_name}</p>
+                  <p className="text-sm text-muted-foreground">{client.email}</p>
+                </div>
+                {client.project ? <Badge variant="secondary">{client.project.name}</Badge> : <Badge variant="outline" className="text-muted-foreground">Pas de projet</Badge>}
+                <ChevronRight className="h-5 w-5 text-muted-foreground" />
               </CardContent>
             </Card>
-          ) : (
-            filtered.map((client) => (
-              <Card
-                key={client.id}
-                className="cursor-pointer hover:border-primary/30 transition-colors"
-                onClick={() => navigate(`/admin/client/${client.id}`)}
-              >
-                <CardContent className="flex items-center gap-4 py-4">
-                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
-                    {client.full_name.charAt(0).toUpperCase()}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="font-semibold text-foreground">{client.full_name}</p>
-                    <p className="text-sm text-muted-foreground">{client.email}</p>
-                  </div>
-                  {client.project ? (
-                    <Badge variant="secondary">{client.project.name}</Badge>
-                  ) : (
-                    <Badge variant="outline" className="text-muted-foreground">Pas de projet</Badge>
-                  )}
-                  <ChevronRight className="h-5 w-5 text-muted-foreground" />
-                </CardContent>
-              </Card>
-            ))
-          )}
+          ))}
         </div>
       </div>
     </div>

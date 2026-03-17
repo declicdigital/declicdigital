@@ -16,20 +16,21 @@ const Connexion = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isFirstLogin, setIsFirstLogin] = useState(false);
+  const [isRecovery, setIsRecovery] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  // Redirect if already logged in
   useEffect(() => {
     if (!authLoading && user) {
-      navigate(isAdmin ? "/admin/clients" : "/espace-client");
+      navigate(isAdmin ? "/admin/clients" : "/espace-client", { replace: true });
     }
   }, [user, isAdmin, authLoading, navigate]);
 
-  // Check URL for recovery token (first login / password reset)
+  // Detect recovery/invite tokens in URL hash
   useEffect(() => {
     const hash = window.location.hash;
     if (hash.includes("type=recovery") || hash.includes("type=invite")) {
-      setIsFirstLogin(true);
+      setIsRecovery(true);
     }
   }, []);
 
@@ -60,7 +61,7 @@ const Connexion = () => {
       toast({ title: "Erreur", description: error.message, variant: "destructive" });
     } else {
       toast({ title: "Mot de passe defini", description: "Vous pouvez maintenant acceder a votre espace." });
-      setIsFirstLogin(false);
+      setIsRecovery(false);
     }
   };
 
@@ -78,16 +79,16 @@ const Connexion = () => {
         <CardHeader className="text-center space-y-4">
           <img src={logoImg} alt="Declic Digital" className="h-10 mx-auto" />
           <CardTitle className="text-2xl font-bold text-foreground">
-            {isFirstLogin ? "Creez votre mot de passe" : "Espace Client"}
+            {isRecovery ? "Creez votre mot de passe" : "Espace Client"}
           </CardTitle>
           <CardDescription className="text-muted-foreground">
-            {isFirstLogin
+            {isRecovery
               ? "Definissez votre mot de passe pour acceder a votre espace."
               : "Connectez-vous pour acceder a votre suivi de projet."}
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {isFirstLogin ? (
+          {isRecovery ? (
             <form onSubmit={handleSetPassword} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="password">Nouveau mot de passe</Label>
@@ -104,7 +105,7 @@ const Connexion = () => {
                 </div>
               </div>
               <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+                {loading && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
                 Definir mon mot de passe
               </Button>
             </form>
@@ -125,7 +126,7 @@ const Connexion = () => {
                 </div>
               </div>
               <Button type="submit" className="w-full" disabled={loading}>
-                {loading ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : null}
+                {loading && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
                 Se connecter
               </Button>
             </form>
