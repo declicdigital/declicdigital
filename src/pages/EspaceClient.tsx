@@ -293,6 +293,23 @@ const EspaceClient = () => {
                         </button>
                         {isExpanded && (
                           <div className="border-t border-border p-4 bg-muted/20 space-y-3">
+                            {/* Attachments */}
+                            {(attachments[task.id] || []).length > 0 && (
+                              <div className="space-y-1">
+                                {(attachments[task.id] || []).map((att: any) => (
+                                  <button
+                                    key={att.id}
+                                    onClick={async () => {
+                                      const { data } = await supabase.storage.from("project-documents").createSignedUrl(att.file_path, 3600);
+                                      if (data?.signedUrl) window.open(data.signedUrl, "_blank");
+                                    }}
+                                    className="flex items-center gap-2 text-xs text-primary hover:underline"
+                                  >
+                                    <Paperclip className="h-3 w-3" /> {att.file_name}
+                                  </button>
+                                ))}
+                              </div>
+                            )}
                             {taskComments.map((c) => (
                               <div
                                 key={c.id}
@@ -319,6 +336,27 @@ const EspaceClient = () => {
                                 onKeyDown={(e) => e.key === "Enter" && addComment(task.id)}
                                 className="flex-1"
                               />
+                              <label className="cursor-pointer">
+                                <Button variant="outline" size="icon" asChild>
+                                  <span><Paperclip className="h-4 w-4" /></span>
+                                </Button>
+                                <input type="file" className="hidden" onChange={async (e) => {
+                                  if (!e.target.files || !user || !project) return;
+                                  const file = e.target.files[0];
+                                  const path = `${project.id}/tasks/${task.id}/${Date.now()}_${file.name}`;
+                                  const { error: upErr } = await supabase.storage.from("project-documents").upload(path, file);
+                                  if (upErr) {
+                                    toast({ title: "Erreur", description: upErr.message, variant: "destructive" });
+                                  } else {
+                                    await (supabase.from("task_attachments" as any) as any).insert({
+                                      task_id: task.id, uploaded_by: user.id, file_name: file.name, file_path: path,
+                                    });
+                                    toast({ title: "Fichier ajoute" });
+                                    loadData();
+                                  }
+                                  e.target.value = "";
+                                }} />
+                              </label>
                               <Button size="icon" onClick={() => addComment(task.id)}>
                                 <Send className="h-4 w-4" />
                               </Button>
