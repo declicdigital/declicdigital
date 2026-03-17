@@ -110,7 +110,7 @@ const GoogleReviewsSection = ({
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
         <a
-          href={GOOGLE_REVIEWS_URL}
+          href={reviewsUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-colors shadow-sm"
@@ -120,7 +120,7 @@ const GoogleReviewsSection = ({
           <ExternalLink size={14} />
         </a>
         <a
-          href={GOOGLE_REVIEW_URL}
+          href={writeReviewUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity shadow-lg"
