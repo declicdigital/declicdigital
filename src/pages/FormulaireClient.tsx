@@ -23,6 +23,8 @@ interface FormData {
   company: string;
   email: string;
   phone: string;
+  password: string;
+  password_confirm: string;
   sector: string;
   size: string;
   current_url: string;
@@ -59,7 +61,8 @@ interface FormData {
 }
 
 const initial: FormData = {
-  full_name: "", company: "", email: "", phone: "", sector: "", size: "",
+  full_name: "", company: "", email: "", phone: "", password: "", password_confirm: "",
+  sector: "", size: "",
   current_url: "", source: "", pt: [], desc: "", inspo: "", kw: "", goal: "",
   csrc: [], budget: "", recur: "", urgency: "", brand: "", cont: [], pages: "",
   feat: [], feat_autre_detail: "", vibe: "",
@@ -200,6 +203,14 @@ const FormulaireClient = () => {
       toast({ title: "Champs requis", description: "Veuillez remplir au moins votre nom et email.", variant: "destructive" });
       return;
     }
+    if (!f.password || f.password.length < 6) {
+      toast({ title: "Mot de passe requis", description: "Le mot de passe doit contenir au moins 6 caracteres.", variant: "destructive" });
+      return;
+    }
+    if (f.password !== f.password_confirm) {
+      toast({ title: "Erreur", description: "Les mots de passe ne correspondent pas.", variant: "destructive" });
+      return;
+    }
     setSending(true);
     try {
       // Upload files
@@ -227,19 +238,17 @@ const FormulaireClient = () => {
         ? teamMembers.map(m => ({ name: m.name, role: m.role, bio: m.bio, photo_name: m.photo?.name || "" }))
         : [];
 
-      // Save to DB
-      const { error } = await supabase.from("form_submissions").insert({
-        id: submissionId,
-        data: { ...f, team: teamData } as any,
-        file_paths: filePaths,
-      } as any);
+      // Send to edge function (creates account + saves form + generates PDF)
+      const { data: result, error } = await supabase.functions.invoke("send-form", {
+        body: { ...f, password: f.password, team: teamData, file_paths: filePaths, submission_id: submissionId },
+      });
 
       if (error) throw error;
       setSent(true);
-      toast({ title: "Formulaire envoyé !", description: "Nous reviendrons vers vous très rapidement." });
+      toast({ title: "Formulaire envoye !", description: "Votre espace client a ete cree. Connectez-vous avec votre email et mot de passe." });
     } catch (err) {
       console.error(err);
-      toast({ title: "Erreur", description: "Une erreur est survenue, veuillez réessayer.", variant: "destructive" });
+      toast({ title: "Erreur", description: "Une erreur est survenue, veuillez reessayer.", variant: "destructive" });
     } finally {
       setSending(false);
     }
@@ -258,13 +267,21 @@ const FormulaireClient = () => {
               <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full gradient-miami shadow-elevated">
                 <CheckCircle className="h-10 w-10 text-primary-foreground" />
               </div>
-              <h1 className="text-3xl font-extrabold mb-4">C'est envoyé !</h1>
-              <p className="text-muted-foreground text-lg mb-8">
-                Déclic Digital a bien reçu votre projet et reviendra vers vous avec une proposition personnalisée.
+              <h1 className="text-3xl font-extrabold mb-4">C'est envoye !</h1>
+              <p className="text-muted-foreground text-lg mb-4">
+                Declic Digital a bien recu votre projet et reviendra vers vous avec une proposition personnalisee.
               </p>
-              <Button onClick={() => window.location.href = "/"} className="rounded-full gradient-primary text-primary-foreground">
-                Retour à l'accueil
-              </Button>
+              <p className="text-foreground font-medium mb-8">
+                Votre espace client a ete cree. Connectez-vous pour suivre l'avancement de votre projet.
+              </p>
+              <div className="flex gap-3 justify-center">
+                <Button onClick={() => window.location.href = "/connexion"} className="rounded-full gradient-miami text-primary-foreground">
+                  Acceder a mon espace client
+                </Button>
+                <Button onClick={() => window.location.href = "/"} variant="outline" className="rounded-full">
+                  Retour a l'accueil
+                </Button>
+              </div>
             </motion.div>
           </div>
         </section>
@@ -347,10 +364,21 @@ const FormulaireClient = () => {
                   <Input type="email" value={f.email} onChange={e => set("email", e.target.value)} placeholder="vous@entreprise.fr" className="rounded-xl" required />
                 </div>
                 <div>
-                  <Label className="text-sm text-muted-foreground mb-2 block">Téléphone</Label>
+                  <Label className="text-sm text-muted-foreground mb-2 block">Telephone</Label>
                   <Input type="tel" value={f.phone} onChange={e => set("phone", e.target.value)} placeholder="06 00 00 00 00" className="rounded-xl" />
                 </div>
               </FieldGroup>
+              <FieldGroup cols={2}>
+                <div>
+                  <Label className="text-sm text-muted-foreground mb-2 block">Mot de passe <span className="text-accent">*</span></Label>
+                  <Input type="password" value={f.password} onChange={e => set("password", e.target.value)} placeholder="Min. 6 caracteres" className="rounded-xl" required minLength={6} />
+                </div>
+                <div>
+                  <Label className="text-sm text-muted-foreground mb-2 block">Confirmer le mot de passe <span className="text-accent">*</span></Label>
+                  <Input type="password" value={f.password_confirm} onChange={e => set("password_confirm", e.target.value)} placeholder="Retapez votre mot de passe" className="rounded-xl" required minLength={6} />
+                </div>
+              </FieldGroup>
+              <p className="text-xs text-muted-foreground">Ce mot de passe vous permettra d'acceder a votre espace client pour suivre l'avancement de votre projet.</p>
               <FieldGroup cols={2}>
                 <div>
                   <Label className="text-sm text-muted-foreground mb-2 block">Secteur d'activité <span className="text-accent">*</span></Label>

@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, CheckCircle2, Clock, AlertCircle, Play, Plus } from "lucide-react";
+import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, CheckCircle2, Clock, AlertCircle, Play, Plus, Globe } from "lucide-react";
 import logoImg from "@/assets/logo-declic-transparent.png";
 import ProjectTimeline from "@/components/espace-client/ProjectTimeline";
 import ProjectInvoices from "@/components/espace-client/ProjectInvoices";
@@ -148,7 +148,6 @@ const EspaceClient = () => {
   }
 
   const completedTasks = tasks.filter((t) => t.status === "termine").length;
-  const progress = tasks.length > 0 ? Math.round((completedTasks / tasks.length) * 100) : 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -187,20 +186,21 @@ const EspaceClient = () => {
                   <span className="flex items-center gap-1">
                     <Calendar className="h-4 w-4" /> Debut : {new Date(project.start_date).toLocaleDateString("fr-FR")}
                   </span>
+                  {project.website_url && (
+                    <a
+                      href={project.website_url.startsWith("http") ? project.website_url : `https://${project.website_url}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 underline hover:text-primary-foreground transition-colors"
+                    >
+                      <Globe className="h-4 w-4" /> {project.website_url.replace(/^https?:\/\//, "")}
+                    </a>
+                  )}
                   <Badge variant="secondary" className="bg-primary-foreground/20 text-primary-foreground border-0">
                     {project.status}
                   </Badge>
                 </div>
               </div>
-              <CardContent className="p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-foreground">Progression globale</span>
-                  <span className="text-sm font-bold text-primary">{progress}%</span>
-                </div>
-                <div className="h-3 bg-muted rounded-full overflow-hidden">
-                  <div className="h-full bg-primary rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
-                </div>
-              </CardContent>
             </Card>
 
             {/* Timeline */}
