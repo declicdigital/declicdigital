@@ -5,7 +5,45 @@ import { Calendar, Clock, ArrowLeft, ArrowRight, Tag, Share2, Copy, Check } from
 import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import { getArticleBySlug, getRelatedArticles, getCategorySlug } from "@/data/blogArticles";
+import { getArticleBySlug, getRelatedArticles, getCategorySlug, type BlogArticle as BlogArticleType } from "@/data/blogArticles";
+
+const OG_FUNCTION_URL = `https://ubtdhicbbwasabgokzje.supabase.co/functions/v1/og-meta`;
+
+const getShareUrl = (slug: string) =>
+  `${OG_FUNCTION_URL}?path=/blog/${slug}`;
+
+const ShareBar = ({ article, formattedDate }: { article: BlogArticleType; formattedDate: string }) => {
+  const [copied, setCopied] = useState(false);
+  const shareUrl = getShareUrl(article.slug);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(shareUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <div className="mb-10 flex flex-wrap items-center gap-4 border-b border-border pb-6">
+      <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
+        <Calendar size={14} /> {formattedDate}
+      </span>
+      <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
+        <Clock size={14} /> {article.readTime} de lecture
+      </span>
+      <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+        {article.category}
+      </span>
+      <button
+        onClick={handleCopy}
+        className="ml-auto flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-secondary/80 transition-colors"
+        title="Copier le lien de partage"
+      >
+        {copied ? <Check size={14} className="text-emerald-500" /> : <Share2 size={14} />}
+        {copied ? "Lien copié !" : "Partager"}
+      </button>
+    </div>
+  );
+};
 
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
