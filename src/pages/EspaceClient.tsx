@@ -300,9 +300,6 @@ const EspaceClient = () => {
               </CardContent>
             </Card>
 
-            {/* Messagerie */}
-            <ProjectChat projectId={project.id} userId={user?.id || ""} />
-
             {/* Invoices */}
             <ProjectInvoices
               invoices={invoices}
