@@ -99,11 +99,13 @@ const Connexion = () => {
         <CardHeader className="text-center space-y-4">
           <img src={logoImg} alt="Declic Digital" className="h-10 mx-auto" />
           <CardTitle className="text-2xl font-bold text-foreground">
-            {isRecovery ? "Creez votre mot de passe" : "Espace Client"}
+            {isRecovery ? "Creez votre mot de passe" : isForgotPassword ? "Mot de passe oublie" : "Espace Client"}
           </CardTitle>
           <CardDescription className="text-muted-foreground">
             {isRecovery
               ? "Definissez votre mot de passe pour acceder a votre espace."
+              : isForgotPassword
+              ? "Entrez votre email pour recevoir un lien de reinitialisation."
               : "Connectez-vous pour acceder a votre suivi de projet."}
           </CardDescription>
         </CardHeader>
