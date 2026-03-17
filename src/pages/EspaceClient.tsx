@@ -145,7 +145,7 @@ const EspaceClient = () => {
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container flex items-center justify-between py-3">
-          <img src={logoImg} alt="Declic Digital" className="h-8" />
+          <img src={logoImg} alt="Declic Digital" className="h-12 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground">{user?.email}</span>
             <Button variant="ghost" size="sm" onClick={signOut}>
