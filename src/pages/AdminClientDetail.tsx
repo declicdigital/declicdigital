@@ -368,7 +368,7 @@ const AdminClientDetail = () => {
                   const isExpanded = expandedTask === task.id;
                   const statusOptions = getStatusOptions(project.name);
                   return (
-                    <div key={task.id} className="border border-border rounded-lg overflow-hidden">
+                    <div key={task.id} className={`border rounded-lg overflow-hidden ${cfg.bg}`}>
                       <div className="flex items-center gap-3 p-3">
                         <Select value={task.status} onValueChange={(v) => updateTaskStatus(task.id, v)}>
                           <SelectTrigger className="w-48"><SelectValue /></SelectTrigger>
