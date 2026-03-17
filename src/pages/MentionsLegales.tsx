@@ -1,5 +1,6 @@
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 
 const MentionsLegales = () => (
   <PageLayout>
