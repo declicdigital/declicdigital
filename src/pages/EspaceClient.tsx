@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, CheckCircle2, Clock, AlertCircle, Play } from "lucide-react";
+import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, CheckCircle2, Clock, AlertCircle, Play, Plus } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital.webp";
 
 const STATUS_CFG: Record<string, { label: string; icon: any; color: string }> = {
@@ -28,6 +28,8 @@ const EspaceClient = () => {
   const [newComment, setNewComment] = useState<Record<string, string>>({});
   const [expandedTask, setExpandedTask] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [showAddTask, setShowAddTask] = useState(false);
 
   useEffect(() => {
     if (!authLoading && !user) navigate("/connexion", { replace: true });
@@ -81,6 +83,25 @@ const EspaceClient = () => {
       toast({ title: "Erreur", description: error.message, variant: "destructive" });
     } else {
       setNewComment((p) => ({ ...p, [taskId]: "" }));
+      loadData();
+    }
+  };
+
+  const addTask = async () => {
+    if (!user || !project || !newTaskTitle.trim()) return;
+    const maxOrder = tasks.length > 0 ? Math.max(...tasks.map((t) => t.sort_order)) + 1 : 0;
+    const { error } = await supabase.from("project_tasks").insert({
+      project_id: project.id,
+      title: newTaskTitle.trim(),
+      status: "a_faire",
+      sort_order: maxOrder,
+    });
+    if (error) {
+      toast({ title: "Erreur", description: error.message, variant: "destructive" });
+    } else {
+      setNewTaskTitle("");
+      setShowAddTask(false);
+      toast({ title: "Tache ajoutee" });
       loadData();
     }
   };
@@ -165,12 +186,23 @@ const EspaceClient = () => {
 
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-lg">
-                  <CheckCircle2 className="h-5 w-5 text-primary" />
-                  Suivi des taches ({completedTasks}/{tasks.length})
-                </CardTitle>
+                <div className="flex items-center justify-between">
+                  <CardTitle className="flex items-center gap-2 text-lg">
+                    <CheckCircle2 className="h-5 w-5 text-primary" />
+                    Suivi des taches ({completedTasks}/{tasks.length})
+                  </CardTitle>
+                  <Button variant="outline" size="sm" onClick={() => setShowAddTask(!showAddTask)}>
+                    <Plus className="h-4 w-4 mr-1" /> Ajouter
+                  </Button>
+                </div>
               </CardHeader>
               <CardContent className="space-y-2">
+                {showAddTask && (
+                  <div className="flex gap-2 mb-3">
+                    <Input placeholder="Titre de la tache..." value={newTaskTitle} onChange={(e) => setNewTaskTitle(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addTask()} className="flex-1" />
+                    <Button size="icon" onClick={addTask} disabled={!newTaskTitle.trim()}><Send className="h-4 w-4" /></Button>
+                  </div>
+                )}
                 {tasks.length === 0 ? (
                   <p className="text-muted-foreground text-sm">Aucune tache pour le moment.</p>
                 ) : tasks.map((task) => {

@@ -17,6 +17,7 @@ const Connexion = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
   const [isRecovery, setIsRecovery] = useState(false);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState("");
 
   // Redirect if already logged in
@@ -33,6 +34,25 @@ const Connexion = () => {
       setIsRecovery(true);
     }
   }, []);
+
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) {
+      toast({ title: "Erreur", description: "Veuillez entrer votre email.", variant: "destructive" });
+      return;
+    }
+    setLoading(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/connexion`,
+    });
+    setLoading(false);
+    if (error) {
+      toast({ title: "Erreur", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Email envoye", description: "Consultez votre boite mail pour reinitialiser votre mot de passe." });
+      setIsForgotPassword(false);
+    }
+  };
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -79,11 +99,13 @@ const Connexion = () => {
         <CardHeader className="text-center space-y-4">
           <img src={logoImg} alt="Declic Digital" className="h-10 mx-auto" />
           <CardTitle className="text-2xl font-bold text-foreground">
-            {isRecovery ? "Creez votre mot de passe" : "Espace Client"}
+            {isRecovery ? "Creez votre mot de passe" : isForgotPassword ? "Mot de passe oublie" : "Espace Client"}
           </CardTitle>
           <CardDescription className="text-muted-foreground">
             {isRecovery
               ? "Definissez votre mot de passe pour acceder a votre espace."
+              : isForgotPassword
+              ? "Entrez votre email pour recevoir un lien de reinitialisation."
               : "Connectez-vous pour acceder a votre suivi de projet."}
           </CardDescription>
         </CardHeader>
@@ -109,6 +131,23 @@ const Connexion = () => {
                 Definir mon mot de passe
               </Button>
             </form>
+          ) : isForgotPassword ? (
+            <form onSubmit={handleForgotPassword} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input id="email" type="email" className="pl-10" placeholder="votre@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                </div>
+              </div>
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
+                Envoyer le lien
+              </Button>
+              <button type="button" onClick={() => setIsForgotPassword(false)} className="w-full text-sm text-muted-foreground hover:text-primary transition-colors">
+                Retour a la connexion
+              </button>
+            </form>
           ) : (
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="space-y-2">
@@ -129,6 +168,9 @@ const Connexion = () => {
                 {loading && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
                 Se connecter
               </Button>
+              <button type="button" onClick={() => setIsForgotPassword(true)} className="w-full text-sm text-muted-foreground hover:text-primary transition-colors">
+                Mot de passe oublie ?
+              </button>
             </form>
           )}
         </CardContent>
