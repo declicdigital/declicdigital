@@ -15,6 +15,7 @@ import {
   KeyRound, Mail, Globe, Save,
 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-transparent.png";
+import ProjectChat from "@/components/espace-client/ProjectChat";
 
 const STATUS_OPTIONS = [
   { value: "a_faire", label: "A faire" },
