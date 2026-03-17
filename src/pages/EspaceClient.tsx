@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, CheckCircle2, Clock, AlertCircle, Play, Plus } from "lucide-react";
-import logoImg from "@/assets/logo-declic-digital.webp";
+import logoImg from "@/assets/logo-declic-transparent.png";
 import ProjectTimeline from "@/components/espace-client/ProjectTimeline";
 import ProjectInvoices from "@/components/espace-client/ProjectInvoices";
 

@@ -14,7 +14,7 @@ import {
   CheckCircle2, Clock, AlertCircle, Play, Users, LogOut, MessageSquare,
   KeyRound, Mail,
 } from "lucide-react";
-import logoImg from "@/assets/logo-declic-digital.webp";
+import logoImg from "@/assets/logo-declic-transparent.png";
 
 const STATUS_OPTIONS = [
   { value: "a_faire", label: "A faire" },

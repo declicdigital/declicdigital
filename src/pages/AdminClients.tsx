@@ -10,7 +10,7 @@ import { Badge } from "@/components/ui/badge";
 import { toast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Loader2, Plus, Users, FileText, LogOut, ChevronRight, Search } from "lucide-react";
-import logoImg from "@/assets/logo-declic-digital.webp";
+import logoImg from "@/assets/logo-declic-transparent.png";
 
 const AdminClients = () => {
   const { user, isAdmin, loading: authLoading, signOut } = useAuth();
