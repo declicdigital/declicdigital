@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight, Tag, Sparkles } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { blogArticles } from "@/data/blogArticles";
 
 const categoryColors: Record<string, string> = {
