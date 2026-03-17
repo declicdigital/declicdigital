@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, CheckCircle2, Clock, AlertCircle, Play, Plus, Globe, Paperclip, Trash2 } from "lucide-react";
+import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, CheckCircle2, Clock, AlertCircle, Play, Plus, Globe, Paperclip, Trash2, Share2 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-transparent.png";
 import ProjectTimeline from "@/components/espace-client/ProjectTimeline";
 import ProjectInvoices from "@/components/espace-client/ProjectInvoices";
