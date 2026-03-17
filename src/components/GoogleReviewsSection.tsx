@@ -44,12 +44,16 @@ const GoogleReviewsSection = ({
       try {
         const { data, error } = await supabase.functions.invoke("google-reviews");
         if (!error && data && !data.fallback && data.reviews) {
+          const apiReviewsUrl = data.googleMapsLinks?.reviewsUri || FALLBACK_REVIEWS_URL;
+          const apiWriteReviewUrl = data.googleMapsLinks?.writeAReviewUri || FALLBACK_WRITE_REVIEW_URL;
+          setReviewsUrl(apiReviewsUrl);
+          setWriteReviewUrl(apiWriteReviewUrl);
           const mapped: ReviewData[] = data.reviews.slice(0, maxReviews).map((r: any) => ({
             author: r.authorAttribution?.displayName || r.author_name || "Client",
             rating: r.rating || 5,
             text: r.text?.text || r.text || "",
             time: r.relativePublishTimeDescription || r.relative_time_description || "",
-            reviewUrl: GOOGLE_REVIEWS_URL,
+            reviewUrl: apiReviewsUrl,
           }));
           setReviews(mapped);
           if (data.rating) setRating(data.rating);
