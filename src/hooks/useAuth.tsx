@@ -26,56 +26,60 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     let mounted = true;
-    let resolved = false;
-
-    const resolve = () => {
-      if (mounted && !resolved) {
-        resolved = true;
-        setLoading(false);
-      }
-    };
-
-    // Safety: never loading more than 3s
-    const timer = setTimeout(resolve, 3000);
 
     const handleSession = async (s: Session | null) => {
       if (!mounted) return;
+
       setSession(s);
       setUser(s?.user ?? null);
 
-      if (s?.user) {
-        try {
-          const { data } = await supabase.rpc("has_role", {
-            _user_id: s.user.id,
-            _role: "admin",
-          });
-          if (mounted) setIsAdmin(!!data);
-        } catch {
-          if (mounted) setIsAdmin(false);
-        }
-      } else {
+      if (!s?.user) {
         setIsAdmin(false);
+        setLoading(false);
+        return;
       }
 
-      if (mounted) {
-        resolved = true;
-        setLoading(false);
+      try {
+        const { data, error } = await supabase.rpc("has_role", {
+          _user_id: s.user.id,
+          _role: "admin",
+        });
+
+        if (!mounted) return;
+
+        if (error) {
+          console.error("has_role error:", error.message);
+          setIsAdmin(false);
+        } else {
+          setIsAdmin(!!data);
+        }
+      } catch (err) {
+        if (mounted) {
+          console.error("has_role exception:", err);
+          setIsAdmin(false);
+        }
+      } finally {
+        if (mounted) setLoading(false);
       }
     };
 
-    // 1. Listen for auth changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange(
       (_event, s) => { handleSession(s); }
     );
 
-    // 2. Get initial session
-    supabase.auth.getSession().then(({ data: { session: s } }) => {
-      if (!resolved) handleSession(s);
-    }).catch(() => resolve());
+    supabase.auth.getSession()
+      .then(({ data: { session: s } }) => handleSession(s))
+      .catch(() => {
+        if (mounted) {
+          setUser(null);
+          setSession(null);
+          setIsAdmin(false);
+          setLoading(false);
+        }
+      });
 
     return () => {
       mounted = false;
-      clearTimeout(timer);
       subscription.unsubscribe();
     };
   }, []);
