@@ -31,11 +31,11 @@ const getStatusOptions = (projectName: string) => [
   { value: "termine", label: "Termine" },
 ];
 
-const getStatusCfg = (projectName: string): Record<string, { label: string; icon: any; color: string }> => ({
-  a_faire_dd: { label: "A faire par D.D", icon: AlertCircle, color: "bg-[#e91e63]/10 text-[#e91e63]" },
-  a_faire_client: { label: `A faire par ${projectName}`, icon: Clock, color: "bg-emerald-500/10 text-emerald-600" },
-  en_cours: { label: "En cours", icon: Play, color: "bg-blue-500/10 text-blue-600" },
-  termine: { label: "Termine", icon: CheckCircle2, color: "bg-muted text-muted-foreground" },
+const getStatusCfg = (projectName: string): Record<string, { label: string; icon: any; color: string; bg: string }> => ({
+  a_faire_dd: { label: "A faire par D.D", icon: AlertCircle, color: "bg-[#e91e63]/10 text-[#e91e63]", bg: "bg-[#e91e63]/5 border-[#e91e63]/20" },
+  a_faire_client: { label: `A faire par ${projectName}`, icon: Clock, color: "bg-emerald-500/10 text-emerald-600", bg: "bg-emerald-500/5 border-emerald-500/20" },
+  en_cours: { label: "En cours", icon: Play, color: "bg-blue-500/10 text-blue-600", bg: "bg-blue-500/5 border-blue-500/20" },
+  termine: { label: "Termine", icon: CheckCircle2, color: "bg-muted text-muted-foreground", bg: "bg-muted/30 border-border" },
 });
 
 const AdminClientDetail = () => {
@@ -368,7 +368,7 @@ const AdminClientDetail = () => {
                   const isExpanded = expandedTask === task.id;
                   const statusOptions = getStatusOptions(project.name);
                   return (
-                    <div key={task.id} className="border border-border rounded-lg overflow-hidden">
+                    <div key={task.id} className={`border rounded-lg overflow-hidden ${cfg.bg}`}>
                       <div className="flex items-center gap-3 p-3">
                         <Select value={task.status} onValueChange={(v) => updateTaskStatus(task.id, v)}>
                           <SelectTrigger className="w-48"><SelectValue /></SelectTrigger>

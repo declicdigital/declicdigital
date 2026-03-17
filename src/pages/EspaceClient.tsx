@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, CheckCircle2, Clock, AlertCircle, Play, Plus, Globe, Paperclip } from "lucide-react";
+import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, CheckCircle2, Clock, AlertCircle, Play, Plus, Globe, Paperclip, Trash2 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-transparent.png";
 import ProjectTimeline from "@/components/espace-client/ProjectTimeline";
 import ProjectInvoices from "@/components/espace-client/ProjectInvoices";
@@ -20,11 +20,11 @@ const STATUS_PRIORITY: Record<string, number> = {
   termine: 3,
 };
 
-const getStatusCfg = (projectName: string): Record<string, { label: string; icon: any; color: string }> => ({
-  a_faire_dd: { label: "A faire par D.D", icon: AlertCircle, color: "bg-[#e91e63]/10 text-[#e91e63]" },
-  a_faire_client: { label: `A faire par ${projectName}`, icon: Clock, color: "bg-emerald-500/10 text-emerald-600" },
-  en_cours: { label: "En cours", icon: Play, color: "bg-blue-500/10 text-blue-600" },
-  termine: { label: "Termine", icon: CheckCircle2, color: "bg-muted text-muted-foreground" },
+const getStatusCfg = (projectName: string): Record<string, { label: string; icon: any; color: string; bg: string }> => ({
+  a_faire_dd: { label: "A faire par D.D", icon: AlertCircle, color: "bg-[#e91e63]/10 text-[#e91e63]", bg: "bg-[#e91e63]/5 border-[#e91e63]/20" },
+  a_faire_client: { label: `A faire par ${projectName}`, icon: Clock, color: "bg-emerald-500/10 text-emerald-600", bg: "bg-emerald-500/5 border-emerald-500/20" },
+  en_cours: { label: "En cours", icon: Play, color: "bg-blue-500/10 text-blue-600", bg: "bg-blue-500/5 border-blue-500/20" },
+  termine: { label: "Termine", icon: CheckCircle2, color: "bg-muted text-muted-foreground", bg: "bg-muted/30 border-border" },
 });
 
 const EspaceClient = () => {
@@ -262,7 +262,7 @@ const EspaceClient = () => {
                     const isExpanded = expandedTask === task.id;
                     const canChangeStatus = task.status === "a_faire_client";
                     return (
-                      <div key={task.id} className="border border-border rounded-lg overflow-hidden">
+                      <div key={task.id} className={`border rounded-lg overflow-hidden ${cfg.bg}`}>
                         <button
                           onClick={() => setExpandedTask(isExpanded ? null : task.id)}
                           className="w-full flex items-center gap-3 p-4 hover:bg-muted/30 transition-colors text-left"
@@ -297,16 +297,22 @@ const EspaceClient = () => {
                             {(attachments[task.id] || []).length > 0 && (
                               <div className="space-y-1">
                                 {(attachments[task.id] || []).map((att: any) => (
-                                  <button
-                                    key={att.id}
-                                    onClick={async () => {
-                                      const { data } = await supabase.storage.from("project-documents").createSignedUrl(att.file_path, 3600);
-                                      if (data?.signedUrl) window.open(data.signedUrl, "_blank");
-                                    }}
-                                    className="flex items-center gap-2 text-xs text-primary hover:underline"
-                                  >
-                                    <Paperclip className="h-3 w-3" /> {att.file_name}
-                                  </button>
+                                  <div key={att.id} className="flex items-center gap-2">
+                                    <button
+                                      onClick={async () => {
+                                        const { data } = await supabase.storage.from("project-documents").createSignedUrl(att.file_path, 3600);
+                                        if (data?.signedUrl) window.open(data.signedUrl, "_blank");
+                                      }}
+                                      className="flex items-center gap-2 text-xs text-primary hover:underline"
+                                    >
+                                      <Paperclip className="h-3 w-3" /> {att.file_name}
+                                    </button>
+                                    <Button variant="ghost" size="icon" className="h-6 w-6 text-destructive" onClick={async () => {
+                                      await supabase.storage.from("project-documents").remove([att.file_path]);
+                                      await (supabase.from("task_attachments" as any) as any).delete().eq("id", att.id);
+                                      loadData();
+                                    }}><Trash2 className="h-3 w-3" /></Button>
+                                  </div>
                                 ))}
                               </div>
                             )}
