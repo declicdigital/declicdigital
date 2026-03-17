@@ -245,11 +245,13 @@ const EspaceClient = () => {
                 {tasks.length === 0 ? (
                   <p className="text-muted-foreground text-sm">Aucune tache pour le moment.</p>
                 ) : (
-                  tasks.map((task) => {
-                    const cfg = STATUS_CFG[task.status] || STATUS_CFG.a_faire;
+                  sortedTasks.map((task) => {
+                    const statusCfg = getStatusCfg(project.name);
+                    const cfg = statusCfg[task.status] || statusCfg.a_faire_dd;
                     const Icon = cfg.icon;
                     const taskComments = comments[task.id] || [];
                     const isExpanded = expandedTask === task.id;
+                    const canChangeStatus = task.status === "a_faire_client";
                     return (
                       <div key={task.id} className="border border-border rounded-lg overflow-hidden">
                         <button
@@ -260,6 +262,20 @@ const EspaceClient = () => {
                             <Icon className="h-3.5 w-3.5" /> {cfg.label}
                           </div>
                           <span className="text-sm font-medium text-foreground flex-1">{task.title}</span>
+                          {canChangeStatus && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="text-xs h-7"
+                              onClick={async (e) => {
+                                e.stopPropagation();
+                                await supabase.from("project_tasks").update({ status: "a_faire_dd" } as any).eq("id", task.id);
+                                loadData();
+                              }}
+                            >
+                              Marquer fait
+                            </Button>
+                          )}
                           {taskComments.length > 0 && (
                             <span className="flex items-center gap-1 text-xs text-muted-foreground">
                               <MessageSquare className="h-3.5 w-3.5" /> {taskComments.length}

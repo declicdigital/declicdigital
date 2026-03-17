@@ -425,18 +425,18 @@ const AdminClientDetail = () => {
               </CardContent>
             </Card>
 
-            {/* Recap taches a faire */}
-            {tasks.filter((t) => t.status === "a_faire").length > 0 && (
-              <Card className="border-primary/30 bg-primary/5">
+            {/* Recap taches a faire par D.D */}
+            {tasks.filter((t) => t.status === "a_faire_dd").length > 0 && (
+              <Card className="border-[#e91e63]/30 bg-[#e91e63]/5">
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <AlertCircle className="h-5 w-5 text-primary" /> A faire ({tasks.filter((t) => t.status === "a_faire").length})
+                    <AlertCircle className="h-5 w-5 text-[#e91e63]" /> A faire par D.D ({tasks.filter((t) => t.status === "a_faire_dd").length})
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  {tasks.filter((t) => t.status === "a_faire").map((task) => (
-                    <div key={task.id} className="flex items-start gap-3 p-3 rounded-lg bg-card border border-primary/20">
-                      <div className="mt-0.5 h-2 w-2 rounded-full bg-primary shrink-0" />
+                  {tasks.filter((t) => t.status === "a_faire_dd").map((task) => (
+                    <div key={task.id} className="flex items-start gap-3 p-3 rounded-lg bg-card border border-[#e91e63]/20">
+                      <div className="mt-0.5 h-2 w-2 rounded-full bg-[#e91e63] shrink-0" />
                       <p className="text-sm font-medium text-foreground">{task.title}</p>
                     </div>
                   ))}
