@@ -28,7 +28,7 @@ const projects = [
     description: "Site e-commerce pour un producteur de saucissons artisanaux des Landes. Design audacieux et identitaire.",
     url: "https://el-saucisson-landes.base44.app/",
     image: portfolioSaucisson,
-    tags: ["E-commerce", "Alimentaire", "Base44"],
+    tags: ["E-commerce", "Alimentaire"],
   },
 ];
 
