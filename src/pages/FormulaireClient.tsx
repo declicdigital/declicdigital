@@ -267,12 +267,19 @@ const FormulaireClient = () => {
               <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full gradient-miami shadow-elevated">
                 <CheckCircle className="h-10 w-10 text-primary-foreground" />
               </div>
-              <h1 className="text-3xl font-extrabold mb-4">C'est envoyé !</h1>
-              <p className="text-muted-foreground text-lg mb-8">
-                Déclic Digital a bien reçu votre projet et reviendra vers vous avec une proposition personnalisée.
+              <h1 className="text-3xl font-extrabold mb-4">C'est envoye !</h1>
+              <p className="text-muted-foreground text-lg mb-4">
+                Declic Digital a bien recu votre projet et reviendra vers vous avec une proposition personnalisee.
               </p>
-              <Button onClick={() => window.location.href = "/"} className="rounded-full gradient-primary text-primary-foreground">
-                Retour à l'accueil
+              <p className="text-foreground font-medium mb-8">
+                Votre espace client a ete cree. Connectez-vous pour suivre l'avancement de votre projet.
+              </p>
+              <div className="flex gap-3 justify-center">
+                <Button onClick={() => window.location.href = "/connexion"} className="rounded-full gradient-miami text-primary-foreground">
+                  Acceder a mon espace client
+                </Button>
+                <Button onClick={() => window.location.href = "/"} variant="outline" className="rounded-full">
+                  Retour a l'accueil
               </Button>
             </motion.div>
           </div>
