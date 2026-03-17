@@ -110,7 +110,7 @@ const EspaceClient = () => {
     const { error } = await supabase.from("project_tasks").insert({
       project_id: project.id,
       title: newTaskTitle.trim(),
-      status: "a_faire",
+      status: "a_faire_dd" as any,
       sort_order: maxOrder,
     });
     if (error) {
