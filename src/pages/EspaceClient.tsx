@@ -13,12 +13,19 @@ import ProjectTimeline from "@/components/espace-client/ProjectTimeline";
 import ProjectInvoices from "@/components/espace-client/ProjectInvoices";
 import ProjectChat from "@/components/espace-client/ProjectChat";
 
-const STATUS_CFG: Record<string, { label: string; icon: any; color: string }> = {
-  a_faire: { label: "A faire", icon: AlertCircle, color: "bg-muted text-muted-foreground" },
-  en_cours: { label: "En cours", icon: Play, color: "bg-primary/10 text-primary" },
-  en_attente: { label: "En attente", icon: Clock, color: "bg-amber-500/10 text-amber-600" },
-  termine: { label: "Termine", icon: CheckCircle2, color: "bg-emerald-500/10 text-emerald-600" },
+const STATUS_PRIORITY: Record<string, number> = {
+  a_faire_client: 0,
+  a_faire_dd: 1,
+  en_cours: 2,
+  termine: 3,
 };
+
+const getStatusCfg = (projectName: string): Record<string, { label: string; icon: any; color: string }> => ({
+  a_faire_dd: { label: "A faire par D.D", icon: AlertCircle, color: "bg-[#e91e63]/10 text-[#e91e63]" },
+  a_faire_client: { label: `A faire par ${projectName}`, icon: Clock, color: "bg-emerald-500/10 text-emerald-600" },
+  en_cours: { label: "En cours", icon: Play, color: "bg-blue-500/10 text-blue-600" },
+  termine: { label: "Termine", icon: CheckCircle2, color: "bg-muted text-muted-foreground" },
+});
 
 const EspaceClient = () => {
   const { user, isAdmin, loading: authLoading, signOut } = useAuth();
