@@ -121,7 +121,7 @@ const Connexion = () => {
                   onCheckedChange={(checked) => setRememberMe(checked === true)}
                 />
                 <Label htmlFor="remember" className="text-sm text-muted-foreground cursor-pointer">
-                  Rester connecte
+                  Rester connecté
                 </Label>
               </div>
               <Button type="submit" className="w-full" disabled={loading}>
