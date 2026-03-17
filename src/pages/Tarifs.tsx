@@ -4,6 +4,7 @@ import { Check, Star, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 
 const plans = [
   {
