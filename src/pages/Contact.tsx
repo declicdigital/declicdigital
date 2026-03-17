@@ -12,6 +12,7 @@ import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 
 const Contact = () => (
   <PageLayout>
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Contact" }]} />
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">
