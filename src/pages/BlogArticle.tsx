@@ -8,7 +8,7 @@ import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { getArticleBySlug, getRelatedArticles, getCategorySlug, type BlogArticle as BlogArticleType } from "@/data/blogArticles";
 
 const getShareUrl = (slug: string) =>
-  `https://declicdigital.net/blog/${slug}`;
+  `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/og-meta?path=/blog/${slug}`;
 
 const ShareBar = ({ article, formattedDate }: { article: BlogArticleType; formattedDate: string }) => {
   const [copied, setCopied] = useState(false);
