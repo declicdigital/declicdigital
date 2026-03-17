@@ -322,8 +322,8 @@ const AdminClientDetail = () => {
                       >
                         <Share2 className="h-4 w-4 mr-1" /> Partager
                       </Button>
-                    )
-                  <Select value={project.status} onValueChange={updateProjectStatus}>
+                    )}
+                    <Select value={project.status} onValueChange={updateProjectStatus}>
                     <SelectTrigger className="w-40 bg-primary-foreground/20 border-primary-foreground/30 text-primary-foreground"><SelectValue /></SelectTrigger>
                     <SelectContent>
                       <SelectItem value="En cours">En cours</SelectItem>
