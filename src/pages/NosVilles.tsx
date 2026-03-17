@@ -6,6 +6,7 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import { cities } from "@/data/cities";
 import { Helmet } from "react-helmet-async";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 
 const parisCities = cities.filter((c) => c.region === "paris");
 const hdsCities = cities.filter((c) => c.region === "hauts-de-seine");
