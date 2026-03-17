@@ -4,6 +4,7 @@ import { Eye, Users, TrendingUp, Search, BarChart3, FileText, Target, CheckCircl
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 import { getCityBySlug, cities } from "@/data/cities";
 import { cityContent } from "@/data/cityContent";
@@ -23,10 +24,16 @@ const VilleReferencementSeo = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>{`Référencement SEO ${city.nameShort} - Agence SEO | Déclic Digital`}</title>
+        <title>{`SEO ${city.nameShort} | Déclic Digital`}</title>
         <meta name="description" content={`Agence de référencement SEO ${city.description}. Améliorez votre visibilité sur Google et attirez des clients qualifiés. Audit SEO gratuit.`} />
         <link rel="canonical" href={`https://declicdigital.net/referencement-seo/${city.slug}`} />
       </Helmet>
+
+      <PageBreadcrumb items={[
+        { label: "Accueil", href: "/" },
+        { label: "Référencement SEO", href: "/referencement-seo" },
+        { label: city.nameShort },
+      ]} />
 
       {/* Hero */}
       <section className="gradient-hero py-16 md:py-24">

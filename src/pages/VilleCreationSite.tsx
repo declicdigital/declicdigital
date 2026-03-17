@@ -4,6 +4,7 @@ import { Monitor, Smartphone, TrendingUp, Zap, CheckCircle, Search, Shield, Cloc
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 import { getCityBySlug, cities } from "@/data/cities";
 import { cityContent } from "@/data/cityContent";
@@ -23,10 +24,17 @@ const VilleCreationSite = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>{`Création de site web ${city.nameShort} - Agence web | Déclic Digital`}</title>
+        <title>{`Site web ${city.nameShort} | Déclic Digital`}</title>
         <meta name="description" content={`Création de site internet professionnel ${city.description}. Agence web spécialisée PME. Site vitrine, e-commerce, responsive et optimisé SEO. Devis gratuit.`} />
         <link rel="canonical" href={`https://declicdigital.net/creation-site-web/${city.slug}`} />
       </Helmet>
+
+      {/* Breadcrumb */}
+      <PageBreadcrumb items={[
+        { label: "Accueil", href: "/" },
+        { label: "Création de site web", href: "/creation-site-web" },
+        { label: city.nameShort },
+      ]} />
 
       {/* Hero */}
       <section className="gradient-hero py-16 md:py-24">

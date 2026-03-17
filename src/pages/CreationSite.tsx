@@ -4,12 +4,19 @@ import { Monitor, Smartphone, TrendingUp, Zap, Building2, User, Wrench, Shopping
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 import heroCreation from "@/assets/screenshot-declic-digital.png";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 import { cities } from "@/data/cities";
 
 const CreationSite = () => (
   <PageLayout>
+    {/* Breadcrumb */}
+    <PageBreadcrumb items={[
+      { label: "Accueil", href: "/" },
+      { label: "Création de site web" },
+    ]} />
+
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">
