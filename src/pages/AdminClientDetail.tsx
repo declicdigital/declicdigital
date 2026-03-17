@@ -77,6 +77,7 @@ const AdminClientDetail = () => {
       setNameDraft(profile?.full_name || "");
       const proj = projects?.[0] || null;
       setProject(proj);
+      setWebsiteUrl(proj?.website_url || "");
 
       if (proj) {
         const [{ data: tasksData }, { data: docsData }] = await Promise.all([
