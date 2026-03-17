@@ -4,6 +4,7 @@ import { Monitor, Smartphone, TrendingUp, Zap, CheckCircle, Search, Shield, Cloc
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 import { getCityBySlug, cities } from "@/data/cities";
 import { cityContent } from "@/data/cityContent";
