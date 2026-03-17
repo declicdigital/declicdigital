@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
