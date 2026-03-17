@@ -97,6 +97,7 @@ const FIELD_LABELS: Record<string, string> = {
 };
 
 const AdminSoumissions = () => {
+  const navigate = useNavigate();
   const [subs, setSubs] = useState<Submission[]>([]);
   const [selected, setSelected] = useState<Submission | null>(null);
   const [loading, setLoading] = useState(true);
