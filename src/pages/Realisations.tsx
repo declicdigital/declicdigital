@@ -135,6 +135,9 @@ const Realisations = () => (
       </div>
     </SectionWrapper>
 
+    {/* Avis clients */}
+    <GoogleReviewsSection compact maxReviews={3} />
+
     {/* CTA */}
     <section className="gradient-miami py-16 text-center">
       <div className="container">

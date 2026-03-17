@@ -123,6 +123,9 @@ const AuditSeo = () => (
       </div>
     </SectionWrapper>
 
+    {/* Avis clients */}
+    <GoogleReviewsSection compact maxReviews={3} />
+
     {/* Formulaire */}
     <SectionWrapper className="bg-card" id="formulaire-audit">
       <div className="mx-auto max-w-xl">

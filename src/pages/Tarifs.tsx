@@ -251,6 +251,9 @@ const Tarifs = () => (
       </div>
     </SectionWrapper>
 
+    {/* Avis clients */}
+    <GoogleReviewsSection compact maxReviews={3} className="bg-card" />
+
     {/* CTA */}
     <section className="gradient-miami py-16">
       <div className="container text-center">

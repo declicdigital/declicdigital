@@ -138,6 +138,9 @@ const Contact = () => (
       </div>
     </SectionWrapper>
 
+    {/* Avis clients */}
+    <GoogleReviewsSection compact maxReviews={3} />
+
     {/* Maillage */}
     <SectionWrapper className="bg-card">
       <div className="mx-auto max-w-3xl text-center">
