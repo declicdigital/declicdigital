@@ -280,8 +280,8 @@ const FormulaireClient = () => {
                 </Button>
                 <Button onClick={() => window.location.href = "/"} variant="outline" className="rounded-full">
                   Retour a l'accueil
-              </Button>
-            </motion.div>
+                </Button>
+              </div>
           </div>
         </section>
       </PageLayout>
