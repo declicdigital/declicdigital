@@ -84,7 +84,7 @@ const BlogArticle = () => {
 
   return (
     <PageLayout>
-      <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Blog", href: "/blog" }, { label: article.title }]} />
+      <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Blog", href: "/blog" }, { label: article.category, href: `/blog/categorie/${getCategorySlug(article.category)}` }, { label: article.title }]} />
       <Helmet>
         <title>{article.metaTitle}</title>
         <meta name="description" content={article.metaDescription} />
