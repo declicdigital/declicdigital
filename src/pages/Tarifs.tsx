@@ -4,6 +4,7 @@ import { Check, Star, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 
 const plans = [
   {
@@ -100,6 +101,7 @@ const plans = [
 
 const Tarifs = () => (
   <PageLayout>
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Tarifs" }]} />
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container text-center">

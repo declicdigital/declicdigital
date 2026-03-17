@@ -6,11 +6,13 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 import heroContact from "@/assets/contact-agence-web.png";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 
 const Contact = () => (
   <PageLayout>
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Contact" }]} />
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">
@@ -107,7 +109,7 @@ const Contact = () => (
       </div>
       <div className="mx-auto max-w-3xl rounded-2xl overflow-hidden shadow-card">
         <iframe
-          src="https://www.google.com/maps?q=D%C3%A9clic+Digital%2C+57+Rue+d%27Alleray%2C+75015+Paris&output=embed"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.5!2d2.2975!3d48.8386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1sChIJsYNdrCdx5kcR89wPMta_l-w!2sD%C3%A9clic%20Digital!5e0!3m2!1sfr!2sfr!4v1"
           width="100%"
           height="350"
           style={{ border: 0 }}

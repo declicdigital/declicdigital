@@ -6,12 +6,14 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import { cities } from "@/data/cities";
 import { Helmet } from "react-helmet-async";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 
 const parisCities = cities.filter((c) => c.region === "paris");
 const hdsCities = cities.filter((c) => c.region === "hauts-de-seine");
 
 const NosVilles = () => (
   <PageLayout>
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Nos villes" }]} />
     <Helmet>
       <title>Nos villes - Création de site web et SEO à Paris et 92 | Déclic Digital</title>
       <meta name="description" content="Déclic Digital intervient à Paris et dans les Hauts-de-Seine (92) pour la création de sites web et le référencement SEO. Découvrez nos pages par ville." />

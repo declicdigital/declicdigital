@@ -1,8 +1,10 @@
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 
 const MentionsLegales = () => (
   <PageLayout>
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Mentions légales" }]} />
     <section className="gradient-hero py-16 md:py-24">
       <div className="container text-center">
         <h1 className="text-4xl font-extrabold md:text-5xl">Mentions légales</h1>

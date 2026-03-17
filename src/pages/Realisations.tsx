@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 import portfolioOffg from "@/assets/site-vitrine-artiste-musical.png";
 import portfolioDomidel from "@/assets/site-professionnel-entreprise-construction.webp";
 import portfolioSaucisson from "@/assets/site-ecommerce-produits-artisanaux.png";
@@ -33,6 +34,7 @@ const projects = [
 
 const Realisations = () => (
   <PageLayout>
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Réalisations" }]} />
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container text-center">

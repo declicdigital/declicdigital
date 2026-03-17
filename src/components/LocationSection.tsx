@@ -2,7 +2,7 @@ import { MapPin, ExternalLink, Star, Clock, Phone } from "lucide-react";
 import SectionWrapper from "./SectionWrapper";
 
 const GOOGLE_PLACE_ID = "ChIJsYNdrCdx5kcR89wPMta_l-w";
-const MAPS_EMBED_URL = `https://www.google.com/maps?q=57+Rue+d'Alleray,+75015+Paris,+France&output=embed`;
+const MAPS_EMBED_URL = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.5!2d2.2975!3d48.8386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s${GOOGLE_PLACE_ID}!2sD%C3%A9clic%20Digital!5e0!3m2!1sfr!2sfr!4v1`;
 const GOOGLE_MAPS_LINK = `https://www.google.com/maps/place/?q=place_id:${GOOGLE_PLACE_ID}`;
 const GOOGLE_REVIEW_URL = `https://search.google.com/local/writereview?placeid=${GOOGLE_PLACE_ID}`;
 
