@@ -19,14 +19,9 @@ Deno.serve(async (req) => {
       );
     }
 
+    // Use legacy Places API (placedetails) which is more commonly enabled
     const res = await fetch(
-      `https://places.googleapis.com/v1/places/${placeId}?languageCode=fr`,
-      {
-        headers: {
-          "X-Goog-Api-Key": apiKey,
-          "X-Goog-FieldMask": "displayName,rating,userRatingCount,reviews",
-        },
-      }
+      `https://maps.googleapis.com/maps/api/place/details/json?place_id=${placeId}&fields=name,rating,user_ratings_total,reviews&language=fr&key=${apiKey}`
     );
 
     if (!res.ok) {
@@ -39,7 +34,28 @@ Deno.serve(async (req) => {
 
     const data = await res.json();
 
-    return new Response(JSON.stringify(data), {
+    if (data.status !== "OK" || !data.result) {
+      console.error("Google Places API status:", data.status, data.error_message);
+      return new Response(
+        JSON.stringify({ fallback: true, error: data.status }),
+        { headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    const result = data.result;
+    const response = {
+      displayName: result.name,
+      rating: result.rating,
+      userRatingCount: result.user_ratings_total,
+      reviews: (result.reviews || []).map((r: any) => ({
+        authorAttribution: { displayName: r.author_name },
+        rating: r.rating,
+        text: { text: r.text },
+        relativePublishTimeDescription: r.relative_time_description,
+      })),
+    };
+
+    return new Response(JSON.stringify(response), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {

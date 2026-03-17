@@ -25,6 +25,7 @@ const links = [
 
 const PlanDuSite = () => (
   <PageLayout>
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Plan du site" }]} />
     <section className="gradient-hero py-16 md:py-24">
       <div className="container text-center">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>

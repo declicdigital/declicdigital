@@ -32,6 +32,7 @@ const faqItems = [
 
 const Faq = () => (
   <PageLayout>
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "FAQ" }]} />
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">
         <div className="grid items-center gap-10 lg:grid-cols-2">

@@ -101,6 +101,7 @@ const plans = [
 
 const Tarifs = () => (
   <PageLayout>
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Tarifs" }]} />
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container text-center">

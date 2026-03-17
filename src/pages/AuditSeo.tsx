@@ -11,6 +11,7 @@ import heroAudit from "@/assets/audit-seo-gratuit-site-web.png";
 
 const AuditSeo = () => (
   <PageLayout>
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Audit SEO gratuit" }]} />
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">

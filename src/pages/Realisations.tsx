@@ -34,6 +34,7 @@ const projects = [
 
 const Realisations = () => (
   <PageLayout>
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Réalisations" }]} />
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container text-center">
