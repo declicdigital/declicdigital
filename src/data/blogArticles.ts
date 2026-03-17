@@ -270,6 +270,17 @@ Les municipales de Paris 2026 confirment que la présence digitale n'est plus op
   },
 ];
 
+export const blogCategories = [...new Set(blogArticles.map((a) => a.category))];
+
+export const getArticlesByCategory = (category: string) =>
+  blogArticles.filter((a) => a.category === category);
+
+export const getCategorySlug = (category: string) =>
+  category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+export const getCategoryFromSlug = (slug: string) =>
+  blogCategories.find((c) => getCategorySlug(c) === slug);
+
 export const getArticleBySlug = (slug: string) =>
   blogArticles.find((a) => a.slug === slug);
 
