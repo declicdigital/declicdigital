@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Search, FileText, Users, Lightbulb, CheckCircle } from "lucide-react";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
