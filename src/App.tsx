@@ -67,6 +67,7 @@ const App = () => (
               <Route path="/admin/clients" element={<AdminClients />} />
               <Route path="/admin/client/:clientId" element={<AdminClientDetail />} />
               <Route path="/admin/soumissions" element={<AdminSoumissions />} />
+              <Route path="/projet/:token" element={<SharedProject />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
