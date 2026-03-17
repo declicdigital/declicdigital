@@ -9,7 +9,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    const apiKey = Deno.env.get("GOOGLE_MAPS_API_KEY");
+    const apiKey = Deno.env.get("GOOGLE_MAPS_API_KEY_BACKEND");
     const placeId = Deno.env.get("GOOGLE_PLACE_ID") || "ChIJsYNdrCdx5kcR89wPMta_l-w";
 
     if (!apiKey) {
