@@ -28,6 +28,7 @@ import VilleReferencementSeo from "./pages/VilleReferencementSeo";
 import NosVilles from "./pages/NosVilles";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
+import BlogCategory from "./pages/BlogCategory";
 import SharedProject from "./pages/SharedProject";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
@@ -60,6 +61,7 @@ const App = () => (
               <Route path="/plan-du-site" element={<PlanDuSite />} />
               <Route path="/formulaire-client" element={<FormulaireClient />} />
               <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/categorie/:categorySlug" element={<BlogCategory />} />
               <Route path="/blog/:slug" element={<BlogArticle />} />
               <Route path="/connexion" element={<Connexion />} />
               <Route path="/espace-client" element={<EspaceClient />} />

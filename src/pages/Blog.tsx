@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight, Tag, Sparkles } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import { blogArticles } from "@/data/blogArticles";
+import { blogArticles, blogCategories, getCategorySlug } from "@/data/blogArticles";
 
 const categoryColors: Record<string, string> = {
   Technique: "bg-primary/10 text-primary",
   Design: "bg-accent/10 text-accent",
   "SEO & Performance": "bg-emerald-500/10 text-emerald-600",
   "Stratégie digitale": "bg-violet-500/10 text-violet-600",
+  "Tech & Objets connectés": "bg-sky-500/10 text-sky-600",
 };
 
 const sorted = [...blogArticles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
@@ -91,6 +92,22 @@ const Blog = () => {
             </div>
           </motion.article>
         </Link>
+      </section>
+
+      {/* Categories */}
+      <section className="container mb-10">
+        <h2 className="text-lg font-bold mb-4">Parcourir par catégorie</h2>
+        <div className="flex flex-wrap gap-2">
+          {blogCategories.map((cat) => (
+            <Link
+              key={cat}
+              to={`/blog/categorie/${getCategorySlug(cat)}`}
+              className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors hover:opacity-80 ${categoryColors[cat] || "bg-secondary text-secondary-foreground"}`}
+            >
+              {cat}
+            </Link>
+          ))}
+        </div>
       </section>
 
       {/* Other articles */}

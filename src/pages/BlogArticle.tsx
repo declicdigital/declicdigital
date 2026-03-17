@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowLeft, ArrowRight, Tag, Share2 } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import { getArticleBySlug, getRelatedArticles } from "@/data/blogArticles";
+import { getArticleBySlug, getRelatedArticles, getCategorySlug } from "@/data/blogArticles";
 
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -84,7 +84,7 @@ const BlogArticle = () => {
 
   return (
     <PageLayout>
-      <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Blog", href: "/blog" }, { label: article.title }]} />
+      <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Blog", href: "/blog" }, { label: article.category, href: `/blog/categorie/${getCategorySlug(article.category)}` }, { label: article.title }]} />
       <Helmet>
         <title>{article.metaTitle}</title>
         <meta name="description" content={article.metaDescription} />
