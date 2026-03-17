@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Check, Star, AlertTriangle } from "lucide-react";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
