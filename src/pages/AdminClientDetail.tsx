@@ -418,16 +418,16 @@ const AdminClientDetail = () => {
               </CardContent>
             </Card>
 
-            {/* Recap taches en cours */}
-            {tasks.filter((t) => t.status === "en_cours").length > 0 && (
+            {/* Recap taches a faire */}
+            {tasks.filter((t) => t.status === "a_faire").length > 0 && (
               <Card className="border-primary/30 bg-primary/5">
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <Play className="h-5 w-5 text-primary" /> A faire maintenant ({tasks.filter((t) => t.status === "en_cours").length})
+                    <AlertCircle className="h-5 w-5 text-primary" /> A faire ({tasks.filter((t) => t.status === "a_faire").length})
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  {tasks.filter((t) => t.status === "en_cours").map((task) => (
+                  {tasks.filter((t) => t.status === "a_faire").map((task) => (
                     <div key={task.id} className="flex items-start gap-3 p-3 rounded-lg bg-card border border-primary/20">
                       <div className="mt-0.5 h-2 w-2 rounded-full bg-primary shrink-0" />
                       <p className="text-sm font-medium text-foreground">{task.title}</p>
