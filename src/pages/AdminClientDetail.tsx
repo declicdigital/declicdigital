@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import {
   Loader2, ArrowLeft, Plus, Trash2, FileText, Upload, Send,
   CheckCircle2, Clock, AlertCircle, Play, Users, LogOut, MessageSquare,
-  KeyRound, Mail, Globe, Save,
+  KeyRound, Mail, Globe, Save, Paperclip,
 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-transparent.png";
 import ProjectChat from "@/components/espace-client/ProjectChat";
@@ -47,6 +47,7 @@ const AdminClientDetail = () => {
   const [project, setProject] = useState<any>(null);
   const [tasks, setTasks] = useState<any[]>([]);
   const [comments, setComments] = useState<Record<string, any[]>>({});
+  const [attachments, setAttachments] = useState<Record<string, any[]>>({});
   const [documents, setDocuments] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [newTaskTitle, setNewTaskTitle] = useState("");
@@ -96,16 +97,23 @@ const AdminClientDetail = () => {
         setDocuments(docsData || []);
 
         if (tasksData && tasksData.length > 0) {
-          const { data: commentsData } = await supabase
-            .from("task_comments").select("*")
-            .in("task_id", tasksData.map((t: any) => t.id))
-            .order("created_at", { ascending: true });
+          const taskIds = tasksData.map((t: any) => t.id);
+          const [{ data: commentsData }, { data: attachData }] = await Promise.all([
+            supabase.from("task_comments").select("*").in("task_id", taskIds).order("created_at", { ascending: true }),
+            supabase.from("task_attachments" as any).select("*").in("task_id", taskIds).order("created_at", { ascending: false }),
+          ]);
           const grouped: Record<string, any[]> = {};
           (commentsData || []).forEach((c: any) => {
             if (!grouped[c.task_id]) grouped[c.task_id] = [];
             grouped[c.task_id].push(c);
           });
           setComments(grouped);
+          const groupedAtt: Record<string, any[]> = {};
+          ((attachData as any[]) || []).forEach((a: any) => {
+            if (!groupedAtt[a.task_id]) groupedAtt[a.task_id] = [];
+            groupedAtt[a.task_id].push(a);
+          });
+          setAttachments(groupedAtt);
         }
       }
     } catch (err) {
@@ -376,6 +384,29 @@ const AdminClientDetail = () => {
                       </div>
                       {isExpanded && (
                         <div className="border-t border-border p-4 bg-muted/20 space-y-3">
+                          {/* Attachments */}
+                          {(attachments[task.id] || []).length > 0 && (
+                            <div className="space-y-1">
+                              {(attachments[task.id] || []).map((att: any) => (
+                                <div key={att.id} className="flex items-center gap-2">
+                                  <button
+                                    onClick={async () => {
+                                      const { data } = await supabase.storage.from("project-documents").createSignedUrl(att.file_path, 3600);
+                                      if (data?.signedUrl) window.open(data.signedUrl, "_blank");
+                                    }}
+                                    className="flex items-center gap-2 text-xs text-primary hover:underline"
+                                  >
+                                    <Paperclip className="h-3 w-3" /> {att.file_name}
+                                  </button>
+                                  <Button variant="ghost" size="icon" className="h-6 w-6 text-destructive" onClick={async () => {
+                                    await supabase.storage.from("project-documents").remove([att.file_path]);
+                                    await (supabase.from("task_attachments" as any) as any).delete().eq("id", att.id);
+                                    loadAll();
+                                  }}><Trash2 className="h-3 w-3" /></Button>
+                                </div>
+                              ))}
+                            </div>
+                          )}
                           {taskComments.map((c) => (
                             <div key={c.id} className="text-sm p-3 rounded-lg bg-card border border-border">
                               <p className="text-foreground">{c.content}</p>
@@ -384,6 +415,27 @@ const AdminClientDetail = () => {
                           ))}
                           <div className="flex gap-2">
                             <Input placeholder="Commentaire..." value={newComment[task.id] || ""} onChange={(e) => setNewComment((p) => ({ ...p, [task.id]: e.target.value }))} onKeyDown={(e) => e.key === "Enter" && addComment(task.id)} className="flex-1" />
+                            <label className="cursor-pointer">
+                              <Button variant="outline" size="icon" asChild>
+                                <span><Paperclip className="h-4 w-4" /></span>
+                              </Button>
+                              <input type="file" className="hidden" onChange={async (e) => {
+                                if (!e.target.files || !user || !project) return;
+                                const file = e.target.files[0];
+                                const path = `${project.id}/tasks/${task.id}/${Date.now()}_${file.name}`;
+                                const { error: upErr } = await supabase.storage.from("project-documents").upload(path, file);
+                                if (upErr) {
+                                  toast({ title: "Erreur", description: upErr.message, variant: "destructive" });
+                                } else {
+                                  await (supabase.from("task_attachments" as any) as any).insert({
+                                    task_id: task.id, uploaded_by: user.id, file_name: file.name, file_path: path,
+                                  });
+                                  toast({ title: "Fichier ajoute" });
+                                  loadAll();
+                                }
+                                e.target.value = "";
+                              }} />
+                            </label>
                             <Button size="icon" onClick={() => addComment(task.id)}><Send className="h-4 w-4" /></Button>
                           </div>
                         </div>
