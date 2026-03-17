@@ -200,8 +200,6 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
-      {/* Avis clients Google */}
-      <GoogleReviewsSection />
 
       {/* Maillage interne */}
       <SectionWrapper className="bg-card">
