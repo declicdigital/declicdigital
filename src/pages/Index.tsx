@@ -57,8 +57,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Avis clients Google */}
-      <GoogleReviewsSection />
 
       {/* Problème */}
       <SectionWrapper className="bg-card">
@@ -155,6 +153,9 @@ const Index = () => {
           </Button>
         </div>
       </SectionWrapper>
+
+      {/* Avis clients Google */}
+      <GoogleReviewsSection />
 
       {/* Pourquoi un site web est essentiel */}
       <SectionWrapper>
