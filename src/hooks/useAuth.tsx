@@ -23,81 +23,74 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [session, setSession] = useState<Session | null>(null);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
-  const checkedUserIdRef = useRef<string | null>(null);
+  const initializedRef = useRef(false);
 
-  const resolveAdminRole = useCallback(async (userId: string) => {
-    if (checkedUserIdRef.current === userId) return;
-
-    const { data, error } = await supabase.rpc("has_role", {
-      _user_id: userId,
-      _role: "admin",
-    });
-
-    checkedUserIdRef.current = userId;
-    setIsAdmin(!error && !!data);
+  const checkAdmin = useCallback(async (userId: string): Promise<boolean> => {
+    try {
+      const { data, error } = await supabase.rpc("has_role", {
+        _user_id: userId,
+        _role: "admin",
+      });
+      return !error && !!data;
+    } catch {
+      return false;
+    }
   }, []);
 
   useEffect(() => {
     let mounted = true;
 
-    const bootstrapSession = async () => {
-      setLoading(true);
-      const { data: { session: initialSession } } = await supabase.auth.getSession();
+    // Set up auth listener FIRST
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      async (_event, newSession) => {
+        if (!mounted) return;
 
-      if (!mounted) return;
+        setSession(newSession);
+        setUser(newSession?.user ?? null);
 
-      setSession(initialSession);
-      setUser(initialSession?.user ?? null);
+        if (newSession?.user) {
+          const admin = await checkAdmin(newSession.user.id);
+          if (mounted) setIsAdmin(admin);
+        } else {
+          setIsAdmin(false);
+        }
 
-      if (initialSession?.user) {
-        checkedUserIdRef.current = null;
-        await resolveAdminRole(initialSession.user.id);
-      } else {
-        setIsAdmin(false);
-        checkedUserIdRef.current = null;
+        if (mounted) setLoading(false);
+      }
+    );
+
+    // Then get initial session
+    supabase.auth.getSession().then(async ({ data: { session: initial } }) => {
+      if (!mounted || initializedRef.current) return;
+      initializedRef.current = true;
+
+      setSession(initial);
+      setUser(initial?.user ?? null);
+
+      if (initial?.user) {
+        const admin = await checkAdmin(initial.user.id);
+        if (mounted) setIsAdmin(admin);
       }
 
       if (mounted) setLoading(false);
-    };
-
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, nextSession) => {
-      if (!mounted) return;
-
-      setSession(nextSession);
-      setUser(nextSession?.user ?? null);
-
-      if (!nextSession?.user) {
-        checkedUserIdRef.current = null;
-        setIsAdmin(false);
-        setLoading(false);
-        return;
-      }
-
-      if (event === "TOKEN_REFRESHED" && checkedUserIdRef.current === nextSession.user.id) {
-        return;
-      }
-
-      if (event === "SIGNED_IN" || event === "USER_UPDATED") {
-        setLoading(true);
-      }
-
-      checkedUserIdRef.current = null;
-      await resolveAdminRole(nextSession.user.id);
-
+    }).catch(() => {
       if (mounted) setLoading(false);
     });
 
-    bootstrapSession();
+    // Safety timeout - never stay loading more than 5s
+    const timeout = setTimeout(() => {
+      if (mounted) setLoading(false);
+    }, 5000);
 
     return () => {
       mounted = false;
+      clearTimeout(timeout);
       subscription.unsubscribe();
     };
-  }, [resolveAdminRole]);
+  }, [checkAdmin]);
 
   const signOut = async () => {
     await supabase.auth.signOut();
-    checkedUserIdRef.current = null;
     setUser(null);
     setSession(null);
     setIsAdmin(false);
