@@ -11,7 +11,7 @@ export interface ReviewData {
 const DESKTOP_LIMIT = 200;
 const MOBILE_LIMIT = 160;
 
-const FALLBACK_URL = "https://search.google.com/local/reviews?placeid=ChIJsYNdrCdx5kcR89wPMta_l-w";
+const FALLBACK_URL = "https://www.google.com/maps/place/?q=place_id:ChIJsYNdrCdx5kcR89wPMta_l-w";
 
 const ReviewCard = ({ review }: { review: ReviewData }) => {
   const needsTruncation = review.text.length > MOBILE_LIMIT;

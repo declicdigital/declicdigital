@@ -25,7 +25,7 @@ Deno.serve(async (req) => {
       {
         headers: {
           "X-Goog-Api-Key": apiKey,
-          "X-Goog-FieldMask": "id,displayName,rating,userRatingCount,reviews,formattedAddress",
+          "X-Goog-FieldMask": "id,displayName,rating,userRatingCount,reviews,formattedAddress,googleMapsLinks",
         },
       }
     );

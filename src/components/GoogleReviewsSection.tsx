@@ -7,8 +7,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import SectionWrapper from "./SectionWrapper";
 
 const GOOGLE_PLACE_ID = "ChIJsYNdrCdx5kcR89wPMta_l-w";
-const GOOGLE_REVIEWS_URL = `https://search.google.com/local/reviews?placeid=${GOOGLE_PLACE_ID}`;
-const GOOGLE_REVIEW_URL = `https://search.google.com/local/writereview?placeid=${GOOGLE_PLACE_ID}`;
+const FALLBACK_REVIEWS_URL = `https://www.google.com/maps/place/?q=place_id:${GOOGLE_PLACE_ID}`;
+const FALLBACK_WRITE_REVIEW_URL = `https://www.google.com/maps/place/?q=place_id:${GOOGLE_PLACE_ID}`;
 
 const MOCK_REVIEWS: ReviewData[] = [
   { author: "Sophie L.", rating: 5, text: "Mon ancien site ne générait aucun contact. Depuis la refonte avec Déclic Digital, je reçois 3 à 5 demandes par semaine via Google.", time: "Il y a 2 mois" },
@@ -36,18 +36,24 @@ const GoogleReviewsSection = ({
   const [rating, setRating] = useState(4.9);
   const [totalReviews, setTotalReviews] = useState(47);
   const [loading, setLoading] = useState(true);
+  const [reviewsUrl, setReviewsUrl] = useState(FALLBACK_REVIEWS_URL);
+  const [writeReviewUrl, setWriteReviewUrl] = useState(FALLBACK_WRITE_REVIEW_URL);
 
   useEffect(() => {
     const fetchReviews = async () => {
       try {
         const { data, error } = await supabase.functions.invoke("google-reviews");
         if (!error && data && !data.fallback && data.reviews) {
+          const apiReviewsUrl = data.googleMapsLinks?.reviewsUri || FALLBACK_REVIEWS_URL;
+          const apiWriteReviewUrl = data.googleMapsLinks?.writeAReviewUri || FALLBACK_WRITE_REVIEW_URL;
+          setReviewsUrl(apiReviewsUrl);
+          setWriteReviewUrl(apiWriteReviewUrl);
           const mapped: ReviewData[] = data.reviews.slice(0, maxReviews).map((r: any) => ({
             author: r.authorAttribution?.displayName || r.author_name || "Client",
             rating: r.rating || 5,
             text: r.text?.text || r.text || "",
             time: r.relativePublishTimeDescription || r.relative_time_description || "",
-            reviewUrl: GOOGLE_REVIEWS_URL,
+            reviewUrl: r.googleMapsUri || apiReviewsUrl,
           }));
           setReviews(mapped);
           if (data.rating) setRating(data.rating);
@@ -104,7 +110,7 @@ const GoogleReviewsSection = ({
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
         <a
-          href={GOOGLE_REVIEWS_URL}
+          href={reviewsUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-colors shadow-sm"
@@ -114,7 +120,7 @@ const GoogleReviewsSection = ({
           <ExternalLink size={14} />
         </a>
         <a
-          href={GOOGLE_REVIEW_URL}
+          href={writeReviewUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity shadow-lg"
