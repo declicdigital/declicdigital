@@ -9,7 +9,7 @@ export interface BreadcrumbItem {
 const PageBreadcrumb = ({ items }: { items: BreadcrumbItem[] }) => (
   <nav
     aria-label="Fil d'Ariane"
-    className="container py-3 -mb-4"
+    className="container py-3 mb-2"
     itemScope
     itemType="https://schema.org/BreadcrumbList"
   >
