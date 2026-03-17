@@ -356,10 +356,21 @@ const FormulaireClient = () => {
                   <Input type="email" value={f.email} onChange={e => set("email", e.target.value)} placeholder="vous@entreprise.fr" className="rounded-xl" required />
                 </div>
                 <div>
-                  <Label className="text-sm text-muted-foreground mb-2 block">Téléphone</Label>
+                  <Label className="text-sm text-muted-foreground mb-2 block">Telephone</Label>
                   <Input type="tel" value={f.phone} onChange={e => set("phone", e.target.value)} placeholder="06 00 00 00 00" className="rounded-xl" />
                 </div>
               </FieldGroup>
+              <FieldGroup cols={2}>
+                <div>
+                  <Label className="text-sm text-muted-foreground mb-2 block">Mot de passe <span className="text-accent">*</span></Label>
+                  <Input type="password" value={f.password} onChange={e => set("password", e.target.value)} placeholder="Min. 6 caracteres" className="rounded-xl" required minLength={6} />
+                </div>
+                <div>
+                  <Label className="text-sm text-muted-foreground mb-2 block">Confirmer le mot de passe <span className="text-accent">*</span></Label>
+                  <Input type="password" value={f.password_confirm} onChange={e => set("password_confirm", e.target.value)} placeholder="Retapez votre mot de passe" className="rounded-xl" required minLength={6} />
+                </div>
+              </FieldGroup>
+              <p className="text-xs text-muted-foreground">Ce mot de passe vous permettra d'acceder a votre espace client pour suivre l'avancement de votre projet.</p>
               <FieldGroup cols={2}>
                 <div>
                   <Label className="text-sm text-muted-foreground mb-2 block">Secteur d'activité <span className="text-accent">*</span></Label>
