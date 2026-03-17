@@ -35,6 +35,25 @@ const Connexion = () => {
     }
   }, []);
 
+  const handleForgotPassword = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) {
+      toast({ title: "Erreur", description: "Veuillez entrer votre email.", variant: "destructive" });
+      return;
+    }
+    setLoading(true);
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/connexion`,
+    });
+    setLoading(false);
+    if (error) {
+      toast({ title: "Erreur", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Email envoye", description: "Consultez votre boite mail pour reinitialiser votre mot de passe." });
+      setIsForgotPassword(false);
+    }
+  };
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
