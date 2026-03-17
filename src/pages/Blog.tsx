@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight, Tag, Sparkles } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import { blogArticles } from "@/data/blogArticles";
+import { blogArticles, blogCategories, getCategorySlug } from "@/data/blogArticles";
 
 const categoryColors: Record<string, string> = {
   Technique: "bg-primary/10 text-primary",
   Design: "bg-accent/10 text-accent",
   "SEO & Performance": "bg-emerald-500/10 text-emerald-600",
   "Stratégie digitale": "bg-violet-500/10 text-violet-600",
+  "Tech & Objets connectés": "bg-sky-500/10 text-sky-600",
 };
 
 const sorted = [...blogArticles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
