@@ -37,7 +37,8 @@ const EspaceClient = () => {
 
   useEffect(() => {
     if (!authLoading && !user) navigate("/connexion", { replace: true });
-  }, [user, authLoading, navigate]);
+    if (!authLoading && user && isAdmin) navigate("/admin/clients", { replace: true });
+  }, [user, isAdmin, authLoading, navigate]);
 
   useEffect(() => {
     if (user) loadData();
