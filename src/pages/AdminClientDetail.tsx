@@ -331,7 +331,8 @@ const AdminClientDetail = () => {
                       <SelectItem value="Termine">Termine</SelectItem>
                       <SelectItem value="En ligne">En ligne</SelectItem>
                     </SelectContent>
-                  </Select>
+                    </Select>
+                  </div>
                 </div>
               </div>
               <CardContent className="p-6">
