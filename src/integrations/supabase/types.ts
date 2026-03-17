@@ -138,6 +138,41 @@ export type Database = {
           },
         ]
       }
+      project_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          is_read: boolean
+          project_id: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          project_id: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          is_read?: boolean
+          project_id?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_messages_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_milestones: {
         Row: {
           completed: boolean
