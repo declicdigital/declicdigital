@@ -12,10 +12,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import {
   Loader2, ArrowLeft, Plus, Trash2, FileText, Upload, Send,
   CheckCircle2, Clock, AlertCircle, Play, Users, LogOut, MessageSquare,
-  KeyRound, Mail, Globe, Save,
-import {
-  Loader2, ArrowLeft, Plus, Trash2, FileText, Upload, Send,
-  CheckCircle2, Clock, AlertCircle, Play, Users, LogOut, MessageSquare,
   KeyRound, Mail, Globe, Save, Paperclip,
 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-transparent.png";
