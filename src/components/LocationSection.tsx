@@ -81,9 +81,8 @@ const LocationSection = () => {
                   <Star key={i} size={14} className="text-amber-400 fill-amber-400" />
                 ))}
               </div>
-              <span className="text-sm font-bold text-foreground">4.9/5</span>
+              <span className="text-sm font-bold text-foreground">5/5</span>
             </div>
-            <p className="text-xs text-muted-foreground">Noté 4.9/5 sur Google, basé sur 47 avis</p>
           </div>
 
           <div className="flex flex-col sm:flex-row gap-3">
