@@ -10,7 +10,7 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import heroDashboard from "@/assets/tableau-bord-seo-professionnel.png";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
-import creationSiteImage from "@/assets/creation-site-internet-professionnel.png";
+
 
 const techLogos = ["WordPress", "Shopify", "Lovable", "Base44", "Claude AI", "Semrush", "Google Analytics", "Search Console"];
 
@@ -179,9 +179,6 @@ const Index = () => {
                   <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
                 </div>
               ))}
-            </div>
-            <div className="flex justify-center">
-              <img src={creationSiteImage} alt="Création de site internet professionnel pour entreprise" className="w-full max-w-md rounded-2xl shadow-card" />
             </div>
           </div>
         </div>
