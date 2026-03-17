@@ -101,16 +101,23 @@ const AdminClientDetail = () => {
         setDocuments(docsData || []);
 
         if (tasksData && tasksData.length > 0) {
-          const { data: commentsData } = await supabase
-            .from("task_comments").select("*")
-            .in("task_id", tasksData.map((t: any) => t.id))
-            .order("created_at", { ascending: true });
+          const taskIds = tasksData.map((t: any) => t.id);
+          const [{ data: commentsData }, { data: attachData }] = await Promise.all([
+            supabase.from("task_comments").select("*").in("task_id", taskIds).order("created_at", { ascending: true }),
+            supabase.from("task_attachments" as any).select("*").in("task_id", taskIds).order("created_at", { ascending: false }),
+          ]);
           const grouped: Record<string, any[]> = {};
           (commentsData || []).forEach((c: any) => {
             if (!grouped[c.task_id]) grouped[c.task_id] = [];
             grouped[c.task_id].push(c);
           });
           setComments(grouped);
+          const groupedAtt: Record<string, any[]> = {};
+          ((attachData as any[]) || []).forEach((a: any) => {
+            if (!groupedAtt[a.task_id]) groupedAtt[a.task_id] = [];
+            groupedAtt[a.task_id].push(a);
+          });
+          setAttachments(groupedAtt);
         }
       }
     } catch (err) {
