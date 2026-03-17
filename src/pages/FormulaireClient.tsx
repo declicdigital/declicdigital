@@ -23,6 +23,8 @@ interface FormData {
   company: string;
   email: string;
   phone: string;
+  password: string;
+  password_confirm: string;
   sector: string;
   size: string;
   current_url: string;
@@ -59,7 +61,8 @@ interface FormData {
 }
 
 const initial: FormData = {
-  full_name: "", company: "", email: "", phone: "", sector: "", size: "",
+  full_name: "", company: "", email: "", phone: "", password: "", password_confirm: "",
+  sector: "", size: "",
   current_url: "", source: "", pt: [], desc: "", inspo: "", kw: "", goal: "",
   csrc: [], budget: "", recur: "", urgency: "", brand: "", cont: [], pages: "",
   feat: [], feat_autre_detail: "", vibe: "",
