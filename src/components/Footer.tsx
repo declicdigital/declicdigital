@@ -4,7 +4,7 @@ import logo from "@/assets/logo-declic-transparent.png";
 
 const Footer = () => (
   <footer className="border-t border-border">
-    <div className="bg-foreground text-primary-foreground">
+    <div className="text-primary-foreground" style={{ backgroundColor: 'hsl(270, 40%, 15%)' }}>
       <div className="container py-12 md:py-16">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
