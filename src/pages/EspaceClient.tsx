@@ -13,12 +13,19 @@ import ProjectTimeline from "@/components/espace-client/ProjectTimeline";
 import ProjectInvoices from "@/components/espace-client/ProjectInvoices";
 import ProjectChat from "@/components/espace-client/ProjectChat";
 
-const STATUS_CFG: Record<string, { label: string; icon: any; color: string }> = {
-  a_faire: { label: "A faire", icon: AlertCircle, color: "bg-muted text-muted-foreground" },
-  en_cours: { label: "En cours", icon: Play, color: "bg-primary/10 text-primary" },
-  en_attente: { label: "En attente", icon: Clock, color: "bg-amber-500/10 text-amber-600" },
-  termine: { label: "Termine", icon: CheckCircle2, color: "bg-emerald-500/10 text-emerald-600" },
+const STATUS_PRIORITY: Record<string, number> = {
+  a_faire_client: 0,
+  a_faire_dd: 1,
+  en_cours: 2,
+  termine: 3,
 };
+
+const getStatusCfg = (projectName: string): Record<string, { label: string; icon: any; color: string }> => ({
+  a_faire_dd: { label: "A faire par D.D", icon: AlertCircle, color: "bg-[#e91e63]/10 text-[#e91e63]" },
+  a_faire_client: { label: `A faire par ${projectName}`, icon: Clock, color: "bg-emerald-500/10 text-emerald-600" },
+  en_cours: { label: "En cours", icon: Play, color: "bg-blue-500/10 text-blue-600" },
+  termine: { label: "Termine", icon: CheckCircle2, color: "bg-muted text-muted-foreground" },
+});
 
 const EspaceClient = () => {
   const { user, isAdmin, loading: authLoading, signOut } = useAuth();
@@ -103,7 +110,7 @@ const EspaceClient = () => {
     const { error } = await supabase.from("project_tasks").insert({
       project_id: project.id,
       title: newTaskTitle.trim(),
-      status: "a_faire",
+      status: "a_faire_dd" as any,
       sort_order: maxOrder,
     });
     if (error) {
@@ -148,6 +155,7 @@ const EspaceClient = () => {
     );
   }
 
+  const sortedTasks = [...tasks].sort((a, b) => (STATUS_PRIORITY[a.status] ?? 9) - (STATUS_PRIORITY[b.status] ?? 9));
   const completedTasks = tasks.filter((t) => t.status === "termine").length;
 
   return (
@@ -238,11 +246,13 @@ const EspaceClient = () => {
                 {tasks.length === 0 ? (
                   <p className="text-muted-foreground text-sm">Aucune tache pour le moment.</p>
                 ) : (
-                  tasks.map((task) => {
-                    const cfg = STATUS_CFG[task.status] || STATUS_CFG.a_faire;
+                  sortedTasks.map((task) => {
+                    const statusCfg = getStatusCfg(project.name);
+                    const cfg = statusCfg[task.status] || statusCfg.a_faire_dd;
                     const Icon = cfg.icon;
                     const taskComments = comments[task.id] || [];
                     const isExpanded = expandedTask === task.id;
+                    const canChangeStatus = task.status === "a_faire_client";
                     return (
                       <div key={task.id} className="border border-border rounded-lg overflow-hidden">
                         <button
@@ -253,6 +263,20 @@ const EspaceClient = () => {
                             <Icon className="h-3.5 w-3.5" /> {cfg.label}
                           </div>
                           <span className="text-sm font-medium text-foreground flex-1">{task.title}</span>
+                          {canChangeStatus && (
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="text-xs h-7"
+                              onClick={async (e) => {
+                                e.stopPropagation();
+                                await supabase.from("project_tasks").update({ status: "a_faire_dd" } as any).eq("id", task.id);
+                                loadData();
+                              }}
+                            >
+                              Marquer fait
+                            </Button>
+                          )}
                           {taskComments.length > 0 && (
                             <span className="flex items-center gap-1 text-xs text-muted-foreground">
                               <MessageSquare className="h-3.5 w-3.5" /> {taskComments.length}

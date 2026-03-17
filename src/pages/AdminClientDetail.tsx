@@ -17,19 +17,26 @@ import {
 import logoImg from "@/assets/logo-declic-transparent.png";
 import ProjectChat from "@/components/espace-client/ProjectChat";
 
-const STATUS_OPTIONS = [
-  { value: "a_faire", label: "A faire" },
+const STATUS_PRIORITY: Record<string, number> = {
+  a_faire_client: 0,
+  a_faire_dd: 1,
+  en_cours: 2,
+  termine: 3,
+};
+
+const getStatusOptions = (projectName: string) => [
+  { value: "a_faire_client", label: `A faire par ${projectName}` },
+  { value: "a_faire_dd", label: "A faire par D.D" },
   { value: "en_cours", label: "En cours" },
-  { value: "en_attente", label: "En attente" },
   { value: "termine", label: "Termine" },
 ];
 
-const STATUS_CFG: Record<string, { label: string; icon: any; color: string }> = {
-  a_faire: { label: "A faire", icon: AlertCircle, color: "bg-muted text-muted-foreground" },
-  en_cours: { label: "En cours", icon: Play, color: "bg-primary/10 text-primary" },
-  en_attente: { label: "En attente", icon: Clock, color: "bg-amber-500/10 text-amber-600" },
-  termine: { label: "Termine", icon: CheckCircle2, color: "bg-emerald-500/10 text-emerald-600" },
-};
+const getStatusCfg = (projectName: string): Record<string, { label: string; icon: any; color: string }> => ({
+  a_faire_dd: { label: "A faire par D.D", icon: AlertCircle, color: "bg-[#e91e63]/10 text-[#e91e63]" },
+  a_faire_client: { label: `A faire par ${projectName}`, icon: Clock, color: "bg-emerald-500/10 text-emerald-600" },
+  en_cours: { label: "En cours", icon: Play, color: "bg-blue-500/10 text-blue-600" },
+  termine: { label: "Termine", icon: CheckCircle2, color: "bg-muted text-muted-foreground" },
+});
 
 const AdminClientDetail = () => {
   const { clientId } = useParams();
@@ -208,6 +215,7 @@ const AdminClientDetail = () => {
     );
   }
 
+  const sortedTasks = [...tasks].sort((a, b) => (STATUS_PRIORITY[a.status] ?? 9) - (STATUS_PRIORITY[b.status] ?? 9));
   const completedTasks = tasks.filter((t) => t.status === "termine").length;
 
   return (
@@ -344,18 +352,20 @@ const AdminClientDetail = () => {
             <Card>
               <CardHeader><CardTitle className="text-lg">Taches ({tasks.length})</CardTitle></CardHeader>
               <CardContent className="space-y-2">
-                {tasks.map((task) => {
-                  const cfg = STATUS_CFG[task.status] || STATUS_CFG.a_faire;
+                {sortedTasks.map((task) => {
+                  const statusCfg = getStatusCfg(project.name);
+                  const cfg = statusCfg[task.status] || statusCfg.a_faire_dd;
                   const Icon = cfg.icon;
                   const taskComments = comments[task.id] || [];
                   const isExpanded = expandedTask === task.id;
+                  const statusOptions = getStatusOptions(project.name);
                   return (
                     <div key={task.id} className="border border-border rounded-lg overflow-hidden">
                       <div className="flex items-center gap-3 p-3">
                         <Select value={task.status} onValueChange={(v) => updateTaskStatus(task.id, v)}>
-                          <SelectTrigger className="w-36"><SelectValue /></SelectTrigger>
+                          <SelectTrigger className="w-48"><SelectValue /></SelectTrigger>
                           <SelectContent>
-                            {STATUS_OPTIONS.map((o) => <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>)}
+                            {statusOptions.map((o) => <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>)}
                           </SelectContent>
                         </Select>
                         <button onClick={() => setExpandedTask(isExpanded ? null : task.id)} className="flex-1 text-sm font-medium text-foreground text-left hover:text-primary transition-colors">
@@ -418,18 +428,18 @@ const AdminClientDetail = () => {
               </CardContent>
             </Card>
 
-            {/* Recap taches a faire */}
-            {tasks.filter((t) => t.status === "a_faire").length > 0 && (
-              <Card className="border-primary/30 bg-primary/5">
+            {/* Recap taches a faire par D.D */}
+            {tasks.filter((t) => t.status === "a_faire_dd").length > 0 && (
+              <Card className="border-[#e91e63]/30 bg-[#e91e63]/5">
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center gap-2">
-                    <AlertCircle className="h-5 w-5 text-primary" /> A faire ({tasks.filter((t) => t.status === "a_faire").length})
+                    <AlertCircle className="h-5 w-5 text-[#e91e63]" /> A faire par D.D ({tasks.filter((t) => t.status === "a_faire_dd").length})
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2">
-                  {tasks.filter((t) => t.status === "a_faire").map((task) => (
-                    <div key={task.id} className="flex items-start gap-3 p-3 rounded-lg bg-card border border-primary/20">
-                      <div className="mt-0.5 h-2 w-2 rounded-full bg-primary shrink-0" />
+                  {tasks.filter((t) => t.status === "a_faire_dd").map((task) => (
+                    <div key={task.id} className="flex items-start gap-3 p-3 rounded-lg bg-card border border-[#e91e63]/20">
+                      <div className="mt-0.5 h-2 w-2 rounded-full bg-[#e91e63] shrink-0" />
                       <p className="text-sm font-medium text-foreground">{task.title}</p>
                     </div>
                   ))}
