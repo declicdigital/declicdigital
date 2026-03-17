@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, CheckCircle2, Clock, AlertCircle, Play, Plus } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital.webp";
+import ProjectTimeline from "@/components/espace-client/ProjectTimeline";
+import ProjectInvoices from "@/components/espace-client/ProjectInvoices";
 
 const STATUS_CFG: Record<string, { label: string; icon: any; color: string }> = {
   a_faire: { label: "A faire", icon: AlertCircle, color: "bg-muted text-muted-foreground" },
@@ -24,6 +26,8 @@ const EspaceClient = () => {
   const [tasks, setTasks] = useState<any[]>([]);
   const [comments, setComments] = useState<Record<string, any[]>>({});
   const [documents, setDocuments] = useState<any[]>([]);
+  const [milestones, setMilestones] = useState<any[]>([]);
+  const [invoices, setInvoices] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [newComment, setNewComment] = useState<Record<string, string>>({});
   const [expandedTask, setExpandedTask] = useState<string | null>(null);
@@ -48,12 +52,16 @@ const EspaceClient = () => {
       setProject(proj);
 
       if (proj) {
-        const [{ data: tasksData }, { data: docsData }] = await Promise.all([
+        const [{ data: tasksData }, { data: docsData }, { data: milestonesData }, { data: invoicesData }] = await Promise.all([
           supabase.from("project_tasks").select("*").eq("project_id", proj.id).order("sort_order", { ascending: true }),
           supabase.from("project_documents").select("*").eq("project_id", proj.id).order("created_at", { ascending: false }),
+          supabase.from("project_milestones").select("*").eq("project_id", proj.id).order("sort_order", { ascending: true }),
+          (supabase.from("project_invoices") as any).select("*").eq("project_id", proj.id).order("created_at", { ascending: false }),
         ]);
         setTasks(tasksData || []);
         setDocuments(docsData || []);
+        setMilestones(milestonesData || []);
+        setInvoices(invoicesData || []);
 
         if (tasksData && tasksData.length > 0) {
           const { data: commentsData } = await supabase
@@ -145,9 +153,14 @@ const EspaceClient = () => {
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container flex items-center justify-between py-3">
-          <img src={logoImg} alt="Declic Digital" className="h-12 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
+          <img
+            src={logoImg}
+            alt="Declic Digital"
+            className="h-12 cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          />
           <div className="flex items-center gap-3">
-            <span className="text-sm text-muted-foreground">{user?.email}</span>
+            <span className="text-sm text-muted-foreground hidden sm:inline">{user?.email}</span>
             <Button variant="ghost" size="sm" onClick={signOut}>
               <LogOut className="h-4 w-4 mr-1" /> Deconnexion
             </Button>
@@ -164,13 +177,18 @@ const EspaceClient = () => {
           </Card>
         ) : (
           <>
+            {/* Project header */}
             <Card className="overflow-hidden">
               <div className="bg-gradient-to-r from-primary to-primary/80 p-6 text-primary-foreground">
                 <h1 className="text-2xl font-bold">{project.name}</h1>
                 <p className="text-primary-foreground/80 mt-1">{project.description}</p>
                 <div className="flex items-center gap-4 mt-3 text-sm text-primary-foreground/70">
-                  <span className="flex items-center gap-1"><Calendar className="h-4 w-4" /> Debut : {new Date(project.start_date).toLocaleDateString("fr-FR")}</span>
-                  <Badge variant="secondary" className="bg-primary-foreground/20 text-primary-foreground border-0">{project.status}</Badge>
+                  <span className="flex items-center gap-1">
+                    <Calendar className="h-4 w-4" /> Debut : {new Date(project.start_date).toLocaleDateString("fr-FR")}
+                  </span>
+                  <Badge variant="secondary" className="bg-primary-foreground/20 text-primary-foreground border-0">
+                    {project.status}
+                  </Badge>
                 </div>
               </div>
               <CardContent className="p-6">
@@ -184,6 +202,10 @@ const EspaceClient = () => {
               </CardContent>
             </Card>
 
+            {/* Timeline */}
+            <ProjectTimeline milestones={milestones} />
+
+            {/* Tasks */}
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -199,50 +221,92 @@ const EspaceClient = () => {
               <CardContent className="space-y-2">
                 {showAddTask && (
                   <div className="flex gap-2 mb-3">
-                    <Input placeholder="Titre de la tache..." value={newTaskTitle} onChange={(e) => setNewTaskTitle(e.target.value)} onKeyDown={(e) => e.key === "Enter" && addTask()} className="flex-1" />
-                    <Button size="icon" onClick={addTask} disabled={!newTaskTitle.trim()}><Send className="h-4 w-4" /></Button>
+                    <Input
+                      placeholder="Titre de la tache..."
+                      value={newTaskTitle}
+                      onChange={(e) => setNewTaskTitle(e.target.value)}
+                      onKeyDown={(e) => e.key === "Enter" && addTask()}
+                      className="flex-1"
+                    />
+                    <Button size="icon" onClick={addTask} disabled={!newTaskTitle.trim()}>
+                      <Send className="h-4 w-4" />
+                    </Button>
                   </div>
                 )}
                 {tasks.length === 0 ? (
                   <p className="text-muted-foreground text-sm">Aucune tache pour le moment.</p>
-                ) : tasks.map((task) => {
-                  const cfg = STATUS_CFG[task.status] || STATUS_CFG.a_faire;
-                  const Icon = cfg.icon;
-                  const taskComments = comments[task.id] || [];
-                  const isExpanded = expandedTask === task.id;
-                  return (
-                    <div key={task.id} className="border border-border rounded-lg overflow-hidden">
-                      <button onClick={() => setExpandedTask(isExpanded ? null : task.id)} className="w-full flex items-center gap-3 p-4 hover:bg-muted/30 transition-colors text-left">
-                        <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${cfg.color}`}>
-                          <Icon className="h-3.5 w-3.5" /> {cfg.label}
-                        </div>
-                        <span className="text-sm font-medium text-foreground flex-1">{task.title}</span>
-                        {taskComments.length > 0 && (
-                          <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                            <MessageSquare className="h-3.5 w-3.5" /> {taskComments.length}
-                          </span>
-                        )}
-                      </button>
-                      {isExpanded && (
-                        <div className="border-t border-border p-4 bg-muted/20 space-y-3">
-                          {taskComments.map((c) => (
-                            <div key={c.id} className={`text-sm p-3 rounded-lg ${c.user_id === user?.id ? "bg-primary/10 ml-8" : "bg-card mr-8 border border-border"}`}>
-                              <p className="text-foreground">{c.content}</p>
-                              <p className="text-xs text-muted-foreground mt-1">{new Date(c.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</p>
-                            </div>
-                          ))}
-                          <div className="flex gap-2">
-                            <Input placeholder="Ajouter un commentaire..." value={newComment[task.id] || ""} onChange={(e) => setNewComment((p) => ({ ...p, [task.id]: e.target.value }))} onKeyDown={(e) => e.key === "Enter" && addComment(task.id)} className="flex-1" />
-                            <Button size="icon" onClick={() => addComment(task.id)}><Send className="h-4 w-4" /></Button>
+                ) : (
+                  tasks.map((task) => {
+                    const cfg = STATUS_CFG[task.status] || STATUS_CFG.a_faire;
+                    const Icon = cfg.icon;
+                    const taskComments = comments[task.id] || [];
+                    const isExpanded = expandedTask === task.id;
+                    return (
+                      <div key={task.id} className="border border-border rounded-lg overflow-hidden">
+                        <button
+                          onClick={() => setExpandedTask(isExpanded ? null : task.id)}
+                          className="w-full flex items-center gap-3 p-4 hover:bg-muted/30 transition-colors text-left"
+                        >
+                          <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${cfg.color}`}>
+                            <Icon className="h-3.5 w-3.5" /> {cfg.label}
                           </div>
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+                          <span className="text-sm font-medium text-foreground flex-1">{task.title}</span>
+                          {taskComments.length > 0 && (
+                            <span className="flex items-center gap-1 text-xs text-muted-foreground">
+                              <MessageSquare className="h-3.5 w-3.5" /> {taskComments.length}
+                            </span>
+                          )}
+                        </button>
+                        {isExpanded && (
+                          <div className="border-t border-border p-4 bg-muted/20 space-y-3">
+                            {taskComments.map((c) => (
+                              <div
+                                key={c.id}
+                                className={`text-sm p-3 rounded-lg ${
+                                  c.user_id === user?.id ? "bg-primary/10 ml-8" : "bg-card mr-8 border border-border"
+                                }`}
+                              >
+                                <p className="text-foreground">{c.content}</p>
+                                <p className="text-xs text-muted-foreground mt-1">
+                                  {new Date(c.created_at).toLocaleDateString("fr-FR", {
+                                    day: "numeric",
+                                    month: "short",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                  })}
+                                </p>
+                              </div>
+                            ))}
+                            <div className="flex gap-2">
+                              <Input
+                                placeholder="Ajouter un commentaire..."
+                                value={newComment[task.id] || ""}
+                                onChange={(e) => setNewComment((p) => ({ ...p, [task.id]: e.target.value }))}
+                                onKeyDown={(e) => e.key === "Enter" && addComment(task.id)}
+                                className="flex-1"
+                              />
+                              <Button size="icon" onClick={() => addComment(task.id)}>
+                                <Send className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })
+                )}
               </CardContent>
             </Card>
 
+            {/* Invoices */}
+            <ProjectInvoices
+              invoices={invoices}
+              projectId={project.id}
+              userId={user?.id || ""}
+              onRefresh={loadData}
+            />
+
+            {/* Documents */}
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
@@ -251,7 +315,10 @@ const EspaceClient = () => {
                   </CardTitle>
                   <label className="cursor-pointer">
                     <Button variant="outline" size="sm" asChild disabled={uploading}>
-                      <span>{uploading ? <Loader2 className="h-4 w-4 animate-spin mr-1" /> : <Upload className="h-4 w-4 mr-1" />} Ajouter un fichier</span>
+                      <span>
+                        {uploading ? <Loader2 className="h-4 w-4 animate-spin mr-1" /> : <Upload className="h-4 w-4 mr-1" />}
+                        Ajouter un fichier
+                      </span>
                     </Button>
                     <input type="file" className="hidden" onChange={uploadDocument} />
                   </label>
@@ -260,15 +327,23 @@ const EspaceClient = () => {
               <CardContent className="space-y-2">
                 {documents.length === 0 ? (
                   <p className="text-muted-foreground text-sm">Aucun document partage.</p>
-                ) : documents.map((doc) => (
-                  <button key={doc.id} onClick={() => downloadDoc(doc.file_path)} className="w-full flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-muted/30 transition-colors text-left">
-                    <FileText className="h-5 w-5 text-primary shrink-0" />
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-foreground truncate">{doc.name}</p>
-                      <p className="text-xs text-muted-foreground">{new Date(doc.created_at).toLocaleDateString("fr-FR")}</p>
-                    </div>
-                  </button>
-                ))}
+                ) : (
+                  documents.map((doc) => (
+                    <button
+                      key={doc.id}
+                      onClick={() => downloadDoc(doc.file_path)}
+                      className="w-full flex items-center gap-3 p-3 rounded-lg border border-border hover:bg-muted/30 transition-colors text-left"
+                    >
+                      <FileText className="h-5 w-5 text-primary shrink-0" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-foreground truncate">{doc.name}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {new Date(doc.created_at).toLocaleDateString("fr-FR")}
+                        </p>
+                      </div>
+                    </button>
+                  ))
+                )}
               </CardContent>
             </Card>
           </>
