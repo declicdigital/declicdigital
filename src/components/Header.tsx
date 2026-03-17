@@ -47,7 +47,7 @@ const Header = () => {
     <>
       <div className="hidden border-b border-border gradient-miami text-primary-foreground text-xs md:block">
         <div className="container flex h-8 items-center justify-end gap-6">
-          <a href="sms:0602228939" className="flex items-center gap-1.5 hover:text-accent transition-colors">
+          <a href="tel:0602228939" className="flex items-center gap-1.5 hover:text-accent transition-colors">
             <Phone size={12} /> 06.02.22.89.39
           </a>
           <a href="mailto:contact@declicdigital.net" className="flex items-center gap-1.5 hover:text-accent transition-colors">
