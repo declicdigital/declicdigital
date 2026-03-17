@@ -53,7 +53,7 @@ const GoogleReviewsSection = ({
             rating: r.rating || 5,
             text: r.text?.text || r.text || "",
             time: r.relativePublishTimeDescription || r.relative_time_description || "",
-            reviewUrl: apiReviewsUrl,
+            reviewUrl: r.googleMapsUri || apiReviewsUrl,
           }));
           setReviews(mapped);
           if (data.rating) setRating(data.rating);
