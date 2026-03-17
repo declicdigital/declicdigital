@@ -197,7 +197,23 @@ const EspaceClient = () => {
             {/* Project header */}
             <Card className="overflow-hidden">
               <div className="bg-gradient-to-r from-primary to-primary/80 p-6 text-primary-foreground">
-                <h1 className="text-2xl font-bold">{project.name}</h1>
+                <div className="flex items-center justify-between">
+                  <h1 className="text-2xl font-bold">{project.name}</h1>
+                  {project.share_token && (
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      className="bg-primary-foreground/20 text-primary-foreground border-0 hover:bg-primary-foreground/30"
+                      onClick={() => {
+                        const url = `${window.location.origin}/projet/${project.share_token}`;
+                        navigator.clipboard.writeText(url);
+                        toast({ title: "Lien copie !" });
+                      }}
+                    >
+                      <Share2 className="h-4 w-4 mr-1" /> Partager
+                    </Button>
+                  )}
+                </div>
                 <p className="text-primary-foreground/80 mt-1">{project.description}</p>
                 <div className="flex items-center gap-4 mt-3 text-sm text-primary-foreground/70">
                   <span className="flex items-center gap-1">
