@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Check, Star, AlertTriangle } from "lucide-react";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
@@ -249,6 +250,9 @@ const Tarifs = () => (
         </div>
       </div>
     </SectionWrapper>
+
+    {/* Avis clients */}
+    <GoogleReviewsSection compact maxReviews={3} className="bg-card" />
 
     {/* CTA */}
     <section className="gradient-miami py-16">

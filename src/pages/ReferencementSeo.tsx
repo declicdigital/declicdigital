@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { motion } from "framer-motion";
 import { Eye, Users, TrendingUp, Search, Settings, FileText, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -142,6 +143,9 @@ const ReferencementSeo = () => (
         </Link>
       </div>
     </SectionWrapper>
+
+    {/* Avis clients */}
+    <GoogleReviewsSection compact maxReviews={3} className="bg-card" />
 
     {/* CTA */}
     <section className="gradient-miami py-16">

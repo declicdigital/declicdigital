@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { motion } from "framer-motion";
 import { Monitor, Smartphone, TrendingUp, Zap, Building2, User, Wrench, ShoppingCart, CheckCircle, Search, Shield, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -166,6 +167,9 @@ const CreationSite = () => (
         </Link>
       </div>
     </SectionWrapper>
+
+    {/* Avis clients */}
+    <GoogleReviewsSection compact maxReviews={3} className="bg-card" />
 
     {/* CTA */}
     <section className="gradient-miami py-16">

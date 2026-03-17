@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
@@ -133,6 +134,9 @@ const Realisations = () => (
         </div>
       </div>
     </SectionWrapper>
+
+    {/* Avis clients */}
+    <GoogleReviewsSection compact maxReviews={3} />
 
     {/* CTA */}
     <section className="gradient-miami py-16 text-center">
