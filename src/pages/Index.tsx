@@ -194,56 +194,8 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
-      {/* Avis clients */}
-      <SectionWrapper>
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold md:text-4xl">Ce que disent nos clients</h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Des PME et indépendants qui nous ont fait confiance pour leur <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> et leur <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>.
-          </p>
-        </div>
-
-        {/* Carousel */}
-        <div className="relative mx-auto max-w-5xl overflow-hidden">
-          <motion.div
-            className="flex gap-6"
-            animate={{ x: ["0%", "-50%"] }}
-            transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          >
-            {[
-              { name: "Sophie L.", activity: "Ostéopathe", text: "Mon ancien site ne générait aucun contact. Depuis la refonte avec Déclic Digital, je reçois 3 à 5 demandes par semaine via Google." },
-              { name: "Marc D.", activity: "Plombier", text: "En 3 mois, mon site est passé en première page Google sur mes mots clés principaux. Les appels ont doublé." },
-              { name: "Julie R.", activity: "Boulangerie artisanale", text: "Un site magnifique, livré rapidement et parfaitement adapté à mon activité. Mes clients adorent commander en ligne." },
-              { name: "Thomas B.", activity: "Coach sportif", text: "Déclic Digital a compris mon besoin dès le premier échange. Le site est pro, rapide et les inscriptions ont explosé." },
-              { name: "Nadia K.", activity: "Architecte d'intérieur", text: "Le portfolio en ligne m'a permis de décrocher des projets que je n'aurais jamais eus sans visibilité web." },
-              { name: "Pierre M.", activity: "Restaurant", text: "Grâce au référencement local, on apparaît en premier sur Google Maps. La fréquentation a augmenté de 40%." },
-              { name: "Camille F.", activity: "Formatrice", text: "Le site vitrine et le blog m'apportent une crédibilité énorme auprès de mes prospects. Investissement très rentable." },
-              { name: "Antoine G.", activity: "Électricien", text: "Service réactif, prix très correct pour une PME. Mon site me ramène des chantiers toutes les semaines." },
-              { name: "Émilie S.", activity: "Boutique déco", text: "La boutique e-commerce fonctionne parfaitement. Le SEO nous amène des clients qu'on n'aurait jamais touchés autrement." },
-              { name: "David P.", activity: "Avocat", text: "Un site sobre, professionnel et bien référencé. Exactement ce qu'il me fallait pour inspirer confiance à mes clients." },
-              { name: "Sophie L.", activity: "Ostéopathe", text: "Mon ancien site ne générait aucun contact. Depuis la refonte avec Déclic Digital, je reçois 3 à 5 demandes par semaine via Google." },
-              { name: "Marc D.", activity: "Plombier", text: "En 3 mois, mon site est passé en première page Google sur mes mots clés principaux. Les appels ont doublé." },
-              { name: "Julie R.", activity: "Boulangerie artisanale", text: "Un site magnifique, livré rapidement et parfaitement adapté à mon activité. Mes clients adorent commander en ligne." },
-              { name: "Thomas B.", activity: "Coach sportif", text: "Déclic Digital a compris mon besoin dès le premier échange. Le site est pro, rapide et les inscriptions ont explosé." },
-              { name: "Nadia K.", activity: "Architecte d'intérieur", text: "Le portfolio en ligne m'a permis de décrocher des projets que je n'aurais jamais eus sans visibilité web." },
-            ].map((review, i) => (
-              <div key={i} className="min-w-[320px] max-w-[360px] shrink-0 rounded-2xl bg-card p-6 shadow-card border border-border">
-                <div className="flex items-center gap-1 mb-3 text-primary">
-                  {[...Array(5)].map((_, j) => (
-                    <Star key={j} size={16} fill="currentColor" />
-                  ))}
-                </div>
-                <p className="text-sm text-muted-foreground leading-relaxed mb-4">"{review.text}"</p>
-                <div>
-                  <p className="font-semibold text-sm">{review.name}</p>
-                  <p className="text-xs text-muted-foreground">{review.activity}</p>
-                </div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-
-      </SectionWrapper>
+      {/* Avis clients Google */}
+      <GoogleReviewsSection />
 
       {/* Maillage interne */}
       <SectionWrapper className="bg-card">
