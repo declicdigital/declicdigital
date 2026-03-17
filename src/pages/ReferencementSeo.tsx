@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { motion } from "framer-motion";
 import { Eye, Users, TrendingUp, Search, Settings, FileText, BarChart3 } from "lucide-react";
 import { Button } from "@/components/ui/button";
