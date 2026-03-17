@@ -154,6 +154,9 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
+      {/* Avis clients Google */}
+      <GoogleReviewsSection />
+
       {/* Pourquoi un site web est essentiel */}
       <SectionWrapper>
         <div className="mx-auto max-w-5xl">
