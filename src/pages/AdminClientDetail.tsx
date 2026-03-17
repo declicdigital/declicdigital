@@ -206,7 +206,6 @@ const AdminClientDetail = () => {
   }
 
   const completedTasks = tasks.filter((t) => t.status === "termine").length;
-  const progress = tasks.length > 0 ? Math.round((completedTasks / tasks.length) * 100) : 0;
 
   return (
     <div className="min-h-screen bg-background">
