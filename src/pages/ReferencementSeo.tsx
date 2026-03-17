@@ -58,17 +58,24 @@ const ReferencementSeo = () => (
 
     {/* Qu'est-ce que le SEO */}
     <SectionWrapper>
-      <div className="mx-auto max-w-3xl space-y-6">
-        <h2 className="text-3xl font-extrabold md:text-4xl text-center">Qu'est-ce que le référencement SEO ?</h2>
-        <p className="text-muted-foreground leading-relaxed">
-          Le SEO (Search Engine Optimization) regroupe l'ensemble des techniques qui permettent d'améliorer la position de votre site web dans les résultats des moteurs de recherche comme Google. L'objectif est simple : faire en sorte que votre site apparaisse quand vos clients potentiels recherchent vos services.
-        </p>
-        <p className="text-muted-foreground leading-relaxed">
-          Le référencement naturel repose sur trois piliers fondamentaux. Le premier est la technique : vitesse de chargement, architecture du site, compatibilité mobile, sécurité HTTPS. Le deuxième est le contenu : des textes pertinents, bien structurés et optimisés pour les mots clés recherchés par votre cible. Le troisième est la popularité : les liens provenant d'autres sites qui renforcent l'autorité de votre domaine aux yeux de Google.
-        </p>
-        <p className="text-muted-foreground leading-relaxed">
-          Pour une PME, le SEO est particulièrement puissant car il permet de rivaliser avec des entreprises plus grandes en se positionnant sur des mots clés locaux ou de niche. Découvrez <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">nos offres de création de site</Link> intégrant le SEO dès la conception.
-        </p>
+      <div className="mx-auto max-w-5xl">
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Qu'est-ce que le référencement SEO ?</h2>
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div className="space-y-6">
+            <p className="text-muted-foreground leading-relaxed">
+              Le SEO (Search Engine Optimization) regroupe l'ensemble des techniques qui permettent d'améliorer la position de votre site web dans les résultats des moteurs de recherche comme Google. L'objectif est simple : faire en sorte que votre site apparaisse quand vos clients potentiels recherchent vos services.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Le référencement naturel repose sur trois piliers fondamentaux. Le premier est la technique : vitesse de chargement, architecture du site, compatibilité mobile, sécurité HTTPS. Le deuxième est le contenu : des textes pertinents, bien structurés et optimisés pour les mots clés recherchés par votre cible. Le troisième est la popularité : les liens provenant d'autres sites qui renforcent l'autorité de votre domaine aux yeux de Google.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Pour une PME, le SEO est particulièrement puissant car il permet de rivaliser avec des entreprises plus grandes en se positionnant sur des mots clés locaux ou de niche. Découvrez <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">nos offres de création de site</Link> intégrant le SEO dès la conception.
+            </p>
+          </div>
+          <div className="flex justify-center">
+            <img src={seoImage} alt="Référencement SEO Google pour améliorer la visibilité des PME" className="w-full max-w-md rounded-2xl shadow-card" />
+          </div>
+        </div>
       </div>
     </SectionWrapper>
 

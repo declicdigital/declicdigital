@@ -116,20 +116,27 @@ const CreationSite = () => (
 
     {/* Contenu SEO */}
     <SectionWrapper>
-      <div className="mx-auto max-w-3xl space-y-6">
-        <h2 className="text-3xl font-extrabold md:text-4xl text-center">Qu'est-ce qu'un bon site web pour une PME ?</h2>
-        <p className="text-muted-foreground leading-relaxed">
-          Un bon site web pour une PME, c'est avant tout un site qui remplit son objectif : attirer des visiteurs et les convertir en clients. Il ne suffit pas d'avoir un site "joli". Il doit être rapide, bien structuré, adapté aux mobiles et surtout visible sur Google.
-        </p>
-        <p className="text-muted-foreground leading-relaxed">
-          Chaque page doit être pensée pour répondre à une intention de recherche précise. Par exemple, si vous êtes plombier à Bordeaux, votre site doit apparaître quand un internaute tape "plombier Bordeaux" dans Google. C'est le rôle du <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement naturel</Link>, et c'est ce que nous intégrons dès la conception de chaque projet.
-        </p>
-        <p className="text-muted-foreground leading-relaxed">
-          Chez Déclic Digital, nous créons des sites orientés résultats. Cela signifie que chaque élément, le design, les textes, les appels à l'action, la navigation, est conçu pour maximiser vos chances de transformer un visiteur en prospect. Nous ne livrons pas simplement un site, nous livrons un outil commercial.
-        </p>
-        <p className="text-muted-foreground leading-relaxed">
-          Nos sites incluent systématiquement : un design professionnel sur mesure, une <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">optimisation SEO complète</Link>, une compatibilité mobile parfaite, une vitesse de chargement optimisée, et un formulaire de contact pour capturer vos prospects. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> pour en savoir plus.
-        </p>
+      <div className="mx-auto max-w-5xl">
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Qu'est-ce qu'un bon site web pour une PME ?</h2>
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div className="flex justify-center order-2 lg:order-1">
+            <img src={siteProImage} alt="Site web professionnel pour entreprise de construction" className="w-full max-w-md rounded-2xl shadow-card" />
+          </div>
+          <div className="space-y-6 order-1 lg:order-2">
+            <p className="text-muted-foreground leading-relaxed">
+              Un bon site web pour une PME, c'est avant tout un site qui remplit son objectif : attirer des visiteurs et les convertir en clients. Il ne suffit pas d'avoir un site "joli". Il doit être rapide, bien structuré, adapté aux mobiles et surtout visible sur Google.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Chaque page doit être pensée pour répondre à une intention de recherche précise. Par exemple, si vous êtes plombier à Bordeaux, votre site doit apparaître quand un internaute tape "plombier Bordeaux" dans Google. C'est le rôle du <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement naturel</Link>, et c'est ce que nous intégrons dès la conception de chaque projet.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Chez Déclic Digital, nous créons des sites orientés résultats. Cela signifie que chaque élément, le design, les textes, les appels à l'action, la navigation, est conçu pour maximiser vos chances de transformer un visiteur en prospect. Nous ne livrons pas simplement un site, nous livrons un outil commercial.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Nos sites incluent systématiquement : un design professionnel sur mesure, une <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">optimisation SEO complète</Link>, une compatibilité mobile parfaite, une vitesse de chargement optimisée, et un formulaire de contact pour capturer vos prospects. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> pour en savoir plus.
+            </p>
+          </div>
+        </div>
       </div>
     </SectionWrapper>
 
