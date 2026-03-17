@@ -7,8 +7,8 @@ import { Skeleton } from "@/components/ui/skeleton";
 import SectionWrapper from "./SectionWrapper";
 
 const GOOGLE_PLACE_ID = "ChIJsYNdrCdx5kcR89wPMta_l-w";
-const GOOGLE_REVIEWS_URL = `https://search.google.com/local/reviews?placeid=${GOOGLE_PLACE_ID}`;
-const GOOGLE_REVIEW_URL = `https://search.google.com/local/writereview?placeid=${GOOGLE_PLACE_ID}`;
+const FALLBACK_REVIEWS_URL = `https://www.google.com/maps/place/?q=place_id:${GOOGLE_PLACE_ID}`;
+const FALLBACK_WRITE_REVIEW_URL = `https://www.google.com/maps/place/?q=place_id:${GOOGLE_PLACE_ID}`;
 
 const MOCK_REVIEWS: ReviewData[] = [
   { author: "Sophie L.", rating: 5, text: "Mon ancien site ne générait aucun contact. Depuis la refonte avec Déclic Digital, je reçois 3 à 5 demandes par semaine via Google.", time: "Il y a 2 mois" },
