@@ -456,7 +456,7 @@ const AdminSoumissions = () => {
       <div className="border-b border-border bg-card">
         <div className="container py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
-            <img src={logoImg} alt="Declic Digital" className="h-14 cursor-pointer" onClick={() => navigate("/admin/clients")} />
+            <img src={logoImg} alt="Declic Digital" className="h-14 md:h-16 cursor-pointer" onClick={() => navigate("/admin/clients")} />
             <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">ADMIN</span>
           </div>
           <div>

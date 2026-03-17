@@ -157,8 +157,8 @@ const EspaceClient = () => {
           <img
             src={logoImg}
             alt="Declic Digital"
-            className="h-12 cursor-pointer"
-            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+            className="h-14 md:h-16 cursor-pointer"
+            onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); navigate("/espace-client"); }}
           />
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground hidden sm:inline">{user?.email}</span>

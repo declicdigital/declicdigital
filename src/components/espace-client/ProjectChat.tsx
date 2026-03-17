@@ -50,6 +50,14 @@ const ProjectChat = ({
     setLoading(false);
   };
 
+  const markAsRead = async () => {
+    await (supabase.from("project_messages") as any)
+      .update({ is_read: true })
+      .eq("project_id", projectId)
+      .neq("user_id", userId)
+      .eq("is_read", false);
+  };
+
   useEffect(() => {
     loadMessages();
 
@@ -64,6 +72,13 @@ const ProjectChat = ({
 
     return () => { supabase.removeChannel(channel); };
   }, [projectId]);
+
+  useEffect(() => {
+    if (open) {
+      markAsRead();
+      setUnreadCount(0);
+    }
+  }, [open, messages]);
 
   useEffect(() => {
     if (scrollRef.current) {
