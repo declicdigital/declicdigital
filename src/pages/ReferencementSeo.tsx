@@ -10,6 +10,12 @@ import { cities } from "@/data/cities";
 
 const ReferencementSeo = () => (
   <PageLayout>
+    {/* Breadcrumb */}
+    <PageBreadcrumb items={[
+      { label: "Accueil", href: "/" },
+      { label: "Référencement SEO" },
+    ]} />
+
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">

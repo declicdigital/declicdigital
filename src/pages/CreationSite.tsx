@@ -11,6 +11,12 @@ import { cities } from "@/data/cities";
 
 const CreationSite = () => (
   <PageLayout>
+    {/* Breadcrumb */}
+    <PageBreadcrumb items={[
+      { label: "Accueil", href: "/" },
+      { label: "Création de site web" },
+    ]} />
+
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">
