@@ -203,6 +203,14 @@ const FormulaireClient = () => {
       toast({ title: "Champs requis", description: "Veuillez remplir au moins votre nom et email.", variant: "destructive" });
       return;
     }
+    if (!f.password || f.password.length < 6) {
+      toast({ title: "Mot de passe requis", description: "Le mot de passe doit contenir au moins 6 caracteres.", variant: "destructive" });
+      return;
+    }
+    if (f.password !== f.password_confirm) {
+      toast({ title: "Erreur", description: "Les mots de passe ne correspondent pas.", variant: "destructive" });
+      return;
+    }
     setSending(true);
     try {
       // Upload files
@@ -230,19 +238,17 @@ const FormulaireClient = () => {
         ? teamMembers.map(m => ({ name: m.name, role: m.role, bio: m.bio, photo_name: m.photo?.name || "" }))
         : [];
 
-      // Save to DB
-      const { error } = await supabase.from("form_submissions").insert({
-        id: submissionId,
-        data: { ...f, team: teamData } as any,
-        file_paths: filePaths,
-      } as any);
+      // Send to edge function (creates account + saves form + generates PDF)
+      const { data: result, error } = await supabase.functions.invoke("send-form", {
+        body: { ...f, password: f.password, team: teamData, file_paths: filePaths, submission_id: submissionId },
+      });
 
       if (error) throw error;
       setSent(true);
-      toast({ title: "Formulaire envoyé !", description: "Nous reviendrons vers vous très rapidement." });
+      toast({ title: "Formulaire envoye !", description: "Votre espace client a ete cree. Connectez-vous avec votre email et mot de passe." });
     } catch (err) {
       console.error(err);
-      toast({ title: "Erreur", description: "Une erreur est survenue, veuillez réessayer.", variant: "destructive" });
+      toast({ title: "Erreur", description: "Une erreur est survenue, veuillez reessayer.", variant: "destructive" });
     } finally {
       setSending(false);
     }
