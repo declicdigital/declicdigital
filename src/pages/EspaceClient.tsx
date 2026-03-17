@@ -200,7 +200,58 @@ const EspaceClient = () => {
                 <div className="h-3 bg-muted rounded-full overflow-hidden">
                   <div className="h-full bg-primary rounded-full transition-all duration-500" style={{ width: `${progress}%` }} />
                 </div>
-              </CardContent>
+  return (
+    <div className="min-h-screen bg-background">
+      <header className="border-b border-border bg-card sticky top-0 z-50">
+        <div className="container flex items-center justify-between py-3">
+          <img
+            src={logoImg}
+            alt="Declic Digital"
+            className="h-12 cursor-pointer"
+            onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          />
+          <div className="flex items-center gap-3">
+            <span className="text-sm text-muted-foreground hidden sm:inline">{user?.email}</span>
+            <Button variant="ghost" size="sm" onClick={signOut}>
+              <LogOut className="h-4 w-4 mr-1" /> Deconnexion
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <div className="container py-8 max-w-4xl space-y-6">
+        {!project ? (
+          <Card>
+            <CardContent className="py-12 text-center">
+              <p className="text-muted-foreground">Aucun projet n'est encore associe a votre compte.</p>
+            </CardContent>
+          </Card>
+        ) : (
+          <>
+            {/* Project header */}
+            <Card className="overflow-hidden">
+              <div className="bg-gradient-to-r from-primary to-primary/80 p-6 text-primary-foreground">
+                <h1 className="text-2xl font-bold">{project.name}</h1>
+                <p className="text-primary-foreground/80 mt-1">{project.description}</p>
+                <div className="flex items-center gap-4 mt-3 text-sm text-primary-foreground/70">
+                  <span className="flex items-center gap-1">
+                    <Calendar className="h-4 w-4" /> Debut : {new Date(project.start_date).toLocaleDateString("fr-FR")}
+                  </span>
+                  {project.website_url && (
+                    <a
+                      href={project.website_url.startsWith("http") ? project.website_url : `https://${project.website_url}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 underline hover:text-primary-foreground transition-colors"
+                    >
+                      <Globe className="h-4 w-4" /> {project.website_url.replace(/^https?:\/\//, "")}
+                    </a>
+                  )}
+                  <Badge variant="secondary" className="bg-primary-foreground/20 text-primary-foreground border-0">
+                    {project.status}
+                  </Badge>
+                </div>
+              </div>
             </Card>
 
             {/* Timeline */}
