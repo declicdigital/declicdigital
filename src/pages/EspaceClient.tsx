@@ -28,6 +28,8 @@ const EspaceClient = () => {
   const [newComment, setNewComment] = useState<Record<string, string>>({});
   const [expandedTask, setExpandedTask] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [newTaskTitle, setNewTaskTitle] = useState("");
+  const [showAddTask, setShowAddTask] = useState(false);
 
   useEffect(() => {
     if (!authLoading && !user) navigate("/connexion", { replace: true });
