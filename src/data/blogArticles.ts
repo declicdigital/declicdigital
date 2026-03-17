@@ -31,7 +31,7 @@ export const blogArticles: BlogArticle[] = [
     category: "Technique",
     tags: ["hébergement web", "serveur", "performance", "sécurité"],
     image: hebergementImg,
-    relatedSlugs: ["vitesse-site-web-impact-chiffre-affaires", "tendances-web-design-2026"],
+    relatedSlugs: ["vitesse-site-web-impact-chiffre-affaires", "whatsapp-montres-garmin-evolution-usage"],
     content: `
 ## Pourquoi le choix de l'hébergement est crucial
 
