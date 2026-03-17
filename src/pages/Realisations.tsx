@@ -21,7 +21,7 @@ const projects = [
     description: "Site professionnel pour une entreprise de construction en Aquitaine. Calculateur de projet intégré.",
     url: "https://domideldidier.base44.app/",
     image: portfolioDomidel,
-    tags: ["Site vitrine", "BTP", "Base44"],
+    tags: ["Site vitrine", "BTP"],
   },
   {
     name: "El Saucisson",
