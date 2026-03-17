@@ -47,6 +47,7 @@ const GoogleReviewsSection = ({
             rating: r.rating || 5,
             text: r.text?.text || r.text || "",
             time: r.relativePublishTimeDescription || r.relative_time_description || "",
+            googleMapsUri: r.googleMapsUri || undefined,
           }));
           setReviews(mapped);
           if (data.rating) setRating(data.rating);
