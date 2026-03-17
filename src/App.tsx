@@ -28,6 +28,7 @@ import VilleReferencementSeo from "./pages/VilleReferencementSeo";
 import NosVilles from "./pages/NosVilles";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
+import BlogCategory from "./pages/BlogCategory";
 import SharedProject from "./pages/SharedProject";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
