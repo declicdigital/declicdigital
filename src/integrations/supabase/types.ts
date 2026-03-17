@@ -94,6 +94,91 @@ export type Database = {
           },
         ]
       }
+      project_invoices: {
+        Row: {
+          amount: number | null
+          created_at: string
+          file_path: string
+          id: string
+          name: string
+          project_id: string
+          status: string
+          type: string
+          uploaded_by: string | null
+        }
+        Insert: {
+          amount?: number | null
+          created_at?: string
+          file_path: string
+          id?: string
+          name: string
+          project_id: string
+          status?: string
+          type?: string
+          uploaded_by?: string | null
+        }
+        Update: {
+          amount?: number | null
+          created_at?: string
+          file_path?: string
+          id?: string
+          name?: string
+          project_id?: string
+          status?: string
+          type?: string
+          uploaded_by?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_invoices_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      project_milestones: {
+        Row: {
+          completed: boolean
+          created_at: string
+          description: string
+          due_date: string | null
+          id: string
+          project_id: string
+          sort_order: number
+          title: string
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string
+          description?: string
+          due_date?: string | null
+          id?: string
+          project_id: string
+          sort_order?: number
+          title: string
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string
+          description?: string
+          due_date?: string | null
+          id?: string
+          project_id?: string
+          sort_order?: number
+          title?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "project_milestones_project_id_fkey"
+            columns: ["project_id"]
+            isOneToOne: false
+            referencedRelation: "projects"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       project_tasks: {
         Row: {
           created_at: string

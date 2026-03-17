@@ -22,6 +22,7 @@ import AdminClients from "./pages/AdminClients";
 import AdminClientDetail from "./pages/AdminClientDetail";
 import Connexion from "./pages/Connexion";
 import EspaceClient from "./pages/EspaceClient";
+import ResetPassword from "./pages/ResetPassword";
 import VilleCreationSite from "./pages/VilleCreationSite";
 import VilleReferencementSeo from "./pages/VilleReferencementSeo";
 import NosVilles from "./pages/NosVilles";
@@ -61,6 +62,7 @@ const App = () => (
               <Route path="/blog/:slug" element={<BlogArticle />} />
               <Route path="/connexion" element={<Connexion />} />
               <Route path="/espace-client" element={<EspaceClient />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/admin/clients" element={<AdminClients />} />
               <Route path="/admin/client/:clientId" element={<AdminClientDetail />} />
               <Route path="/admin/soumissions" element={<AdminSoumissions />} />

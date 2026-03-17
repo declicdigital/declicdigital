@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
 import { Loader2, Lock, Mail } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital.webp";
@@ -16,24 +17,14 @@ const Connexion = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  const [isRecovery, setIsRecovery] = useState(false);
   const [isForgotPassword, setIsForgotPassword] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
 
-  // Redirect if already logged in
   useEffect(() => {
     if (!authLoading && user) {
       navigate(isAdmin ? "/admin/clients" : "/espace-client", { replace: true });
     }
   }, [user, isAdmin, authLoading, navigate]);
-
-  // Detect recovery/invite tokens in URL hash
-  useEffect(() => {
-    const hash = window.location.hash;
-    if (hash.includes("type=recovery") || hash.includes("type=invite")) {
-      setIsRecovery(true);
-    }
-  }, []);
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,7 +34,7 @@ const Connexion = () => {
     }
     setLoading(true);
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: `${window.location.origin}/connexion`,
+      redirectTo: `${window.location.origin}/reset-password`,
     });
     setLoading(false);
     if (error) {
@@ -61,27 +52,9 @@ const Connexion = () => {
     setLoading(false);
     if (error) {
       toast({ title: "Erreur de connexion", description: error.message, variant: "destructive" });
-    }
-  };
-
-  const handleSetPassword = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (password !== confirmPassword) {
-      toast({ title: "Erreur", description: "Les mots de passe ne correspondent pas.", variant: "destructive" });
-      return;
-    }
-    if (password.length < 6) {
-      toast({ title: "Erreur", description: "Le mot de passe doit faire au moins 6 caracteres.", variant: "destructive" });
-      return;
-    }
-    setLoading(true);
-    const { error } = await supabase.auth.updateUser({ password });
-    setLoading(false);
-    if (error) {
-      toast({ title: "Erreur", description: error.message, variant: "destructive" });
-    } else {
-      toast({ title: "Mot de passe defini", description: "Vous pouvez maintenant acceder a votre espace." });
-      setIsRecovery(false);
+    } else if (!rememberMe) {
+      // If not "remember me", we mark a flag so we can sign out on tab close
+      sessionStorage.setItem("declic_session_only", "true");
     }
   };
 
@@ -99,39 +72,16 @@ const Connexion = () => {
         <CardHeader className="text-center space-y-4">
           <img src={logoImg} alt="Declic Digital" className="h-10 mx-auto" />
           <CardTitle className="text-2xl font-bold text-foreground">
-            {isRecovery ? "Creez votre mot de passe" : isForgotPassword ? "Mot de passe oublie" : "Espace Client"}
+            {isForgotPassword ? "Mot de passe oublie" : "Espace Client"}
           </CardTitle>
           <CardDescription className="text-muted-foreground">
-            {isRecovery
-              ? "Definissez votre mot de passe pour acceder a votre espace."
-              : isForgotPassword
+            {isForgotPassword
               ? "Entrez votre email pour recevoir un lien de reinitialisation."
               : "Connectez-vous pour acceder a votre suivi de projet."}
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {isRecovery ? (
-            <form onSubmit={handleSetPassword} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="password">Nouveau mot de passe</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input id="password" type="password" className="pl-10" value={password} onChange={(e) => setPassword(e.target.value)} required />
-                </div>
-              </div>
-              <div className="space-y-2">
-                <Label htmlFor="confirm">Confirmer le mot de passe</Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-                  <Input id="confirm" type="password" className="pl-10" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-                </div>
-              </div>
-              <Button type="submit" className="w-full" disabled={loading}>
-                {loading && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
-                Definir mon mot de passe
-              </Button>
-            </form>
-          ) : isForgotPassword ? (
+          {isForgotPassword ? (
             <form onSubmit={handleForgotPassword} className="space-y-4">
               <div className="space-y-2">
                 <Label htmlFor="email">Email</Label>
@@ -163,6 +113,16 @@ const Connexion = () => {
                   <Lock className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
                   <Input id="password" type="password" className="pl-10" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="remember"
+                  checked={rememberMe}
+                  onCheckedChange={(checked) => setRememberMe(checked === true)}
+                />
+                <Label htmlFor="remember" className="text-sm text-muted-foreground cursor-pointer">
+                  Rester connecte
+                </Label>
               </div>
               <Button type="submit" className="w-full" disabled={loading}>
                 {loading && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
