@@ -7,8 +7,16 @@ import PageBreadcrumb from "@/components/PageBreadcrumb";
 import portfolioOffg from "@/assets/site-vitrine-artiste-musical.png";
 import portfolioDomidel from "@/assets/site-professionnel-entreprise-construction.webp";
 import portfolioSaucisson from "@/assets/site-ecommerce-produits-artisanaux.png";
+import portfolioAploz from "@/assets/site-aploz-agence-video-publicitaire.png";
 
 const projects = [
+  {
+    name: "Aploz",
+    description: "Site vitrine pour une agence vidéo publicitaire. Design sombre et immersif avec showreel intégré et études de cas clients.",
+    url: "https://aploz.lovable.app/",
+    image: portfolioAploz,
+    tags: ["Site vitrine", "Vidéo", "Publicité"],
+  },
   {
     name: "Off G",
     description: "Site vitrine pour un artiste musical. Design sombre et immersif avec intégration Spotify.",
