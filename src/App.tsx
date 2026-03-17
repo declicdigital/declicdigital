@@ -22,6 +22,7 @@ import AdminClients from "./pages/AdminClients";
 import AdminClientDetail from "./pages/AdminClientDetail";
 import Connexion from "./pages/Connexion";
 import EspaceClient from "./pages/EspaceClient";
+import ResetPassword from "./pages/ResetPassword";
 import VilleCreationSite from "./pages/VilleCreationSite";
 import VilleReferencementSeo from "./pages/VilleReferencementSeo";
 import NosVilles from "./pages/NosVilles";
