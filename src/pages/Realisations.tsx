@@ -14,21 +14,21 @@ const projects = [
     description: "Site vitrine pour un artiste musical. Design sombre et immersif avec intégration Spotify.",
     url: "https://offg.lovable.app/",
     image: portfolioOffg,
-    tags: ["Site vitrine", "Musique", "Lovable"],
+    tags: ["Site vitrine", "Musique"],
   },
   {
     name: "Domidel & Didier",
     description: "Site professionnel pour une entreprise de construction en Aquitaine. Calculateur de projet intégré.",
     url: "https://domideldidier.base44.app/",
     image: portfolioDomidel,
-    tags: ["Site vitrine", "BTP", "Base44"],
+    tags: ["Site vitrine", "BTP"],
   },
   {
     name: "El Saucisson",
     description: "Site e-commerce pour un producteur de saucissons artisanaux des Landes. Design audacieux et identitaire.",
     url: "https://el-saucisson-landes.base44.app/",
     image: portfolioSaucisson,
-    tags: ["E-commerce", "Alimentaire", "Base44"],
+    tags: ["E-commerce", "Alimentaire"],
   },
 ];
 
