@@ -146,7 +146,7 @@ L'essentiel reste la cohérence : un design qui reflète votre identité et faci
     category: "SEO & Performance",
     tags: ["performance web", "vitesse", "SEO", "conversion"],
     image: vitesseImg,
-    relatedSlugs: ["comment-choisir-hebergement-web-2026", "tendances-web-design-2026"],
+    relatedSlugs: ["comment-choisir-hebergement-web-2026", "whatsapp-montres-garmin-evolution-usage"],
     content: `
 ## La vitesse, facteur invisible de votre réussite en ligne
 
