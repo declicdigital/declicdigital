@@ -5,7 +5,7 @@ export interface ReviewData {
   rating: number;
   text: string;
   time: string;
-  googleMapsUri?: string;
+  reviewUrl?: string;
 }
 
 const DESKTOP_LIMIT = 200;
