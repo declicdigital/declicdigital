@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import {
   Loader2, ArrowLeft, Plus, Trash2, FileText, Upload, Send,
   CheckCircle2, Clock, AlertCircle, Play, Users, LogOut, MessageSquare,
-  KeyRound, Mail,
+  KeyRound, Mail, Globe, Save,
 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-transparent.png";
 
@@ -54,6 +54,7 @@ const AdminClientDetail = () => {
   const [newComment, setNewComment] = useState<Record<string, string>>({});
   const [expandedTask, setExpandedTask] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [websiteUrl, setWebsiteUrl] = useState("");
 
   useEffect(() => {
     if (!authLoading && (!user || !isAdmin)) navigate("/connexion", { replace: true });
@@ -76,6 +77,7 @@ const AdminClientDetail = () => {
       setNameDraft(profile?.full_name || "");
       const proj = projects?.[0] || null;
       setProject(proj);
+      setWebsiteUrl(proj?.website_url || "");
 
       if (proj) {
         const [{ data: tasksData }, { data: docsData }] = await Promise.all([
@@ -206,7 +208,6 @@ const AdminClientDetail = () => {
   }
 
   const completedTasks = tasks.filter((t) => t.status === "termine").length;
-  const progress = tasks.length > 0 ? Math.round((completedTasks / tasks.length) * 100) : 0;
 
   return (
     <div className="min-h-screen bg-background">
@@ -302,13 +303,39 @@ const AdminClientDetail = () => {
                 </div>
               </div>
               <CardContent className="p-6">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium">Progression</span>
-                  <span className="text-sm font-bold text-primary">{progress}%</span>
+                <div className="flex items-center gap-2">
+                  <Globe className="h-4 w-4 text-muted-foreground" />
+                  <Input
+                    placeholder="https://exemple.fr"
+                    value={websiteUrl}
+                    onChange={(e) => setWebsiteUrl(e.target.value)}
+                    className="flex-1"
+                  />
+                  <Button
+                    size="sm"
+                    onClick={async () => {
+                      const { error } = await supabase.from("projects").update({ website_url: websiteUrl }).eq("id", project.id);
+                      if (error) {
+                        toast({ title: "Erreur", description: error.message, variant: "destructive" });
+                      } else {
+                        toast({ title: "URL du site mise a jour" });
+                        setProject({ ...project, website_url: websiteUrl });
+                      }
+                    }}
+                  >
+                    <Save className="h-4 w-4 mr-1" /> Sauvegarder
+                  </Button>
                 </div>
-                <div className="h-3 bg-muted rounded-full overflow-hidden">
-                  <div className="h-full bg-primary rounded-full transition-all" style={{ width: `${progress}%` }} />
-                </div>
+                {project.website_url && project.website_url.trim() !== "" && (
+                  <a
+                    href={project.website_url.startsWith("http") ? project.website_url : `https://${project.website_url}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-1 text-sm text-primary hover:underline mt-2"
+                  >
+                    <Globe className="h-3.5 w-3.5" /> {project.website_url.replace(/^https?:\/\//, "")}
+                  </a>
+                )}
               </CardContent>
             </Card>
 
