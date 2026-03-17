@@ -151,17 +151,7 @@ const BlogArticle = () => {
       <article className="container py-12 md:py-16">
         <div className="mx-auto max-w-3xl">
           {/* Meta bar */}
-          <div className="mb-10 flex flex-wrap items-center gap-4 border-b border-border pb-6">
-            <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
-              <Calendar size={14} /> {formattedDate}
-            </span>
-            <span className="flex items-center gap-1.5 text-sm text-muted-foreground">
-              <Clock size={14} /> {article.readTime} de lecture
-            </span>
-            <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-              {article.category}
-            </span>
-          </div>
+          <ShareBar article={article} formattedDate={formattedDate} />
 
           {/* Content */}
           <motion.div
