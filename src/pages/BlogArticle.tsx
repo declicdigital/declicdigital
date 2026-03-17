@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowLeft, ArrowRight, Tag, Share2 } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
+import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { getArticleBySlug, getRelatedArticles } from "@/data/blogArticles";
 
 const BlogArticle = () => {
