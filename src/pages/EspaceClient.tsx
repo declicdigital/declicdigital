@@ -351,6 +351,11 @@ const EspaceClient = () => {
           </>
         )}
       </div>
+
+      {/* Floating chat */}
+      {project && (
+        <ProjectChat projectId={project.id} userId={user?.id || ""} />
+      )}
     </div>
   );
 };
