@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { FileText, Calendar, User, Building2, Mail, ChevronRight, Download, Copy, Check, Trash2, Clock, Eye, CheckCircle2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import jsPDF from "jspdf";
+import logoImg from "@/assets/logo-declic-transparent.png";
 
 const generateBriefPrompt = (d: any): string => {
   const lines: string[] = [];
@@ -95,6 +97,7 @@ const FIELD_LABELS: Record<string, string> = {
 };
 
 const AdminSoumissions = () => {
+  const navigate = useNavigate();
   const [subs, setSubs] = useState<Submission[]>([]);
   const [selected, setSelected] = useState<Submission | null>(null);
   const [loading, setLoading] = useState(true);
@@ -451,9 +454,15 @@ const AdminSoumissions = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="border-b border-border bg-card">
-        <div className="container py-6">
-          <h1 className="text-2xl font-extrabold">Soumissions formulaire</h1>
-          <p className="text-muted-foreground text-sm mt-1">{subs.length} soumission(s) reçue(s)</p>
+        <div className="container py-4 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <img src={logoImg} alt="Declic Digital" className="h-14 cursor-pointer" onClick={() => navigate("/admin/clients")} />
+            <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">ADMIN</span>
+          </div>
+          <div>
+            <h1 className="text-2xl font-extrabold text-right">Soumissions formulaire</h1>
+            <p className="text-muted-foreground text-sm mt-1 text-right">{subs.length} soumission(s) reçue(s)</p>
+          </div>
         </div>
       </div>
       <div className="container py-8 max-w-4xl">
