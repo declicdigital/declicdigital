@@ -58,7 +58,7 @@ const Header = () => {
 
       <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-lg">
         <div className="container flex h-14 items-center justify-between md:h-16">
-          <Link to="/" className="flex items-center gap-2 shrink-0">
+          <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => { if (window.location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }}>
             <img src={logo} alt="Déclic Digital" className="h-14 w-auto md:h-16" />
           </Link>
 

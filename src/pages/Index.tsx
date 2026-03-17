@@ -180,9 +180,6 @@ const Index = () => {
                 </div>
               ))}
             </div>
-            <div className="flex justify-center">
-              <img src={creationSiteImage} alt="Création de site internet professionnel pour entreprise" className="w-full max-w-md rounded-2xl shadow-card" />
-            </div>
           </div>
         </div>
       </SectionWrapper>
