@@ -87,6 +87,25 @@ const EspaceClient = () => {
     }
   };
 
+  const addTask = async () => {
+    if (!user || !project || !newTaskTitle.trim()) return;
+    const maxOrder = tasks.length > 0 ? Math.max(...tasks.map((t) => t.sort_order)) + 1 : 0;
+    const { error } = await supabase.from("project_tasks").insert({
+      project_id: project.id,
+      title: newTaskTitle.trim(),
+      status: "a_faire",
+      sort_order: maxOrder,
+    });
+    if (error) {
+      toast({ title: "Erreur", description: error.message, variant: "destructive" });
+    } else {
+      setNewTaskTitle("");
+      setShowAddTask(false);
+      toast({ title: "Tache ajoutee" });
+      loadData();
+    }
+  };
+
   const uploadDocument = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || !project || !user) return;
     setUploading(true);
