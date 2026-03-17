@@ -11,11 +11,11 @@ export interface ReviewData {
 const DESKTOP_LIMIT = 200;
 const MOBILE_LIMIT = 160;
 
+const FALLBACK_URL = "https://search.google.com/local/reviews?placeid=ChIJsYNdrCdx5kcR89wPMta_l-w";
+
 const ReviewCard = ({ review }: { review: ReviewData }) => {
   const needsTruncation = review.text.length > MOBILE_LIMIT;
-  const reviewUrl =
-    review.googleMapsUri ||
-    "https://search.google.com/local/reviews?placeid=ChIJsYNdrCdx5kcR89wPMta_l-w";
+  const reviewUrl = review.reviewUrl || FALLBACK_URL;
 
   return (
     <div className="rounded-2xl bg-card p-5 shadow-card border border-border flex flex-col h-full min-h-[180px]">
