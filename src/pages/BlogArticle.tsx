@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowLeft, ArrowRight, Tag, Share2 } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import { getArticleBySlug, getRelatedArticles } from "@/data/blogArticles";
+import { getArticleBySlug, getRelatedArticles, getCategorySlug } from "@/data/blogArticles";
 
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
