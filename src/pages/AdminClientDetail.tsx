@@ -215,6 +215,7 @@ const AdminClientDetail = () => {
     );
   }
 
+  const sortedTasks = [...tasks].sort((a, b) => (STATUS_PRIORITY[a.status] ?? 9) - (STATUS_PRIORITY[b.status] ?? 9));
   const completedTasks = tasks.filter((t) => t.status === "termine").length;
 
   return (
