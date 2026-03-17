@@ -186,7 +186,7 @@ const EspaceClient = () => {
                   <span className="flex items-center gap-1">
                     <Calendar className="h-4 w-4" /> Debut : {new Date(project.start_date).toLocaleDateString("fr-FR")}
                   </span>
-                  {project.website_url && (
+                  {project.website_url && project.website_url.trim() !== "" && (
                     <a
                       href={project.website_url.startsWith("http") ? project.website_url : `https://${project.website_url}`}
                       target="_blank"
