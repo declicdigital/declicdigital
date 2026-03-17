@@ -282,6 +282,7 @@ const FormulaireClient = () => {
                   Retour a l'accueil
                 </Button>
               </div>
+            </motion.div>
           </div>
         </section>
       </PageLayout>
