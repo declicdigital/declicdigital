@@ -131,6 +131,23 @@ const Connexion = () => {
                 Definir mon mot de passe
               </Button>
             </form>
+          ) : isForgotPassword ? (
+            <form onSubmit={handleForgotPassword} className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="email">Email</Label>
+                <div className="relative">
+                  <Mail className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                  <Input id="email" type="email" className="pl-10" placeholder="votre@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                </div>
+              </div>
+              <Button type="submit" className="w-full" disabled={loading}>
+                {loading && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
+                Envoyer le lien
+              </Button>
+              <button type="button" onClick={() => setIsForgotPassword(false)} className="w-full text-sm text-muted-foreground hover:text-primary transition-colors">
+                Retour a la connexion
+              </button>
+            </form>
           ) : (
             <form onSubmit={handleLogin} className="space-y-4">
               <div className="space-y-2">
@@ -151,6 +168,9 @@ const Connexion = () => {
                 {loading && <Loader2 className="h-4 w-4 animate-spin mr-2" />}
                 Se connecter
               </Button>
+              <button type="button" onClick={() => setIsForgotPassword(true)} className="w-full text-sm text-muted-foreground hover:text-primary transition-colors">
+                Mot de passe oublie ?
+              </button>
             </form>
           )}
         </CardContent>
