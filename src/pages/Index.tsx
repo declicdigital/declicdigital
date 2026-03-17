@@ -164,7 +164,7 @@ const Index = () => {
             <h2 className="text-3xl font-extrabold md:text-4xl">Pourquoi un site web est essentiel pour votre entreprise</h2>
           </div>
           <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div className="grid gap-6 sm:grid-cols-2">
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 { icon: Clock, title: "Disponible 24h/24", desc: "Contrairement à un commerce physique, votre site travaille pour vous en permanence. Vos prospects peuvent vous découvrir et vous contacter à tout moment." },
                 { icon: Target, title: "Attirez des clients ciblés", desc: "Un site bien référencé attire des visiteurs qui recherchent activement vos services. Ce sont des prospects qualifiés prêts à passer à l'action." },
