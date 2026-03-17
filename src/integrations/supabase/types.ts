@@ -256,6 +256,7 @@ export type Database = {
           description: string
           id: string
           name: string
+          share_token: string | null
           start_date: string
           status: string
           website_url: string | null
@@ -266,6 +267,7 @@ export type Database = {
           description?: string
           id?: string
           name: string
+          share_token?: string | null
           start_date?: string
           status?: string
           website_url?: string | null
@@ -276,6 +278,7 @@ export type Database = {
           description?: string
           id?: string
           name?: string
+          share_token?: string | null
           start_date?: string
           status?: string
           website_url?: string | null

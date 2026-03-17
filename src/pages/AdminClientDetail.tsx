@@ -12,7 +12,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import {
   Loader2, ArrowLeft, Plus, Trash2, FileText, Upload, Send,
   CheckCircle2, Clock, AlertCircle, Play, Users, LogOut, MessageSquare,
-  KeyRound, Mail, Globe, Save, Paperclip,
+  KeyRound, Mail, Globe, Save, Paperclip, Share2,
 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-transparent.png";
 import ProjectChat from "@/components/espace-client/ProjectChat";
@@ -308,7 +308,22 @@ const AdminClientDetail = () => {
                     <h2 className="text-xl font-bold">{project.name}</h2>
                     <p className="text-primary-foreground/80 mt-1">{project.description}</p>
                   </div>
-                  <Select value={project.status} onValueChange={updateProjectStatus}>
+                  <div className="flex items-center gap-2">
+                    {project.share_token && (
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        className="bg-primary-foreground/20 text-primary-foreground border-0 hover:bg-primary-foreground/30"
+                        onClick={() => {
+                          const url = `${window.location.origin}/projet/${project.share_token}`;
+                          navigator.clipboard.writeText(url);
+                          toast({ title: "Lien copie !" });
+                        }}
+                      >
+                        <Share2 className="h-4 w-4 mr-1" /> Partager
+                      </Button>
+                    )}
+                    <Select value={project.status} onValueChange={updateProjectStatus}>
                     <SelectTrigger className="w-40 bg-primary-foreground/20 border-primary-foreground/30 text-primary-foreground"><SelectValue /></SelectTrigger>
                     <SelectContent>
                       <SelectItem value="En cours">En cours</SelectItem>
@@ -316,7 +331,8 @@ const AdminClientDetail = () => {
                       <SelectItem value="Termine">Termine</SelectItem>
                       <SelectItem value="En ligne">En ligne</SelectItem>
                     </SelectContent>
-                  </Select>
+                    </Select>
+                  </div>
                 </div>
               </div>
               <CardContent className="p-6">

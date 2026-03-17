@@ -28,6 +28,7 @@ import VilleReferencementSeo from "./pages/VilleReferencementSeo";
 import NosVilles from "./pages/NosVilles";
 import Blog from "./pages/Blog";
 import BlogArticle from "./pages/BlogArticle";
+import SharedProject from "./pages/SharedProject";
 import NotFound from "./pages/NotFound";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -66,6 +67,7 @@ const App = () => (
               <Route path="/admin/clients" element={<AdminClients />} />
               <Route path="/admin/client/:clientId" element={<AdminClientDetail />} />
               <Route path="/admin/soumissions" element={<AdminSoumissions />} />
+              <Route path="/projet/:token" element={<SharedProject />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
