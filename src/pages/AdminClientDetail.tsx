@@ -215,7 +215,7 @@ const AdminClientDetail = () => {
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container flex items-center justify-between py-3">
           <div className="flex items-center gap-4">
-            <img src={logoImg} alt="Declic Digital" className="h-8" />
+            <img src={logoImg} alt="Declic Digital" className="h-14 md:h-16 cursor-pointer" onClick={() => navigate("/admin/clients")} />
             <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">ADMIN</span>
           </div>
           <nav className="flex items-center gap-2">
