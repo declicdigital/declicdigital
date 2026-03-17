@@ -213,7 +213,7 @@ La vitesse n'est pas un luxe technique, c'est un levier commercial. Un site qui 
     category: "Stratégie digitale",
     tags: ["municipales Paris", "campagne digitale", "site web politique", "Knafo", "stratégie web", "élections"],
     image: campagneImg,
-    relatedSlugs: ["tendances-web-design-2026", "vitesse-site-web-impact-chiffre-affaires"],
+    relatedSlugs: ["tendances-web-design-2026", "whatsapp-montres-garmin-evolution-usage"],
     content: `
 ## Municipales Paris 2026 : le digital comme levier électoral
 
