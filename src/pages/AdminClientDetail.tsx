@@ -352,19 +352,22 @@ const AdminClientDetail = () => {
             <Card>
               <CardHeader><CardTitle className="text-lg">Taches ({tasks.length})</CardTitle></CardHeader>
               <CardContent className="space-y-2">
-                {tasks.map((task) => {
-                  const cfg = STATUS_CFG[task.status] || STATUS_CFG.a_faire;
+                {sortedTasks.map((task) => {
+                  const statusCfg = getStatusCfg(project.name);
+                  const cfg = statusCfg[task.status] || statusCfg.a_faire_dd;
                   const Icon = cfg.icon;
                   const taskComments = comments[task.id] || [];
                   const isExpanded = expandedTask === task.id;
+                  const statusOptions = getStatusOptions(project.name);
                   return (
                     <div key={task.id} className="border border-border rounded-lg overflow-hidden">
                       <div className="flex items-center gap-3 p-3">
                         <Select value={task.status} onValueChange={(v) => updateTaskStatus(task.id, v)}>
-                          <SelectTrigger className="w-36"><SelectValue /></SelectTrigger>
+                          <SelectTrigger className="w-48"><SelectValue /></SelectTrigger>
                           <SelectContent>
-                            {STATUS_OPTIONS.map((o) => <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>)}
+                            {statusOptions.map((o) => <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>)}
                           </SelectContent>
+                        </Select>
                         </Select>
                         <button onClick={() => setExpandedTask(isExpanded ? null : task.id)} className="flex-1 text-sm font-medium text-foreground text-left hover:text-primary transition-colors">
                           {task.title}
