@@ -157,8 +157,6 @@ const EspaceClient = () => {
     if (data?.signedUrl) window.open(data.signedUrl, "_blank");
   };
 
-  const [renamingDocId, setRenamingDocId] = useState<string | null>(null);
-  const [renameValue, setRenameValue] = useState("");
 
   const startRename = (doc: { id: string; name: string }) => {
     setRenamingDocId(doc.id);
