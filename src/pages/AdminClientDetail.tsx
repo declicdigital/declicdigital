@@ -64,6 +64,8 @@ const AdminClientDetail = () => {
   const [expandedTask, setExpandedTask] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
   const [websiteUrl, setWebsiteUrl] = useState("");
+  const [renamingDocId, setRenamingDocId] = useState<string | null>(null);
+  const [renameValue, setRenameValue] = useState("");
 
   useEffect(() => {
     if (!authLoading && (!user || !isAdmin)) navigate("/connexion", { replace: true });

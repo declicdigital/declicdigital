@@ -43,6 +43,8 @@ const EspaceClient = () => {
   const [uploading, setUploading] = useState(false);
   const [newTaskTitle, setNewTaskTitle] = useState("");
   const [showAddTask, setShowAddTask] = useState(false);
+  const [renamingDocId, setRenamingDocId] = useState<string | null>(null);
+  const [renameValue, setRenameValue] = useState("");
 
   useEffect(() => {
     if (!authLoading && !user) navigate("/connexion", { replace: true });
