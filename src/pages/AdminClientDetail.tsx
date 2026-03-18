@@ -215,6 +215,26 @@ const AdminClientDetail = () => {
     if (data?.signedUrl) window.open(data.signedUrl, "_blank");
   };
 
+  const [renamingDocId, setRenamingDocId] = useState<string | null>(null);
+  const [renameValue, setRenameValue] = useState("");
+
+  const startRename = (doc: { id: string; name: string }) => {
+    setRenamingDocId(doc.id);
+    setRenameValue(doc.name);
+  };
+
+  const confirmRename = async () => {
+    if (!renamingDocId || !renameValue.trim()) return;
+    const { error } = await supabase.from("project_documents").update({ name: renameValue.trim() }).eq("id", renamingDocId);
+    if (error) {
+      toast({ title: "Erreur", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Fichier renomme" });
+      loadAll();
+    }
+    setRenamingDocId(null);
+  };
+
   if (authLoading || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
