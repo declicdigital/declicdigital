@@ -1,16 +1,15 @@
 project_id = "ubtdhicbbwasabgokzje"
 
-[functions.send-form]
-verify_jwt = false
-
-[functions.invite-client]
-verify_jwt = false
-
-[functions.admin-manage-client]
-verify_jwt = false
-
-[functions.og-meta]
-verify_jwt = false
-
-[functions.process-email-queue]
-verify_jwt = true
+[functions]
+  [functions.admin-manage-client]
+    verify_jwt = false
+  [functions.auth-email-hook]
+    verify_jwt = false
+  [functions.invite-client]
+    verify_jwt = false
+  [functions.og-meta]
+    verify_jwt = false
+  [functions.process-email-queue]
+    verify_jwt = true
+  [functions.send-form]
+    verify_jwt = false
