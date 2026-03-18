@@ -503,13 +503,39 @@ const AdminClientDetail = () => {
               <CardContent className="space-y-2">
                 {documents.length === 0 ? <p className="text-muted-foreground text-sm">Aucun document.</p> : documents.map((doc) => (
                   <div key={doc.id} className="flex items-center gap-3 p-3 rounded-lg border border-border">
-                    <button onClick={() => downloadDoc(doc.file_path)} className="flex-1 flex items-center gap-3 text-left hover:text-primary transition-colors">
+                    <button onClick={() => downloadDoc(doc.file_path)} className="flex-1 flex items-center gap-3 text-left hover:text-primary transition-colors min-w-0">
                       <FileText className="h-5 w-5 text-primary shrink-0" />
-                      <div className="min-w-0">
-                        <p className="text-sm font-medium text-foreground truncate">{doc.name}</p>
-                        <p className="text-xs text-muted-foreground">{new Date(doc.created_at).toLocaleDateString("fr-FR")}</p>
+                      <div className="flex-1 min-w-0">
+                        {renamingDocId === doc.id ? (
+                          <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
+                            <Input
+                              value={renameValue}
+                              onChange={(e) => setRenameValue(e.target.value)}
+                              onKeyDown={(e) => { if (e.key === "Enter") confirmRename(); if (e.key === "Escape") setRenamingDocId(null); }}
+                              className="h-7 text-sm"
+                              autoFocus
+                              onClick={(e) => e.preventDefault()}
+                            />
+                            <Button variant="ghost" size="icon" className="h-7 w-7 shrink-0" onClick={(e) => { e.preventDefault(); confirmRename(); }}>
+                              <Check className="h-3.5 w-3.5 text-emerald-600" />
+                            </Button>
+                            <Button variant="ghost" size="icon" className="h-7 w-7 shrink-0" onClick={(e) => { e.preventDefault(); setRenamingDocId(null); }}>
+                              <X className="h-3.5 w-3.5 text-muted-foreground" />
+                            </Button>
+                          </div>
+                        ) : (
+                          <>
+                            <p className="text-sm font-medium text-foreground truncate">{doc.name}</p>
+                            <p className="text-xs text-muted-foreground">{new Date(doc.created_at).toLocaleDateString("fr-FR")}</p>
+                          </>
+                        )}
                       </div>
                     </button>
+                    {renamingDocId !== doc.id && (
+                      <Button variant="ghost" size="icon" className="h-8 w-8 shrink-0" onClick={() => startRename(doc)}>
+                        <Pencil className="h-3.5 w-3.5 text-muted-foreground" />
+                      </Button>
+                    )}
                     <Button variant="ghost" size="icon" className="text-destructive h-8 w-8" onClick={() => deleteDocument(doc.id, doc.file_path)}><Trash2 className="h-4 w-4" /></Button>
                   </div>
                 ))}
