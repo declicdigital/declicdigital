@@ -70,7 +70,7 @@ const Faq = () => (
     </SectionWrapper>
 
     {/* Maillage */}
-    <SectionWrapper className="bg-card">
+    <SectionWrapper className="bg-section-blue">
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="text-2xl font-extrabold mb-4">Découvrez nos services</h2>
         <div className="flex flex-wrap justify-center gap-3">

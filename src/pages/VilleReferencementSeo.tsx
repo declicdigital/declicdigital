@@ -72,7 +72,7 @@ const VilleReferencementSeo = () => {
       </section>
 
       {/* Bénéfices SEO local */}
-      <SectionWrapper className="bg-card">
+      <SectionWrapper className="bg-section-blue">
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">
           Pourquoi investir dans le SEO à {city.nameShort} ?
         </h2>
@@ -131,7 +131,7 @@ const VilleReferencementSeo = () => {
 
       {/* Contenu SEO unique */}
       {content && (
-        <SectionWrapper className="bg-card">
+        <SectionWrapper className="bg-section-blue">
           <div className="mx-auto max-w-3xl space-y-6">
             <h2 className="text-3xl font-extrabold md:text-4xl text-center">
               Le SEO local à {city.nameShort}
@@ -180,7 +180,7 @@ const VilleReferencementSeo = () => {
 
       {/* Maillage interne */}
       {nearCities.length > 0 && (
-        <SectionWrapper className="bg-card">
+        <SectionWrapper className="bg-section-blue">
           <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">
             Référencement SEO près de {city.nameShort}
           </h2>

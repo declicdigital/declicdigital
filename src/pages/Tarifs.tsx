@@ -186,7 +186,7 @@ const Tarifs = () => (
     </SectionWrapper>
 
     {/* Transparence */}
-    <SectionWrapper className="bg-card">
+    <SectionWrapper className="bg-section-blue">
       <div className="mx-auto max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
