@@ -97,7 +97,7 @@ const Faq = () => (
     </SectionWrapper>
 
     {/* Avis clients */}
-    <GoogleReviewsSection compact maxReviews={3} className="bg-card" />
+    <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
 
     {/* CTA */}
     <section className="gradient-miami py-16">

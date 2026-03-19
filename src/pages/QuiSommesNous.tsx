@@ -121,7 +121,7 @@ const QuiSommesNous = () => (
     </SectionWrapper>
 
     {/* Avis clients Google */}
-    <GoogleReviewsSection className="bg-card" />
+    <GoogleReviewsSection className="bg-section-blue" />
 
     {/* Notre agence - Google Maps */}
     <LocationSection />
