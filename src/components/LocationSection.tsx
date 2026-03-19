@@ -25,7 +25,7 @@ const LocationSection = () => {
   }, []);
 
   return (
-    <SectionWrapper className="bg-card">
+    <SectionWrapper className="bg-section-blue">
       <div className="text-center mb-10">
         <h2 className="text-3xl font-extrabold md:text-4xl">Notre agence</h2>
         <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">

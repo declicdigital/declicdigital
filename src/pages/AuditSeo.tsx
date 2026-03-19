@@ -39,7 +39,7 @@ const AuditSeo = () => (
     </section>
 
     {/* Contenu audit */}
-    <SectionWrapper className="bg-card">
+    <SectionWrapper className="bg-section-blue">
       <div className="text-center mb-4">
         <h2 className="text-3xl font-extrabold md:text-4xl">Ce que contient votre audit</h2>
       </div>
@@ -84,7 +84,7 @@ const AuditSeo = () => (
     </SectionWrapper>
 
     {/* Pourquoi c'est gratuit */}
-    <SectionWrapper className="bg-card">
+    <SectionWrapper className="bg-section-blue">
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="text-3xl font-extrabold md:text-4xl mb-6">Pourquoi l'audit est-il gratuit ?</h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
@@ -127,7 +127,7 @@ const AuditSeo = () => (
     <GoogleReviewsSection compact maxReviews={3} />
 
     {/* Formulaire */}
-    <SectionWrapper className="bg-card" id="formulaire-audit">
+    <SectionWrapper className="bg-section-blue" id="formulaire-audit">
       <div className="mx-auto max-w-xl">
         <h2 className="mb-4 text-center text-3xl font-extrabold">Demandez votre audit gratuit</h2>
         <p className="text-center text-muted-foreground mb-8">

@@ -93,4 +93,7 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
+  .bg-section-blue {
+    background: hsl(199, 45%, 96%);
+  }
 }

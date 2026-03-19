@@ -59,7 +59,7 @@ const Index = () => {
 
 
       {/* Problème */}
-      <SectionWrapper className="bg-card">
+      <SectionWrapper className="bg-section-blue">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mb-6 text-3xl font-extrabold md:text-4xl">
             Pourquoi votre site ne vous apporte pas de clients ?
@@ -123,7 +123,7 @@ const Index = () => {
       </SectionWrapper>
 
       {/* Notre méthode */}
-      <SectionWrapper className="bg-card">
+      <SectionWrapper className="bg-section-blue">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold md:text-4xl">Notre méthode</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
@@ -183,7 +183,7 @@ const Index = () => {
       </SectionWrapper>
 
       {/* Technologies */}
-      <SectionWrapper className="bg-card">
+      <SectionWrapper className="bg-section-blue">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Nos outils et technologies</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -201,7 +201,7 @@ const Index = () => {
 
 
       {/* Maillage interne */}
-      <SectionWrapper className="bg-card">
+      <SectionWrapper className="bg-section-blue">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-extrabold mb-4">Explorez nos services</h2>
           <p className="text-muted-foreground mb-6">Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.</p>

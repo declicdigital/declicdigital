@@ -73,7 +73,7 @@ const VilleCreationSite = () => {
       </section>
 
       {/* Pourquoi un site web */}
-      <SectionWrapper className="bg-card">
+      <SectionWrapper className="bg-section-blue">
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">
           {content?.creationWhyTitle || `Pourquoi créer un site web à ${city.nameShort} ?`}
         </h2>
@@ -127,7 +127,7 @@ const VilleCreationSite = () => {
 
       {/* Contenu SEO unique */}
       {content && (
-        <SectionWrapper className="bg-card">
+        <SectionWrapper className="bg-section-blue">
           <div className="mx-auto max-w-3xl space-y-6">
             <h2 className="text-3xl font-extrabold md:text-4xl text-center">
               Votre agence web à {city.nameShort}
@@ -170,7 +170,7 @@ const VilleCreationSite = () => {
       </SectionWrapper>
 
       {/* Liens services */}
-      <SectionWrapper className="bg-card">
+      <SectionWrapper className="bg-section-blue">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-extrabold mb-4">Découvrez aussi nos autres services</h2>
           <div className="flex flex-wrap justify-center gap-3">

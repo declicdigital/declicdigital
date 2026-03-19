@@ -70,7 +70,7 @@ const Faq = () => (
     </SectionWrapper>
 
     {/* Maillage */}
-    <SectionWrapper className="bg-card">
+    <SectionWrapper className="bg-section-blue">
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="text-2xl font-extrabold mb-4">Découvrez nos services</h2>
         <div className="flex flex-wrap justify-center gap-3">
@@ -97,7 +97,7 @@ const Faq = () => (
     </SectionWrapper>
 
     {/* Avis clients */}
-    <GoogleReviewsSection compact maxReviews={3} className="bg-card" />
+    <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
 
     {/* CTA */}
     <section className="gradient-miami py-16">

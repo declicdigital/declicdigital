@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
@@ -8,6 +8,7 @@ import { toast } from "@/hooks/use-toast";
 import {
   Loader2, FileText, MessageSquare, Upload, Send, Calendar,
   CheckCircle2, Clock, AlertCircle, Play, Plus, Globe, Paperclip,
+  FolderOpen, Pencil, Check, X,
 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-transparent.png";
 import ProjectTimeline from "@/components/espace-client/ProjectTimeline";
@@ -40,13 +41,16 @@ const SharedProject = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [expandedTask, setExpandedTask] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const [renamingAttId, setRenamingAttId] = useState<string | null>(null);
+  const [renameAttValue, setRenameAttValue] = useState("");
+  const initialLoadDone = useRef(false);
 
   useEffect(() => {
     if (token) loadData();
   }, [token]);
 
   const loadData = async () => {
-    setLoading(true);
+    if (!initialLoadDone.current) setLoading(true);
     try {
       const { data: projects } = await (supabase.from("projects") as any).select("*").eq("share_token", token).limit(1);
       const proj = projects?.[0] ?? null;
@@ -85,6 +89,7 @@ const SharedProject = () => {
       console.error("loadData error:", err);
     }
     setLoading(false);
+    initialLoadDone.current = true;
   };
 
   const addTask = async () => {
@@ -130,6 +135,23 @@ const SharedProject = () => {
     if (data?.signedUrl) window.open(data.signedUrl, "_blank");
   };
 
+  const startRenameAtt = (att: { id: string; file_name: string }) => {
+    setRenamingAttId(att.id);
+    setRenameAttValue(att.file_name);
+  };
+
+  const confirmRenameAtt = async () => {
+    if (!renamingAttId || !renameAttValue.trim()) return;
+    const { error } = await (supabase.from("task_attachments" as any) as any).update({ file_name: renameAttValue.trim() }).eq("id", renamingAttId);
+    if (error) {
+      toast({ title: "Erreur", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Fichier renomme" });
+      loadData();
+    }
+    setRenamingAttId(null);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
@@ -164,7 +186,7 @@ const SharedProject = () => {
           <div className="bg-gradient-to-r from-primary to-primary/80 p-6 text-primary-foreground">
             <h1 className="text-2xl font-bold">{project.name}</h1>
             <p className="text-primary-foreground/80 mt-1">{project.description}</p>
-            <div className="flex items-center gap-4 mt-3 text-sm text-primary-foreground/70">
+            <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-primary-foreground/70">
               <span className="flex items-center gap-1">
                 <Calendar className="h-4 w-4" /> Debut : {new Date(project.start_date).toLocaleDateString("fr-FR")}
               </span>
@@ -176,6 +198,16 @@ const SharedProject = () => {
                   className="flex items-center gap-1 underline hover:text-primary-foreground transition-colors"
                 >
                   <Globe className="h-4 w-4" /> {project.website_url.replace(/^https?:\/\//, "")}
+                </a>
+              )}
+              {(project as any).drive_url && (project as any).drive_url.trim() !== "" && (
+                <a
+                  href={(project as any).drive_url.startsWith("http") ? (project as any).drive_url : `https://${(project as any).drive_url}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-1 underline hover:text-primary-foreground transition-colors"
+                >
+                  <FolderOpen className="h-4 w-4" /> Lien Drive
                 </a>
               )}
             </div>
@@ -260,16 +292,40 @@ const SharedProject = () => {
                         {taskAttachments.length > 0 && (
                           <div className="space-y-1">
                             {taskAttachments.map((att: any) => (
-                              <button
-                                key={att.id}
-                                onClick={async () => {
-                                  const { data } = await supabase.storage.from("project-documents").createSignedUrl(att.file_path, 3600);
-                                  if (data?.signedUrl) window.open(data.signedUrl, "_blank");
-                                }}
-                                className="flex items-center gap-2 text-xs text-primary hover:underline"
-                              >
-                                <Paperclip className="h-3 w-3" /> {att.file_name}
-                              </button>
+                              <div key={att.id} className="flex items-center gap-2">
+                                {renamingAttId === att.id ? (
+                                  <div className="flex items-center gap-1 flex-1">
+                                    <Input
+                                      value={renameAttValue}
+                                      onChange={(e) => setRenameAttValue(e.target.value)}
+                                      onKeyDown={(e) => { if (e.key === "Enter") confirmRenameAtt(); if (e.key === "Escape") setRenamingAttId(null); }}
+                                      className="h-7 text-xs flex-1"
+                                      autoFocus
+                                    />
+                                    <Button variant="ghost" size="icon" className="h-6 w-6 shrink-0" onClick={confirmRenameAtt}>
+                                      <Check className="h-3 w-3 text-emerald-600" />
+                                    </Button>
+                                    <Button variant="ghost" size="icon" className="h-6 w-6 shrink-0" onClick={() => setRenamingAttId(null)}>
+                                      <X className="h-3 w-3 text-muted-foreground" />
+                                    </Button>
+                                  </div>
+                                ) : (
+                                  <>
+                                    <button
+                                      onClick={async () => {
+                                        const { data } = await supabase.storage.from("project-documents").createSignedUrl(att.file_path, 3600);
+                                        if (data?.signedUrl) window.open(data.signedUrl, "_blank");
+                                      }}
+                                      className="flex items-center gap-2 text-xs text-primary hover:underline"
+                                    >
+                                      <Paperclip className="h-3 w-3" /> {att.file_name}
+                                    </button>
+                                    <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => startRenameAtt(att)}>
+                                      <Pencil className="h-3 w-3 text-muted-foreground" />
+                                    </Button>
+                                  </>
+                                )}
+                              </div>
                             ))}
                           </div>
                         )}
