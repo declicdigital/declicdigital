@@ -341,6 +341,7 @@ export type Database = {
           client_id: string
           created_at: string
           description: string
+          drive_url: string | null
           id: string
           name: string
           share_token: string | null
@@ -352,6 +353,7 @@ export type Database = {
           client_id: string
           created_at?: string
           description?: string
+          drive_url?: string | null
           id?: string
           name: string
           share_token?: string | null
@@ -363,6 +365,7 @@ export type Database = {
           client_id?: string
           created_at?: string
           description?: string
+          drive_url?: string | null
           id?: string
           name?: string
           share_token?: string | null
