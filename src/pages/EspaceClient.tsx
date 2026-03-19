@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
@@ -7,7 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, CheckCircle2, Clock, AlertCircle, Play, Plus, Globe, Paperclip, Trash2, Share2, Pencil, Check, X } from "lucide-react";
+import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, CheckCircle2, Clock, AlertCircle, Play, Plus, Globe, Paperclip, Trash2, Share2, Pencil, Check, X, FolderOpen } from "lucide-react";
 import logoImg from "@/assets/logo-declic-transparent.png";
 import ProjectTimeline from "@/components/espace-client/ProjectTimeline";
 import ProjectInvoices from "@/components/espace-client/ProjectInvoices";
@@ -45,6 +45,9 @@ const EspaceClient = () => {
   const [showAddTask, setShowAddTask] = useState(false);
   const [renamingDocId, setRenamingDocId] = useState<string | null>(null);
   const [renameValue, setRenameValue] = useState("");
+  const [renamingAttId, setRenamingAttId] = useState<string | null>(null);
+  const [renameAttValue, setRenameAttValue] = useState("");
+  const initialLoadDone = useRef(false);
 
   useEffect(() => {
     if (!authLoading && !user) navigate("/connexion", { replace: true });
@@ -57,7 +60,7 @@ const EspaceClient = () => {
 
   const loadData = async () => {
     if (!user) return;
-    setLoading(true);
+    if (!initialLoadDone.current) setLoading(true);
     try {
       const { data: projects } = await supabase.from("projects").select("*").eq("client_id", user.id).limit(1);
       const proj = projects?.[0] ?? null;
@@ -99,6 +102,7 @@ const EspaceClient = () => {
       console.error("loadData error:", err);
     }
     setLoading(false);
+    initialLoadDone.current = true;
   };
 
   const addComment = async (taskId: string) => {
@@ -157,7 +161,6 @@ const EspaceClient = () => {
     if (data?.signedUrl) window.open(data.signedUrl, "_blank");
   };
 
-
   const startRename = (doc: { id: string; name: string }) => {
     setRenamingDocId(doc.id);
     setRenameValue(doc.name);
@@ -173,6 +176,23 @@ const EspaceClient = () => {
       loadData();
     }
     setRenamingDocId(null);
+  };
+
+  const startRenameAtt = (att: { id: string; file_name: string }) => {
+    setRenamingAttId(att.id);
+    setRenameAttValue(att.file_name);
+  };
+
+  const confirmRenameAtt = async () => {
+    if (!renamingAttId || !renameAttValue.trim()) return;
+    const { error } = await (supabase.from("task_attachments" as any) as any).update({ file_name: renameAttValue.trim() }).eq("id", renamingAttId);
+    if (error) {
+      toast({ title: "Erreur", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Fichier renomme" });
+      loadData();
+    }
+    setRenamingAttId(null);
   };
 
   if (authLoading || loading) {
@@ -235,7 +255,7 @@ const EspaceClient = () => {
                   )}
                 </div>
                 <p className="text-primary-foreground/80 mt-1">{project.description}</p>
-                <div className="flex items-center gap-4 mt-3 text-sm text-primary-foreground/70">
+                <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-primary-foreground/70">
                   <span className="flex items-center gap-1">
                     <Calendar className="h-4 w-4" /> Debut : {new Date(project.start_date).toLocaleDateString("fr-FR")}
                   </span>
@@ -247,6 +267,16 @@ const EspaceClient = () => {
                       className="flex items-center gap-1 underline hover:text-primary-foreground transition-colors"
                     >
                       <Globe className="h-4 w-4" /> {project.website_url.replace(/^https?:\/\//, "")}
+                    </a>
+                  )}
+                  {(project as any).drive_url && (project as any).drive_url.trim() !== "" && (
+                    <a
+                      href={(project as any).drive_url.startsWith("http") ? (project as any).drive_url : `https://${(project as any).drive_url}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1 underline hover:text-primary-foreground transition-colors"
+                    >
+                      <FolderOpen className="h-4 w-4" /> Lien Drive
                     </a>
                   )}
                   <Badge variant="secondary" className="bg-primary-foreground/20 text-primary-foreground border-0">
@@ -295,6 +325,7 @@ const EspaceClient = () => {
                     const cfg = statusCfg[task.status] || statusCfg.a_faire_dd;
                     const Icon = cfg.icon;
                     const taskComments = comments[task.id] || [];
+                    const taskAttachments = attachments[task.id] || [];
                     const isExpanded = expandedTask === task.id;
                     const canChangeStatus = task.status === "a_faire_client";
                     return (
@@ -321,33 +352,57 @@ const EspaceClient = () => {
                               Marquer fait
                             </Button>
                           )}
-                          {taskComments.length > 0 && (
-                            <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                              <MessageSquare className="h-3.5 w-3.5" /> {taskComments.length}
+                          {(taskComments.length > 0 || taskAttachments.length > 0) && (
+                            <span className="flex items-center gap-2 text-xs text-muted-foreground">
+                              {taskComments.length > 0 && <span className="flex items-center gap-1"><MessageSquare className="h-3.5 w-3.5" /> {taskComments.length}</span>}
+                              {taskAttachments.length > 0 && <span className="flex items-center gap-1"><Paperclip className="h-3.5 w-3.5" /> {taskAttachments.length}</span>}
                             </span>
                           )}
                         </button>
                         {isExpanded && (
                           <div className="border-t border-border p-4 bg-muted/20 space-y-3">
                             {/* Attachments */}
-                            {(attachments[task.id] || []).length > 0 && (
+                            {taskAttachments.length > 0 && (
                               <div className="space-y-1">
-                                {(attachments[task.id] || []).map((att: any) => (
+                                {taskAttachments.map((att: any) => (
                                   <div key={att.id} className="flex items-center gap-2">
-                                    <button
-                                      onClick={async () => {
-                                        const { data } = await supabase.storage.from("project-documents").createSignedUrl(att.file_path, 3600);
-                                        if (data?.signedUrl) window.open(data.signedUrl, "_blank");
-                                      }}
-                                      className="flex items-center gap-2 text-xs text-primary hover:underline"
-                                    >
-                                      <Paperclip className="h-3 w-3" /> {att.file_name}
-                                    </button>
-                                    <Button variant="ghost" size="icon" className="h-6 w-6 text-destructive" onClick={async () => {
-                                      await supabase.storage.from("project-documents").remove([att.file_path]);
-                                      await (supabase.from("task_attachments" as any) as any).delete().eq("id", att.id);
-                                      loadData();
-                                    }}><Trash2 className="h-3 w-3" /></Button>
+                                    {renamingAttId === att.id ? (
+                                      <div className="flex items-center gap-1 flex-1">
+                                        <Input
+                                          value={renameAttValue}
+                                          onChange={(e) => setRenameAttValue(e.target.value)}
+                                          onKeyDown={(e) => { if (e.key === "Enter") confirmRenameAtt(); if (e.key === "Escape") setRenamingAttId(null); }}
+                                          className="h-7 text-xs flex-1"
+                                          autoFocus
+                                        />
+                                        <Button variant="ghost" size="icon" className="h-6 w-6 shrink-0" onClick={confirmRenameAtt}>
+                                          <Check className="h-3 w-3 text-emerald-600" />
+                                        </Button>
+                                        <Button variant="ghost" size="icon" className="h-6 w-6 shrink-0" onClick={() => setRenamingAttId(null)}>
+                                          <X className="h-3 w-3 text-muted-foreground" />
+                                        </Button>
+                                      </div>
+                                    ) : (
+                                      <>
+                                        <button
+                                          onClick={async () => {
+                                            const { data } = await supabase.storage.from("project-documents").createSignedUrl(att.file_path, 3600);
+                                            if (data?.signedUrl) window.open(data.signedUrl, "_blank");
+                                          }}
+                                          className="flex items-center gap-2 text-xs text-primary hover:underline"
+                                        >
+                                          <Paperclip className="h-3 w-3" /> {att.file_name}
+                                        </button>
+                                        <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => startRenameAtt(att)}>
+                                          <Pencil className="h-3 w-3 text-muted-foreground" />
+                                        </Button>
+                                        <Button variant="ghost" size="icon" className="h-6 w-6 text-destructive" onClick={async () => {
+                                          await supabase.storage.from("project-documents").remove([att.file_path]);
+                                          await (supabase.from("task_attachments" as any) as any).delete().eq("id", att.id);
+                                          loadData();
+                                        }}><Trash2 className="h-3 w-3" /></Button>
+                                      </>
+                                    )}
                                   </div>
                                 ))}
                               </div>
