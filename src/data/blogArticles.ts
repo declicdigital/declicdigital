@@ -357,7 +357,7 @@ Pour les utilisateurs, cela signifie une chose simple : moins de compromis entre
     tags: ["porte-avions France Libre", "PANG France", "marine nationale", "défense française", "France Libre 2038", "successeur Charles de Gaulle"],
     image: porteAvionsImg,
     relatedSlugs: ["knafo-municipales-paris-campagne-digitale-site-web", "tendances-web-design-2026"],
-    content: \`
+    content: `
 ## France Libre : un symbole stratégique pour la marine française
 
 La France s'apprête à franchir une nouvelle étape dans sa stratégie de défense avec le développement de son porte-avions de nouvelle génération, baptisé France Libre. Prévu pour entrer en service à l'horizon 2038, ce navire remplacera le Charles de Gaulle, actuellement seul porte-avions en activité dans la marine nationale.
@@ -410,7 +410,7 @@ Avec un coût estimé à plusieurs milliards d'euros, ce projet représente un e
 Pour les entreprises françaises, ce type de projet illustre l'importance d'investir dans l'innovation et la modernisation, que ce soit dans la défense ou dans la [création d'un site web performant](/creation-site-web). La compétitivité passe par l'adaptation aux nouvelles technologies.
 
 Besoin de moderniser votre présence en ligne ? [Demandez un audit SEO gratuit](/audit-seo-gratuit) ou découvrez nos [services de référencement](/referencement-seo) pour PME.
-    \`,
+    `,
   },
 ];
 
