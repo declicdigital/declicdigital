@@ -80,7 +80,7 @@ const Index = () => {
                 </div>
                 <div>
                   <span className="font-semibold block">{item.text}</span>
-                  <p className="text-sm text-muted-foreground mt-1">{item.detail}</p>
+                  <p className="text-sm md:text-base text-muted-foreground mt-1">{item.detail}</p>
                 </div>
               </div>
             ))}
