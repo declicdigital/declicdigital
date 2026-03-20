@@ -68,7 +68,7 @@
     --brand-violet-light: 284 72% 81%;
 
     /* Custom tokens */
-    --gradient-primary: linear-gradient(135deg, hsl(40, 95%, 55%), hsl(25, 100%, 55%));
+    --gradient-primary: linear-gradient(135deg, #5ce1e6, #cb6ce6, #ff66c4);
     --gradient-hero: linear-gradient(135deg, hsl(45, 40%, 94%), hsl(43, 35%, 91%));
     --gradient-miami: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(284, 65%, 66%), hsl(330, 100%, 70%));
     --shadow-card: 0 4px 24px -4px hsl(230 25% 14% / 0.08);
