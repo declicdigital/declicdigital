@@ -47,6 +47,8 @@ const EspaceClient = () => {
   const [renameValue, setRenameValue] = useState("");
   const [renamingAttId, setRenamingAttId] = useState<string | null>(null);
   const [renameAttValue, setRenameAttValue] = useState("");
+  const [renamingTaskId, setRenamingTaskId] = useState<string | null>(null);
+  const [renameTaskValue, setRenameTaskValue] = useState("");
   const initialLoadDone = useRef(false);
 
   useEffect(() => {
@@ -120,12 +122,13 @@ const EspaceClient = () => {
 
   const addTask = async () => {
     if (!user || !project || !newTaskTitle.trim()) return;
-    const maxOrder = tasks.length > 0 ? Math.max(...tasks.map((t) => t.sort_order)) + 1 : 0;
+    // New tasks get sort_order = -1 so they appear at the top
+    const minOrder = tasks.length > 0 ? Math.min(...tasks.map((t) => t.sort_order)) - 1 : 0;
     const { error } = await supabase.from("project_tasks").insert({
       project_id: project.id,
       title: newTaskTitle.trim(),
       status: "a_faire_dd" as any,
-      sort_order: maxOrder,
+      sort_order: minOrder,
     });
     if (error) {
       toast({ title: "Erreur", description: error.message, variant: "destructive" });
@@ -135,6 +138,18 @@ const EspaceClient = () => {
       toast({ title: "Tache ajoutee" });
       loadData();
     }
+  };
+
+  const renameTask = async () => {
+    if (!renamingTaskId || !renameTaskValue.trim()) return;
+    const { error } = await supabase.from("project_tasks").update({ title: renameTaskValue.trim() } as any).eq("id", renamingTaskId);
+    if (error) {
+      toast({ title: "Erreur", description: error.message, variant: "destructive" });
+    } else {
+      toast({ title: "Tache renommee" });
+      loadData();
+    }
+    setRenamingTaskId(null);
   };
 
   const uploadDocument = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -203,7 +218,7 @@ const EspaceClient = () => {
     );
   }
 
-  const sortedTasks = [...tasks].sort((a, b) => (STATUS_PRIORITY[a.status] ?? 9) - (STATUS_PRIORITY[b.status] ?? 9));
+  const sortedTasks = [...tasks].sort((a, b) => (STATUS_PRIORITY[a.status] ?? 9) - (STATUS_PRIORITY[b.status] ?? 9) || a.sort_order - b.sort_order);
   const completedTasks = tasks.filter((t) => t.status === "termine").length;
 
   return (
@@ -214,7 +229,7 @@ const EspaceClient = () => {
             src={logoImg}
             alt="Declic Digital"
             className="h-20 md:h-24 cursor-pointer"
-            onClick={() => { window.scrollTo({ top: 0, behavior: "smooth" }); navigate("/espace-client"); }}
+            onClick={() => navigate("/espace-client")}
           />
           <div className="flex items-center gap-3">
             <span className="text-sm text-muted-foreground hidden sm:inline">{user?.email}</span>
@@ -243,7 +258,7 @@ const EspaceClient = () => {
                     <Button
                       variant="secondary"
                       size="sm"
-                      className="bg-primary-foreground/20 text-primary-foreground border-0 hover:bg-primary-foreground/30"
+                      className="bg-white/20 text-white border-0 hover:bg-white/30"
                       onClick={() => {
                         const url = `${window.location.origin}/projet/${project.share_token}`;
                         navigator.clipboard.writeText(url);
@@ -254,8 +269,8 @@ const EspaceClient = () => {
                     </Button>
                   )}
                 </div>
-                <p className="text-primary-foreground/80 mt-1">{project.description}</p>
-                <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-primary-foreground/70">
+                <p className="text-white/80 mt-1">{project.description}</p>
+                <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-white/70">
                   <span className="flex items-center gap-1">
                     <Calendar className="h-4 w-4" /> Debut : {new Date(project.start_date).toLocaleDateString("fr-FR")}
                   </span>
@@ -264,7 +279,7 @@ const EspaceClient = () => {
                       href={project.website_url.startsWith("http") ? project.website_url : `https://${project.website_url}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 underline hover:text-primary-foreground transition-colors"
+                      className="flex items-center gap-1 underline hover:text-white transition-colors"
                     >
                       <Globe className="h-4 w-4" /> {project.website_url.replace(/^https?:\/\//, "")}
                     </a>
@@ -274,12 +289,12 @@ const EspaceClient = () => {
                       href={(project as any).drive_url.startsWith("http") ? (project as any).drive_url : `https://${(project as any).drive_url}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex items-center gap-1 underline hover:text-primary-foreground transition-colors"
+                      className="flex items-center gap-1 underline hover:text-white transition-colors"
                     >
                       <FolderOpen className="h-4 w-4" /> Lien Drive
                     </a>
                   )}
-                  <Badge variant="secondary" className="bg-primary-foreground/20 text-primary-foreground border-0">
+                  <Badge variant="secondary" className="bg-white/20 text-white border-0">
                     {project.status}
                   </Badge>
                 </div>
@@ -328,6 +343,7 @@ const EspaceClient = () => {
                     const taskAttachments = attachments[task.id] || [];
                     const isExpanded = expandedTask === task.id;
                     const canChangeStatus = task.status === "a_faire_client";
+                    const isRenamingThis = renamingTaskId === task.id;
                     return (
                       <div key={task.id} className={`border rounded-lg overflow-hidden ${cfg.bg}`}>
                         <button
@@ -337,7 +353,39 @@ const EspaceClient = () => {
                           <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${cfg.color}`}>
                             <Icon className="h-3.5 w-3.5" /> {cfg.label}
                           </div>
-                          <span className="text-sm font-medium text-foreground flex-1">{task.title}</span>
+                          {isRenamingThis ? (
+                            <div className="flex items-center gap-1 flex-1" onClick={(e) => e.stopPropagation()}>
+                              <Input
+                                value={renameTaskValue}
+                                onChange={(e) => setRenameTaskValue(e.target.value)}
+                                onKeyDown={(e) => { if (e.key === "Enter") renameTask(); if (e.key === "Escape") setRenamingTaskId(null); }}
+                                className="h-7 text-sm flex-1"
+                                autoFocus
+                              />
+                              <Button variant="ghost" size="icon" className="h-6 w-6 shrink-0" onClick={renameTask}>
+                                <Check className="h-3 w-3 text-emerald-600" />
+                              </Button>
+                              <Button variant="ghost" size="icon" className="h-6 w-6 shrink-0" onClick={() => setRenamingTaskId(null)}>
+                                <X className="h-3 w-3 text-muted-foreground" />
+                              </Button>
+                            </div>
+                          ) : (
+                            <span className="text-sm font-medium text-foreground flex-1">{task.title}</span>
+                          )}
+                          {!isRenamingThis && (
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              className="h-7 w-7 shrink-0"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                setRenamingTaskId(task.id);
+                                setRenameTaskValue(task.title);
+                              }}
+                            >
+                              <Pencil className="h-3 w-3 text-muted-foreground" />
+                            </Button>
+                          )}
                           {canChangeStatus && (
                             <Button
                               variant="outline"
