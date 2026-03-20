@@ -134,7 +134,7 @@ const ScaleButtons = ({ value, onChange, leftLabel, rightLabel }: {
           onClick={() => onChange(v)}
           className={`flex-1 h-10 rounded-lg font-bold text-sm transition-all ${
             value === v
-              ? "gradient-primary text-white shadow-lg"
+              ? "gradient-primary text-white shadow-glow"
               : "border border-border text-muted-foreground hover:border-primary hover:text-primary hover:bg-primary/5"
           }`}
         >
