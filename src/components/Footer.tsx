@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail } from "lucide-react";
-import logo from "@/assets/logo-declic-transparent.png";
-import logoWhite from "@/assets/logo-declic-white.png";
+import logo from "@/assets/logo-declic-digital-new.png";
 
 const Footer = () => (
   <footer className="border-t border-border">
@@ -10,7 +9,7 @@ const Footer = () => (
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-4">
-            <img src={logoWhite} alt="Déclic Digital" className="h-16" />
+            <img src={logo} alt="Déclic Digital" className="h-16" />
             <p className="text-sm text-primary-foreground/70 leading-relaxed">
               Déclic Digital accompagne les PME et petites entreprises à Paris et dans les Hauts-de-Seine (92) pour développer leur visibilité en ligne. Fondée par un Expert Produit Google.
             </p>
@@ -73,11 +72,13 @@ const Footer = () => (
           </div>
         </div>
 
-        <div className="mt-10 border-t border-primary-foreground/10 pt-6 space-y-4">
-          <p className="text-xs text-primary-foreground/40 italic">* Offre à 100€ valable uniquement pour les sites vitrine.</p>
+        <div className="mt-10 border-t border-primary-foreground/10 pt-6">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-primary-foreground/40">
             <span>© {new Date().getFullYear()} Déclic Digital. SIRET 102 436 664 00019. Tous droits réservés.</span>
-            <Link to="/mentions-legales" className="hover:text-primary-foreground transition-colors">Mentions légales</Link>
+            <div className="flex items-center gap-4">
+              <Link to="/mentions-legales" className="hover:text-primary-foreground transition-colors">Mentions légales</Link>
+              <Link to="/politique-de-confidentialite" className="hover:text-primary-foreground transition-colors">Politique de confidentialité</Link>
+            </div>
           </div>
         </div>
       </div>

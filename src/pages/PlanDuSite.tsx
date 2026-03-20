@@ -20,6 +20,7 @@ const links = [
   { label: "Blog", to: "/blog" },
   { label: "Formulaire client", to: "/formulaire-client" },
   { label: "Mentions légales", to: "/mentions-legales" },
+  { label: "Politique de confidentialité", to: "/politique-de-confidentialite" },
   { label: "Plan du site", to: "/plan-du-site" },
 ];
 
@@ -78,6 +79,21 @@ const PlanDuSite = () => (
               >
                 <span className="h-1.5 w-1.5 rounded-full gradient-primary shrink-0" />
                 Référencement SEO {city.nameShort}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        <h2 className="text-2xl font-bold mb-4 mt-10">Articles de blog</h2>
+        <ul className="space-y-2 mb-10">
+          {blogArticles.map((article) => (
+            <li key={article.slug}>
+              <Link
+                to={`/blog/${article.slug}`}
+                className="flex items-center gap-3 rounded-lg bg-card p-3 text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                <span className="h-1.5 w-1.5 rounded-full gradient-primary shrink-0" />
+                {article.title}
               </Link>
             </li>
           ))}

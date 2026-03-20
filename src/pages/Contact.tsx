@@ -63,7 +63,7 @@ const Contact = () => (
             {[
               { icon: Mail, label: "Email", value: "contact@declicdigital.net" },
               { icon: Phone, label: "Téléphone", value: "06.02.22.89.39" },
-              { icon: MapPin, label: "Localisation", value: "France entière" },
+              { icon: MapPin, label: "Localisation", value: "Paris et Hauts-de-Seine (92)" },
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-4">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-primary-foreground">

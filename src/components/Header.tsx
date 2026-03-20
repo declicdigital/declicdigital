@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Phone, Mail, ChevronDown } from "lucide-react";
+import { Menu, X, Phone, Mail, ChevronDown, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo-declic-transparent.png";
+import logo from "@/assets/logo-declic-digital-new.png";
 
 const navLinks = [
   { label: "Création de site", to: "/creation-site-web" },
@@ -97,7 +97,12 @@ const Header = () => {
             </div>
           </nav>
 
-          <div className="hidden lg:block">
+          <div className="hidden lg:flex items-center gap-2">
+            <Button asChild variant="ghost" size="sm" className="rounded-full px-4 text-[13px] font-semibold text-muted-foreground hover:text-primary">
+              <Link to="/connexion">
+                <User size={14} className="mr-1.5" /> Espace client
+              </Link>
+            </Button>
             <Button asChild size="sm" className="gradient-primary rounded-full px-5 text-[13px] font-semibold text-primary-foreground shadow-md hover:opacity-90">
               <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
             </Button>
@@ -127,6 +132,15 @@ const Header = () => {
                   {l.label}
                 </Link>
               ))}
+              <Link
+                to="/connexion"
+                onClick={() => setMobileOpen(false)}
+                className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-colors hover:bg-secondary flex items-center gap-2 ${
+                  isActive("/connexion") ? "text-primary bg-secondary" : "text-muted-foreground"
+                }`}
+              >
+                <User size={16} /> Espace client
+              </Link>
               <Button asChild size="sm" className="gradient-primary mt-2 rounded-full font-semibold text-primary-foreground">
                 <Link to="/audit-seo-gratuit" onClick={() => setMobileOpen(false)}>
                   Audit SEO gratuit

@@ -14,7 +14,7 @@ import {
   CheckCircle2, Clock, AlertCircle, Play, Users, LogOut, MessageSquare,
   KeyRound, Mail, Globe, Save, Paperclip, Share2, Pencil, Check, X, FolderOpen,
 } from "lucide-react";
-import logoImg from "@/assets/logo-declic-transparent.png";
+import logoImg from "@/assets/logo-declic-digital-new.png";
 import ProjectChat from "@/components/espace-client/ProjectChat";
 
 const STATUS_PRIORITY: Record<string, number> = {
