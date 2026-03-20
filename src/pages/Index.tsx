@@ -266,7 +266,7 @@ const Index = () => {
       <SectionWrapper className="bg-section-blue">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-extrabold mb-4">Explorez nos services</h2>
-          <p className="text-muted-foreground mb-6">Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.</p>
+          <p className="text-lg text-muted-foreground mb-6">Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link to="/creation-site-web" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
               Création de site web
