@@ -140,7 +140,7 @@
   }
 
   h2, h3 {
-    font-family: 'Recoleta', Georgia, serif;
+    font-family: 'Clash Display', system-ui, sans-serif;
     @apply font-semibold tracking-tight;
     text-shadow:
       0 2px 4px hsl(284 65% 66% / 0.12),
