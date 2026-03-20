@@ -44,9 +44,9 @@ const Index = () => {
               <span className="mb-4 inline-block rounded-full bg-brand-violet/10 px-4 py-1.5 text-xs font-semibold text-brand-violet">
                 Expert Produit Google · Agence digitale
               </span>
-              <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
+              <h1 className="hero-title-yellow mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
                 Création de site web à Paris qui vous apporte des{" "}
-                <span className="text-gradient">clients</span>
+                <span>clients</span>
               </h1>
               <p className="mb-8 max-w-lg text-lg md:text-xl text-muted-foreground leading-relaxed">
                 Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour que les PME et indépendants attirent enfin les bons clients, en toute simplicité et sans budget démesuré.

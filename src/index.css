@@ -193,6 +193,10 @@
     background: var(--gradient-miami);
   }
 
+  .hero-title-yellow {
+    color: hsl(44 88% 28%) !important;
+  }
+
   /* ── Shadows ── */
   .shadow-card {
     box-shadow: var(--shadow-card);
