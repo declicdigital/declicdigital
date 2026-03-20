@@ -216,12 +216,15 @@
     filter: drop-shadow(0 2px 4px hsl(284 65% 66% / 0.18));
   }
 
-  /* ── Section alternate backgrounds ── */
+  /* ── Section alternate backgrounds (vintage warm tones) ── */
   .bg-section-alt {
-    background: hsl(43, 32%, 91%);
+    background: var(--bg-rose);
   }
   .bg-section-blue {
-    background: hsl(43, 32%, 91%);
+    background: var(--bg-blue);
+  }
+  .bg-section-rose {
+    background: var(--bg-rose);
   }
 
   /* ── Torn paper / faded ink CTA button ── */
