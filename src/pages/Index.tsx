@@ -11,8 +11,23 @@ import SectionWrapper from "@/components/SectionWrapper";
 import heroDashboard from "@/assets/tableau-bord-seo-professionnel.png";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 
+import logoWordpress from "@/assets/logos/wordpress.png";
+import logoShopify from "@/assets/logos/shopify.png";
+import logoLovable from "@/assets/logos/lovable.png";
+import logoClaude from "@/assets/logos/claude.svg";
+import logoSemrush from "@/assets/logos/semrush.png";
+import logoSearchConsole from "@/assets/logos/search-console.png";
+import logoChatgpt from "@/assets/logos/chatgpt.png";
 
-const techLogos = ["WordPress", "Shopify", "Lovable", "Base44", "Claude AI", "Semrush", "Google Analytics", "Search Console"];
+const techLogos = [
+  { name: "WordPress", src: logoWordpress },
+  { name: "Shopify", src: logoShopify },
+  { name: "Lovable", src: logoLovable },
+  { name: "Claude AI", src: logoClaude },
+  { name: "ChatGPT", src: logoChatgpt },
+  { name: "Semrush", src: logoSemrush },
+  { name: "Search Console", src: logoSearchConsole },
+];
 
 const Index = () => {
   return (
@@ -190,10 +205,13 @@ const Index = () => {
             Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link>.
           </p>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-8">
           {techLogos.map((t) => (
-            <div key={t} className="rounded-xl bg-secondary px-6 py-4 text-sm font-semibold text-foreground shadow-card">
-              {t}
+            <div key={t.name} className="flex flex-col items-center gap-2">
+              <div className="rounded-xl bg-secondary p-4 shadow-card">
+                <img src={t.src} alt={t.name} className="h-12 w-12 object-contain" />
+              </div>
+              <span className="text-xs font-medium text-muted-foreground">{t.name}</span>
             </div>
           ))}
         </div>
