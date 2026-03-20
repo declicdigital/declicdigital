@@ -101,6 +101,7 @@
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Clash Display', system-ui, sans-serif;
     position: relative;
+    background-color: var(--bg-paper);
   }
 
   /* ── Heavy grain texture overlay (newspaper / risograph) ── */
