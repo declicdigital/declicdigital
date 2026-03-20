@@ -123,7 +123,7 @@ const GoogleReviewsSection = ({
           href={writeReviewUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity shadow-lg"
+          className="inline-flex items-center gap-2 rounded-full gradient-primary px-6 py-3 text-sm font-semibold text-white hover:opacity-90 transition-opacity shadow-lg"
         >
           <Star size={14} />
           Laisser un avis

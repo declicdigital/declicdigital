@@ -52,7 +52,7 @@ const VilleCreationSite = () => {
                 {content?.creationIntro || `Vous êtes une PME ou un indépendant ${city.description} ? Déclic Digital crée votre site internet professionnel, responsive et optimisé pour Google. Attirez enfin les bons clients grâce à un site qui travaille pour vous.`}
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+                <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-white font-semibold shadow-lg hover:opacity-90">
                   <Link to="/contact">Devis création de site</Link>
                 </Button>
                 <Link to="/audit-seo-gratuit" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
@@ -88,7 +88,7 @@ const VilleCreationSite = () => {
             { icon: Zap, title: "Rapide et performant", desc: "Un temps de chargement optimisé pour une meilleure expérience utilisateur et un meilleur positionnement Google." },
           ].map((item, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="rounded-2xl bg-background p-6 shadow-card text-center">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">
                 <item.icon size={26} />
               </div>
               <h3 className="mb-2 text-lg font-bold">{item.title}</h3>
@@ -159,7 +159,7 @@ const VilleCreationSite = () => {
             { icon: Clock, step: "4", title: "Mise en ligne", desc: "Votre site est mis en ligne. Nous assurons la formation et le suivi technique." },
           ].map((item, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full gradient-primary text-primary-foreground font-bold text-xl">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full gradient-primary text-white font-bold text-xl">
                 {item.step}
               </div>
               <h3 className="mb-2 text-lg font-bold">{item.title}</h3>

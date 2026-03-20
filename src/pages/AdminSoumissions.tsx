@@ -512,7 +512,7 @@ const AdminSoumissions = () => {
                   transition={{ delay: i * 0.05 }}
                   className="flex items-center gap-4 rounded-xl border border-border bg-card p-5 shadow-card hover:shadow-elevated hover:border-primary/20 transition-all group"
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-primary-foreground">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
                     <FileText className="h-5 w-5" />
                   </div>
                   <div className="flex-1 min-w-0 cursor-pointer" onClick={() => setSelected(s)}>

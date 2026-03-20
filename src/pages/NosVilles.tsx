@@ -142,7 +142,7 @@ const NosVilles = () => (
           Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+          <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-white font-semibold shadow-lg hover:opacity-90">
             <Link to="/creation-site-web">Création de site web</Link>
           </Button>
           <Link to="/referencement-seo" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">

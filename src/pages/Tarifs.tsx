@@ -138,7 +138,7 @@ const Tarifs = () => (
           >
             {plan.highlighted && (
               <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                <span className="inline-flex items-center gap-1 rounded-full gradient-primary px-4 py-1 text-xs font-bold text-primary-foreground">
+                <span className="inline-flex items-center gap-1 rounded-full gradient-primary px-4 py-1 text-xs font-bold text-white">
                   <Star size={12} fill="currentColor" /> Populaire
                 </span>
               </div>
@@ -165,7 +165,7 @@ const Tarifs = () => (
               asChild
               className={`w-full rounded-full font-semibold ${
                 plan.highlighted
-                  ? "gradient-primary text-primary-foreground shadow-lg hover:opacity-90"
+                  ? "gradient-primary text-white shadow-lg hover:opacity-90"
                   : ""
               }`}
               variant={plan.highlighted ? "default" : "outline"}

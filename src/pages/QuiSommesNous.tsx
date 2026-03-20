@@ -57,7 +57,7 @@ const QuiSommesNous = () => (
           C'est de ce constat qu'est née Déclic Digital : une agence web pensée pour les PME, les artisans et les indépendants. L'idée est simple : proposer des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites web professionnels</Link>, performants et optimisés pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement Google</Link>, à des <Link to="/tarifs" className="text-primary font-semibold hover:underline">tarifs accessibles</Link>.
         </p>
         <div className="rounded-2xl bg-card p-6 shadow-card flex items-start gap-4">
-          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
+          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl gradient-primary text-white">
             <Award size={24} />
           </div>
           <div>
@@ -94,7 +94,7 @@ const QuiSommesNous = () => (
           { icon: Rocket, title: "Accessibilité", desc: "Des solutions adaptées aux budgets des PME et petites entreprises. Des explications claires, pas de surprise. Des prix transparents et un accompagnement humain." },
         ].map((item, i) => (
           <div key={i} className="rounded-2xl bg-background p-6 shadow-card text-center">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">
               <item.icon size={26} />
             </div>
             <h3 className="mb-2 font-bold">{item.title}</h3>

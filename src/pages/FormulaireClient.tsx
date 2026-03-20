@@ -134,7 +134,7 @@ const ScaleButtons = ({ value, onChange, leftLabel, rightLabel }: {
           onClick={() => onChange(v)}
           className={`flex-1 h-10 rounded-lg font-bold text-sm transition-all ${
             value === v
-              ? "gradient-primary text-primary-foreground shadow-lg"
+              ? "gradient-primary text-white shadow-lg"
               : "border border-border text-muted-foreground hover:border-primary hover:text-primary hover:bg-primary/5"
           }`}
         >
@@ -275,7 +275,7 @@ const FormulaireClient = () => {
                 Votre espace client a ete cree. Connectez-vous pour suivre l'avancement de votre projet.
               </p>
               <div className="flex gap-3 justify-center">
-                <Button onClick={() => window.location.href = "/connexion"} className="rounded-full gradient-miami text-primary-foreground">
+                <Button onClick={() => window.location.href = "/connexion"} className="rounded-full gradient-miami text-white">
                   Acceder a mon espace client
                 </Button>
                 <Button onClick={() => window.location.href = "/"} variant="outline" className="rounded-full">
@@ -872,7 +872,7 @@ const FormulaireClient = () => {
                 type="submit"
                 size="lg"
                 disabled={sending}
-                className="rounded-full gradient-miami text-primary-foreground font-bold text-base px-10 py-6 shadow-elevated hover:opacity-90 transition-opacity"
+                className="rounded-full gradient-miami text-white font-bold text-base px-10 py-6 shadow-elevated hover:opacity-90 transition-opacity"
               >
                 <Send className="h-5 w-5 mr-2" />
                 {sending ? "Envoi en cours…" : "Envoyer mon projet à Déclic Digital"}
