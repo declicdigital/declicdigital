@@ -85,7 +85,7 @@ const Index = () => {
               </div>
             ))}
           </div>
-          <Button asChild size="lg" className="gradient-primary mt-10 rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+          <Button asChild size="lg" className="gradient-primary btn-glow mt-10 rounded-full px-8 text-white font-semibold shadow-glow">
             <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
           </Button>
         </div>
