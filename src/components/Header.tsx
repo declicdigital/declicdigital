@@ -39,7 +39,7 @@ const Header = () => {
     location.pathname === to || (to !== "/" && location.pathname.startsWith(to));
 
   const linkClass = (to: string) =>
-    `rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors hover:bg-secondary ${
+    `rounded-lg px-3 py-2 text-[15px] font-medium transition-colors hover:bg-secondary ${
       isActive(to) ? "text-primary" : "text-muted-foreground"
     }`;
 
@@ -57,9 +57,9 @@ const Header = () => {
       </div>
 
       <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-lg">
-        <div className="container flex h-14 items-center justify-between md:h-16">
+        <div className="container flex h-18 items-center justify-between md:h-20">
           <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => { if (window.location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }}>
-            <img src={logo} alt="Déclic Digital" className="h-14 w-auto md:h-16" />
+            <img src={logo} alt="Déclic Digital" className="h-20 w-auto md:h-24" />
           </Link>
 
           {/* Desktop nav */}
@@ -74,9 +74,9 @@ const Header = () => {
             <div ref={moreRef} className="relative">
               <button
                 onClick={() => setMoreOpen(!moreOpen)}
-                className={`flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors hover:bg-secondary text-muted-foreground`}
+                className={`flex items-center gap-1 rounded-lg px-3 py-2 text-[15px] font-medium transition-colors hover:bg-secondary text-muted-foreground`}
               >
-                Plus <ChevronDown size={14} className={`transition-transform ${moreOpen ? "rotate-180" : ""}`} />
+                Plus <ChevronDown size={15} className={`transition-transform ${moreOpen ? "rotate-180" : ""}`} />
               </button>
               {moreOpen && (
                 <div className="absolute right-0 top-full mt-1 w-48 rounded-lg border border-border bg-card p-1 shadow-elevated animate-fade-in">
@@ -85,7 +85,7 @@ const Header = () => {
                       key={l.to}
                       to={l.to}
                       onClick={() => setMoreOpen(false)}
-                      className={`block rounded-md px-3 py-2 text-[13px] font-medium transition-colors hover:bg-secondary ${
+                      className={`block rounded-md px-3 py-2 text-[15px] font-medium transition-colors hover:bg-secondary ${
                         isActive(l.to) ? "text-primary" : "text-muted-foreground"
                       }`}
                     >
@@ -98,12 +98,12 @@ const Header = () => {
           </nav>
 
           <div className="hidden lg:flex items-center gap-2">
-            <Button asChild variant="ghost" size="sm" className="rounded-full px-4 text-[13px] font-semibold text-muted-foreground hover:text-primary">
+            <Button asChild variant="ghost" size="sm" className="rounded-full px-4 text-[15px] font-semibold text-muted-foreground hover:text-primary">
               <Link to="/connexion">
-                <User size={14} className="mr-1.5" /> Espace client
+                <User size={16} className="mr-1.5" /> Espace client
               </Link>
             </Button>
-            <Button asChild size="sm" className="gradient-primary rounded-full px-5 text-[13px] font-semibold text-primary-foreground shadow-md hover:opacity-90">
+            <Button asChild size="sm" className="gradient-primary rounded-full px-6 text-[15px] font-semibold text-primary-foreground shadow-md hover:opacity-90">
               <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
             </Button>
           </div>
