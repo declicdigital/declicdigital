@@ -8,8 +8,8 @@ const Footer = () => (
       <div className="container py-10 md:py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
-          <div className="space-y-4">
-            <img src={logo} alt="Déclic Digital" className="h-28" />
+          <div className="space-y-2">
+            <img src={logo} alt="Déclic Digital" className="h-36" />
             <p className="text-sm text-white/60 leading-relaxed">
               Déclic Digital accompagne les PME et petites entreprises à Paris et dans les Hauts-de-Seine (92) pour développer leur visibilité en ligne. Fondée par un Expert Produit Google.
             </p>
