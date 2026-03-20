@@ -154,12 +154,9 @@
     box-shadow: var(--shadow-glow);
   }
 
-  /* ── Gradient text ── */
+  /* ── Accent text (no gradient, solid brand violet) ── */
   .text-gradient {
-    background: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(284, 65%, 66%), hsl(330, 100%, 70%));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: hsl(284, 65%, 66%);
     filter: drop-shadow(0 2px 4px hsl(284 65% 66% / 0.18));
   }
 
