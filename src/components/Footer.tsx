@@ -58,7 +58,7 @@ const Footer = () => (
             <div className="flex flex-col items-start gap-3">
               <Link
                 to="/audit-seo-gratuit"
-                className="inline-block gradient-primary rounded-full px-5 py-2.5 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+                className="inline-block gradient-primary btn-glow rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all"
               >
                 Audit SEO gratuit
               </Link>

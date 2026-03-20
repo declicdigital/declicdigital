@@ -141,7 +141,7 @@ const Header = () => {
               >
                 <User size={16} /> Espace client
               </Link>
-              <Button asChild size="sm" className="gradient-primary mt-2 rounded-full font-semibold text-primary-foreground">
+              <Button asChild size="sm" className="gradient-primary btn-glow mt-2 rounded-full font-semibold text-white shadow-glow">
                 <Link to="/audit-seo-gratuit" onClick={() => setMobileOpen(false)}>
                   Audit SEO gratuit
                 </Link>
