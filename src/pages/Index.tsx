@@ -11,8 +11,23 @@ import SectionWrapper from "@/components/SectionWrapper";
 import heroDashboard from "@/assets/tableau-bord-seo-professionnel.png";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 
+import logoWordpress from "@/assets/logos/wordpress.png";
+import logoShopify from "@/assets/logos/shopify.png";
+import logoLovable from "@/assets/logos/lovable.png";
+import logoClaude from "@/assets/logos/claude.svg";
+import logoSemrush from "@/assets/logos/semrush.png";
+import logoSearchConsole from "@/assets/logos/search-console.png";
+import logoChatgpt from "@/assets/logos/chatgpt.png";
 
-const techLogos = ["WordPress", "Shopify", "Lovable", "Base44", "Claude AI", "Semrush", "Google Analytics", "Search Console"];
+const techLogos = [
+  { name: "WordPress", src: logoWordpress },
+  { name: "Shopify", src: logoShopify },
+  { name: "Lovable", src: logoLovable },
+  { name: "Claude AI", src: logoClaude },
+  { name: "ChatGPT", src: logoChatgpt },
+  { name: "Semrush", src: logoSemrush },
+  { name: "Search Console", src: logoSearchConsole },
+];
 
 const Index = () => {
   return (
