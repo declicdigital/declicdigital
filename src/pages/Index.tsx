@@ -126,7 +126,7 @@ const Index = () => {
       <SectionWrapper className="bg-section-blue">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold md:text-4xl">Notre méthode</h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Un processus simple et transparent pour vous accompagner de A à Z. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link> et <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
           </p>
         </div>
