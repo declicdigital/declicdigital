@@ -205,15 +205,17 @@ const Index = () => {
             Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link>.
           </p>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-10 md:gap-14">
-          {techLogos.map((t) => (
-            <div key={t.name} className="flex flex-col items-center gap-3">
-              <div className="rounded-2xl bg-secondary p-5 shadow-card">
-                <img src={t.src} alt={t.name} className="h-16 w-16 md:h-20 md:w-20 object-contain" />
+        <div className="overflow-hidden">
+          <div className="flex animate-scroll-left gap-10 md:gap-14 w-max">
+            {[...techLogos, ...techLogos].map((t, i) => (
+              <div key={`${t.name}-${i}`} className="flex flex-col items-center gap-3 shrink-0">
+                <div className="rounded-2xl bg-secondary p-5 shadow-card">
+                  <img src={t.src} alt={t.name} className="h-16 w-16 md:h-20 md:w-20 object-contain" />
+                </div>
+                <span className="text-sm font-medium text-muted-foreground">{t.name}</span>
               </div>
-              <span className="text-sm font-medium text-muted-foreground">{t.name}</span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </SectionWrapper>
 
