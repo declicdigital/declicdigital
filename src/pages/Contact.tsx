@@ -52,7 +52,7 @@ const Contact = () => (
             </div>
             <Input placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" />
             <Textarea placeholder="Décrivez votre projet : type de site souhaité, objectifs, fonctionnalités..." className="rounded-xl min-h-[120px]" required />
-            <Button type="submit" size="lg" className="w-full gradient-primary rounded-full text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+            <Button type="submit" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
               <CheckCircle size={18} className="mr-2" /> Envoyer ma demande
             </Button>
           </form>
@@ -66,7 +66,7 @@ const Contact = () => (
               { icon: MapPin, label: "Localisation", value: "Paris et Hauts-de-Seine (92)" },
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-primary-foreground">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
                   <item.icon size={18} />
                 </div>
                 <div>

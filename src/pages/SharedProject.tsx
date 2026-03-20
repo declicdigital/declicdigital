@@ -183,7 +183,7 @@ const SharedProject = () => {
       <div className="container py-8 max-w-4xl space-y-6">
         {/* Project header */}
         <Card className="overflow-hidden">
-          <div className="bg-gradient-to-r from-primary to-primary/80 p-6 text-primary-foreground">
+          <div className="gradient-miami p-6 text-white">
             <h1 className="text-2xl font-bold">{project.name}</h1>
             <p className="text-primary-foreground/80 mt-1">{project.description}</p>
             <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-primary-foreground/70">

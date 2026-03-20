@@ -26,7 +26,7 @@ const Index = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
             >
-              <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">
+              <span className="mb-4 inline-block rounded-full bg-brand-violet/10 px-4 py-1.5 text-xs font-semibold text-brand-violet">
                 Expert Produit Google · Agence digitale
               </span>
               <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
@@ -37,7 +37,7 @@ const Index = () => {
                 Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour que les PME et indépendants attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+                <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
                   <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
                 </Button>
                 <Link to="/contact" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
@@ -75,7 +75,7 @@ const Index = () => {
               { icon: Gauge, text: "Site trop lent", detail: "Un temps de chargement supérieur à 3 secondes augmente le taux de rebond de plus de 50%." },
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-4 rounded-xl bg-secondary p-5 text-left shadow-card">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-primary text-primary-foreground">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
                   <item.icon size={22} />
                 </div>
                 <div>
@@ -85,7 +85,7 @@ const Index = () => {
               </div>
             ))}
           </div>
-          <Button asChild size="lg" className="gradient-primary mt-10 rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+          <Button asChild size="lg" className="gradient-primary btn-glow mt-10 rounded-full px-8 text-white font-semibold shadow-glow">
             <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
           </Button>
         </div>
@@ -109,7 +109,7 @@ const Index = () => {
             { icon: BarChart3, title: "Stratégie digitale", desc: "Analyse de marché, positionnement, contenu, suivi des performances : chaque action est mesurée et orientée résultats pour développer votre visibilité.", link: "/contact" },
           ].map((s, i) => (
             <div key={i} className="group rounded-2xl bg-card p-8 shadow-card transition-all hover:shadow-elevated hover:-translate-y-1">
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">
                 <s.icon size={26} />
               </div>
               <h3 className="mb-3 text-xl font-bold">{s.title}</h3>
@@ -139,7 +139,7 @@ const Index = () => {
             { step: "5", icon: BarChart3, title: "Suivi", desc: "Nous suivons les performances et optimisons en continu pour maximiser vos résultats." },
           ].map((p, i) => (
             <div key={i} className="relative text-center">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full gradient-miami text-primary-foreground text-lg font-bold">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full gradient-miami btn-glow text-white text-lg font-bold">
                 {p.step}
               </div>
               <h3 className="mb-1 font-bold">{p.title}</h3>
@@ -148,7 +148,7 @@ const Index = () => {
           ))}
         </div>
         <div className="text-center mt-10">
-          <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+          <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
             <Link to="/contact">Démarrer mon projet</Link>
           </Button>
         </div>
@@ -171,7 +171,7 @@ const Index = () => {
               { icon: TrendingUp, title: "Rentabilité sur le long terme", desc: "Contrairement à la publicité payante, le référencement naturel génère du trafic durable sans coût par clic." },
             ].map((item, i) => (
               <div key={i} className="rounded-2xl bg-card p-6 shadow-card">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-miami text-primary-foreground">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-miami text-white">
                   <item.icon size={22} />
                 </div>
                 <h3 className="mb-2 font-bold text-lg">{item.title}</h3>
@@ -254,7 +254,7 @@ const Index = () => {
             </div>
             <Input placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" />
             <Textarea placeholder="Décrivez votre projet..." className="rounded-xl min-h-[120px]" required />
-            <Button type="submit" size="lg" className="w-full gradient-primary rounded-full text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+            <Button type="submit" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
               <CheckCircle size={18} className="mr-2" /> Envoyer ma demande
             </Button>
           </form>
@@ -262,7 +262,7 @@ const Index = () => {
       </SectionWrapper>
 
       {/* CTA Final */}
-      <section className="gradient-miami py-16 md:py-24">
+      <section className="gradient-miami py-16 md:py-24 text-white">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -271,19 +271,19 @@ const Index = () => {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-center text-center"
           >
-            <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-primary-foreground/30 shadow-lg mb-4" />
-            <p className="text-sm font-semibold text-primary-foreground mb-1">Geoffrey, Expert Produit Google</p>
-            <h2 className="mb-4 text-3xl font-extrabold text-primary-foreground md:text-4xl">
+            <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-white/30 shadow-lg mb-4" />
+            <p className="text-sm font-semibold text-white mb-1">Geoffrey, Expert Produit Google</p>
+            <h2 className="mb-4 text-3xl font-extrabold text-white md:text-4xl">
               Et si votre site devenait votre meilleur commercial ?
             </h2>
-            <p className="mb-8 text-lg text-primary-foreground/80 max-w-2xl">
+            <p className="mb-8 text-lg text-white/80 max-w-2xl">
               Un site optimisé peut générer des prospects tous les jours. Ne laissez plus vos concurrents capter les clients qui vous cherchent sur Google.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
+              <Button asChild size="lg" className="rounded-full bg-white px-8 font-semibold text-foreground shadow-lg hover:bg-white/90">
                 <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
               </Button>
-              <Link to="/tarifs" className="inline-flex items-center justify-center rounded-full border-2 border-primary-foreground/40 bg-transparent px-8 py-3 font-semibold text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
+              <Link to="/tarifs" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
                 Voir nos tarifs
               </Link>
             </div>

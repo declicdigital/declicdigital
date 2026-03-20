@@ -30,7 +30,7 @@ const CreationSite = () => (
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
               Nous concevons des sites modernes, rapides et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour les PME et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou demandez un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link>.
             </p>
-            <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+            <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
               <Link to="/contact">Devis création de site</Link>
             </Button>
           </motion.div>
@@ -55,7 +55,7 @@ const CreationSite = () => (
           { icon: Zap, title: "Vitesse optimale", desc: "Un site rapide convertit mieux. Nous optimisons chaque élément pour un temps de chargement minimal et une expérience fluide." },
         ].map((item, i) => (
           <div key={i} className="rounded-2xl bg-background p-6 shadow-card text-center">
-            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
+            <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">
               <item.icon size={26} />
             </div>
             <h3 className="mb-2 font-bold">{item.title}</h3>
@@ -79,7 +79,7 @@ const CreationSite = () => (
           { icon: CheckCircle, title: "4. Mise en ligne et suivi", desc: "Après vos retours et validations, nous mettons votre site en ligne. Nous assurons ensuite un suivi pour garantir ses performances." },
         ].map((item, i) => (
           <div key={i} className="rounded-2xl bg-card p-6 shadow-card">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-miami text-primary-foreground">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-miami text-white">
               <item.icon size={22} />
             </div>
             <h3 className="mb-2 font-bold">{item.title}</h3>
@@ -103,7 +103,7 @@ const CreationSite = () => (
           { icon: ShoppingCart, title: "E-commerce", desc: "Vendez vos produits en ligne avec un site sécurisé, rapide et pensé pour la conversion." },
         ].map((item, i) => (
           <div key={i} className="flex items-start gap-4 rounded-xl bg-background p-5 shadow-card">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-miami text-primary-foreground">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-miami text-white">
               <item.icon size={22} />
             </div>
             <div>
@@ -161,7 +161,7 @@ const CreationSite = () => (
         ))}
         <Link
           to="/nos-villes"
-          className="rounded-full gradient-primary px-4 py-2 text-sm font-semibold text-primary-foreground hover:opacity-90 transition-opacity"
+          className="rounded-full gradient-primary btn-glow px-4 py-2 text-sm font-semibold text-white shadow-glow"
         >
           Voir toutes les villes →
         </Link>

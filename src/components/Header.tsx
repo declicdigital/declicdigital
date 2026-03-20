@@ -45,7 +45,7 @@ const Header = () => {
 
   return (
     <>
-      <div className="hidden border-b border-border gradient-miami text-primary-foreground text-xs md:block">
+      <div className="hidden border-b border-border gradient-miami text-white text-xs md:block">
         <div className="container flex h-8 items-center justify-end gap-6">
           <a href="tel:0602228939" className="flex items-center gap-1.5 hover:text-accent transition-colors">
             <Phone size={12} /> 06.02.22.89.39
@@ -103,7 +103,7 @@ const Header = () => {
                 <User size={16} className="mr-1.5" /> Espace client
               </Link>
             </Button>
-            <Button asChild size="sm" className="gradient-primary rounded-full px-6 text-[15px] font-semibold text-primary-foreground shadow-md hover:opacity-90">
+            <Button asChild size="sm" className="gradient-primary btn-glow rounded-full px-6 text-[15px] font-semibold text-white shadow-glow">
               <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
             </Button>
           </div>
@@ -141,7 +141,7 @@ const Header = () => {
               >
                 <User size={16} /> Espace client
               </Link>
-              <Button asChild size="sm" className="gradient-primary mt-2 rounded-full font-semibold text-primary-foreground">
+              <Button asChild size="sm" className="gradient-primary btn-glow mt-2 rounded-full font-semibold text-white shadow-glow">
                 <Link to="/audit-seo-gratuit" onClick={() => setMobileOpen(false)}>
                   Audit SEO gratuit
                 </Link>

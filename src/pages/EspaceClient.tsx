@@ -236,7 +236,7 @@ const EspaceClient = () => {
           <>
             {/* Project header */}
             <Card className="overflow-hidden">
-              <div className="bg-gradient-to-r from-primary to-primary/80 p-6 text-primary-foreground">
+              <div className="gradient-miami p-6 text-white">
                 <div className="flex items-center justify-between">
                   <h1 className="text-2xl font-bold">{project.name}</h1>
                   {project.share_token && (

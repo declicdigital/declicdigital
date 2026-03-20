@@ -14,8 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
-        display: ['"DM Serif Display"', 'serif'],
+        sans: ['"Inter"', 'system-ui', 'sans-serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,9 +50,11 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        miami: {
-          DEFAULT: "hsl(340, 65%, 52%)",
-          light: "hsl(340, 65%, 90%)",
+        brand: {
+          blue: "hsl(183, 70%, 63%)",
+          violet: "hsl(284, 65%, 66%)",
+          pink: "hsl(330, 100%, 70%)",
+          "violet-light": "hsl(284, 72%, 81%)",
         },
         "footer-bg": "hsl(var(--footer-bg))",
         sidebar: {

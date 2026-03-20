@@ -51,7 +51,7 @@ const VilleReferencementSeo = () => {
                 {content?.seoIntro || `Votre entreprise ${city.description} mérite d'être visible sur Google. Notre agence SEO optimise votre site pour attirer des clients qualifiés et développer votre activité grâce au référencement naturel.`}
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+                <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
                   <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
                 </Button>
                 <Link to="/contact" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
@@ -86,7 +86,7 @@ const VilleReferencementSeo = () => {
             { icon: TrendingUp, title: "Croissance durable", desc: "Contrairement à la publicité payante, le SEO génère des résultats qui s'amplifient avec le temps sans coût par clic." },
           ].map((item, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="rounded-2xl bg-background p-8 shadow-card text-center">
-              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
+              <div className="mx-auto mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">
                 <item.icon size={26} />
               </div>
               <h3 className="mb-3 text-xl font-bold">{item.title}</h3>
@@ -110,7 +110,7 @@ const VilleReferencementSeo = () => {
           ].map((item, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="rounded-2xl bg-card p-8 shadow-card">
               <div className="flex items-center gap-3 mb-4">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-primary text-white">
                   <item.icon size={20} />
                 </div>
                 <h3 className="text-xl font-bold">{item.title}</h3>
