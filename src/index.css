@@ -171,42 +171,61 @@
     background: hsl(43, 32%, 91%);
   }
 
-  /* ── Vintage poster / stamp CTA button ── */
+  /* ── Torn paper / faded ink CTA button ── */
   .btn-glow {
     position: relative;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    border: 2px solid hsl(0 0% 100% / 0.25);
+    border: none;
+    filter: saturate(0.55) brightness(1.08) contrast(0.92);
+    clip-path: polygon(
+      2% 8%, 5% 2%, 9% 6%, 14% 1%, 19% 5%, 24% 0%, 30% 4%, 35% 1%, 40% 6%, 46% 2%, 52% 5%, 57% 0%, 63% 4%, 68% 1%, 74% 6%, 79% 2%, 85% 5%, 90% 1%, 95% 7%, 98% 3%, 100% 10%,
+      99% 18%, 100% 28%, 98% 38%, 100% 48%, 99% 58%, 100% 68%, 98% 78%, 100% 88%, 99% 95%,
+      96% 98%, 92% 94%, 87% 99%, 82% 95%, 76% 100%, 70% 96%, 64% 99%, 58% 95%, 52% 100%, 46% 96%, 40% 99%, 34% 95%, 28% 100%, 22% 96%, 16% 99%, 10% 95%, 5% 100%, 2% 96%, 0% 92%,
+      1% 82%, 0% 72%, 2% 62%, 0% 52%, 1% 42%, 0% 32%, 2% 22%, 0% 12%
+    );
     box-shadow:
-      0 4px 18px -4px hsl(284 65% 66% / 0.35),
-      0 1px 3px hsl(230 25% 14% / 0.1),
-      inset 0 1px 0 hsl(0 0% 100% / 0.2),
-      inset 0 -2px 4px hsl(230 25% 14% / 0.1);
-    text-shadow: 0 1px 2px hsl(230 25% 14% / 0.3);
-    letter-spacing: 0.02em;
+      0 4px 16px -4px hsl(284 65% 66% / 0.2),
+      0 1px 3px hsl(230 25% 14% / 0.08);
+    text-shadow: 0 1px 2px hsl(230 25% 14% / 0.25);
+    letter-spacing: 0.03em;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-top: 0.85rem;
+    padding-bottom: 0.85rem;
+  }
+  .btn-glow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0.12;
+    pointer-events: none;
+    background: radial-gradient(ellipse at 30% 20%, hsl(45 50% 90% / 0.6), transparent 60%),
+                radial-gradient(ellipse at 80% 70%, hsl(330 40% 70% / 0.15), transparent 50%);
   }
   .btn-glow::after {
     content: "";
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    opacity: 0.18;
+    opacity: 0.22;
     pointer-events: none;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
     background-size: 64px 64px;
     mix-blend-mode: overlay;
   }
   .btn-glow:hover {
-    transform: translateY(-2px) rotate(-0.5deg);
+    filter: saturate(0.7) brightness(1.05) contrast(0.95);
+    transform: translateY(-2px) rotate(-0.8deg);
     box-shadow:
-      0 8px 30px -5px hsl(284 65% 66% / 0.45),
-      0 2px 8px hsl(330 100% 70% / 0.2),
-      inset 0 1px 0 hsl(0 0% 100% / 0.25),
-      inset 0 -2px 4px hsl(230 25% 14% / 0.12);
+      0 8px 28px -5px hsl(284 65% 66% / 0.3),
+      0 2px 8px hsl(330 100% 70% / 0.15);
   }
   .btn-glow:active {
-    transform: translateY(0px) scale(0.97);
+    filter: saturate(0.45) brightness(1.02) contrast(0.88);
+    transform: translateY(0px) scale(0.97) rotate(0.3deg);
     box-shadow:
-      0 2px 10px -2px hsl(284 65% 66% / 0.3);
+      0 2px 8px -2px hsl(284 65% 66% / 0.2);
   }
 
   /* ── Text relief / depth ── */
