@@ -15,6 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+        display: ['"DM Serif Display"', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -51,8 +52,8 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         miami: {
-          DEFAULT: "hsl(340, 82%, 62%)",
-          light: "hsl(340, 82%, 90%)",
+          DEFAULT: "hsl(340, 65%, 52%)",
+          light: "hsl(340, 65%, 90%)",
         },
         "footer-bg": "hsl(var(--footer-bg))",
         sidebar: {
