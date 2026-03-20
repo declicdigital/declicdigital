@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { toast } from "@/hooks/use-toast";
 import { Loader2, Lock } from "lucide-react";
-import logoImg from "@/assets/logo-declic-transparent.png";
+import logoImg from "@/assets/logo-declic-digital-new.png";
 
 const ResetPassword = () => {
   const navigate = useNavigate();

@@ -9,7 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
 import { Loader2, Lock, Mail } from "lucide-react";
-import logoImg from "@/assets/logo-declic-transparent.png";
+import logoImg from "@/assets/logo-declic-digital-new.png";
 
 const Connexion = () => {
   const { user, isAdmin, loading: authLoading } = useAuth();
