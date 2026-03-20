@@ -26,7 +26,7 @@ const Index = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
             >
-              <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">
+              <span className="mb-4 inline-block rounded-full bg-brand-violet/10 px-4 py-1.5 text-xs font-semibold text-brand-violet">
                 Expert Produit Google · Agence digitale
               </span>
               <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
