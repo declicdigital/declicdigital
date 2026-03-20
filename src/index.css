@@ -134,7 +134,6 @@
     font-family: 'Recoleta', Georgia, serif;
     @apply font-bold tracking-tight;
     color: hsl(var(--heading));
-    -webkit-text-stroke: 1.5px hsl(0 0% 0%);
     paint-order: stroke fill;
     text-shadow:
       0px 1px 0px hsl(0 0% 10%),
