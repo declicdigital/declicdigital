@@ -8,8 +8,8 @@ const GOOGLE_BUSINESS_LINK = "https://share.google/8Ifh8V9cpPGinQXkY";
 const MAPS_EMBED_URL = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.5!2d2.2975!3d48.8386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s${GOOGLE_PLACE_ID}!2sD%C3%A9clic%20Digital!5e0!3m2!1sfr!2sfr!4v1`;
 
 const LocationSection = () => {
-  const [placeUrl, setPlaceUrl] = useState(FALLBACK_MAPS_LINK);
-  const [writeReviewUrl, setWriteReviewUrl] = useState(FALLBACK_MAPS_LINK);
+  const [placeUrl, setPlaceUrl] = useState(GOOGLE_BUSINESS_LINK);
+  const [writeReviewUrl, setWriteReviewUrl] = useState(GOOGLE_BUSINESS_LINK);
 
   useEffect(() => {
     const fetchLinks = async () => {
