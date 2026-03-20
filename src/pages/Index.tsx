@@ -205,10 +205,13 @@ const Index = () => {
             Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link>.
           </p>
         </div>
-        <div className="flex flex-wrap items-center justify-center gap-6">
+        <div className="flex flex-wrap items-center justify-center gap-8">
           {techLogos.map((t) => (
-            <div key={t} className="rounded-xl bg-secondary px-6 py-4 text-sm font-semibold text-foreground shadow-card">
-              {t}
+            <div key={t.name} className="flex flex-col items-center gap-2">
+              <div className="rounded-xl bg-secondary p-4 shadow-card">
+                <img src={t.src} alt={t.name} className="h-12 w-12 object-contain" />
+              </div>
+              <span className="text-xs font-medium text-muted-foreground">{t.name}</span>
             </div>
           ))}
         </div>
