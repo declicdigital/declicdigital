@@ -16,8 +16,8 @@ Design rules and constraints for Déclic Digital website
 - Buttons: NO clean borders, torn paper clip-path + desaturated colors like old printed paper
 - Text on gradients: always text-white (NOT text-primary-foreground)
 - Text on dark sections: always text-white or text-white/70 etc
-- Footer: dark charcoal hsl(230, 18%, 15%), text-white/60, section titles in brand colors, gradient separator, logo h-28, py-10/py-14
-- Logos: h-24 md:h-28 in header, h-28 in footer
+- Footer: dark charcoal hsl(230, 18%, 15%), text-white/60, section titles in brand colors, gradient separator, logo h-36, py-10/py-14, space-y-2 around logo
+- Logos: h-32 md:h-36 in header, h-36 in footer
 - Header: h-18/h-20, nav font text-[15px]
 - Tilt classes available: .tilt-left (-1.5deg), .tilt-right (1.5deg) for emphasis
 - EC: tasks can be renamed, new tasks appear at top (lowest sort_order), logo click doesn't scroll to top
