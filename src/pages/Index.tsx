@@ -139,7 +139,7 @@ const Index = () => {
             { step: "5", icon: BarChart3, title: "Suivi", desc: "Nous suivons les performances et optimisons en continu pour maximiser vos résultats." },
           ].map((p, i) => (
             <div key={i} className="relative text-center">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full gradient-miami text-white text-lg font-bold">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full gradient-miami btn-glow text-white text-lg font-bold">
                 {p.step}
               </div>
               <h3 className="mb-1 font-bold">{p.title}</h3>

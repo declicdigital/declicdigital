@@ -27,7 +27,7 @@ const AuditSeo = () => (
             <p className="mb-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
               Découvrez pourquoi votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> n'apparaît pas sur Google et recevez des recommandations concrètes pour améliorer votre visibilité. Notre audit est complet et personnalisé. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link>.
             </p>
-            <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-white font-semibold shadow-lg hover:opacity-90">
+            <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
               <a href="#formulaire-audit">Demander mon audit SEO</a>
             </Button>
           </motion.div>
@@ -140,7 +140,7 @@ const AuditSeo = () => (
           <Input placeholder="Votre email" type="email" className="rounded-xl" required />
           <Input placeholder="Votre téléphone (optionnel)" type="tel" className="rounded-xl" />
           <Textarea placeholder="Votre message (optionnel)" className="rounded-xl min-h-[100px]" />
-          <Button type="submit" size="lg" className="w-full gradient-primary rounded-full text-white font-semibold shadow-lg hover:opacity-90">
+          <Button type="submit" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
             <CheckCircle size={18} className="mr-2" /> Recevoir mon audit SEO gratuit
           </Button>
         </form>

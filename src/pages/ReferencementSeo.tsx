@@ -27,7 +27,7 @@ const ReferencementSeo = () => (
           <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
             Le référencement SEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour qu'il apparaisse en première page Google. Commencez par un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit gratuit</Link>.
           </p>
-          <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-white font-semibold shadow-lg hover:opacity-90">
+          <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
             <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
           </Button>
         </motion.div>
@@ -137,7 +137,7 @@ const ReferencementSeo = () => (
         ))}
         <Link
           to="/nos-villes"
-          className="rounded-full gradient-primary px-4 py-2 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+          className="rounded-full gradient-primary btn-glow px-4 py-2 text-sm font-semibold text-white shadow-glow"
         >
           Voir toutes les villes →
         </Link>

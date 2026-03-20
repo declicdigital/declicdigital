@@ -30,7 +30,7 @@ const CreationSite = () => (
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
               Nous concevons des sites modernes, rapides et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour les PME et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou demandez un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link>.
             </p>
-            <Button asChild size="lg" className="gradient-primary rounded-full px-8 text-white font-semibold shadow-lg hover:opacity-90">
+            <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
               <Link to="/contact">Devis création de site</Link>
             </Button>
           </motion.div>
@@ -161,7 +161,7 @@ const CreationSite = () => (
         ))}
         <Link
           to="/nos-villes"
-          className="rounded-full gradient-primary px-4 py-2 text-sm font-semibold text-white hover:opacity-90 transition-opacity"
+          className="rounded-full gradient-primary btn-glow px-4 py-2 text-sm font-semibold text-white shadow-glow"
         >
           Voir toutes les villes →
         </Link>
