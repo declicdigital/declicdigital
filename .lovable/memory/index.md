@@ -12,8 +12,8 @@ Design rules and constraints for Déclic Digital website
 - ALL text has subtle ink-printed shadow (body text + headings)
 - Headings: text-shadow with violet tint + dark depth + warm highlight
 - Body text: subtle 1px shadow for ink-on-paper feel
-- Buttons: gradient blue→violet→pink, btn-glow class with TORN PAPER clip-path edges, grain texture overlay, shadow-glow
-- Buttons: gradient blue→violet→pink, btn-glow class with vintage stamp border + grain overlay + inner shadow, NO clip-path
+- Buttons: gradient blue→violet→pink, btn-glow class with TORN PAPER clip-path edges + faded/washed-out filter saturate(0.55), grain overlay
+- Buttons: NO clean borders, torn paper clip-path + desaturated colors like old printed paper
 - Text on gradients: always text-white (NOT text-primary-foreground)
 - Text on dark sections: always text-white or text-white/70 etc
 - Footer: dark charcoal hsl(230, 18%, 15%), text-white/60, section titles in brand colors, gradient separator, logo h-28, py-10/py-14
