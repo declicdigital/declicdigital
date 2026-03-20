@@ -98,12 +98,12 @@ const Header = () => {
           </nav>
 
           <div className="hidden lg:flex items-center gap-2">
-            <Button asChild variant="ghost" size="sm" className="rounded-full px-4 text-[13px] font-semibold text-muted-foreground hover:text-primary">
+            <Button asChild variant="ghost" size="sm" className="rounded-full px-4 text-[15px] font-semibold text-muted-foreground hover:text-primary">
               <Link to="/connexion">
-                <User size={14} className="mr-1.5" /> Espace client
+                <User size={16} className="mr-1.5" /> Espace client
               </Link>
             </Button>
-            <Button asChild size="sm" className="gradient-primary rounded-full px-5 text-[13px] font-semibold text-primary-foreground shadow-md hover:opacity-90">
+            <Button asChild size="sm" className="gradient-primary rounded-full px-6 text-[15px] font-semibold text-primary-foreground shadow-md hover:opacity-90">
               <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
             </Button>
           </div>
