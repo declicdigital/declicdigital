@@ -5,13 +5,16 @@ Design rules and constraints for Déclic Digital website
 - Site is in French, SEO-optimized for PME/small business web creation and SEO services
 - Google Business link: https://share.google/8Ifh8V9cpPGinQXkY
 - GTM ID: GTM-KMBKVH5C
-- DA: Digital modern + heavy grain texture (Miami/Cuba vintage newspaper/poster). Inter font. Warm tinted paper background
+- DA: Digital modern + heavy grain texture (Miami/Cuba vintage newspaper/poster). Inter font. Warm yellow pastel paper background (70s wallpaper vibe)
 - Brand colors from logo ONLY: #5ce1e6 (blue), #cb6ce6 (violet), #ff66c4 (pink), #e2a9f1 (violet light)
-- Background: hsl(42, 30%, 96%) warm paper tint, sections alternate with hsl(40, 22%, 94%)
+- Background: hsl(45, 40%, 94%) warm yellow pastel paper, sections alternate with hsl(43, 32%, 91%)
 - Grain texture: TWO layers - main grain 14% opacity multiply + fiber overlay 6% opacity
+- ALL text gets logo-like texture via -webkit-text-stroke
 - Headings: text-shadow with violet tint + dark depth + warm highlight (text-relief class available)
 - Buttons: gradient blue→violet→pink, btn-glow class with grain texture overlay, shadow-glow, hover glow intensification + translateY
 - Text on gradients: always text-white (NOT text-primary-foreground)
-- Footer: dark charcoal hsl(230, 18%, 15%), text-white/60, section titles in brand colors, gradient separator
-- Logos: h-20 md:h-24 in EC/admin/shared headers, h-20 in connexion/reset, h-24 in footer
+- Text on dark sections: always text-white or text-white/70 etc
+- Footer: dark charcoal hsl(230, 18%, 15%), text-white/60, section titles in brand colors, gradient separator, logo h-28, py-10/py-14
+- Logos: h-24 md:h-28 in header, h-28 in footer
 - Header: h-18/h-20, nav font text-[15px]
+- Tilt classes available: .tilt-left (-1.5deg), .tilt-right (1.5deg) for emphasis
