@@ -103,7 +103,7 @@ const Header = () => {
                 <User size={16} className="mr-1.5" /> Espace client
               </Link>
             </Button>
-            <Button asChild size="sm" className="gradient-primary rounded-full px-6 text-[15px] font-semibold text-primary-foreground shadow-md hover:opacity-90">
+            <Button asChild size="sm" className="gradient-primary btn-glow rounded-full px-6 text-[15px] font-semibold text-white shadow-glow">
               <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
             </Button>
           </div>
