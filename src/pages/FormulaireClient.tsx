@@ -323,7 +323,7 @@ const FormulaireClient = () => {
       </section>
 
       {/* Progress bar */}
-      <div className="sticky top-[64px] z-40 bg-background/95 backdrop-blur border-b border-border py-3">
+      <div className="sticky top-[80px] z-40 bg-background/95 backdrop-blur border-b border-border py-3">
         <div className="container">
           <div className="flex items-center justify-between mb-2">
             <div className="flex gap-1 text-[11px] font-semibold uppercase tracking-wider">
