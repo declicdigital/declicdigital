@@ -75,7 +75,7 @@ const Index = () => {
               { icon: Gauge, text: "Site trop lent", detail: "Un temps de chargement supérieur à 3 secondes augmente le taux de rebond de plus de 50%." },
             ].map((item, i) => (
               <div key={i} className="flex items-start gap-4 rounded-xl bg-secondary p-5 text-left shadow-card">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-primary text-primary-foreground">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
                   <item.icon size={22} />
                 </div>
                 <div>
@@ -109,7 +109,7 @@ const Index = () => {
             { icon: BarChart3, title: "Stratégie digitale", desc: "Analyse de marché, positionnement, contenu, suivi des performances : chaque action est mesurée et orientée résultats pour développer votre visibilité.", link: "/contact" },
           ].map((s, i) => (
             <div key={i} className="group rounded-2xl bg-card p-8 shadow-card transition-all hover:shadow-elevated hover:-translate-y-1">
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-primary-foreground">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">
                 <s.icon size={26} />
               </div>
               <h3 className="mb-3 text-xl font-bold">{s.title}</h3>
@@ -139,7 +139,7 @@ const Index = () => {
             { step: "5", icon: BarChart3, title: "Suivi", desc: "Nous suivons les performances et optimisons en continu pour maximiser vos résultats." },
           ].map((p, i) => (
             <div key={i} className="relative text-center">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full gradient-miami text-primary-foreground text-lg font-bold">
+              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full gradient-miami text-white text-lg font-bold">
                 {p.step}
               </div>
               <h3 className="mb-1 font-bold">{p.title}</h3>
@@ -171,7 +171,7 @@ const Index = () => {
               { icon: TrendingUp, title: "Rentabilité sur le long terme", desc: "Contrairement à la publicité payante, le référencement naturel génère du trafic durable sans coût par clic." },
             ].map((item, i) => (
               <div key={i} className="rounded-2xl bg-card p-6 shadow-card">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-miami text-primary-foreground">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-miami text-white">
                   <item.icon size={22} />
                 </div>
                 <h3 className="mb-2 font-bold text-lg">{item.title}</h3>
