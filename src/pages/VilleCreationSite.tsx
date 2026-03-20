@@ -242,7 +242,7 @@ const VilleCreationSite = () => {
             Contactez-nous pour un devis gratuit et personnalisé. Premier mois de mise en service + 50€/mois.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
+            <Button asChild size="lg" className="rounded-full bg-white px-8 font-semibold text-foreground shadow-lg hover:bg-white/90">
               <Link to="/contact">Demander un devis</Link>
             </Button>
             <Link to="/audit-seo-gratuit" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
