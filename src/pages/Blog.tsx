@@ -44,17 +44,17 @@ const Blog = () => {
       </Helmet>
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-foreground text-primary-foreground">
+      <section className="relative overflow-hidden" style={{ background: "hsl(230, 18%, 15%)" }}>
         <div className="absolute inset-0 opacity-[0.03]" style={{
           backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
         }} />
         <div className="container relative py-20 md:py-28">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-2xl">
-            <span className="mb-4 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider">Blog</span>
-            <h1 className="text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
+            <span className="mb-4 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">Blog</span>
+            <h1 className="text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl text-white">
               Veille web, SEO<br /><span className="text-gradient">& tech</span>
             </h1>
-            <p className="mt-6 text-lg text-primary-foreground/70 leading-relaxed max-w-lg">
+            <p className="mt-6 text-lg text-white/70 leading-relaxed max-w-lg">
               Des articles pratiques pour comprendre le web, améliorer votre visibilité et faire les bons choix pour votre entreprise.
             </p>
           </motion.div>
@@ -72,7 +72,7 @@ const Blog = () => {
           >
             <div className="aspect-[16/10] md:aspect-auto overflow-hidden relative">
               <img src={featured.image} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-              <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full bg-primary px-4 py-1.5 text-xs font-bold text-primary-foreground shadow-lg">
+              <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full gradient-primary px-4 py-1.5 text-xs font-bold text-white shadow-lg">
                 <Sparkles size={14} /> Nouvel article
               </span>
             </div>
@@ -127,7 +127,7 @@ const Blog = () => {
                   <div className="aspect-[16/9] overflow-hidden relative">
                     <img src={article.image} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
                     {isNew && (
-                      <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-[11px] font-bold text-primary-foreground shadow-md">
+                      <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full gradient-primary px-3 py-1 text-[11px] font-bold text-white shadow-md">
                         <Sparkles size={12} /> Nouvel article
                       </span>
                     )}
@@ -167,14 +167,14 @@ const Blog = () => {
 
       {/* CTA */}
       <section className="gradient-miami py-16">
-        <div className="container text-center text-primary-foreground">
-          <h2 className="text-3xl font-bold md:text-4xl">Besoin d'un site performant et bien référencé ?</h2>
-          <p className="mt-4 text-lg text-primary-foreground/80 max-w-xl mx-auto">
+        <div className="container text-center">
+          <h2 className="text-3xl font-bold md:text-4xl text-white">Besoin d'un site performant et bien référencé ?</h2>
+          <p className="mt-4 text-lg text-white/80 max-w-xl mx-auto">
             Nous créons des sites web rapides, optimisés SEO et conçus pour convertir vos visiteurs en clients.
           </p>
           <Link
             to="/audit-seo-gratuit"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-primary-foreground px-8 py-3 font-semibold text-foreground shadow-md hover:opacity-90 transition-opacity"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-semibold text-foreground shadow-md hover:opacity-90 transition-opacity"
           >
             Demander un audit SEO gratuit <ArrowRight size={16} />
           </Link>
