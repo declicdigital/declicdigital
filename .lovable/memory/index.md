@@ -5,7 +5,9 @@ Design rules and constraints for Déclic Digital website
 - Site is in French, SEO-optimized for PME/small business web creation and SEO services
 - Google Business link: https://share.google/8Ifh8V9cpPGinQXkY
 - GTM ID: GTM-KMBKVH5C
-- DA: Digital modern + heavy grain texture (Miami/Cuba vintage newspaper/poster). Inter font. Warm yellow pastel paper background (70s wallpaper vibe)
+- DA: Digital modern + heavy grain texture (Miami/Cuba vintage newspaper/poster). Warm yellow pastel paper background (70s wallpaper vibe)
+- Fonts: H1=Recoleta Bold, H2/H3=Recoleta SemiBold, everything else=Clash Display. Exception: CGV + mentions légales keep system fonts
+- Font files: public/fonts/ (Recoleta-Bold.otf, Recoleta-SemiBold.otf, ClashDisplay-Variable.ttf)
 - Brand colors from logo ONLY: #5ce1e6 (blue), #cb6ce6 (violet), #ff66c4 (pink), #e2a9f1 (violet light)
 - Background: hsl(45, 40%, 94%) warm yellow pastel paper, sections alternate with hsl(43, 32%, 91%)
 - Grain texture: TWO layers - main grain 14% opacity multiply + fiber overlay 6% opacity

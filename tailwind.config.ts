@@ -14,7 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['"Inter"', 'system-ui', 'sans-serif'],
+        sans: ['"Clash Display"', 'system-ui', 'sans-serif'],
+        display: ['"Recoleta"', 'Georgia', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
