@@ -6,22 +6,22 @@
 
 @layer base {
   :root {
-    --background: 225 20% 98%;
+    --background: 42 30% 96%;
     --foreground: 230 25% 14%;
 
-    --card: 0 0% 100%;
+    --card: 40 25% 98%;
     --card-foreground: 230 25% 14%;
 
-    --popover: 0 0% 100%;
+    --popover: 40 25% 98%;
     --popover-foreground: 230 25% 14%;
 
     --primary: 183 70% 63%;
     --primary-foreground: 230 25% 14%;
 
-    --secondary: 225 15% 94%;
+    --secondary: 40 18% 92%;
     --secondary-foreground: 230 25% 14%;
 
-    --muted: 225 12% 93%;
+    --muted: 40 14% 90%;
     --muted-foreground: 230 10% 44%;
 
     --accent: 284 65% 66%;
@@ -30,8 +30,8 @@
     --destructive: 0 70% 50%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 225 15% 90%;
-    --input: 225 15% 90%;
+    --border: 40 18% 86%;
+    --input: 40 18% 86%;
     --ring: 183 70% 63%;
 
     --radius: 0.75rem;
@@ -44,20 +44,20 @@
 
     /* Custom tokens */
     --gradient-primary: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(284, 65%, 66%), hsl(330, 100%, 70%));
-    --gradient-hero: linear-gradient(135deg, hsl(225, 20%, 98%), hsl(225, 25%, 96%));
+    --gradient-hero: linear-gradient(135deg, hsl(42, 30%, 96%), hsl(40, 25%, 94%));
     --gradient-miami: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(284, 65%, 66%), hsl(330, 100%, 70%));
-    --shadow-card: 0 4px 24px -4px hsl(230 25% 14% / 0.06);
-    --shadow-elevated: 0 12px 40px -8px hsl(230 25% 14% / 0.10);
+    --shadow-card: 0 4px 24px -4px hsl(230 25% 14% / 0.08);
+    --shadow-elevated: 0 12px 40px -8px hsl(230 25% 14% / 0.12);
     --shadow-glow: 0 4px 20px -4px hsl(284 65% 66% / 0.3);
     --footer-bg: 230 18% 15%;
 
-    --sidebar-background: 0 0% 98%;
+    --sidebar-background: 40 20% 97%;
     --sidebar-foreground: 230 10% 26%;
     --sidebar-primary: 230 25% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 225 12% 93%;
+    --sidebar-primary-foreground: 40 20% 97%;
+    --sidebar-accent: 40 14% 90%;
     --sidebar-accent-foreground: 230 25% 10%;
-    --sidebar-border: 225 15% 90%;
+    --sidebar-border: 40 18% 86%;
     --sidebar-ring: 183 70% 63%;
   }
 }
@@ -73,7 +73,7 @@
     position: relative;
   }
 
-  /* ── Grain texture overlay ── */
+  /* ── Heavy grain texture overlay (newspaper / risograph) ── */
   body::before {
     content: "";
     position: fixed;
@@ -83,11 +83,25 @@
     height: 200%;
     pointer-events: none;
     z-index: 9999;
-    opacity: 0.08;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.14;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-repeat: repeat;
-    background-size: 200px 200px;
+    background-size: 256px 256px;
     mix-blend-mode: multiply;
+  }
+
+  /* ── Secondary paper fiber texture ── */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 128px 128px;
+    mix-blend-mode: overlay;
   }
 
   /* ── Headings ── */
@@ -95,8 +109,10 @@
     font-family: 'Inter', system-ui, sans-serif;
     @apply font-bold tracking-tight;
     text-shadow:
-      0 2px 6px hsl(284 65% 66% / 0.10),
-      0 4px 16px hsl(230 25% 14% / 0.08);
+      0 2px 4px hsl(284 65% 66% / 0.12),
+      0 4px 12px hsl(230 25% 14% / 0.10),
+      0 1px 0px hsl(40 30% 80% / 0.5);
+    -webkit-text-stroke: 0.2px hsl(230 25% 14% / 0.04);
   }
 }
 
@@ -134,19 +150,20 @@
 
   /* ── Section alternate backgrounds ── */
   .bg-section-alt {
-    background: hsl(225, 20%, 96%);
+    background: hsl(40, 22%, 94%);
   }
   .bg-section-blue {
-    background: hsl(225, 20%, 96%);
+    background: hsl(40, 22%, 94%);
   }
 
-  /* ── Glow button ── */
+  /* ── Glow button with rough texture ── */
   .btn-glow {
     position: relative;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow:
       0 4px 15px -3px hsl(284 65% 66% / 0.3),
-      0 1px 3px hsl(230 25% 14% / 0.1);
+      0 1px 3px hsl(230 25% 14% / 0.1),
+      inset 0 1px 0 hsl(0 0% 100% / 0.15);
   }
   .btn-glow::before {
     content: "";
@@ -159,11 +176,23 @@
     z-index: -1;
     transition: opacity 0.3s ease;
   }
+  .btn-glow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    opacity: 0.12;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 128 128' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+    background-size: 64px 64px;
+    mix-blend-mode: overlay;
+  }
   .btn-glow:hover {
     transform: translateY(-2px);
     box-shadow:
       0 8px 30px -5px hsl(284 65% 66% / 0.45),
-      0 2px 8px hsl(330 100% 70% / 0.2);
+      0 2px 8px hsl(330 100% 70% / 0.2),
+      inset 0 1px 0 hsl(0 0% 100% / 0.2);
   }
   .btn-glow:hover::before {
     opacity: 0.55;
@@ -178,7 +207,8 @@
   .text-relief {
     text-shadow:
       0 2px 6px hsl(284 65% 66% / 0.12),
-      0 4px 20px hsl(230 25% 14% / 0.06);
+      0 4px 20px hsl(230 25% 14% / 0.06),
+      0 1px 0px hsl(40 30% 80% / 0.4);
   }
 
   /* ── Spark / pixel micro detail ── */
@@ -193,5 +223,11 @@
     font-size: 10px;
     opacity: 0.6;
     filter: drop-shadow(0 0 2px hsl(183, 70%, 63%));
+  }
+
+  /* ── Rough card edges ── */
+  .card-rough {
+    box-shadow: var(--shadow-card);
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)' opacity='0.03'/%3E%3C/svg%3E");
   }
 }
