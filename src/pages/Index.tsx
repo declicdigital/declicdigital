@@ -33,7 +33,7 @@ const Index = () => {
                 Création de site web à Paris qui vous apporte des{" "}
                 <span className="text-gradient">clients</span>
               </h1>
-              <p className="mb-8 max-w-lg text-lg text-muted-foreground leading-relaxed">
+              <p className="mb-8 max-w-lg text-lg md:text-xl text-muted-foreground leading-relaxed">
                 Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour que les PME et indépendants attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
@@ -64,7 +64,7 @@ const Index = () => {
           <h2 className="mb-6 text-3xl font-extrabold md:text-4xl">
             Pourquoi votre site ne vous apporte pas de clients ?
           </h2>
-          <p className="mb-8 text-muted-foreground max-w-2xl mx-auto">
+          <p className="mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
             De nombreuses PME investissent dans un site web, mais celui-ci reste invisible sur Google. Sans stratégie de <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement</Link>, sans optimisation technique et sans contenu adapté, votre site ne peut pas attirer de visiteurs qualifiés. Résultat : zéro contact, zéro prospect, zéro retour sur investissement.
           </p>
           <div className="grid gap-4 sm:grid-cols-2 mt-8">
@@ -80,7 +80,7 @@ const Index = () => {
                 </div>
                 <div>
                   <span className="font-semibold block">{item.text}</span>
-                  <p className="text-sm text-muted-foreground mt-1">{item.detail}</p>
+                  <p className="text-sm md:text-base text-muted-foreground mt-1">{item.detail}</p>
                 </div>
               </div>
             ))}
@@ -98,7 +98,7 @@ const Index = () => {
             Notre mission : transformer votre site en{" "}
             <span className="text-gradient">machine à clients</span>
           </h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">Déclic Digital</Link>, nous ne créons pas simplement des sites web. Nous concevons des outils de génération de clients, pensés pour les PME et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> adaptés aux petits budgets.
           </p>
         </div>
@@ -113,7 +113,7 @@ const Index = () => {
                 <s.icon size={26} />
               </div>
               <h3 className="mb-3 text-xl font-bold">{s.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
+              <p className="text-muted-foreground text-base leading-relaxed">{s.desc}</p>
               <Link to={s.link} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">
                 En savoir plus <ChevronRight size={16} />
               </Link>
@@ -126,7 +126,7 @@ const Index = () => {
       <SectionWrapper className="bg-section-blue">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold md:text-4xl">Notre méthode</h2>
-          <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Un processus simple et transparent pour vous accompagner de A à Z. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link> et <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
           </p>
         </div>
@@ -143,7 +143,7 @@ const Index = () => {
                 {p.step}
               </div>
               <h3 className="mb-1 font-bold">{p.title}</h3>
-              <p className="text-sm text-muted-foreground">{p.desc}</p>
+              <p className="text-sm md:text-base text-muted-foreground">{p.desc}</p>
             </div>
           ))}
         </div>
@@ -175,7 +175,7 @@ const Index = () => {
                   <item.icon size={22} />
                 </div>
                 <h3 className="mb-2 font-bold text-lg">{item.title}</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{item.desc}</p>
               </div>
             ))}
           </div>
@@ -208,28 +208,28 @@ const Index = () => {
             </h2>
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-6">
-            <p>
-              Créer un site internet ne se résume pas à assembler quelques pages et publier du contenu. Dans un environnement numérique de plus en plus concurrentiel, la réussite d'un projet web repose sur une combinaison d'expertise technique, de vision stratégique et de compréhension fine de votre marché. Chez Déclic Digital, nous accompagnons les PME, artisans, professions libérales et indépendants de Paris et des Hauts-de-Seine dans la conception de sites web qui génèrent réellement des contacts qualifiés.
+            <p className="text-base md:text-lg">
+              Créer un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site internet</Link> ne se résume pas à assembler quelques pages et publier du contenu. Dans un environnement numérique de plus en plus concurrentiel, la réussite d'un projet web repose sur une combinaison d'expertise technique, de vision stratégique et de compréhension fine de votre marché. Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">Déclic Digital</Link>, nous accompagnons les PME, artisans, professions libérales et indépendants de <Link to="/nos-villes" className="text-primary font-semibold hover:underline">Paris et des Hauts-de-Seine</Link> dans la conception de sites web qui génèrent réellement des contacts qualifiés.
             </p>
             <div className="grid gap-6 md:grid-cols-2 not-prose">
               <div className="rounded-2xl bg-card p-6 shadow-card">
                 <h3 className="text-lg font-bold mb-2">Un site pensé pour convertir</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
+                <p className="text-base text-muted-foreground leading-relaxed">
                   Chaque élément de votre site est pensé pour guider le visiteur vers une action précise : demande de devis, appel téléphonique, prise de rendez-vous. Nous structurons vos pages selon les meilleures pratiques UX et les standards d'accessibilité pour maximiser votre taux de conversion. Un site qui ne convertit pas est un site qui coûte de l'argent au lieu d'en rapporter.
                 </p>
               </div>
               <div className="rounded-2xl bg-card p-6 shadow-card">
                 <h3 className="text-lg font-bold mb-2">Le SEO au coeur de la conception</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Nous ne construisons pas un site web puis nous pensons au référencement ensuite. Le SEO est intégré dès la phase de conception : architecture des pages, balisage sémantique, vitesse de chargement, maillage interne, contenu optimisé. Cette approche garantit que votre site est prêt à se positionner sur Google dès sa mise en ligne.
+                <p className="text-base text-muted-foreground leading-relaxed">
+                  Nous ne construisons pas un site web puis nous pensons au <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement</Link> ensuite. Le SEO est intégré dès la phase de conception : architecture des pages, balisage sémantique, vitesse de chargement, maillage interne, contenu optimisé. Cette approche garantit que votre site est prêt à se positionner sur Google dès sa mise en ligne.
                 </p>
               </div>
             </div>
-            <p>
+            <p className="text-base md:text-lg">
               La majorité des PME qui nous contactent partagent un constat commun : elles ont investi dans un site web il y a quelques années, mais celui-ci ne leur apporte aucun retour. Les raisons sont souvent les mêmes : un design daté, un temps de chargement excessif, une absence totale de stratégie de mots clés, et un contenu qui ne répond pas aux questions que se posent réellement leurs prospects.
             </p>
-            <p>
-              Notre approche est différente. Nous commençons par une analyse approfondie de votre secteur d'activité, de vos concurrents et des requêtes que tapent vos futurs clients sur Google. À partir de cette analyse, nous définissons une arborescence de site optimisée, nous rédigeons des contenus ciblés et nous mettons en place une architecture technique irréprochable. Le résultat : un site qui se positionne durablement sur les mots clés stratégiques de votre activité.
+            <p className="text-base md:text-lg">
+              Notre approche est différente. Nous commençons par une analyse approfondie de votre secteur d'activité, de vos concurrents et des requêtes que tapent vos futurs clients sur Google. À partir de cette analyse, nous définissons une arborescence de site optimisée, nous rédigeons des contenus ciblés et nous mettons en place une architecture technique irréprochable. Le résultat : un site qui se positionne durablement sur les mots clés stratégiques de votre activité. Demandez votre <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour en savoir plus.
             </p>
             <div className="rounded-2xl bg-card p-6 shadow-card not-prose">
               <h3 className="text-lg font-bold mb-3">Ce qui fait la différence avec Déclic Digital</h3>
@@ -242,15 +242,15 @@ const Index = () => {
                   "Accompagnement sur-mesure, pas de template générique",
                   "Tarifs adaptés aux budgets des PME et indépendants",
                 ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-sm text-muted-foreground">
+                  <li key={i} className="flex items-start gap-2 text-base text-muted-foreground">
                     <CheckCircle size={16} className="text-brand-violet mt-0.5 shrink-0" />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <p>
-              Nous croyons que chaque entreprise, quelle que soit sa taille, mérite une présence en ligne professionnelle et performante. C'est pourquoi nous proposons des formules accessibles sans sacrifier la qualité. De la création de votre site vitrine à la mise en place d'une stratégie de référencement naturel complète, nous vous accompagnons à chaque étape avec transparence et réactivité. Votre succès en ligne est notre priorité.
+            <p className="text-base md:text-lg">
+              Nous croyons que chaque entreprise, quelle que soit sa taille, mérite une présence en ligne professionnelle et performante. C'est pourquoi nous proposons des <Link to="/tarifs" className="text-primary font-semibold hover:underline">formules accessibles</Link> sans sacrifier la qualité. De la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de votre site vitrine</Link> à la mise en place d'une stratégie de <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement naturel</Link> complète, nous vous accompagnons à chaque étape avec transparence et réactivité. Votre succès en ligne est notre priorité.
             </p>
           </div>
           <div className="text-center mt-10">
@@ -266,7 +266,7 @@ const Index = () => {
       <SectionWrapper className="bg-section-blue">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-extrabold mb-4">Explorez nos services</h2>
-          <p className="text-muted-foreground mb-6">Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.</p>
+          <p className="text-lg text-muted-foreground mb-6">Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link to="/creation-site-web" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
               Création de site web
@@ -301,7 +301,7 @@ const Index = () => {
         <div className="mx-auto max-w-2xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-extrabold md:text-4xl">Parlez-nous de votre projet</h2>
-            <p className="mt-4 text-muted-foreground">
+            <p className="mt-4 text-lg text-muted-foreground">
               Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de votre site web</Link>.
             </p>
           </div>
