@@ -135,18 +135,15 @@
     @apply font-bold tracking-tight;
     color: hsl(var(--heading));
     text-shadow:
-      /* Stacked depth layers - vintage letterpress 3D */
-      1px 1px 0 hsl(263 40% 8%),
-      2px 2px 0 hsl(263 40% 7%),
-      3px 3px 0 hsl(263 40% 6%),
-      4px 4px 0 hsl(263 40% 5%),
-      5px 5px 0 hsl(263 40% 4%),
-      6px 6px 0 hsl(263 40% 3%),
-      /* Soft diffuse shadow underneath */
-      7px 8px 8px hsl(263 30% 5% / 0.35),
-      4px 12px 24px hsl(263 30% 5% / 0.2),
-      /* Warm highlight on top edge */
-      -1px -1px 0 hsl(40 30% 80% / 0.25);
+      1px 1px 0 hsl(263 50% 5%),
+      2px 2px 0 hsl(263 50% 4%),
+      3px 3px 0 hsl(263 50% 3%),
+      4px 4px 0 hsl(260 50% 2%),
+      5px 5px 0 hsl(260 50% 1%),
+      6px 6px 0 hsl(260 50% 0%),
+      7px 7px 0 hsl(260 50% 0%),
+      8px 8px 2px hsl(0 0% 0% / 0.4),
+      3px 14px 25px hsl(0 0% 0% / 0.25);
     -webkit-text-stroke: 0.2px hsl(230 25% 14% / 0.04);
   }
 
