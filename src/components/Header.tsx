@@ -85,7 +85,7 @@ const Header = () => {
                       key={l.to}
                       to={l.to}
                       onClick={() => setMoreOpen(false)}
-                      className={`block rounded-md px-3 py-2 text-[13px] font-medium transition-colors hover:bg-secondary ${
+                      className={`block rounded-md px-3 py-2 text-[15px] font-medium transition-colors hover:bg-secondary ${
                         isActive(l.to) ? "text-primary" : "text-muted-foreground"
                       }`}
                     >
