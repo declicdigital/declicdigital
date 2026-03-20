@@ -135,9 +135,17 @@
     @apply font-bold tracking-tight;
     color: hsl(var(--heading));
     text-shadow:
-      0 2px 4px hsl(284 65% 66% / 0.12),
-      0 4px 12px hsl(230 25% 14% / 0.10),
-      0 1px 0px hsl(40 30% 80% / 0.5);
+      /* Stacked depth layers - vintage letterpress 3D */
+      0 1px 0 hsl(263 36% 14%),
+      0 2px 0 hsl(263 36% 13%),
+      0 3px 0 hsl(263 36% 12%),
+      0 4px 0 hsl(263 36% 11%),
+      0 5px 0 hsl(263 36% 10%),
+      /* Soft diffuse shadow underneath */
+      0 6px 6px hsl(263 30% 10% / 0.25),
+      0 10px 20px hsl(263 30% 10% / 0.15),
+      /* Warm highlight on top edge */
+      0 -1px 0 hsl(40 30% 80% / 0.3);
     -webkit-text-stroke: 0.2px hsl(230 25% 14% / 0.04);
   }
 
