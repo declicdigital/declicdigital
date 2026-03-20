@@ -74,9 +74,9 @@ const Header = () => {
             <div ref={moreRef} className="relative">
               <button
                 onClick={() => setMoreOpen(!moreOpen)}
-                className={`flex items-center gap-1 rounded-lg px-2.5 py-1.5 text-[13px] font-medium transition-colors hover:bg-secondary text-muted-foreground`}
+                className={`flex items-center gap-1 rounded-lg px-3 py-2 text-[15px] font-medium transition-colors hover:bg-secondary text-muted-foreground`}
               >
-                Plus <ChevronDown size={14} className={`transition-transform ${moreOpen ? "rotate-180" : ""}`} />
+                Plus <ChevronDown size={15} className={`transition-transform ${moreOpen ? "rotate-180" : ""}`} />
               </button>
               {moreOpen && (
                 <div className="absolute right-0 top-full mt-1 w-48 rounded-lg border border-border bg-card p-1 shadow-elevated animate-fade-in">
