@@ -3,6 +3,7 @@ import webDesignImg from "@/assets/tendances-web-design-2026.jpg";
 import vitesseImg from "@/assets/vitesse-site-web-performance.jpg";
 import campagneImg from "@/assets/knafo-campagne-digitale-municipales-paris.jpg";
 import garminImg from "@/assets/whatsapp-garmin-montre-connectee.jpg";
+import porteAvionsImg from "@/assets/porte-avions-france-libre.jpg";
 
 export interface BlogArticle {
   slug: string;
