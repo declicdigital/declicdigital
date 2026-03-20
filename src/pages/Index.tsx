@@ -113,7 +113,7 @@ const Index = () => {
                 <s.icon size={26} />
               </div>
               <h3 className="mb-3 text-xl font-bold">{s.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
+              <p className="text-muted-foreground text-base leading-relaxed">{s.desc}</p>
               <Link to={s.link} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">
                 En savoir plus <ChevronRight size={16} />
               </Link>
