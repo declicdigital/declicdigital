@@ -64,7 +64,7 @@ const Index = () => {
           <h2 className="mb-6 text-3xl font-extrabold md:text-4xl">
             Pourquoi votre site ne vous apporte pas de clients ?
           </h2>
-          <p className="mb-8 text-muted-foreground max-w-2xl mx-auto">
+          <p className="mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
             De nombreuses PME investissent dans un site web, mais celui-ci reste invisible sur Google. Sans stratégie de <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement</Link>, sans optimisation technique et sans contenu adapté, votre site ne peut pas attirer de visiteurs qualifiés. Résultat : zéro contact, zéro prospect, zéro retour sur investissement.
           </p>
           <div className="grid gap-4 sm:grid-cols-2 mt-8">
