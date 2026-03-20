@@ -254,7 +254,7 @@ const Index = () => {
             </div>
             <Input placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" />
             <Textarea placeholder="Décrivez votre projet..." className="rounded-xl min-h-[120px]" required />
-            <Button type="submit" size="lg" className="w-full gradient-primary rounded-full text-primary-foreground font-semibold shadow-lg hover:opacity-90">
+            <Button type="submit" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
               <CheckCircle size={18} className="mr-2" /> Envoyer ma demande
             </Button>
           </form>
