@@ -104,33 +104,28 @@
     background-color: var(--bg-paper);
   }
 
-  /* ── Heavy grain texture overlay (newspaper / risograph) ── */
+  /* ── Heavy grain texture overlay (real grain.png) ── */
   body::before {
     content: "";
     position: fixed;
-    top: -50%;
-    left: -50%;
-    width: 200%;
-    height: 200%;
-    pointer-events: none;
-    z-index: 9999;
-    opacity: 0.14;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
+    inset: 0;
+    background: url('/grain.png');
     background-size: 256px 256px;
+    opacity: 0.15;
+    pointer-events: none;
     mix-blend-mode: multiply;
+    z-index: 9999;
   }
 
-  /* ── Secondary paper fiber texture ── */
+  /* ── Secondary subtle overlay for paper fiber ── */
   body::after {
     content: "";
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 9998;
-    opacity: 0.06;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='turbulence' baseFrequency='1.2' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
-    background-repeat: repeat;
+    opacity: 0.08;
+    background: url('/grain.png');
     background-size: 128px 128px;
     mix-blend-mode: overlay;
   }
