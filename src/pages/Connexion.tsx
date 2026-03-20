@@ -70,7 +70,7 @@ const Connexion = () => {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-background to-muted px-4">
       <Card className="w-full max-w-md shadow-elevated border-border">
         <CardHeader className="text-center space-y-4">
-          <img src={logoImg} alt="Declic Digital" className="h-10 mx-auto" />
+          <img src={logoImg} alt="Declic Digital" className="h-20 mx-auto" />
           <CardTitle className="text-2xl font-bold text-foreground">
             {isForgotPassword ? "Mot de passe oublie" : "Espace Client"}
           </CardTitle>

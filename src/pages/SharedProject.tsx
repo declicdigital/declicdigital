@@ -175,7 +175,7 @@ const SharedProject = () => {
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container flex items-center justify-between py-3">
-          <img src={logoImg} alt="Declic Digital" className="h-14 md:h-16" />
+          <img src={logoImg} alt="Declic Digital" className="h-20 md:h-24" />
           <span className="text-xs font-semibold text-muted-foreground bg-muted px-2 py-1 rounded-full">ACCES PARTAGE</span>
         </div>
       </header>
