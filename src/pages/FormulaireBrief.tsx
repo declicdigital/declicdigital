@@ -247,7 +247,7 @@ const FormulaireBrief = () => {
           className="mx-auto max-w-lg text-center"
         >
           <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-primary shadow-elevated">
-            <CheckCircle className="h-10 w-10 text-primary-foreground" />
+            <CheckCircle className="h-10 w-10 text-white" />
           </div>
           <h1 className="text-3xl font-extrabold mb-4">C'est envoyé !</h1>
           <p className="text-muted-foreground text-lg mb-8">
@@ -265,8 +265,8 @@ const FormulaireBrief = () => {
     <div className="min-h-screen bg-background">
       {/* Progress floating bubble */}
       <div className="fixed bottom-8 right-8 z-50 flex h-16 w-16 flex-col items-center justify-center rounded-full bg-primary shadow-elevated cursor-default">
-        <span className="text-lg font-black text-primary-foreground leading-none">{pct}%</span>
-        <span className="text-[8px] font-bold text-primary-foreground/80 uppercase tracking-wider">complet</span>
+        <span className="text-lg font-black text-white leading-none">{pct}%</span>
+        <span className="text-[8px] font-bold text-white/80 uppercase tracking-wider">complet</span>
       </div>
 
       {/* Hero */}
@@ -620,7 +620,7 @@ const FormulaireBrief = () => {
               viewport={{ once: true }}
               className="text-center pt-4"
             >
-              <Button type="submit" size="lg" disabled={sending} className="rounded-full px-12 py-6 text-lg font-bold bg-primary text-primary-foreground shadow-elevated hover:opacity-90">
+              <Button type="submit" size="lg" disabled={sending} className="rounded-full px-12 py-6 text-lg font-bold bg-primary text-white shadow-elevated hover:opacity-90">
                 {sending ? <><span className="animate-spin mr-2">⏳</span> Envoi en cours...</> : <><Send className="mr-2 h-5 w-5" /> Envoyer mon brief</>}
               </Button>
               <p className="mt-4 text-xs text-muted-foreground">

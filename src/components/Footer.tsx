@@ -5,11 +5,11 @@ import logo from "@/assets/logo-declic-digital-new.png";
 const Footer = () => (
   <footer className="border-t border-border">
     <div style={{ background: "hsl(230, 18%, 15%)" }}>
-      <div className="container py-14 md:py-18">
+      <div className="container py-10 md:py-14">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
-          <div className="space-y-5">
-            <img src={logo} alt="Déclic Digital" className="h-24" />
+          <div className="space-y-4">
+            <img src={logo} alt="Déclic Digital" className="h-28" />
             <p className="text-sm text-white/60 leading-relaxed">
               Déclic Digital accompagne les PME et petites entreprises à Paris et dans les Hauts-de-Seine (92) pour développer leur visibilité en ligne. Fondée par un Expert Produit Google.
             </p>
@@ -73,7 +73,7 @@ const Footer = () => (
         </div>
 
         {/* Separator with gradient */}
-        <div className="mt-12 mb-6 h-px" style={{ background: "linear-gradient(90deg, transparent, hsl(183, 70%, 63%, 0.3), hsl(284, 65%, 66%, 0.3), hsl(330, 100%, 70%, 0.3), transparent)" }} />
+        <div className="mt-10 mb-5 h-px" style={{ background: "linear-gradient(90deg, transparent, hsl(183, 70%, 63%, 0.3), hsl(284, 65%, 66%, 0.3), hsl(330, 100%, 70%, 0.3), transparent)" }} />
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/40">
           <span>© {new Date().getFullYear()} Déclic Digital. SIRET 102 436 664 00019. Tous droits réservés.</span>

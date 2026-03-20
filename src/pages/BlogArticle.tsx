@@ -172,11 +172,11 @@ const BlogArticle = () => {
           >
             <Link
               to="/blog"
-              className="mb-4 inline-flex items-center gap-1.5 text-sm text-primary-foreground/70 hover:text-primary-foreground transition-colors"
+              className="mb-4 inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors"
             >
               <ArrowLeft size={14} /> Retour au blog
             </Link>
-            <h1 className="text-3xl font-extrabold text-primary-foreground md:text-4xl lg:text-5xl leading-tight max-w-3xl">
+            <h1 className="text-3xl font-extrabold text-white md:text-4xl lg:text-5xl leading-tight max-w-3xl">
               {article.title}
             </h1>
           </motion.div>
@@ -250,9 +250,9 @@ const BlogArticle = () => {
 
       {/* CTA */}
       <section className="gradient-miami py-14">
-        <div className="container text-center text-primary-foreground">
+        <div className="container text-center text-white">
           <h2 className="text-2xl font-bold md:text-3xl">Envie d'un site qui performe ?</h2>
-          <p className="mt-3 text-primary-foreground/80">
+          <p className="mt-3 text-white/80">
             Demandez votre audit SEO gratuit et découvrez comment améliorer votre visibilité.
           </p>
           <Link
