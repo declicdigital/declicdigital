@@ -134,15 +134,12 @@
     font-family: 'Recoleta', Georgia, serif;
     @apply font-bold tracking-tight;
     color: hsl(var(--heading));
+    -webkit-text-stroke: 1.5px #8a6d00;
+    paint-order: stroke fill;
     text-shadow:
-      0px 1px 0px #8a6d00,
-      0px 2px 0px #7d6300,
-      0px 3px 0px #705900,
-      0px 4px 0px #634f00,
-      0px 5px 0px #564500,
-      0px 6px 0px #493b00,
-      0px 7px 0px #3c3100,
-      0px 8px 4px rgba(60, 49, 0, 0.3);
+      0px 2px 0px #705900,
+      0px 4px 0px #564500,
+      0px 6px 4px rgba(60, 49, 0, 0.25);
     -webkit-text-stroke: 0.2px hsl(230 25% 14% / 0.04);
   }
 
