@@ -134,15 +134,15 @@
     font-family: 'Recoleta', Georgia, serif;
     @apply font-bold tracking-tight;
     color: hsl(var(--heading));
-    -webkit-text-stroke: 3px hsl(56 100% 42%);
+    -webkit-text-stroke: 3px hsl(0 0% 0%);
     paint-order: stroke fill;
     text-shadow:
-      0px 1px 0px hsl(56 100% 34%),
-      0px 2px 0px hsl(56 100% 30%),
-      0px 3px 0px hsl(56 100% 26%),
-      0px 4px 0px hsl(56 100% 22%),
-      0px 5px 0px hsl(56 100% 18%),
-      0px 6px 3px hsl(56 100% 10% / 0.28);
+      0px 1px 0px hsl(0 0% 10%),
+      0px 2px 0px hsl(0 0% 8%),
+      0px 3px 0px hsl(0 0% 6%),
+      0px 4px 0px hsl(0 0% 4%),
+      0px 5px 0px hsl(0 0% 2%),
+      0px 6px 3px hsl(0 0% 0% / 0.28);
   }
 
   h2, h3 {
