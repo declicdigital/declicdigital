@@ -262,7 +262,7 @@ const Index = () => {
       </SectionWrapper>
 
       {/* CTA Final */}
-      <section className="gradient-miami py-16 md:py-24">
+      <section className="gradient-miami py-16 md:py-24 text-white">
         <div className="container">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
