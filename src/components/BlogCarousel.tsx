@@ -14,7 +14,7 @@ const BlogCarousel = () => {
       <div className="container">
         <div className="flex items-center justify-between mb-10">
           <div>
-            <span className="mb-2 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-primary-foreground">
+            <span className="mb-2 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
               Le Blog
             </span>
             <h2 className="text-2xl font-extrabold md:text-3xl mt-2">Nos derniers articles</h2>

@@ -344,7 +344,7 @@ const AdminClientDetail = () => {
           <>
             {/* Project header */}
             <Card className="overflow-hidden">
-              <div className="bg-gradient-to-r from-primary to-primary/80 p-6 text-primary-foreground">
+              <div className="gradient-miami p-6 text-white">
                 <div className="flex items-center justify-between">
                   <div>
                     <h2 className="text-xl font-bold">{project.name}</h2>
