@@ -301,7 +301,7 @@ const Index = () => {
         <div className="mx-auto max-w-2xl">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-extrabold md:text-4xl">Parlez-nous de votre projet</h2>
-            <p className="mt-4 text-muted-foreground">
+            <p className="mt-4 text-lg text-muted-foreground">
               Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de votre site web</Link>.
             </p>
           </div>
