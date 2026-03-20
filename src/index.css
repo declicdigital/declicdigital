@@ -69,8 +69,13 @@
 
     /* Custom tokens */
     --gradient-primary: linear-gradient(135deg, #5ce1e6, #cb6ce6, #ff66c4);
-    --gradient-hero: linear-gradient(135deg, hsl(45, 40%, 94%), hsl(43, 35%, 91%));
+    --gradient-hero: linear-gradient(135deg, #f6f1e9, #f0ebe2);
     --gradient-miami: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(284, 65%, 66%), hsl(330, 100%, 70%));
+
+    /* Alternating section backgrounds */
+    --bg-paper: #f6f1e9;
+    --bg-rose: #f3e8ef;
+    --bg-blue: #e9f2f4;
     --shadow-card: 0 4px 24px -4px hsl(230 25% 14% / 0.08);
     --shadow-elevated: 0 12px 40px -8px hsl(230 25% 14% / 0.12);
     --shadow-glow: 0 4px 20px -4px hsl(284 65% 66% / 0.3);
