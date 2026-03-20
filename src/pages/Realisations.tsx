@@ -84,7 +84,7 @@ const Realisations = () => (
                 loading="lazy"
               />
               <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300 flex items-center justify-center">
-                <ExternalLink className="text-primary-foreground opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={32} />
+                <ExternalLink className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={32} />
               </div>
             </div>
             <div className="p-6">
@@ -141,10 +141,10 @@ const Realisations = () => (
     {/* CTA */}
     <section className="gradient-miami py-16 text-center">
       <div className="container">
-        <h2 className="mb-4 text-3xl font-extrabold text-primary-foreground">
+        <h2 className="mb-4 text-3xl font-extrabold text-white">
           Votre projet sera le prochain ?
         </h2>
-        <p className="mx-auto mb-8 max-w-lg text-primary-foreground/80">
+        <p className="mx-auto mb-8 max-w-lg text-white/80">
           Contactez-nous pour discuter de votre projet et obtenir un devis.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -154,7 +154,7 @@ const Realisations = () => (
           >
             Devis création de site
           </Link>
-          <Link to="/qui-sommes-nous" className="inline-flex items-center justify-center rounded-full border-2 border-primary-foreground/40 bg-transparent px-8 py-3 font-semibold text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
+          <Link to="/qui-sommes-nous" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
             Qui sommes-nous
           </Link>
         </div>

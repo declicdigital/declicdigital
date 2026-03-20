@@ -235,17 +235,17 @@ const VilleCreationSite = () => {
       {/* CTA */}
       <section className="gradient-miami py-16">
         <div className="container text-center">
-          <h2 className="mb-4 text-3xl font-extrabold text-primary-foreground">
+          <h2 className="mb-4 text-3xl font-extrabold text-white">
             Prêt à créer votre site web à {city.nameShort} ?
           </h2>
-          <p className="mb-8 text-primary-foreground/80">
+          <p className="mb-8 text-white/80">
             Contactez-nous pour un devis gratuit et personnalisé. Premier mois de mise en service + 50€/mois.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild size="lg" className="rounded-full bg-card px-8 font-semibold text-foreground shadow-lg hover:bg-card/90">
               <Link to="/contact">Demander un devis</Link>
             </Button>
-            <Link to="/audit-seo-gratuit" className="inline-flex items-center justify-center rounded-full border-2 border-primary-foreground/40 bg-transparent px-8 py-3 font-semibold text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
+            <Link to="/audit-seo-gratuit" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
               Audit SEO gratuit
             </Link>
           </div>
