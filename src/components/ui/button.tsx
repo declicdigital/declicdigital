@@ -4,8 +4,10 @@ import { cva, type VariantProps } from "class-variance-authority";
 
 import { cn } from "@/lib/utils";
 
+const tornPaperClip = "polygon(2% 8%, 5% 2%, 9% 6%, 14% 1%, 19% 5%, 24% 0%, 30% 4%, 35% 1%, 40% 6%, 46% 2%, 52% 5%, 57% 0%, 63% 4%, 68% 1%, 74% 6%, 79% 2%, 85% 5%, 90% 1%, 95% 7%, 98% 3%, 100% 10%, 99% 18%, 100% 28%, 98% 38%, 100% 48%, 99% 58%, 100% 68%, 98% 78%, 100% 88%, 99% 95%, 96% 98%, 92% 94%, 87% 99%, 82% 95%, 76% 100%, 70% 96%, 64% 99%, 58% 95%, 52% 100%, 46% 96%, 40% 99%, 34% 95%, 28% 100%, 22% 96%, 16% 99%, 10% 95%, 5% 100%, 2% 96%, 0% 92%, 1% 82%, 0% 72%, 2% 62%, 0% 52%, 1% 42%, 0% 32%, 2% 22%, 0% 12%)";
+
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
   {
     variants: {
       variant: {
