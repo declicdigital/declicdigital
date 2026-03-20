@@ -7,15 +7,15 @@ const Footer = () => (
     {/* Grain overlay on footer */}
     <div className="absolute inset-0 pointer-events-none z-10" style={{ background: "url('/grain.png')", backgroundSize: "256px 256px", opacity: 0.12, mixBlendMode: "soft-light" }} />
     <div style={{ background: "hsl(230, 18%, 15%)" }}>
-      <div className="container py-10 md:py-14">
-        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <div className="container py-6 md:py-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
-          <div className="space-y-2">
-            <img src={logo} alt="Déclic Digital" className="h-20" />
+          <div className="space-y-1.5">
+            <img src={logo} alt="Déclic Digital" className="h-36 -mt-4 -mb-4" />
             <p className="text-sm text-white/60 leading-relaxed">
               Déclic Digital accompagne les PME et petites entreprises à Paris et dans les Hauts-de-Seine (92) pour développer leur visibilité en ligne. Fondée par un Expert Produit Google.
             </p>
-            <div className="space-y-2.5 text-sm text-white/60">
+            <div className="space-y-1.5 text-sm text-white/60">
               <a href="tel:0602228939" className="flex items-center gap-2 hover:text-white transition-colors">
                 <Phone size={14} className="text-brand-blue" /> 06.02.22.89.39
               </a>
@@ -27,8 +27,8 @@ const Footer = () => (
 
           {/* Services */}
           <div>
-            <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-brand-blue">Services</h3>
-            <ul className="space-y-2.5 text-sm">
+            <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-brand-blue">Services</h3>
+            <ul className="space-y-2 text-sm">
               <li><Link to="/creation-site-web" className="text-white/60 hover:text-white transition-colors">Création de site web</Link></li>
               <li><Link to="/referencement-seo" className="text-white/60 hover:text-white transition-colors">Référencement SEO</Link></li>
               <li><Link to="/audit-seo-gratuit" className="text-white/60 hover:text-white transition-colors">Audit SEO gratuit</Link></li>
@@ -40,8 +40,8 @@ const Footer = () => (
 
           {/* Navigation */}
           <div>
-            <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-brand-violet">Navigation</h3>
-            <ul className="space-y-2.5 text-sm">
+            <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-brand-violet">Navigation</h3>
+            <ul className="space-y-2 text-sm">
               <li><Link to="/" className="text-white/60 hover:text-white transition-colors">Accueil</Link></li>
               <li><Link to="/realisations" className="text-white/60 hover:text-white transition-colors">Réalisations</Link></li>
               <li><Link to="/qui-sommes-nous" className="text-white/60 hover:text-white transition-colors">Qui sommes-nous</Link></li>
@@ -53,11 +53,11 @@ const Footer = () => (
 
           {/* CTA */}
           <div>
-            <h3 className="mb-5 text-xs font-bold uppercase tracking-widest text-brand-pink">Contact</h3>
-            <p className="text-sm text-white/60 mb-5">
+            <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-brand-pink">Contact</h3>
+            <p className="text-sm text-white/60 mb-3">
               Prêt à développer votre visibilité en ligne ?
             </p>
-            <div className="flex flex-col items-start gap-3">
+            <div className="flex flex-col items-start gap-2.5">
               <Link
                 to="/audit-seo-gratuit"
                 className="inline-block gradient-primary btn-glow rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all"
