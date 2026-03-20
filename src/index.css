@@ -31,7 +31,8 @@
 @layer base {
   :root {
     --background: 45 40% 94%;
-    --foreground: 230 25% 14%;
+    --foreground: 0 0% 13%;
+    --heading: 263 36% 18%;
 
     --card: 43 35% 96%;
     --card-foreground: 230 25% 14%;
@@ -132,6 +133,7 @@
   h1 {
     font-family: 'Recoleta', Georgia, serif;
     @apply font-bold tracking-tight;
+    color: hsl(var(--heading));
     text-shadow:
       0 2px 4px hsl(284 65% 66% / 0.12),
       0 4px 12px hsl(230 25% 14% / 0.10),
@@ -142,6 +144,7 @@
   h2, h3 {
     font-family: 'Clash Display', system-ui, sans-serif;
     @apply font-semibold tracking-tight;
+    color: hsl(var(--heading));
     text-shadow:
       0 2px 4px hsl(284 65% 66% / 0.12),
       0 4px 12px hsl(230 25% 14% / 0.10),
@@ -152,6 +155,7 @@
   h4, h5, h6 {
     font-family: 'Clash Display', system-ui, sans-serif;
     @apply font-bold tracking-tight;
+    color: hsl(var(--heading));
     text-shadow:
       0 2px 4px hsl(284 65% 66% / 0.12),
       0 4px 12px hsl(230 25% 14% / 0.10),
