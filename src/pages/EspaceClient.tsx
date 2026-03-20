@@ -222,7 +222,9 @@ const EspaceClient = () => {
   const completedTasks = tasks.filter((t) => t.status === "termine").length;
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen relative" style={{ backgroundColor: "var(--bg-paper)" }}>
+      {/* Grain overlay */}
+      <div className="fixed inset-0 pointer-events-none z-[60]" style={{ background: "url('/grain.png')", backgroundSize: "256px 256px", opacity: 0.12, mixBlendMode: "multiply" as any }} />
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container flex items-center justify-between py-3">
           <img
