@@ -72,6 +72,8 @@ const App = () => (
               <Route path="/admin/client/:clientId" element={<AdminClientDetail />} />
               <Route path="/admin/soumissions" element={<AdminSoumissions />} />
               <Route path="/projet/:token" element={<SharedProject />} />
+              <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
+              <Route path="/brief" element={<FormulaireBrief />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>

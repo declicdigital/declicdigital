@@ -83,6 +83,21 @@ const PlanDuSite = () => (
             </li>
           ))}
         </ul>
+
+        <h2 className="text-2xl font-bold mb-4 mt-10">Articles de blog</h2>
+        <ul className="space-y-2 mb-10">
+          {blogArticles.map((article) => (
+            <li key={article.slug}>
+              <Link
+                to={`/blog/${article.slug}`}
+                className="flex items-center gap-3 rounded-lg bg-card p-3 text-sm font-medium text-foreground hover:text-primary transition-colors"
+              >
+                <span className="h-1.5 w-1.5 rounded-full gradient-primary shrink-0" />
+                {article.title}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </SectionWrapper>
   </PageLayout>
