@@ -31,6 +31,8 @@ import BlogArticle from "./pages/BlogArticle";
 import BlogCategory from "./pages/BlogCategory";
 import SharedProject from "./pages/SharedProject";
 import NotFound from "./pages/NotFound";
+import PolitiqueConfidentialite from "./pages/PolitiqueConfidentialite";
+import FormulaireBrief from "./pages/FormulaireBrief";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
