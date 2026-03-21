@@ -122,7 +122,7 @@ const Tarifs = () => (
 
     {/* Grille tarifs */}
     <SectionWrapper>
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
         {plans.map((plan, i) => (
           <motion.div
             key={plan.name}
