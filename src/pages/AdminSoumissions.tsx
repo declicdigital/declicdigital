@@ -104,22 +104,20 @@ const AdminSoumissions = () => {
   const [copied, setCopied] = useState(false);
   const [filterStatus, setFilterStatus] = useState<StatusType | "all">("all");
 
-  const fetchSubs = () => {
-    supabase
-      .from("form_submissions")
-      .select("*")
-      .order("created_at", { ascending: false })
-      .then(({ data, error }) => {
-        if (error) {
-          console.error("fetchSubs error:", error);
-        }
-        setSubs((data as any) || []);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("fetchSubs catch:", err);
-        setLoading(false);
-      });
+  const fetchSubs = async () => {
+    try {
+      const { data, error } = await supabase
+        .from("form_submissions")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (error) {
+        console.error("fetchSubs error:", error);
+      }
+      setSubs((data as any) || []);
+    } catch (err) {
+      console.error("fetchSubs catch:", err);
+    }
+    setLoading(false);
   };
 
   useEffect(() => { fetchSubs(); }, []);
