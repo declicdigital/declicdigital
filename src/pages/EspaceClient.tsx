@@ -255,7 +255,7 @@ const EspaceClient = () => {
             <Card className="overflow-hidden">
               <div className="gradient-miami p-6 text-white">
                 <div className="flex items-center justify-between">
-                  <h1 className="text-2xl font-bold">{project.name}</h1>
+                  <h1 className="text-3xl font-bold">{project.name}</h1>
                   {project.share_token && (
                     <Button
                       variant="secondary"
