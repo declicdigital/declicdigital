@@ -242,7 +242,7 @@ const EspaceClient = () => {
         </div>
       </header>
 
-      <div className="container py-8 max-w-4xl space-y-6">
+      <div className="container py-8 max-w-5xl space-y-6">
         {!project ? (
           <Card>
             <CardContent className="py-12 text-center">
