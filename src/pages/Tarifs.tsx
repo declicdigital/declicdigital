@@ -152,6 +152,15 @@ const Tarifs = () => (
                 <span className="text-lg font-semibold text-muted-foreground">{plan.unit}</span>
               </div>
               <p className="text-xs text-muted-foreground mt-1">+ {plan.setup}€ la première mensualité</p>
+              {(() => {
+                const total = Number(plan.monthly) * 12 + Number(plan.setup.replace(/\s/g, ""));
+                const discounted = Math.round(total * 0.85);
+                return (
+                  <p className="text-xs text-primary font-semibold mt-2">
+                    ou en 1 fois −15% : {discounted.toLocaleString("fr-FR")}€ <span className="line-through text-muted-foreground font-normal">{total.toLocaleString("fr-FR")}€</span>
+                  </p>
+                );
+              })()}
             </div>
             <ul className="space-y-2.5 mb-8 mt-4 flex-1">
               {plan.features.map((feature, j) => (
