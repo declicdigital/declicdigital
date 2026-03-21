@@ -230,7 +230,7 @@ const EspaceClient = () => {
           <img
             src={logoImg}
             alt="Declic Digital"
-            className="h-20 md:h-24 cursor-pointer"
+            className="h-32 md:h-36 cursor-pointer"
             onClick={() => navigate("/espace-client")}
           />
           <div className="flex items-center gap-3">
@@ -242,7 +242,7 @@ const EspaceClient = () => {
         </div>
       </header>
 
-      <div className="container py-8 max-w-4xl space-y-6">
+      <div className="container py-8 max-w-5xl space-y-6">
         {!project ? (
           <Card>
             <CardContent className="py-12 text-center">
@@ -255,7 +255,7 @@ const EspaceClient = () => {
             <Card className="overflow-hidden">
               <div className="gradient-miami p-6 text-white">
                 <div className="flex items-center justify-between">
-                  <h1 className="text-2xl font-bold">{project.name}</h1>
+                  <h1 className="text-3xl font-bold">{project.name}</h1>
                   {project.share_token && (
                     <Button
                       variant="secondary"
@@ -310,7 +310,7 @@ const EspaceClient = () => {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center gap-2 text-lg">
+                  <CardTitle className="flex items-center gap-2 text-xl">
                     <CheckCircle2 className="h-5 w-5 text-primary" />
                     Suivi des taches ({completedTasks}/{tasks.length})
                   </CardTitle>
