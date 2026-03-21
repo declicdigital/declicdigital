@@ -310,7 +310,7 @@ const EspaceClient = () => {
             <Card>
               <CardHeader>
                 <div className="flex items-center justify-between">
-                  <CardTitle className="flex items-center gap-2 text-lg">
+                  <CardTitle className="flex items-center gap-2 text-xl">
                     <CheckCircle2 className="h-5 w-5 text-primary" />
                     Suivi des taches ({completedTasks}/{tasks.length})
                   </CardTitle>

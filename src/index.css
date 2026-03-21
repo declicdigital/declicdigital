@@ -6,6 +6,7 @@
   font-weight: 700;
   font-style: normal;
   font-display: swap;
+  unicode-range: U+0000-007F, U+2000-206F;
 }
 
 @font-face {

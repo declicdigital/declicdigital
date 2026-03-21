@@ -109,8 +109,15 @@ const AdminSoumissions = () => {
       .from("form_submissions")
       .select("*")
       .order("created_at", { ascending: false })
-      .then(({ data }) => {
+      .then(({ data, error }) => {
+        if (error) {
+          console.error("fetchSubs error:", error);
+        }
         setSubs((data as any) || []);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("fetchSubs catch:", err);
         setLoading(false);
       });
   };
