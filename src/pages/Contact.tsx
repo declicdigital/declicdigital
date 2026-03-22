@@ -129,7 +129,7 @@ const Contact = () => (
           </div>
           <div className="rounded-2xl bg-card p-6 shadow-card">
             <div className="flex items-center gap-4 mb-4">
-              <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital" className="w-14 h-14 rounded-full object-cover shadow-md" />
+              <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital" className="w-14 h-14 rounded-full object-cover shadow-md" loading="lazy" />
               <div>
                 <p className="font-bold text-sm">Geoffrey</p>
                 <p className="text-xs text-muted-foreground">Fondateur, Expert Produit Google</p>

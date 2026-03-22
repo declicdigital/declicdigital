@@ -82,7 +82,7 @@ const ReferencementSeo = () => (
             </p>
           </div>
           <div className="flex justify-center">
-            <img src={seoImage} alt="Référencement SEO Google pour améliorer la visibilité des TPE" className="w-full max-w-md rounded-2xl shadow-card" />
+            <img src={seoImage} alt="Référencement SEO Google pour améliorer la visibilité des TPE" className="w-full max-w-md rounded-2xl shadow-card" loading="lazy" />
           </div>
         </div>
       </div>

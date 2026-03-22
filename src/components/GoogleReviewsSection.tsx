@@ -115,7 +115,7 @@ const GoogleReviewsSection = ({
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-colors shadow-sm"
         >
-          <img src="https://www.google.com/favicon.ico" alt="Google" className="h-4 w-4" />
+          <img src="https://www.google.com/favicon.ico" alt="Google" className="h-4 w-4" loading="lazy" />
           Voir tous les avis sur Google
           <ExternalLink size={14} />
         </a>

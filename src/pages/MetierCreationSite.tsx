@@ -194,7 +194,7 @@ const MetierCreationSite = () => {
       {/* CTA */}
       <section className="gradient-miami py-16">
         <div className="container flex flex-col items-center text-center">
-          <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital" className="w-16 h-16 rounded-full object-cover border-2 border-white/30 shadow-lg mb-3" />
+          <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital" className="w-16 h-16 rounded-full object-cover border-2 border-white/30 shadow-lg mb-3" loading="lazy" />
           <p className="text-sm font-semibold text-white mb-2">Geoffrey, Expert Produit Google</p>
           <h2 className="mb-4 text-3xl font-extrabold text-white">Prêt à lancer votre site de {trade.name.toLowerCase()} ?</h2>
           <p className="mb-8 text-white/80">Recevez un devis personnalisé gratuit sous 24h. Sans engagement.</p>
