@@ -56,8 +56,8 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/audit-seo-gratuit" element={<AuditSeo />} />
                 <Route path="/creation-site-web" element={<CreationSite />} />
-                <Route path="/creation-site-web/:ville" element={<VilleCreationSite />} />
                 <Route path="/creation-site-web/metier/:metier" element={<MetierCreationSite />} />
+                <Route path="/creation-site-web/:ville" element={<VilleCreationSite />} />
                 <Route path="/nos-metiers" element={<NosMetiers2 />} />
                 <Route path="/referencement-seo" element={<ReferencementSeo />} />
                 <Route path="/referencement-seo/:ville" element={<VilleReferencementSeo />} />
