@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import seoImage from "@/assets/referencement-seo-google.png";
+import seoImage from "@/assets/referencement-seo-google.webp";
 import { cities } from "@/data/cities";
 
 const ReferencementSeo = () => (
