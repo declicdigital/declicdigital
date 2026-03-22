@@ -35,10 +35,10 @@ const Index = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>Agence web Paris | Création site internet & SEO TPE | Déclic Digital</title>
+        <title>Création site internet Paris & Hauts-de-Seine (92) | SEO TPE | Déclic Digital</title>
         <meta
           name="description"
-          content="Déclic Digital, agence web à Paris spécialisée TPE et artisans. Création de site internet professionnel et référencement SEO en Île-de-France. Audit gratuit, devis en 24h."
+          content="Déclic Digital, agence web à Paris et dans les Hauts-de-Seine (92). Création de site internet professionnel et référencement SEO pour TPE et artisans. Audit gratuit, devis en 24h."
         />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://declicdigital.net" />
@@ -108,10 +108,10 @@ const Index = () => {
                 Expert Produit Google · Agence digitale
               </span>
               <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
-                Création de site internet et SEO pour les TPE et indépendants en Île-de-France
+                Création de site internet et SEO à Paris et dans les Hauts-de-Seine (92)
               </h1>
               <p className="mb-8 max-w-lg text-lg md:text-xl text-muted-foreground leading-relaxed">
-                Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour que les TPE et indépendants attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
+                Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour que les TPE et indépendants de Paris et du 92 attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
@@ -132,7 +132,7 @@ const Index = () => {
                 <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital - Expert Produit Google" className="mx-auto mb-4 h-32 w-32 rounded-full object-cover" width={128} height={128} fetchPriority="high" />
                 <p className="font-bold text-lg">Geoffrey</p>
                 <p className="text-sm text-muted-foreground">Expert Produit Google</p>
-                <p className="text-sm text-muted-foreground mt-2">Fondateur de Déclic Digital, j'accompagne les TPE et indépendants d'Île-de-France dans leur transformation digitale.</p>
+                <p className="text-sm text-muted-foreground mt-2">Fondateur de Déclic Digital, j'accompagne les TPE et indépendants à Paris et dans le 92 dans leur transformation digitale.</p>
               </div>
             </motion.div>
           </div>
