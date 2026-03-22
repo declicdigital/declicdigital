@@ -2,30 +2,18 @@
 
 @font-face {
   font-family: 'Recoleta';
-  src: url('/fonts/Recoleta-Bold.otf') format('opentype');
+  src: url('/fonts/recoleta-bold.otf') format('opentype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
-  unicode-range: U+0000-007F, U+2000-206F;
 }
 
 @font-face {
-  font-family: 'Recoleta';
-  src: url('/fonts/Recoleta-SemiBold.otf') format('opentype');
-  font-weight: 600;
+  font-family: 'RecoletaAlt';
+  src: url('/fonts/recoletaalt-bold.otf') format('opentype');
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
-  unicode-range: U+0000-007F, U+2000-206F;
-}
-
-/* Fallback: use Clash Display for accented/special characters in Recoleta context */
-@font-face {
-  font-family: 'Recoleta';
-  src: url('/fonts/ClashDisplay-Variable.ttf') format('truetype');
-  font-weight: 600 700;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+00C0-00FF, U+0100-024F, U+2013-2014, U+2018-201D, U+2026, U+0080-00BF;
 }
 
 @font-face {
