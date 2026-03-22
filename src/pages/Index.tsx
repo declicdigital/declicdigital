@@ -38,7 +38,7 @@ const Index = () => {
         <title>Création site internet Paris & Hauts-de-Seine (92) | SEO TPE | Déclic Digital</title>
         <meta
           name="description"
-          content="Déclic Digital, agence web à Paris spécialisée TPE et artisans. Création de site internet professionnel et référencement SEO en Île-de-France. Audit gratuit, devis en 24h."
+          content="Déclic Digital, agence web à Paris et dans les Hauts-de-Seine (92). Création de site internet professionnel et référencement SEO pour TPE et artisans. Audit gratuit, devis en 24h."
         />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://declicdigital.net" />
