@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Search, FileText, Users, Lightbulb, CheckCircle } from "lucide-react";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,13 @@ import heroAudit from "@/assets/audit-seo-gratuit-site-web.png";
 
 const AuditSeo = () => (
   <PageLayout>
+    <Helmet>
+      <title>Audit SEO gratuit pour votre site — Déclic Digital</title>
+      <meta name="description" content="Recevez un audit SEO complet et gratuit de votre site web. Déclic Digital analyse votre visibilité Google et vous propose un plan d'action concret. Sans engagement." />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://declicdigital.net/audit-seo-gratuit" />
+      <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"Service",serviceType:"Audit SEO gratuit",provider:{"@type":"LocalBusiness",name:"Déclic Digital",url:"https://declicdigital.net"},areaServed:"Île-de-France"})}</script>
+    </Helmet>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Audit SEO gratuit" }]} />
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
@@ -22,7 +30,7 @@ const AuditSeo = () => (
               Audit SEO gratuit · Analyse complète de votre site
             </span>
             <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-              Audit SEO gratuit à Paris : recevez votre <span className="text-gradient">analyse complète</span>
+              Audit SEO gratuit : analysez la visibilité Google de votre site en 48h
             </h1>
             <p className="mb-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
               Découvrez pourquoi votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> n'apparaît pas sur Google et recevez des recommandations concrètes pour améliorer votre visibilité. Notre audit est complet et personnalisé. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link>.
@@ -41,7 +49,7 @@ const AuditSeo = () => (
     {/* Contenu audit */}
     <SectionWrapper className="bg-section-blue">
       <div className="text-center mb-4">
-        <h2 className="text-3xl font-extrabold md:text-4xl">Ce que contient votre audit</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl">Qu'est-ce qu'un audit SEO et à quoi ça sert ?</h2>
       </div>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
         Notre audit SEO est une analyse approfondie de votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link>. Il couvre tous les aspects qui influencent votre positionnement sur Google et vous donne une feuille de route claire. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
@@ -67,7 +75,7 @@ const AuditSeo = () => (
     {/* Comment fonctionne un audit SEO */}
     <SectionWrapper>
       <div className="mx-auto max-w-3xl space-y-6">
-        <h2 className="text-3xl font-extrabold md:text-4xl text-center">Comment fonctionne un audit SEO ?</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center">Ce que comprend votre audit SEO gratuit</h2>
         <p className="text-muted-foreground leading-relaxed">
           Un audit SEO est une analyse complète de votre site web qui évalue sa capacité à être bien référencé sur Google. Il identifie les points forts, les faiblesses et les opportunités d'amélioration de votre présence en ligne.
         </p>
@@ -86,7 +94,7 @@ const AuditSeo = () => (
     {/* Pourquoi c'est gratuit */}
     <SectionWrapper className="bg-section-blue">
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="text-3xl font-extrabold md:text-4xl mb-6">Pourquoi l'audit est-il gratuit ?</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl mb-6">En quoi votre site perd-il des clients chaque jour ?</h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
           Nous croyons que chaque entreprise mérite de comprendre pourquoi son site ne génère pas de résultats. L'audit gratuit est notre façon de vous montrer <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre expertise</Link> et de vous aider à y voir plus clair, sans aucun engagement.
         </p>
@@ -99,7 +107,7 @@ const AuditSeo = () => (
     {/* Maillage */}
     <SectionWrapper>
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="text-2xl font-extrabold mb-4">Découvrez nos services</h2>
+        <h2 className="text-2xl font-extrabold mb-4">Comment fonctionne l'audit Déclic Digital ?</h2>
         <div className="flex flex-wrap justify-center gap-3">
           <Link to="/creation-site-web" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
             Création de site web
@@ -129,7 +137,7 @@ const AuditSeo = () => (
     {/* Formulaire */}
     <SectionWrapper className="bg-section-blue" id="formulaire-audit">
       <div className="mx-auto max-w-xl">
-        <h2 className="mb-4 text-center text-3xl font-extrabold">Demandez votre audit gratuit</h2>
+        <h2 className="mb-4 text-center text-3xl font-extrabold">Demandez votre audit maintenant — réponse en 48h</h2>
         <p className="text-center text-muted-foreground mb-8">
           Remplissez le formulaire ci-dessous et recevez votre audit SEO personnalisé sous 48 heures.
         </p>

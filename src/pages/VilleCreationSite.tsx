@@ -24,8 +24,19 @@ const VilleCreationSite = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>{`Site web ${city.nameShort} | Déclic Digital`}</title>
-        <meta name="description" content={`Création de site internet professionnel ${city.description}. Agence web spécialisée PME. Site vitrine, e-commerce, responsive et optimisé SEO. Devis gratuit.`} />
+        <title>{
+          city.slug === "paris-1er" ? "Création site internet Paris 1er — TPE & artisans" :
+          city.slug === "paris-3eme" ? "Création site internet Paris 3ème — artisans & TPE" :
+          city.slug === "boulogne-billancourt" ? "Création site internet Boulogne-Billancourt — TPE" :
+          `Création site internet ${city.nameShort} — artisans & TPE`
+        }</title>
+        <meta name="description" content={
+          city.slug === "paris-1er" ? "Créez votre site web professionnel dans le 1er arrondissement de Paris. Déclic Digital accompagne les indépendants et TPE. Devis gratuit." :
+          city.slug === "paris-3eme" ? "Votre site web professionnel dans le Marais. Déclic Digital accompagne les artisans et TPE du 3ème arrondissement de Paris. Devis gratuit." :
+          city.slug === "boulogne-billancourt" ? "Agence web à Boulogne-Billancourt pour TPE et artisans. Déclic Digital crée votre site professionnel et améliore votre visibilité Google." :
+          `Agence web pour les TPE et artisans de ${city.nameShort}. Déclic Digital crée votre site professionnel et améliore votre référencement Google local.`
+        } />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`https://declicdigital.net/creation-site-web/${city.slug}`} />
       </Helmet>
 
@@ -45,8 +56,10 @@ const VilleCreationSite = () => {
                 Agence web {city.description}
               </span>
               <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-                Création de site web à{" "}
-                <span className="text-gradient">{city.nameShort}</span>
+                {city.slug === "paris-1er" ? "Création de site internet pour les TPE et artisans du Paris 1er" :
+                 city.slug === "paris-3eme" ? "Création de site web pour les artisans et TPE du Paris 3ème (Le Marais)" :
+                 city.slug === "boulogne-billancourt" ? "Création de site internet pour les TPE et artisans de Boulogne-Billancourt" :
+                 `Création de site internet pour les artisans et TPE de ${city.nameShort}`}
               </h1>
               <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
                 {content?.creationIntro || `Vous êtes une PME ou un indépendant ${city.description} ? Déclic Digital crée votre site internet professionnel, responsive et optimisé pour Google. Attirez enfin les bons clients grâce à un site qui travaille pour vous.`}
@@ -75,7 +88,7 @@ const VilleCreationSite = () => {
       {/* Pourquoi un site web */}
       <SectionWrapper className="bg-section-blue">
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">
-          {content?.creationWhyTitle || `Pourquoi créer un site web à ${city.nameShort} ?`}
+          {`Pourquoi les professionnels de ${city.nameShort} ont besoin d'un site web`}
         </h2>
         <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
           {content?.creationWhyText || `Un site internet professionnel est indispensable pour les entreprises ${city.description}. Il vous permet d'être trouvé par vos clients locaux et de vous démarquer de la concurrence.`}
@@ -101,7 +114,7 @@ const VilleCreationSite = () => {
       {/* Types de sites */}
       <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-10">
-          Nos solutions de création de site à {city.nameShort}
+          Un site web livré en 3 semaines, adapté à votre métier
         </h2>
         <div className="grid gap-6 md:grid-cols-3">
           {[
@@ -130,7 +143,7 @@ const VilleCreationSite = () => {
         <SectionWrapper className="bg-section-blue">
           <div className="mx-auto max-w-3xl space-y-6">
             <h2 className="text-3xl font-extrabold md:text-4xl text-center">
-              Votre agence web à {city.nameShort}
+              Référencement local {city.nameShort} : apparaissez dans Google Maps
             </h2>
             {content.creationSeoText.map((text, i) => (
               <p key={i} className="text-muted-foreground leading-relaxed">{text}</p>
@@ -236,7 +249,7 @@ const VilleCreationSite = () => {
       <section className="gradient-miami py-16">
         <div className="container text-center">
           <h2 className="mb-4 text-3xl font-extrabold text-white">
-            Prêt à créer votre site web à {city.nameShort} ?
+            Vous êtes basé(e) à {city.nameShort} ? Parlons de votre projet.
           </h2>
           <p className="mb-8 text-white/80">
             Contactez-nous pour un devis gratuit et personnalisé. Premier mois de mise en service + 50€/mois.

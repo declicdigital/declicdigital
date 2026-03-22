@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -33,13 +34,22 @@ const faqItems = [
 
 const Faq = () => (
   <PageLayout>
+    <Helmet>
+      <title>FAQ création site web & SEO pour TPE — Déclic Digital</title>
+      <meta name="description" content="Toutes les réponses à vos questions sur la création de site web et le référencement SEO pour les TPE et artisans. Délais, tarifs, méthodes." />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://declicdigital.net/faq" />
+      <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"FAQPage",mainEntity:faqItems.slice(0,10).map(item=>({
+        "@type":"Question",name:typeof item.q === "string" ? item.q : "",acceptedAnswer:{"@type":"Answer",text:typeof item.a === "string" ? item.a : "Consultez notre site pour la réponse détaillée."}
+      }))})}</script>
+    </Helmet>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "FAQ" }]} />
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
             <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
-              Questions <span className="text-gradient">fréquentes</span>
+              Questions fréquentes sur la création de site internet et le SEO pour les TPE
             </h1>
             <p className="text-lg text-muted-foreground">
               Retrouvez les réponses aux questions les plus posées sur la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link> et le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>.

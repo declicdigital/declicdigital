@@ -24,8 +24,15 @@ const VilleReferencementSeo = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>{`SEO ${city.nameShort} | Déclic Digital`}</title>
-        <meta name="description" content={`Agence de référencement SEO ${city.description}. Améliorez votre visibilité sur Google et attirez des clients qualifiés. Audit SEO gratuit.`} />
+        <title>{
+          city.slug === "boulogne-billancourt" ? "SEO local Boulogne-Billancourt — TPE & artisans" :
+          `Référencement SEO ${city.nameShort} — TPE & artisans`
+        }</title>
+        <meta name="description" content={
+          city.slug === "boulogne-billancourt" ? "Référencement Google local pour les TPE et artisans de Boulogne-Billancourt. Déclic Digital booste votre visibilité en Île-de-France. Audit gratuit." :
+          `Boostez votre visibilité Google à ${city.nameShort}. Déclic Digital, agence SEO locale pour TPE, artisans et indépendants en Île-de-France. Audit gratuit.`
+        } />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`https://declicdigital.net/referencement-seo/${city.slug}`} />
       </Helmet>
 
@@ -44,8 +51,8 @@ const VilleReferencementSeo = () => {
                 Agence SEO {city.description}
               </span>
               <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-                Référencement SEO à{" "}
-                <span className="text-gradient">{city.nameShort}</span>
+                {city.slug === "boulogne-billancourt" ? "Référencement SEO local pour les artisans et TPE de Boulogne-Billancourt" :
+                 `Référencement SEO local pour les artisans et TPE de ${city.nameShort}`}
               </h1>
               <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
                 {content?.seoIntro || `Votre entreprise ${city.description} mérite d'être visible sur Google. Notre agence SEO optimise votre site pour attirer des clients qualifiés et développer votre activité grâce au référencement naturel.`}
@@ -74,7 +81,7 @@ const VilleReferencementSeo = () => {
       {/* Bénéfices SEO local */}
       <SectionWrapper className="bg-section-blue">
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">
-          Pourquoi investir dans le SEO à {city.nameShort} ?
+          Pourquoi le SEO local est indispensable à {city.nameShort}
         </h2>
         <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
           {content?.seoWhyText || `Le référencement local est essentiel pour les entreprises ${city.description}. Il vous permet d'apparaitre devant vos clients au moment où ils recherchent vos services.`}
@@ -99,7 +106,7 @@ const VilleReferencementSeo = () => {
       {/* Services SEO */}
       <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-10">
-          Nos services SEO à {city.nameShort}
+          Notre méthode de référencement pour {city.nameShort}
         </h2>
         <div className="grid gap-6 md:grid-cols-2">
           {[
@@ -134,7 +141,7 @@ const VilleReferencementSeo = () => {
         <SectionWrapper className="bg-section-blue">
           <div className="mx-auto max-w-3xl space-y-6">
             <h2 className="text-3xl font-extrabold md:text-4xl text-center">
-              Le SEO local à {city.nameShort}
+              Apparaître dans Google Maps et les recherches locales à {city.nameShort}
             </h2>
             <p className="text-muted-foreground leading-relaxed">{content.seoLocalText}</p>
             <p className="text-muted-foreground leading-relaxed">
@@ -215,7 +222,7 @@ const VilleReferencementSeo = () => {
       <section className="gradient-miami py-16">
         <div className="container text-center">
           <h2 className="mb-4 text-3xl font-extrabold text-white">
-            Améliorez votre visibilité à {city.nameShort}
+            Demandez votre audit SEO gratuit — réponse en 48h
           </h2>
           <p className="mb-8 text-white/80">
             Demandez votre audit SEO gratuit et découvrez comment attirer plus de clients depuis Google.

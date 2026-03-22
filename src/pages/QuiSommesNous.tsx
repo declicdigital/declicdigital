@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Heart, Target, Rocket, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,13 @@ import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 
 const QuiSommesNous = () => (
   <PageLayout>
+    <Helmet>
+      <title>Qui sommes-nous — Agence web & SEO Paris | Déclic Digital</title>
+      <meta name="description" content="Déclic Digital, agence web et SEO freelance à Paris, spécialisée dans l'accompagnement des TPE, artisans et indépendants en Île-de-France." />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://declicdigital.net/qui-sommes-nous" />
+    </Helmet>
+
     {/* Breadcrumb */}
     <PageBreadcrumb items={[
       { label: "Accueil", href: "/" },
@@ -26,7 +34,7 @@ const QuiSommesNous = () => (
               Expert Produit Google
             </span>
             <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-              L'histoire de <span className="text-gradient">Déclic Digital</span>
+              Déclic Digital : votre agence web et SEO freelance spécialisée TPE à Paris
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
               Une agence fondée par un Expert Produit Google, avec la conviction que chaque entreprise, quelle que soit sa taille, mérite d'être visible en ligne et d'attirer des clients grâce à un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web professionnel</Link>.

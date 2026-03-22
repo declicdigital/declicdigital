@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { motion } from "framer-motion";
 import { Eye, Users, TrendingUp, Search, Settings, FileText, BarChart3 } from "lucide-react";
@@ -11,6 +12,14 @@ import { cities } from "@/data/cities";
 
 const ReferencementSeo = () => (
   <PageLayout>
+    <Helmet>
+      <title>Référencement SEO local pour TPE & artisans — Paris</title>
+      <meta name="description" content="Améliorez votre visibilité sur Google avec notre agence SEO freelance. Référencement naturel local pour TPE et artisans en Île-de-France. Résultats mesurables." />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://declicdigital.net/referencement-seo" />
+      <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"Service",serviceType:"Référencement SEO",provider:{"@type":"LocalBusiness",name:"Déclic Digital",url:"https://declicdigital.net"},areaServed:"Île-de-France"})}</script>
+    </Helmet>
+
     {/* Breadcrumb */}
     <PageBreadcrumb items={[
       { label: "Accueil", href: "/" },
@@ -22,7 +31,7 @@ const ReferencementSeo = () => (
       <div className="container">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="mx-auto max-w-3xl text-center">
           <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-            Référencement SEO à Paris : soyez <span className="text-gradient">visible sur Google</span>
+            Référencement naturel Google (SEO) pour les TPE, artisans et indépendants à Paris
           </h1>
           <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
             Le référencement SEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour qu'il apparaisse en première page Google. Commencez par un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit gratuit</Link>.
@@ -33,10 +42,9 @@ const ReferencementSeo = () => (
         </motion.div>
       </div>
     </section>
-
     {/* Bénéfices */}
     <SectionWrapper className="bg-section-blue">
-      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Les bénéfices du SEO pour les PME</h2>
+      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Pourquoi le SEO local est essentiel pour votre activité</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
         Le référencement naturel est la stratégie la plus rentable pour développer votre activité en ligne. Contrairement à la publicité payante, les résultats du SEO sont durables. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou consultez <Link to="/faq" className="text-primary font-semibold hover:underline">notre FAQ</Link>.
       </p>
@@ -60,7 +68,7 @@ const ReferencementSeo = () => (
     {/* Qu'est-ce que le SEO */}
     <SectionWrapper>
       <div className="mx-auto max-w-5xl">
-        <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Qu'est-ce que le référencement SEO ?</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Agence SEO freelance : une approche personnalisée et transparente</h2>
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="space-y-6">
             <p className="text-muted-foreground leading-relaxed">
@@ -82,7 +90,7 @@ const ReferencementSeo = () => (
 
     {/* Méthode */}
     <SectionWrapper className="bg-section-blue">
-      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre méthode SEO</h2>
+      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre méthode de référencement naturel en 4 étapes</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
         Notre approche est méthodique et transparente. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link> et notre processus éprouvé pour optimiser votre visibilité sur Google.
       </p>
@@ -107,7 +115,7 @@ const ReferencementSeo = () => (
     {/* SEO vs SEA */}
     <SectionWrapper>
       <div className="mx-auto max-w-3xl space-y-6">
-        <h2 className="text-3xl font-extrabold md:text-4xl text-center">SEO vs publicité payante : pourquoi choisir le référencement naturel ?</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center">SEO local : apparaître dans Google Maps et les recherches de proximité</h2>
         <p className="text-muted-foreground leading-relaxed">
           La publicité payante (Google Ads, Facebook Ads) peut générer du trafic rapidement, mais elle s'arrête dès que vous coupez le budget. Le SEO, en revanche, est un investissement qui continue de porter ses fruits sur le long terme. Une fois bien positionné, votre site attire des visiteurs gratuitement, jour après jour.
         </p>
@@ -120,7 +128,7 @@ const ReferencementSeo = () => (
     {/* Villes maillage */}
     <SectionWrapper className="bg-section-blue">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">
-        Référencement SEO par ville
+        Combien de temps avant de voir des résultats SEO ?
       </h2>
       <p className="text-center text-muted-foreground mb-8">
         Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold hover:underline">référencement SEO local</Link> à Paris et dans les Hauts-de-Seine.
@@ -150,7 +158,7 @@ const ReferencementSeo = () => (
     {/* CTA */}
     <section className="gradient-miami py-16">
       <div className="container text-center">
-        <h2 className="mb-4 text-3xl font-extrabold text-white">Prêt à booster votre visibilité ?</h2>
+        <h2 className="mb-4 text-3xl font-extrabold text-white">Demandez votre audit SEO gratuit</h2>
         <p className="mb-8 text-white/80">Recevez un audit gratuit de votre site en 48h et découvrez comment améliorer votre référencement.</p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Button asChild size="lg" className="rounded-full bg-white px-8 font-semibold text-foreground shadow-lg hover:bg-white/90">
