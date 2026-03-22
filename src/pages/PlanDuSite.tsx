@@ -15,6 +15,7 @@ const links = [
   { label: "Nos tarifs", to: "/tarifs" },
   { label: "Réalisations", to: "/realisations" },
   { label: "Nos villes", to: "/nos-villes" },
+  { label: "Nos métiers", to: "/nos-metiers" },
   { label: "Qui sommes-nous", to: "/qui-sommes-nous" },
   { label: "Contact", to: "/contact" },
   { label: "FAQ", to: "/faq" },
