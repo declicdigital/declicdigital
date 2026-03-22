@@ -141,7 +141,7 @@ const VilleReferencementSeo = () => {
         <SectionWrapper className="bg-section-blue">
           <div className="mx-auto max-w-3xl space-y-6">
             <h2 className="text-3xl font-extrabold md:text-4xl text-center">
-              Le SEO local à {city.nameShort}
+              Apparaître dans Google Maps et les recherches locales à {city.nameShort}
             </h2>
             <p className="text-muted-foreground leading-relaxed">{content.seoLocalText}</p>
             <p className="text-muted-foreground leading-relaxed">
