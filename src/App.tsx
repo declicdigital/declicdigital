@@ -34,6 +34,8 @@ const Blog = lazy(() => import("./pages/Blog"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const BlogCategory = lazy(() => import("./pages/BlogCategory"));
 const SharedProject = lazy(() => import("./pages/SharedProject"));
+const NosMetiers2 = lazy(() => import("./pages/NosMetiers2"));
+const MetierCreationSite = lazy(() => import("./pages/MetierCreationSite"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite"));
 const FormulaireBrief = lazy(() => import("./pages/FormulaireBrief"));
@@ -54,7 +56,9 @@ const App = () => (
                 <Route path="/" element={<Index />} />
                 <Route path="/audit-seo-gratuit" element={<AuditSeo />} />
                 <Route path="/creation-site-web" element={<CreationSite />} />
+                <Route path="/creation-site-web/metier/:metier" element={<MetierCreationSite />} />
                 <Route path="/creation-site-web/:ville" element={<VilleCreationSite />} />
+                <Route path="/nos-metiers" element={<NosMetiers2 />} />
                 <Route path="/referencement-seo" element={<ReferencementSeo />} />
                 <Route path="/referencement-seo/:ville" element={<VilleReferencementSeo />} />
                 <Route path="/nos-villes" element={<NosVilles />} />
