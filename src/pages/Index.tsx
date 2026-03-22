@@ -35,7 +35,7 @@ const Index = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>Agence web Paris | Création site internet & SEO TPE | Déclic Digital</title>
+        <title>Création site internet Paris & Hauts-de-Seine (92) | SEO TPE | Déclic Digital</title>
         <meta
           name="description"
           content="Déclic Digital, agence web à Paris spécialisée TPE et artisans. Création de site internet professionnel et référencement SEO en Île-de-France. Audit gratuit, devis en 24h."
