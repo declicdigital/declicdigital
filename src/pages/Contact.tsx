@@ -9,7 +9,7 @@ import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import heroContact from "@/assets/contact-agence-web.png";
+import heroContact from "@/assets/contact-agence-web.webp";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 
 const Contact = () => (
