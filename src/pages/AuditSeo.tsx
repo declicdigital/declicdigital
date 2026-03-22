@@ -107,7 +107,7 @@ const AuditSeo = () => (
     {/* Maillage */}
     <SectionWrapper>
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="text-2xl font-extrabold mb-4">Découvrez nos services</h2>
+        <h2 className="text-2xl font-extrabold mb-4">Comment fonctionne l'audit Déclic Digital ?</h2>
         <div className="flex flex-wrap justify-center gap-3">
           <Link to="/creation-site-web" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
             Création de site web
