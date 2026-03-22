@@ -1,17 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap');
 
 @font-face {
-  font-family: 'Recoleta';
-  src: url('/fonts/recoleta-bold.otf') format('opentype');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'RecoletaAlt';
-  src: url('/fonts/recoletaalt-bold.otf') format('opentype');
-  font-weight: 700;
+  font-family: 'Clash Display';
+  src: url('/fonts/ClashDisplay-Variable.ttf') format('truetype');
+  font-weight: 200 700;
   font-style: normal;
   font-display: swap;
 }
@@ -132,7 +125,7 @@
 
   /* ── Headings ── */
   h1 {
-    font-family: 'Recoleta', Georgia, serif;
+    font-family: 'DM Serif Display', Georgia, serif;
     @apply font-bold tracking-tight;
     color: hsl(var(--heading));
     position: relative;
