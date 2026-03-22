@@ -25,8 +25,8 @@ const VilleReferencementSeo = () => {
     <PageLayout>
       <Helmet>
         <title>{
-          city.slug === "boulogne-billancourt" ? "SEO local Boulogne-Billancourt — TPE & artisans" :
-          `Référencement SEO ${city.nameShort} — TPE & artisans`
+          city.slug === "boulogne-billancourt" ? "SEO local Boulogne-Billancourt | TPE & artisans" :
+          `Référencement SEO ${city.nameShort} | TPE & artisans`
         }</title>
         <meta name="description" content={
           city.slug === "boulogne-billancourt" ? "Référencement Google local pour les TPE et artisans de Boulogne-Billancourt. Déclic Digital booste votre visibilité en Île-de-France. Audit gratuit." :
