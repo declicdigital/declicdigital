@@ -41,7 +41,7 @@ const plans: {
     monthly: "50",
     setup: "590",
     unit: "€/mois",
-    description: "Pour les PME et indépendants qui veulent une présence en ligne professionnelle.",
+    description: "Pour les TPE et indépendants qui veulent une présence en ligne professionnelle.",
     highlighted: false,
     type: "creation",
     features: [
@@ -223,7 +223,7 @@ const Tarifs = () => (
             Nos tarifs création de site web et référencement SEO pour indépendants et TPE
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Des offres claires et adaptées aux budgets des PME et indépendants. Chaque prestation, de la{" "}
+            Des offres claires et adaptées aux budgets des TPE et indépendants. Chaque prestation, de la{" "}
             <Link to="/creation-site-web" className="font-semibold text-primary hover:underline">
               création de site web
             </Link>{" "}

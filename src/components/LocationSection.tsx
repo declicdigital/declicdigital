@@ -29,7 +29,7 @@ const LocationSection = () => {
       <div className="text-center mb-10">
         <h2 className="text-3xl font-extrabold md:text-4xl">Notre agence</h2>
         <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-          Basés à Paris 15e, nous accompagnons les PME et indépendants dans toute l'Île-de-France.
+          Basés à Paris 15e, nous accompagnons les TPE et indépendants dans toute l'Île-de-France.
         </p>
       </div>
 

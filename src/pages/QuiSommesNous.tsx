@@ -62,7 +62,7 @@ const QuiSommesNous = () => (
           Passionné par le web depuis plus de 8 ans, il a commencé en aidant son père à développer la visibilité de son entreprise de BTP. Puis il a accompagné un artiste dans la création de son site internet. Ces deux expériences lui ont fait prendre conscience d'un constat : la plupart des petites entreprises n'ont pas les moyens ni les connaissances pour créer un site qui génère réellement des clients.
         </p>
         <p>
-          C'est de ce constat qu'est née Déclic Digital : une agence web pensée pour les PME, les artisans et les indépendants. L'idée est simple : proposer des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites web professionnels</Link>, performants et optimisés pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement Google</Link>, à des <Link to="/tarifs" className="text-primary font-semibold hover:underline">tarifs accessibles</Link>.
+          C'est de ce constat qu'est née Déclic Digital : une agence web pensée pour les TPE, les artisans et les indépendants. L'idée est simple : proposer des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites web professionnels</Link>, performants et optimisés pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement Google</Link>, à des <Link to="/tarifs" className="text-primary font-semibold hover:underline">tarifs accessibles</Link>.
         </p>
         <div className="rounded-2xl bg-card p-6 shadow-card flex items-start gap-4">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl gradient-primary text-white">
@@ -79,7 +79,7 @@ const QuiSommesNous = () => (
           "Les petites entreprises ont besoin d'outils simples et efficaces pour trouver des clients en ligne."
         </blockquote>
         <p>
-          Aujourd'hui, Déclic Digital accompagne des PME et indépendants <Link to="/nos-villes" className="text-primary font-semibold hover:underline">à Paris et dans les Hauts-de-Seine</Link>. Chaque projet est abordé avec la même rigueur et la même passion : comprendre les besoins du client, concevoir un site qui lui ressemble, l'optimiser pour Google et mesurer les résultats.
+          Aujourd'hui, Déclic Digital accompagne des TPE et indépendants <Link to="/nos-villes" className="text-primary font-semibold hover:underline">à Paris et dans les Hauts-de-Seine</Link>. Chaque projet est abordé avec la même rigueur et la même passion : comprendre les besoins du client, concevoir un site qui lui ressemble, l'optimiser pour Google et mesurer les résultats.
         </p>
         <p>
           Notre force, c'est la proximité. Nous ne sommes pas une grande agence impersonnelle. Nous prenons le temps d'échanger avec chaque client, de comprendre son métier et de proposer des solutions sur mesure. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
@@ -92,14 +92,14 @@ const QuiSommesNous = () => (
       <div className="text-center mb-10">
         <h2 className="text-3xl font-extrabold md:text-4xl">Notre mission</h2>
         <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-          Rendre la visibilité en ligne accessible à toutes les entreprises grâce à la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de sites web</Link> et le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>. Nous croyons que chaque PME mérite un site qui attire des clients.
+          Rendre la visibilité en ligne accessible à toutes les entreprises grâce à la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de sites web</Link> et le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>. Nous croyons que chaque TPE mérite un site qui attire des clients.
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-3 max-w-4xl mx-auto">
         {[
           { icon: Heart, title: "Passion", desc: "Le web est notre métier et notre passion depuis toujours. Nous aimons ce que nous faisons et cela se reflète dans la qualité de chaque projet." },
           { icon: Target, title: "Résultats", desc: "Chaque action est orientée vers un objectif concret : générer des clients pour votre entreprise. Nous mesurons tout pour optimiser en continu." },
-          { icon: Rocket, title: "Accessibilité", desc: "Des solutions adaptées aux budgets des PME et petites entreprises. Des explications claires, pas de surprise. Des prix transparents et un accompagnement humain." },
+          { icon: Rocket, title: "Accessibilité", desc: "Des solutions adaptées aux budgets des TPE et indépendants. Des explications claires, pas de surprise. Des prix transparents et un accompagnement humain." },
         ].map((item, i) => (
           <div key={i} className="rounded-2xl bg-background p-6 shadow-card text-center">
             <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">

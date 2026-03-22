@@ -25,18 +25,18 @@ const Blog = () => {
     <PageLayout hideBlogCarousel>
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Blog" }]} />
       <Helmet>
-        <title>Blog web, SEO et tech pour PME | Déclic Digital</title>
-        <meta name="description" content="Conseils, tendances et guides pratiques sur la création de sites web, le SEO et la tech pour les PME. Blog par Déclic Digital." />
+        <title>Blog web, SEO et tech pour TPE | Déclic Digital</title>
+        <meta name="description" content="Conseils, tendances et guides pratiques sur la création de sites web, le SEO et la tech pour les TPE. Blog par Déclic Digital." />
         <link rel="canonical" href="https://declic-digital.fr/blog" />
         <meta property="og:title" content="Blog web, SEO et tech | Déclic Digital" />
-        <meta property="og:description" content="Conseils, tendances et guides pratiques sur la création de sites web, le SEO et la tech pour les PME." />
+        <meta property="og:description" content="Conseils, tendances et guides pratiques sur la création de sites web, le SEO et la tech pour les TPE." />
         <meta property="og:type" content="website" />
         <script type="application/ld+json">
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Blog",
             name: "Blog Déclic Digital",
-            description: "Conseils web, SEO et tech pour PME",
+            description: "Conseils web, SEO et tech pour TPE",
             url: "https://declic-digital.fr/blog",
             publisher: { "@type": "Organization", name: "Déclic Digital" },
           })}

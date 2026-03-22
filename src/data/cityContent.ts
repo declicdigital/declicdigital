@@ -360,7 +360,7 @@ export const cityContent: Record<string, CityContent> = {
     creationWhyTitle: "Première ville du 92 en digital",
     creationWhyText: "Boulogne-Billancourt accueille les sièges de TF1, Canal+ et de nombreuses entreprises technologiques. Cette concentration de sociétés crée un marché local exigeant où la qualité de votre site web fait la différence.",
     creationSeoText: [
-      "Boulogne-Billancourt est un véritable pôle économique aux portes de Paris. Les PME et commerces locaux doivent se démarquer dans un environnement où les grandes entreprises imposent un standard digital élevé.",
+      "Boulogne-Billancourt est un véritable pôle économique aux portes de Paris. Les TPE et commerces locaux doivent se démarquer dans un environnement où les grandes entreprises imposent un standard digital élevé.",
       "Notre agence crée des sites web qui permettent aux entreprises boulonnaises de rivaliser avec les grands groupes en termes de présence en ligne. Performance, design et SEO local sont nos priorités pour votre projet.",
     ],
     seoIntro: "Dominez les résultats Google à Boulogne-Billancourt. Avec plus de 120 000 habitants et des milliers d'entreprises, le potentiel de clients à capter en ligne est considérable.",
@@ -570,7 +570,7 @@ export const cityContent: Record<string, CityContent> = {
     creationWhyTitle: "Densité maximale, visibilité maximale",
     creationWhyText: "Avec plus de 65 000 habitants sur seulement 2,4 km², Levallois est un marché hyper-concentré. Chaque recherche Google locale peut vous apporter un client à quelques centaines de mètres de votre entreprise.",
     creationSeoText: [
-      "Levallois-Perret est la ville la plus dense de France et l'une des plus riches en entreprises. Les startups, PME et grands groupes s'y côtoient dans un espace réduit. Votre site web est votre meilleur outil pour capter cette proximité.",
+      "Levallois-Perret est la ville la plus dense de France et l'une des plus riches en entreprises. Les startups, TPE et indépendants s'y côtoient dans un espace réduit. Votre site web est votre meilleur outil pour capter cette proximité.",
       "De la mairie à Anatole France, chaque quartier de Levallois regorge de clients potentiels. Un site rapide, bien conçu et optimisé SEO vous permet de les atteindre avant vos concurrents directs.",
     ],
     seoIntro: "Dans la ville la plus dense de France, le SEO local est un avantage concurrentiel majeur. Positionnez votre entreprise de Levallois devant vos voisins sur Google.",
@@ -668,7 +668,7 @@ export const cityContent: Record<string, CityContent> = {
     creationWhyTitle: "Votre site au coeur de La Défense",
     creationWhyText: "Puteaux accueille une grande partie de La Défense et des quartiers résidentiels animés. Cette position unique offre un marché double : professionnels du quartier d'affaires et résidents locaux.",
     creationSeoText: [
-      "Puteaux combine vie de quartier et proximité avec le plus grand centre d'affaires européen. Les PME et commerces locaux peuvent capter une clientèle étendue avec un site web performant.",
+      "Puteaux combine vie de quartier et proximité avec le plus grand centre d'affaires européen. Les TPE et commerces locaux peuvent capter une clientèle étendue avec un site web performant.",
       "Du vieux Puteaux aux tours de La Défense, la ville offre un tissu commercial diversifié. Un site bien référencé vous positionne auprès des 45 000 habitants et des 180 000 salariés du quartier.",
     ],
     seoIntro: "Positionnez votre entreprise à Puteaux sur Google. Entre La Défense et les quartiers résidentiels, le potentiel de clients à capter en ligne est immense.",

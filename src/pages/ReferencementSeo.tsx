@@ -78,11 +78,11 @@ const ReferencementSeo = () => (
               Le référencement naturel repose sur trois piliers fondamentaux. Le premier est la technique : vitesse de chargement, architecture du site, compatibilité mobile, sécurité HTTPS. Le deuxième est le contenu : des textes pertinents, bien structurés et optimisés pour les mots clés recherchés par votre cible. Le troisième est la popularité : les liens provenant d'autres sites qui renforcent l'autorité de votre domaine aux yeux de Google.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Pour une PME, le SEO est particulièrement puissant car il permet de rivaliser avec des entreprises plus grandes en se positionnant sur des mots clés locaux ou de niche. Découvrez <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">nos offres de création de site</Link> intégrant le SEO dès la conception.
+              Pour une TPE, le SEO est particulièrement puissant car il permet de rivaliser avec des entreprises plus grandes en se positionnant sur des mots clés locaux ou de niche. Découvrez <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">nos offres de création de site</Link> intégrant le SEO dès la conception.
             </p>
           </div>
           <div className="flex justify-center">
-            <img src={seoImage} alt="Référencement SEO Google pour améliorer la visibilité des PME" className="w-full max-w-md rounded-2xl shadow-card" />
+            <img src={seoImage} alt="Référencement SEO Google pour améliorer la visibilité des TPE" className="w-full max-w-md rounded-2xl shadow-card" />
           </div>
         </div>
       </div>
@@ -120,7 +120,7 @@ const ReferencementSeo = () => (
           La publicité payante (Google Ads, Facebook Ads) peut générer du trafic rapidement, mais elle s'arrête dès que vous coupez le budget. Le SEO, en revanche, est un investissement qui continue de porter ses fruits sur le long terme. Une fois bien positionné, votre site attire des visiteurs gratuitement, jour après jour.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Pour les PME avec des budgets marketing limités, le SEO est souvent la stratégie la plus rentable. Les premiers résultats apparaissent généralement entre 3 et 6 mois, mais les gains s'accumulent et se renforcent avec le temps. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou <Link to="/faq" className="text-primary font-semibold hover:underline">notre FAQ</Link> pour en savoir plus.
+          Pour les TPE avec des budgets marketing limités, le SEO est souvent la stratégie la plus rentable. Les premiers résultats apparaissent généralement entre 3 et 6 mois, mais les gains s'accumulent et se renforcent avec le temps. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou <Link to="/faq" className="text-primary font-semibold hover:underline">notre FAQ</Link> pour en savoir plus.
         </p>
       </div>
     </SectionWrapper>

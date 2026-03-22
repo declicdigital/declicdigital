@@ -17,19 +17,19 @@ const staticPages: Record<string, PageMeta> = {
   "/": {
     title: "Création site web Paris, SEO | Déclic Digital",
     description:
-      "Agence web à Paris spécialisée en création de site internet et référencement SEO pour PME. Expert Produit Google. Audit SEO gratuit. Devis en ligne.",
+      "Agence web à Paris spécialisée en création de site internet et référencement SEO pour TPE. Expert Produit Google. Audit SEO gratuit. Devis en ligne.",
     image: DEFAULT_IMAGE,
   },
   "/creation-site-web": {
     title: "Création de site web professionnel | Déclic Digital",
     description:
-      "Création de site internet sur mesure pour PME. Site vitrine, e-commerce, landing page. Design responsive et optimisé SEO. Devis gratuit.",
+      "Création de site internet sur mesure pour TPE. Site vitrine, e-commerce, landing page. Design responsive et optimisé SEO. Devis gratuit.",
     image: `${SITE_URL}/og/creation-site.png`,
   },
   "/referencement-seo": {
     title: "Référencement SEO Google | Déclic Digital",
     description:
-      "Agence SEO à Paris. Audit, stratégie de référencement naturel et suivi de performance pour PME. Augmentez votre visibilité sur Google.",
+      "Agence SEO à Paris. Audit, stratégie de référencement naturel et suivi de performance pour TPE. Augmentez votre visibilité sur Google.",
     image: `${SITE_URL}/og/seo.png`,
   },
   "/audit-seo-gratuit": {
@@ -47,13 +47,13 @@ const staticPages: Record<string, PageMeta> = {
   "/realisations": {
     title: "Nos réalisations | Déclic Digital",
     description:
-      "Découvrez nos projets de création de sites web et de référencement SEO pour des PME et entrepreneurs.",
+      "Découvrez nos projets de création de sites web et de référencement SEO pour des TPE et indépendants.",
     image: DEFAULT_IMAGE,
   },
   "/qui-sommes-nous": {
     title: "Qui sommes-nous | Déclic Digital",
     description:
-      "Déclic Digital, agence web fondée par Geoffrey, Expert Produit Google. Accompagnement digital pour PME à Paris et dans les Hauts-de-Seine.",
+      "Déclic Digital, agence web fondée par Geoffrey, Expert Produit Google. Accompagnement digital pour TPE à Paris et dans les Hauts-de-Seine.",
     image: DEFAULT_IMAGE,
   },
   "/faq": {
@@ -71,7 +71,7 @@ const staticPages: Record<string, PageMeta> = {
   "/blog": {
     title: "Blog | Déclic Digital",
     description:
-      "Conseils et actualités sur la création de site web, le SEO et le marketing digital pour les PME.",
+      "Conseils et actualités sur la création de site web, le SEO et le marketing digital pour les TPE.",
     image: DEFAULT_IMAGE,
   },
   "/nos-villes": {
@@ -86,7 +86,7 @@ const blogArticles: Record<string, PageMeta> = {
   "comment-choisir-hebergement-web-2026": {
     title: "Comment choisir son hébergement web en 2026 | Guide complet",
     description:
-      "Découvrez les critères essentiels pour choisir un hébergement web performant en 2026 : vitesse, sécurité, support et prix. Guide pratique pour PME.",
+      "Découvrez les critères essentiels pour choisir un hébergement web performant en 2026 : vitesse, sécurité, support et prix. Guide pratique pour TPE.",
     image: `${SITE_URL}/og/hebergement.webp`,
   },
   "tendances-web-design-2026": {

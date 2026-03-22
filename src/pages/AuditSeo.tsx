@@ -40,7 +40,7 @@ const AuditSeo = () => (
             </Button>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroAudit} alt="Audit SEO gratuit pour site web PME" className="w-full max-w-lg drop-shadow-2xl" />
+            <img src={heroAudit} alt="Audit SEO gratuit pour site web TPE" className="w-full max-w-lg drop-shadow-2xl" />
           </motion.div>
         </div>
       </div>
@@ -83,7 +83,7 @@ const AuditSeo = () => (
           Concrètement, nous analysons la structure technique de votre site (vitesse, mobile, sécurité), la qualité de votre contenu (mots clés, balises, textes), et votre positionnement par rapport à vos concurrents. À l'issue de l'audit, vous recevez un rapport détaillé avec des recommandations classées par priorité.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          L'audit est la première étape indispensable pour toute stratégie de <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link> efficace. Sans diagnostic précis, il est impossible de savoir quelles actions vont réellement améliorer votre visibilité. C'est pourquoi nous proposons cet audit gratuitement : nous voulons que chaque PME puisse comprendre sa situation et prendre les bonnes décisions.
+          L'audit est la première étape indispensable pour toute stratégie de <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link> efficace. Sans diagnostic précis, il est impossible de savoir quelles actions vont réellement améliorer votre visibilité. C'est pourquoi nous proposons cet audit gratuitement : nous voulons que chaque TPE puisse comprendre sa situation et prendre les bonnes décisions.
         </p>
         <p className="text-muted-foreground leading-relaxed">
           Après avoir reçu votre audit, vous pouvez choisir de mettre en oeuvre les recommandations vous-même ou de nous confier l'optimisation de votre site. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> pour découvrir nos offres. Dans tous les cas, l'audit vous appartient et vous n'avez aucune obligation.

@@ -34,14 +34,14 @@ const CreationSite = () => (
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
             <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">Création de site internet sur-mesure pour les artisans, TPE et indépendants à Paris</h1>
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-              Nous concevons des sites modernes, rapides et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour les PME et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou demandez un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link>.
+              Nous concevons des sites modernes, rapides et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour les TPE et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou demandez un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link>.
             </p>
             <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
               <Link to="/contact">Devis création de site</Link>
             </Button>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroCreation} alt="Création de site internet professionnel pour PME" className="w-full max-w-lg drop-shadow-2xl" />
+            <img src={heroCreation} alt="Création de site internet professionnel pour TPE" className="w-full max-w-lg drop-shadow-2xl" />
           </motion.div>
         </div>
       </div>
@@ -99,11 +99,11 @@ const CreationSite = () => (
     <SectionWrapper className="bg-section-blue">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre méthode : de la maquette à la mise en ligne</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-        Nos solutions s'adaptent à tous les profils d'entreprises. Que vous soyez artisan, commerçant, profession libérale ou dirigeant de PME, nous concevons un site adapté à votre métier et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement Google</Link>.
+        Nos solutions s'adaptent à tous les profils d'entreprises. Que vous soyez artisan, commerçant, profession libérale ou dirigeant de TPE, nous concevons un site adapté à votre métier et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement Google</Link>.
       </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
-          { icon: Building2, title: "PME", desc: "Développez votre présence en ligne et positionnez-vous comme un acteur de référence dans votre secteur." },
+          { icon: Building2, title: "TPE", desc: "Développez votre présence en ligne et positionnez-vous comme un acteur de référence dans votre secteur." },
           { icon: User, title: "Indépendants", desc: "Présentez vos services de manière professionnelle et générez des prises de contact qualifiées." },
           { icon: Wrench, title: "Artisans", desc: "Attirez des clients locaux grâce à un site optimisé pour le référencement local et Google Maps." },
           { icon: ShoppingCart, title: "E-commerce", desc: "Vendez vos produits en ligne avec un site sécurisé, rapide et pensé pour la conversion." },
@@ -131,7 +131,7 @@ const CreationSite = () => (
           </div>
           <div className="space-y-6 order-1 lg:order-2">
             <p className="text-muted-foreground leading-relaxed">
-              Un bon site web pour une PME, c'est avant tout un site qui remplit son objectif : attirer des visiteurs et les convertir en clients. Il ne suffit pas d'avoir un site "joli". Il doit être rapide, bien structuré, adapté aux mobiles et surtout visible sur Google.
+              Un bon site web pour une TPE, c'est avant tout un site qui remplit son objectif : attirer des visiteurs et les convertir en clients. Il ne suffit pas d'avoir un site "joli". Il doit être rapide, bien structuré, adapté aux mobiles et surtout visible sur Google.
             </p>
             <p className="text-muted-foreground leading-relaxed">
               Chaque page doit être pensée pour répondre à une intention de recherche précise. Par exemple, si vous êtes plombier à Bordeaux, votre site doit apparaître quand un internaute tape "plombier Bordeaux" dans Google. C'est le rôle du <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement naturel</Link>, et c'est ce que nous intégrons dès la conception de chaque projet.
