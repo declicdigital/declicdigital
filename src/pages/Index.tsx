@@ -199,7 +199,9 @@ const Index = () => {
       </SectionWrapper>
 
       {/* Avis clients Google */}
-      <GoogleReviewsSection />
+      <Suspense fallback={<div className="py-16" />}>
+        <GoogleReviewsSection />
+      </Suspense>
 
       {/* Pourquoi un site web est essentiel */}
       <SectionWrapper>
