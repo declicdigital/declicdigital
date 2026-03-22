@@ -84,7 +84,7 @@ const Index = () => {
                   Devis création de site
                 </Link>
               </div>
-            </motion.div>
+            </div>
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
