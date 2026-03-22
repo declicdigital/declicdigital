@@ -1,8 +1,9 @@
+import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Globe, Search, BarChart3, Zap, Eye, Users, TrendingUp, ChevronRight, Monitor, Smartphone, Gauge, CheckCircle, Shield, Clock, Target, Award, MessageSquare, Phone as PhoneIcon, FileText, Rocket, Star } from "lucide-react";
-import GoogleReviewsSection from "@/components/GoogleReviewsSection";
+const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -65,11 +66,7 @@ const Index = () => {
       <section className="gradient-hero relative overflow-hidden">
         <div className="container py-16 md:py-24 lg:py-32">
           <div className="grid items-center gap-10 lg:grid-cols-2">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-            >
+            <div>
               <span className="mb-4 inline-block rounded-full bg-brand-violet/10 px-4 py-1.5 text-xs font-semibold text-brand-violet">
                 Expert Produit Google · Agence digitale
               </span>
@@ -87,7 +84,7 @@ const Index = () => {
                   Devis création de site
                 </Link>
               </div>
-            </motion.div>
+            </div>
             <motion.div
               initial={{ opacity: 0, x: 40 }}
               animate={{ opacity: 1, x: 0 }}
@@ -198,7 +195,9 @@ const Index = () => {
       </SectionWrapper>
 
       {/* Avis clients Google */}
-      <GoogleReviewsSection />
+      <Suspense fallback={<div className="py-16" />}>
+        <GoogleReviewsSection />
+      </Suspense>
 
       {/* Pourquoi un site web est essentiel */}
       <SectionWrapper>
