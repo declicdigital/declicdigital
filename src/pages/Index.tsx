@@ -9,16 +9,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
-import heroDashboard from "@/assets/tableau-bord-seo-professionnel.png";
-import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
+import heroDashboard from "@/assets/tableau-bord-seo-professionnel.webp";
+import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 
-import logoWordpress from "@/assets/logos/wordpress.png";
-import logoShopify from "@/assets/logos/shopify.png";
-import logoLovable from "@/assets/logos/lovable.png";
+import logoWordpress from "@/assets/logos/wordpress.webp";
+import logoShopify from "@/assets/logos/shopify.webp";
+import logoLovable from "@/assets/logos/lovable.webp";
 import logoClaude from "@/assets/logos/claude.svg";
-import logoSemrush from "@/assets/logos/semrush.png";
-import logoSearchConsole from "@/assets/logos/search-console.png";
-import logoChatgpt from "@/assets/logos/chatgpt.png";
+import logoSemrush from "@/assets/logos/semrush.webp";
+import logoSearchConsole from "@/assets/logos/search-console.webp";
+import logoChatgpt from "@/assets/logos/chatgpt.webp";
 
 const techLogos = [
   { name: "WordPress", src: logoWordpress },
@@ -95,7 +95,7 @@ const Index = () => {
               className="flex justify-center"
             >
               <div className="rounded-2xl bg-card p-8 shadow-card text-center max-w-sm">
-                <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital - Expert Produit Google" className="mx-auto mb-4 h-32 w-32 rounded-full object-cover" />
+                <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital - Expert Produit Google" className="mx-auto mb-4 h-32 w-32 rounded-full object-cover" width={128} height={128} fetchPriority="high" />
                 <p className="font-bold text-lg">Geoffrey</p>
                 <p className="text-sm text-muted-foreground">Expert Produit Google</p>
                 <p className="text-sm text-muted-foreground mt-2">Fondateur de Déclic Digital, j'accompagne les TPE et indépendants d'Île-de-France dans leur transformation digitale.</p>

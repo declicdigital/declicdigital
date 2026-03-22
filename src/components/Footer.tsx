@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail } from "lucide-react";
-import logo from "@/assets/logo-declic-digital-new.png";
+import logo from "@/assets/logo-declic-digital-new.webp";
 
 const Footer = () => (
   <footer className="border-t border-border relative overflow-hidden">
     {/* Grain overlay on footer */}
-    <div className="absolute inset-0 pointer-events-none z-10" style={{ background: "url('/grain.png')", backgroundSize: "256px 256px", opacity: 0.12, mixBlendMode: "soft-light" }} />
+    <div className="absolute inset-0 pointer-events-none z-10" style={{ background: "url('/grain.webp')", backgroundSize: "256px 256px", opacity: 0.12, mixBlendMode: "soft-light" }} />
     <div style={{ background: "hsl(230, 18%, 15%)" }}>
       <div className="container py-6 md:py-8">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-1.5">
-            <img src={logo} alt="Déclic Digital" className="h-36 -mt-4 -mb-4" />
+            <img src={logo} alt="Déclic Digital" className="h-36 -mt-4 -mb-4" width={216} height={144} />
             <p className="text-sm text-white/60 leading-relaxed">
               Déclic Digital accompagne les TPE et indépendants à Paris et dans les Hauts-de-Seine (92) pour développer leur visibilité en ligne. Fondée par un Expert Produit Google.
             </p>

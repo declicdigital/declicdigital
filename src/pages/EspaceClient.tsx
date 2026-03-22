@@ -8,7 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
 import { Loader2, LogOut, FileText, MessageSquare, Upload, Send, Calendar, CheckCircle2, Clock, AlertCircle, Play, Plus, Globe, Paperclip, Trash2, Share2, Pencil, Check, X, FolderOpen } from "lucide-react";
-import logoImg from "@/assets/logo-declic-digital-new.png";
+import logoImg from "@/assets/logo-declic-digital-new.webp";
 import ProjectTimeline from "@/components/espace-client/ProjectTimeline";
 import ProjectInvoices from "@/components/espace-client/ProjectInvoices";
 import ProjectChat from "@/components/espace-client/ProjectChat";
@@ -224,7 +224,7 @@ const EspaceClient = () => {
   return (
     <div className="min-h-screen relative" style={{ backgroundColor: "var(--bg-paper)" }}>
       {/* Grain overlay */}
-      <div className="fixed inset-0 pointer-events-none z-[60]" style={{ background: "url('/grain.png')", backgroundSize: "256px 256px", opacity: 0.12, mixBlendMode: "multiply" as any }} />
+      <div className="fixed inset-0 pointer-events-none z-[60]" style={{ background: "url('/grain.webp')", backgroundSize: "256px 256px", opacity: 0.12, mixBlendMode: "multiply" as any }} />
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container flex items-center justify-between py-3">
           <img

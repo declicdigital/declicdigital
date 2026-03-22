@@ -10,7 +10,7 @@ import {
   CheckCircle2, Clock, AlertCircle, Play, Plus, Globe, Paperclip,
   FolderOpen, Pencil, Check, X,
 } from "lucide-react";
-import logoImg from "@/assets/logo-declic-digital-new.png";
+import logoImg from "@/assets/logo-declic-digital-new.webp";
 import ProjectTimeline from "@/components/espace-client/ProjectTimeline";
 
 const STATUS_PRIORITY: Record<string, number> = {

@@ -5,7 +5,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { MessageSquare, Send, Loader2, X } from "lucide-react";
-import logoImg from "@/assets/logo-declic-digital-new.png";
+import logoImg from "@/assets/logo-declic-digital-new.webp";
 
 interface Message {
   id: string;

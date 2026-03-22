@@ -9,7 +9,7 @@ import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import LocationSection from "@/components/LocationSection";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 
-import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
+import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 
 const QuiSommesNous = () => (
   <PageLayout>

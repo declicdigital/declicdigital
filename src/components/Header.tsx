@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import logo from "@/assets/logo-declic-digital-new.png";
+import logo from "@/assets/logo-declic-digital-new.webp";
 
 const navLinks = [
   { label: "Création de site", to: "/creation-site-web" },
@@ -46,7 +46,7 @@ const Header = () => {
     <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-lg">
       <div className="container flex h-18 items-center justify-between md:h-20">
         <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => { if (window.location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }}>
-          <img src={logo} alt="Déclic Digital" className="h-32 w-auto md:h-36" />
+          <img src={logo} alt="Déclic Digital" className="h-32 w-auto md:h-36" width={216} height={144} />
         </Link>
 
         {/* Desktop nav */}
