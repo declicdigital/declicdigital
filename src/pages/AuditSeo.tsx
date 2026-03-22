@@ -75,7 +75,7 @@ const AuditSeo = () => (
     {/* Comment fonctionne un audit SEO */}
     <SectionWrapper>
       <div className="mx-auto max-w-3xl space-y-6">
-        <h2 className="text-3xl font-extrabold md:text-4xl text-center">Comment fonctionne un audit SEO ?</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center">Ce que comprend votre audit SEO gratuit</h2>
         <p className="text-muted-foreground leading-relaxed">
           Un audit SEO est une analyse complète de votre site web qui évalue sa capacité à être bien référencé sur Google. Il identifie les points forts, les faiblesses et les opportunités d'amélioration de votre présence en ligne.
         </p>
