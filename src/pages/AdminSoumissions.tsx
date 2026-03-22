@@ -57,6 +57,13 @@ interface Submission {
 
 type StatusType = "en_attente" | "lu" | "termine";
 
+const normalizeStatus = (status?: string): StatusType => {
+  if (status === "lu" || status === "termine" || status === "en_attente") {
+    return status;
+  }
+  return "en_attente";
+};
+
 const STATUS_CONFIG: Record<StatusType, { label: string; icon: any; color: string; badgeClass: string }> = {
   en_attente: { label: "En attente", icon: Clock, color: "text-amber-500", badgeClass: "bg-amber-500/10 text-amber-600 border-amber-500/20" },
   lu: { label: "Lu", icon: Eye, color: "text-blue-500", badgeClass: "bg-blue-500/10 text-blue-600 border-blue-500/20" },
@@ -297,19 +304,21 @@ const AdminSoumissions = () => {
     doc.save(`fiche_${name}.pdf`);
   };
 
-  const filteredSubs = filterStatus === "all" ? subs : subs.filter((s) => s.status === filterStatus);
+  const filteredSubs = filterStatus === "all"
+    ? subs
+    : subs.filter((s) => normalizeStatus(s.status) === filterStatus);
 
   const statusCounts = {
     all: subs.length,
-    en_attente: subs.filter((s) => s.status === "en_attente").length,
-    lu: subs.filter((s) => s.status === "lu").length,
-    termine: subs.filter((s) => s.status === "termine").length,
+    en_attente: subs.filter((s) => normalizeStatus(s.status) === "en_attente").length,
+    lu: subs.filter((s) => normalizeStatus(s.status) === "lu").length,
+    termine: subs.filter((s) => normalizeStatus(s.status) === "termine").length,
   };
 
   // ==================== DETAIL VIEW ====================
   if (selected) {
     const d = selected.data;
-    const currentStatus = (selected.status || "en_attente") as StatusType;
+    const currentStatus = normalizeStatus(selected.status);
     const StatusIcon = STATUS_CONFIG[currentStatus].icon;
 
     return (
@@ -506,7 +515,7 @@ const AdminSoumissions = () => {
         ) : (
           <div className="space-y-3">
             {filteredSubs.map((s, i) => {
-              const status = (s.status || "en_attente") as StatusType;
+              const status = normalizeStatus(s.status);
               const cfg = STATUS_CONFIG[status];
               const StatusIcon = cfg.icon;
               return (

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Globe, Search, BarChart3, Zap, Eye, Users, TrendingUp, ChevronRight, Monitor, Smartphone, Gauge, CheckCircle, Shield, Clock, Target, Award, MessageSquare, Phone as PhoneIcon, FileText, Rocket, Star } from "lucide-react";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
@@ -32,6 +33,34 @@ const techLogos = [
 const Index = () => {
   return (
     <PageLayout>
+      <Helmet>
+        <title>Déclic Digital | Création site web & SEO pour TPE — Paris</title>
+        <meta
+          name="description"
+          content="Déclic Digital crée votre site web et améliore votre référencement Google. Spécialiste TPE, artisans et indépendants en Île-de-France. Audit SEO gratuit."
+        />
+        <meta name="robots" content="index, follow" />
+        <link rel="canonical" href="https://declicdigital.net" />
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "LocalBusiness",
+            name: "Déclic Digital",
+            description: "Agence web et SEO pour TPE, artisans et indépendants en Île-de-France",
+            url: "https://declicdigital.net",
+            telephone: "+33602228939",
+            email: "contact@declicdigital.net",
+            address: {
+              "@type": "PostalAddress",
+              streetAddress: "57 rue d'Alleray",
+              addressLocality: "Paris",
+              postalCode: "75015",
+              addressCountry: "FR",
+            },
+          })}
+        </script>
+      </Helmet>
+
       {/* Hero */}
       <section className="gradient-hero relative overflow-hidden">
         <div className="container py-16 md:py-24 lg:py-32">
@@ -45,8 +74,7 @@ const Index = () => {
                 Expert Produit Google · Agence digitale
               </span>
               <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
-                Création de site web à Paris qui vous apporte des{" "}
-                <span className="text-gradient">clients</span>
+                Création de site internet et référencement SEO pour les TPE, artisans et indépendants en Île-de-France
               </h1>
               <p className="mb-8 max-w-lg text-lg md:text-xl text-muted-foreground leading-relaxed">
                 Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour que les PME et indépendants attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
@@ -76,9 +104,7 @@ const Index = () => {
       {/* Problème */}
       <SectionWrapper className="bg-section-blue">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="mb-6 text-3xl font-extrabold md:text-4xl">
-            Pourquoi votre site ne vous apporte pas de clients ?
-          </h2>
+          <h2 className="mb-6 text-3xl font-extrabold md:text-4xl">Vous n'avez pas de site, ou il ne génère aucun client ?</h2>
           <p className="mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
             De nombreuses PME investissent dans un site web, mais celui-ci reste invisible sur Google. Sans stratégie de <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement</Link>, sans optimisation technique et sans contenu adapté, votre site ne peut pas attirer de visiteurs qualifiés. Résultat : zéro contact, zéro prospect, zéro retour sur investissement.
           </p>
@@ -109,10 +135,7 @@ const Index = () => {
       {/* Solutions */}
       <SectionWrapper>
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold md:text-4xl">
-            Notre mission : transformer votre site en{" "}
-            <span className="text-gradient">machine à clients</span>
-          </h2>
+          <h2 className="text-3xl font-extrabold md:text-4xl">Création de site web professionnel pour indépendants</h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">Déclic Digital</Link>, nous ne créons pas simplement des sites web. Nous concevons des outils de génération de clients, pensés pour les PME et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> adaptés aux petits budgets.
           </p>
@@ -140,7 +163,7 @@ const Index = () => {
       {/* Notre méthode */}
       <SectionWrapper className="bg-section-blue">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold md:text-4xl">Notre méthode</h2>
+          <h2 className="text-3xl font-extrabold md:text-4xl">Référencement naturel Google : soyez visible localement</h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
             Un processus simple et transparent pour vous accompagner de A à Z. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link> et <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
           </p>
@@ -176,7 +199,7 @@ const Index = () => {
       <SectionWrapper>
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold md:text-4xl">Pourquoi un site web est essentiel pour votre entreprise</h2>
+            <h2 className="text-3xl font-extrabold md:text-4xl">Pourquoi choisir Déclic Digital pour votre projet web ?</h2>
           </div>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -200,7 +223,7 @@ const Index = () => {
       {/* Technologies */}
       <SectionWrapper className="bg-section-blue">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Nos outils et technologies</h2>
+          <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Nos réalisations pour des TPE et artisans parisiens</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link>.
           </p>
@@ -223,9 +246,7 @@ const Index = () => {
       <SectionWrapper>
         <div className="mx-auto max-w-4xl">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold md:text-4xl">
-              Pourquoi choisir une agence web spécialisée pour votre projet digital
-            </h2>
+            <h2 className="text-3xl font-extrabold md:text-4xl">Demandez votre audit SEO gratuit dès aujourd'hui</h2>
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-6">
             <p className="text-base md:text-lg">
@@ -285,7 +306,7 @@ const Index = () => {
       {/* Maillage interne */}
       <SectionWrapper className="bg-section-blue">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl font-extrabold mb-4">Explorez nos services</h2>
+          <h3 className="text-2xl font-extrabold mb-4">Explorez nos services</h3>
           <p className="text-lg text-muted-foreground mb-6">Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.</p>
           <div className="flex flex-wrap justify-center gap-3">
             <Link to="/creation-site-web" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
@@ -320,7 +341,7 @@ const Index = () => {
       <SectionWrapper>
         <div className="mx-auto max-w-2xl">
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold md:text-4xl">Parlez-nous de votre projet</h2>
+            <h3 className="text-3xl font-extrabold md:text-4xl">Parlez-nous de votre projet</h3>
             <p className="mt-4 text-lg text-muted-foreground">
               Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de votre site web</Link>.
             </p>
@@ -355,9 +376,7 @@ const Index = () => {
           >
             <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-white/30 shadow-lg mb-4" />
             <p className="text-sm font-semibold text-white mb-1">Geoffrey, Expert Produit Google</p>
-            <h2 className="mb-4 text-3xl font-extrabold text-white md:text-4xl">
-              Et si votre site devenait votre meilleur commercial ?
-            </h2>
+            <h3 className="mb-4 text-3xl font-extrabold text-white md:text-4xl">Et si votre site devenait votre meilleur commercial ?</h3>
             <p className="mb-8 text-lg text-white/80 max-w-2xl">
               Un site optimisé peut générer des prospects tous les jours. Ne laissez plus vos concurrents capter les clients qui vous cherchent sur Google.
             </p>
