@@ -44,8 +44,8 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-lg">
-      <div className="container flex h-18 items-center justify-between md:h-20">
-        <Link to="/" className="flex items-center gap-2 shrink-0" onClick={() => { if (window.location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }}>
+      <div className="container flex h-14 items-center justify-between md:h-20">
+        <Link to="/" className="flex items-center shrink-0 -my-2" onClick={() => { if (window.location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }}>
           <img src={logo} alt="Déclic Digital" className="h-32 w-auto md:h-36" width={216} height={144} />
         </Link>
 
