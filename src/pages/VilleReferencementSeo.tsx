@@ -81,7 +81,7 @@ const VilleReferencementSeo = () => {
       {/* Bénéfices SEO local */}
       <SectionWrapper className="bg-section-blue">
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">
-          Pourquoi investir dans le SEO à {city.nameShort} ?
+          Pourquoi le SEO local est indispensable à {city.nameShort}
         </h2>
         <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
           {content?.seoWhyText || `Le référencement local est essentiel pour les entreprises ${city.description}. Il vous permet d'apparaitre devant vos clients au moment où ils recherchent vos services.`}
