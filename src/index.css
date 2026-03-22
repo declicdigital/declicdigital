@@ -125,7 +125,7 @@
 
   /* ── Headings ── */
   h1 {
-    font-family: 'Recoleta', Georgia, serif;
+    font-family: 'DM Serif Display', Georgia, serif;
     @apply font-bold tracking-tight;
     color: hsl(var(--heading));
     position: relative;
