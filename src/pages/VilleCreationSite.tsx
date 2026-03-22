@@ -75,7 +75,7 @@ const VilleCreationSite = () => {
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
               <div className="rounded-2xl bg-card p-8 shadow-card text-center max-w-sm">
-                <img src={geoffreyPhoto} alt={`Geoffrey, fondateur Déclic Digital - création site web ${city.nameShort}`} className="mx-auto mb-4 h-32 w-32 rounded-full object-cover" />
+                <img src={geoffreyPhoto} alt={`Geoffrey, fondateur Déclic Digital - création site web ${city.nameShort}`} className="mx-auto mb-4 h-32 w-32 rounded-full object-cover" loading="lazy" />
                 <p className="font-bold text-lg">Geoffrey</p>
                 <p className="text-sm text-muted-foreground">Expert Produit Google</p>
                 <p className="text-sm text-muted-foreground mt-2">Fondateur de Déclic Digital, j'accompagne les entreprises {city.description} dans leur transformation digitale.</p>

@@ -75,7 +75,7 @@ const LocationSection = () => {
 
           <div className="rounded-xl bg-background p-4 border border-border">
             <div className="flex items-center gap-2 mb-2">
-              <img src="https://www.google.com/favicon.ico" alt="Google" className="h-4 w-4" />
+              <img src="https://www.google.com/favicon.ico" alt="Google" className="h-4 w-4" loading="lazy" />
               <div className="flex items-center gap-1">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} size={14} className="text-amber-400 fill-amber-400" />

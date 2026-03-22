@@ -127,7 +127,7 @@ const CreationSite = () => (
         <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Site web rapide, mobile et optimisé pour Google</h2>
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="flex justify-center order-2 lg:order-1">
-            <img src={siteProImage} alt="Site web professionnel pour entreprise de construction" className="w-full max-w-md rounded-2xl shadow-card" />
+            <img src={siteProImage} alt="Site web professionnel pour entreprise de construction" className="w-full max-w-md rounded-2xl shadow-card" loading="lazy" />
           </div>
           <div className="space-y-6 order-1 lg:order-2">
             <p className="text-muted-foreground leading-relaxed">
@@ -209,7 +209,7 @@ const CreationSite = () => (
     {/* CTA */}
     <section className="gradient-miami py-16">
       <div className="container flex flex-col items-center text-center">
-        <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-16 h-16 rounded-full object-cover border-2 border-white/30 shadow-lg mb-3" />
+        <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-16 h-16 rounded-full object-cover border-2 border-white/30 shadow-lg mb-3" loading="lazy" />
         <p className="text-sm font-semibold text-white mb-2">Geoffrey, Expert Produit Google</p>
         <h2 className="mb-4 text-3xl font-extrabold text-white">Ils nous ont fait confiance : réalisations récentes</h2>
         <p className="mb-8 text-white/80">Demandez un devis gratuit pour la création de votre site web professionnel.</p>
