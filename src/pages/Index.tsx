@@ -133,7 +133,7 @@ const Index = () => {
                 <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital - Expert Produit Google" className="mx-auto mb-4 h-32 w-32 rounded-full object-cover" width={128} height={128} fetchPriority="high" />
                 <p className="font-bold text-lg">Geoffrey</p>
                 <p className="text-sm text-muted-foreground">Expert Produit Google</p>
-                <p className="text-sm text-muted-foreground mt-2">Fondateur de Déclic Digital, j'accompagne les TPE et indépendants d'Île-de-France dans leur transformation digitale.</p>
+                <p className="text-sm text-muted-foreground mt-2">Fondateur de Déclic Digital, j'accompagne les TPE et indépendants à Paris et dans le 92 dans leur transformation digitale.</p>
               </div>
             </motion.div>
           </div>
