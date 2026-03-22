@@ -27,7 +27,7 @@ const Contact = () => (
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
             <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
-              Parlons de votre projet — devis gratuit sous 24h
+              Parlons de votre projet : devis gratuit sous 24h
             </h1>
             <p className="text-lg text-muted-foreground">
               Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link> ou le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>. Nous répondons sous 24 à 48 heures ouvrées.

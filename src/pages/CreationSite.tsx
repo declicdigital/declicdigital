@@ -180,7 +180,7 @@ const CreationSite = () => (
       <div className="container flex flex-col items-center text-center">
         <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-16 h-16 rounded-full object-cover border-2 border-white/30 shadow-lg mb-3" />
         <p className="text-sm font-semibold text-white mb-2">Geoffrey, Expert Produit Google</p>
-        <h2 className="mb-4 text-3xl font-extrabold text-white">Ils nous ont fait confiance — réalisations récentes</h2>
+        <h2 className="mb-4 text-3xl font-extrabold text-white">Ils nous ont fait confiance : réalisations récentes</h2>
         <p className="mb-8 text-white/80">Demandez un devis gratuit pour la création de votre site web professionnel.</p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Button asChild size="lg" className="rounded-full bg-white px-8 font-semibold text-foreground shadow-lg hover:bg-white/90">

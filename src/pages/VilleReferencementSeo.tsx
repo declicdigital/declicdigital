@@ -222,7 +222,7 @@ const VilleReferencementSeo = () => {
       <section className="gradient-miami py-16">
         <div className="container text-center">
           <h2 className="mb-4 text-3xl font-extrabold text-white">
-            Demandez votre audit SEO gratuit — réponse en 48h
+            Demandez votre audit SEO gratuit : réponse en 48h
           </h2>
           <p className="mb-8 text-white/80">
             Demandez votre audit SEO gratuit et découvrez comment attirer plus de clients depuis Google.

@@ -25,10 +25,10 @@ const VilleCreationSite = () => {
     <PageLayout>
       <Helmet>
         <title>{
-          city.slug === "paris-1er" ? "Création site internet Paris 1er — TPE & artisans" :
-          city.slug === "paris-3eme" ? "Création site internet Paris 3ème — artisans & TPE" :
-          city.slug === "boulogne-billancourt" ? "Création site internet Boulogne-Billancourt — TPE" :
-          `Création site internet ${city.nameShort} — artisans & TPE`
+          city.slug === "paris-1er" ? "Création site internet Paris 1er | TPE & artisans" :
+          city.slug === "paris-3eme" ? "Création site internet Paris 3ème | artisans & TPE" :
+          city.slug === "boulogne-billancourt" ? "Création site internet Boulogne-Billancourt | TPE" :
+          `Création site internet ${city.nameShort} | artisans & TPE`
         }</title>
         <meta name="description" content={
           city.slug === "paris-1er" ? "Créez votre site web professionnel dans le 1er arrondissement de Paris. Déclic Digital accompagne les indépendants et TPE. Devis gratuit." :

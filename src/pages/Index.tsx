@@ -35,7 +35,7 @@ const Index = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>Déclic Digital | Création site web & SEO pour TPE — Paris</title>
+        <title>Déclic Digital | Création site web & SEO pour TPE | Paris</title>
         <meta
           name="description"
           content="Déclic Digital crée votre site web et améliore votre référencement Google. Spécialiste TPE, artisans et indépendants en Île-de-France. Audit SEO gratuit."
