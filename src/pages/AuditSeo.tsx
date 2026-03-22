@@ -94,7 +94,7 @@ const AuditSeo = () => (
     {/* Pourquoi c'est gratuit */}
     <SectionWrapper className="bg-section-blue">
       <div className="mx-auto max-w-3xl text-center">
-        <h2 className="text-3xl font-extrabold md:text-4xl mb-6">Pourquoi l'audit est-il gratuit ?</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl mb-6">En quoi votre site perd-il des clients chaque jour ?</h2>
         <p className="text-muted-foreground leading-relaxed mb-4">
           Nous croyons que chaque entreprise mérite de comprendre pourquoi son site ne génère pas de résultats. L'audit gratuit est notre façon de vous montrer <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre expertise</Link> et de vous aider à y voir plus clair, sans aucun engagement.
         </p>
