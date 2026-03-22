@@ -143,7 +143,7 @@ const VilleCreationSite = () => {
         <SectionWrapper className="bg-section-blue">
           <div className="mx-auto max-w-3xl space-y-6">
             <h2 className="text-3xl font-extrabold md:text-4xl text-center">
-              Votre agence web à {city.nameShort}
+              Référencement local {city.nameShort} : apparaissez dans Google Maps
             </h2>
             {content.creationSeoText.map((text, i) => (
               <p key={i} className="text-muted-foreground leading-relaxed">{text}</p>
