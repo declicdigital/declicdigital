@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { motion } from "framer-motion";
 import { Eye, Users, TrendingUp, Search, Settings, FileText, BarChart3 } from "lucide-react";
@@ -11,6 +12,14 @@ import { cities } from "@/data/cities";
 
 const ReferencementSeo = () => (
   <PageLayout>
+    <Helmet>
+      <title>Référencement SEO local pour TPE & artisans — Paris</title>
+      <meta name="description" content="Améliorez votre visibilité sur Google avec notre agence SEO freelance. Référencement naturel local pour TPE et artisans en Île-de-France. Résultats mesurables." />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://declicdigital.net/referencement-seo" />
+      <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"Service",serviceType:"Référencement SEO",provider:{"@type":"LocalBusiness",name:"Déclic Digital",url:"https://declicdigital.net"},areaServed:"Île-de-France"})}</script>
+    </Helmet>
+
     {/* Breadcrumb */}
     <PageBreadcrumb items={[
       { label: "Accueil", href: "/" },
@@ -22,7 +31,7 @@ const ReferencementSeo = () => (
       <div className="container">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="mx-auto max-w-3xl text-center">
           <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-            Référencement SEO à Paris : soyez <span className="text-gradient">visible sur Google</span>
+            Référencement naturel Google (SEO) pour les TPE, artisans et indépendants à Paris
           </h1>
           <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
             Le référencement SEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour qu'il apparaisse en première page Google. Commencez par un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit gratuit</Link>.
@@ -33,7 +42,6 @@ const ReferencementSeo = () => (
         </motion.div>
       </div>
     </section>
-
     {/* Bénéfices */}
     <SectionWrapper className="bg-section-blue">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Les bénéfices du SEO pour les PME</h2>
