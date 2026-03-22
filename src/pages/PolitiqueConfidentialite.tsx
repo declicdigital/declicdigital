@@ -7,8 +7,10 @@ import { Helmet } from "react-helmet-async";
 const PolitiqueConfidentialite = () => (
   <PageLayout>
     <Helmet>
-      <title>Politique de confidentialité | Déclic Digital</title>
-      <meta name="description" content="Politique de confidentialité de Déclic Digital. Découvrez comment nous collectons, utilisons et protégeons vos données personnelles conformément au RGPD." />
+      <title>Politique de confidentialité et RGPD | Déclic Digital</title>
+      <meta name="description" content="Comment Déclic Digital collecte, utilise et protège vos données personnelles. Politique conforme au RGPD. Vos droits d'accès, rectification et suppression." />
+      <meta name="robots" content="noindex, follow" />
+      <link rel="canonical" href="https://declicdigital.net/politique-de-confidentialite" />
     </Helmet>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Politique de confidentialité" }]} />
     <section className="gradient-hero py-16 md:py-24">

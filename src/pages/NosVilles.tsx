@@ -15,8 +15,8 @@ const NosVilles = () => (
   <PageLayout>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Nos villes" }]} />
     <Helmet>
-      <title>Nos villes - Création de site web et SEO à Paris et 92 | Déclic Digital</title>
-      <meta name="description" content="Déclic Digital intervient à Paris et dans les Hauts-de-Seine (92) pour la création de sites web et le référencement SEO. Découvrez nos pages par ville." />
+      <title>Agence web Paris et Hauts-de-Seine (92) | Déclic Digital par ville</title>
+      <meta name="description" content="Création de site internet et SEO local à Paris et dans le 92 (Boulogne, Neuilly, Issy...). Retrouvez nos pages dédiées par ville et arrondissement." />
       <link rel="canonical" href="https://declicdigital.net/nos-villes" />
     </Helmet>
 

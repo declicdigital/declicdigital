@@ -14,8 +14,8 @@ import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 const QuiSommesNous = () => (
   <PageLayout>
     <Helmet>
-      <title>Qui sommes-nous | Agence web & SEO Paris | Déclic Digital</title>
-      <meta name="description" content="Déclic Digital, agence web et SEO freelance à Paris. Spécialisée dans l'accompagnement des TPE, artisans et indépendants en Île-de-France. Découvrez l'équipe." />
+      <title>Expert Produit Google, fondateur de Déclic Digital | Qui sommes-nous</title>
+      <meta name="description" content="Geoffrey, Expert Produit Google, a fondé Déclic Digital pour rendre le web accessible aux TPE. Agence freelance spécialisée site internet et SEO à Paris." />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/qui-sommes-nous" />
     </Helmet>
