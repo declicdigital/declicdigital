@@ -15,7 +15,7 @@ const QuiSommesNous = () => (
   <PageLayout>
     <Helmet>
       <title>Qui sommes-nous — Agence web & SEO Paris | Déclic Digital</title>
-      <meta name="description" content="Déclic Digital, agence web et SEO freelance à Paris, spécialisée dans l'accompagnement des TPE, artisans et indépendants en Île-de-France." />
+      <meta name="description" content="Déclic Digital, agence web et SEO freelance à Paris. Spécialisée dans l'accompagnement des TPE, artisans et indépendants en Île-de-France. Découvrez l'équipe." />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/qui-sommes-nous" />
     </Helmet>
