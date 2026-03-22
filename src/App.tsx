@@ -49,7 +49,8 @@ const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <AuthProvider>
+        <Suspense fallback={null}>
+        <LazyAuthProvider>
           <Toaster />
           <Sonner />
           <BrowserRouter>
