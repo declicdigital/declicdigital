@@ -66,11 +66,7 @@ const Index = () => {
       <section className="gradient-hero relative overflow-hidden">
         <div className="container py-16 md:py-24 lg:py-32">
           <div className="grid items-center gap-10 lg:grid-cols-2">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-            >
+            <div>
               <span className="mb-4 inline-block rounded-full bg-brand-violet/10 px-4 py-1.5 text-xs font-semibold text-brand-violet">
                 Expert Produit Google · Agence digitale
               </span>
