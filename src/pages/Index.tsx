@@ -379,7 +379,7 @@ const Index = () => {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-center text-center"
           >
-            <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-white/30 shadow-lg mb-4" />
+            <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-white/30 shadow-lg mb-4" width={80} height={80} loading="lazy" />
             <p className="text-sm font-semibold text-white mb-1">Geoffrey, Expert Produit Google</p>
             <h3 className="mb-4 text-3xl font-extrabold text-white md:text-4xl">Et si votre site devenait votre meilleur commercial ?</h3>
             <p className="mb-8 text-lg text-white/80 max-w-2xl">
