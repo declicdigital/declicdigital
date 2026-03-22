@@ -15,69 +15,69 @@ interface PageMeta {
 
 const staticPages: Record<string, PageMeta> = {
   "/": {
-    title: "Création site web Paris, SEO | Déclic Digital",
+    title: "Agence web Paris | Création site internet & SEO TPE | Déclic Digital",
     description:
-      "Agence web à Paris spécialisée en création de site internet et référencement SEO pour TPE. Expert Produit Google. Audit SEO gratuit. Devis en ligne.",
+      "Déclic Digital, agence web à Paris spécialisée TPE et artisans. Création de site internet professionnel et référencement SEO en Île-de-France. Audit gratuit, devis en 24h.",
     image: DEFAULT_IMAGE,
   },
   "/creation-site-web": {
-    title: "Création de site web professionnel | Déclic Digital",
+    title: "Création de site internet sur-mesure pour TPE | Déclic Digital Paris",
     description:
-      "Création de site internet sur mesure pour TPE. Site vitrine, e-commerce, landing page. Design responsive et optimisé SEO. Devis gratuit.",
+      "Site vitrine, e-commerce ou landing page pour TPE et artisans. Design responsive, optimisé SEO, livré en 2 semaines. Devis gratuit en 24h.",
     image: `${SITE_URL}/og/creation-site.png`,
   },
   "/referencement-seo": {
-    title: "Référencement SEO Google | Déclic Digital",
+    title: "Référencement SEO Google pour TPE | Agence SEO Paris | Déclic Digital",
     description:
-      "Agence SEO à Paris. Audit, stratégie de référencement naturel et suivi de performance pour TPE. Augmentez votre visibilité sur Google.",
+      "Gagnez en visibilité sur Google grâce au référencement naturel local. Audit SEO, optimisation technique et suivi de positionnement pour TPE en Île-de-France.",
     image: `${SITE_URL}/og/seo.png`,
   },
   "/audit-seo-gratuit": {
-    title: "Audit SEO gratuit | Déclic Digital",
+    title: "Audit SEO gratuit de votre site web en 48h | Déclic Digital",
     description:
-      "Recevez un audit SEO complet et gratuit de votre site web. Identifiez vos axes d'amélioration pour mieux vous positionner sur Google.",
+      "Demandez votre audit SEO gratuit : analyse technique, mots clés, concurrence et recommandations personnalisées. Résultats envoyés sous 48 heures.",
     image: `${SITE_URL}/og/audit.png`,
   },
   "/tarifs": {
-    title: "Tarifs création de site web et SEO | Déclic Digital",
+    title: "Tarifs site web et SEO dès 50€/mois | Déclic Digital Paris",
     description:
-      "Découvrez nos tarifs transparents pour la création de site web et le référencement SEO. À partir de 50€/mois. Devis personnalisé gratuit.",
+      "Tarifs transparents : landing page dès 200€, site vitrine dès 590€, SEO dès 50€/mois. Forfaits adaptés aux TPE et artisans. Sans engagement, devis gratuit.",
     image: DEFAULT_IMAGE,
   },
   "/realisations": {
-    title: "Nos réalisations | Déclic Digital",
+    title: "Portfolio : sites web créés pour TPE et artisans | Déclic Digital",
     description:
-      "Découvrez nos projets de création de sites web et de référencement SEO pour des TPE et indépendants.",
+      "Découvrez nos réalisations : sites vitrines, e-commerce et landing pages pour artisans et TPE. Projets concrets avec résultats mesurables.",
     image: DEFAULT_IMAGE,
   },
   "/qui-sommes-nous": {
-    title: "Qui sommes-nous | Déclic Digital",
+    title: "Expert Produit Google, fondateur de Déclic Digital | Qui sommes-nous",
     description:
-      "Déclic Digital, agence web fondée par Geoffrey, Expert Produit Google. Accompagnement digital pour TPE à Paris et dans les Hauts-de-Seine.",
+      "Geoffrey, Expert Produit Google, a fondé Déclic Digital pour rendre le web accessible aux TPE. Agence freelance spécialisée site internet et SEO à Paris.",
     image: DEFAULT_IMAGE,
   },
   "/faq": {
-    title: "FAQ - Questions fréquentes | Déclic Digital",
+    title: "FAQ : 20 questions sur la création de site web et le SEO | Déclic Digital",
     description:
-      "Retrouvez les réponses aux questions les plus fréquentes sur la création de site web et le référencement SEO.",
+      "Combien coûte un site web ? Combien de temps pour apparaitre sur Google ? Retrouvez 20 réponses concrètes sur la création de site et le SEO pour TPE.",
     image: `${SITE_URL}/og/faq.webp`,
   },
   "/contact": {
-    title: "Contact | Déclic Digital",
+    title: "Contact et devis gratuit en 24h | Déclic Digital Paris",
     description:
-      "Contactez Déclic Digital pour votre projet web. Devis gratuit sous 24h. Téléphone, email ou formulaire en ligne.",
+      "Besoin d'un site internet ou d'un boost SEO ? Contactez Déclic Digital par téléphone, email ou formulaire. Devis personnalisé gratuit, réponse sous 24h.",
     image: `${SITE_URL}/og/contact.png`,
   },
   "/blog": {
-    title: "Blog | Déclic Digital",
+    title: "Blog création de site web, SEO et tech | Déclic Digital",
     description:
-      "Conseils et actualités sur la création de site web, le SEO et le marketing digital pour les TPE.",
+      "Guides pratiques, tendances web design et conseils SEO pour les TPE et artisans. Apprenez à développer votre visibilité en ligne avec le blog Déclic Digital.",
     image: DEFAULT_IMAGE,
   },
   "/nos-villes": {
-    title: "Nos villes | Création de site web et SEO | Déclic Digital",
+    title: "Agence web Paris et Hauts-de-Seine (92) | Déclic Digital par ville",
     description:
-      "Déclic Digital intervient à Paris et dans les Hauts-de-Seine (92). Découvrez nos services de création de site et SEO près de chez vous.",
+      "Création de site internet et SEO local à Paris et dans le 92 (Boulogne, Neuilly, Issy...). Retrouvez nos pages dédiées par ville et arrondissement.",
     image: DEFAULT_IMAGE,
   },
 };

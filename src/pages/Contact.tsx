@@ -15,8 +15,8 @@ import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 const Contact = () => (
   <PageLayout>
     <Helmet>
-      <title>Contactez Déclic Digital | Devis site web & SEO Paris</title>
-      <meta name="description" content="Vous avez un projet de site web ou de référencement SEO à Paris ? Contactez Déclic Digital pour un devis gratuit et personnalisé. Réponse garantie sous 24h." />
+      <title>Contact et devis gratuit en 24h | Déclic Digital Paris</title>
+      <meta name="description" content="Besoin d'un site internet ou d'un boost SEO ? Contactez Déclic Digital par téléphone, email ou formulaire. Devis personnalisé gratuit, réponse sous 24h." />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/contact" />
     </Helmet>

@@ -189,10 +189,10 @@ const renderPlanCard = (plan: (typeof plans)[number], index: number) => (
 const Tarifs = () => (
   <PageLayout>
     <Helmet>
-      <title>Tarifs création site web & SEO pour TPE | Déclic Digital</title>
+      <title>Tarifs site web et SEO dès 50€/mois | Déclic Digital Paris</title>
       <meta
         name="description"
-        content="Découvrez nos tarifs clairs pour la création de site internet et le SEO, adaptés aux budgets des TPE et artisans. Aucune surprise, devis gratuit."
+        content="Tarifs transparents : landing page dès 200€, site vitrine dès 590€, SEO dès 50€/mois. Forfaits adaptés aux TPE et artisans. Sans engagement, devis gratuit."
       />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/tarifs" />

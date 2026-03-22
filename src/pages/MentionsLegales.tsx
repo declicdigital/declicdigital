@@ -1,9 +1,16 @@
+import { Helmet } from "react-helmet-async";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 
 const MentionsLegales = () => (
   <PageLayout>
+    <Helmet>
+      <title>Mentions légales | Déclic Digital, agence web Paris</title>
+      <meta name="description" content="Mentions légales du site declicdigital.net. Informations sur l'éditeur, l'hébergeur et les conditions d'utilisation du site Déclic Digital." />
+      <meta name="robots" content="noindex, follow" />
+      <link rel="canonical" href="https://declicdigital.net/mentions-legales" />
+    </Helmet>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Mentions légales" }]} />
     <section className="gradient-hero py-16 md:py-24">
       <div className="container text-center">

@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
@@ -26,6 +27,12 @@ const links = [
 
 const PlanDuSite = () => (
   <PageLayout>
+    <Helmet>
+      <title>Plan du site | Déclic Digital</title>
+      <meta name="description" content="Retrouvez toutes les pages du site Déclic Digital : création de site web, référencement SEO, tarifs, réalisations, blog et pages par ville." />
+      <meta name="robots" content="noindex, follow" />
+      <link rel="canonical" href="https://declicdigital.net/plan-du-site" />
+    </Helmet>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Plan du site" }]} />
     <section className="gradient-hero py-16 md:py-24">
       <div className="container text-center">

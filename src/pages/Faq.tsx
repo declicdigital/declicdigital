@@ -35,8 +35,8 @@ const faqItems = [
 const Faq = () => (
   <PageLayout>
     <Helmet>
-      <title>FAQ création site web & SEO pour TPE | Déclic Digital</title>
-      <meta name="description" content="Toutes les réponses à vos questions sur la création de site web et le référencement SEO pour les TPE et artisans. Délais, tarifs, méthodes et conseils." />
+      <title>FAQ : 20 questions sur la création de site web et le SEO | Déclic Digital</title>
+      <meta name="description" content="Combien coûte un site web ? Combien de temps pour apparaitre sur Google ? Retrouvez 20 réponses concrètes sur la création de site et le SEO pour TPE." />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/faq" />
       <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"FAQPage",mainEntity:faqItems.slice(0,10).map(item=>({
