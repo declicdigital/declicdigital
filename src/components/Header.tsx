@@ -13,6 +13,7 @@ const navLinks = [
 ];
 
 const moreLinks = [
+  { label: "Nos métiers", to: "/nos-metiers" },
   { label: "Nos villes", to: "/nos-villes" },
   { label: "Qui sommes-nous", to: "/qui-sommes-nous" },
   { label: "FAQ", to: "/faq" },
