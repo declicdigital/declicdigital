@@ -94,12 +94,11 @@ const Index = () => {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="flex justify-center"
             >
-              <div className="relative">
-                <img src={geoffreyPhoto} alt="Geoffrey, Expert Produit Google et fondateur de Déclic Digital" className="w-full max-w-md rounded-2xl drop-shadow-2xl" />
-                <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 rounded-full bg-card px-6 py-2.5 shadow-elevated border border-border text-center whitespace-nowrap">
-                  <p className="text-sm font-bold text-foreground">Geoffrey</p>
-                  <p className="text-xs text-muted-foreground">Expert Produit Google · Fondateur</p>
-                </div>
+              <div className="rounded-2xl bg-card p-8 shadow-card text-center max-w-sm">
+                <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital - Expert Produit Google" className="mx-auto mb-4 h-32 w-32 rounded-full object-cover" />
+                <p className="font-bold text-lg">Geoffrey</p>
+                <p className="text-sm text-muted-foreground">Expert Produit Google</p>
+                <p className="text-sm text-muted-foreground mt-2">Fondateur de Déclic Digital, j'accompagne les TPE et indépendants d'Île-de-France dans leur transformation digitale.</p>
               </div>
             </motion.div>
           </div>
