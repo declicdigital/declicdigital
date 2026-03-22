@@ -30,7 +30,7 @@ const AuditSeo = () => (
               Audit SEO gratuit · Analyse complète de votre site
             </span>
             <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-              Audit SEO gratuit à Paris : recevez votre <span className="text-gradient">analyse complète</span>
+              Audit SEO gratuit : analysez la visibilité Google de votre site en 48h
             </h1>
             <p className="mb-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
               Découvrez pourquoi votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> n'apparaît pas sur Google et recevez des recommandations concrètes pour améliorer votre visibilité. Notre audit est complet et personnalisé. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link>.
