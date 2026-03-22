@@ -106,7 +106,7 @@ const VilleReferencementSeo = () => {
       {/* Services SEO */}
       <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-10">
-          Nos services SEO à {city.nameShort}
+          Notre méthode de référencement pour {city.nameShort}
         </h2>
         <div className="grid gap-6 md:grid-cols-2">
           {[
