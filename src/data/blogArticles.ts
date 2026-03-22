@@ -4,6 +4,7 @@ import vitesseImg from "@/assets/vitesse-site-web-performance.jpg";
 import campagneImg from "@/assets/knafo-campagne-digitale-municipales-paris.jpg";
 import garminImg from "@/assets/whatsapp-garmin-montre-connectee.jpg";
 import porteAvionsImg from "@/assets/porte-avions-france-libre.jpg";
+import xboxImg from "@/assets/manette-xbox-carbon-black-promo.jpg";
 
 export interface BlogArticle {
   slug: string;
