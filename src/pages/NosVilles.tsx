@@ -32,7 +32,7 @@ const NosVilles = () => (
             <span className="text-gradient">Paris et dans le 92</span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Notre agence accompagne les PME et indépendants à Paris et dans les Hauts-de-Seine pour la création de sites internet professionnels et le référencement SEO. Découvrez nos interventions par ville.
+            Notre agence accompagne les TPE et indépendants à Paris et dans les Hauts-de-Seine pour la création de sites internet professionnels et le référencement SEO. Découvrez nos interventions par ville.
           </p>
         </motion.div>
       </div>
@@ -123,7 +123,7 @@ const NosVilles = () => (
       <div className="mx-auto max-w-3xl space-y-6">
         <h2 className="text-3xl font-extrabold md:text-4xl text-center">Pourquoi le référencement local est essentiel ?</h2>
         <p className="text-muted-foreground leading-relaxed">
-          Le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement local</Link> permet à votre entreprise d'apparaître dans les résultats de recherche quand un internaute effectue une recherche géolocalisée. Par exemple, "plombier Boulogne-Billancourt" ou "restaurant Paris 15". C'est un levier puissant pour les PME qui ciblent une clientèle de proximité.
+          Le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement local</Link> permet à votre entreprise d'apparaître dans les résultats de recherche quand un internaute effectue une recherche géolocalisée. Par exemple, "plombier Boulogne-Billancourt" ou "restaurant Paris 15". C'est un levier puissant pour les TPE qui ciblent une clientèle de proximité.
         </p>
         <p className="text-muted-foreground leading-relaxed">
           Chez Déclic Digital, nous optimisons chaque <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour le référencement local : fiche Google Business Profile, pages dédiées par ville, contenu géolocalisé et citations sur les annuaires locaux. Cette approche vous permet de dominer les résultats Google dans votre zone de chalandise. Demandez votre <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour évaluer votre situation.

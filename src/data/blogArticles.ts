@@ -25,7 +25,7 @@ export const blogArticles: BlogArticle[] = [
     slug: "comment-choisir-hebergement-web-2026",
     title: "Comment choisir son hébergement web en 2026 ?",
     metaTitle: "Comment choisir son hébergement web en 2026 | Guide complet",
-    metaDescription: "Découvrez les critères essentiels pour choisir un hébergement web performant en 2026 : vitesse, sécurité, support et prix. Guide pratique pour PME.",
+    metaDescription: "Découvrez les critères essentiels pour choisir un hébergement web performant en 2026 : vitesse, sécurité, support et prix. Guide pratique pour TPE.",
     excerpt: "Vitesse, sécurité, support technique : les critères essentiels pour héberger votre site professionnel sans mauvaise surprise.",
     date: "2026-03-10",
     readTime: "6 min",
@@ -75,7 +75,7 @@ Des sauvegardes quotidiennes avec restauration en un clic sont indispensables. N
 ### 5. Le support technique
 Un support réactif en français, disponible 24/7, peut vous sauver en cas de problème critique.
 
-## Notre recommandation pour les PME
+## Notre recommandation pour les TPE
 
 Pour un [site vitrine professionnel](/creation-site-web), un hébergement cloud managé comme Vercel, Netlify ou un VPS chez OVH offre le meilleur rapport qualité-prix. Si vous gérez un [e-commerce](/creation-site-web), orientez-vous vers une solution cloud avec CDN intégré. La connectivité permanente est aussi un enjeu pour les [objets connectés comme les montres Garmin](/blog/whatsapp-montres-garmin-evolution-usage), qui dépendent d'infrastructures serveur fiables.
 
@@ -251,7 +251,7 @@ Le blog de campagne publiait des articles de fond sur les enjeux parisiens, posi
 
 ## Ce que les entreprises peuvent en retenir
 
-Le parallèle avec le monde de l'entreprise est direct. Si un candidat politique peut gagner 10% des voix grâce à une stratégie digitale bien menée, imaginez l'impact pour une PME ou un indépendant à Paris :
+Le parallèle avec le monde de l'entreprise est direct. Si un candidat politique peut gagner 10% des voix grâce à une stratégie digitale bien menée, imaginez l'impact pour une TPE ou un indépendant à Paris :
 
 - **Un [site web professionnel](/creation-site-web) inspire confiance** : que vous soyez candidat ou commerçant, la première impression en ligne est décisive
 - **Le [SEO local](/referencement-seo) fonctionne** : se positionner sur des requêtes géolocalisées (Paris, arrondissements, quartiers) attire une audience qualifiée
@@ -260,7 +260,7 @@ Le parallèle avec le monde de l'entreprise est direct. Si un candidat politique
 
 ## Le digital, un égaliseur de chances
 
-Ce que montre le cas Knafo aux municipales de Paris, c'est que le digital est un égaliseur de chances. Avec un budget maîtrisé mais une stratégie intelligente, il est possible de se rendre visible et de convaincre. C'est exactement ce que nous observons chaque jour avec nos clients PME à Paris et dans les Hauts-de-Seine. Cette logique s'applique aussi aux marques tech : [Garmin mise sur WhatsApp](/blog/whatsapp-montres-garmin-evolution-usage) pour élargir son audience au-delà du sport.
+Ce que montre le cas Knafo aux municipales de Paris, c'est que le digital est un égaliseur de chances. Avec un budget maîtrisé mais une stratégie intelligente, il est possible de se rendre visible et de convaincre. C'est exactement ce que nous observons chaque jour avec nos clients TPE à Paris et dans les Hauts-de-Seine. Cette logique s'applique aussi aux marques tech : [Garmin mise sur WhatsApp](/blog/whatsapp-montres-garmin-evolution-usage) pour élargir son audience au-delà du sport.
 
 Un artisan du [15ème arrondissement](/creation-site-web/paris-15eme), un restaurant à [Boulogne-Billancourt](/creation-site-web/boulogne-billancourt) ou un cabinet à [Neuilly-sur-Seine](/creation-site-web/neuilly-sur-seine) peuvent tous bénéficier des mêmes principes : un site rapide, bien référencé, avec du contenu de qualité.
 
@@ -409,7 +409,7 @@ Avec un coût estimé à plusieurs milliards d'euros, ce projet représente un e
 
 Pour les entreprises françaises, ce type de projet illustre l'importance d'investir dans l'innovation et la modernisation, que ce soit dans la défense ou dans la [création d'un site web performant](/creation-site-web). La compétitivité passe par l'adaptation aux nouvelles technologies.
 
-Besoin de moderniser votre présence en ligne ? [Demandez un audit SEO gratuit](/audit-seo-gratuit) ou découvrez nos [services de référencement](/referencement-seo) pour PME.
+Besoin de moderniser votre présence en ligne ? [Demandez un audit SEO gratuit](/audit-seo-gratuit) ou découvrez nos [services de référencement](/referencement-seo) pour TPE.
     `,
   },
 ];

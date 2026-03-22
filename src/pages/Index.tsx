@@ -77,7 +77,7 @@ const Index = () => {
                 Création de site internet et référencement SEO pour les TPE, artisans et indépendants en Île-de-France
               </h1>
               <p className="mb-8 max-w-lg text-lg md:text-xl text-muted-foreground leading-relaxed">
-                Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour que les PME et indépendants attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
+                Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour que les TPE et indépendants attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
@@ -94,7 +94,7 @@ const Index = () => {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="flex justify-center"
             >
-              <img src={heroDashboard} alt="Tableau de bord SEO professionnel pour PME" className="w-full max-w-lg drop-shadow-2xl" />
+              <img src={heroDashboard} alt="Tableau de bord SEO professionnel pour TPE" className="w-full max-w-lg drop-shadow-2xl" />
             </motion.div>
           </div>
         </div>
@@ -137,7 +137,7 @@ const Index = () => {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold md:text-4xl">Création de site web professionnel pour indépendants</h2>
           <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">Déclic Digital</Link>, nous ne créons pas simplement des sites web. Nous concevons des outils de génération de clients, pensés pour les PME et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> adaptés aux petits budgets.
+            Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">Déclic Digital</Link>, nous ne créons pas simplement des sites web. Nous concevons des outils de génération de clients, pensés pour les TPE et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> adaptés aux petits budgets.
           </p>
         </div>
         <div className="grid gap-6 md:grid-cols-3">
@@ -250,7 +250,7 @@ const Index = () => {
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-6">
             <p className="text-base md:text-lg">
-              Créer un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site internet</Link> ne se résume pas à assembler quelques pages et publier du contenu. Dans un environnement numérique de plus en plus concurrentiel, la réussite d'un projet web repose sur une combinaison d'expertise technique, de vision stratégique et de compréhension fine de votre marché. Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">Déclic Digital</Link>, nous accompagnons les PME, artisans, professions libérales et indépendants de <Link to="/nos-villes" className="text-primary font-semibold hover:underline">Paris et des Hauts-de-Seine</Link> dans la conception de sites web qui génèrent réellement des contacts qualifiés.
+              Créer un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site internet</Link> ne se résume pas à assembler quelques pages et publier du contenu. Dans un environnement numérique de plus en plus concurrentiel, la réussite d'un projet web repose sur une combinaison d'expertise technique, de vision stratégique et de compréhension fine de votre marché. Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">Déclic Digital</Link>, nous accompagnons les TPE, artisans, professions libérales et indépendants de <Link to="/nos-villes" className="text-primary font-semibold hover:underline">Paris et des Hauts-de-Seine</Link> dans la conception de sites web qui génèrent réellement des contacts qualifiés.
             </p>
             <div className="grid gap-6 md:grid-cols-2 not-prose">
               <div className="rounded-2xl bg-card p-6 shadow-card">
@@ -267,7 +267,7 @@ const Index = () => {
               </div>
             </div>
             <p className="text-base md:text-lg">
-              La majorité des PME qui nous contactent partagent un constat commun : elles ont investi dans un site web il y a quelques années, mais celui-ci ne leur apporte aucun retour. Les raisons sont souvent les mêmes : un design daté, un temps de chargement excessif, une absence totale de stratégie de mots clés, et un contenu qui ne répond pas aux questions que se posent réellement leurs prospects.
+              La majorité des TPE qui nous contactent partagent un constat commun : elles ont investi dans un site web il y a quelques années, mais celui-ci ne leur apporte aucun retour. Les raisons sont souvent les mêmes : un design daté, un temps de chargement excessif, une absence totale de stratégie de mots clés, et un contenu qui ne répond pas aux questions que se posent réellement leurs prospects.
             </p>
             <p className="text-base md:text-lg">
               Notre approche est différente. Nous commençons par une analyse approfondie de votre secteur d'activité, de vos concurrents et des requêtes que tapent vos futurs clients sur Google. À partir de cette analyse, nous définissons une arborescence de site optimisée, nous rédigeons des contenus ciblés et nous mettons en place une architecture technique irréprochable. Le résultat : un site qui se positionne durablement sur les mots clés stratégiques de votre activité. Demandez votre <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour en savoir plus.
@@ -281,7 +281,7 @@ const Index = () => {
                   "Expertise Google certifiée (Expert Produit Google)",
                   "Sites rapides : score PageSpeed supérieur à 90",
                   "Accompagnement sur-mesure, pas de template générique",
-                  "Tarifs adaptés aux budgets des PME et indépendants",
+                  "Tarifs adaptés aux budgets des TPE et indépendants",
                 ].map((item, i) => (
                   <li key={i} className="flex items-start gap-2 text-base text-muted-foreground">
                     <CheckCircle size={16} className="text-brand-violet mt-0.5 shrink-0" />

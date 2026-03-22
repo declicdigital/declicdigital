@@ -100,7 +100,7 @@ const Contact = () => (
             <p className="text-sm text-muted-foreground italic mb-4">"Chaque projet est unique. Je prends le temps d'échanger avec vous pour comprendre vos besoins et vous proposer la meilleure solution."</p>
             <ul className="text-sm text-muted-foreground space-y-2">
               <li>✅ Expert Produit Google certifié</li>
-              <li>✅ Spécialistes des PME et petites entreprises</li>
+              <li>✅ Spécialistes des TPE et indépendants</li>
               <li>✅ Sites optimisés SEO dès la conception</li>
               <li>✅ Tarifs adaptés aux petits budgets</li>
             </ul>
@@ -137,7 +137,7 @@ const Contact = () => (
           Créer un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web professionnel</Link> ne se résume pas à assembler quelques pages. Il faut penser à l'expérience utilisateur, au design, à la vitesse de chargement, à l'optimisation pour les moteurs de recherche et à la compatibilité mobile. Une agence web comme Déclic Digital prend en charge l'ensemble de ces aspects pour vous livrer un site qui travaille pour vous.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Pour une PME ou un indépendant, un site web bien conçu est un investissement rentable. Il vous permet d'être trouvé par vos clients potentiels sur Google, de présenter vos services de manière professionnelle et de générer des demandes de devis automatiquement. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+          Pour une TPE ou un indépendant, un site web bien conçu est un investissement rentable. Il vous permet d'être trouvé par vos clients potentiels sur Google, de présenter vos services de manière professionnelle et de générer des demandes de devis automatiquement. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
         </p>
         <p className="text-muted-foreground leading-relaxed">
           Chez Déclic Digital, nous comprenons les contraintes des petites entreprises. C'est pourquoi nous proposons des solutions accessibles, avec des explications simples et un accompagnement humain à chaque étape. Du premier échange à la mise en ligne, en passant par le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>, nous sommes à vos côtés pour faire de votre présence en ligne un véritable levier de croissance.
