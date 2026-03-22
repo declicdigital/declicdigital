@@ -44,7 +44,7 @@ const ReferencementSeo = () => (
     </section>
     {/* Bénéfices */}
     <SectionWrapper className="bg-section-blue">
-      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Les bénéfices du SEO pour les PME</h2>
+      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Pourquoi le SEO local est essentiel pour votre activité</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
         Le référencement naturel est la stratégie la plus rentable pour développer votre activité en ligne. Contrairement à la publicité payante, les résultats du SEO sont durables. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou consultez <Link to="/faq" className="text-primary font-semibold hover:underline">notre FAQ</Link>.
       </p>
