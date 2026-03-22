@@ -49,7 +49,7 @@ const AuditSeo = () => (
     {/* Contenu audit */}
     <SectionWrapper className="bg-section-blue">
       <div className="text-center mb-4">
-        <h2 className="text-3xl font-extrabold md:text-4xl">Ce que contient votre audit</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl">Qu'est-ce qu'un audit SEO et à quoi ça sert ?</h2>
       </div>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
         Notre audit SEO est une analyse approfondie de votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link>. Il couvre tous les aspects qui influencent votre positionnement sur Google et vous donne une feuille de route claire. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
