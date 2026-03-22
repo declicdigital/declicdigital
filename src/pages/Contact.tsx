@@ -19,6 +19,44 @@ const Contact = () => (
       <meta name="description" content="Besoin d'un site internet ou d'un boost SEO ? Contactez Déclic Digital par téléphone, email ou formulaire. Devis personnalisé gratuit, réponse sous 24h." />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/contact" />
+      <script type="application/ld+json">{JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://declicdigital.net/#organization",
+        name: "Déclic Digital",
+        description: "Agence web et SEO pour TPE à Paris et Hauts-de-Seine",
+        url: "https://declicdigital.net",
+        telephone: "+33602228939",
+        email: "contact@declicdigital.net",
+        image: "https://declicdigital.net/og/contact.png",
+        priceRange: "€€",
+        address: {
+          "@type": "PostalAddress",
+          streetAddress: "57 rue d'Alleray",
+          addressLocality: "Paris",
+          postalCode: "75015",
+          addressRegion: "Île-de-France",
+          addressCountry: "FR",
+        },
+        geo: { "@type": "GeoCoordinates", latitude: 48.8396, longitude: 2.3004 },
+        areaServed: [
+          { "@type": "City", name: "Paris" },
+          { "@type": "AdministrativeArea", name: "Hauts-de-Seine (92)" },
+        ],
+        openingHoursSpecification: {
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          opens: "09:00",
+          closes: "18:00",
+        },
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: "+33602228939",
+          contactType: "customer service",
+          email: "contact@declicdigital.net",
+          availableLanguage: ["French"],
+        },
+      })}</script>
     </Helmet>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Contact" }]} />
     {/* Hero */}

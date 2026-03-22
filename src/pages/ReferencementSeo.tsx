@@ -68,7 +68,7 @@ const ReferencementSeo = () => (
     {/* Qu'est-ce que le SEO */}
     <SectionWrapper>
       <div className="mx-auto max-w-5xl">
-        <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Agence SEO freelance : une approche personnalisée et transparente</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Qu'est-ce que le référencement naturel (SEO) et pourquoi c'est indispensable ?</h2>
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="space-y-6">
             <p className="text-muted-foreground leading-relaxed">
@@ -88,8 +88,26 @@ const ReferencementSeo = () => (
       </div>
     </SectionWrapper>
 
-    {/* Méthode */}
+    {/* SEO local */}
     <SectionWrapper className="bg-section-blue">
+      <div className="mx-auto max-w-3xl space-y-6">
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center">SEO local Hauts-de-Seine : dominez Google Maps dans le 92</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          Le référencement local est le levier le plus efficace pour les TPE et artisans qui travaillent avec une clientèle de proximité. Quand un internaute tape "plombier Boulogne-Billancourt" ou "coiffeur Neuilly-sur-Seine", Google affiche en priorité les résultats locaux avec la carte Google Maps (le "pack local"). Être positionné dans ce pack local, c'est capter les clients qui sont prêts à acheter maintenant.
+        </p>
+        <h3 className="text-xl font-bold">Comment fonctionne le SEO local pour une TPE ?</h3>
+        <p className="text-muted-foreground leading-relaxed">
+          Le SEO local combine plusieurs actions complémentaires : l'optimisation de votre fiche Google Business Profile (anciennement Google My Business), la création de pages géolocalisées sur votre site, le travail sur les avis clients Google, et l'inscription sur les annuaires locaux pertinents. Chaque signal envoyé à Google renforce votre légitimité sur votre zone de chalandise.
+        </p>
+        <h3 className="text-xl font-bold">Pourquoi le SEO local est rentable pour les artisans et TPE à Paris et dans le 92</h3>
+        <p className="text-muted-foreground leading-relaxed">
+          Contrairement à la publicité payante (Google Ads), le SEO local est un investissement durable. Une fois votre site bien positionné sur "création site web artisan Paris" ou "SEO TPE Hauts-de-Seine", vous recevez des demandes de contact gratuitement, sans payer au clic. Les premiers résultats apparaissent entre 3 et 6 mois, mais les gains s'accumulent et se renforcent avec le temps. C'est la stratégie la plus rentable pour les petits budgets marketing.
+        </p>
+      </div>
+    </SectionWrapper>
+
+    {/* Méthode */}
+    <SectionWrapper>
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre méthode de référencement naturel en 4 étapes</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
         Notre approche est méthodique et transparente. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link> et notre processus éprouvé pour optimiser votre visibilité sur Google.
@@ -113,14 +131,18 @@ const ReferencementSeo = () => (
     </SectionWrapper>
 
     {/* SEO vs SEA */}
-    <SectionWrapper>
+    <SectionWrapper className="bg-section-blue">
       <div className="mx-auto max-w-3xl space-y-6">
-        <h2 className="text-3xl font-extrabold md:text-4xl text-center">SEO local : apparaître dans Google Maps et les recherches de proximité</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center">SEO vs SEA : quelle stratégie choisir pour votre TPE ?</h2>
         <p className="text-muted-foreground leading-relaxed">
           La publicité payante (Google Ads, Facebook Ads) peut générer du trafic rapidement, mais elle s'arrête dès que vous coupez le budget. Le SEO, en revanche, est un investissement qui continue de porter ses fruits sur le long terme. Une fois bien positionné, votre site attire des visiteurs gratuitement, jour après jour.
         </p>
+        <h3 className="text-xl font-bold">Combien de temps pour voir des résultats SEO concrets ?</h3>
         <p className="text-muted-foreground leading-relaxed">
-          Pour les TPE avec des budgets marketing limités, le SEO est souvent la stratégie la plus rentable. Les premiers résultats apparaissent généralement entre 3 et 6 mois, mais les gains s'accumulent et se renforcent avec le temps. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou <Link to="/faq" className="text-primary font-semibold hover:underline">notre FAQ</Link> pour en savoir plus.
+          Les premiers résultats apparaissent généralement entre 3 et 6 mois après le début de l'optimisation. Certaines améliorations techniques (vitesse, balises, structure) peuvent avoir un impact plus rapide. L'important est de maintenir l'effort dans la durée : le SEO est un marathon, pas un sprint. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs SEO</Link> ou lisez <Link to="/faq" className="text-primary font-semibold hover:underline">notre FAQ</Link> pour en savoir plus.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          Nous recommandons souvent de combiner les deux stratégies : le SEA pour des résultats immédiats sur des mots clés à forte intention d'achat, et le SEO pour construire une visibilité durable. Nos clients qui investissent dans le SEO voient leur coût d'acquisition client baisser de 30 à 60% en 12 mois. Commencez par un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour évaluer votre potentiel.
         </p>
       </div>
     </SectionWrapper>

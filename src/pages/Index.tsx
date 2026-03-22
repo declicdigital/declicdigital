@@ -46,18 +46,55 @@ const Index = () => {
           {JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
+            "@id": "https://declicdigital.net/#organization",
             name: "Déclic Digital",
             description: "Agence web et SEO pour TPE, artisans et indépendants en Île-de-France",
             url: "https://declicdigital.net",
             telephone: "+33602228939",
             email: "contact@declicdigital.net",
+            image: "https://declicdigital.net/og/default.png",
+            priceRange: "€€",
+            currenciesAccepted: "EUR",
+            paymentAccepted: "Virement bancaire, Carte bancaire",
             address: {
               "@type": "PostalAddress",
               streetAddress: "57 rue d'Alleray",
               addressLocality: "Paris",
               postalCode: "75015",
+              addressRegion: "Île-de-France",
               addressCountry: "FR",
             },
+            geo: {
+              "@type": "GeoCoordinates",
+              latitude: 48.8396,
+              longitude: 2.3004,
+            },
+            areaServed: [
+              {
+                "@type": "City",
+                name: "Paris",
+                sameAs: "https://fr.wikipedia.org/wiki/Paris",
+              },
+              {
+                "@type": "AdministrativeArea",
+                name: "Hauts-de-Seine (92)",
+                sameAs: "https://fr.wikipedia.org/wiki/Hauts-de-Seine",
+              },
+            ],
+            openingHoursSpecification: {
+              "@type": "OpeningHoursSpecification",
+              dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+              opens: "09:00",
+              closes: "18:00",
+            },
+            founder: {
+              "@type": "Person",
+              name: "Geoffrey",
+              jobTitle: "Expert Produit Google",
+            },
+            sameAs: [
+              "https://share.google/8Ifh8V9cpPGinQXkY",
+            ],
           })}
         </script>
       </Helmet>
