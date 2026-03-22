@@ -13,8 +13,8 @@ import { cities } from "@/data/cities";
 const ReferencementSeo = () => (
   <PageLayout>
     <Helmet>
-      <title>Référencement SEO local pour TPE & artisans | Paris</title>
-      <meta name="description" content="Améliorez votre visibilité sur Google avec notre agence SEO freelance. Référencement naturel local pour TPE et artisans en Île-de-France. Résultats concrets." />
+      <title>Référencement SEO Google pour TPE | Agence SEO Paris | Déclic Digital</title>
+      <meta name="description" content="Gagnez en visibilité sur Google grâce au référencement naturel local. Audit SEO, optimisation technique et suivi de positionnement pour TPE en Île-de-France." />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/referencement-seo" />
       <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"Service",serviceType:"Référencement SEO",provider:{"@type":"LocalBusiness",name:"Déclic Digital",url:"https://declicdigital.net"},areaServed:"Île-de-France"})}</script>

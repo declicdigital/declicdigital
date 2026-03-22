@@ -15,8 +15,8 @@ import { cities } from "@/data/cities";
 const CreationSite = () => (
   <PageLayout>
     <Helmet>
-      <title>Création site internet pour TPE & artisans | Paris</title>
-      <meta name="description" content="Créez un site web professionnel adapté à votre activité. Déclic Digital accompagne les indépendants et TPE d'Île-de-France. Devis gratuit en 24h." />
+      <title>Création de site internet sur-mesure pour TPE | Déclic Digital Paris</title>
+      <meta name="description" content="Site vitrine, e-commerce ou landing page pour TPE et artisans. Design responsive, optimisé SEO, livré en 2 semaines. Devis gratuit en 24h." />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/creation-site-web" />
       <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"Service",serviceType:"Création de site internet",provider:{"@type":"LocalBusiness",name:"Déclic Digital",url:"https://declicdigital.net"},areaServed:"Île-de-France"})}</script>

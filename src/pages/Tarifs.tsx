@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+// Tarifs page
 import { motion } from "framer-motion";
 import { Check, Star, AlertTriangle } from "lucide-react";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
