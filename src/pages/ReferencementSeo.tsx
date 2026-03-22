@@ -115,7 +115,7 @@ const ReferencementSeo = () => (
     {/* SEO vs SEA */}
     <SectionWrapper>
       <div className="mx-auto max-w-3xl space-y-6">
-        <h2 className="text-3xl font-extrabold md:text-4xl text-center">SEO vs publicité payante : pourquoi choisir le référencement naturel ?</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center">SEO local : apparaître dans Google Maps et les recherches de proximité</h2>
         <p className="text-muted-foreground leading-relaxed">
           La publicité payante (Google Ads, Facebook Ads) peut générer du trafic rapidement, mais elle s'arrête dès que vous coupez le budget. Le SEO, en revanche, est un investissement qui continue de porter ses fruits sur le long terme. Une fois bien positionné, votre site attire des visiteurs gratuitement, jour après jour.
         </p>
