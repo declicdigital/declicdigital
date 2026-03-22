@@ -1,8 +1,9 @@
+import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Globe, Search, BarChart3, Zap, Eye, Users, TrendingUp, ChevronRight, Monitor, Smartphone, Gauge, CheckCircle, Shield, Clock, Target, Award, MessageSquare, Phone as PhoneIcon, FileText, Rocket, Star } from "lucide-react";
-import GoogleReviewsSection from "@/components/GoogleReviewsSection";
+const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
