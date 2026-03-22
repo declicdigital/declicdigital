@@ -45,7 +45,7 @@ const projects = [
 const Realisations = () => (
   <PageLayout>
     <Helmet>
-      <title>Nos réalisations web pour TPE & artisans — Déclic Digital</title>
+      <title>Nos réalisations web pour TPE & artisans | Déclic Digital</title>
       <meta name="description" content="Découvrez les sites web créés par Déclic Digital pour des artisans et TPE d'Île-de-France. Des projets concrets, des résultats mesurables. Portfolio complet." />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/realisations" />

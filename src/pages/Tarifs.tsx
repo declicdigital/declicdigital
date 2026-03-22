@@ -189,7 +189,7 @@ const renderPlanCard = (plan: (typeof plans)[number], index: number) => (
 const Tarifs = () => (
   <PageLayout>
     <Helmet>
-      <title>Tarifs création site web & SEO pour TPE — Déclic Digital</title>
+      <title>Tarifs création site web & SEO pour TPE | Déclic Digital</title>
       <meta
         name="description"
         content="Découvrez nos tarifs clairs pour la création de site internet et le SEO, adaptés aux budgets des TPE et artisans. Aucune surprise, devis gratuit."

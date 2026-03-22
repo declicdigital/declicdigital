@@ -14,7 +14,7 @@ import heroAudit from "@/assets/audit-seo-gratuit-site-web.webp";
 const AuditSeo = () => (
   <PageLayout>
     <Helmet>
-      <title>Audit SEO gratuit pour votre site — Déclic Digital</title>
+      <title>Audit SEO gratuit pour votre site | Déclic Digital</title>
       <meta name="description" content="Recevez un audit SEO complet et gratuit de votre site web. Déclic Digital analyse votre visibilité Google et propose un plan d'action concret et personnalisé." />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/audit-seo-gratuit" />
@@ -137,7 +137,7 @@ const AuditSeo = () => (
     {/* Formulaire */}
     <SectionWrapper className="bg-section-blue" id="formulaire-audit">
       <div className="mx-auto max-w-xl">
-        <h2 className="mb-4 text-center text-3xl font-extrabold">Demandez votre audit maintenant — réponse en 48h</h2>
+        <h2 className="mb-4 text-center text-3xl font-extrabold">Demandez votre audit maintenant : réponse en 48h</h2>
         <p className="text-center text-muted-foreground mb-8">
           Remplissez le formulaire ci-dessous et recevez votre audit SEO personnalisé sous 48 heures.
         </p>

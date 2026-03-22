@@ -13,7 +13,7 @@ import { cities } from "@/data/cities";
 const ReferencementSeo = () => (
   <PageLayout>
     <Helmet>
-      <title>Référencement SEO local pour TPE & artisans — Paris</title>
+      <title>Référencement SEO local pour TPE & artisans | Paris</title>
       <meta name="description" content="Améliorez votre visibilité sur Google avec notre agence SEO freelance. Référencement naturel local pour TPE et artisans en Île-de-France. Résultats concrets." />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/referencement-seo" />

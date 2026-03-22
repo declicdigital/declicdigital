@@ -25,8 +25,8 @@ const VilleReferencementSeo = () => {
     <PageLayout>
       <Helmet>
         <title>{
-          city.slug === "boulogne-billancourt" ? "SEO local Boulogne-Billancourt — TPE & artisans" :
-          `Référencement SEO ${city.nameShort} — TPE & artisans`
+          city.slug === "boulogne-billancourt" ? "SEO local Boulogne-Billancourt | TPE & artisans" :
+          `Référencement SEO ${city.nameShort} | TPE & artisans`
         }</title>
         <meta name="description" content={
           city.slug === "boulogne-billancourt" ? "Référencement Google local pour les TPE et artisans de Boulogne-Billancourt. Déclic Digital booste votre visibilité en Île-de-France. Audit gratuit." :
@@ -222,7 +222,7 @@ const VilleReferencementSeo = () => {
       <section className="gradient-miami py-16">
         <div className="container text-center">
           <h2 className="mb-4 text-3xl font-extrabold text-white">
-            Demandez votre audit SEO gratuit — réponse en 48h
+            Demandez votre audit SEO gratuit : réponse en 48h
           </h2>
           <p className="mb-8 text-white/80">
             Demandez votre audit SEO gratuit et découvrez comment attirer plus de clients depuis Google.

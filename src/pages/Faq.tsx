@@ -35,7 +35,7 @@ const faqItems = [
 const Faq = () => (
   <PageLayout>
     <Helmet>
-      <title>FAQ création site web & SEO pour TPE — Déclic Digital</title>
+      <title>FAQ création site web & SEO pour TPE | Déclic Digital</title>
       <meta name="description" content="Toutes les réponses à vos questions sur la création de site web et le référencement SEO pour les TPE et artisans. Délais, tarifs, méthodes et conseils." />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/faq" />
