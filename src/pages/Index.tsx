@@ -74,7 +74,7 @@ const Index = () => {
                 Expert Produit Google · Agence digitale
               </span>
               <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
-                Création de site internet et référencement SEO pour les TPE, artisans et indépendants en Île-de-France
+                Création de site internet et SEO pour les TPE et indépendants en Île-de-France
               </h1>
               <p className="mb-8 max-w-lg text-lg md:text-xl text-muted-foreground leading-relaxed">
                 Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour que les TPE et indépendants attirent enfin les bons clients, en toute simplicité et sans budget démesuré.

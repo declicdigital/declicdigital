@@ -15,7 +15,7 @@ const AuditSeo = () => (
   <PageLayout>
     <Helmet>
       <title>Audit SEO gratuit pour votre site — Déclic Digital</title>
-      <meta name="description" content="Recevez un audit SEO complet et gratuit de votre site web. Déclic Digital analyse votre visibilité Google et vous propose un plan d'action concret. Sans engagement." />
+      <meta name="description" content="Recevez un audit SEO complet et gratuit de votre site web. Déclic Digital analyse votre visibilité Google et propose un plan d'action concret et personnalisé." />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/audit-seo-gratuit" />
       <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"Service",serviceType:"Audit SEO gratuit",provider:{"@type":"LocalBusiness",name:"Déclic Digital",url:"https://declicdigital.net"},areaServed:"Île-de-France"})}</script>
