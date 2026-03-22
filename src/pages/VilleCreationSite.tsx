@@ -24,8 +24,19 @@ const VilleCreationSite = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>{`Site web ${city.nameShort} | Déclic Digital`}</title>
-        <meta name="description" content={`Création de site internet professionnel ${city.description}. Agence web spécialisée PME. Site vitrine, e-commerce, responsive et optimisé SEO. Devis gratuit.`} />
+        <title>{
+          city.slug === "paris-1er" ? "Création site internet Paris 1er — TPE & artisans" :
+          city.slug === "paris-3eme" ? "Création site internet Paris 3ème — artisans & TPE" :
+          city.slug === "boulogne-billancourt" ? "Création site internet Boulogne-Billancourt — TPE" :
+          `Création site internet ${city.nameShort} — artisans & TPE`
+        }</title>
+        <meta name="description" content={
+          city.slug === "paris-1er" ? "Créez votre site web professionnel dans le 1er arrondissement de Paris. Déclic Digital accompagne les indépendants et TPE. Devis gratuit." :
+          city.slug === "paris-3eme" ? "Votre site web professionnel dans le Marais. Déclic Digital accompagne les artisans et TPE du 3ème arrondissement de Paris. Devis gratuit." :
+          city.slug === "boulogne-billancourt" ? "Agence web à Boulogne-Billancourt pour TPE et artisans. Déclic Digital crée votre site professionnel et améliore votre visibilité Google." :
+          `Agence web pour les TPE et artisans de ${city.nameShort}. Déclic Digital crée votre site professionnel et améliore votre référencement Google local.`
+        } />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`https://declicdigital.net/creation-site-web/${city.slug}`} />
       </Helmet>
 
@@ -45,8 +56,10 @@ const VilleCreationSite = () => {
                 Agence web {city.description}
               </span>
               <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-                Création de site web à{" "}
-                <span className="text-gradient">{city.nameShort}</span>
+                {city.slug === "paris-1er" ? "Création de site internet pour les TPE et artisans du Paris 1er" :
+                 city.slug === "paris-3eme" ? "Création de site web pour les artisans et TPE du Paris 3ème (Le Marais)" :
+                 city.slug === "boulogne-billancourt" ? "Création de site internet pour les TPE et artisans de Boulogne-Billancourt" :
+                 `Création de site internet pour les artisans et TPE de ${city.nameShort}`}
               </h1>
               <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
                 {content?.creationIntro || `Vous êtes une PME ou un indépendant ${city.description} ? Déclic Digital crée votre site internet professionnel, responsive et optimisé pour Google. Attirez enfin les bons clients grâce à un site qui travaille pour vous.`}
