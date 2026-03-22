@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { motion } from "framer-motion";
 import { Monitor, Smartphone, TrendingUp, Zap, Building2, User, Wrench, ShoppingCart, CheckCircle, Search, Shield, Clock } from "lucide-react";
@@ -13,6 +14,13 @@ import { cities } from "@/data/cities";
 
 const CreationSite = () => (
   <PageLayout>
+    <Helmet>
+      <title>Création site internet pour TPE & artisans — Paris</title>
+      <meta name="description" content="Créez un site web professionnel adapté à votre activité. Déclic Digital accompagne les indépendants et TPE d'Île-de-France. Devis gratuit en 24h." />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://declicdigital.net/creation-site-web" />
+      <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"Service",serviceType:"Création de site internet",provider:{"@type":"LocalBusiness",name:"Déclic Digital",url:"https://declicdigital.net"},areaServed:"Île-de-France"})}</script>
+    </Helmet>
     {/* Breadcrumb */}
     <PageBreadcrumb items={[
       { label: "Accueil", href: "/" },
@@ -24,9 +32,7 @@ const CreationSite = () => (
       <div className="container">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
-            <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-              Création de site web à Paris qui <span className="text-gradient">attire des clients</span>
-            </h1>
+            <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">Création de site internet sur-mesure pour les artisans, TPE et indépendants à Paris</h1>
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
               Nous concevons des sites modernes, rapides et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour les PME et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou demandez un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link>.
             </p>
@@ -43,7 +49,7 @@ const CreationSite = () => (
 
     {/* Avantages */}
     <SectionWrapper className="bg-section-blue">
-      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Les avantages d'un site professionnel</h2>
+      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Pourquoi votre activité a besoin d'un site web professionnel</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
         Un site web professionnel ne se limite pas à une simple vitrine en ligne. C'est un outil stratégique qui renforce votre crédibilité, attire de nouveaux clients grâce au <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement naturel</Link> et vous différencie de vos concurrents.
       </p>
@@ -67,7 +73,7 @@ const CreationSite = () => (
 
     {/* Comment se déroule la création */}
     <SectionWrapper>
-      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Comment se déroule la création de votre site</h2>
+      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Un site vitrine ou e-commerce adapté à votre métier</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
         Nous avons développé un processus clair et structuré pour vous accompagner du premier échange à la mise en ligne de votre site.
       </p>
@@ -91,7 +97,7 @@ const CreationSite = () => (
 
     {/* Pour qui */}
     <SectionWrapper className="bg-section-blue">
-      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Pour qui ?</h2>
+      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre méthode : de la maquette à la mise en ligne</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
         Nos solutions s'adaptent à tous les profils d'entreprises. Que vous soyez artisan, commerçant, profession libérale ou dirigeant de PME, nous concevons un site adapté à votre métier et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement Google</Link>.
       </p>
@@ -118,7 +124,7 @@ const CreationSite = () => (
     {/* Contenu SEO */}
     <SectionWrapper>
       <div className="mx-auto max-w-5xl">
-        <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Qu'est-ce qu'un bon site web pour une PME ?</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Site web rapide, mobile et optimisé pour Google</h2>
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="flex justify-center order-2 lg:order-1">
             <img src={siteProImage} alt="Site web professionnel pour entreprise de construction" className="w-full max-w-md rounded-2xl shadow-card" />
@@ -143,9 +149,7 @@ const CreationSite = () => (
 
     {/* Villes maillage */}
     <SectionWrapper className="bg-section-blue">
-      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">
-        Création de site web par ville
-      </h2>
+      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">Combien coûte la création d'un site internet pour une TPE ?</h2>
       <p className="text-center text-muted-foreground mb-8">
         Nous intervenons à Paris et dans les Hauts-de-Seine pour la <Link to="/nos-villes" className="text-primary font-semibold hover:underline">création de sites web professionnels</Link>.
       </p>
@@ -176,7 +180,7 @@ const CreationSite = () => (
       <div className="container flex flex-col items-center text-center">
         <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-16 h-16 rounded-full object-cover border-2 border-white/30 shadow-lg mb-3" />
         <p className="text-sm font-semibold text-white mb-2">Geoffrey, Expert Produit Google</p>
-        <h2 className="mb-4 text-3xl font-extrabold text-white">Prêt à lancer votre projet ?</h2>
+        <h2 className="mb-4 text-3xl font-extrabold text-white">Ils nous ont fait confiance — réalisations récentes</h2>
         <p className="mb-8 text-white/80">Demandez un devis gratuit pour la création de votre site web professionnel.</p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Button asChild size="lg" className="rounded-full bg-white px-8 font-semibold text-foreground shadow-lg hover:bg-white/90">
