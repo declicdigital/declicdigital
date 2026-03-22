@@ -24,8 +24,15 @@ const VilleReferencementSeo = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>{`SEO ${city.nameShort} | Déclic Digital`}</title>
-        <meta name="description" content={`Agence de référencement SEO ${city.description}. Améliorez votre visibilité sur Google et attirez des clients qualifiés. Audit SEO gratuit.`} />
+        <title>{
+          city.slug === "boulogne-billancourt" ? "SEO local Boulogne-Billancourt — TPE & artisans" :
+          `Référencement SEO ${city.nameShort} — TPE & artisans`
+        }</title>
+        <meta name="description" content={
+          city.slug === "boulogne-billancourt" ? "Référencement Google local pour les TPE et artisans de Boulogne-Billancourt. Déclic Digital booste votre visibilité en Île-de-France. Audit gratuit." :
+          `Boostez votre visibilité Google à ${city.nameShort}. Déclic Digital, agence SEO locale pour TPE, artisans et indépendants en Île-de-France. Audit gratuit.`
+        } />
+        <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`https://declicdigital.net/referencement-seo/${city.slug}`} />
       </Helmet>
 
@@ -44,8 +51,8 @@ const VilleReferencementSeo = () => {
                 Agence SEO {city.description}
               </span>
               <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-                Référencement SEO à{" "}
-                <span className="text-gradient">{city.nameShort}</span>
+                {city.slug === "boulogne-billancourt" ? "Référencement SEO local pour les artisans et TPE de Boulogne-Billancourt" :
+                 `Référencement SEO local pour les artisans et TPE de ${city.nameShort}`}
               </h1>
               <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
                 {content?.seoIntro || `Votre entreprise ${city.description} mérite d'être visible sur Google. Notre agence SEO optimise votre site pour attirer des clients qualifiés et développer votre activité grâce au référencement naturel.`}
