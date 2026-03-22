@@ -118,7 +118,7 @@
     pointer-events: none;
     z-index: 9998;
     opacity: 0.08;
-    background: url('/grain.png');
+    background: url('/grain.webp');
     background-size: 128px 128px;
     mix-blend-mode: overlay;
   }

@@ -5,7 +5,7 @@ import logo from "@/assets/logo-declic-digital-new.webp";
 const Footer = () => (
   <footer className="border-t border-border relative overflow-hidden">
     {/* Grain overlay on footer */}
-    <div className="absolute inset-0 pointer-events-none z-10" style={{ background: "url('/grain.png')", backgroundSize: "256px 256px", opacity: 0.12, mixBlendMode: "soft-light" }} />
+    <div className="absolute inset-0 pointer-events-none z-10" style={{ background: "url('/grain.webp')", backgroundSize: "256px 256px", opacity: 0.12, mixBlendMode: "soft-light" }} />
     <div style={{ background: "hsl(230, 18%, 15%)" }}>
       <div className="container py-6 md:py-8">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
