@@ -5,13 +5,10 @@ import { HelmetProvider } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { AuthProvider } from "@/hooks/useAuth";
 import Index from "./pages/Index";
 import ScrollToTop from "./components/ScrollToTop";
 
-// Lazy-load AuthProvider (and supabase) — only needed for auth routes
-const LazyAuthProvider = lazy(() =>
-  import("@/hooks/useAuth").then((m) => ({ default: m.AuthProvider }))
-);
 // Lazy-loaded pages for code splitting
 const AuditSeo = lazy(() => import("./pages/AuditSeo"));
 const CreationSite = lazy(() => import("./pages/CreationSite"));
@@ -49,8 +46,7 @@ const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Suspense fallback={null}>
-        <LazyAuthProvider>
+        <AuthProvider>
           <Toaster />
           <Sonner />
           <BrowserRouter>
@@ -90,8 +86,7 @@ const App = () => (
               </Routes>
             </Suspense>
           </BrowserRouter>
-        </LazyAuthProvider>
-        </Suspense>
+        </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>
