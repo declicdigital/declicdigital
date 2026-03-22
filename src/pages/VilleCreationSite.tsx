@@ -114,7 +114,7 @@ const VilleCreationSite = () => {
       {/* Types de sites */}
       <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-10">
-          Nos solutions de création de site à {city.nameShort}
+          Un site web livré en 3 semaines, adapté à votre métier
         </h2>
         <div className="grid gap-6 md:grid-cols-3">
           {[
