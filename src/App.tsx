@@ -34,6 +34,8 @@ const Blog = lazy(() => import("./pages/Blog"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const BlogCategory = lazy(() => import("./pages/BlogCategory"));
 const SharedProject = lazy(() => import("./pages/SharedProject"));
+const NosMetiers2 = lazy(() => import("./pages/NosMetiers2"));
+const MetierCreationSite = lazy(() => import("./pages/MetierCreationSite"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite"));
 const FormulaireBrief = lazy(() => import("./pages/FormulaireBrief"));
