@@ -128,7 +128,7 @@ const ReferencementSeo = () => (
     {/* Villes maillage */}
     <SectionWrapper className="bg-section-blue">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">
-        Référencement SEO par ville
+        Combien de temps avant de voir des résultats SEO ?
       </h2>
       <p className="text-center text-muted-foreground mb-8">
         Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold hover:underline">référencement SEO local</Link> à Paris et dans les Hauts-de-Seine.
