@@ -88,7 +88,7 @@ const VilleCreationSite = () => {
       {/* Pourquoi un site web */}
       <SectionWrapper className="bg-section-blue">
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">
-          {content?.creationWhyTitle || `Pourquoi créer un site web à ${city.nameShort} ?`}
+          {`Pourquoi les professionnels de ${city.nameShort} ont besoin d'un site web`}
         </h2>
         <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
           {content?.creationWhyText || `Un site internet professionnel est indispensable pour les entreprises ${city.description}. Il vous permet d'être trouvé par vos clients locaux et de vous démarquer de la concurrence.`}
