@@ -147,9 +147,40 @@ const CreationSite = () => (
       </div>
     </SectionWrapper>
 
+    {/* Création site web artisan Paris */}
+    <SectionWrapper className="bg-section-blue">
+      <div className="mx-auto max-w-3xl space-y-6">
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center">Création de site web pour artisan à Paris : pourquoi c'est indispensable</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          En tant qu'artisan ou indépendant à Paris, votre visibilité en ligne détermine directement votre volume de clients. 97% des consommateurs recherchent un professionnel local sur internet avant de le contacter. Sans site web, vous êtes invisible pour cette audience. Avec un site bien conçu et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement local</Link>, vous captez des demandes de devis chaque semaine.
+        </p>
+        <h3 className="text-xl font-bold">Un site vitrine qui inspire confiance et génère des contacts</h3>
+        <p className="text-muted-foreground leading-relaxed">
+          Votre site web est votre vitrine 24h/24. Il doit présenter clairement vos services, afficher vos réalisations, et faciliter la prise de contact. Nous concevons chaque site avec un objectif commercial précis : transformer les visiteurs en prospects qualifiés. Formulaire de contact, bouton d'appel, témoignages clients, chaque élément est pensé pour la conversion.
+        </p>
+        <h3 className="text-xl font-bold">Technologies modernes pour des performances optimales</h3>
+        <p className="text-muted-foreground leading-relaxed">
+          Nous utilisons les technologies les plus adaptées selon votre projet : WordPress pour les sites éditoriaux, Shopify pour le e-commerce, ou des solutions sur-mesure pour les besoins spécifiques. Quel que soit l'outil, nous garantissons un site rapide (score PageSpeed > 90), sécurisé (HTTPS), et conforme aux standards d'accessibilité. Consultez nos <Link to="/realisations" className="text-primary font-semibold hover:underline">réalisations récentes</Link> pour voir des exemples concrets.
+        </p>
+      </div>
+    </SectionWrapper>
+
+    {/* Combien coûte */}
+    <SectionWrapper>
+      <div className="mx-auto max-w-3xl space-y-6">
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center">Combien coûte la création d'un site internet pour une TPE ?</h2>
+        <p className="text-muted-foreground leading-relaxed">
+          Le prix d'un site web dépend de sa complexité, du nombre de pages et des fonctionnalités souhaitées. Chez Déclic Digital, nous proposons des <Link to="/tarifs" className="text-primary font-semibold hover:underline">tarifs adaptés aux budgets des TPE</Link> : une landing page dès 200€ de mise en service + 50€/mois, un site vitrine complet dès 590€ + 50€/mois. Ces forfaits incluent le design, le développement, l'hébergement, la maintenance et l'optimisation SEO de base.
+        </p>
+        <p className="text-muted-foreground leading-relaxed">
+          L'avantage de notre modèle par abonnement : pas de grosse facture au démarrage, et un site toujours à jour, sécurisé et performant. Vous avez une question ? Consultez <Link to="/faq" className="text-primary font-semibold hover:underline">notre FAQ</Link> ou <Link to="/contact" className="text-primary font-semibold hover:underline">demandez un devis gratuit</Link>.
+        </p>
+      </div>
+    </SectionWrapper>
+
     {/* Villes maillage */}
     <SectionWrapper className="bg-section-blue">
-      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">Combien coûte la création d'un site internet pour une TPE ?</h2>
+      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">Création de site internet à Paris et dans les Hauts-de-Seine</h2>
       <p className="text-center text-muted-foreground mb-8">
         Nous intervenons à Paris et dans les Hauts-de-Seine pour la <Link to="/nos-villes" className="text-primary font-semibold hover:underline">création de sites web professionnels</Link>.
       </p>
