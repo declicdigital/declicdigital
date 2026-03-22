@@ -40,7 +40,7 @@ const AuditSeo = () => (
             </Button>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroAudit} alt="Audit SEO gratuit pour site web PME" className="w-full max-w-lg drop-shadow-2xl" />
+            <img src={heroAudit} alt="Audit SEO gratuit pour site web TPE" className="w-full max-w-lg drop-shadow-2xl" />
           </motion.div>
         </div>
       </div>
