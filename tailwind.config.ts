@@ -14,7 +14,7 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['"Clash Display"', 'system-ui', 'sans-serif'],
+        sans: ['"Clash Display"', '"Clash Display Fallback"', 'system-ui', 'sans-serif'],
         display: ['"DM Serif Display"', 'Georgia', 'serif'],
       },
       colors: {
