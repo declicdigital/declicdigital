@@ -160,7 +160,7 @@ const CreationSite = () => (
         </p>
         <h3 className="text-xl font-bold">Technologies modernes pour des performances optimales</h3>
         <p className="text-muted-foreground leading-relaxed">
-          Nous utilisons les technologies les plus adaptées selon votre projet : WordPress pour les sites éditoriaux, Shopify pour le e-commerce, ou des solutions sur-mesure pour les besoins spécifiques. Quel que soit l'outil, nous garantissons un site rapide (score PageSpeed > 90), sécurisé (HTTPS), et conforme aux standards d'accessibilité. Consultez nos <Link to="/realisations" className="text-primary font-semibold hover:underline">réalisations récentes</Link> pour voir des exemples concrets.
+          Nous utilisons les technologies les plus adaptées selon votre projet : WordPress pour les sites éditoriaux, Shopify pour le e-commerce, ou des solutions sur-mesure pour les besoins spécifiques. Quel que soit l'outil, nous garantissons un site rapide (score PageSpeed supérieur à 90), sécurisé (HTTPS), et conforme aux standards d'accessibilité. Consultez nos <Link to="/realisations" className="text-primary font-semibold hover:underline">réalisations récentes</Link> pour voir des exemples concrets.
         </p>
       </div>
     </SectionWrapper>
