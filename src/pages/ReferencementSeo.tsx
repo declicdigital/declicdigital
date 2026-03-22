@@ -158,7 +158,7 @@ const ReferencementSeo = () => (
     {/* CTA */}
     <section className="gradient-miami py-16">
       <div className="container text-center">
-        <h2 className="mb-4 text-3xl font-extrabold text-white">Prêt à booster votre visibilité ?</h2>
+        <h2 className="mb-4 text-3xl font-extrabold text-white">Demandez votre audit SEO gratuit</h2>
         <p className="mb-8 text-white/80">Recevez un audit gratuit de votre site en 48h et découvrez comment améliorer votre référencement.</p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Button asChild size="lg" className="rounded-full bg-white px-8 font-semibold text-foreground shadow-lg hover:bg-white/90">

@@ -249,7 +249,7 @@ const VilleCreationSite = () => {
       <section className="gradient-miami py-16">
         <div className="container text-center">
           <h2 className="mb-4 text-3xl font-extrabold text-white">
-            Prêt à créer votre site web à {city.nameShort} ?
+            Vous êtes basé(e) à {city.nameShort} ? Parlons de votre projet.
           </h2>
           <p className="mb-8 text-white/80">
             Contactez-nous pour un devis gratuit et personnalisé. Premier mois de mise en service + 50€/mois.

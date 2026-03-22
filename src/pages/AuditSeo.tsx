@@ -137,7 +137,7 @@ const AuditSeo = () => (
     {/* Formulaire */}
     <SectionWrapper className="bg-section-blue" id="formulaire-audit">
       <div className="mx-auto max-w-xl">
-        <h2 className="mb-4 text-center text-3xl font-extrabold">Demandez votre audit gratuit</h2>
+        <h2 className="mb-4 text-center text-3xl font-extrabold">Demandez votre audit maintenant — réponse en 48h</h2>
         <p className="text-center text-muted-foreground mb-8">
           Remplissez le formulaire ci-dessous et recevez votre audit SEO personnalisé sous 48 heures.
         </p>

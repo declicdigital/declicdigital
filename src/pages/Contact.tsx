@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, CheckCircle } from "lucide-react";
@@ -13,6 +14,12 @@ import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
 
 const Contact = () => (
   <PageLayout>
+    <Helmet>
+      <title>Contactez Déclic Digital — Devis site web & SEO Paris</title>
+      <meta name="description" content="Vous avez un projet de site web ou de référencement SEO à Paris ? Contactez Déclic Digital pour un devis gratuit. Réponse sous 24h." />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://declicdigital.net/contact" />
+    </Helmet>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Contact" }]} />
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
@@ -20,7 +27,7 @@ const Contact = () => (
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
             <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
-              Parlez-nous de votre <span className="text-gradient">projet</span>
+              Parlons de votre projet — devis gratuit sous 24h
             </h1>
             <p className="text-lg text-muted-foreground">
               Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link> ou le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>. Nous répondons sous 24 à 48 heures ouvrées.
