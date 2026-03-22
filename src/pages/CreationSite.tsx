@@ -8,7 +8,7 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import heroCreation from "@/assets/screenshot-declic-digital.png";
-import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
+import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 import siteProImage from "@/assets/site-professionnel-entreprise-construction.webp";
 import { cities } from "@/data/cities";
 

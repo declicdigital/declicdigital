@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail } from "lucide-react";
-import logo from "@/assets/logo-declic-digital-new.png";
+import logo from "@/assets/logo-declic-digital-new.webp";
 
 const Footer = () => (
   <footer className="border-t border-border relative overflow-hidden">

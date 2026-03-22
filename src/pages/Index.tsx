@@ -9,16 +9,16 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
-import heroDashboard from "@/assets/tableau-bord-seo-professionnel.png";
-import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.png";
+import heroDashboard from "@/assets/tableau-bord-seo-professionnel.webp";
+import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 
-import logoWordpress from "@/assets/logos/wordpress.png";
-import logoShopify from "@/assets/logos/shopify.png";
-import logoLovable from "@/assets/logos/lovable.png";
+import logoWordpress from "@/assets/logos/wordpress.webp";
+import logoShopify from "@/assets/logos/shopify.webp";
+import logoLovable from "@/assets/logos/lovable.webp";
 import logoClaude from "@/assets/logos/claude.svg";
-import logoSemrush from "@/assets/logos/semrush.png";
-import logoSearchConsole from "@/assets/logos/search-console.png";
-import logoChatgpt from "@/assets/logos/chatgpt.png";
+import logoSemrush from "@/assets/logos/semrush.webp";
+import logoSearchConsole from "@/assets/logos/search-console.webp";
+import logoChatgpt from "@/assets/logos/chatgpt.webp";
 
 const techLogos = [
   { name: "WordPress", src: logoWordpress },
