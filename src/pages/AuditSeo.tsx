@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { Search, FileText, Users, Lightbulb, CheckCircle } from "lucide-react";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Button } from "@/components/ui/button";
@@ -12,6 +13,13 @@ import heroAudit from "@/assets/audit-seo-gratuit-site-web.png";
 
 const AuditSeo = () => (
   <PageLayout>
+    <Helmet>
+      <title>Audit SEO gratuit pour votre site — Déclic Digital</title>
+      <meta name="description" content="Recevez un audit SEO complet et gratuit de votre site web. Déclic Digital analyse votre visibilité Google et vous propose un plan d'action concret. Sans engagement." />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://declicdigital.net/audit-seo-gratuit" />
+      <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"Service",serviceType:"Audit SEO gratuit",provider:{"@type":"LocalBusiness",name:"Déclic Digital",url:"https://declicdigital.net"},areaServed:"Île-de-France"})}</script>
+    </Helmet>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Audit SEO gratuit" }]} />
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
