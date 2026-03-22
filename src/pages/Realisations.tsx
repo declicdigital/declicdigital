@@ -43,6 +43,12 @@ const projects = [
 
 const Realisations = () => (
   <PageLayout>
+    <Helmet>
+      <title>Nos réalisations web pour TPE & artisans — Déclic Digital</title>
+      <meta name="description" content="Découvrez les sites web créés par Déclic Digital pour des artisans et TPE d'Île-de-France. Des projets concrets avec des résultats mesurables." />
+      <meta name="robots" content="index, follow" />
+      <link rel="canonical" href="https://declicdigital.net/realisations" />
+    </Helmet>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Réalisations" }]} />
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
@@ -52,7 +58,7 @@ const Realisations = () => (
             Portfolio
           </span>
           <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
-            Nos <span className="text-gradient">réalisations</span>
+            Nos réalisations : sites web professionnels créés pour des artisans et TPE en Île-de-France
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Découvrez les sites que nous avons créés pour nos clients. Chaque projet est unique, conçu pour répondre aux besoins spécifiques de chaque entreprise et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>.
