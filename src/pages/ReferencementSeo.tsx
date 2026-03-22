@@ -90,7 +90,7 @@ const ReferencementSeo = () => (
 
     {/* Méthode */}
     <SectionWrapper className="bg-section-blue">
-      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre méthode SEO</h2>
+      <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre méthode de référencement naturel en 4 étapes</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
         Notre approche est méthodique et transparente. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link> et notre processus éprouvé pour optimiser votre visibilité sur Google.
       </p>
