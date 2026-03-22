@@ -15,7 +15,7 @@ import { cities } from "@/data/cities";
 const CreationSite = () => (
   <PageLayout>
     <Helmet>
-      <title>Création site internet pour TPE & artisans — Paris</title>
+      <title>Création site internet pour TPE & artisans | Paris</title>
       <meta name="description" content="Créez un site web professionnel adapté à votre activité. Déclic Digital accompagne les indépendants et TPE d'Île-de-France. Devis gratuit en 24h." />
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/creation-site-web" />
