@@ -90,7 +90,8 @@ const App = () => (
               </Routes>
             </Suspense>
           </BrowserRouter>
-        </AuthProvider>
+        </LazyAuthProvider>
+        </Suspense>
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>
