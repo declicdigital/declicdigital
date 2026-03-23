@@ -3,20 +3,35 @@ import { MapPin, ExternalLink, Star, Clock, Phone } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import SectionWrapper from "./SectionWrapper";
 
-const GOOGLE_BUSINESS_LINK = "https://www.google.com/maps?cid=17048305841118108915";
+const GOOGLE_MAPS_CID = "17048305841118108915";
+const GOOGLE_BUSINESS_LINK = `https://www.google.com/maps?cid=${GOOGLE_MAPS_CID}`;
 const GOOGLE_WRITE_REVIEW_URL = "https://www.google.com/maps/place//data=!4m3!3m2!1s0x47e67127ac5d83b1:0xec97bfd6320fdcf3!12e1";
-const MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1313!2d2.2975!3d48.8386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671272a1d87b1%3A0xec97d6d632cf0df3!2sD%C3%A9clic+Digital!5e0!3m2!1sfr!2sfr";
+const MAPS_EMBED_URL = `https://www.google.com/maps?cid=${GOOGLE_MAPS_CID}&output=embed`;
+
+const getEmbedUrlFromPlaceUrl = (url: string) => {
+  try {
+    const parsed = new URL(url);
+    const cid = parsed.searchParams.get("cid");
+    return cid ? `https://www.google.com/maps?cid=${cid}&output=embed` : MAPS_EMBED_URL;
+  } catch {
+    return MAPS_EMBED_URL;
+  }
+};
 
 const LocationSection = () => {
   const [placeUrl, setPlaceUrl] = useState(GOOGLE_BUSINESS_LINK);
   const [writeReviewUrl, setWriteReviewUrl] = useState(GOOGLE_WRITE_REVIEW_URL);
+  const [mapEmbedUrl, setMapEmbedUrl] = useState(MAPS_EMBED_URL);
 
   useEffect(() => {
     const fetchLinks = async () => {
       try {
         const { data, error } = await supabase.functions.invoke("google-reviews");
         if (!error && data && !data.fallback && data.googleMapsLinks) {
-          if (data.googleMapsLinks.placeUri) setPlaceUrl(data.googleMapsLinks.placeUri);
+          if (data.googleMapsLinks.placeUri) {
+            setPlaceUrl(data.googleMapsLinks.placeUri);
+            setMapEmbedUrl(getEmbedUrlFromPlaceUrl(data.googleMapsLinks.placeUri));
+          }
           if (data.googleMapsLinks.writeAReviewUri) setWriteReviewUrl(data.googleMapsLinks.writeAReviewUri);
         }
       } catch {}
@@ -42,7 +57,7 @@ const LocationSection = () => {
             loading="lazy"
             allowFullScreen
             referrerPolicy="no-referrer-when-downgrade"
-            src={MAPS_EMBED_URL}
+            src={mapEmbedUrl}
             title="Déclic Digital - 57 Rue d'Alleray, Paris 15e"
           />
         </div>
