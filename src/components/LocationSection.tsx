@@ -3,9 +3,20 @@ import { MapPin, ExternalLink, Star, Clock, Phone } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import SectionWrapper from "./SectionWrapper";
 
-const GOOGLE_BUSINESS_LINK = "https://www.google.com/maps?cid=17048305841118108915";
+const GOOGLE_MAPS_CID = "17048305841118108915";
+const GOOGLE_BUSINESS_LINK = `https://www.google.com/maps?cid=${GOOGLE_MAPS_CID}`;
 const GOOGLE_WRITE_REVIEW_URL = "https://www.google.com/maps/place//data=!4m3!3m2!1s0x47e67127ac5d83b1:0xec97bfd6320fdcf3!12e1";
-const MAPS_EMBED_URL = "https://www.google.com/maps?cid=17048305841118108915&output=embed";
+const MAPS_EMBED_URL = `https://www.google.com/maps?cid=${GOOGLE_MAPS_CID}&output=embed`;
+
+const getEmbedUrlFromPlaceUrl = (url: string) => {
+  try {
+    const parsed = new URL(url);
+    const cid = parsed.searchParams.get("cid");
+    return cid ? `https://www.google.com/maps?cid=${cid}&output=embed` : MAPS_EMBED_URL;
+  } catch {
+    return MAPS_EMBED_URL;
+  }
+};
 
 const LocationSection = () => {
   const [placeUrl, setPlaceUrl] = useState(GOOGLE_BUSINESS_LINK);
