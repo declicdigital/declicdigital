@@ -28,7 +28,10 @@ const LocationSection = () => {
       try {
         const { data, error } = await supabase.functions.invoke("google-reviews");
         if (!error && data && !data.fallback && data.googleMapsLinks) {
-          if (data.googleMapsLinks.placeUri) setPlaceUrl(data.googleMapsLinks.placeUri);
+          if (data.googleMapsLinks.placeUri) {
+            setPlaceUrl(data.googleMapsLinks.placeUri);
+            setMapEmbedUrl(getEmbedUrlFromPlaceUrl(data.googleMapsLinks.placeUri));
+          }
           if (data.googleMapsLinks.writeAReviewUri) setWriteReviewUrl(data.googleMapsLinks.writeAReviewUri);
         }
       } catch {}
