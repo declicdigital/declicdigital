@@ -5,7 +5,7 @@ import SectionWrapper from "./SectionWrapper";
 
 const GOOGLE_BUSINESS_LINK = "https://www.google.com/maps?cid=17048305841118108915";
 const GOOGLE_WRITE_REVIEW_URL = "https://www.google.com/maps/place//data=!4m3!3m2!1s0x47e67127ac5d83b1:0xec97bfd6320fdcf3!12e1";
-const MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1313!2d2.2975!3d48.8386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671272a1d87b1%3A0xec97d6d632cf0df3!2sD%C3%A9clic+Digital!5e0!3m2!1sfr!2sfr";
+const MAPS_EMBED_URL = "https://www.google.com/maps?cid=17048305841118108915&output=embed";
 
 const LocationSection = () => {
   const [placeUrl, setPlaceUrl] = useState(GOOGLE_BUSINESS_LINK);
