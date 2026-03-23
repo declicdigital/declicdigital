@@ -58,7 +58,7 @@ const MapEmbed = ({ title, subtitle }: MapEmbedProps) => {
           loading="lazy"
           allowFullScreen
           referrerPolicy="no-referrer-when-downgrade"
-          src={MAPS_EMBED_URL}
+          src={mapEmbedUrl}
           title="Déclic Digital - 57 Rue d'Alleray, Paris 15e"
         />
       </div>
