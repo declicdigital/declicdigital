@@ -53,37 +53,89 @@
   <url><loc>https://declicdigital.net/creation-site-web/suresnes</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/creation-site-web/garches</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/creation-site-web/chaville</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/paris-5eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/paris-6eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/paris-7eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/paris-11eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/paris-12eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/paris-13eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/paris-14eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/paris-18eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/paris-19eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/paris-20eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/bagneux</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/bois-colombes</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/bourg-la-reine</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/chatenay-malabry</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/clichy</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/fontenay-aux-roses</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/gennevilliers</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/la-garenne-colombes</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/le-plessis-robinson</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/marnes-la-coquette</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/puteaux</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/saint-cloud</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/sceaux</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/vaucresson</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/ville-d-avray</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/creation-site-web/villeneuve-la-garenne</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <!-- Villes - Référencement SEO -->
   <url><loc>https://declicdigital.net/referencement-seo/paris-1er</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/referencement-seo/paris-2eme</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/referencement-seo/paris-3eme</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/referencement-seo/paris-4eme</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/paris-5eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/paris-6eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/paris-7eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/referencement-seo/paris-8eme</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/referencement-seo/paris-9eme</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/referencement-seo/paris-10eme</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/paris-11eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/paris-12eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/paris-13eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/paris-14eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/referencement-seo/paris-15eme</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/referencement-seo/paris-16eme</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/referencement-seo/paris-17eme</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/boulogne-billancourt</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/issy-les-moulineaux</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/nanterre</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/courbevoie</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/levallois-perret</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/neuilly-sur-seine</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/colombes</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/asnieres-sur-seine</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/rueil-malmaison</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/paris-18eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/paris-19eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/paris-20eme</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/referencement-seo/antony</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/clamart</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/meudon</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/sevres</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/vanves</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/malakoff</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/montrouge</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/asnieres-sur-seine</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/bagneux</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/bois-colombes</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/boulogne-billancourt</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/bourg-la-reine</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/referencement-seo/chatillon</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/suresnes</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://declicdigital.net/referencement-seo/garches</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/chatenay-malabry</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <url><loc>https://declicdigital.net/referencement-seo/chaville</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/clamart</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/clichy</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/colombes</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/courbevoie</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/fontenay-aux-roses</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/garches</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/gennevilliers</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/issy-les-moulineaux</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/la-garenne-colombes</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/le-plessis-robinson</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/levallois-perret</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/malakoff</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/marnes-la-coquette</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/meudon</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/montrouge</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/nanterre</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/neuilly-sur-seine</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/puteaux</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/rueil-malmaison</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/saint-cloud</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/sceaux</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/sevres</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/suresnes</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/vanves</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/vaucresson</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/ville-d-avray</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
+  <url><loc>https://declicdigital.net/referencement-seo/villeneuve-la-garenne</loc><lastmod>2026-03-23</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
   <!-- Métiers - Création de site web -->
   <url><loc>https://declicdigital.net/nos-metiers</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
   <url><loc>https://declicdigital.net/creation-site-web/metier/plombier</loc><lastmod>2026-03-22</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
