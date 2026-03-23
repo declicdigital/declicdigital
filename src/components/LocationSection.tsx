@@ -21,6 +21,7 @@ const getEmbedUrlFromPlaceUrl = (url: string) => {
 const LocationSection = () => {
   const [placeUrl, setPlaceUrl] = useState(GOOGLE_BUSINESS_LINK);
   const [writeReviewUrl, setWriteReviewUrl] = useState(GOOGLE_WRITE_REVIEW_URL);
+  const [mapEmbedUrl, setMapEmbedUrl] = useState(MAPS_EMBED_URL);
 
   useEffect(() => {
     const fetchLinks = async () => {
