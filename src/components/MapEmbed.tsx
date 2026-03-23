@@ -25,6 +25,7 @@ interface MapEmbedProps {
 const MapEmbed = ({ title, subtitle }: MapEmbedProps) => {
   const [placeUrl, setPlaceUrl] = useState(GOOGLE_MAPS_PLACE_URL);
   const [writeReviewUrl, setWriteReviewUrl] = useState(GOOGLE_WRITE_REVIEW_URL);
+  const [mapEmbedUrl, setMapEmbedUrl] = useState(MAPS_EMBED_URL);
 
   useEffect(() => {
     const fetchLinks = async () => {
