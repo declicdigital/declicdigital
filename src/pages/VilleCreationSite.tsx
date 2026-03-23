@@ -1,14 +1,32 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Monitor, Smartphone, TrendingUp, Zap, CheckCircle, Search, Shield, Clock } from "lucide-react";
+import { Monitor, Smartphone, TrendingUp, Zap, CheckCircle, Search, Shield, Clock, HelpCircle, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
+import MapEmbed from "@/components/MapEmbed";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 import { getCityBySlug, cities } from "@/data/cities";
 import { cityContent } from "@/data/cityContent";
 import { Helmet } from "react-helmet-async";
+
+const creationFaqsByRegion: Record<string, { q: string; a: string }[]> = {
+  paris: [
+    { q: "Combien coûte un site web professionnel à Paris ?", a: "Chez Déclic Digital, nos forfaits démarrent avec un premier mois de mise en service puis 50€/mois tout compris : design, hébergement, maintenance et optimisation SEO. Pas de mauvaise surprise." },
+    { q: "Combien de temps pour créer mon site ?", a: "Un site vitrine est livré en 2 à 3 semaines. Un site e-commerce ou sur-mesure peut prendre 4 à 6 semaines. Nous vous tenons informé à chaque étape via votre espace client." },
+    { q: "Mon site sera-t-il visible sur Google ?", a: "Oui. Chaque site est optimisé pour le référencement local dès sa conception : balises SEO, vitesse de chargement, compatibilité mobile, fiche Google Business. Nous travaillons votre positionnement dès le premier jour." },
+    { q: "Pourrai-je modifier mon site moi-même ?", a: "Oui, nous vous fournissons un accès simple pour modifier vos textes et images. Pour les modifications plus importantes, notre équipe intervient dans les 48h, inclus dans votre forfait." },
+    { q: "Que se passe-t-il si je ne suis pas satisfait ?", a: "Nous travaillons par étapes avec validation à chaque phase. Vous voyez et approuvez le design avant le développement. Si le résultat final ne correspond pas au cahier des charges validé, nous corrigeons sans frais supplémentaires." },
+  ],
+  "hauts-de-seine": [
+    { q: "Intervenez-vous dans toutes les villes du 92 ?", a: "Oui. Nous accompagnons les TPE et indépendants dans toutes les communes des Hauts-de-Seine : Boulogne-Billancourt, Nanterre, Issy-les-Moulineaux, Levallois-Perret, et toutes les autres." },
+    { q: "Faut-il être à Paris pour travailler avec vous ?", a: "Non. Nous travaillons principalement à distance via visioconférence et notre espace client en ligne. Nous pouvons aussi nous rencontrer dans notre agence à Paris 15e si vous le souhaitez." },
+    { q: "Un site web est-il vraiment utile pour une petite entreprise du 92 ?", a: "Plus que jamais. 97% des consommateurs recherchent un professionnel en ligne avant de le contacter. Sans site, vous laissez vos concurrents capter ces clients. Le retour sur investissement est rapide." },
+    { q: "Proposez-vous aussi le référencement SEO ?", a: "Oui. Chaque site que nous créons est optimisé SEO dès la conception. Nous proposons aussi des prestations de référencement avancé pour les TPE qui veulent aller plus loin." },
+    { q: "Que comprend le forfait mensuel ?", a: "Le forfait de 50€/mois inclut l'hébergement, la maintenance technique, les mises à jour de sécurité, le support par email, et les modifications mineures de contenu. Tout est compris." },
+  ],
+};
 
 const VilleCreationSite = () => {
   const { ville } = useParams<{ ville: string }>();
@@ -20,6 +38,7 @@ const VilleCreationSite = () => {
   const nearCities = cities
     .filter((c) => c.region === city.region && c.slug !== city.slug)
     .slice(0, 6);
+  const faqs = creationFaqsByRegion[city.region] || creationFaqsByRegion.paris;
 
   return (
     <PageLayout>
@@ -40,7 +59,6 @@ const VilleCreationSite = () => {
         <link rel="canonical" href={`https://declicdigital.net/creation-site-web/${city.slug}`} />
       </Helmet>
 
-      {/* Breadcrumb */}
       <PageBreadcrumb items={[
         { label: "Accueil", href: "/" },
         { label: "Création de site web", href: "/creation-site-web" },
@@ -56,10 +74,7 @@ const VilleCreationSite = () => {
                 Agence web {city.description}
               </span>
               <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-                {city.slug === "paris-1er" ? "Création de site internet pour les TPE et artisans du Paris 1er" :
-                 city.slug === "paris-3eme" ? "Création de site web pour les artisans et TPE du Paris 3ème (Le Marais)" :
-                 city.slug === "boulogne-billancourt" ? "Création de site internet pour les TPE et artisans de Boulogne-Billancourt" :
-                 `Création de site internet pour les artisans et TPE de ${city.nameShort}`}
+                {`Création de site internet pour les artisans et TPE de ${city.nameShort}`}
               </h1>
               <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
                 {content?.creationIntro || `Vous êtes une TPE ou un indépendant ${city.description} ? Déclic Digital crée votre site internet professionnel, responsive et optimisé pour Google. Attirez enfin les bons clients grâce à un site qui travaille pour vous.`}
@@ -95,10 +110,10 @@ const VilleCreationSite = () => {
         </p>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
-            { icon: Monitor, title: "Design professionnel", desc: `Un site qui reflète le sérieux de votre entreprise ${city.description}. Première impression décisive.` },
-            { icon: Smartphone, title: "100% responsive", desc: "Votre site s'affiche parfaitement sur mobile, tablette et ordinateur. Plus de 60% du trafic est mobile." },
+            { icon: Monitor, title: "Design professionnel", desc: `Un site qui reflète le sérieux de votre entreprise ${city.description}. Première impression décisive en moins de 3 secondes.` },
+            { icon: Smartphone, title: "100% responsive", desc: "Votre site s'affiche parfaitement sur mobile, tablette et ordinateur. Plus de 70% du trafic web est mobile." },
             { icon: TrendingUp, title: "Optimisé SEO", desc: `Référencement local pour apparaître en première page Google sur "${city.nameShort}" et vos mots clés métier.` },
-            { icon: Zap, title: "Rapide et performant", desc: "Un temps de chargement optimisé pour une meilleure expérience utilisateur et un meilleur positionnement Google." },
+            { icon: Zap, title: "Rapide et performant", desc: "Temps de chargement optimisé (LCP < 2,5s) pour une meilleure expérience et un meilleur positionnement Google." },
           ].map((item, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="rounded-2xl bg-background p-6 shadow-card text-center">
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">
@@ -111,16 +126,19 @@ const VilleCreationSite = () => {
         </div>
       </SectionWrapper>
 
-      {/* Types de sites */}
+      {/* Ce que nous livrons */}
       <SectionWrapper>
-        <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-10">
-          Un site web livré en 3 semaines, adapté à votre métier
+        <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">
+          Ce que comprend votre site web à {city.nameShort}
         </h2>
+        <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
+          Chaque site est conçu sur-mesure, optimisé pour le référencement local et livré en 2 à 3 semaines.
+        </p>
         <div className="grid gap-6 md:grid-cols-3">
           {[
-            { title: "Site vitrine", desc: `Présentez votre activité ${city.description} avec un site élégant et optimisé. Idéal pour les artisans, professions libérales et commerces locaux.`, features: ["Design sur mesure", "Formulaire de contact", "Google Maps intégré", "Optimisation SEO local"] },
-            { title: "Site e-commerce", desc: `Vendez vos produits en ligne depuis ${city.nameShort}. Boutique en ligne complète avec paiement sécurisé et gestion des stocks.`, features: ["Catalogue produits", "Paiement sécurisé", "Gestion des commandes", "Optimisation conversion"] },
-            { title: "Site sur mesure", desc: `Un site web unique et personnalisé pour votre entreprise ${city.description}. Fonctionnalités avancées selon vos besoins.`, features: ["Fonctionnalités sur mesure", "Espace client", "Intégrations API", "Évolutif et scalable"] },
+            { title: "Site vitrine", desc: `Présentez votre activité ${city.description} avec un site élégant et optimisé. Idéal pour les artisans, professions libérales et commerces locaux.`, features: ["Design sur mesure", "Formulaire de contact", "Fiche Google Maps intégrée", "Optimisation SEO local", "Bouton d'appel direct", "Galerie photos / portfolio"] },
+            { title: "Site e-commerce", desc: `Vendez vos produits en ligne depuis ${city.nameShort}. Boutique en ligne complète avec paiement sécurisé et gestion des stocks.`, features: ["Catalogue produits illimité", "Paiement sécurisé (CB, PayPal)", "Gestion des commandes", "Suivi de livraison", "Optimisation conversion", "Statistiques de vente"] },
+            { title: "Site sur mesure", desc: `Un site web unique pour votre entreprise ${city.description}. Fonctionnalités avancées selon vos besoins spécifiques.`, features: ["Fonctionnalités sur mesure", "Espace client / réservation", "Intégrations API tierces", "Évolutif et scalable", "Formation à l'utilisation", "Support technique dédié"] },
           ].map((item, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="rounded-2xl bg-card p-8 shadow-card">
               <h3 className="mb-3 text-xl font-bold">{item.title}</h3>
@@ -138,7 +156,7 @@ const VilleCreationSite = () => {
         </div>
       </SectionWrapper>
 
-      {/* Contenu SEO unique */}
+      {/* Contenu SEO unique + Map */}
       {content && (
         <SectionWrapper className="bg-section-blue">
           <div className="mx-auto max-w-3xl space-y-6">
@@ -148,6 +166,18 @@ const VilleCreationSite = () => {
             {content.creationSeoText.map((text, i) => (
               <p key={i} className="text-muted-foreground leading-relaxed">{text}</p>
             ))}
+            <p className="text-muted-foreground leading-relaxed">
+              Un site web seul ne suffit pas : il doit être accompagné d'une fiche Google Business Profile optimisée pour apparaître dans le pack local Google Maps. Nous créons et optimisons votre fiche avec photos professionnelles, catégorie adaptée, zone de service et collecte d'avis clients.
+            </p>
+
+            {/* Map embed */}
+            <div className="pt-4">
+              <MapEmbed
+                title="Déclic Digital, votre agence web"
+                subtitle={`Basés à Paris 15e, nous accompagnons les professionnels de ${city.nameShort} dans leur visibilité en ligne.`}
+              />
+            </div>
+
             <p className="text-muted-foreground leading-relaxed">
               Découvrez nos <Link to="/tarifs" className="text-primary font-semibold hover:underline">tarifs adaptés aux TPE</Link>, nos <Link to="/realisations" className="text-primary font-semibold hover:underline">réalisations</Link> ou demandez un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour évaluer votre visibilité actuelle.
             </p>
@@ -166,10 +196,10 @@ const VilleCreationSite = () => {
         </h2>
         <div className="grid gap-6 md:grid-cols-4">
           {[
-            { icon: Search, step: "1", title: "Échange et analyse", desc: "Nous échangeons sur vos besoins, votre activité et vos objectifs pour définir le cahier des charges." },
-            { icon: Monitor, step: "2", title: "Maquette et design", desc: "Nous créons une maquette visuelle que vous validez avant le développement." },
+            { icon: Search, step: "1", title: "Échange et analyse", desc: "Nous échangeons sur vos besoins, votre activité et vos objectifs pour définir le cahier des charges idéal." },
+            { icon: Monitor, step: "2", title: "Maquette et design", desc: "Nous créons une maquette visuelle que vous validez avant le développement. Aucune surprise." },
             { icon: Shield, step: "3", title: "Développement", desc: "Votre site est développé avec les meilleures technologies, optimisé pour le SEO et la performance." },
-            { icon: Clock, step: "4", title: "Mise en ligne", desc: "Votre site est mis en ligne. Nous assurons la formation et le suivi technique." },
+            { icon: Clock, step: "4", title: "Mise en ligne", desc: "Votre site est mis en ligne et indexé sur Google. Formation et suivi technique inclus." },
           ].map((item, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">
               <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full gradient-primary text-white font-bold text-xl">
@@ -182,8 +212,29 @@ const VilleCreationSite = () => {
         </div>
       </SectionWrapper>
 
-      {/* Liens services */}
+      {/* FAQ */}
       <SectionWrapper className="bg-section-blue">
+        <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-10">
+          Questions fréquentes sur la création de site à {city.nameShort}
+        </h2>
+        <div className="mx-auto max-w-3xl space-y-4">
+          {faqs.map((faq, i) => (
+            <details key={i} className="group rounded-2xl bg-background p-6 shadow-card">
+              <summary className="flex cursor-pointer items-center gap-3 font-bold text-foreground list-none">
+                <HelpCircle size={18} className="text-primary shrink-0" />
+                {faq.q}
+              </summary>
+              <p className="mt-3 text-muted-foreground leading-relaxed pl-8">{faq.a}</p>
+            </details>
+          ))}
+        </div>
+        <p className="text-center mt-6">
+          <Link to="/faq" className="text-primary font-semibold hover:underline">Voir toutes les questions fréquentes →</Link>
+        </p>
+      </SectionWrapper>
+
+      {/* Liens services */}
+      <SectionWrapper>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-extrabold mb-4">Découvrez aussi nos autres services</h2>
           <div className="flex flex-wrap justify-center gap-3">
@@ -199,11 +250,8 @@ const VilleCreationSite = () => {
             <Link to="/tarifs" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
               Nos tarifs
             </Link>
-            <Link to="/realisations" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Nos réalisations
-            </Link>
-            <Link to="/faq" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Questions fréquentes
+            <Link to="/nos-metiers" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+              Nos métiers
             </Link>
             <Link to="/nos-villes" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
               Toutes nos villes
@@ -212,9 +260,9 @@ const VilleCreationSite = () => {
         </div>
       </SectionWrapper>
 
-      {/* Maillage interne - autres villes */}
+      {/* Maillage interne */}
       {nearCities.length > 0 && (
-        <SectionWrapper>
+        <SectionWrapper className="bg-section-blue">
           <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">
             Création de site web près de {city.nameShort}
           </h2>
@@ -223,7 +271,7 @@ const VilleCreationSite = () => {
           </p>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {nearCities.map((c) => (
-              <div key={c.slug} className="rounded-2xl bg-card p-4 shadow-card">
+              <div key={c.slug} className="rounded-2xl bg-background p-4 shadow-card">
                 <h3 className="font-bold mb-2">{c.nameShort}</h3>
                 <div className="flex flex-wrap gap-2">
                   <Link

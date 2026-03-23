@@ -5,10 +5,11 @@ import SectionWrapper from "./SectionWrapper";
 
 const GOOGLE_PLACE_ID = "ChIJsYNdrCdx5kcR89wPMta_l-w";
 const GOOGLE_BUSINESS_LINK = "https://share.google/8Ifh8V9cpPGinQXkY";
-const MAPS_EMBED_URL = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.5!2d2.2975!3d48.8386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s${GOOGLE_PLACE_ID}!2sD%C3%A9clic%20Digital!5e0!3m2!1sfr!2sfr!4v1`;
+const GOOGLE_MAPS_PLACE_URL = `https://www.google.com/maps/search/?api=1&query=D%C3%A9clic+Digital+57+Rue+d%27Alleray+Paris+75015&query_place_id=${GOOGLE_PLACE_ID}`;
+const MAPS_EMBED_URL = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1313!2d2.2975!3d48.8386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e671272a1d87b1%3A0xec97d6d632cf0df3!2sD%C3%A9clic+Digital!5e0!3m2!1sfr!2sfr";
 
 const LocationSection = () => {
-  const [placeUrl, setPlaceUrl] = useState(GOOGLE_BUSINESS_LINK);
+  const [placeUrl, setPlaceUrl] = useState(GOOGLE_MAPS_PLACE_URL);
   const [writeReviewUrl, setWriteReviewUrl] = useState(GOOGLE_BUSINESS_LINK);
 
   useEffect(() => {
