@@ -28,7 +28,7 @@ const Contact = () => (
         url: "https://declicdigital.net",
         telephone: "+33602228939",
         email: "contact@declicdigital.net",
-        image: "https://declicdigital.net/og/contact.png",
+        image: "https://declicdigital.net/og/contact.webp",
         priceRange: "€€",
         address: {
           "@type": "PostalAddress",
