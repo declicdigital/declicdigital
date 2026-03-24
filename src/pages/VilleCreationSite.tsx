@@ -189,8 +189,59 @@ const VilleCreationSite = () => {
         </SectionWrapper>
       )}
 
-      {/* Process */}
+      {/* Guide SEO long - ville création */}
       <SectionWrapper>
+        <div className="mx-auto max-w-3xl space-y-6">
+          <h2 className="text-3xl font-extrabold md:text-4xl text-center">
+            Tout savoir sur la création de site internet à {city.nameShort}
+          </h2>
+
+          <h3 className="text-xl font-bold">Pourquoi un site web est devenu indispensable pour les entreprises de {city.nameShort}</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            En 2026, la présence en ligne n'est plus une option pour les professionnels {city.description}. Les études montrent que 97% des consommateurs effectuent une recherche sur internet avant de contacter un prestataire local. Que vous soyez artisan, commerçant, profession libérale ou consultant, vos clients potentiels vous cherchent sur Google en tapant des requêtes comme {content?.targetKeywords?.slice(0, 2).map(k => `"${k}"`).join(" ou ") || `"création site web ${city.nameShort}"`}. Sans site web professionnel, ces prospects contactent directement vos concurrents qui, eux, sont visibles en ligne. Un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site internet bien conçu</Link> transforme cette visibilité en demandes de devis, en appels et en clients fidèles.
+          </p>
+
+          <h3 className="text-xl font-bold">Le tissu économique de {city.nameShort} et les opportunités digitales</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            {city.region === "paris"
+              ? `${city.nameShort} est un arrondissement avec une forte densité de commerces, de professions libérales et d'artisans. La concurrence y est vive, mais les opportunités sont immenses pour ceux qui investissent dans leur présence digitale. Les résidents et les travailleurs du quartier utilisent quotidiennement Google pour trouver des services de proximité : plombier, coiffeur, restaurant, avocat, comptable. Chaque recherche est une opportunité de gagner un nouveau client.`
+              : `${city.nameShort} fait partie des villes les plus dynamiques des Hauts-de-Seine. Son tissu économique diversifié, composé de TPE, d'artisans, de professions libérales et de commerces de proximité, crée un environnement concurrentiel où la visibilité en ligne fait la différence. Les habitants de ${city.nameShort} et des communes voisines recherchent activement des prestataires locaux sur Google. Être présent avec un site web optimisé, c'est capter cette demande avant vos concurrents.`
+            }
+          </p>
+
+          <h3 className="text-xl font-bold">Les critères d'un site web performant à {city.nameShort}</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Un site web efficace pour une entreprise {city.description} doit répondre à plusieurs exigences techniques et marketing. Côté technique, il doit être rapide (temps de chargement inférieur à 2,5 secondes), responsive (adapté à tous les écrans, notamment les smartphones qui représentent plus de 75% du trafic local), et sécurisé (certificat SSL, protocole HTTPS). Côté marketing, il doit présenter clairement vos services, afficher vos coordonnées de manière visible, proposer un formulaire de contact ou un bouton d'appel direct, et intégrer des témoignages clients pour rassurer les visiteurs.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            Chez Déclic Digital, nous allons plus loin en intégrant dès la conception une stratégie de <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement naturel (SEO)</Link> adaptée à {city.nameShort}. Chaque page est optimisée pour les mots clés que vos clients utilisent réellement, le balisage technique est soigné (Schema.org, meta tags, sitemap XML) et votre fiche Google Business Profile est créée ou optimisée pour maximiser votre visibilité dans Google Maps.
+          </p>
+
+          <h3 className="text-xl font-bold">Le référencement local : votre meilleur allié à {city.nameShort}</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Le <Link to={`/referencement-seo/${city.slug}`} className="text-primary font-semibold hover:underline">SEO local à {city.nameShort}</Link> est la stratégie qui vous permet d'apparaître dans les résultats de recherche géolocalisés. Quand un internaute tape une requête comme "plombier {city.nameShort}" ou "restaurant près de moi" depuis {city.nameShort}, Google lui propose les entreprises les plus pertinentes à proximité. Le "pack local" (les 3 résultats affichés avec la carte Google Maps) capte 42% des clics. Pour y figurer, votre site doit être techniquement irréprochable, associé à une fiche Google Business complète et enrichi d'avis clients positifs.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            Notre approche du SEO local pour {city.nameShort} combine l'optimisation on-page de votre site, la gestion de votre fiche Google Business, la création de contenus géolocalisés et la collecte stratégique d'avis clients. Cette méthode éprouvée permet à nos clients d'obtenir leurs premières demandes de contact dans les 2 à 6 semaines suivant la mise en ligne, avec une progression constante au fil des mois.
+          </p>
+
+          <h3 className="text-xl font-bold">Combien coûte un site web professionnel à {city.nameShort} ?</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            La question du budget est légitime. Beaucoup de freelances et agences proposent des sites à plusieurs milliers d'euros, souvent sans garantie de résultat. Chez Déclic Digital, nous avons choisi un modèle transparent et accessible : un premier mois de mise en service pour la conception et le développement de votre site, puis <Link to="/tarifs" className="text-primary font-semibold hover:underline">50€/mois tout compris</Link>. Ce forfait mensuel inclut l'hébergement sur des serveurs performants, la maintenance technique, les mises à jour de sécurité, le support par email et les modifications mineures de contenu. Aucun frais caché, aucune mauvaise surprise.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            Ce modèle d'abonnement présente un avantage majeur : il n'y a pas de gros investissement initial qui freine les TPE et indépendants. Vous bénéficiez immédiatement d'un site professionnel sans grever votre trésorerie. Et contrairement aux solutions "gratuites" type Wix ou WordPress.com, votre site est véritablement optimisé pour le référencement, sans publicité parasite et avec un accompagnement humain.
+          </p>
+
+          <h3 className="text-xl font-bold">Pourquoi choisir Déclic Digital plutôt qu'une autre agence ?</h3>
+          <p className="text-muted-foreground leading-relaxed">
+            Déclic Digital est une agence spécialisée dans l'accompagnement des TPE et indépendants à Paris et dans les Hauts-de-Seine. Notre fondateur, Geoffrey, est Expert Produit Google, ce qui nous donne une compréhension approfondie des algorithmes de recherche et des meilleures pratiques SEO. Nous ne faisons pas de sites web "génériques" : chaque projet est pensé comme un outil de croissance pour votre activité. Notre proximité géographique avec {city.nameShort} nous permet de comprendre les spécificités de votre marché local et d'adapter notre stratégie en conséquence. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link>, consultez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link> ou demandez un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour évaluer votre situation actuelle.
+          </p>
+        </div>
+      </SectionWrapper>
+
+      {/* Process */}
+      <SectionWrapper className="bg-section-blue">
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-10">
           Comment se déroule votre projet ?
         </h2>
