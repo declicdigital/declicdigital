@@ -52,7 +52,7 @@ const Index = () => {
             url: "https://declicdigital.net",
             telephone: "+33602228939",
             email: "contact@declicdigital.net",
-            image: "https://declicdigital.net/og/default.png",
+            image: "https://declicdigital.net/og/default.webp",
             priceRange: "€€",
             currenciesAccepted: "EUR",
             paymentAccepted: "Virement bancaire, Carte bancaire",
