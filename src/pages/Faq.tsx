@@ -9,7 +9,7 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 
-const FaqAiChat = lazy(() => import("@/components/FaqAiChat"));
+const FaqAiChatSidebar = lazy(() => import("@/components/FaqAiChat").then(m => ({ default: m.FaqAiChatSidebar })));
 
 const faqItems = [
   // --- Création de site ---
