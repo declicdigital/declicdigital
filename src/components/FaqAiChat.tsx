@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Bot, User, Loader2, Sparkles, X, MessageCircle } from "lucide-react";
+import { Send, Bot, User, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import chatBotLogo from "@/assets/chat-bot-logo.png";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
