@@ -9,7 +9,7 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 
-const FaqAiChat = lazy(() => import("@/components/FaqAiChat"));
+const FaqAiChatSidebar = lazy(() => import("@/components/FaqAiChat").then(m => ({ default: m.FaqAiChatSidebar })));
 
 const faqItems = [
   // --- Création de site ---
@@ -96,29 +96,39 @@ const Faq = () => {
         </div>
       </section>
 
-      {/* FAQ Accordion */}
+      {/* FAQ + AI Sidebar */}
       <SectionWrapper>
-        <div className="mx-auto max-w-3xl">
-          <Accordion type="single" collapsible className="space-y-3">
-            {faqItems.map((item, i) => (
-              <AccordionItem key={i} value={`faq-${i}`} className="rounded-xl border bg-card px-6 shadow-card">
-                <AccordionTrigger className="text-left font-semibold hover:no-underline">
-                  {item.q}
-                </AccordionTrigger>
-                <AccordionContent className="text-muted-foreground">
-                  {item.a}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-        </div>
-      </SectionWrapper>
+        <div className="grid gap-10 lg:grid-cols-[1fr_380px]">
+          {/* FAQ Accordion */}
+          <div>
+            <Accordion type="single" collapsible className="space-y-3">
+              {faqItems.map((item, i) => (
+                <AccordionItem key={i} value={`faq-${i}`} className="rounded-xl border bg-card px-6 shadow-card">
+                  <AccordionTrigger className="text-left font-semibold hover:no-underline">
+                    {item.q}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-muted-foreground">
+                    {item.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
 
-      {/* Assistant IA */}
-      <SectionWrapper className="bg-section-blue">
-        <Suspense fallback={null}>
-          <FaqAiChat />
-        </Suspense>
+          {/* AI Sidebar */}
+          <div className="hidden lg:block">
+            <Suspense fallback={null}>
+              <FaqAiChatSidebar />
+            </Suspense>
+          </div>
+        </div>
+
+        {/* Mobile AI chat */}
+        <div className="mt-10 lg:hidden">
+          <Suspense fallback={null}>
+            <FaqAiChatSidebar />
+          </Suspense>
+        </div>
       </SectionWrapper>
 
       {/* Maillage */}
