@@ -1,9 +1,10 @@
 import { useState, useRef, useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Bot, User, Loader2, Sparkles, X, MessageCircle } from "lucide-react";
+import { Send, Bot, User, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
+import chatBotLogo from "@/assets/chat-bot-logo.png";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
@@ -237,9 +238,7 @@ export const FaqAiChatSidebar = () => {
   return (
     <div className="sticky top-24">
       <div className="mb-4 flex items-center gap-2">
-        <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
-          <Sparkles size={16} className="text-primary" />
-        </div>
+        <img src={chatBotLogo} alt="Assistant IA" className="h-8 w-8 rounded-full object-cover" />
         <div>
           <h2 className="text-lg font-bold">Assistant IA</h2>
           <p className="text-xs text-muted-foreground">Posez votre question</p>
@@ -276,7 +275,7 @@ export const AiChatWidget = () => {
             className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-elevated hover:scale-105 transition-transform"
             aria-label="Ouvrir l'assistant IA"
           >
-            <MessageCircle size={24} />
+            <img src={chatBotLogo} alt="Assistant IA" className="h-9 w-9 rounded-full object-cover" />
           </motion.button>
         )}
       </AnimatePresence>
@@ -304,9 +303,7 @@ const FloatingChatPanel = ({ onClose }: { onClose: () => void }) => {
       {/* Header */}
       <div className="flex items-center justify-between border-b bg-primary/5 px-4 py-3">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
-            <Sparkles size={16} className="text-primary" />
-          </div>
+          <img src={chatBotLogo} alt="Assistant IA" className="h-8 w-8 rounded-full object-cover" />
           <div>
             <p className="text-sm font-bold">Assistant Déclic Digital</p>
             <p className="text-[11px] text-muted-foreground">Posez-nous votre question</p>
