@@ -7,11 +7,11 @@ import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { blogArticles, blogCategories, getCategorySlug } from "@/data/blogArticles";
 
 const categoryColors: Record<string, string> = {
-  Technique: "bg-primary/10 text-primary",
-  Design: "bg-accent/10 text-accent",
-  "SEO & Performance": "bg-emerald-500/10 text-emerald-600",
-  "Stratégie digitale": "bg-violet-500/10 text-violet-600",
-  "Tech & Objets connectés": "bg-sky-500/10 text-sky-600",
+  "Technique": "bg-amber-500/15 text-amber-700 dark:text-amber-400",
+  "Création de site": "bg-violet-500/15 text-violet-700 dark:text-violet-400",
+  "SEO & Performance": "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
+  "Stratégie digitale": "bg-rose-500/15 text-rose-700 dark:text-rose-400",
+  "Tech & Gadgets": "bg-sky-500/15 text-sky-700 dark:text-sky-400",
 };
 
 const sorted = [...blogArticles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
