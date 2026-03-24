@@ -304,8 +304,7 @@ const FloatingChatPanel = ({ onClose }: { onClose: () => void }) => {
       {/* Header */}
       <div className="flex items-center justify-between border-b bg-primary/5 px-4 py-3">
         <div className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-primary/10">
-            <Sparkles size={16} className="text-primary" />
+          <img src={chatBotLogo} alt="Assistant IA" className="h-8 w-8 rounded-full object-cover" />
           </div>
           <div>
             <p className="text-sm font-bold">Assistant Déclic Digital</p>
