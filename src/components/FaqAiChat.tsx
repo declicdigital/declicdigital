@@ -304,7 +304,6 @@ const FloatingChatPanel = ({ onClose }: { onClose: () => void }) => {
       <div className="flex items-center justify-between border-b bg-primary/5 px-4 py-3">
         <div className="flex items-center gap-2">
           <img src={chatBotLogo} alt="Assistant IA" className="h-8 w-8 rounded-full object-cover" />
-          </div>
           <div>
             <p className="text-sm font-bold">Assistant Déclic Digital</p>
             <p className="text-[11px] text-muted-foreground">Posez-nous votre question</p>
