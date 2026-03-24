@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Send, Bot, User, Loader2, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import chatBotLogo from "@/assets/chat-bot-logo.png";
+import chatBotLogo from "@/assets/chat-bot-logo.webp";
 
 type Msg = { role: "user" | "assistant"; content: string };
 
