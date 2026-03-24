@@ -256,53 +256,25 @@ const MetierCreationSite = () => {
         </div>
       </SectionWrapper>
 
-      {/* Guide complet SEO long */}
-      <SectionWrapper>
-        <div className="mx-auto max-w-3xl space-y-6">
-          <h2 className="text-3xl font-extrabold md:text-4xl text-center">
-            Guide complet : pourquoi et comment créer un site internet pour {trade.name.toLowerCase()}
-          </h2>
-
-          <h3 className="text-xl font-bold">Le digital, un levier de croissance incontournable pour les {trade.name.toLowerCase()}s</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Le comportement des consommateurs a radicalement changé ces dernières années. Avant de contacter un professionnel {trade.description}, la grande majorité des clients effectue une recherche sur Google. Les requêtes comme {trade.seoKeywords.slice(0, 2).map(k => `"${k}"`).join(", ")} génèrent des centaines de recherches chaque mois rien qu'en Île-de-France. Si votre entreprise n'apparaît pas dans ces résultats, vous laissez vos concurrents capter une clientèle qui aurait pu être la vôtre. Un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site internet professionnel</Link> est donc bien plus qu'une simple carte de visite en ligne : c'est votre premier commercial, disponible 24 heures sur 24, 7 jours sur 7.
-          </p>
-
-          <h3 className="text-xl font-bold">Les erreurs fréquentes des {trade.name.toLowerCase()}s sur internet</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Beaucoup de professionnels {trade.description} commettent l'erreur de se contenter d'une page Facebook ou d'un profil sur un annuaire gratuit. Ces plateformes ne vous appartiennent pas et ne vous donnent aucun contrôle sur votre image, votre référencement ou vos données clients. Un site web, en revanche, est votre propriété. Vous maîtrisez le contenu, le design et la stratégie SEO. De plus, les algorithmes de Google favorisent les sites web avec du contenu original et de qualité, bien avant les pages de réseaux sociaux ou d'annuaires.
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            Autre erreur courante : négliger l'aspect mobile. En 2026, plus de 75% des recherches locales sont effectuées depuis un smartphone. Un site qui ne s'affiche pas correctement sur mobile fait fuir les visiteurs en moins de 3 secondes. Chez Déclic Digital, tous nos sites sont conçus en approche "mobile-first" pour garantir une expérience optimale sur tous les appareils.
-          </p>
-
-          <h3 className="text-xl font-bold">Comment le référencement local transforme votre activité de {trade.name.toLowerCase()}</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement local (SEO local)</Link> est la technique qui permet à votre site d'apparaître dans les résultats de recherche géolocalisés. Quand un client potentiel tape "{trade.clientSearch.split(",")[0]}" sur son téléphone, Google lui propose les résultats les plus pertinents à proximité. Pour y figurer, votre site doit être optimisé avec les bons mots clés ({trade.seoKeywords.join(", ")}), disposer d'une structure technique irréprochable et être associé à une fiche Google Business Profile complète.
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            Le pack local Google Maps, ces 3 résultats affichés avec la carte en haut de page, capte à lui seul 42% des clics sur les recherches locales. Pour un {trade.name.toLowerCase()}, apparaître dans ce pack signifie recevoir des appels et des demandes de devis sans dépenser un centime en publicité. C'est un investissement durable qui, contrairement aux campagnes Google Ads, continue de porter ses fruits mois après mois sans coûts récurrents par clic.
-          </p>
-
-          <h3 className="text-xl font-bold">Ce qui différencie un bon site de {trade.name.toLowerCase()} d'un site médiocre</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Un site efficace pour un professionnel {trade.description} doit remplir plusieurs critères essentiels. Premièrement, il doit inspirer confiance dès les premières secondes : design professionnel, photos de qualité de vos réalisations, témoignages clients vérifiés et certifications visibles. Deuxièmement, il doit faciliter le passage à l'action : formulaire de contact visible, numéro de téléphone cliquable, bouton "demander un devis" et éventuellement un système de réservation en ligne. Troisièmement, il doit être rapide : Google pénalise les sites lents et les utilisateurs quittent une page qui met plus de 3 secondes à charger.
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            Chez Déclic Digital, chaque site que nous créons pour un {trade.name.toLowerCase()} intègre ces fondamentaux, complétés par une optimisation technique poussée (Core Web Vitals, balisage Schema.org, sitemap XML, fichier robots.txt). Nous ne livrons pas simplement un "beau site" : nous livrons un outil de génération de leads pensé pour convertir les visiteurs en clients. Nos <Link to="/tarifs" className="text-primary font-semibold hover:underline">forfaits à partir de 50€/mois</Link> incluent l'hébergement, la maintenance, les mises à jour de sécurité et le support technique, pour que vous puissiez vous concentrer sur votre métier.
-          </p>
-
-          <h3 className="text-xl font-bold">L'importance des avis Google pour un {trade.name.toLowerCase()}</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Les avis clients sont devenus le critère de choix numéro un pour les consommateurs. 93% des internautes lisent les avis avant de choisir un professionnel. Pour un {trade.name.toLowerCase()}, chaque avis positif sur Google renforce votre crédibilité et améliore votre positionnement dans les résultats de recherche. Nous intégrons une stratégie de collecte d'avis dans chaque projet : QR code sur vos devis et factures, lien direct vers votre fiche Google, et affichage automatique de vos meilleurs avis sur votre site. Demandez un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour évaluer votre visibilité actuelle et identifier les axes d'amélioration.
-          </p>
-
-          <h3 className="text-xl font-bold">Combien de temps pour voir des résultats concrets ?</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Un site bien conçu et bien référencé commence à générer ses premières demandes de contact entre 2 et 6 semaines après sa mise en ligne. Les premiers résultats SEO significatifs apparaissent entre 3 et 6 mois, avec une progression constante ensuite. Contrairement à la publicité payante qui s'arrête dès que vous cessez de payer, le référencement naturel est un actif qui prend de la valeur avec le temps. Plus votre site accumule de contenu de qualité, de liens entrants et d'avis positifs, plus votre positionnement se solidifie. C'est pourquoi nous considérons la création de votre site comme le début d'un partenariat de long terme, pas comme une prestation ponctuelle. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link> et <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link> pour comprendre notre approche.
-          </p>
-        </div>
-      </SectionWrapper>
+      {/* Guide unique par métier */}
+      {tradeGuideContent[trade.slug] && (
+        <SectionWrapper>
+          <div className="mx-auto max-w-3xl space-y-6">
+            <h2 className="text-3xl font-extrabold md:text-4xl text-center">
+              {tradeGuideContent[trade.slug].title}
+            </h2>
+            {tradeGuideContent[trade.slug].sections.map((section, i) => (
+              <div key={i}>
+                <h3 className="text-xl font-bold">{section.heading}</h3>
+                <p className="text-muted-foreground leading-relaxed">{section.text}</p>
+              </div>
+            ))}
+            <p className="text-muted-foreground leading-relaxed">
+              Prêt à passer à l'action ? <Link to="/contact" className="text-primary font-semibold hover:underline">Demandez votre devis gratuit</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+            </p>
+          </div>
+        </SectionWrapper>
+      )}
 
       {/* Process */}
       <SectionWrapper className="bg-section-blue">
