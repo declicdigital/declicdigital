@@ -130,8 +130,6 @@ const Faq = () => {
           </Suspense>
         </div>
       </SectionWrapper>
-        </Suspense>
-      </SectionWrapper>
 
       {/* Maillage */}
       <SectionWrapper>
