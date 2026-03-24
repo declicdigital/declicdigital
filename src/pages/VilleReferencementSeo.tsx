@@ -9,6 +9,7 @@ import MapEmbed from "@/components/MapEmbed";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 import { getCityBySlug, cities } from "@/data/cities";
 import { cityContent } from "@/data/cityContent";
+import { getCityGuide } from "@/data/cityGuideContent";
 import { Helmet } from "react-helmet-async";
 
 const seoFaqsByRegion: Record<string, { q: string; a: string }[]> = {
@@ -201,49 +202,29 @@ const VilleReferencementSeo = () => {
         </SectionWrapper>
       )}
 
-      {/* Guide SEO long - ville référencement */}
-      <SectionWrapper>
-        <div className="mx-auto max-w-3xl space-y-6">
-          <h2 className="text-3xl font-extrabold md:text-4xl text-center">
-            Guide complet du référencement local à {city.nameShort}
-          </h2>
-
-          <h3 className="text-xl font-bold">Comprendre le SEO local : les fondamentaux pour {city.nameShort}</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Le référencement local, ou SEO local, est l'ensemble des techniques qui permettent à votre entreprise d'apparaître dans les résultats de recherche géolocalisés sur Google. Quand un internaute {city.description} tape "plombier près de moi", "restaurant {city.nameShort}" ou "comptable {city.region === "paris" ? city.nameShort : `dans le 92`}", Google utilise des centaines de signaux pour déterminer quels résultats afficher. Le SEO local consiste à optimiser ces signaux pour que votre entreprise apparaisse en haut des résultats, et notamment dans le "pack local" Google Maps qui concentre 42% des clics.
-          </p>
-
-          <h3 className="text-xl font-bold">Les 3 piliers du référencement local à {city.nameShort}</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Pour dominer les résultats de recherche à {city.nameShort}, trois éléments doivent être parfaitement alignés. Le premier pilier est votre <Link to={`/creation-site-web/${city.slug}`} className="text-primary font-semibold hover:underline">site web</Link> : il doit être techniquement irréprochable (rapide, responsive, sécurisé), contenir du contenu optimisé pour vos mots clés locaux et disposer d'un balisage technique soigné (meta tags, Schema.org, données structurées LocalBusiness). Le deuxième pilier est votre fiche Google Business Profile : elle doit être complète, régulièrement mise à jour avec des photos, des posts et des réponses aux avis. Le troisième pilier est votre réputation en ligne : les avis Google sont devenus le facteur de classement n°1 pour le pack local.
-          </p>
-
-          <h3 className="text-xl font-bold">Les mots clés qui comptent pour votre activité à {city.nameShort}</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Une stratégie SEO efficace commence par une recherche de mots clés approfondie. Pour une entreprise {city.description}, les requêtes les plus stratégiques combinent votre métier et votre localisation : {content?.targetKeywords?.map(k => `"${k}"`).join(", ") || `"votre métier + ${city.nameShort}"`}. Mais il ne faut pas négliger les requêtes longue traîne, plus spécifiques et souvent moins concurrentielles : "meilleur [votre métier] {city.nameShort} avis", "[votre service] pas cher {city.region === "paris" ? city.nameShort : city.nameShort + " 92"}", ou encore "[votre métier] ouvert le samedi {city.nameShort}". Ces requêtes précises génèrent moins de volume mais convertissent beaucoup mieux car l'intention d'achat est claire.
-          </p>
-
-          <h3 className="text-xl font-bold">Google Business Profile : la clé de votre visibilité locale</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Votre fiche Google Business Profile (anciennement Google My Business) est probablement l'outil le plus puissant et le plus sous-utilisé par les TPE de {city.nameShort}. Une fiche correctement optimisée peut à elle seule multiplier par 5 vos appels entrants. Pour cela, elle doit contenir : une description riche en mots clés (sans suroptimisation), des photos professionnelles de votre établissement et de vos réalisations, vos horaires à jour, votre zone de service précise, et des publications régulières (Google Posts). Chez Déclic Digital, l'optimisation de votre fiche Google Business est incluse dans chaque projet de <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>.
-          </p>
-
-          <h3 className="text-xl font-bold">Les avis Google : votre arme secrète à {city.nameShort}</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            93% des consommateurs lisent les avis en ligne avant de choisir un professionnel. Pour Google aussi, les avis sont un signal de confiance majeur. Une entreprise avec 50 avis positifs et une note de 4,8/5 sera systématiquement privilégiée dans les résultats locaux par rapport à un concurrent avec 5 avis et une note de 4/5. Nous mettons en place une stratégie de collecte d'avis structurée : QR code sur vos documents commerciaux, lien direct vers votre fiche Google envoyé par SMS après chaque prestation, et réponses personnalisées à chaque avis (positif comme négatif). Cette approche méthodique permet à nos clients d'atteindre 30 à 50 nouveaux avis dans les 6 premiers mois.
-          </p>
-
-          <h3 className="text-xl font-bold">SEO vs Google Ads : que choisir pour {city.nameShort} ?</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            C'est l'une des questions les plus fréquentes que nous recevons des entreprises de {city.nameShort}. La réponse dépend de votre situation. Google Ads (la publicité payante) vous place immédiatement en haut des résultats, mais chaque clic vous coûte entre 2€ et 30€ selon votre secteur. Dès que vous arrêtez de payer, vous disparaissez. Le SEO naturel demande plus de patience (3 à 6 mois pour des résultats significatifs), mais les positions acquises sont durables et le coût par lead diminue avec le temps. Pour la plupart des TPE de {city.nameShort}, la stratégie optimale est de combiner les deux au démarrage : Google Ads pour obtenir des résultats immédiats, et SEO pour construire une visibilité pérenne.
-          </p>
-
-          <h3 className="text-xl font-bold">Notre méthode éprouvée pour les entreprises de {city.nameShort}</h3>
-          <p className="text-muted-foreground leading-relaxed">
-            Chez Déclic Digital, chaque projet de référencement à {city.nameShort} suit une méthodologie rigoureuse en 4 phases. Phase 1 : l'audit complet de votre présence en ligne (site, fiche Google, avis, concurrents). Phase 2 : la définition d'une stratégie personnalisée avec les mots clés prioritaires et le plan d'action. Phase 3 : l'implémentation technique et éditoriale (optimisation du site, création de contenu, configuration Google Business). Phase 4 : le suivi mensuel avec un reporting détaillé de vos positions, votre trafic et vos conversions. Demandez votre <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour démarrer cette démarche, ou consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> pour découvrir nos forfaits adaptés aux TPE.
-          </p>
-        </div>
-      </SectionWrapper>
+      {/* Guide unique par ville */}
+      {(() => {
+        const guide = getCityGuide(city.slug);
+        if (!guide) return null;
+        return (
+          <SectionWrapper>
+            <div className="mx-auto max-w-3xl space-y-6">
+              <h2 className="text-3xl font-extrabold md:text-4xl text-center">
+                {guide.seo.title}
+              </h2>
+              {guide.seo.sections.map((section, i) => (
+                <div key={i}>
+                  <h3 className="text-xl font-bold">{section.heading}</h3>
+                  <p className="text-muted-foreground leading-relaxed">{section.text}</p>
+                </div>
+              ))}
+              <p className="text-muted-foreground leading-relaxed">
+                Améliorez votre visibilité Google à {city.nameShort} dès maintenant. <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">Demandez votre audit SEO gratuit</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+              </p>
+            </div>
+          </SectionWrapper>
+        );
+      })()}
 
       {/* FAQ */}
       <SectionWrapper className="bg-section-blue">
