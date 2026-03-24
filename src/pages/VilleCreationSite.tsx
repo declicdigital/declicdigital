@@ -9,6 +9,7 @@ import MapEmbed from "@/components/MapEmbed";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 import { getCityBySlug, cities } from "@/data/cities";
 import { cityContent } from "@/data/cityContent";
+import { getCityGuide } from "@/data/cityGuideContent";
 import { Helmet } from "react-helmet-async";
 
 const creationFaqsByRegion: Record<string, { q: string; a: string }[]> = {
