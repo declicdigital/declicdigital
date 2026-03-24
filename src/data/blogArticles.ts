@@ -279,7 +279,7 @@ Les municipales de Paris 2026 confirment que la présence digitale n'est plus op
     excerpt: "Longtemps en retrait sur la messagerie, Garmin franchit un cap avec WhatsApp. Une avancée qui transforme concrètement l'expérience utilisateur.",
     date: "2026-03-17",
     readTime: "5 min",
-    category: "Tech & Objets connectés",
+    category: "Tech & Gadgets",
     tags: ["Garmin", "WhatsApp", "montre connectée", "smartwatch", "objets connectés"],
     image: garminImg,
     relatedSlugs: ["tendances-web-design-2026", "vitesse-site-web-impact-chiffre-affaires"],
