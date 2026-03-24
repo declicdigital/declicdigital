@@ -355,7 +355,7 @@ Pour les utilisateurs, cela signifie une chose simple : moins de compromis entre
     excerpt: "La France s'apprête à franchir une nouvelle étape avec le France Libre, un porte-avions nucléaire de 80 000 tonnes prévu pour 2038.",
     date: "2026-03-20",
     readTime: "8 min",
-    category: "Défense & Stratégie",
+    category: "Tech & Gadgets",
     tags: ["porte-avions France Libre", "PANG France", "marine nationale", "défense française", "France Libre 2038", "successeur Charles de Gaulle"],
     image: porteAvionsImg,
     relatedSlugs: ["knafo-municipales-paris-campagne-digitale-site-web", "tendances-web-design-2026"],
