@@ -5,6 +5,7 @@ import campagneImg from "@/assets/knafo-campagne-digitale-municipales-paris.webp
 import garminImg from "@/assets/whatsapp-garmin-montre-connectee.webp";
 import porteAvionsImg from "@/assets/porte-avions-france-libre.webp";
 import xboxImg from "@/assets/manette-xbox-carbon-black-promo.webp";
+import artisanParisImg from "@/assets/artisan-paris-site-web.jpg";
 
 export interface BlogArticle {
   slug: string;
@@ -479,6 +480,106 @@ La manette Microsoft conserve toutefois un avantage difficile à contester : son
 Pour ceux qui visent des gâchettes à butées réglables et une batterie rechargeable intégrée, la Xbox Elite Series 2 ou certaines alternatives tierces répondront mieux à ces exigences. Pour tout le monde, une manette officielle Microsoft notée 8/10, neuve et sous les 45 €, c'est le genre de bon plan qui ne revient pas chaque semaine.
 
 Besoin d'un [site web performant](/creation-site-web) pour votre activité ? Découvrez nos services de [création de site internet](/creation-site-web) et de [référencement SEO](/referencement-seo). Vous pouvez aussi demander un [audit SEO gratuit](/audit-seo-gratuit).
+    `,
+  },
+  {
+    slug: "site-web-artisan-paris-pourquoi-il-ne-rapporte-pas",
+    title: "Artisan à Paris : pourquoi votre site web ne vous rapporte aucun client (et comment y remédier)",
+    metaTitle: "Site web artisan Paris : pourquoi il ne rapporte pas — Déclic Digital",
+    metaDescription: "Votre site d'artisan ne génère aucun appel ? Découvrez les 5 raisons et les solutions pour enfin attirer des clients grâce à votre site web à Paris.",
+    excerpt: "Votre site d'artisan ne génère aucun appel ? Découvrez les 5 raisons les plus fréquentes et les solutions concrètes pour enfin attirer des clients à Paris.",
+    date: "2026-03-24",
+    readTime: "8 min",
+    category: "Création de site",
+    tags: ["artisan", "site web", "Paris", "SEO local", "conversion", "TPE"],
+    image: artisanParisImg,
+    relatedSlugs: ["vitesse-site-web-impact-chiffre-affaires", "tendances-web-design-2026"],
+    content: `
+## Les 5 raisons pour lesquelles un site artisan ne convertit pas
+
+Vous avez investi du temps et de l'argent dans un site web, mais votre téléphone reste silencieux. Vous n'êtes pas seul dans cette situation. La grande majorité des artisans parisiens ont un site qui existe sans vraiment travailler pour eux. Voici les 5 raisons les plus fréquentes.
+
+### Première raison : votre site n'apparaît pas sur Google
+
+Si personne ne vous trouve, personne ne vous appelle. Sans [référencement naturel (SEO)](/referencement-seo), votre site est invisible, comme une vitrine sans enseigne dans une ruelle sans passage.
+
+### Deuxième raison : votre site ne rassure pas
+
+Un visiteur qui arrive sur votre site a une question simple : "est-ce que je peux faire confiance à cet artisan ?" S'il ne trouve pas de photos de [réalisations](/realisations), d'avis clients ou de certifications, il repart.
+
+### Troisième raison : votre site est trop lent
+
+53 % des visiteurs quittent une page qui met plus de 3 secondes à charger. Sur mobile, c'est encore pire. Un [site lent](/blog/vitesse-site-web-impact-chiffre-affaires) fait fuir vos clients potentiels avant même qu'ils aient lu une ligne.
+
+### Quatrième raison : il n'y a pas d'appel à l'action clair
+
+Votre visiteur ne doit pas chercher comment vous contacter. Un bouton "Demander un devis" ou un numéro de téléphone cliquable doit être visible immédiatement, sans avoir à scroller.
+
+### Cinquième raison : votre site n'est pas adapté au mobile
+
+Plus de 70 % des recherches locales se font depuis un smartphone. Si votre site est difficile à lire sur téléphone, vous perdez la majorité de vos clients potentiels.
+
+## Ce que veulent vraiment les clients avant d'appeler un artisan
+
+Avant de décrocher leur téléphone, vos futurs clients font une mini-enquête en ligne. Ils veulent savoir : êtes-vous disponible dans leur secteur ? Avez-vous déjà fait ce type de travail ? Combien ça coûte environ ? Êtes-vous fiable ?
+
+Ils cherchent des preuves concrètes : des photos avant/après, des témoignages de clients satisfaits, vos zones d'intervention à Paris et en Île-de-France, vos certifications ou labels qualité.
+
+Un artisan avec un site qui répond à ces questions sera contacté. Celui dont le site est vague ou générique sera ignoré, même s'il est meilleur dans son métier.
+
+La clé : votre site doit parler des problèmes de vos clients, pas uniquement de vous. Remplacez "Nous sommes une entreprise de plomberie depuis 15 ans" par "Votre fuite d'eau réparée en urgence à Paris, 7j/7".
+
+## Les éléments indispensables d'un site artisan efficace
+
+Un [site artisan](/creation-site-web) qui génère des appels doit contenir plusieurs éléments clés.
+
+### Un H1 clair avec votre métier et votre zone
+
+Par exemple : "Plombier à Paris 15ème, intervention rapide et devis gratuit".
+
+### Vos coordonnées visibles sans scroller
+
+Numéro de téléphone cliquable en haut de page, formulaire de [contact](/contact) court (prénom, téléphone, description du problème).
+
+### Une galerie photos de vos réalisations récentes
+
+Des avis clients authentiques, idéalement issus de Google. La liste de vos zones d'intervention par arrondissement ou commune.
+
+### Vos certifications et labels
+
+RGE, Qualibat, ou tout autre label de confiance que vous possédez. Ces éléments rassurent instantanément vos visiteurs.
+
+### Un site rapide, sécurisé et mobile-first
+
+Un texte optimisé SEO qui mentionne naturellement votre métier et votre localisation. Un site rapide, sécurisé (HTTPS) et agréable à lire sur mobile.
+
+Chacun de ces éléments répond à une question implicite de votre visiteur. Ensemble, ils transforment votre site en véritable commercial qui travaille pour vous 24h/24.
+
+## Exemple concret : avant et après une refonte
+
+Prenons l'exemple d'un électricien installé dans le 11ème arrondissement de Paris.
+
+### Avant la refonte
+
+- Aucune position sur Google pour "électricien Paris 11"
+- 3 à 4 appels par mois venant du site
+- Un taux de rebond de 80 %
+
+### Après une refonte centrée sur le SEO local et la conversion
+
+- Apparition en première page Google pour plusieurs requêtes locales
+- 18 à 22 contacts par mois depuis le site
+- Un taux de rebond tombé à 45 %
+
+Ce qui a changé : une page d'accueil restructurée avec un H1 optimisé, des pages par arrondissement ciblant des mots-clés locaux, des témoignages clients visibles dès l'arrivée sur le site, et un formulaire de contact simplifié.
+
+**Le résultat : un retour sur investissement en moins de 4 mois.**
+
+## Demandez votre audit SEO gratuit
+
+Vous souhaitez savoir comment votre site se positionne sur Google et ce qui bloque vos conversions ? Demandez votre [audit SEO gratuit](/audit-seo-gratuit) : nous analysons votre site et vous proposons un plan d'action concret. Réponse en 48h, sans engagement.
+
+Besoin d'un [site web performant](/creation-site-web) pour votre activité d'artisan ? Découvrez nos [tarifs](/tarifs) et nos [réalisations](/realisations). Contactez-nous dès maintenant pour transformer votre site en machine à clients.
     `,
   },
 ];
