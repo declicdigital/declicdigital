@@ -94,7 +94,7 @@ Ne choisissez jamais votre hébergement uniquement sur le prix. Un site lent ou 
     excerpt: "Minimalisme audacieux, animations fluides, typographies XXL : les codes visuels qui font la différence cette année.",
     date: "2026-03-05",
     readTime: "5 min",
-    category: "Design",
+    category: "Création de site",
     tags: ["web design", "tendances", "UX", "UI"],
     image: webDesignImg,
     relatedSlugs: ["comment-choisir-hebergement-web-2026", "whatsapp-montres-garmin-evolution-usage"],
