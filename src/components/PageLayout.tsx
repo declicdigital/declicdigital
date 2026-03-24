@@ -3,6 +3,7 @@ import Header from "./Header";
 
 const Footer = lazy(() => import("./Footer"));
 const BlogCarousel = lazy(() => import("./BlogCarousel"));
+const AiChatWidget = lazy(() => import("./FaqAiChat").then(m => ({ default: m.AiChatWidget })));
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -16,6 +17,7 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
     <Suspense fallback={null}>
       {!hideBlogCarousel && <BlogCarousel />}
       <Footer />
+      <AiChatWidget />
     </Suspense>
   </div>
 );
