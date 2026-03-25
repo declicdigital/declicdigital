@@ -468,9 +468,9 @@ const AdminSoumissions = () => {
   return (
     <div className="min-h-screen bg-background">
       <div className="border-b border-border bg-card">
-        <div className="container py-4 flex items-center justify-between">
-          <div className="flex items-center gap-4">
-            <img src={logoImg} alt="Declic Digital" className="h-32 w-auto md:h-36 cursor-pointer" onClick={() => navigate("/admin/clients")} />
+        <div className="container flex h-[4.5rem] md:h-20 items-center justify-between">
+          <div className="flex items-center gap-4 -my-2">
+            <img src={logoImg} alt="Declic Digital" className="h-20 md:h-24 w-auto cursor-pointer" onClick={() => navigate("/admin/clients")} />
             <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">ADMIN</span>
           </div>
           <div>
