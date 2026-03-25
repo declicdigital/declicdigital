@@ -22,20 +22,21 @@ const getColor = (score: number) => {
   return { stroke: "#ff4e42", bg: "rgba(255,78,66,0.12)" };
 };
 
-const CircleScore = ({ score, label }: { score: number | null; label: string }) => {
-  const size = 64;
-  const strokeWidth = 5;
+const CircleScore = ({ score, label, size = 64 }: { score: number | null; label: string; size?: number }) => {
+  const strokeWidth = size > 48 ? 5 : 3.5;
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
   const pct = score ?? 0;
   const offset = circumference - (pct / 100) * circumference;
   const { stroke, bg } = getColor(pct);
+  const fontSize = size > 48 ? "text-sm" : "text-[10px]";
+  const labelSize = size > 48 ? "text-[10px]" : "text-[8px]";
 
   return (
-    <div className="flex flex-col items-center gap-1">
+    <div className="flex flex-col items-center gap-0.5">
       <div className="relative" style={{ width: size, height: size }}>
         <svg width={size} height={size} className="-rotate-90">
-          <circle cx={size / 2} cy={size / 2} r={radius} fill={bg} stroke="rgba(255,255,255,0.15)" strokeWidth={strokeWidth} />
+          <circle cx={size / 2} cy={size / 2} r={radius} fill={bg} stroke="rgba(128,128,128,0.15)" strokeWidth={strokeWidth} />
           {score !== null && (
             <circle
               cx={size / 2} cy={size / 2} r={radius}
@@ -46,11 +47,11 @@ const CircleScore = ({ score, label }: { score: number | null; label: string }) 
             />
           )}
         </svg>
-        <span className="absolute inset-0 flex items-center justify-center text-sm font-bold" style={{ color: score !== null ? stroke : "rgba(255,255,255,0.5)" }}>
+        <span className={`absolute inset-0 flex items-center justify-center ${fontSize} font-bold`} style={{ color: score !== null ? stroke : "rgba(128,128,128,0.5)" }}>
           {score !== null ? pct : "—"}
         </span>
       </div>
-      <span className="text-[10px] font-medium text-primary-foreground/70">{label}</span>
+      <span className={`${labelSize} font-medium text-muted-foreground`}>{label}</span>
     </div>
   );
 };
