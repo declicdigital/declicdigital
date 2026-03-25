@@ -471,17 +471,17 @@ const AdminSoumissions = () => {
         <div className="container flex h-[4.5rem] md:h-20 items-center justify-between">
           <div className="flex items-center gap-4 -my-2">
             <img src={logoImg} alt="Declic Digital" className="h-32 md:h-36 w-auto cursor-pointer" onClick={() => navigate("/admin/clients")} />
-            <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">ADMIN</span>
+            <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full hidden md:inline">ADMIN</span>
           </div>
-          <div>
-            <h1 className="text-2xl font-extrabold text-right">Soumissions formulaire</h1>
-            <p className="text-muted-foreground text-sm mt-1 text-right">{subs.length} soumission(s) reçue(s)</p>
+          <div className="text-right">
+            <h1 className="text-lg md:text-2xl font-extrabold">Soumissions</h1>
+            <p className="text-muted-foreground text-xs md:text-sm mt-0.5">{subs.length} soumission(s)</p>
           </div>
         </div>
       </div>
-      <div className="container py-8 max-w-4xl">
+      <div className="container py-6 md:py-8 max-w-4xl">
         {/* Status filter tabs */}
-        <div className="flex items-center gap-2 mb-6 flex-wrap">
+        <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-1 -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap">
           {(["all", ...STATUSES] as const).map((st) => {
             const isAll = st === "all";
             const label = isAll ? "Toutes" : STATUS_CONFIG[st].label;
@@ -492,7 +492,7 @@ const AdminSoumissions = () => {
               <button
                 key={st}
                 onClick={() => setFilterStatus(st)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all border ${
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition-all border whitespace-nowrap shrink-0 ${
                   isActive
                     ? isAll
                       ? "bg-primary text-primary-foreground border-primary shadow-sm"
@@ -500,9 +500,9 @@ const AdminSoumissions = () => {
                     : "bg-card text-muted-foreground border-border hover:bg-muted"
                 }`}
               >
-                <Icon className="h-4 w-4" />
+                <Icon className="h-3.5 w-3.5" />
                 {label}
-                <span className={`text-xs font-bold rounded-full px-2 py-0.5 ${isActive ? "bg-white/20" : "bg-muted"}`}>{count}</span>
+                <span className={`text-xs font-bold rounded-full px-1.5 py-0.5 ${isActive ? "bg-white/20" : "bg-muted"}`}>{count}</span>
               </button>
             );
           })}
@@ -524,57 +524,31 @@ const AdminSoumissions = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="flex items-center gap-4 rounded-xl border border-border bg-card p-5 shadow-card hover:shadow-elevated hover:border-primary/20 transition-all group"
+                  className="rounded-xl border border-border bg-card p-4 md:p-5 shadow-card hover:shadow-elevated hover:border-primary/20 transition-all group cursor-pointer"
+                  onClick={() => setSelected(s)}
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
-                    <FileText className="h-5 w-5" />
-                  </div>
-                  <div className="flex-1 min-w-0 cursor-pointer" onClick={() => setSelected(s)}>
-                    <div className="flex items-center gap-2">
-                      <User className="h-3.5 w-3.5 text-muted-foreground" />
-                      <span className="font-semibold text-sm truncate">{s.data?.full_name || "Sans nom"}</span>
-                      <span className={`inline-flex items-center gap-1 text-[11px] font-medium rounded-full px-2 py-0.5 border ${cfg.badgeClass}`}>
-                        <StatusIcon className="h-3 w-3" />
-                        {cfg.label}
-                      </span>
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
+                      <FileText className="h-4 w-4 md:h-5 md:w-5" />
                     </div>
-                    <div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
-                      {s.data?.company && <span className="flex items-center gap-1"><Building2 className="h-3 w-3" />{s.data.company}</span>}
-                      {s.data?.email && <span className="flex items-center gap-1"><Mail className="h-3 w-3" />{s.data.email}</span>}
-                      <span className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        {new Date(s.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}
-                      </span>
-                      <span className="font-medium text-primary">{getCompletionPercent(s.data)}%</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-semibold text-sm truncate">{s.data?.full_name || "Sans nom"}</span>
+                        <span className={`inline-flex items-center gap-1 text-[11px] font-medium rounded-full px-2 py-0.5 border ${cfg.badgeClass}`}>
+                          <StatusIcon className="h-3 w-3" />
+                          {cfg.label}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground flex-wrap">
+                        {s.data?.company && <span className="flex items-center gap-1"><Building2 className="h-3 w-3" />{s.data.company}</span>}
+                        <span className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {new Date(s.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}
+                        </span>
+                        <span className="font-medium text-primary">{getCompletionPercent(s.data)}%</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {/* Quick status toggle */}
-                    {STATUSES.map((st) => {
-                      const stCfg = STATUS_CONFIG[st];
-                      const StIcon = stCfg.icon;
-                      const isActive = status === st;
-                      return (
-                        <button
-                          key={st}
-                          title={stCfg.label}
-                          onClick={(e) => { e.stopPropagation(); updateStatus(s.id, st); }}
-                          className={`p-1.5 rounded-md transition-all ${
-                            isActive ? stCfg.color + " bg-current/10" : "text-muted-foreground/40 hover:text-muted-foreground"
-                          }`}
-                        >
-                          <StIcon className="h-4 w-4" />
-                        </button>
-                      );
-                    })}
-                    <button
-                      title="Supprimer"
-                      onClick={(e) => { e.stopPropagation(); deleteSub(s.id); }}
-                      className="p-1.5 rounded-md text-muted-foreground/40 hover:text-destructive transition-all ml-1"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                    <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors ml-1 cursor-pointer" onClick={() => setSelected(s)} />
+                    <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0 mt-1" />
                   </div>
                 </motion.div>
               );
