@@ -7,7 +7,7 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import portfolioOffg from "@/assets/site-vitrine-artiste-musical.webp";
-import portfolioDomidel from "@/assets/site-professionnel-entreprise-construction.webp";
+
 import portfolioSaucisson from "@/assets/site-ecommerce-produits-artisanaux.webp";
 import portfolioAploz from "@/assets/site-aploz-agence-video-publicitaire.webp";
 
@@ -25,13 +25,6 @@ const projects = [
     url: "https://offg.lovable.app/",
     image: portfolioOffg,
     tags: ["Site vitrine", "Musique"],
-  },
-  {
-    name: "Domidel & Didier",
-    description: "Site professionnel pour une entreprise de construction en Aquitaine. Calculateur de projet intégré.",
-    url: "https://domideldidier.base44.app/",
-    image: portfolioDomidel,
-    tags: ["Site vitrine", "BTP"],
   },
   {
     name: "El Saucisson",
