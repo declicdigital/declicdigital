@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital-new.webp";
 import ProjectChat from "@/components/espace-client/ProjectChat";
+import PageSpeedScores from "@/components/PageSpeedScores";
 
 const STATUS_PRIORITY: Record<string, number> = {
   a_faire_client: 0,
@@ -349,6 +350,7 @@ const AdminClientDetail = () => {
                   <div>
                     <h2 className="text-xl font-bold">{project.name}</h2>
                     <p className="text-primary-foreground/80 mt-1">{project.description}</p>
+                    <PageSpeedScores url={project.website_url || ""} />
                   </div>
                   <div className="flex items-center gap-2">
                     {project.share_token && (
