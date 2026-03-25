@@ -360,18 +360,18 @@ const AdminSoumissions = () => {
         </div>
         <div className="container py-8 max-w-5xl">
           <div className="rounded-2xl border border-border bg-card shadow-card overflow-hidden">
-            <div className="gradient-miami p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-extrabold text-primary-foreground">{d.full_name}</h2>
-                  <p className="text-primary-foreground/80 text-sm">{d.company} · {d.email}</p>
-                  <p className="text-primary-foreground/70 text-xs mt-1">{getCompletionPercent(d)}% des questions répondues</p>
+              <div className="gradient-miami p-4 md:p-6">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <div>
+                    <h2 className="text-lg md:text-xl font-extrabold text-primary-foreground">{d.full_name}</h2>
+                    <p className="text-primary-foreground/80 text-xs md:text-sm">{d.company} · {d.email}</p>
+                    <p className="text-primary-foreground/70 text-xs mt-1">{getCompletionPercent(d)}% des questions répondues</p>
+                  </div>
+                  <div className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-xs md:text-sm font-semibold self-start ${STATUS_CONFIG[currentStatus].badgeClass}`}>
+                    <StatusIcon className="h-3.5 w-3.5" />
+                    {STATUS_CONFIG[currentStatus].label}
+                  </div>
                 </div>
-                <div className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold ${STATUS_CONFIG[currentStatus].badgeClass}`}>
-                  <StatusIcon className="h-4 w-4" />
-                  {STATUS_CONFIG[currentStatus].label}
-                </div>
-              </div>
             </div>
             <div className="divide-y divide-border">
               {[
