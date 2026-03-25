@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital-new.webp";
 import ProjectChat from "@/components/espace-client/ProjectChat";
+import PageSpeedScores from "@/components/PageSpeedScores";
 
 const STATUS_PRIORITY: Record<string, number> = {
   a_faire_client: 0,
