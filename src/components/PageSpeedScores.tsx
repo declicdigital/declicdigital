@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Loader2, RefreshCw } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { supabase } from "@/integrations/supabase/client";
 
 interface Scores {
   performance: number | null;
@@ -66,11 +65,18 @@ const PageSpeedScores = ({ url }: { url: string }) => {
     setLoading(true);
     setError(false);
     try {
-      const { data, error: fnError } = await supabase.functions.invoke("pagespeed-scores", {
-        body: { url },
+      const categories = "category=performance&category=accessibility&category=best-practices&category=seo";
+      const apiUrl = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&strategy=desktop&${categories}`;
+      const res = await fetch(apiUrl);
+      if (!res.ok) throw new Error("API error");
+      const data = await res.json();
+      const cats = data.lighthouseResult?.categories;
+      setScores({
+        performance: cats?.performance ? Math.round(cats.performance.score * 100) : null,
+        accessibility: cats?.accessibility ? Math.round(cats.accessibility.score * 100) : null,
+        "best-practices": cats?.["best-practices"] ? Math.round(cats["best-practices"].score * 100) : null,
+        seo: cats?.seo ? Math.round(cats.seo.score * 100) : null,
       });
-      if (fnError || !data?.scores) throw new Error("API error");
-      setScores(data.scores);
     } catch {
       setError(true);
     }
