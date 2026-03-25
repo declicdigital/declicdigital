@@ -151,16 +151,18 @@ const AdminClients = () => {
             <Card><CardContent className="py-12 text-center text-muted-foreground">Aucun client pour le moment.</CardContent></Card>
           ) : filtered.map((client) => (
             <Card key={client.id} className="cursor-pointer hover:border-primary/30 transition-colors" onClick={() => navigate(`/admin/client/${client.id}`)}>
-              <CardContent className="flex items-center gap-4 py-4">
-                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
+              <CardContent className="flex items-center gap-3 py-4">
+                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm shrink-0">
                   {client.full_name.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-foreground">{client.full_name}</p>
-                  <p className="text-sm text-muted-foreground">{client.email}</p>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <p className="font-semibold text-foreground truncate">{client.full_name}</p>
+                    {client.project ? <Badge variant="secondary" className="text-xs shrink-0">{client.project.name}</Badge> : <Badge variant="outline" className="text-muted-foreground text-xs shrink-0">Pas de projet</Badge>}
+                  </div>
+                  <p className="text-sm text-muted-foreground truncate">{client.email}</p>
                 </div>
-                {client.project ? <Badge variant="secondary">{client.project.name}</Badge> : <Badge variant="outline" className="text-muted-foreground">Pas de projet</Badge>}
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                <ChevronRight className="h-5 w-5 text-muted-foreground shrink-0" />
               </CardContent>
             </Card>
           ))}
