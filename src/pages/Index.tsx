@@ -122,19 +122,14 @@ const Index = () => {
                 </Link>
               </div>
             </div>
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="flex justify-center"
-            >
+            <div className="flex justify-center animate-fade-in-right">
               <div className="rounded-2xl bg-card p-8 shadow-card text-center max-w-sm">
                 <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital - Expert Produit Google" className="mx-auto mb-4 h-32 w-32 rounded-full object-cover" width={128} height={128} fetchPriority="high" />
                 <p className="font-bold text-lg">Geoffrey</p>
                 <p className="text-sm text-muted-foreground">Expert Produit Google</p>
                 <p className="text-sm text-muted-foreground mt-2">Fondateur de Déclic Digital, j'accompagne les TPE et indépendants à Paris et dans le 92 dans leur transformation digitale.</p>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
