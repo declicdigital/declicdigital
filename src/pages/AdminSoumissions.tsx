@@ -324,12 +324,13 @@ const AdminSoumissions = () => {
     return (
       <div className="min-h-screen bg-background">
         <div className="border-b border-border bg-card">
-          <div className="container py-4 flex items-center gap-4 flex-wrap">
-            <Button variant="ghost" size="sm" onClick={() => setSelected(null)}>← Retour</Button>
-            <h1 className="text-lg font-bold">Soumission de {d.full_name || "Inconnu"}</h1>
-            <div className="ml-auto flex items-center gap-2 flex-wrap">
-              {/* Status buttons */}
-              <div className="flex items-center gap-1 border border-border rounded-lg p-1 bg-muted/30">
+          <div className="container py-3 md:py-4 space-y-2">
+            <div className="flex items-center gap-2">
+              <Button variant="ghost" size="sm" className="px-2" onClick={() => setSelected(null)}>← Retour</Button>
+              <h1 className="text-base md:text-lg font-bold truncate">{d.full_name || "Inconnu"}</h1>
+            </div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="flex items-center gap-1 border border-border rounded-lg p-0.5 bg-muted/30">
                 {STATUSES.map((st) => {
                   const cfg = STATUS_CONFIG[st];
                   const Icon = cfg.icon;
@@ -338,39 +339,39 @@ const AdminSoumissions = () => {
                     <button
                       key={st}
                       onClick={() => updateStatus(selected.id, st)}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+                      className={`flex items-center gap-1 px-2 py-1 rounded-md text-[11px] md:text-xs font-medium transition-all ${
                         isActive ? cfg.badgeClass + " shadow-sm" : "text-muted-foreground hover:bg-muted"
                       }`}
                     >
-                      <Icon className="h-3.5 w-3.5" />
-                      {cfg.label}
+                      <Icon className="h-3 w-3 md:h-3.5 md:w-3.5" />
+                      <span className="hidden sm:inline">{cfg.label}</span>
                     </button>
                   );
                 })}
               </div>
-              <Button variant="outline" size="sm" onClick={() => downloadPdf(selected)}>
-                <Download className="h-4 w-4 mr-1" /> PDF
+              <Button variant="outline" size="sm" className="text-xs h-7 px-2" onClick={() => downloadPdf(selected)}>
+                <Download className="h-3.5 w-3.5 mr-1" /> PDF
               </Button>
-              <Button variant="destructive" size="sm" onClick={() => deleteSub(selected.id)}>
-                <Trash2 className="h-4 w-4 mr-1" /> Supprimer
+              <Button variant="destructive" size="sm" className="text-xs h-7 px-2" onClick={() => deleteSub(selected.id)}>
+                <Trash2 className="h-3.5 w-3.5" />
               </Button>
             </div>
           </div>
         </div>
         <div className="container py-8 max-w-5xl">
           <div className="rounded-2xl border border-border bg-card shadow-card overflow-hidden">
-            <div className="gradient-miami p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h2 className="text-xl font-extrabold text-primary-foreground">{d.full_name}</h2>
-                  <p className="text-primary-foreground/80 text-sm">{d.company} · {d.email}</p>
-                  <p className="text-primary-foreground/70 text-xs mt-1">{getCompletionPercent(d)}% des questions répondues</p>
+              <div className="gradient-miami p-4 md:p-6">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <div>
+                    <h2 className="text-lg md:text-xl font-extrabold text-primary-foreground">{d.full_name}</h2>
+                    <p className="text-primary-foreground/80 text-xs md:text-sm">{d.company} · {d.email}</p>
+                    <p className="text-primary-foreground/70 text-xs mt-1">{getCompletionPercent(d)}% des questions répondues</p>
+                  </div>
+                  <div className={`flex items-center gap-2 rounded-full px-3 py-1.5 text-xs md:text-sm font-semibold self-start ${STATUS_CONFIG[currentStatus].badgeClass}`}>
+                    <StatusIcon className="h-3.5 w-3.5" />
+                    {STATUS_CONFIG[currentStatus].label}
+                  </div>
                 </div>
-                <div className={`flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold ${STATUS_CONFIG[currentStatus].badgeClass}`}>
-                  <StatusIcon className="h-4 w-4" />
-                  {STATUS_CONFIG[currentStatus].label}
-                </div>
-              </div>
             </div>
             <div className="divide-y divide-border">
               {[
@@ -404,10 +405,10 @@ const AdminSoumissions = () => {
                       const value = d[key];
                       const display = Array.isArray(value) ? value.join(", ") : String(value);
                       return (
-                        <div key={key} className="flex gap-4 px-6 py-4">
-                          <span className="text-sm font-semibold text-foreground w-48 shrink-0">{FIELD_LABELS[key] || key}</span>
-                          <span className="text-sm text-muted-foreground whitespace-pre-wrap break-words min-w-0">{renderValue(display)}</span>
-                        </div>
+                         <div key={key} className="flex flex-col sm:flex-row gap-1 sm:gap-4 px-4 md:px-6 py-3 md:py-4">
+                           <span className="text-xs md:text-sm font-semibold text-foreground sm:w-40 sm:shrink-0">{FIELD_LABELS[key] || key}</span>
+                           <span className="text-xs md:text-sm text-muted-foreground whitespace-pre-wrap break-words min-w-0">{renderValue(display)}</span>
+                         </div>
                       );
                     })}
                   </div>
@@ -471,17 +472,17 @@ const AdminSoumissions = () => {
         <div className="container flex h-[4.5rem] md:h-20 items-center justify-between">
           <div className="flex items-center gap-4 -my-2">
             <img src={logoImg} alt="Declic Digital" className="h-32 md:h-36 w-auto cursor-pointer" onClick={() => navigate("/admin/clients")} />
-            <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">ADMIN</span>
+            <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full hidden md:inline">ADMIN</span>
           </div>
-          <div>
-            <h1 className="text-2xl font-extrabold text-right">Soumissions formulaire</h1>
-            <p className="text-muted-foreground text-sm mt-1 text-right">{subs.length} soumission(s) reçue(s)</p>
+          <div className="text-right">
+            <h1 className="text-lg md:text-2xl font-extrabold">Soumissions</h1>
+            <p className="text-muted-foreground text-xs md:text-sm mt-0.5">{subs.length} soumission(s)</p>
           </div>
         </div>
       </div>
-      <div className="container py-8 max-w-4xl">
+      <div className="container py-6 md:py-8 max-w-4xl">
         {/* Status filter tabs */}
-        <div className="flex items-center gap-2 mb-6 flex-wrap">
+        <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-1 -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap">
           {(["all", ...STATUSES] as const).map((st) => {
             const isAll = st === "all";
             const label = isAll ? "Toutes" : STATUS_CONFIG[st].label;
@@ -492,7 +493,7 @@ const AdminSoumissions = () => {
               <button
                 key={st}
                 onClick={() => setFilterStatus(st)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all border ${
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition-all border whitespace-nowrap shrink-0 ${
                   isActive
                     ? isAll
                       ? "bg-primary text-primary-foreground border-primary shadow-sm"
@@ -500,9 +501,9 @@ const AdminSoumissions = () => {
                     : "bg-card text-muted-foreground border-border hover:bg-muted"
                 }`}
               >
-                <Icon className="h-4 w-4" />
+                <Icon className="h-3.5 w-3.5" />
                 {label}
-                <span className={`text-xs font-bold rounded-full px-2 py-0.5 ${isActive ? "bg-white/20" : "bg-muted"}`}>{count}</span>
+                <span className={`text-xs font-bold rounded-full px-1.5 py-0.5 ${isActive ? "bg-white/20" : "bg-muted"}`}>{count}</span>
               </button>
             );
           })}
@@ -524,57 +525,31 @@ const AdminSoumissions = () => {
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.05 }}
-                  className="flex items-center gap-4 rounded-xl border border-border bg-card p-5 shadow-card hover:shadow-elevated hover:border-primary/20 transition-all group"
+                  className="rounded-xl border border-border bg-card p-4 md:p-5 shadow-card hover:shadow-elevated hover:border-primary/20 transition-all group cursor-pointer"
+                  onClick={() => setSelected(s)}
                 >
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
-                    <FileText className="h-5 w-5" />
-                  </div>
-                  <div className="flex-1 min-w-0 cursor-pointer" onClick={() => setSelected(s)}>
-                    <div className="flex items-center gap-2">
-                      <User className="h-3.5 w-3.5 text-muted-foreground" />
-                      <span className="font-semibold text-sm truncate">{s.data?.full_name || "Sans nom"}</span>
-                      <span className={`inline-flex items-center gap-1 text-[11px] font-medium rounded-full px-2 py-0.5 border ${cfg.badgeClass}`}>
-                        <StatusIcon className="h-3 w-3" />
-                        {cfg.label}
-                      </span>
+                  <div className="flex items-start gap-3">
+                    <div className="flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
+                      <FileText className="h-4 w-4 md:h-5 md:w-5" />
                     </div>
-                    <div className="flex items-center gap-4 mt-1 text-xs text-muted-foreground">
-                      {s.data?.company && <span className="flex items-center gap-1"><Building2 className="h-3 w-3" />{s.data.company}</span>}
-                      {s.data?.email && <span className="flex items-center gap-1"><Mail className="h-3 w-3" />{s.data.email}</span>}
-                      <span className="flex items-center gap-1">
-                        <Calendar className="h-3 w-3" />
-                        {new Date(s.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}
-                      </span>
-                      <span className="font-medium text-primary">{getCompletionPercent(s.data)}%</span>
+                    <div className="flex-1 min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
+                        <span className="font-semibold text-sm truncate">{s.data?.full_name || "Sans nom"}</span>
+                        <span className={`inline-flex items-center gap-1 text-[11px] font-medium rounded-full px-2 py-0.5 border ${cfg.badgeClass}`}>
+                          <StatusIcon className="h-3 w-3" />
+                          {cfg.label}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-3 mt-1 text-xs text-muted-foreground flex-wrap">
+                        {s.data?.company && <span className="flex items-center gap-1"><Building2 className="h-3 w-3" />{s.data.company}</span>}
+                        <span className="flex items-center gap-1">
+                          <Calendar className="h-3 w-3" />
+                          {new Date(s.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}
+                        </span>
+                        <span className="font-medium text-primary">{getCompletionPercent(s.data)}%</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    {/* Quick status toggle */}
-                    {STATUSES.map((st) => {
-                      const stCfg = STATUS_CONFIG[st];
-                      const StIcon = stCfg.icon;
-                      const isActive = status === st;
-                      return (
-                        <button
-                          key={st}
-                          title={stCfg.label}
-                          onClick={(e) => { e.stopPropagation(); updateStatus(s.id, st); }}
-                          className={`p-1.5 rounded-md transition-all ${
-                            isActive ? stCfg.color + " bg-current/10" : "text-muted-foreground/40 hover:text-muted-foreground"
-                          }`}
-                        >
-                          <StIcon className="h-4 w-4" />
-                        </button>
-                      );
-                    })}
-                    <button
-                      title="Supprimer"
-                      onClick={(e) => { e.stopPropagation(); deleteSub(s.id); }}
-                      className="p-1.5 rounded-md text-muted-foreground/40 hover:text-destructive transition-all ml-1"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </button>
-                    <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors ml-1 cursor-pointer" onClick={() => setSelected(s)} />
+                    <ChevronRight className="h-5 w-5 text-muted-foreground group-hover:text-primary transition-colors shrink-0 mt-1" />
                   </div>
                 </motion.div>
               );
