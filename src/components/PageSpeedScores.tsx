@@ -56,7 +56,7 @@ const CircleScore = ({ score, label, size = 64 }: { score: number | null; label:
   );
 };
 
-const PageSpeedScores = ({ url }: { url: string }) => {
+const PageSpeedScores = ({ url, mini = false }: { url: string; mini?: boolean }) => {
   const [scores, setScores] = useState<Scores | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
