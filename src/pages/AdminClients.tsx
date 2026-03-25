@@ -11,6 +11,7 @@ import { toast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Loader2, Plus, Users, FileText, LogOut, ChevronRight, Search } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital-new.webp";
+import PageSpeedScores from "@/components/PageSpeedScores";
 
 const AdminClients = () => {
   const { user, isAdmin, loading: authLoading, signOut } = useAuth();
@@ -49,7 +50,7 @@ const AdminClients = () => {
 
       setClients((profiles || []).map((p: any) => ({
         id: p.id, email: p.email, full_name: p.full_name, created_at: p.created_at,
-        project: projectMap[p.id] ? { id: projectMap[p.id].id, name: projectMap[p.id].name, status: projectMap[p.id].status } : undefined,
+        project: projectMap[p.id] ? { id: projectMap[p.id].id, name: projectMap[p.id].name, status: projectMap[p.id].status, website_url: projectMap[p.id].website_url } : undefined,
       })));
     } catch (err) {
       console.error("loadClients error:", err);
@@ -151,16 +152,23 @@ const AdminClients = () => {
             <Card><CardContent className="py-12 text-center text-muted-foreground">Aucun client pour le moment.</CardContent></Card>
           ) : filtered.map((client) => (
             <Card key={client.id} className="cursor-pointer hover:border-primary/30 transition-colors" onClick={() => navigate(`/admin/client/${client.id}`)}>
-              <CardContent className="flex items-center gap-4 py-4">
-                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
-                  {client.full_name.charAt(0).toUpperCase()}
+              <CardContent className="py-4">
+                <div className="flex items-center gap-4">
+                  <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm shrink-0">
+                    {client.full_name.charAt(0).toUpperCase()}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-foreground">{client.full_name}</p>
+                    <p className="text-sm text-muted-foreground">{client.email}</p>
+                  </div>
+                  {client.project ? <Badge variant="secondary">{client.project.name}</Badge> : <Badge variant="outline" className="text-muted-foreground">Pas de projet</Badge>}
+                  <ChevronRight className="h-5 w-5 text-muted-foreground shrink-0" />
                 </div>
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-foreground">{client.full_name}</p>
-                  <p className="text-sm text-muted-foreground">{client.email}</p>
-                </div>
-                {client.project ? <Badge variant="secondary">{client.project.name}</Badge> : <Badge variant="outline" className="text-muted-foreground">Pas de projet</Badge>}
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                {client.project?.website_url && (
+                  <div className="mt-3 ml-14" onClick={(e) => e.stopPropagation()}>
+                    <PageSpeedScores url={client.project.website_url} mini />
+                  </div>
+                )}
               </CardContent>
             </Card>
           ))}
