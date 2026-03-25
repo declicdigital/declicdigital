@@ -90,20 +90,24 @@ const PageSpeedScores = ({ url, mini = false }: { url: string; mini?: boolean })
 
   if (!url) return null;
 
+  const circleSize = mini ? 40 : 64;
+  const textClass = mini ? "text-muted-foreground" : "text-primary-foreground/60";
+  const btnClass = mini ? "text-muted-foreground hover:text-foreground" : "text-primary-foreground/50 hover:text-primary-foreground";
+
   if (loading) {
     return (
-      <div className="flex items-center gap-2 mt-3">
-        <Loader2 className="h-4 w-4 animate-spin text-primary-foreground/60" />
-        <span className="text-xs text-primary-foreground/60">Analyse PageSpeed...</span>
+      <div className={`flex items-center gap-2 ${mini ? "" : "mt-3"}`}>
+        <Loader2 className={`h-4 w-4 animate-spin ${textClass}`} />
+        <span className={`text-xs ${textClass}`}>Analyse PageSpeed...</span>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="flex items-center gap-2 mt-3">
-        <span className="text-xs text-primary-foreground/60">Erreur PageSpeed</span>
-        <Button variant="ghost" size="sm" className="h-6 px-2 text-primary-foreground/70 hover:text-primary-foreground" onClick={fetchScores}>
+      <div className={`flex items-center gap-2 ${mini ? "" : "mt-3"}`}>
+        <span className={`text-xs ${textClass}`}>Erreur PageSpeed</span>
+        <Button variant="ghost" size="sm" className={`h-6 px-2 ${btnClass}`} onClick={fetchScores}>
           <RefreshCw className="h-3 w-3" />
         </Button>
       </div>
@@ -113,11 +117,11 @@ const PageSpeedScores = ({ url, mini = false }: { url: string; mini?: boolean })
   if (!scores) return null;
 
   return (
-    <div className="flex items-center gap-4 mt-3">
+    <div className={`flex items-center gap-${mini ? "3" : "4"} ${mini ? "" : "mt-3"}`}>
       {CATEGORIES.map((c) => (
-        <CircleScore key={c.key} score={scores[c.key]} label={c.label} />
+        <CircleScore key={c.key} score={scores[c.key]} label={c.label} size={circleSize} />
       ))}
-      <Button variant="ghost" size="sm" className="h-7 w-7 p-0 text-primary-foreground/50 hover:text-primary-foreground" onClick={fetchScores} title="Rafraichir">
+      <Button variant="ghost" size="sm" className={`h-7 w-7 p-0 ${btnClass}`} onClick={fetchScores} title="Rafraichir">
         <RefreshCw className="h-3.5 w-3.5" />
       </Button>
     </div>
