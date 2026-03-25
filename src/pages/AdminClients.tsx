@@ -94,7 +94,7 @@ const AdminClients = () => {
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container flex items-center justify-between py-3 gap-2">
           <div className="flex items-center gap-2 shrink-0">
-            <img src={logoImg} alt="Declic Digital" className="h-10 md:h-24" />
+            <img src={logoImg} alt="Declic Digital" className="h-32 w-auto md:h-36" />
             <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full hidden md:inline">ADMIN</span>
           </div>
           <nav className="flex items-center gap-1 md:gap-2">
