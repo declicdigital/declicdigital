@@ -70,6 +70,8 @@ const AdminClientDetail = () => {
   const [renameValue, setRenameValue] = useState("");
   const [renamingAttId, setRenamingAttId] = useState<string | null>(null);
   const [renameAttValue, setRenameAttValue] = useState("");
+  const [editingProjectName, setEditingProjectName] = useState(false);
+  const [projectNameDraft, setProjectNameDraft] = useState("");
   const initialLoadDone = useRef(false);
 
   useEffect(() => {
@@ -192,6 +194,18 @@ const AdminClientDetail = () => {
     if (!project) return;
     await supabase.from("projects").update({ status }).eq("id", project.id);
     setProject((prev: any) => ({ ...prev, status }));
+  };
+
+  const saveProjectName = async () => {
+    if (!project || !projectNameDraft.trim()) return;
+    const { error } = await supabase.from("projects").update({ name: projectNameDraft.trim() }).eq("id", project.id);
+    if (error) {
+      toast({ title: "Erreur", description: error.message, variant: "destructive" });
+    } else {
+      setProject((prev: any) => ({ ...prev, name: projectNameDraft.trim() }));
+      toast({ title: "Nom du projet mis a jour" });
+    }
+    setEditingProjectName(false);
   };
 
   const addComment = async (taskId: string) => {
@@ -348,7 +362,26 @@ const AdminClientDetail = () => {
               <div className="gradient-miami p-6 text-white">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h2 className="text-xl font-bold">{project.name}</h2>
+                    <div className="flex items-center gap-2">
+                      {editingProjectName ? (
+                        <>
+                          <Input
+                            value={projectNameDraft}
+                            onChange={(e) => setProjectNameDraft(e.target.value)}
+                            className="bg-white/20 border-white/30 text-white placeholder:text-white/50 h-8 text-lg font-bold w-48"
+                            onKeyDown={(e) => { if (e.key === "Enter") saveProjectName(); if (e.key === "Escape") setEditingProjectName(false); }}
+                            autoFocus
+                          />
+                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white hover:bg-white/20" onClick={saveProjectName}><Check className="h-4 w-4" /></Button>
+                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white hover:bg-white/20" onClick={() => setEditingProjectName(false)}><X className="h-4 w-4" /></Button>
+                        </>
+                      ) : (
+                        <>
+                          <h2 className="text-xl font-bold">{project.name}</h2>
+                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white/70 hover:text-white hover:bg-white/20" onClick={() => { setProjectNameDraft(project.name); setEditingProjectName(true); }}><Pencil className="h-3.5 w-3.5" /></Button>
+                        </>
+                      )}
+                    </div>
                     <p className="text-primary-foreground/80 mt-1">{project.description}</p>
                     <PageSpeedScores url={project.website_url || ""} />
                   </div>
