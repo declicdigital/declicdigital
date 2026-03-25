@@ -70,6 +70,8 @@ const AdminClientDetail = () => {
   const [renameValue, setRenameValue] = useState("");
   const [renamingAttId, setRenamingAttId] = useState<string | null>(null);
   const [renameAttValue, setRenameAttValue] = useState("");
+  const [editingProjectName, setEditingProjectName] = useState(false);
+  const [projectNameDraft, setProjectNameDraft] = useState("");
   const initialLoadDone = useRef(false);
 
   useEffect(() => {
