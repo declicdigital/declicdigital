@@ -350,6 +350,7 @@ const AdminClientDetail = () => {
                   <div>
                     <h2 className="text-xl font-bold">{project.name}</h2>
                     <p className="text-primary-foreground/80 mt-1">{project.description}</p>
+                    <PageSpeedScores url={project.website_url || ""} />
                   </div>
                   <div className="flex items-center gap-2">
                     {project.share_token && (
