@@ -273,6 +273,9 @@ const EspaceClient = () => {
                   )}
                 </div>
                 <p className="text-white/80 mt-1">{project.description}</p>
+                {project.website_url && project.website_url.trim() !== "" && (
+                  <PageSpeedScores url={project.website_url} />
+                )}
                 <div className="flex flex-wrap items-center gap-4 mt-3 text-sm text-white/70">
                   <span className="flex items-center gap-1">
                     <Calendar className="h-4 w-4" /> Debut : {new Date(project.start_date).toLocaleDateString("fr-FR")}
