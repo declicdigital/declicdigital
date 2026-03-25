@@ -27,13 +27,6 @@ const projects = [
     tags: ["Site vitrine", "Musique"],
   },
   {
-    name: "Domidel & Didier",
-    description: "Site professionnel pour une entreprise de construction en Aquitaine. Calculateur de projet intégré.",
-    url: "https://domideldidier.base44.app/",
-    image: portfolioDomidel,
-    tags: ["Site vitrine", "BTP"],
-  },
-  {
     name: "El Saucisson",
     description: "Site e-commerce pour un producteur de saucissons artisanaux des Landes. Design audacieux et identitaire.",
     url: "https://el-saucisson-landes.base44.app/",
