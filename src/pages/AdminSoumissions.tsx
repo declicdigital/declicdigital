@@ -405,10 +405,10 @@ const AdminSoumissions = () => {
                       const value = d[key];
                       const display = Array.isArray(value) ? value.join(", ") : String(value);
                       return (
-                        <div key={key} className="flex gap-4 px-6 py-4">
-                          <span className="text-sm font-semibold text-foreground w-48 shrink-0">{FIELD_LABELS[key] || key}</span>
-                          <span className="text-sm text-muted-foreground whitespace-pre-wrap break-words min-w-0">{renderValue(display)}</span>
-                        </div>
+                         <div key={key} className="flex flex-col sm:flex-row gap-1 sm:gap-4 px-4 md:px-6 py-3 md:py-4">
+                           <span className="text-xs md:text-sm font-semibold text-foreground sm:w-40 sm:shrink-0">{FIELD_LABELS[key] || key}</span>
+                           <span className="text-xs md:text-sm text-muted-foreground whitespace-pre-wrap break-words min-w-0">{renderValue(display)}</span>
+                         </div>
                       );
                     })}
                   </div>
