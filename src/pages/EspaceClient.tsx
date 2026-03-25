@@ -226,11 +226,11 @@ const EspaceClient = () => {
       {/* Grain overlay */}
       <div className="fixed inset-0 pointer-events-none z-[60]" style={{ background: "url('/grain.webp')", backgroundSize: "256px 256px", opacity: 0.12, mixBlendMode: "multiply" as any }} />
       <header className="border-b border-border bg-card sticky top-0 z-50">
-        <div className="container flex items-center justify-between py-3">
+        <div className="container flex h-[4.5rem] md:h-20 items-center justify-between">
           <img
             src={logoImg}
             alt="Declic Digital"
-            className="h-32 md:h-36 cursor-pointer"
+            className="h-20 md:h-24 cursor-pointer -my-2"
             onClick={() => navigate("/espace-client")}
           />
           <div className="flex items-center gap-3">
