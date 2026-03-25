@@ -7,9 +7,8 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import portfolioOffg from "@/assets/site-vitrine-artiste-musical.webp";
-
-import portfolioSaucisson from "@/assets/site-ecommerce-produits-artisanaux.webp";
 import portfolioAploz from "@/assets/site-aploz-agence-video-publicitaire.webp";
+import portfolioNjPhoto from "@/assets/site-photographe-professionnelle.webp";
 
 const projects = [
   {
@@ -27,11 +26,11 @@ const projects = [
     tags: ["Site vitrine", "Musique"],
   },
   {
-    name: "El Saucisson",
-    description: "Site e-commerce pour un producteur de saucissons artisanaux des Landes. Design audacieux et identitaire.",
-    url: "https://el-saucisson-landes.base44.app/",
-    image: portfolioSaucisson,
-    tags: ["E-commerce", "Alimentaire"],
+    name: "NJ Photography",
+    description: "Site vitrine pour une photographe professionnelle. Design élégant et immersif avec portfolio visuel.",
+    url: "https://njphotography.lovable.app/",
+    image: portfolioNjPhoto,
+    tags: ["Site vitrine", "Photographie"],
   },
 ];
 

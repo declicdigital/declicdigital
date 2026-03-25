@@ -9,7 +9,7 @@ import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import heroCreation from "@/assets/screenshot-declic-digital.webp";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
-import siteProImage from "@/assets/site-professionnel-entreprise-construction.webp";
+import siteProImage from "@/assets/site-photographe-professionnelle.webp";
 import { cities } from "@/data/cities";
 
 const CreationSite = () => (
@@ -127,7 +127,7 @@ const CreationSite = () => (
         <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Site web rapide, mobile et optimisé pour Google</h2>
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="flex justify-center order-2 lg:order-1">
-            <img src={siteProImage} alt="Site web professionnel pour entreprise de construction" className="w-full max-w-md rounded-2xl shadow-card" loading="lazy" />
+            <img src={siteProImage} alt="Site web professionnel pour photographe" className="w-full max-w-md rounded-2xl shadow-card" loading="lazy" />
           </div>
           <div className="space-y-6 order-1 lg:order-2">
             <p className="text-muted-foreground leading-relaxed">
