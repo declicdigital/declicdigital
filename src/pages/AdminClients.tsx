@@ -92,20 +92,20 @@ const AdminClients = () => {
   return (
     <div className="min-h-screen bg-background">
       <header className="border-b border-border bg-card sticky top-0 z-50">
-        <div className="container flex items-center justify-between py-3">
-          <div className="flex items-center gap-4">
-            <img src={logoImg} alt="Declic Digital" className="h-20 md:h-24" />
-            <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">ADMIN</span>
+        <div className="container flex items-center justify-between py-3 gap-2">
+          <div className="flex items-center gap-2 shrink-0">
+            <img src={logoImg} alt="Declic Digital" className="h-10 md:h-24" />
+            <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full hidden md:inline">ADMIN</span>
           </div>
-          <nav className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={() => navigate("/admin/clients")} className="font-semibold text-primary">
-              <Users className="h-4 w-4 mr-1" /> Clients
+          <nav className="flex items-center gap-1 md:gap-2">
+            <Button variant="ghost" size="sm" onClick={() => navigate("/admin/clients")} className="font-semibold text-primary px-2 md:px-3 text-xs md:text-sm">
+              <Users className="h-4 w-4 md:mr-1" /> <span className="hidden md:inline">Clients</span>
             </Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/admin/soumissions")}>
-              <FileText className="h-4 w-4 mr-1" /> Formulaires
+            <Button variant="ghost" size="sm" onClick={() => navigate("/admin/soumissions")} className="px-2 md:px-3 text-xs md:text-sm">
+              <FileText className="h-4 w-4 md:mr-1" /> <span className="hidden md:inline">Formulaires</span>
             </Button>
-            <Button variant="ghost" size="sm" onClick={signOut}>
-              <LogOut className="h-4 w-4 mr-1" /> Deconnexion
+            <Button variant="ghost" size="sm" onClick={signOut} className="px-2 md:px-3 text-xs md:text-sm">
+              <LogOut className="h-4 w-4 md:mr-1" /> <span className="hidden md:inline">Deconnexion</span>
             </Button>
           </nav>
         </div>
@@ -151,16 +151,18 @@ const AdminClients = () => {
             <Card><CardContent className="py-12 text-center text-muted-foreground">Aucun client pour le moment.</CardContent></Card>
           ) : filtered.map((client) => (
             <Card key={client.id} className="cursor-pointer hover:border-primary/30 transition-colors" onClick={() => navigate(`/admin/client/${client.id}`)}>
-              <CardContent className="flex items-center gap-4 py-4">
-                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm">
+              <CardContent className="flex items-center gap-3 py-4">
+                <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold text-sm shrink-0">
                   {client.full_name.charAt(0).toUpperCase()}
                 </div>
                 <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-foreground">{client.full_name}</p>
-                  <p className="text-sm text-muted-foreground">{client.email}</p>
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <p className="font-semibold text-foreground truncate">{client.full_name}</p>
+                    {client.project ? <Badge variant="secondary" className="text-xs shrink-0">{client.project.name}</Badge> : <Badge variant="outline" className="text-muted-foreground text-xs shrink-0">Pas de projet</Badge>}
+                  </div>
+                  <p className="text-sm text-muted-foreground truncate">{client.email}</p>
                 </div>
-                {client.project ? <Badge variant="secondary">{client.project.name}</Badge> : <Badge variant="outline" className="text-muted-foreground">Pas de projet</Badge>}
-                <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                <ChevronRight className="h-5 w-5 text-muted-foreground shrink-0" />
               </CardContent>
             </Card>
           ))}
