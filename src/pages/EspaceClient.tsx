@@ -12,6 +12,7 @@ import logoImg from "@/assets/logo-declic-digital-new.webp";
 import ProjectTimeline from "@/components/espace-client/ProjectTimeline";
 import ProjectInvoices from "@/components/espace-client/ProjectInvoices";
 import ProjectChat from "@/components/espace-client/ProjectChat";
+import PageSpeedScores from "@/components/PageSpeedScores";
 
 const STATUS_PRIORITY: Record<string, number> = {
   a_faire_client: 0,
