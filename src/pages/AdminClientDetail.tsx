@@ -196,6 +196,18 @@ const AdminClientDetail = () => {
     setProject((prev: any) => ({ ...prev, status }));
   };
 
+  const saveProjectName = async () => {
+    if (!project || !projectNameDraft.trim()) return;
+    const { error } = await supabase.from("projects").update({ name: projectNameDraft.trim() }).eq("id", project.id);
+    if (error) {
+      toast({ title: "Erreur", description: error.message, variant: "destructive" });
+    } else {
+      setProject((prev: any) => ({ ...prev, name: projectNameDraft.trim() }));
+      toast({ title: "Nom du projet mis a jour" });
+    }
+    setEditingProjectName(false);
+  };
+
   const addComment = async (taskId: string) => {
     if (!user || !newComment[taskId]?.trim()) return;
     await supabase.from("task_comments").insert({ task_id: taskId, user_id: user.id, content: newComment[taskId].trim() });
