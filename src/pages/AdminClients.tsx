@@ -50,7 +50,7 @@ const AdminClients = () => {
 
       setClients((profiles || []).map((p: any) => ({
         id: p.id, email: p.email, full_name: p.full_name, created_at: p.created_at,
-        project: projectMap[p.id] ? { id: projectMap[p.id].id, name: projectMap[p.id].name, status: projectMap[p.id].status } : undefined,
+        project: projectMap[p.id] ? { id: projectMap[p.id].id, name: projectMap[p.id].name, status: projectMap[p.id].status, website_url: projectMap[p.id].website_url } : undefined,
       })));
     } catch (err) {
       console.error("loadClients error:", err);
