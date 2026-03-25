@@ -324,12 +324,13 @@ const AdminSoumissions = () => {
     return (
       <div className="min-h-screen bg-background">
         <div className="border-b border-border bg-card">
-          <div className="container py-4 flex items-center gap-4 flex-wrap">
-            <Button variant="ghost" size="sm" onClick={() => setSelected(null)}>← Retour</Button>
-            <h1 className="text-lg font-bold">Soumission de {d.full_name || "Inconnu"}</h1>
-            <div className="ml-auto flex items-center gap-2 flex-wrap">
-              {/* Status buttons */}
-              <div className="flex items-center gap-1 border border-border rounded-lg p-1 bg-muted/30">
+          <div className="container py-3 md:py-4 space-y-2">
+            <div className="flex items-center gap-2">
+              <Button variant="ghost" size="sm" className="px-2" onClick={() => setSelected(null)}>← Retour</Button>
+              <h1 className="text-base md:text-lg font-bold truncate">{d.full_name || "Inconnu"}</h1>
+            </div>
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="flex items-center gap-1 border border-border rounded-lg p-0.5 bg-muted/30">
                 {STATUSES.map((st) => {
                   const cfg = STATUS_CONFIG[st];
                   const Icon = cfg.icon;
@@ -338,21 +339,21 @@ const AdminSoumissions = () => {
                     <button
                       key={st}
                       onClick={() => updateStatus(selected.id, st)}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
+                      className={`flex items-center gap-1 px-2 py-1 rounded-md text-[11px] md:text-xs font-medium transition-all ${
                         isActive ? cfg.badgeClass + " shadow-sm" : "text-muted-foreground hover:bg-muted"
                       }`}
                     >
-                      <Icon className="h-3.5 w-3.5" />
-                      {cfg.label}
+                      <Icon className="h-3 w-3 md:h-3.5 md:w-3.5" />
+                      <span className="hidden sm:inline">{cfg.label}</span>
                     </button>
                   );
                 })}
               </div>
-              <Button variant="outline" size="sm" onClick={() => downloadPdf(selected)}>
-                <Download className="h-4 w-4 mr-1" /> PDF
+              <Button variant="outline" size="sm" className="text-xs h-7 px-2" onClick={() => downloadPdf(selected)}>
+                <Download className="h-3.5 w-3.5 mr-1" /> PDF
               </Button>
-              <Button variant="destructive" size="sm" onClick={() => deleteSub(selected.id)}>
-                <Trash2 className="h-4 w-4 mr-1" /> Supprimer
+              <Button variant="destructive" size="sm" className="text-xs h-7 px-2" onClick={() => deleteSub(selected.id)}>
+                <Trash2 className="h-3.5 w-3.5" />
               </Button>
             </div>
           </div>
