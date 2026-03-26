@@ -359,30 +359,30 @@ const AdminClientDetail = () => {
           <>
             {/* Project header */}
             <Card className="overflow-hidden">
-              <div className="gradient-miami p-6 text-white">
-                <div className="flex items-center justify-between">
-                  <div>
+              <div className="gradient-miami p-4 sm:p-6 text-white">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div className="min-w-0">
                     <div className="flex items-center gap-2">
                       {editingProjectName ? (
                         <>
                           <Input
                             value={projectNameDraft}
                             onChange={(e) => setProjectNameDraft(e.target.value)}
-                            className="bg-white/20 border-white/30 text-white placeholder:text-white/50 h-8 text-lg font-bold w-48"
+                            className="bg-white/20 border-white/30 text-white placeholder:text-white/50 h-8 text-base sm:text-lg font-bold w-full sm:w-48"
                             onKeyDown={(e) => { if (e.key === "Enter") saveProjectName(); if (e.key === "Escape") setEditingProjectName(false); }}
                             autoFocus
                           />
-                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white hover:bg-white/20" onClick={saveProjectName}><Check className="h-4 w-4" /></Button>
-                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white hover:bg-white/20" onClick={() => setEditingProjectName(false)}><X className="h-4 w-4" /></Button>
+                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white hover:bg-white/20 shrink-0" onClick={saveProjectName}><Check className="h-4 w-4" /></Button>
+                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white hover:bg-white/20 shrink-0" onClick={() => setEditingProjectName(false)}><X className="h-4 w-4" /></Button>
                         </>
                       ) : (
                         <>
-                          <h2 className="text-xl font-bold">{project.name}</h2>
-                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white/70 hover:text-white hover:bg-white/20" onClick={() => { setProjectNameDraft(project.name); setEditingProjectName(true); }}><Pencil className="h-3.5 w-3.5" /></Button>
+                          <h2 className="text-lg sm:text-xl font-bold truncate">{project.name}</h2>
+                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white/70 hover:text-white hover:bg-white/20 shrink-0" onClick={() => { setProjectNameDraft(project.name); setEditingProjectName(true); }}><Pencil className="h-3.5 w-3.5" /></Button>
                         </>
                       )}
                     </div>
-                    <p className="text-primary-foreground/80 mt-1">{project.description}</p>
+                    <p className="text-primary-foreground/80 mt-1 text-sm">{project.description}</p>
                     <PageSpeedScores url={project.website_url || ""} />
                   </div>
                   <div className="flex items-center gap-2">
@@ -401,7 +401,7 @@ const AdminClientDetail = () => {
                       </Button>
                     )}
                     <Select value={project.status} onValueChange={updateProjectStatus}>
-                    <SelectTrigger className="w-40 bg-primary-foreground/20 border-primary-foreground/30 text-primary-foreground"><SelectValue /></SelectTrigger>
+                    <SelectTrigger className="w-32 sm:w-40 bg-primary-foreground/20 border-primary-foreground/30 text-primary-foreground text-xs sm:text-sm"><SelectValue /></SelectTrigger>
                     <SelectContent>
                       <SelectItem value="En cours">En cours</SelectItem>
                       <SelectItem value="En pause">En pause</SelectItem>
@@ -412,7 +412,7 @@ const AdminClientDetail = () => {
                   </div>
                 </div>
               </div>
-              <CardContent className="p-6 space-y-3">
+              <CardContent className="p-4 sm:p-6 space-y-3">
                 <div className="flex items-center gap-2">
                   <Globe className="h-4 w-4 text-muted-foreground" />
                   <Input
