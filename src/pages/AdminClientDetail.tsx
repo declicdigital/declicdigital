@@ -324,12 +324,12 @@ const AdminClientDetail = () => {
               <div className="space-y-2"><Label>Nom</Label><Input value={nameDraft} onChange={(e) => setNameDraft(e.target.value)} /></div>
               <div className="space-y-2"><Label>Email</Label><Input type="email" value={emailDraft} onChange={(e) => setEmailDraft(e.target.value)} /></div>
             </div>
-            <div className="flex flex-wrap gap-2">
-              <Button onClick={updateClientAccount} disabled={savingAccount}>
+            <div className="flex flex-col sm:flex-row flex-wrap gap-2">
+              <Button size="sm" onClick={updateClientAccount} disabled={savingAccount} className="w-full sm:w-auto">
                 {savingAccount && <Loader2 className="h-4 w-4 animate-spin mr-2" />} Mettre a jour
               </Button>
-              <Button variant="outline" onClick={sendResetPassword} disabled={sendingReset}>
-                {sendingReset ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <KeyRound className="h-4 w-4 mr-2" />} Envoyer lien mot de passe
+              <Button variant="outline" size="sm" onClick={sendResetPassword} disabled={sendingReset} className="w-full sm:w-auto">
+                {sendingReset ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <KeyRound className="h-4 w-4 mr-2" />} Envoyer lien mdp
               </Button>
             </div>
           </CardContent>
