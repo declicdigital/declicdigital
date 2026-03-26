@@ -506,23 +506,25 @@ const AdminClientDetail = () => {
                   const statusOptions = getStatusOptions(project.name);
                   return (
                     <div key={task.id} className={`border rounded-lg overflow-hidden ${cfg.bg}`}>
-                      <div className="flex items-center gap-3 p-3">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 p-3">
                         <Select value={task.status} onValueChange={(v) => updateTaskStatus(task.id, v)}>
-                          <SelectTrigger className="w-48"><SelectValue /></SelectTrigger>
+                          <SelectTrigger className="w-full sm:w-48 text-xs sm:text-sm"><SelectValue /></SelectTrigger>
                           <SelectContent>
                             {statusOptions.map((o) => <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>)}
                           </SelectContent>
                         </Select>
-                        <button onClick={() => setExpandedTask(isExpanded ? null : task.id)} className="flex-1 text-sm font-medium text-foreground text-left hover:text-primary transition-colors">
-                          {task.title}
-                        </button>
-                        {(taskComments.length > 0 || taskAttachments.length > 0) && (
-                          <span className="flex items-center gap-2 text-xs text-muted-foreground">
-                            {taskComments.length > 0 && <span className="flex items-center gap-1"><MessageSquare className="h-3.5 w-3.5" /> {taskComments.length}</span>}
-                            {taskAttachments.length > 0 && <span className="flex items-center gap-1"><Paperclip className="h-3.5 w-3.5" /> {taskAttachments.length}</span>}
-                          </span>
-                        )}
-                        <Button variant="ghost" size="icon" className="text-destructive h-8 w-8" onClick={() => deleteTask(task.id)}><Trash2 className="h-4 w-4" /></Button>
+                        <div className="flex items-center gap-2 flex-1 min-w-0">
+                          <button onClick={() => setExpandedTask(isExpanded ? null : task.id)} className="flex-1 text-sm font-medium text-foreground text-left hover:text-primary transition-colors truncate">
+                            {task.title}
+                          </button>
+                          {(taskComments.length > 0 || taskAttachments.length > 0) && (
+                            <span className="flex items-center gap-2 text-xs text-muted-foreground shrink-0">
+                              {taskComments.length > 0 && <span className="flex items-center gap-1"><MessageSquare className="h-3.5 w-3.5" /> {taskComments.length}</span>}
+                              {taskAttachments.length > 0 && <span className="flex items-center gap-1"><Paperclip className="h-3.5 w-3.5" /> {taskAttachments.length}</span>}
+                            </span>
+                          )}
+                          <Button variant="ghost" size="icon" className="text-destructive h-8 w-8 shrink-0" onClick={() => deleteTask(task.id)}><Trash2 className="h-4 w-4" /></Button>
+                        </div>
                       </div>
                       {isExpanded && (
                         <div className="border-t border-border p-4 bg-muted/20 space-y-3">
