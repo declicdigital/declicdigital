@@ -289,17 +289,17 @@ const AdminClientDetail = () => {
         <div className="container flex h-[4.5rem] md:h-20 items-center justify-between">
           <div className="flex items-center gap-4 -my-2">
             <img src={logoImg} alt="Declic Digital" className="h-32 md:h-36 w-auto cursor-pointer" onClick={() => navigate("/admin/clients")} />
-            <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">ADMIN</span>
+            <span className="hidden sm:inline text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">ADMIN</span>
           </div>
-          <nav className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={() => navigate("/admin/clients")}><Users className="h-4 w-4 mr-1" /> Clients</Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/admin/soumissions")}><FileText className="h-4 w-4 mr-1" /> Formulaires</Button>
-            <Button variant="ghost" size="sm" onClick={signOut}><LogOut className="h-4 w-4 mr-1" /> Deconnexion</Button>
+          <nav className="flex items-center gap-1 sm:gap-2">
+            <Button variant="ghost" size="sm" className="px-2 sm:px-3" onClick={() => navigate("/admin/clients")}><Users className="h-4 w-4 sm:mr-1" /><span className="hidden sm:inline"> Clients</span></Button>
+            <Button variant="ghost" size="sm" className="px-2 sm:px-3" onClick={() => navigate("/admin/soumissions")}><FileText className="h-4 w-4 sm:mr-1" /><span className="hidden sm:inline"> Formulaires</span></Button>
+            <Button variant="ghost" size="sm" className="px-2 sm:px-3" onClick={signOut}><LogOut className="h-4 w-4 sm:mr-1" /><span className="hidden sm:inline"> Deconnexion</span></Button>
           </nav>
         </div>
       </header>
 
-      <div className="container py-8 max-w-5xl space-y-6">
+      <div className="container py-4 sm:py-8 max-w-5xl space-y-4 sm:space-y-6 px-3 sm:px-4">
         <Button variant="ghost" size="sm" onClick={() => navigate("/admin/clients")}><ArrowLeft className="h-4 w-4 mr-1" /> Retour</Button>
 
         {/* Client info */}
@@ -324,12 +324,12 @@ const AdminClientDetail = () => {
               <div className="space-y-2"><Label>Nom</Label><Input value={nameDraft} onChange={(e) => setNameDraft(e.target.value)} /></div>
               <div className="space-y-2"><Label>Email</Label><Input type="email" value={emailDraft} onChange={(e) => setEmailDraft(e.target.value)} /></div>
             </div>
-            <div className="flex flex-wrap gap-2">
-              <Button onClick={updateClientAccount} disabled={savingAccount}>
+            <div className="flex flex-col sm:flex-row flex-wrap gap-2">
+              <Button size="sm" onClick={updateClientAccount} disabled={savingAccount} className="w-full sm:w-auto">
                 {savingAccount && <Loader2 className="h-4 w-4 animate-spin mr-2" />} Mettre a jour
               </Button>
-              <Button variant="outline" onClick={sendResetPassword} disabled={sendingReset}>
-                {sendingReset ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <KeyRound className="h-4 w-4 mr-2" />} Envoyer lien mot de passe
+              <Button variant="outline" size="sm" onClick={sendResetPassword} disabled={sendingReset} className="w-full sm:w-auto">
+                {sendingReset ? <Loader2 className="h-4 w-4 animate-spin mr-2" /> : <KeyRound className="h-4 w-4 mr-2" />} Envoyer lien mdp
               </Button>
             </div>
           </CardContent>
@@ -359,30 +359,30 @@ const AdminClientDetail = () => {
           <>
             {/* Project header */}
             <Card className="overflow-hidden">
-              <div className="gradient-miami p-6 text-white">
-                <div className="flex items-center justify-between">
-                  <div>
+              <div className="gradient-miami p-4 sm:p-6 text-white">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                  <div className="min-w-0">
                     <div className="flex items-center gap-2">
                       {editingProjectName ? (
                         <>
                           <Input
                             value={projectNameDraft}
                             onChange={(e) => setProjectNameDraft(e.target.value)}
-                            className="bg-white/20 border-white/30 text-white placeholder:text-white/50 h-8 text-lg font-bold w-48"
+                            className="bg-white/20 border-white/30 text-white placeholder:text-white/50 h-8 text-base sm:text-lg font-bold w-full sm:w-48"
                             onKeyDown={(e) => { if (e.key === "Enter") saveProjectName(); if (e.key === "Escape") setEditingProjectName(false); }}
                             autoFocus
                           />
-                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white hover:bg-white/20" onClick={saveProjectName}><Check className="h-4 w-4" /></Button>
-                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white hover:bg-white/20" onClick={() => setEditingProjectName(false)}><X className="h-4 w-4" /></Button>
+                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white hover:bg-white/20 shrink-0" onClick={saveProjectName}><Check className="h-4 w-4" /></Button>
+                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white hover:bg-white/20 shrink-0" onClick={() => setEditingProjectName(false)}><X className="h-4 w-4" /></Button>
                         </>
                       ) : (
                         <>
-                          <h2 className="text-xl font-bold">{project.name}</h2>
-                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white/70 hover:text-white hover:bg-white/20" onClick={() => { setProjectNameDraft(project.name); setEditingProjectName(true); }}><Pencil className="h-3.5 w-3.5" /></Button>
+                          <h2 className="text-lg sm:text-xl font-bold truncate">{project.name}</h2>
+                          <Button size="icon" variant="ghost" className="h-7 w-7 text-white/70 hover:text-white hover:bg-white/20 shrink-0" onClick={() => { setProjectNameDraft(project.name); setEditingProjectName(true); }}><Pencil className="h-3.5 w-3.5" /></Button>
                         </>
                       )}
                     </div>
-                    <p className="text-primary-foreground/80 mt-1">{project.description}</p>
+                    <p className="text-primary-foreground/80 mt-1 text-sm">{project.description}</p>
                     <PageSpeedScores url={project.website_url || ""} />
                   </div>
                   <div className="flex items-center gap-2">
@@ -401,7 +401,7 @@ const AdminClientDetail = () => {
                       </Button>
                     )}
                     <Select value={project.status} onValueChange={updateProjectStatus}>
-                    <SelectTrigger className="w-40 bg-primary-foreground/20 border-primary-foreground/30 text-primary-foreground"><SelectValue /></SelectTrigger>
+                    <SelectTrigger className="w-32 sm:w-40 bg-primary-foreground/20 border-primary-foreground/30 text-primary-foreground text-xs sm:text-sm"><SelectValue /></SelectTrigger>
                     <SelectContent>
                       <SelectItem value="En cours">En cours</SelectItem>
                       <SelectItem value="En pause">En pause</SelectItem>
@@ -412,17 +412,20 @@ const AdminClientDetail = () => {
                   </div>
                 </div>
               </div>
-              <CardContent className="p-6 space-y-3">
-                <div className="flex items-center gap-2">
-                  <Globe className="h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder="https://exemple.fr"
-                    value={websiteUrl}
-                    onChange={(e) => setWebsiteUrl(e.target.value)}
-                    className="flex-1"
-                  />
+              <CardContent className="p-4 sm:p-6 space-y-3">
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                  <div className="flex items-center gap-2 flex-1">
+                    <Globe className="h-4 w-4 text-muted-foreground shrink-0" />
+                    <Input
+                      placeholder="https://exemple.fr"
+                      value={websiteUrl}
+                      onChange={(e) => setWebsiteUrl(e.target.value)}
+                      className="flex-1 text-sm"
+                    />
+                  </div>
                   <Button
                     size="sm"
+                    className="w-full sm:w-auto"
                     onClick={async () => {
                       const { error } = await supabase.from("projects").update({ website_url: websiteUrl }).eq("id", project.id);
                       if (error) {
@@ -446,16 +449,19 @@ const AdminClientDetail = () => {
                     <Globe className="h-3.5 w-3.5" /> {project.website_url.replace(/^https?:\/\//, "")}
                   </a>
                 )}
-                <div className="flex items-center gap-2">
-                  <FolderOpen className="h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder="https://drive.google.com/..."
-                    value={driveUrl}
-                    onChange={(e) => setDriveUrl(e.target.value)}
-                    className="flex-1"
-                  />
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                  <div className="flex items-center gap-2 flex-1">
+                    <FolderOpen className="h-4 w-4 text-muted-foreground shrink-0" />
+                    <Input
+                      placeholder="https://drive.google.com/..."
+                      value={driveUrl}
+                      onChange={(e) => setDriveUrl(e.target.value)}
+                      className="flex-1 text-sm"
+                    />
+                  </div>
                   <Button
                     size="sm"
+                    className="w-full sm:w-auto"
                     onClick={async () => {
                       const { error } = await (supabase.from("projects") as any).update({ drive_url: driveUrl }).eq("id", project.id);
                       if (error) {
@@ -500,23 +506,25 @@ const AdminClientDetail = () => {
                   const statusOptions = getStatusOptions(project.name);
                   return (
                     <div key={task.id} className={`border rounded-lg overflow-hidden ${cfg.bg}`}>
-                      <div className="flex items-center gap-3 p-3">
+                      <div className="flex flex-col sm:flex-row sm:items-center gap-2 p-3">
                         <Select value={task.status} onValueChange={(v) => updateTaskStatus(task.id, v)}>
-                          <SelectTrigger className="w-48"><SelectValue /></SelectTrigger>
+                          <SelectTrigger className="w-full sm:w-48 text-xs sm:text-sm"><SelectValue /></SelectTrigger>
                           <SelectContent>
                             {statusOptions.map((o) => <SelectItem key={o.value} value={o.value}>{o.label}</SelectItem>)}
                           </SelectContent>
                         </Select>
-                        <button onClick={() => setExpandedTask(isExpanded ? null : task.id)} className="flex-1 text-sm font-medium text-foreground text-left hover:text-primary transition-colors">
-                          {task.title}
-                        </button>
-                        {(taskComments.length > 0 || taskAttachments.length > 0) && (
-                          <span className="flex items-center gap-2 text-xs text-muted-foreground">
-                            {taskComments.length > 0 && <span className="flex items-center gap-1"><MessageSquare className="h-3.5 w-3.5" /> {taskComments.length}</span>}
-                            {taskAttachments.length > 0 && <span className="flex items-center gap-1"><Paperclip className="h-3.5 w-3.5" /> {taskAttachments.length}</span>}
-                          </span>
-                        )}
-                        <Button variant="ghost" size="icon" className="text-destructive h-8 w-8" onClick={() => deleteTask(task.id)}><Trash2 className="h-4 w-4" /></Button>
+                        <div className="flex items-center gap-2 flex-1 min-w-0">
+                          <button onClick={() => setExpandedTask(isExpanded ? null : task.id)} className="flex-1 text-sm font-medium text-foreground text-left hover:text-primary transition-colors truncate">
+                            {task.title}
+                          </button>
+                          {(taskComments.length > 0 || taskAttachments.length > 0) && (
+                            <span className="flex items-center gap-2 text-xs text-muted-foreground shrink-0">
+                              {taskComments.length > 0 && <span className="flex items-center gap-1"><MessageSquare className="h-3.5 w-3.5" /> {taskComments.length}</span>}
+                              {taskAttachments.length > 0 && <span className="flex items-center gap-1"><Paperclip className="h-3.5 w-3.5" /> {taskAttachments.length}</span>}
+                            </span>
+                          )}
+                          <Button variant="ghost" size="icon" className="text-destructive h-8 w-8 shrink-0" onClick={() => deleteTask(task.id)}><Trash2 className="h-4 w-4" /></Button>
+                        </div>
                       </div>
                       {isExpanded && (
                         <div className="border-t border-border p-4 bg-muted/20 space-y-3">
