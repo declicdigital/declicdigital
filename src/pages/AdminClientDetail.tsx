@@ -289,12 +289,12 @@ const AdminClientDetail = () => {
         <div className="container flex h-[4.5rem] md:h-20 items-center justify-between">
           <div className="flex items-center gap-4 -my-2">
             <img src={logoImg} alt="Declic Digital" className="h-32 md:h-36 w-auto cursor-pointer" onClick={() => navigate("/admin/clients")} />
-            <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">ADMIN</span>
+            <span className="hidden sm:inline text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">ADMIN</span>
           </div>
-          <nav className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" onClick={() => navigate("/admin/clients")}><Users className="h-4 w-4 mr-1" /> Clients</Button>
-            <Button variant="ghost" size="sm" onClick={() => navigate("/admin/soumissions")}><FileText className="h-4 w-4 mr-1" /> Formulaires</Button>
-            <Button variant="ghost" size="sm" onClick={signOut}><LogOut className="h-4 w-4 mr-1" /> Deconnexion</Button>
+          <nav className="flex items-center gap-1 sm:gap-2">
+            <Button variant="ghost" size="sm" className="px-2 sm:px-3" onClick={() => navigate("/admin/clients")}><Users className="h-4 w-4 sm:mr-1" /><span className="hidden sm:inline"> Clients</span></Button>
+            <Button variant="ghost" size="sm" className="px-2 sm:px-3" onClick={() => navigate("/admin/soumissions")}><FileText className="h-4 w-4 sm:mr-1" /><span className="hidden sm:inline"> Formulaires</span></Button>
+            <Button variant="ghost" size="sm" className="px-2 sm:px-3" onClick={signOut}><LogOut className="h-4 w-4 sm:mr-1" /><span className="hidden sm:inline"> Deconnexion</span></Button>
           </nav>
         </div>
       </header>
