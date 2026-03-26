@@ -449,16 +449,19 @@ const AdminClientDetail = () => {
                     <Globe className="h-3.5 w-3.5" /> {project.website_url.replace(/^https?:\/\//, "")}
                   </a>
                 )}
-                <div className="flex items-center gap-2">
-                  <FolderOpen className="h-4 w-4 text-muted-foreground" />
-                  <Input
-                    placeholder="https://drive.google.com/..."
-                    value={driveUrl}
-                    onChange={(e) => setDriveUrl(e.target.value)}
-                    className="flex-1"
-                  />
+                <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2">
+                  <div className="flex items-center gap-2 flex-1">
+                    <FolderOpen className="h-4 w-4 text-muted-foreground shrink-0" />
+                    <Input
+                      placeholder="https://drive.google.com/..."
+                      value={driveUrl}
+                      onChange={(e) => setDriveUrl(e.target.value)}
+                      className="flex-1 text-sm"
+                    />
+                  </div>
                   <Button
                     size="sm"
+                    className="w-full sm:w-auto"
                     onClick={async () => {
                       const { error } = await (supabase.from("projects") as any).update({ drive_url: driveUrl }).eq("id", project.id);
                       if (error) {
