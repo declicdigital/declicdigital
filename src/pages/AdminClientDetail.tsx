@@ -299,7 +299,7 @@ const AdminClientDetail = () => {
         </div>
       </header>
 
-      <div className="container py-8 max-w-5xl space-y-6">
+      <div className="container py-4 sm:py-8 max-w-5xl space-y-4 sm:space-y-6 px-3 sm:px-4">
         <Button variant="ghost" size="sm" onClick={() => navigate("/admin/clients")}><ArrowLeft className="h-4 w-4 mr-1" /> Retour</Button>
 
         {/* Client info */}
