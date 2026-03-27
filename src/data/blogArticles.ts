@@ -6,6 +6,7 @@ import garminImg from "@/assets/whatsapp-garmin-montre-connectee.webp";
 import porteAvionsImg from "@/assets/porte-avions-france-libre.webp";
 import xboxImg from "@/assets/manette-xbox-carbon-black-promo.webp";
 import artisanParisImg from "@/assets/artisan-paris-site-web.webp";
+import coutSiteImg from "@/assets/cout-creation-site-web-tpe.jpg";
 
 export interface BlogArticle {
   slug: string;
