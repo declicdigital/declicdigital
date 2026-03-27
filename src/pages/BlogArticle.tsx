@@ -68,10 +68,10 @@ const BlogArticle = () => {
         if (ctaMatch) {
           const [, ctaText, ctaUrl] = ctaMatch;
           return (
-            <div key={i} className="my-10 rounded-2xl gradient-miami p-8 text-center">
+            <div key={i} className="my-10 text-center">
               <Link
                 to={ctaUrl}
-                className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-bold text-foreground text-lg hover:opacity-90 transition-opacity shadow-lg"
+                className="inline-flex items-center gap-2 rounded-full gradient-miami px-8 py-3 font-bold text-white text-lg hover:opacity-90 transition-opacity shadow-lg"
               >
                 {ctaText} <ArrowRight size={18} />
               </Link>
