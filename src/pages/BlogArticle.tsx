@@ -64,6 +64,20 @@ const BlogArticle = () => {
       .map((line, i) => {
         const trimmed = line.trim();
         if (!trimmed) return <br key={i} />;
+        const ctaMatch = trimmed.match(/^\[CTA:(.+):(.+)\]$/);
+        if (ctaMatch) {
+          const [, ctaText, ctaUrl] = ctaMatch;
+          return (
+            <div key={i} className="my-10 rounded-2xl gradient-miami p-8 text-center">
+              <Link
+                to={ctaUrl}
+                className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-bold text-foreground text-lg hover:opacity-90 transition-opacity shadow-lg"
+              >
+                {ctaText} <ArrowRight size={18} />
+              </Link>
+            </div>
+          );
+        }
         if (trimmed.startsWith("### "))
           return (
             <h3 key={i} className="mt-8 mb-3 text-xl font-bold text-foreground">
