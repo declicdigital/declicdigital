@@ -6,6 +6,7 @@ import garminImg from "@/assets/whatsapp-garmin-montre-connectee.webp";
 import porteAvionsImg from "@/assets/porte-avions-france-libre.webp";
 import xboxImg from "@/assets/manette-xbox-carbon-black-promo.webp";
 import artisanParisImg from "@/assets/artisan-paris-site-web.webp";
+import coutSiteImg from "@/assets/cout-creation-site-web-tpe.jpg";
 
 export interface BlogArticle {
   slug: string;
@@ -580,6 +581,89 @@ Ce qui a changé : une page d'accueil restructurée avec un H1 optimisé, des pa
 Vous souhaitez savoir comment votre site se positionne sur Google et ce qui bloque vos conversions ? Demandez votre [audit SEO gratuit](/audit-seo-gratuit) : nous analysons votre site et vous proposons un plan d'action concret. Réponse en 48h, sans engagement.
 
 Besoin d'un [site web performant](/creation-site-web) pour votre activité d'artisan ? Découvrez nos [tarifs](/tarifs) et nos [réalisations](/realisations). Contactez-nous dès maintenant pour transformer votre site en machine à clients.
+    `,
+  },
+  {
+    slug: "combien-coute-creation-site-web-tpe-2026",
+    title: "Combien coûte vraiment la création d'un site web pour une TPE en 2026 ?",
+    metaTitle: "Prix création site web TPE en 2026 — Déclic Digital Paris",
+    metaDescription: "Combien coûte vraiment un site web pour une TPE en 2026 ? Tarifs, options et pièges à éviter. Guide complet par Déclic Digital, agence web Paris.",
+    excerpt: "Tarifs réalistes, options et pièges à éviter : tout ce qu'une TPE doit savoir avant de lancer la création de son site web en 2026.",
+    date: "2026-03-27",
+    readTime: "7 min",
+    category: "Business",
+    tags: ["prix site web", "TPE", "budget", "création site", "devis", "agence web Paris"],
+    image: coutSiteImg,
+    relatedSlugs: ["site-web-artisan-paris-pourquoi-il-ne-rapporte-pas", "vitesse-site-web-impact-chiffre-affaires"],
+    content: `
+## Les 3 grands types de sites et leurs fourchettes de prix
+
+La question du budget est souvent la première que posent les TPE et [artisans](/nos-metiers). Et la réponse honnête est : ça dépend. Mais on peut dégager trois grandes catégories avec des fourchettes réalistes.
+
+### Le site vitrine simple (3 à 5 pages) : entre 800 et 2 500 euros
+
+Il présente votre activité, vos services, votre zone géographique et vos coordonnées. Idéal pour les artisans, professions libérales ou petits commerces qui veulent être visibles en ligne sans complexité. Découvrez nos [offres de création de site web](/creation-site-web) adaptées à ce besoin.
+
+### Le site vitrine avec optimisation SEO : entre 2 000 et 5 000 euros
+
+Ce type de site inclut un travail de [référencement naturel](/referencement-seo) : choix des mots-clés, structure des pages, optimisation technique, pour apparaître dans les résultats Google. C'est l'option la plus rentable sur le long terme.
+
+### Le site e-commerce : à partir de 4 000 euros
+
+Si vous vendez des produits ou des prestations en ligne, le e-commerce requiert plus de développement, de sécurité et de maintenance. Le budget peut vite atteindre 10 000 euros pour un catalogue conséquent.
+
+## Ce qui fait varier le tarif d'une création de site web
+
+Plusieurs facteurs influencent le prix final d'un site web pour une TPE.
+
+### Le nombre de pages
+
+Un site de 5 pages coûte moins cher qu'un site de 20 pages avec des fiches de services détaillées. Consultez nos [tarifs](/tarifs) pour avoir une idée précise.
+
+### Le travail SEO inclus ou non
+
+Un site livré sans optimisation pour Google est moins cher à la création, mais ne génère aucun trafic. C'est une fausse économie. Découvrez pourquoi dans notre article sur [l'impact de la vitesse sur le chiffre d'affaires](/blog/vitesse-site-web-impact-chiffre-affaires).
+
+### La rédaction des textes
+
+Si vous fournissez vos propres contenus, le prix baisse. Si l'agence rédige pour vous, avec des textes optimisés SEO, cela représente un coût supplémentaire, mais aussi un gain de temps considérable.
+
+### Les fonctionnalités spécifiques
+
+Formulaire de réservation, galerie photos avec filtres, blog, espace client, connexion à des outils externes (CRM, facturation). Chaque fonctionnalité supplémentaire a un coût.
+
+## Les pièges à éviter : plateformes low-cost et agences surdimensionnées
+
+Deux erreurs courantes chez les TPE.
+
+### Piège n°1 : les plateformes low-cost
+
+Se tourner vers des plateformes comme Wix ou Squarespace pour "faire des économies". Ces outils sont pratiques pour créer une présence basique, mais ils ont des limites importantes pour le SEO, la personnalisation et la performance.
+
+Un site sur plateforme low-cost sera difficile à positionner sur Google pour des requêtes locales compétitives. Vous paierez moins au départ, mais vous laisserez des clients à vos concurrents chaque mois. Lisez notre article sur les [erreurs qui empêchent un site artisan de rapporter](/blog/site-web-artisan-paris-pourquoi-il-ne-rapporte-pas).
+
+### Piège n°2 : les grandes agences web
+
+Faire appel à une grande agence web sans vérifier que leurs tarifs correspondent à votre budget et que leurs références incluent des TPE similaires à la vôtre. Certaines agences facturent 15 000 euros pour un site qu'une agence spécialisée TPE ferait à 3 000 euros avec le même résultat.
+
+La bonne approche : chercher un prestataire spécialisé dans les TPE et artisans, qui connaît vos contraintes de budget et vos objectifs concrets.
+
+## Ce qu'inclut une prestation Déclic Digital
+
+Chez [Déclic Digital](/qui-sommes-nous), nous accompagnons exclusivement les TPE, artisans et indépendants en Île-de-France. Nos prestations incluent systématiquement :
+
+- La conception du site sur-mesure
+- L'optimisation [SEO on-page](/referencement-seo) complète
+- La rédaction des textes optimisés
+- La mise en ligne et la configuration technique
+
+Nous travaillons avec des budgets adaptés aux réalités des petites structures, avec des délais clairs et une communication directe. Pas d'intermédiaire, pas de surprises. Découvrez nos [réalisations](/realisations) pour voir des exemples concrets.
+
+## Demandez un devis gratuit en 24h
+
+Vous souhaitez savoir combien coûterait votre site web ? [Contactez-nous](/contact) pour un devis gratuit et personnalisé. Nous vous répondons en 24h.
+
+Vous souhaitez d'abord savoir comment votre site actuel se positionne sur Google ? Demandez votre [audit SEO gratuit](/audit-seo-gratuit) : nous vous répondons en 48h, sans engagement.
     `,
   },
 ];
