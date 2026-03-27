@@ -659,9 +659,7 @@ Chez [Déclic Digital](/qui-sommes-nous), nous accompagnons exclusivement les TP
 
 Nous travaillons avec des budgets adaptés aux réalités des petites structures, avec des délais clairs et une communication directe. Pas d'intermédiaire, pas de surprises. Découvrez nos [réalisations](/realisations) pour voir des exemples concrets.
 
-## Demandez un devis gratuit en 24h
-
-Vous souhaitez savoir combien coûterait votre site web ? [Contactez-nous](/contact) pour un devis gratuit et personnalisé. Nous vous répondons en 24h.
+[CTA:Demandez un devis gratuit en 24h:/contact]
 
 Vous souhaitez d'abord savoir comment votre site actuel se positionne sur Google ? Demandez votre [audit SEO gratuit](/audit-seo-gratuit) : nous vous répondons en 48h, sans engagement.
     `,

@@ -67,7 +67,20 @@ const BlogArticle = () => {
         const ctaMatch = trimmed.match(/^\[CTA:(.+):(.+)\]$/);
         if (ctaMatch) {
           const [, ctaText, ctaUrl] = ctaMatch;
-          return null;
+          return (
+            <section key={i} className="gradient-miami py-14 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-12 px-4 my-10 rounded-2xl text-center text-white">
+              <h2 className="text-2xl font-bold md:text-3xl">{ctaText}</h2>
+              <p className="mt-3 text-white/80">
+                Nous vous répondons en 24h, sans engagement.
+              </p>
+              <Link
+                to={ctaUrl}
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary-foreground px-8 py-3 font-semibold text-foreground hover:opacity-90 transition-opacity"
+              >
+                {ctaText} <ArrowRight size={16} />
+              </Link>
+            </section>
+          );
         }
         if (trimmed.startsWith("### "))
           return (
