@@ -68,18 +68,14 @@ const BlogArticle = () => {
         if (ctaMatch) {
           const [, ctaText, ctaUrl] = ctaMatch;
           return (
-            <section key={i} className="gradient-miami py-14 -mx-4 sm:-mx-6 md:-mx-8 lg:-mx-12 px-4 my-10 rounded-2xl text-center text-white">
-              <h2 className="text-2xl font-bold md:text-3xl">{ctaText}</h2>
-              <p className="mt-3 text-white/80">
-                Nous vous répondons en 24h, sans engagement.
-              </p>
+            <div key={i} className="my-10 text-center">
               <Link
                 to={ctaUrl}
-                className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary-foreground px-8 py-3 font-semibold text-foreground hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2 rounded-full gradient-miami px-8 py-3 font-bold text-white text-lg hover:opacity-90 transition-opacity shadow-lg"
               >
-                {ctaText} <ArrowRight size={16} />
+                {ctaText} <ArrowRight size={18} />
               </Link>
-            </section>
+            </div>
           );
         }
         if (trimmed.startsWith("### "))
