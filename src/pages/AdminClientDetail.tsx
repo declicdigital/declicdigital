@@ -527,7 +527,7 @@ const AdminClientDetail = () => {
                           </SelectContent>
                         </Select>
                         <div className="flex items-center gap-2 flex-1 min-w-0">
-                          <button onClick={() => setExpandedTask(isExpanded ? null : task.id)} className="flex-1 text-sm font-medium text-foreground text-left hover:text-primary transition-colors truncate">
+                          <button onClick={() => setExpandedTask(isExpanded ? null : task.id)} className="flex-1 text-sm font-medium text-foreground text-left hover:text-primary transition-colors break-words whitespace-normal">
                             {task.title}
                           </button>
                           {(taskComments.length > 0 || taskAttachments.length > 0) && (
