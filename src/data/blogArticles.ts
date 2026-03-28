@@ -7,6 +7,7 @@ import porteAvionsImg from "@/assets/porte-avions-france-libre.webp";
 import xboxImg from "@/assets/manette-xbox-carbon-black-promo.webp";
 import artisanParisImg from "@/assets/artisan-paris-site-web.webp";
 import coutSiteImg from "@/assets/cout-creation-site-web-tpe.jpg";
+import genererClientsImg from "@/assets/generer-clients-site-web-independant.jpg";
 
 export interface BlogArticle {
   slug: string;
@@ -662,6 +663,88 @@ Nous travaillons avec des budgets adaptés aux réalités des petites structures
 [CTA:Demandez un devis gratuit en 24h:/contact]
 
 Vous souhaitez d'abord savoir comment votre site actuel se positionne sur Google ? Demandez votre [audit SEO gratuit](/audit-seo-gratuit) : nous vous répondons en 48h, sans engagement.
+    `,
+  },
+  {
+    slug: "generer-clients-site-web-independant",
+    title: "Comment générer des clients avec son site web quand on est indépendant ?",
+    metaTitle: "Générer des clients avec son site web — Guide indépendant",
+    metaDescription: "Votre site ne génère aucun lead ? Découvrez comment transformer votre site en machine à clients pour les indépendants et TPE. Conseils concrets.",
+    excerpt: "6 éléments concrets pour transformer votre site vitrine en machine à générer des demandes de contact. Guide pratique pour indépendants et TPE.",
+    date: "2026-03-28",
+    readTime: "7 min",
+    category: "Stratégie digitale",
+    tags: ["génération de leads", "site web", "indépendant", "conversion", "SEO"],
+    image: genererClientsImg,
+    relatedSlugs: ["site-web-artisan-paris-pourquoi-il-ne-rapporte-pas", "combien-coute-creation-site-web-tpe-2026"],
+    content: `
+## Pourquoi la plupart des sites d'indépendants ne convertissent pas
+
+La grande majorité des indépendants ont un site web. Mais combien d'entre eux reçoivent régulièrement des demandes de contact grâce à ce site ? Très peu. Et ce n'est pas une question de chance ou de secteur, c'est une question de méthode.
+
+Un site qui ne convertit pas souffre généralement de l'un de ces problèmes : il n'est pas visible sur Google (problème de [SEO](/referencement-seo)), il ne rassure pas le visiteur (pas de preuves sociales), il ne guide pas le visiteur vers l'action (pas d'appel à l'action clair), ou il est trop lent sur mobile. Découvrez pourquoi dans notre article sur [l'impact de la vitesse sur le chiffre d'affaires](/blog/vitesse-site-web-impact-chiffre-affaires).
+
+La bonne nouvelle : ces problèmes se corrigent. Et une fois corrigés, un site peut devenir votre meilleur commercial, disponible 24h/24, 7j/7, sans commission.
+
+## Les 6 éléments qui transforment un visiteur en client
+
+### Une proposition de valeur claire dès la première ligne
+
+Votre visiteur doit comprendre en moins de 5 secondes ce que vous faites, pour qui, et pourquoi vous choisir. "Consultant RH freelance à Paris, j'aide les TPE à structurer leurs recrutements" est infiniment plus efficace que "Bienvenue sur mon site".
+
+### Des preuves sociales visibles
+
+Témoignages clients, logos de clients, résultats chiffrés, avis Google : plus vous avez de preuves, plus votre visiteur est rassuré.
+
+### Un appel à l'action unique et répété
+
+Ne donnez pas 10 options à votre visiteur. Choisissez une action prioritaire (prendre [contact](/contact), demander un devis, réserver une consultation) et répétez-la à chaque section de page.
+
+### Un formulaire de contact simplifié
+
+Chaque champ supplémentaire réduit le taux de complétion. Demandez uniquement le strict nécessaire : prénom, email ou téléphone, et un message court.
+
+### La vitesse
+
+Un site qui charge en moins de 2 secondes convertit 3 fois mieux qu'un site qui charge en 5 secondes. Consultez notre guide sur [le choix d'un hébergement web performant](/blog/comment-choisir-hebergement-web-2026).
+
+### La confiance technique
+
+HTTPS, [mentions légales](/mentions-legales), [politique de confidentialité](/politique-de-confidentialite) : ces éléments semblent anodins mais rassurent vos visiteurs et sont requis par la loi.
+
+## Le rôle du SEO dans la génération de leads
+
+Avoir un beau site bien conçu ne sert à rien si personne n'y vient. C'est là qu'intervient le [SEO](/referencement-seo), le référencement naturel Google. L'objectif : apparaître dans les premiers résultats quand vos clients potentiels cherchent vos services en ligne.
+
+Pour un indépendant à Paris, cela signifie cibler des requêtes comme "consultant marketing Paris", "coach professionnel Île-de-France" ou "graphiste freelance Paris". Ces recherches sont faites par des personnes qui ont un besoin concret et qui cherchent activement quelqu'un comme vous.
+
+Le SEO ne génère pas de résultats du jour au lendemain : comptez 3 à 6 mois pour voir des effets significatifs. Mais contrairement à la publicité payante, le trafic organique continue de venir même si vous cessez d'investir.
+
+## Un exemple de tunnel de conversion simple à mettre en place
+
+Voici un tunnel de conversion basique mais très efficace pour un indépendant.
+
+### Étape 1 : attirer le visiteur
+
+Un visiteur cherche "coach professionnel Paris" sur Google et tombe sur votre site grâce au SEO.
+
+### Étape 2 : convaincre dès l'arrivée
+
+Il arrive sur votre page d'accueil, voit immédiatement votre proposition de valeur, quelques témoignages clients, et un bouton "Réserver une consultation gratuite de 30 minutes".
+
+### Étape 3 : simplifier l'action
+
+Il clique, remplit un formulaire simple (prénom, email, disponibilités), et reçoit une confirmation automatique.
+
+### Étape 4 : convertir rapidement
+
+Vous le contactez dans les 24h. La conversation démarre dans un contexte positif, c'est lui qui a fait la démarche.
+
+Ce tunnel ne nécessite pas de technologie complexe. Un bon [site web](/creation-site-web), un calendrier de réservation en ligne et un email de confirmation suffisent pour commencer. Découvrez nos [réalisations](/realisations) pour voir des exemples concrets.
+
+[CTA:Demandez votre audit SEO gratuit:/audit-seo-gratuit]
+
+Vous souhaitez savoir comment votre site se positionne sur Google ? Demandez votre [audit SEO gratuit](/audit-seo-gratuit) : nous vous répondons en 48h, sans engagement.
     `,
   },
 ];
