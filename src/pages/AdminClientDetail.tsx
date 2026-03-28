@@ -39,7 +39,14 @@ const getStatusCfg = (projectName: string): Record<string, { label: string; icon
   termine: { label: "Termine", icon: CheckCircle2, color: "bg-muted text-muted-foreground", bg: "bg-muted/30 border-border" },
 });
 
-const AdminClientDetail = () => {
+interface ProjectMessage {
+  id: string;
+  project_id: string;
+  user_id: string;
+  content: string;
+  is_read: boolean;
+  created_at: string;
+}
   const { clientId } = useParams();
   const navigate = useNavigate();
   const { user, isAdmin, loading: authLoading, signOut } = useAuth();
