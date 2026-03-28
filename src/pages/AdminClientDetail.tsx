@@ -681,7 +681,51 @@ const AdminClientDetail = () => {
               </CardContent>
             </Card>
 
-            {/* Recap taches a faire par D.D */}
+            {/* Messages */}
+            {projectMessages.length > 0 && (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center gap-2">
+                    <MessageSquare className="h-5 w-5 text-primary" /> Messages ({projectMessages.length})
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2">
+                  {projectMessages.map((msg) => {
+                    const isOwn = msg.user_id === user?.id;
+                    const isExpanded = expandedMessageId === msg.id;
+                    const isLong = msg.content.length > 120;
+                    return (
+                      <div
+                        key={msg.id}
+                        className={`p-3 rounded-lg border cursor-pointer transition-colors hover:bg-muted/50 ${
+                          isOwn ? "border-primary/20 bg-primary/5" : "border-border bg-card"
+                        }`}
+                        onClick={() => setExpandedMessageId(isExpanded ? null : msg.id)}
+                      >
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className={`text-xs font-semibold ${isOwn ? "text-primary" : "text-foreground"}`}>
+                            {isOwn ? "Vous" : client?.full_name || "Client"}
+                          </span>
+                          <span className="text-xs text-muted-foreground">
+                            {new Date(msg.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
+                          </span>
+                          {!msg.is_read && !isOwn && (
+                            <span className="h-2 w-2 rounded-full bg-primary shrink-0" />
+                          )}
+                        </div>
+                        <p className={`text-sm text-foreground whitespace-pre-wrap break-words ${!isExpanded && isLong ? "line-clamp-2" : ""}`}>
+                          {msg.content}
+                        </p>
+                        {isLong && (
+                          <p className="text-xs text-primary mt-1">{isExpanded ? "Reduire" : "Voir le message entier"}</p>
+                        )}
+                      </div>
+                    );
+                  })}
+                </CardContent>
+              </Card>
+            )}
+
             {tasks.filter((t) => t.status === "a_faire_dd").length > 0 && (
               <Card className="border-[#e91e63]/30 bg-[#e91e63]/5">
                 <CardHeader>
