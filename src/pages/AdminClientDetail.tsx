@@ -110,12 +110,14 @@ const AdminClientDetail = () => {
       setDriveUrl((proj as any)?.drive_url || "");
 
       if (proj) {
-        const [{ data: tasksData }, { data: docsData }] = await Promise.all([
+        const [{ data: tasksData }, { data: docsData }, { data: msgsData }] = await Promise.all([
           supabase.from("project_tasks").select("*").eq("project_id", proj.id).order("sort_order", { ascending: true }),
           supabase.from("project_documents").select("*").eq("project_id", proj.id).order("created_at", { ascending: false }),
+          (supabase.from("project_messages") as any).select("*").eq("project_id", proj.id).order("created_at", { ascending: false }),
         ]);
         setTasks(tasksData || []);
         setDocuments(docsData || []);
+        setProjectMessages((msgsData as ProjectMessage[]) || []);
 
         if (tasksData && tasksData.length > 0) {
           const taskIds = tasksData.map((t: any) => t.id);
