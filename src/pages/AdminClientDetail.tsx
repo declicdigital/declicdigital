@@ -576,7 +576,7 @@ const AdminClientDetail = () => {
                           )}
                           {taskComments.map((c) => (
                             <div key={c.id} className="text-sm p-3 rounded-lg bg-card border border-border">
-                              <p className="text-foreground">{c.content}</p>
+                              <p className="text-foreground whitespace-pre-wrap break-words">{c.content}</p>
                               <p className="text-xs text-muted-foreground mt-1">{new Date(c.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}</p>
                             </div>
                           ))}
