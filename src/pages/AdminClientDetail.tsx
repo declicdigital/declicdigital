@@ -47,6 +47,8 @@ interface ProjectMessage {
   is_read: boolean;
   created_at: string;
 }
+
+const AdminClientDetail = () => {
   const { clientId } = useParams();
   const navigate = useNavigate();
   const { user, isAdmin, loading: authLoading, signOut } = useAuth();
