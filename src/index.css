@@ -144,6 +144,8 @@
     font-family: 'DM Serif Display', Georgia, serif !important;
     font-weight: 700 !important;
     font-synthesis: weight;
+    font-variation-settings: "wght" 700;
+    -webkit-text-stroke: 0.6px hsl(var(--heading));
     @apply tracking-tight;
     color: hsl(var(--heading));
     position: relative;
