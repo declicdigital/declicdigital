@@ -141,8 +141,9 @@
 
   /* ── Headings ── */
   h1 {
-    font-family: 'DM Serif Display', Georgia, serif;
-    @apply font-bold tracking-tight;
+    font-family: 'DM Serif Display', Georgia, serif !important;
+    font-weight: 400 !important;
+    @apply tracking-tight;
     color: hsl(var(--heading));
     position: relative;
     paint-order: stroke fill;
