@@ -142,8 +142,8 @@
   /* ── Headings ── */
   h1 {
     font-family: 'DM Serif Display', Georgia, serif !important;
-    font-weight: 400 !important;
-    -webkit-text-stroke: 0.8px currentColor;
+    font-weight: 700 !important;
+    font-synthesis: weight;
     @apply tracking-tight;
     color: hsl(var(--heading));
     position: relative;
