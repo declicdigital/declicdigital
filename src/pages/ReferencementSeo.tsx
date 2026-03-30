@@ -69,7 +69,7 @@ const ReferencementSeo = () => (
     {/* Qu'est-ce que le SEO */}
     <SectionWrapper>
       <div className="mx-auto max-w-5xl">
-        <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Qu'est-ce que le référencement naturel (SEO) et pourquoi c'est indispensable ?</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Qu'est-ce que le référencement naturel (SEO et GEO) et pourquoi c'est indispensable ?</h2>
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="space-y-6">
             <p className="text-muted-foreground leading-relaxed">
