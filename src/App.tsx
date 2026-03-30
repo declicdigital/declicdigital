@@ -39,6 +39,7 @@ const MetierCreationSite = lazy(() => import("./pages/MetierCreationSite"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite"));
 const FormulaireBrief = lazy(() => import("./pages/FormulaireBrief"));
+const Geo = lazy(() => import("./pages/Geo"));
 
 const queryClient = new QueryClient();
 
@@ -82,6 +83,7 @@ const App = () => (
                 <Route path="/projet/:token" element={<SharedProject />} />
                 <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
                 <Route path="/brief" element={<FormulaireBrief />} />
+                <Route path="/geo" element={<Geo />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
