@@ -401,6 +401,11 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
+      {/* Notre agence */}
+      <Suspense fallback={null}>
+        <LocationSection />
+      </Suspense>
+
       {/* CTA Final */}
       <section className="gradient-miami py-16 md:py-24 text-white">
         <div className="container">
