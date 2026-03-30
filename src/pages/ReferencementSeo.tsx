@@ -10,7 +10,8 @@ import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import LocationSection from "@/components/LocationSection";
 import { ChevronDown, CheckCircle2, Building2, Hammer, Laptop } from "lucide-react";
 import { cities } from "@/data/cities";
-import heroSeo from "@/assets/seo-dashboard-analytics.webp";
+import heroSeo from "@/assets/seo-hero-businessman.webp";
+import seoDashboard from "@/assets/seo-dashboard-analytics.webp";
 
 const stats = [
   { num: "93%", label: "des expériences en ligne commencent par un moteur de recherche" },
@@ -260,6 +261,25 @@ const ReferencementSeo = () => {
           </div>
         </div>
       </section>
+
+      {/* Image + texte */}
+      <SectionWrapper>
+        <div className="mx-auto max-w-5xl grid items-center gap-10 lg:grid-cols-2">
+          <div className="relative">
+            <div className="absolute -inset-3 rounded-3xl gradient-miami opacity-15 blur-2xl" />
+            <img src={seoDashboard} alt="Dashboard analytics SEO pour suivre les performances" className="relative w-full rounded-2xl shadow-2xl" />
+          </div>
+          <div className="space-y-5">
+            <h2 className="text-3xl font-extrabold md:text-4xl">Suivez vos résultats en temps réel</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              Le SEO n'est pas une boîte noire. Grâce aux outils d'analyse, vous suivez chaque progression : mots-clés qui montent, trafic organique, demandes de devis générées par votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link>.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              C'est cette transparence qui fait du SEO un investissement mesurable, contrairement à bien d'autres canaux marketing.
+            </p>
+          </div>
+        </div>
+      </SectionWrapper>
 
       {/* 03 - Comparaison */}
       <SectionWrapper id="comparaison">
