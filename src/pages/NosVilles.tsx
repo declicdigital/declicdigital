@@ -28,7 +28,7 @@ const NosVilles = () => (
             Zone d'intervention
           </span>
           <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
-            Création de site web et SEO à{" "}
+            Création de site web et SEO / GEO à{" "}
             <span className="text-gradient">Paris et dans le 92</span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
