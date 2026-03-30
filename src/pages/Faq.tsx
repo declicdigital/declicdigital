@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import { lazy, Suspense } from "react";
 import { Button } from "@/components/ui/button";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
+import LocationSection from "@/components/LocationSection";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
