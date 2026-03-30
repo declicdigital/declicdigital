@@ -178,7 +178,7 @@ const Index = () => {
         <div className="grid gap-6 md:grid-cols-3">
           {[
             { icon: Monitor, title: "Création de site web", desc: "Nous concevons des sites modernes, rapides et responsive, optimisés pour la conversion et l'expérience utilisateur. Chaque site est pensé pour guider vos visiteurs vers l'action.", link: "/creation-site-web" },
-            { icon: TrendingUp, title: "Référencement SEO", desc: "Le SEO est le levier le plus rentable pour attirer des clients. Nous optimisons votre site pour apparaître en première page Google sur les mots clés de vos prospects.", link: "/referencement-seo" },
+            { icon: TrendingUp, title: "Référencement SEO et GEO", desc: "Le SEO et le GEO sont les leviers les plus rentables pour attirer des clients. Nous optimisons votre site pour apparaître en première page Google et dans les réponses des IA.", link: "/referencement-seo" },
             { icon: BarChart3, title: "Stratégie digitale", desc: "Analyse de marché, positionnement, contenu, suivi des performances : chaque action est mesurée et orientée résultats pour développer votre visibilité.", link: "/contact" },
           ].map((s, i) => (
             <div key={i} className="group rounded-2xl bg-card p-8 shadow-card transition-all hover:shadow-elevated hover:-translate-y-1">
