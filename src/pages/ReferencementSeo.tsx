@@ -343,7 +343,7 @@ const ReferencementSeo = () => {
       <section className="gradient-miami py-14">
         <div className="container text-center">
           <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Vous vous reconnaissez dans ces freins ?</h2>
-          <p className="mb-6 text-white/60 max-w-xl mx-auto">On démystifie le SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
+          <p className="mb-6 text-white/80 max-w-xl mx-auto">On démystifie le SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
           <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
             <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
           </Button>
