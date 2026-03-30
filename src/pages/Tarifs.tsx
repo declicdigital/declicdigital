@@ -219,7 +219,7 @@ const Tarifs = () => (
             Tarifs transparents
           </span>
           <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
-            Nos tarifs création de site web et référencement SEO pour indépendants et TPE
+            Nos tarifs création de site web et référencement SEO et GEO pour indépendants et TPE
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Des offres claires et adaptées aux budgets des TPE et indépendants. Chaque prestation, de la{" "}
@@ -228,7 +228,7 @@ const Tarifs = () => (
             </Link>{" "}
             au{" "}
             <Link to="/referencement-seo" className="font-semibold text-primary hover:underline">
-              référencement SEO
+              référencement SEO et GEO
             </Link>
             , est pensée pour générer un retour sur investissement concret.
           </p>
@@ -244,7 +244,7 @@ const Tarifs = () => (
     <SectionWrapper>
       <div className="mx-auto max-w-6xl">
         <h2 className="mb-8 text-center text-2xl font-extrabold md:text-3xl">
-          Nos formules création de site et référencement SEO
+          Nos formules création de site et référencement SEO et GEO
         </h2>
         <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3">
           {plans.map((plan, i) => renderPlanCard(plan, i))}
@@ -312,7 +312,7 @@ const Tarifs = () => (
             Création de site web
           </Link>
           <Link to="/referencement-seo" className="rounded-full border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary">
-            Référencement SEO
+            Référencement SEO et GEO
           </Link>
           <Link to="/audit-seo-gratuit" className="rounded-full border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary">
             Audit SEO gratuit

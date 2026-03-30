@@ -109,10 +109,10 @@ const Index = () => {
                 Expert Produit Google · Agence digitale
               </span>
               <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
-                Création de site internet et SEO à Paris et dans les Hauts-de-Seine (92)
+                Création de site internet et SEO / GEO à Paris et dans les Hauts-de-Seine (92)
               </h1>
               <p className="mb-8 max-w-lg text-lg md:text-xl text-muted-foreground leading-relaxed">
-                Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour que les TPE et indépendants de Paris et du 92 attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
+                Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO et GEO</Link> pour que les TPE et indépendants de Paris et du 92 attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
@@ -178,7 +178,7 @@ const Index = () => {
         <div className="grid gap-6 md:grid-cols-3">
           {[
             { icon: Monitor, title: "Création de site web", desc: "Nous concevons des sites modernes, rapides et responsive, optimisés pour la conversion et l'expérience utilisateur. Chaque site est pensé pour guider vos visiteurs vers l'action.", link: "/creation-site-web" },
-            { icon: TrendingUp, title: "Référencement SEO", desc: "Le SEO est le levier le plus rentable pour attirer des clients. Nous optimisons votre site pour apparaître en première page Google sur les mots clés de vos prospects.", link: "/referencement-seo" },
+            { icon: TrendingUp, title: "Référencement SEO et GEO", desc: "Le SEO et le GEO sont les leviers les plus rentables pour attirer des clients. Nous optimisons votre site pour apparaître en première page Google et dans les réponses des IA.", link: "/referencement-seo" },
             { icon: BarChart3, title: "Stratégie digitale", desc: "Analyse de marché, positionnement, contenu, suivi des performances : chaque action est mesurée et orientée résultats pour développer votre visibilité.", link: "/contact" },
           ].map((s, i) => (
             <div key={i} className="group rounded-2xl bg-card p-8 shadow-card transition-all hover:shadow-elevated hover:-translate-y-1">
@@ -262,7 +262,7 @@ const Index = () => {
         <div className="text-center mb-10">
           <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Nos réalisations pour des TPE et artisans parisiens</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link>.
+            Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO et GEO</Link>.
           </p>
         </div>
         <div className="overflow-hidden">
@@ -350,7 +350,7 @@ const Index = () => {
               Création de site web
             </Link>
             <Link to="/referencement-seo" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Référencement SEO
+              Référencement SEO et GEO
             </Link>
             <Link to="/audit-seo-gratuit" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
               Audit SEO gratuit

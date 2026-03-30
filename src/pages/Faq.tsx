@@ -91,7 +91,7 @@ const Faq = () => {
               Questions fréquentes sur la création de site internet et le SEO
             </h1>
             <p className="text-lg text-muted-foreground">
-              Retrouvez les réponses aux questions les plus posées sur la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link>, le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link> et nos services pour les TPE et artisans.
+              Retrouvez les réponses aux questions les plus posées sur la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link>, le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO et GEO</Link> et nos services pour les TPE et artisans.
             </p>
           </motion.div>
         </div>
@@ -138,7 +138,7 @@ const Faq = () => {
           <h2 className="text-2xl font-extrabold mb-4">Découvrez nos services</h2>
           <div className="flex flex-wrap justify-center gap-3">
             <Link to="/creation-site-web" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">Création de site web</Link>
-            <Link to="/referencement-seo" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">Référencement SEO</Link>
+            <Link to="/referencement-seo" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">Référencement SEO et GEO</Link>
             <Link to="/audit-seo-gratuit" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">Audit SEO gratuit</Link>
             <Link to="/tarifs" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">Nos tarifs</Link>
             <Link to="/realisations" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">Nos réalisations</Link>

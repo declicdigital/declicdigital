@@ -24,7 +24,7 @@ const ReferencementSeo = () => (
     {/* Breadcrumb */}
     <PageBreadcrumb items={[
       { label: "Accueil", href: "/" },
-      { label: "Référencement SEO" },
+      { label: "Référencement SEO et GEO" },
     ]} />
 
     {/* Hero */}
@@ -32,10 +32,10 @@ const ReferencementSeo = () => (
       <div className="container">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="mx-auto max-w-3xl text-center">
           <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-            Référencement naturel Google (SEO) pour les TPE, artisans et indépendants à Paris
+            Référencement naturel Google (SEO) et GEO pour les TPE, artisans et indépendants à Paris
           </h1>
           <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-            Le référencement SEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour qu'il apparaisse en première page Google. Commencez par un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit gratuit</Link>.
+            Le référencement SEO et GEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour qu'il apparaisse en première page Google et dans les réponses des IA. Commencez par un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit gratuit</Link>.
           </p>
           <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
             <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
@@ -69,7 +69,7 @@ const ReferencementSeo = () => (
     {/* Qu'est-ce que le SEO */}
     <SectionWrapper>
       <div className="mx-auto max-w-5xl">
-        <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Qu'est-ce que le référencement naturel (SEO) et pourquoi c'est indispensable ?</h2>
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Qu'est-ce que le référencement naturel (SEO et GEO) et pourquoi c'est indispensable ?</h2>
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="space-y-6">
             <p className="text-muted-foreground leading-relaxed">
@@ -154,7 +154,7 @@ const ReferencementSeo = () => (
         Combien de temps avant de voir des résultats SEO ?
       </h2>
       <p className="text-center text-muted-foreground mb-8">
-        Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold hover:underline">référencement SEO local</Link> à Paris et dans les Hauts-de-Seine.
+        Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold hover:underline">référencement SEO et GEO local</Link> à Paris et dans les Hauts-de-Seine.
       </p>
       <div className="flex flex-wrap justify-center gap-3">
         {cities.slice(0, 12).map((c) => (

@@ -10,7 +10,7 @@ import { blogArticles } from "@/data/blogArticles";
 const links = [
   { label: "Accueil", to: "/" },
   { label: "Création de site web", to: "/creation-site-web" },
-  { label: "Référencement SEO", to: "/referencement-seo" },
+  { label: "Référencement SEO et GEO", to: "/referencement-seo" },
   { label: "Audit SEO gratuit", to: "/audit-seo-gratuit" },
   { label: "Nos tarifs", to: "/tarifs" },
   { label: "Réalisations", to: "/realisations" },
@@ -77,7 +77,7 @@ const PlanDuSite = () => (
           ))}
         </ul>
 
-        <h2 className="text-2xl font-bold mb-4">Référencement SEO par ville</h2>
+        <h2 className="text-2xl font-bold mb-4">Référencement SEO et GEO par ville</h2>
         <ul className="space-y-2">
           {cities.map((city) => (
             <li key={city.slug}>
@@ -86,7 +86,7 @@ const PlanDuSite = () => (
                 className="flex items-center gap-3 rounded-lg bg-card p-3 text-sm font-medium text-foreground hover:text-primary transition-colors"
               >
                 <span className="h-1.5 w-1.5 rounded-full gradient-primary shrink-0" />
-                Référencement SEO {city.nameShort}
+                Référencement SEO et GEO {city.nameShort}
               </Link>
             </li>
           ))}

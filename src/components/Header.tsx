@@ -6,7 +6,7 @@ import logo from "@/assets/logo-declic-digital-new.webp";
 
 const navLinks = [
   { label: "Création de site", to: "/creation-site-web" },
-  { label: "SEO", to: "/referencement-seo" },
+  { label: "SEO et GEO", to: "/referencement-seo" },
   { label: "Tarifs", to: "/tarifs" },
   { label: "Réalisations", to: "/realisations" },
   { label: "Blog", to: "/blog" },

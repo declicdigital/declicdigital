@@ -264,7 +264,7 @@ const VilleCreationSite = () => {
           <h2 className="text-2xl font-extrabold mb-4">Découvrez aussi nos autres services</h2>
           <div className="flex flex-wrap justify-center gap-3">
             <Link to="/referencement-seo" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Référencement SEO
+              Référencement SEO et GEO
             </Link>
             <Link to={`/referencement-seo/${city.slug}`} className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
               SEO à {city.nameShort}

@@ -28,11 +28,11 @@ const NosVilles = () => (
             Zone d'intervention
           </span>
           <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
-            Création de site web et SEO à{" "}
+            Création de site web et SEO / GEO à{" "}
             <span className="text-gradient">Paris et dans le 92</span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Notre agence accompagne les TPE et indépendants à Paris et dans les Hauts-de-Seine pour la création de sites internet professionnels et le référencement SEO. Découvrez nos interventions par ville.
+            Notre agence accompagne les TPE et indépendants à Paris et dans les Hauts-de-Seine pour la création de sites internet professionnels et le référencement SEO et GEO. Découvrez nos interventions par ville.
           </p>
         </motion.div>
       </div>
@@ -70,7 +70,7 @@ const NosVilles = () => (
                 to={`/referencement-seo/${city.slug}`}
                 className="rounded-full bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/20 transition-colors"
               >
-                SEO
+                SEO et GEO
               </Link>
             </div>
           </motion.div>
@@ -85,7 +85,7 @@ const NosVilles = () => (
         Hauts-de-Seine (92)
       </h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-        Nous accompagnons les entreprises des Hauts-de-Seine pour développer leur visibilité en ligne avec des sites web performants et un référencement SEO ciblé.
+        Nous accompagnons les entreprises des Hauts-de-Seine pour développer leur visibilité en ligne avec des sites web performants et un référencement SEO et GEO ciblé.
       </p>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {hdsCities.map((city, i) => (
@@ -110,7 +110,7 @@ const NosVilles = () => (
                 to={`/referencement-seo/${city.slug}`}
                 className="rounded-full bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/20 transition-colors"
               >
-                SEO
+                SEO et GEO
               </Link>
             </div>
           </motion.div>
@@ -146,7 +146,7 @@ const NosVilles = () => (
             <Link to="/creation-site-web">Création de site web</Link>
           </Button>
           <Link to="/referencement-seo" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
-            Référencement SEO
+            Référencement SEO et GEO
           </Link>
           <Link to="/audit-seo-gratuit" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
             Audit SEO gratuit

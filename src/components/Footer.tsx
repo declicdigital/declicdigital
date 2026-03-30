@@ -30,7 +30,7 @@ const Footer = () => (
             <h3 className="mb-3 text-xs font-bold uppercase tracking-widest text-brand-blue">Services</h3>
             <ul className="space-y-2 text-sm">
               <li><Link to="/creation-site-web" className="text-white/60 hover:text-white transition-colors">Création de site web</Link></li>
-              <li><Link to="/referencement-seo" className="text-white/60 hover:text-white transition-colors">Référencement SEO</Link></li>
+              <li><Link to="/referencement-seo" className="text-white/60 hover:text-white transition-colors">Référencement SEO et GEO</Link></li>
               <li><Link to="/audit-seo-gratuit" className="text-white/60 hover:text-white transition-colors">Audit SEO gratuit</Link></li>
               <li><Link to="/tarifs" className="text-white/60 hover:text-white transition-colors">Nos tarifs</Link></li>
               <li><Link to="/contact" className="text-white/60 hover:text-white transition-colors">Demande de devis</Link></li>

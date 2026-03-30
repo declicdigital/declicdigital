@@ -44,7 +44,7 @@ const VilleReferencementSeo = () => {
       <Helmet>
         <title>{
           city.slug === "boulogne-billancourt" ? "SEO local Boulogne-Billancourt | TPE & artisans" :
-          `Référencement SEO ${city.nameShort} | TPE & artisans`
+          `Référencement SEO et GEO ${city.nameShort} | TPE & artisans`
         }</title>
         <meta name="description" content={
           city.slug === "boulogne-billancourt" ? "Référencement Google local pour les TPE et artisans de Boulogne-Billancourt. Déclic Digital booste votre visibilité à Paris et dans le 92. Audit gratuit." :
@@ -56,7 +56,7 @@ const VilleReferencementSeo = () => {
 
       <PageBreadcrumb items={[
         { label: "Accueil", href: "/" },
-        { label: "Référencement SEO", href: "/referencement-seo" },
+        { label: "Référencement SEO et GEO", href: "/referencement-seo" },
         { label: city.nameShort },
       ]} />
 
@@ -69,7 +69,7 @@ const VilleReferencementSeo = () => {
                 Agence SEO {city.description}
               </span>
               <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-                {`Référencement SEO local pour les artisans et TPE de ${city.nameShort}`}
+                {`Référencement SEO et GEO local pour les artisans et TPE de ${city.nameShort}`}
               </h1>
               <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
                 {content?.seoIntro || `Votre entreprise ${city.description} mérite d'être visible sur Google. Notre agence SEO optimise votre site pour attirer des clients qualifiés et développer votre activité grâce au référencement naturel.`}
@@ -281,7 +281,7 @@ const VilleReferencementSeo = () => {
       {nearCities.length > 0 && (
         <SectionWrapper>
           <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">
-            Référencement SEO près de {city.nameShort}
+            Référencement SEO et GEO près de {city.nameShort}
           </h2>
           <p className="text-center text-muted-foreground mb-8">
             Notre agence SEO intervient également dans les villes voisines.
