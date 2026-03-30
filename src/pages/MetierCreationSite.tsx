@@ -155,10 +155,10 @@ const MetierCreationSite = () => {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-              {(trade.slug === "expert-comptable" || trade.slug === "plombier") ? (
+              {{"expert-comptable": metierComptable, "plombier": metierPlombier, "electricien": metierElectricien}[trade.slug] ? (
                 <div className="relative">
                   <div className="absolute -inset-3 rounded-3xl gradient-miami opacity-15 blur-2xl" />
-                  <img src={trade.slug === "plombier" ? metierPlombier : metierComptable} alt={`${trade.name} - création site web professionnel`} className="relative w-full max-w-lg rounded-2xl shadow-2xl" />
+                  <img src={{"expert-comptable": metierComptable, "plombier": metierPlombier, "electricien": metierElectricien}[trade.slug]} alt={`${trade.name} - création site web professionnel`} className="relative w-full max-w-lg rounded-2xl shadow-2xl" />
                 </div>
               ) : (
                 <div className="rounded-2xl bg-card p-8 shadow-card text-center max-w-sm">
