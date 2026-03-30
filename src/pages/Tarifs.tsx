@@ -228,7 +228,7 @@ const Tarifs = () => (
             </Link>{" "}
             au{" "}
             <Link to="/referencement-seo" className="font-semibold text-primary hover:underline">
-              référencement SEO
+              référencement SEO et GEO
             </Link>
             , est pensée pour générer un retour sur investissement concret.
           </p>
