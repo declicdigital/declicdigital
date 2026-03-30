@@ -344,6 +344,8 @@ const ReferencementSeo = () => {
         </div>
       </SectionWrapper>
 
+      <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+
       {/* 05 - Mythes */}
       <SectionWrapper id="idees-recues">
         <div className="mx-auto max-w-3xl space-y-8">
@@ -522,7 +524,6 @@ const ReferencementSeo = () => {
         </div>
       </SectionWrapper>
 
-      <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
       <LocationSection />
     </PageLayout>
   );
