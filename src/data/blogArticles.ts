@@ -666,7 +666,7 @@ Vous souhaitez d'abord savoir comment votre site actuel se positionne sur Google
     `,
   },
   {
-    slug: "generer-clients-site-web-independant",
+    slug: "comment-generer-clients-site-web-independant",
     title: "Comment générer des clients avec son site web quand on est indépendant ?",
     metaTitle: "Générer des clients avec son site web — Guide indépendant",
     metaDescription: "Votre site ne génère aucun lead ? Découvrez comment transformer votre site en machine à clients pour les indépendants et TPE. Conseils concrets.",
