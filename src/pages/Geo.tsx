@@ -314,7 +314,16 @@ const Geo = () => {
         </div>
       </SectionWrapper>
 
-      {/* CTA mid */}
+      {/* Image break */}
+      <SectionWrapper>
+        <div className="mx-auto max-w-4xl flex justify-center">
+          <div className="relative">
+            <div className="absolute -inset-4 rounded-3xl gradient-miami opacity-15 blur-2xl" />
+            <img src={geoWorkspace} alt="Espace de travail design et optimisation digitale" className="relative w-full max-w-2xl rounded-2xl shadow-2xl" />
+          </div>
+        </div>
+      </SectionWrapper>
+
       <section className="gradient-miami py-14">
         <div className="container text-center">
           <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Vous voulez être cité par les IA ?</h2>
