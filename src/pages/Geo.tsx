@@ -314,12 +314,24 @@ const Geo = () => {
         </div>
       </SectionWrapper>
 
-      {/* Image break */}
+      {/* Image + texte */}
       <SectionWrapper>
-        <div className="mx-auto max-w-4xl flex justify-center">
+        <div className="mx-auto max-w-5xl grid items-center gap-10 lg:grid-cols-2">
           <div className="relative">
-            <div className="absolute -inset-4 rounded-3xl gradient-miami opacity-15 blur-2xl" />
-            <img src={geoWorkspace} alt="Espace de travail design et optimisation digitale" className="relative w-full max-w-2xl rounded-2xl shadow-2xl" />
+            <div className="absolute -inset-3 rounded-3xl gradient-miami opacity-15 blur-2xl" />
+            <img src={geoWorkspace} alt="Espace de travail design et optimisation digitale" className="relative w-full rounded-2xl shadow-2xl" />
+          </div>
+          <div className="space-y-5">
+            <h2 className="text-3xl font-extrabold md:text-4xl">Pourquoi le GEO est un avantage concurrentiel pour les TPE</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              Les grandes entreprises investissent des millions dans le SEO classique. Mais le GEO change la donne : les IA génératives ne cherchent pas la plus grosse marque, elles cherchent la <strong className="text-foreground">réponse la plus pertinente</strong>.
+            </p>
+            <p className="text-muted-foreground leading-relaxed">
+              Un artisan qui documente ses techniques, un consultant qui partage son expertise, une TPE qui répond avec précision aux questions de ses clients - c'est exactement ce que ChatGPT, Gemini et Perplexity mettent en avant.
+            </p>
+            <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+              <Link to="/contact">Discuter de votre stratégie GEO</Link>
+            </Button>
           </div>
         </div>
       </SectionWrapper>
