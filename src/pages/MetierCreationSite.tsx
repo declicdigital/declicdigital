@@ -9,6 +9,7 @@ import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import MapEmbed from "@/components/MapEmbed";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 import metierComptable from "@/assets/metier-expert-comptable.webp";
+import metierPlombier from "@/assets/metier-plombier.webp";
 import { getTradeBySlug, trades, tradeCategories } from "@/data/trades";
 import { tradeGuideContent } from "@/data/tradeGuideContent";
 import { Helmet } from "react-helmet-async";
@@ -153,10 +154,10 @@ const MetierCreationSite = () => {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-              {trade.slug === "expert-comptable" ? (
+              {(trade.slug === "expert-comptable" || trade.slug === "plombier") ? (
                 <div className="relative">
                   <div className="absolute -inset-3 rounded-3xl gradient-miami opacity-15 blur-2xl" />
-                  <img src={metierComptable} alt={`Expert-comptable au bureau - création site web`} className="relative w-full max-w-lg rounded-2xl shadow-2xl" />
+                  <img src={trade.slug === "plombier" ? metierPlombier : metierComptable} alt={`${trade.name} - création site web professionnel`} className="relative w-full max-w-lg rounded-2xl shadow-2xl" />
                 </div>
               ) : (
                 <div className="rounded-2xl bg-card p-8 shadow-card text-center max-w-sm">
