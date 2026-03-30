@@ -335,6 +335,8 @@ const Tarifs = () => (
 
     <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
 
+    <LocationSection />
+
     <section className="gradient-miami py-16">
       <div className="container text-center">
         <h2 className="mb-4 text-3xl font-extrabold text-white">Une question sur les tarifs ? Parlons-en.</h2>
