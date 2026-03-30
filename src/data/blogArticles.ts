@@ -7,7 +7,7 @@ import porteAvionsImg from "@/assets/porte-avions-france-libre.webp";
 import xboxImg from "@/assets/manette-xbox-carbon-black-promo.webp";
 import artisanParisImg from "@/assets/artisan-paris-site-web.webp";
 import coutSiteImg from "@/assets/cout-creation-site-web-tpe.jpg";
-import genererClientsImg from "@/assets/generer-clients-site-web-independant.jpg";
+import genererClientsImg from "@/assets/generer-clients-site-web-independant.webp";
 
 export interface BlogArticle {
   slug: string;
@@ -666,7 +666,7 @@ Vous souhaitez d'abord savoir comment votre site actuel se positionne sur Google
     `,
   },
   {
-    slug: "generer-clients-site-web-independant",
+    slug: "comment-generer-clients-site-web-independant",
     title: "Comment générer des clients avec son site web quand on est indépendant ?",
     metaTitle: "Générer des clients avec son site web — Guide indépendant",
     metaDescription: "Votre site ne génère aucun lead ? Découvrez comment transformer votre site en machine à clients pour les indépendants et TPE. Conseils concrets.",
