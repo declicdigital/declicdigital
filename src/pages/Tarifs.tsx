@@ -241,23 +241,12 @@ const Tarifs = () => (
     </section>
 
     <SectionWrapper>
-      <div className="mx-auto max-w-5xl space-y-12">
-        <div>
-          <h2 className="mb-6 text-center text-2xl font-extrabold md:text-3xl">
-            Formules création de site internet pour TPE et artisans
-          </h2>
-          <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {creationPlans.map((plan, i) => renderPlanCard(plan, i))}
-          </div>
-        </div>
-
-        <div>
-          <h2 className="mb-6 text-center text-2xl font-extrabold md:text-3xl">
-            Formules référencement SEO mensuel
-          </h2>
-          <div className="mx-auto grid max-w-4xl gap-6 md:grid-cols-2">
-            {seoPlans.map((plan, i) => renderPlanCard(plan, i))}
-          </div>
+      <div className="mx-auto max-w-6xl">
+        <h2 className="mb-8 text-center text-2xl font-extrabold md:text-3xl">
+          Nos formules création de site et référencement SEO
+        </h2>
+        <div className="mx-auto grid max-w-6xl gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {plans.map((plan, i) => renderPlanCard(plan, i))}
         </div>
       </div>
 
