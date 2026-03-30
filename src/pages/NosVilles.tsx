@@ -85,7 +85,7 @@ const NosVilles = () => (
         Hauts-de-Seine (92)
       </h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-        Nous accompagnons les entreprises des Hauts-de-Seine pour développer leur visibilité en ligne avec des sites web performants et un référencement SEO ciblé.
+        Nous accompagnons les entreprises des Hauts-de-Seine pour développer leur visibilité en ligne avec des sites web performants et un référencement SEO et GEO ciblé.
       </p>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {hdsCities.map((city, i) => (
