@@ -39,6 +39,7 @@ const MetierCreationSite = lazy(() => import("./pages/MetierCreationSite"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite"));
 const FormulaireBrief = lazy(() => import("./pages/FormulaireBrief"));
+const Geo = lazy(() => import("./pages/Geo"));
 
 const queryClient = new QueryClient();
 
