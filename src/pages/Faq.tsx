@@ -80,7 +80,7 @@ const Faq = () => {
           mainEntity: faqSchemaItems.slice(0, 15)
         })}</script>
       </Helmet>
-      <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "FAQ" }]} />
+      <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Qui sommes-nous", href: "/qui-sommes-nous" }, { label: "FAQ" }]} />
 
       {/* Hero sans image */}
       <section className="gradient-hero py-16 md:py-24">

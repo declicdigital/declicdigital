@@ -42,7 +42,7 @@ const Realisations = () => (
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/realisations" />
     </Helmet>
-    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Réalisations" }]} />
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Création de site web", href: "/creation-site-web" }, { label: "Réalisations" }]} />
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container text-center">

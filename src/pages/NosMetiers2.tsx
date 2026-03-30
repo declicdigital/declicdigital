@@ -15,7 +15,7 @@ const NosMetiers = () => (
       <meta name="robots" content="index, follow" />
       <link rel="canonical" href="https://declicdigital.net/nos-metiers" />
     </Helmet>
-    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Nos métiers" }]} />
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Création de site web", href: "/creation-site-web" }, { label: "Nos métiers" }]} />
 
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">

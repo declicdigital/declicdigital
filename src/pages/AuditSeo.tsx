@@ -20,7 +20,7 @@ const AuditSeo = () => (
       <link rel="canonical" href="https://declicdigital.net/audit-seo-gratuit" />
       <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"Service",serviceType:"Audit SEO gratuit",provider:{"@type":"LocalBusiness",name:"Déclic Digital",url:"https://declicdigital.net"},areaServed:"Île-de-France"})}</script>
     </Helmet>
-    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Audit SEO gratuit" }]} />
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Référencement SEO", href: "/referencement-seo" }, { label: "Audit SEO gratuit" }]} />
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">
