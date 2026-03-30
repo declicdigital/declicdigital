@@ -159,7 +159,7 @@ const Geo = () => {
       </section>
 
       {/* Stats strip */}
-      <section className="bg-primary/90 py-10">
+      <section className="bg-[hsl(263,36%,18%)] py-10">
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((s, i) => (
@@ -262,7 +262,7 @@ const Geo = () => {
               </div>
             ))}
           </div>
-          <div className="relative rounded-2xl bg-primary/90 p-8 md:p-10 overflow-hidden">
+          <div className="relative rounded-2xl bg-[hsl(263,36%,18%)] p-8 md:p-10 overflow-hidden">
             <span className="absolute -top-4 left-6 text-8xl font-extrabold text-primary/20 leading-none select-none">"</span>
             <p className="relative text-lg md:text-xl text-white/90 italic leading-relaxed mb-4">
               Dans cinq ans, les entreprises qui auront investi dans le GEO aujourd'hui domineront leur secteur, exactement comme celles qui ont fait du SEO en 2010 dominent aujourd'hui les résultats Google.
@@ -350,7 +350,7 @@ const Geo = () => {
           <div className="overflow-x-auto rounded-2xl border bg-background shadow-card">
             <table className="w-full text-sm">
               <thead>
-                <tr className="bg-primary/90 text-white">
+                <tr className="bg-[hsl(263,36%,18%)] text-white">
                   <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider">Action</th>
                   <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider">Impact GEO</th>
                   <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider">Difficulté</th>
