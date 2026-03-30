@@ -134,7 +134,7 @@ const Contact = () => (
           Pour une TPE ou un indépendant, un site web bien conçu est un investissement rentable. Il vous permet d'être trouvé par vos clients potentiels sur Google, de présenter vos services de manière professionnelle et de générer des demandes de devis automatiquement. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Chez Déclic Digital, nous comprenons les contraintes des petites entreprises. C'est pourquoi nous proposons des solutions accessibles, avec des explications simples et un accompagnement humain à chaque étape. Du premier échange à la mise en ligne, en passant par le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>, nous sommes à vos côtés pour faire de votre présence en ligne un véritable levier de croissance.
+          Chez Déclic Digital, nous comprenons les contraintes des petites entreprises. C'est pourquoi nous proposons des solutions accessibles, avec des explications simples et un accompagnement humain à chaque étape. Du premier échange à la mise en ligne, en passant par le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO et GEO</Link>, nous sommes à vos côtés pour faire de votre présence en ligne un véritable levier de croissance.
         </p>
       </div>
     </SectionWrapper>
