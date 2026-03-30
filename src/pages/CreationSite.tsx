@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
+import LocationSection from "@/components/LocationSection";
 import { motion } from "framer-motion";
 import { Monitor, Smartphone, TrendingUp, Zap, Building2, User, Wrench, ShoppingCart, CheckCircle, Search, Shield, Clock } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -205,6 +206,8 @@ const CreationSite = () => (
 
     {/* Avis clients */}
     <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+
+    <LocationSection />
 
     {/* CTA */}
     <section className="gradient-miami py-16">

@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Check, Star, AlertTriangle } from "lucide-react";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
+import LocationSection from "@/components/LocationSection";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
@@ -333,6 +334,8 @@ const Tarifs = () => (
     </SectionWrapper>
 
     <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+
+    <LocationSection />
 
     <section className="gradient-miami py-16">
       <div className="container text-center">
