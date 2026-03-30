@@ -110,7 +110,7 @@ const NosVilles = () => (
                 to={`/referencement-seo/${city.slug}`}
                 className="rounded-full bg-accent/10 px-3 py-1.5 text-xs font-semibold text-accent hover:bg-accent/20 transition-colors"
               >
-                SEO
+                SEO et GEO
               </Link>
             </div>
           </motion.div>
