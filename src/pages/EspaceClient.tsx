@@ -230,7 +230,7 @@ const EspaceClient = () => {
           <img
             src={logoImg}
             alt="Declic Digital"
-            className="h-32 md:h-36 cursor-pointer -my-2"
+            className="h-14 md:h-16 w-auto object-contain cursor-pointer"
             onClick={() => navigate("/espace-client")}
           />
           <div className="flex items-center gap-3">
