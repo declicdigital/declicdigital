@@ -151,6 +151,9 @@ const Geo = () => {
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
               Generative Engine Optimization - la stratégie qui permet à votre entreprise d'être citée par ChatGPT, Gemini et Perplexity. Indispensable pour les TPE, artisans et indépendants.
             </p>
+            <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+              <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+            </Button>
           </motion.div>
         </div>
       </section>
