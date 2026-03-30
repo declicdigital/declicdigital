@@ -304,6 +304,22 @@ const Geo = () => {
         </div>
       </SectionWrapper>
 
+      {/* CTA mid */}
+      <section className="gradient-miami py-14">
+        <div className="container text-center">
+          <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Vous voulez être cité par les IA ?</h2>
+          <p className="mb-6 text-white/80 max-w-xl mx-auto">Nos experts analysent votre visibilité dans ChatGPT, Gemini et Perplexity et vous donnent un plan d'action concret.</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button asChild size="lg" className="rounded-full bg-white px-8 font-semibold text-foreground shadow-lg hover:bg-white/90">
+              <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
+            </Button>
+            <Link to="/contact" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
+              Nous contacter
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* 05 - Méthode */}
       <SectionWrapper id="section-5">
         <div className="mx-auto max-w-3xl space-y-8">
