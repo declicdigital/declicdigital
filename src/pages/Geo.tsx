@@ -145,19 +145,12 @@ const Geo = () => {
       <section className="gradient-hero py-16 md:py-24">
         <div className="container">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="mx-auto max-w-3xl text-center">
-            <span className="mb-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-primary">
-              <span className="h-1.5 w-1.5 rounded-full bg-primary animate-pulse" /> Nouveau
-            </span>
             <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
               Le <span className="gradient-text">GEO</span> : quand l'IA devient votre meilleur commercial
             </h1>
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
               Generative Engine Optimization - la stratégie qui permet à votre entreprise d'être citée par ChatGPT, Gemini et Perplexity. Indispensable pour les TPE, artisans et indépendants.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-muted-foreground">
-              <span>⏱ Lecture : 12 min</span>
-              <span>👁 Niveau : débutant à intermédiaire</span>
-            </div>
           </motion.div>
         </div>
       </section>
