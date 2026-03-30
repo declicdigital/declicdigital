@@ -3,6 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Check, Star, AlertTriangle } from "lucide-react";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
+import LocationSection from "@/components/LocationSection";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
