@@ -200,8 +200,8 @@ const Geo = () => {
             Imaginez qu'un client potentiel tape dans ChatGPT : <em>"Quel est le meilleur plombier chauffagiste à Lyon ?"</em> ou <em>"Quelle agence web recommandes-tu pour une TPE ?"</em>. Le GEO est ce qui détermine si votre nom apparaît dans la réponse… ou si c'est celui de votre concurrent. Découvrez comment nous intégrons le GEO dans <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">notre offre de référencement SEO et GEO</Link>.
           </p>
           <div className="rounded-2xl border border-amber-300/30 bg-amber-50/50 p-5">
-            <p className="text-sm font-bold text-amber-700 mb-2">⚡ Pourquoi ce terme est-il encore méconnu ?</p>
-            <p className="text-sm text-muted-foreground">Le GEO est une discipline émergente - le terme a été formalisé par des chercheurs de Princeton, IIT Delhi et Georgia Tech en 2023. Il est encore peu maîtrisé par les agences et consultants traditionnels, ce qui représente une <strong>opportunité majeure</strong> pour les entreprises qui s'y mettent dès maintenant.</p>
+            <p className="font-bold text-amber-700 mb-2">⚡ Pourquoi ce terme est-il encore méconnu ?</p>
+            <p className="text-muted-foreground">Le GEO est une discipline émergente - le terme a été formalisé par des chercheurs de Princeton, IIT Delhi et Georgia Tech en 2023. Il est encore peu maîtrisé par les agences et consultants traditionnels, ce qui représente une <strong>opportunité majeure</strong> pour les entreprises qui s'y mettent dès maintenant.</p>
           </div>
           <p className="text-muted-foreground leading-relaxed">
             On retrouve également ce concept sous d'autres appellations : <strong>AEO</strong> (Answer Engine Optimization), <strong>LLMO</strong> (Large Language Model Optimization), ou encore <strong>AI SEO</strong>. Ces termes recouvrent la même réalité : adapter sa présence digitale aux moteurs de recherche génératifs. Pour approfondir, consultez <a href="https://searchengineland.com/generative-engine-optimization-geo-guide-448582" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">le guide Search Engine Land sur le GEO</a>.
@@ -219,7 +219,7 @@ const Geo = () => {
             <div className="rounded-2xl border bg-background p-6 shadow-card">
               <span className="inline-block rounded-full bg-muted px-3 py-1 text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">SEO classique</span>
               <h3 className="text-xl font-bold mb-4">Google Search</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
+              <ul className="space-y-3 text-muted-foreground">
                 {["Classement dans une liste de liens", "Optimisation pour des mots-clés", "Backlinks et autorité de domaine", "L'utilisateur choisit un lien à cliquer", "Position 1 à 10 dans les SERP", "Mesure : trafic organique, CTR"].map((item, i) => (
                   <li key={i} className="flex gap-2"><span className="text-muted-foreground/50 shrink-0">→</span>{item}</li>
                 ))}
@@ -228,7 +228,7 @@ const Geo = () => {
             <div className="rounded-2xl border-2 border-primary bg-primary/5 p-6 shadow-card">
               <span className="inline-block rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-white mb-4">GEO nouveau</span>
               <h3 className="text-xl font-bold mb-4">IA génératives</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
+              <ul className="space-y-3 text-muted-foreground">
                 {["Mention dans une réponse directe", "Optimisation pour des questions naturelles", "Autorité thématique et citations", "L'IA sélectionne et synthétise les sources", "Être cité ou non cité", "Mesure : mentions, trafic référent IA"].map((item, i) => (
                   <li key={i} className="flex gap-2"><span className="text-primary shrink-0">→</span>{item}</li>
                 ))}
@@ -236,8 +236,8 @@ const Geo = () => {
             </div>
           </div>
           <div className="rounded-2xl border border-green-300/30 bg-green-50/50 p-5">
-            <p className="text-sm font-bold text-green-700 mb-2">✅ La bonne nouvelle</p>
-            <p className="text-sm text-muted-foreground">Les fondements restent communs : un contenu de qualité, une expertise réelle, une structure claire et une présence cohérente sur le web favorisent à la fois le SEO et le GEO. Si vous avez déjà un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">bon site web</Link>, vous avez déjà les bases.</p>
+            <p className="font-bold text-green-700 mb-2">✅ La bonne nouvelle</p>
+            <p className="text-muted-foreground">Les fondements restent communs : un contenu de qualité, une expertise réelle, une structure claire et une présence cohérente sur le web favorisent à la fois le SEO et le GEO. Si vous avez déjà un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">bon site web</Link>, vous avez déjà les bases.</p>
           </div>
         </div>
       </SectionWrapper>
@@ -255,7 +255,7 @@ const Geo = () => {
                   <c.icon size={22} />
                 </div>
                 <h3 className="mb-2 font-bold text-lg">{c.title}</h3>
-                <p className="text-sm text-muted-foreground">{c.desc}</p>
+                <p className="text-muted-foreground">{c.desc}</p>
               </div>
             ))}
           </div>
@@ -264,7 +264,7 @@ const Geo = () => {
             <p className="relative text-lg md:text-xl text-white/90 italic leading-relaxed mb-4">
               Dans cinq ans, les entreprises qui auront investi dans le GEO aujourd'hui domineront leur secteur, exactement comme celles qui ont fait du SEO en 2010 dominent aujourd'hui les résultats Google.
             </p>
-            <p className="text-sm text-white/40">Analyse de tendance - Secteur du marketing digital, 2025</p>
+            <p className="text-white/40">Analyse de tendance - Secteur du marketing digital, 2025</p>
           </div>
         </div>
       </SectionWrapper>
@@ -282,10 +282,10 @@ const Geo = () => {
                   <a.icon size={22} />
                 </div>
                 <h3 className="font-bold text-lg mb-2">{a.title}</h3>
-                <p className="text-sm text-muted-foreground mb-4">{a.desc}</p>
+                <p className="text-muted-foreground mb-4">{a.desc}</p>
                 <ul className="space-y-2">
                   {a.items.map((item, j) => (
-                    <li key={j} className="flex gap-2 text-sm text-muted-foreground">
+                    <li key={j} className="flex gap-2 text-muted-foreground">
                       <CheckCircle2 size={14} className="text-primary shrink-0 mt-0.5" />
                       {item}
                     </li>
@@ -295,8 +295,8 @@ const Geo = () => {
             ))}
           </div>
           <div className="rounded-2xl border border-violet-300/30 bg-violet-50/50 p-5">
-            <p className="text-sm font-bold text-violet-700 mb-2">🔑 L'avantage des petites structures</p>
-            <p className="text-sm text-muted-foreground">Les IA génératives sont entraînées à détecter l'expertise réelle et la précision des réponses. Un artisan qui explique en détail son processus, un indépendant qui partage son expérience concrète, une TPE qui répond avec précision aux questions de ses clients - voilà exactement ce que les algorithmes d'IA cherchent à mettre en avant. Découvrez <Link to="/nos-metiers" className="text-primary font-semibold hover:underline">nos solutions par métier</Link>.</p>
+            <p className="font-bold text-violet-700 mb-2">🔑 L'avantage des petites structures</p>
+            <p className="text-muted-foreground">Les IA génératives sont entraînées à détecter l'expertise réelle et la précision des réponses. Un artisan qui explique en détail son processus, un indépendant qui partage son expérience concrète, une TPE qui répond avec précision aux questions de ses clients - voilà exactement ce que les algorithmes d'IA cherchent à mettre en avant. Découvrez <Link to="/nos-metiers" className="text-primary font-semibold hover:underline">nos solutions par métier</Link>.</p>
           </div>
         </div>
       </SectionWrapper>
@@ -315,7 +315,7 @@ const Geo = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-lg mb-2">{s.title}</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                  <p className="text-muted-foreground leading-relaxed">{s.desc}</p>
                 </div>
               </div>
             ))}
@@ -363,7 +363,7 @@ const Geo = () => {
             {checklist.map((item, i) => (
               <li key={i} className="flex gap-4 py-4 border-b border-border last:border-0">
                 <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-green-100 text-green-700 text-xs font-bold mt-0.5">✓</div>
-                <p className="text-sm text-muted-foreground leading-relaxed">{item}</p>
+                <p className="text-muted-foreground leading-relaxed">{item}</p>
               </li>
             ))}
           </ul>
@@ -439,8 +439,8 @@ const Geo = () => {
           </div>
 
           <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
-            <p className="text-sm font-bold text-primary mb-2">📊 Stratégie de ciblage des mots-clés</p>
-            <p className="text-sm text-muted-foreground">Cette page utilise une stratégie de <strong>cluster thématique</strong> centré sur le GEO. Le mot-clé principal apparaît dans le titre H1, la meta description, les titres H2, les 100 premiers mots du contenu et dans les balises Schema. Les mots-clés secondaires sont répartis naturellement dans les titres H3 et le corps du texte pour éviter le keyword stuffing et maximiser la pertinence sémantique globale - un signal fort pour les algorithmes IA.</p>
+            <p className="font-bold text-primary mb-2">📊 Stratégie de ciblage des mots-clés</p>
+            <p className="text-muted-foreground">Cette page utilise une stratégie de <strong>cluster thématique</strong> centré sur le GEO. Le mot-clé principal apparaît dans le titre H1, la meta description, les titres H2, les 100 premiers mots du contenu et dans les balises Schema. Les mots-clés secondaires sont répartis naturellement dans les titres H3 et le corps du texte pour éviter le keyword stuffing et maximiser la pertinence sémantique globale - un signal fort pour les algorithmes IA.</p>
           </div>
         </div>
       </SectionWrapper>
