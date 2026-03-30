@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import MapEmbed from "@/components/MapEmbed";
 import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Link } from "react-router-dom";
