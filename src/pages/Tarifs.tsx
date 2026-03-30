@@ -45,7 +45,7 @@ const plans: {
     unit: "€/mois",
     description: "La solution complète pour être visible sur Google et attirer des clients.",
     highlighted: true,
-    type: "seo",
+    type: "creation",
     features: [
       "Jusqu'à 8 pages",
       "Design professionnel personnalisé",
