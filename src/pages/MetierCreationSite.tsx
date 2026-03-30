@@ -8,6 +8,7 @@ import PageBreadcrumb from "@/components/PageBreadcrumb";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import MapEmbed from "@/components/MapEmbed";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
+import metierComptable from "@/assets/metier-expert-comptable.webp";
 import { getTradeBySlug, trades, tradeCategories } from "@/data/trades";
 import { tradeGuideContent } from "@/data/tradeGuideContent";
 import { Helmet } from "react-helmet-async";
