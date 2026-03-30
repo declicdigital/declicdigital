@@ -24,7 +24,7 @@ const ReferencementSeo = () => (
     {/* Breadcrumb */}
     <PageBreadcrumb items={[
       { label: "Accueil", href: "/" },
-      { label: "Référencement SEO" },
+      { label: "Référencement SEO et GEO" },
     ]} />
 
     {/* Hero */}
