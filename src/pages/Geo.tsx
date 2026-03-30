@@ -162,7 +162,7 @@ const Geo = () => {
             {stats.map((s, i) => (
               <div key={i}>
                 <span className="block text-3xl md:text-4xl font-extrabold gradient-text">{s.num}</span>
-                <p className="mt-2 text-xs md:text-sm text-white/50">{s.label}</p>
+                <p className="mt-2 text-xs md:text-sm text-white/60">{s.label}</p>
               </div>
             ))}
           </div>
