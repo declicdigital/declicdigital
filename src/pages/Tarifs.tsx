@@ -39,6 +39,26 @@ const plans: {
     ],
   },
   {
+    name: "Site Vitrine + SEO",
+    monthly: "75",
+    setup: "990",
+    unit: "€/mois",
+    description: "La solution complète pour être visible sur Google et attirer des clients.",
+    highlighted: true,
+    type: "seo",
+    features: [
+      "Jusqu'à 8 pages",
+      "Design professionnel personnalisé",
+      "Responsive mobile et tablette",
+      "Optimisation SEO complète",
+      "Recherche de mots clés",
+      "Rédaction de contenu optimisé",
+      "Balises meta et structure Hn",
+      "Google Search Console configuré",
+      "Google Analytics configuré",
+    ],
+  },
+  {
     name: "Site Avancé",
     monthly: "80",
     setup: "1 500",
@@ -58,26 +78,6 @@ const plans: {
       "Google Search Console + Analytics",
       "Optimisation pour les IA",
       "Support prioritaire",
-    ],
-  },
-  {
-    name: "Site Vitrine + SEO",
-    monthly: "75",
-    setup: "990",
-    unit: "€/mois",
-    description: "La solution complète pour être visible sur Google et attirer des clients.",
-    highlighted: true,
-    type: "seo",
-    features: [
-      "Jusqu'à 8 pages",
-      "Design professionnel personnalisé",
-      "Responsive mobile et tablette",
-      "Optimisation SEO complète",
-      "Recherche de mots clés",
-      "Rédaction de contenu optimisé",
-      "Balises meta et structure Hn",
-      "Google Search Console configuré",
-      "Google Analytics configuré",
     ],
   },
   {
@@ -211,7 +211,7 @@ const Tarifs = () => (
       </script>
     </Helmet>
 
-    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Tarifs" }]} />
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Création de site web", href: "/creation-site-web" }, { label: "Tarifs" }]} />
 
     <section className="gradient-hero py-16 md:py-24">
       <div className="container text-center">
@@ -233,8 +233,8 @@ const Tarifs = () => (
             </Link>
             , est pensée pour générer un retour sur investissement concret.
           </p>
-          <div className="mt-6">
-            <Button asChild size="lg" className="rounded-full gradient-miami px-8 font-semibold text-white shadow-lg hover:opacity-90">
+          <div className="mt-8">
+            <Button asChild className="rounded-full gradient-miami px-10 py-4 text-lg font-bold text-white shadow-xl hover:opacity-90 h-auto opacity-90 saturate-[0.85]">
               <Link to="/contact">Devis gratuit</Link>
             </Button>
           </div>

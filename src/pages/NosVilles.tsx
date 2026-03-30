@@ -13,7 +13,7 @@ const hdsCities = cities.filter((c) => c.region === "hauts-de-seine");
 
 const NosVilles = () => (
   <PageLayout>
-    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Nos villes" }]} />
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Création de site web", href: "/creation-site-web" }, { label: "Nos villes" }]} />
     <Helmet>
       <title>Agence web Paris et Hauts-de-Seine (92) | Déclic Digital par ville</title>
       <meta name="description" content="Création de site internet et SEO local à Paris et dans le 92 (Boulogne, Neuilly, Issy...). Retrouvez nos pages dédiées par ville et arrondissement." />
