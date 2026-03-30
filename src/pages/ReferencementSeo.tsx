@@ -161,7 +161,7 @@ const ReferencementSeo = () => {
       </section>
 
       {/* Stats strip */}
-      <section className="gradient-miami py-10">
+      <section className="bg-[hsl(263,36%,18%)] py-10">
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((s, i) => (
@@ -191,7 +191,7 @@ const ReferencementSeo = () => {
           <div className="space-y-0">
             {pillars.map((p, i) => (
               <div key={i} className="flex border-b border-border last:border-0">
-                <div className="flex h-auto w-16 shrink-0 items-center justify-center gradient-miami text-white font-extrabold text-lg">
+                <div className="flex h-auto w-16 shrink-0 items-center justify-center bg-[hsl(263,36%,18%)] text-white font-extrabold text-lg">
                   {p.num}
                 </div>
                 <div className="p-5">
@@ -218,7 +218,7 @@ const ReferencementSeo = () => {
           <div className="space-y-0">
             {benefits.map((b, i) => (
               <div key={i} className="flex border-b border-border last:border-0">
-                <div className="flex h-auto w-16 shrink-0 items-center justify-center gradient-miami text-white font-extrabold text-sm">
+                <div className="flex h-auto w-16 shrink-0 items-center justify-center bg-[hsl(263,36%,18%)] text-white font-extrabold text-sm">
                   {b.num}
                 </div>
                 <div className="p-5">
@@ -237,7 +237,7 @@ const ReferencementSeo = () => {
       </SectionWrapper>
 
       {/* CTA 1 */}
-      <section className="gradient-miami py-14">
+      <section className="bg-[hsl(263,36%,18%)] py-14">
         <div className="container text-center">
           <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Prêt à attirer vos premiers clients via Google ?</h2>
           <p className="mb-6 text-white/80 max-w-xl mx-auto">Nos experts analysent votre site et identifient les quick wins SEO pour votre activité.</p>
@@ -261,7 +261,7 @@ const ReferencementSeo = () => {
           <div className="overflow-x-auto rounded-2xl border bg-background shadow-card">
             <table className="w-full">
               <thead>
-                <tr className="gradient-miami text-white">
+                <tr className="bg-[hsl(263,36%,18%)] text-white">
                   <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider">Critère</th>
                   <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider bg-primary/80">SEO (naturel)</th>
                   <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider">Google Ads</th>
@@ -296,7 +296,7 @@ const ReferencementSeo = () => {
           <div className="grid gap-6 md:grid-cols-3">
             {profiles.map((p, i) => (
               <div key={i} className="rounded-2xl bg-background p-6 shadow-card border-t-4 border-primary">
-                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl gradient-miami text-white">
+                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[hsl(263,36%,18%)] text-white">
                   <p.icon size={22} />
                 </div>
                 <h3 className="font-bold text-lg mb-1">{p.title}</h3>
@@ -340,7 +340,7 @@ const ReferencementSeo = () => {
       </SectionWrapper>
 
       {/* CTA 2 */}
-      <section className="gradient-miami py-14">
+      <section className="bg-[hsl(263,36%,18%)] py-14">
         <div className="container text-center">
           <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Vous vous reconnaissez dans ces freins ?</h2>
           <p className="mb-6 text-white/80 max-w-xl mx-auto">On démystifie le SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
@@ -394,7 +394,7 @@ const ReferencementSeo = () => {
       </SectionWrapper>
 
       {/* CTA 3 */}
-      <section className="gradient-miami py-14">
+      <section className="bg-[hsl(263,36%,18%)] py-14">
         <div className="container text-center">
           <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Votre SEO peut travailler pour vous dès aujourd'hui</h2>
           <p className="mb-6 text-white/80 max-w-xl mx-auto">Nos experts analysent votre site, identifient les quick wins SEO et construisent une stratégie adaptée à votre activité, votre zone et votre budget.</p>
