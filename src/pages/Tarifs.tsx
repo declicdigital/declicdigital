@@ -312,7 +312,7 @@ const Tarifs = () => (
             Création de site web
           </Link>
           <Link to="/referencement-seo" className="rounded-full border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary">
-            Référencement SEO
+            Référencement SEO et GEO
           </Link>
           <Link to="/audit-seo-gratuit" className="rounded-full border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary">
             Audit SEO gratuit

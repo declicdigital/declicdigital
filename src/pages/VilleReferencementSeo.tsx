@@ -281,7 +281,7 @@ const VilleReferencementSeo = () => {
       {nearCities.length > 0 && (
         <SectionWrapper>
           <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">
-            Référencement SEO près de {city.nameShort}
+            Référencement SEO et GEO près de {city.nameShort}
           </h2>
           <p className="text-center text-muted-foreground mb-8">
             Notre agence SEO intervient également dans les villes voisines.

@@ -154,7 +154,7 @@ const ReferencementSeo = () => (
         Combien de temps avant de voir des résultats SEO ?
       </h2>
       <p className="text-center text-muted-foreground mb-8">
-        Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold hover:underline">référencement SEO local</Link> à Paris et dans les Hauts-de-Seine.
+        Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold hover:underline">référencement SEO et GEO local</Link> à Paris et dans les Hauts-de-Seine.
       </p>
       <div className="flex flex-wrap justify-center gap-3">
         {cities.slice(0, 12).map((c) => (

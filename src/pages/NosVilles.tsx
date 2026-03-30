@@ -146,7 +146,7 @@ const NosVilles = () => (
             <Link to="/creation-site-web">Création de site web</Link>
           </Button>
           <Link to="/referencement-seo" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
-            Référencement SEO
+            Référencement SEO et GEO
           </Link>
           <Link to="/audit-seo-gratuit" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
             Audit SEO gratuit
