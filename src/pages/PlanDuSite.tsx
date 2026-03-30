@@ -10,7 +10,7 @@ import { blogArticles } from "@/data/blogArticles";
 const links = [
   { label: "Accueil", to: "/" },
   { label: "Création de site web", to: "/creation-site-web" },
-  { label: "Référencement SEO", to: "/referencement-seo" },
+  { label: "Référencement SEO et GEO", to: "/referencement-seo" },
   { label: "Audit SEO gratuit", to: "/audit-seo-gratuit" },
   { label: "Nos tarifs", to: "/tarifs" },
   { label: "Réalisations", to: "/realisations" },
