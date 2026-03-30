@@ -117,8 +117,6 @@ const plans: {
   },
 ];
 
-const creationPlans = plans.filter((plan) => plan.type === "creation");
-const seoPlans = plans.filter((plan) => plan.type === "seo");
 
 const renderPlanCard = (plan: (typeof plans)[number], index: number) => (
   <motion.div
