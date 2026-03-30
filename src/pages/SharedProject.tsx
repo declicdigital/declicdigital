@@ -265,7 +265,7 @@ const SharedProject = () => {
                       <div className={`flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium ${cfg.color}`}>
                         <Icon className="h-3.5 w-3.5" /> {cfg.label}
                       </div>
-                      <span className="text-sm font-medium text-foreground flex-1">{task.title}</span>
+                      <span className="text-sm font-medium text-foreground flex-1"><LinkifyText text={task.title} /></span>
                       {canMarkDone && (
                         <Button
                           variant="outline"

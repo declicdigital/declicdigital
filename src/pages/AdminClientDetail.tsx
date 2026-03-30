@@ -737,7 +737,7 @@ const AdminClientDetail = () => {
                   {tasks.filter((t) => t.status === "a_faire_dd").map((task) => (
                     <div key={task.id} className="flex items-start gap-3 p-3 rounded-lg bg-card border border-[#e91e63]/20">
                       <div className="mt-0.5 h-2 w-2 rounded-full bg-[#e91e63] shrink-0" />
-                      <p className="text-sm font-medium text-foreground">{task.title}</p>
+                      <p className="text-sm font-medium text-foreground"><LinkifyText text={task.title} /></p>
                     </div>
                   ))}
                 </CardContent>

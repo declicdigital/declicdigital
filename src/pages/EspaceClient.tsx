@@ -372,7 +372,7 @@ const EspaceClient = () => {
                               </Button>
                             </div>
                           ) : (
-                            <span className="text-sm font-medium text-foreground flex-1">{task.title}</span>
+                            <span className="text-sm font-medium text-foreground flex-1"><LinkifyText text={task.title} /></span>
                           )}
                           {!isRenamingThis && (
                             <Button
