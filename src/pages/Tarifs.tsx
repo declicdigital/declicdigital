@@ -219,7 +219,7 @@ const Tarifs = () => (
             Tarifs transparents
           </span>
           <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
-            Nos tarifs création de site web et référencement SEO pour indépendants et TPE
+            Nos tarifs création de site web et référencement SEO et GEO pour indépendants et TPE
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Des offres claires et adaptées aux budgets des TPE et indépendants. Chaque prestation, de la{" "}
