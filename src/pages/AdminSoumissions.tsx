@@ -471,7 +471,7 @@ const AdminSoumissions = () => {
       <div className="border-b border-border bg-card">
         <div className="container flex h-[4.5rem] md:h-20 items-center justify-between">
           <div className="flex items-center gap-4 -my-2">
-            <img src={logoImg} alt="Declic Digital" className="h-32 md:h-36 w-auto cursor-pointer" onClick={() => navigate("/admin/clients")} />
+            <img src={logoImg} alt="Declic Digital" className="h-14 md:h-16 w-auto object-contain cursor-pointer" onClick={() => navigate("/admin/clients")} />
             <span className="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full hidden md:inline">ADMIN</span>
           </div>
           <div className="text-right">
