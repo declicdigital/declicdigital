@@ -32,7 +32,7 @@ const NosVilles = () => (
             <span className="text-gradient">Paris et dans le 92</span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Notre agence accompagne les TPE et indépendants à Paris et dans les Hauts-de-Seine pour la création de sites internet professionnels et le référencement SEO. Découvrez nos interventions par ville.
+            Notre agence accompagne les TPE et indépendants à Paris et dans les Hauts-de-Seine pour la création de sites internet professionnels et le référencement SEO et GEO. Découvrez nos interventions par ville.
           </p>
         </motion.div>
       </div>
