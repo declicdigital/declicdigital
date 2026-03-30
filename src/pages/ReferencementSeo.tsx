@@ -35,7 +35,7 @@ const ReferencementSeo = () => (
             Référencement naturel Google (SEO) et GEO pour les TPE, artisans et indépendants à Paris
           </h1>
           <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-            Le référencement SEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour qu'il apparaisse en première page Google. Commencez par un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit gratuit</Link>.
+            Le référencement SEO et GEO est le levier le plus rentable pour attirer des clients qualifiés. Nous optimisons votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour qu'il apparaisse en première page Google et dans les réponses des IA. Commencez par un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit gratuit</Link>.
           </p>
           <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
             <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
