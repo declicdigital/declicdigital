@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 
 import { Globe, Search, BarChart3, Zap, Eye, Users, TrendingUp, ChevronRight, Monitor, Smartphone, Gauge, CheckCircle, Shield, Clock, Target, Award, MessageSquare, Phone as PhoneIcon, FileText, Rocket, Star } from "lucide-react";
 const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
+const LocationSection = lazy(() => import("@/components/LocationSection"));
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
