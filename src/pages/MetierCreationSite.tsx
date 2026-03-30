@@ -10,6 +10,7 @@ import MapEmbed from "@/components/MapEmbed";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 import metierComptable from "@/assets/metier-expert-comptable.webp";
 import metierPlombier from "@/assets/metier-plombier.webp";
+import metierElectricien from "@/assets/metier-electricien.webp";
 import { getTradeBySlug, trades, tradeCategories } from "@/data/trades";
 import { tradeGuideContent } from "@/data/tradeGuideContent";
 import { Helmet } from "react-helmet-async";
