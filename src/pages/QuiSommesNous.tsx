@@ -92,7 +92,7 @@ const QuiSommesNous = () => (
       <div className="text-center mb-10">
         <h2 className="text-3xl font-extrabold md:text-4xl">Notre mission</h2>
         <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-          Rendre la visibilité en ligne accessible à toutes les entreprises grâce à la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de sites web</Link> et le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>. Nous croyons que chaque TPE mérite un site qui attire des clients.
+          Rendre la visibilité en ligne accessible à toutes les entreprises grâce à la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de sites web</Link> et le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO et GEO</Link>. Nous croyons que chaque TPE mérite un site qui attire des clients.
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-3 max-w-4xl mx-auto">
