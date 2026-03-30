@@ -120,18 +120,7 @@ const Contact = () => (
         <h2 className="text-3xl font-extrabold md:text-4xl">Retrouvez-nous</h2>
         <p className="mt-4 text-muted-foreground">Nous intervenons <Link to="/nos-villes" className="text-primary font-semibold hover:underline">à Paris et dans le 92</Link>, en présentiel ou à distance.</p>
       </div>
-      <div className="mx-auto max-w-3xl rounded-2xl overflow-hidden shadow-card">
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2626.5!2d2.2975!3d48.8386!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e67277adc5d83b%3A0xec97d6d60f3fdc73!2sD%C3%A9clic%20Digital!5e0!3m2!1sfr!2sfr!4v1711900000000"
-          width="100%"
-          height="350"
-          style={{ border: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title="Déclic Digital - 57 rue d'Alleray 75015 Paris"
-        />
-      </div>
+      <MapEmbed />
     </SectionWrapper>
 
     {/* Contenu SEO */}
