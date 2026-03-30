@@ -219,7 +219,7 @@ const Geo = () => {
             <div className="rounded-2xl border bg-background p-6 shadow-card">
               <span className="inline-block rounded-full bg-muted px-3 py-1 text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">SEO classique</span>
               <h3 className="text-xl font-bold mb-4">Google Search</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
+              <ul className="space-y-3 text-muted-foreground">
                 {["Classement dans une liste de liens", "Optimisation pour des mots-clés", "Backlinks et autorité de domaine", "L'utilisateur choisit un lien à cliquer", "Position 1 à 10 dans les SERP", "Mesure : trafic organique, CTR"].map((item, i) => (
                   <li key={i} className="flex gap-2"><span className="text-muted-foreground/50 shrink-0">→</span>{item}</li>
                 ))}
@@ -228,7 +228,7 @@ const Geo = () => {
             <div className="rounded-2xl border-2 border-primary bg-primary/5 p-6 shadow-card">
               <span className="inline-block rounded-full bg-primary px-3 py-1 text-xs font-bold uppercase tracking-widest text-white mb-4">GEO nouveau</span>
               <h3 className="text-xl font-bold mb-4">IA génératives</h3>
-              <ul className="space-y-3 text-sm text-muted-foreground">
+              <ul className="space-y-3 text-muted-foreground">
                 {["Mention dans une réponse directe", "Optimisation pour des questions naturelles", "Autorité thématique et citations", "L'IA sélectionne et synthétise les sources", "Être cité ou non cité", "Mesure : mentions, trafic référent IA"].map((item, i) => (
                   <li key={i} className="flex gap-2"><span className="text-primary shrink-0">→</span>{item}</li>
                 ))}
@@ -285,7 +285,7 @@ const Geo = () => {
                 <p className="text-muted-foreground mb-4">{a.desc}</p>
                 <ul className="space-y-2">
                   {a.items.map((item, j) => (
-                    <li key={j} className="flex gap-2 text-sm text-muted-foreground">
+                    <li key={j} className="flex gap-2 text-muted-foreground">
                       <CheckCircle2 size={14} className="text-primary shrink-0 mt-0.5" />
                       {item}
                     </li>
