@@ -46,8 +46,8 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-lg">
       <div className="container flex h-[4.5rem] items-center justify-between md:h-20">
-        <Link to="/" className="flex h-full shrink-0 items-center overflow-hidden" onClick={() => { if (window.location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }}>
-          <img src={logo} alt="Déclic Digital" className="h-full w-auto object-contain" width={216} height={144} />
+        <Link to="/" className="flex shrink-0 items-center" onClick={() => { if (window.location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }}>
+          <img src={logo} alt="Déclic Digital" className="h-14 md:h-16 w-auto object-contain" width={160} height={88} />
         </Link>
 
         {/* Desktop nav */}
