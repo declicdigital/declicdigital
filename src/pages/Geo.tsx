@@ -12,9 +12,9 @@ import { ChevronDown, CheckCircle2, TrendingDown, MessageSquare, Zap, Target, Bu
 
 const stats = [
   { num: "58%", label: "des recherches se terminent sans clic sur Google" },
-  { num: "400M+", label: "utilisateurs hebdomadaires de ChatGPT en 2025" },
+  { num: "400M+", label: "utilisateurs hebdomadaires de ChatGPT en 2026" },
   { num: "3x", label: "plus de clics quand une IA cite votre site" },
-  { num: "2025", label: "l'année où le GEO est devenu incontournable" },
+  { num: "2026", label: "l'année où le GEO est devenu incontournable" },
 ];
 
 const urgencyCards = [
@@ -84,14 +84,14 @@ const faqItems = [
   { q: "Quelle est la différence entre SEO et GEO ?", a: "Le SEO optimise un site pour apparaître dans une liste de résultats Google. Le GEO optimise le contenu pour être sélectionné et cité dans une réponse directe générée par une IA. Le SEO mesure le classement et le trafic ; le GEO mesure les mentions et citations. Les deux sont complémentaires et partagent de nombreuses bonnes pratiques, mais le GEO nécessite des ajustements spécifiques liés aux particularités des modèles de langage." },
   { q: "Le GEO est-il utile pour une petite entreprise ou un artisan ?", a: "Oui, et c'est même l'une des meilleures opportunités actuelles pour les petites structures. Les IA génératives valorisent l'expertise précise, l'authenticité et les réponses détaillées - des atouts naturels des artisans et indépendants. De plus, la recherche locale est un cas d'usage majeur pour les IA." },
   { q: "Combien de temps faut-il pour voir des résultats en GEO ?", a: "Les premiers effets peuvent être visibles en 4 à 8 semaines pour les actions les plus directes comme la FAQ structurée ou la mise à jour de votre fiche Google Business. La construction d'une autorité thématique et d'une présence solide sur plusieurs plateformes demande 3 à 6 mois." },
-  { q: "Est-ce que le GEO remplace le SEO ?", a: "Non. Le GEO ne remplace pas le SEO, il le complète. Google reste le moteur de recherche dominant et continuer à optimiser votre site pour les moteurs traditionnels est toujours nécessaire. Une stratégie digitale complète en 2025 combine SEO, GEO et présence sur les réseaux sociaux." },
+  { q: "Est-ce que le GEO remplace le SEO ?", a: "Non. Le GEO ne remplace pas le SEO, il le complète. Google reste le moteur de recherche dominant et continuer à optimiser votre site pour les moteurs traditionnels est toujours nécessaire. Une stratégie digitale complète en 2026 combine SEO, GEO et présence sur les réseaux sociaux." },
   { q: "Comment une IA choisit-elle de citer une entreprise ou un site ?", a: "Les IA génératives sélectionnent leurs sources selon plusieurs critères : la pertinence et la précision du contenu par rapport à la question posée, l'autorité de la source, la structure et la lisibilité du contenu, la présence de données structurées (Schema.org), et la fréquence des citations de cette source par d'autres sites fiables." },
   { q: "Quel budget prévoir pour une stratégie GEO ?", a: "Le GEO peut être démarré avec un budget minimal si vous avez du temps à y consacrer. Les actions de base sont gratuites en temps de travail. Pour déléguer à un prestataire, comptez entre 500 et 2 000 euros par mois selon l'ambition de la stratégie." },
 ];
 
 const kwPrimary = ["GEO", "Generative Engine Optimization", "optimisation IA", "référencement IA", "être cité par l'IA"];
 const kwSecondary = ["TPE référencement IA", "artisan visibilité IA", "indépendant optimisation IA", "freelance GEO", "petite entreprise IA", "recommandation IA locale"];
-const kwTechnical = ["AEO", "Answer Engine Optimization", "LLMO", "AI SEO", "ChatGPT référencement", "Perplexity SEO", "Gemini visibilité", "moteur génératif", "Schema.org GEO", "stratégie digitale 2025", "visibilité intelligences artificielles", "SEO vs GEO", "données structurées IA", "autorité thématique", "contenu structuré IA"];
+const kwTechnical = ["AEO", "Answer Engine Optimization", "LLMO", "AI SEO", "ChatGPT référencement", "Perplexity SEO", "Gemini visibilité", "moteur génératif", "Schema.org GEO", "stratégie digitale 2026", "visibilité intelligences artificielles", "SEO vs GEO", "données structurées IA", "autorité thématique", "contenu structuré IA"];
 
 const difficultyClass = (d: string) => {
   if (d === "Facile") return "bg-green-100 text-green-700";
@@ -118,7 +118,7 @@ const Geo = () => {
     headline: "GEO (Generative Engine Optimization) : Le guide complet pour TPE, artisans et indépendants",
     description: "Tout comprendre sur le GEO, la nouvelle discipline d'optimisation pour les moteurs génératifs basés sur l'IA.",
     author: { "@type": "LocalBusiness", name: "Déclic Digital", url: "https://declicdigital.net" },
-    datePublished: "2025-06-01",
+    datePublished: "2026-06-01",
     mainEntityOfPage: { "@type": "WebPage", "@id": "https://declicdigital.net/geo/" },
   };
 
@@ -151,6 +151,9 @@ const Geo = () => {
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
               Generative Engine Optimization - la stratégie qui permet à votre entreprise d'être citée par ChatGPT, Gemini et Perplexity. Indispensable pour les TPE, artisans et indépendants.
             </p>
+            <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+              <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+            </Button>
           </motion.div>
         </div>
       </section>
@@ -246,7 +249,7 @@ const Geo = () => {
       <SectionWrapper id="section-3">
         <div className="mx-auto max-w-4xl space-y-8">
           <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">03 - Urgence</p>
-          <h2 className="text-3xl font-extrabold md:text-4xl text-center">Pourquoi le GEO devient urgent en 2025 ?</h2>
+          <h2 className="text-3xl font-extrabold md:text-4xl text-center">Pourquoi le GEO devient urgent en 2026 ?</h2>
           <p className="text-center text-muted-foreground max-w-2xl mx-auto">La façon dont les gens cherchent de l'information est en train de changer profondément et rapidement. Ce n'est pas une tendance lointaine : c'est une réalité du quotidien dès aujourd'hui.</p>
           <div className="grid gap-6 sm:grid-cols-2">
             {urgencyCards.map((c, i) => (
@@ -264,7 +267,7 @@ const Geo = () => {
             <p className="relative text-lg md:text-xl text-white/90 italic leading-relaxed mb-4">
               Dans cinq ans, les entreprises qui auront investi dans le GEO aujourd'hui domineront leur secteur, exactement comme celles qui ont fait du SEO en 2010 dominent aujourd'hui les résultats Google.
             </p>
-            <p className="text-white/40">Analyse de tendance - Secteur du marketing digital, 2025</p>
+            <p className="text-white/40">Analyse de tendance - Secteur du marketing digital, 2026</p>
           </div>
         </div>
       </SectionWrapper>
@@ -300,6 +303,22 @@ const Geo = () => {
           </div>
         </div>
       </SectionWrapper>
+
+      {/* CTA mid */}
+      <section className="gradient-miami py-14">
+        <div className="container text-center">
+          <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Vous voulez être cité par les IA ?</h2>
+          <p className="mb-6 text-white/80 max-w-xl mx-auto">Nos experts analysent votre visibilité dans ChatGPT, Gemini et Perplexity et vous donnent un plan d'action concret.</p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Button asChild size="lg" className="rounded-full bg-white px-8 font-semibold text-foreground shadow-lg hover:bg-white/90">
+              <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
+            </Button>
+            <Link to="/contact" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
+              Nous contacter
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* 05 - Méthode */}
       <SectionWrapper id="section-5">
@@ -369,6 +388,17 @@ const Geo = () => {
           </ul>
         </div>
       </SectionWrapper>
+
+      {/* CTA checklist */}
+      <section className="bg-[hsl(230,18%,15%)] py-14">
+        <div className="container text-center">
+          <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Besoin d'aide pour cocher toutes ces cases ?</h2>
+          <p className="mb-6 text-white/60 max-w-xl mx-auto">On s'occupe de tout. De l'audit à la mise en place, notre équipe vous accompagne sur le SEO et le GEO.</p>
+          <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+            <Link to="/contact">Prendre contact</Link>
+          </Button>
+        </div>
+      </section>
 
       {/* 08 - FAQ */}
       <SectionWrapper className="bg-section-blue" id="section-8">
