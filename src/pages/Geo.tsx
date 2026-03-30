@@ -161,7 +161,7 @@ const Geo = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((s, i) => (
               <div key={i}>
-                <span className="block text-3xl md:text-4xl font-extrabold gradient-text">{s.num}</span>
+                <span className="block text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-brand-blue via-brand-violet to-brand-pink bg-clip-text text-transparent">{s.num}</span>
                 <p className="mt-2 text-xs md:text-sm text-white/60">{s.label}</p>
               </div>
             ))}
