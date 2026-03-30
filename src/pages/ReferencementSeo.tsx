@@ -10,6 +10,7 @@ import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import LocationSection from "@/components/LocationSection";
 import { ChevronDown, CheckCircle2, Building2, Hammer, Laptop } from "lucide-react";
 import { cities } from "@/data/cities";
+import heroSeo from "@/assets/seo-dashboard-analytics.webp";
 
 const stats = [
   { num: "93%", label: "des expériences en ligne commencent par un moteur de recherche" },
@@ -143,20 +144,28 @@ const ReferencementSeo = () => {
       ]} />
 
       {/* Hero */}
-      <section className="gradient-hero py-16 md:py-24">
+      <section className="gradient-hero py-16 md:py-24 overflow-hidden">
         <div className="container">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="mx-auto max-w-3xl text-center">
-            <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">Référencement naturel</p>
-            <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-              Le SEO : le meilleur allié de <span className="gradient-text">l'entrepreneur solo</span>
-            </h1>
-            <p className="mb-8 text-lg text-muted-foreground leading-relaxed italic">
-              Vous n'avez pas le budget d'une multinationale. Vous n'avez pas une équipe marketing. Mais vous avez quelque chose qu'aucune grande entreprise ne peut acheter : une vraie expertise, un vrai territoire, une vraie relation client. Le SEO est l'outil qui transforme ça en visibilité.
-            </p>
-            <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-              <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
-            </Button>
-          </motion.div>
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+              <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">Référencement naturel</p>
+              <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
+                Le SEO : le meilleur allié de <span className="gradient-text">l'entrepreneur solo</span>
+              </h1>
+              <p className="mb-8 text-lg text-muted-foreground leading-relaxed italic">
+                Vous n'avez pas le budget d'une multinationale. Vous n'avez pas une équipe marketing. Mais vous avez quelque chose qu'aucune grande entreprise ne peut acheter : une vraie expertise, un vrai territoire, une vraie relation client. Le SEO est l'outil qui transforme ça en visibilité.
+              </p>
+              <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+                <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+              </Button>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
+              <div className="relative">
+                <div className="absolute -inset-4 rounded-3xl gradient-miami opacity-20 blur-2xl" />
+                <img src={heroSeo} alt="Dashboard analytics SEO pour TPE et artisans" className="relative w-full max-w-lg rounded-2xl shadow-2xl" />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
