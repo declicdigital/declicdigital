@@ -9,6 +9,8 @@ import PageBreadcrumb from "@/components/PageBreadcrumb";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import LocationSection from "@/components/LocationSection";
 import { ChevronDown, CheckCircle2, TrendingDown, MessageSquare, Zap, Target, Building2, Hammer, Laptop } from "lucide-react";
+import heroGeo from "@/assets/geo-bureau-analytics.webp";
+import geoWorkspace from "@/assets/geo-workspace-design.webp";
 
 const stats = [
   { num: "58%", label: "des recherches se terminent sans clic sur Google" },
@@ -142,19 +144,27 @@ const Geo = () => {
       ]} />
 
       {/* Hero */}
-      <section className="gradient-hero py-16 md:py-24">
+      <section className="gradient-hero py-16 md:py-24 overflow-hidden">
         <div className="container">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="mx-auto max-w-3xl text-center">
-            <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-              Le <span className="gradient-text">GEO</span> : quand l'IA devient votre meilleur commercial
-            </h1>
-            <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-              Generative Engine Optimization - la stratégie qui permet à votre entreprise d'être citée par ChatGPT, Gemini et Perplexity. Indispensable pour les TPE, artisans et indépendants.
-            </p>
-            <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-              <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
-            </Button>
-          </motion.div>
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+              <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
+                Le <span className="gradient-text">GEO</span> : quand l'IA devient votre meilleur commercial
+              </h1>
+              <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
+                Generative Engine Optimization - la stratégie qui permet à votre entreprise d'être citée par ChatGPT, Gemini et Perplexity. Indispensable pour les TPE, artisans et indépendants.
+              </p>
+              <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+                <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+              </Button>
+            </motion.div>
+            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
+              <div className="relative">
+                <div className="absolute -inset-4 rounded-3xl gradient-miami opacity-20 blur-2xl" />
+                <img src={heroGeo} alt="Bureau avec analyses et graphiques pour optimisation GEO" className="relative w-full max-w-lg rounded-2xl shadow-2xl" />
+              </div>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -304,7 +314,16 @@ const Geo = () => {
         </div>
       </SectionWrapper>
 
-      {/* CTA mid */}
+      {/* Image break */}
+      <SectionWrapper>
+        <div className="mx-auto max-w-4xl flex justify-center">
+          <div className="relative">
+            <div className="absolute -inset-4 rounded-3xl gradient-miami opacity-15 blur-2xl" />
+            <img src={geoWorkspace} alt="Espace de travail design et optimisation digitale" className="relative w-full max-w-2xl rounded-2xl shadow-2xl" />
+          </div>
+        </div>
+      </SectionWrapper>
+
       <section className="gradient-miami py-14">
         <div className="container text-center">
           <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Vous voulez être cité par les IA ?</h2>
