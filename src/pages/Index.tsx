@@ -262,7 +262,7 @@ const Index = () => {
         <div className="text-center mb-10">
           <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Nos réalisations pour des TPE et artisans parisiens</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link>.
+            Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO et GEO</Link>.
           </p>
         </div>
         <div className="overflow-hidden">
