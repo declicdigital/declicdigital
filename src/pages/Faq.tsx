@@ -91,7 +91,7 @@ const Faq = () => {
               Questions fréquentes sur la création de site internet et le SEO
             </h1>
             <p className="text-lg text-muted-foreground">
-              Retrouvez les réponses aux questions les plus posées sur la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link>, le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link> et nos services pour les TPE et artisans.
+              Retrouvez les réponses aux questions les plus posées sur la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link>, le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO et GEO</Link> et nos services pour les TPE et artisans.
             </p>
           </motion.div>
         </div>
