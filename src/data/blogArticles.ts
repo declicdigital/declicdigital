@@ -7,7 +7,7 @@ import porteAvionsImg from "@/assets/porte-avions-france-libre.webp";
 import xboxImg from "@/assets/manette-xbox-carbon-black-promo.webp";
 import artisanParisImg from "@/assets/artisan-paris-site-web.webp";
 import coutSiteImg from "@/assets/cout-creation-site-web-tpe.jpg";
-import genererClientsImg from "@/assets/generer-clients-site-web-independant.jpg";
+import genererClientsImg from "@/assets/generer-clients-site-web-independant.webp";
 
 export interface BlogArticle {
   slug: string;
