@@ -68,7 +68,7 @@ const Contact = () => (
               Parlons de votre projet : devis gratuit sous 24h
             </h1>
             <p className="text-lg text-muted-foreground mb-6">
-              Remplissez le formulaire ci-contre pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link> ou le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>. Nous répondons sous 24 à 48 heures ouvrées.
+              Remplissez le formulaire ci-contre pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link> ou le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO et GEO</Link>. Nous répondons sous 24 à 48 heures ouvrées.
             </p>
             <div className="space-y-4">
               {[
