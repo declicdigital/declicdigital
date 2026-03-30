@@ -14,7 +14,7 @@ const stats = [
   { num: "58%", label: "des recherches se terminent sans clic sur Google" },
   { num: "400M+", label: "utilisateurs hebdomadaires de ChatGPT en 2026" },
   { num: "3x", label: "plus de clics quand une IA cite votre site" },
-  { num: "2026", label: "l'année où le GEO est devenu incontournable" },
+  { num: "2025", label: "l'année où le GEO est devenu incontournable" },
 ];
 
 const urgencyCards = [
