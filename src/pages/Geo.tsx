@@ -9,7 +9,7 @@ import PageBreadcrumb from "@/components/PageBreadcrumb";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import LocationSection from "@/components/LocationSection";
 import { ChevronDown, CheckCircle2, TrendingDown, MessageSquare, Zap, Target, Building2, Hammer, Laptop } from "lucide-react";
-import heroGeo from "@/assets/geo-bureau-analytics.webp";
+import heroGeo from "@/assets/geo-hero-woman.webp";
 import geoWorkspace from "@/assets/geo-workspace-design.webp";
 
 const stats = [
