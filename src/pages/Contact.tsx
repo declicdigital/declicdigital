@@ -9,7 +9,6 @@ import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import heroContact from "@/assets/contact-agence-web.webp";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 
 const Contact = () => (
@@ -59,93 +58,60 @@ const Contact = () => (
       })}</script>
     </Helmet>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Contact" }]} />
-    {/* Hero */}
+    {/* Hero + Formulaire */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container">
-        <div className="grid items-center gap-10 lg:grid-cols-2">
-          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+        <div className="grid items-start gap-10 lg:grid-cols-2">
+          <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} className="flex flex-col justify-center lg:sticky lg:top-32">
             <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
               Parlons de votre projet : devis gratuit sous 24h
             </h1>
-            <p className="text-lg text-muted-foreground">
-              Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link> ou le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>. Nous répondons sous 24 à 48 heures ouvrées.
+            <p className="text-lg text-muted-foreground mb-6">
+              Remplissez le formulaire ci-contre pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link> ou le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>. Nous répondons sous 24 à 48 heures ouvrées.
             </p>
+            <div className="space-y-4">
+              {[
+                { icon: Mail, label: "Email", value: "contact@declicdigital.net" },
+                { icon: Phone, label: "Téléphone", value: "06.02.22.89.39" },
+                { icon: MapPin, label: "Localisation", value: "Paris et Hauts-de-Seine (92)" },
+              ].map((item, i) => (
+                <div key={i} className="flex items-start gap-4">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
+                    <item.icon size={18} />
+                  </div>
+                  <div>
+                    <p className="text-sm text-muted-foreground">{item.label}</p>
+                    <p className="font-semibold">{item.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </motion.div>
-          <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroContact} alt="Contactez Déclic Digital agence web" className="w-full max-w-lg drop-shadow-2xl" />
+          <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
+            <div className="rounded-2xl border border-border bg-card p-6 md:p-8 shadow-card">
+              <h2 className="mb-6 text-2xl font-extrabold">Demandez votre devis</h2>
+              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Input placeholder="Votre nom" className="rounded-xl" required />
+                  <Input placeholder="Nom de votre entreprise" className="rounded-xl" required />
+                </div>
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <Input placeholder="Votre email" type="email" className="rounded-xl" required />
+                  <Input placeholder="Votre téléphone" type="tel" className="rounded-xl" />
+                </div>
+                <Input placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" />
+                <Textarea placeholder="Décrivez votre projet : type de site souhaité, objectifs, fonctionnalités..." className="rounded-xl min-h-[120px]" required />
+                <Button type="submit" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
+                  <CheckCircle size={18} className="mr-2" /> Envoyer ma demande
+                </Button>
+              </form>
+            </div>
           </motion.div>
         </div>
       </div>
     </section>
 
-    {/* Formulaire + infos */}
-    <SectionWrapper>
-      <div className="grid gap-12 lg:grid-cols-5">
-        <div className="lg:col-span-3">
-          <h2 className="mb-6 text-2xl font-extrabold">Demandez votre devis pour <Link to="/creation-site-web" className="text-primary hover:underline">création de site</Link></h2>
-          <p className="mb-6 text-muted-foreground">
-            Que vous ayez besoin d'un site vitrine, d'un site e-commerce ou d'une refonte complète, nous sommes là pour vous accompagner. Décrivez votre projet et nous vous proposerons une solution adaptée à vos objectifs et à votre budget. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> pour une première idée.
-          </p>
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Input placeholder="Votre nom" className="rounded-xl" required />
-              <Input placeholder="Nom de votre entreprise" className="rounded-xl" required />
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Input placeholder="Votre email" type="email" className="rounded-xl" required />
-              <Input placeholder="Votre téléphone" type="tel" className="rounded-xl" />
-            </div>
-            <Input placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" />
-            <Textarea placeholder="Décrivez votre projet : type de site souhaité, objectifs, fonctionnalités..." className="rounded-xl min-h-[120px]" required />
-            <Button type="submit" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
-              <CheckCircle size={18} className="mr-2" /> Envoyer ma demande
-            </Button>
-          </form>
-        </div>
-        <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-2xl font-extrabold">Nos coordonnées</h2>
-          <div className="space-y-4">
-            {[
-              { icon: Mail, label: "Email", value: "contact@declicdigital.net" },
-              { icon: Phone, label: "Téléphone", value: "06.02.22.89.39" },
-              { icon: MapPin, label: "Localisation", value: "Paris et Hauts-de-Seine (92)" },
-            ].map((item, i) => (
-              <div key={i} className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
-                  <item.icon size={18} />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">{item.label}</p>
-                  <p className="font-semibold">{item.value}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="rounded-2xl bg-card p-6 shadow-card">
-            <h3 className="mb-2 font-bold">Réponse rapide</h3>
-            <p className="text-sm text-muted-foreground">
-              Nous répondons à toutes les demandes sous 24 à 48 heures ouvrées. Chaque projet fait l'objet d'un échange personnalisé pour comprendre vos besoins.
-            </p>
-          </div>
-          <div className="rounded-2xl bg-card p-6 shadow-card">
-            <div className="flex items-center gap-4 mb-4">
-              <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital" className="w-14 h-14 rounded-full object-cover shadow-md" loading="lazy" />
-              <div>
-                <p className="font-bold text-sm">Geoffrey</p>
-                <p className="text-xs text-muted-foreground">Fondateur, Expert Produit Google</p>
-              </div>
-            </div>
-            <p className="text-sm text-muted-foreground italic mb-4">"Chaque projet est unique. Je prends le temps d'échanger avec vous pour comprendre vos besoins et vous proposer la meilleure solution."</p>
-            <ul className="text-sm text-muted-foreground space-y-2">
-              <li>✅ Expert Produit Google certifié</li>
-              <li>✅ Spécialistes des TPE et indépendants</li>
-              <li>✅ Sites optimisés SEO dès la conception</li>
-              <li>✅ Tarifs adaptés aux petits budgets</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </SectionWrapper>
+
 
     {/* Google Maps */}
     <SectionWrapper className="bg-section-blue">
