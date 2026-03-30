@@ -389,6 +389,17 @@ const Geo = () => {
         </div>
       </SectionWrapper>
 
+      {/* CTA checklist */}
+      <section className="bg-[hsl(230,18%,15%)] py-14">
+        <div className="container text-center">
+          <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Besoin d'aide pour cocher toutes ces cases ?</h2>
+          <p className="mb-6 text-white/60 max-w-xl mx-auto">On s'occupe de tout. De l'audit à la mise en place, notre équipe vous accompagne sur le SEO et le GEO.</p>
+          <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+            <Link to="/contact">Prendre contact</Link>
+          </Button>
+        </div>
+      </section>
+
       {/* 08 - FAQ */}
       <SectionWrapper className="bg-section-blue" id="section-8">
         <div className="mx-auto max-w-3xl space-y-8">
