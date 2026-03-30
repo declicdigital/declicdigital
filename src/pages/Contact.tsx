@@ -111,50 +111,8 @@ const Contact = () => (
         </div>
       </div>
     </section>
-        <div className="lg:col-span-2 space-y-6">
-          <h2 className="text-2xl font-extrabold">Nos coordonnées</h2>
-          <div className="space-y-4">
-            {[
-              { icon: Mail, label: "Email", value: "contact@declicdigital.net" },
-              { icon: Phone, label: "Téléphone", value: "06.02.22.89.39" },
-              { icon: MapPin, label: "Localisation", value: "Paris et Hauts-de-Seine (92)" },
-            ].map((item, i) => (
-              <div key={i} className="flex items-start gap-4">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
-                  <item.icon size={18} />
-                </div>
-                <div>
-                  <p className="text-sm text-muted-foreground">{item.label}</p>
-                  <p className="font-semibold">{item.value}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="rounded-2xl bg-card p-6 shadow-card">
-            <h3 className="mb-2 font-bold">Réponse rapide</h3>
-            <p className="text-sm text-muted-foreground">
-              Nous répondons à toutes les demandes sous 24 à 48 heures ouvrées. Chaque projet fait l'objet d'un échange personnalisé pour comprendre vos besoins.
-            </p>
-          </div>
-          <div className="rounded-2xl bg-card p-6 shadow-card">
-            <div className="flex items-center gap-4 mb-4">
-              <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital" className="w-14 h-14 rounded-full object-cover shadow-md" loading="lazy" />
-              <div>
-                <p className="font-bold text-sm">Geoffrey</p>
-                <p className="text-xs text-muted-foreground">Fondateur, Expert Produit Google</p>
-              </div>
-            </div>
-            <p className="text-sm text-muted-foreground italic mb-4">"Chaque projet est unique. Je prends le temps d'échanger avec vous pour comprendre vos besoins et vous proposer la meilleure solution."</p>
-            <ul className="text-sm text-muted-foreground space-y-2">
-              <li>✅ Expert Produit Google certifié</li>
-              <li>✅ Spécialistes des TPE et indépendants</li>
-              <li>✅ Sites optimisés SEO dès la conception</li>
-              <li>✅ Tarifs adaptés aux petits budgets</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </SectionWrapper>
+
+
 
     {/* Google Maps */}
     <SectionWrapper className="bg-section-blue">
