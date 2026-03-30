@@ -233,6 +233,11 @@ const Tarifs = () => (
             </Link>
             , est pensée pour générer un retour sur investissement concret.
           </p>
+          <div className="mt-6">
+            <Button asChild size="lg" className="rounded-full gradient-miami px-8 font-semibold text-white shadow-lg hover:opacity-90">
+              <Link to="/contact">Devis gratuit</Link>
+            </Button>
+          </div>
         </motion.div>
       </div>
     </section>
