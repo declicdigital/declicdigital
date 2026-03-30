@@ -10,6 +10,7 @@ import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import LocationSection from "@/components/LocationSection";
 import { ChevronDown, CheckCircle2, Building2, Hammer, Laptop } from "lucide-react";
 import { cities } from "@/data/cities";
+import heroSeo from "@/assets/seo-dashboard-analytics.webp";
 
 const stats = [
   { num: "93%", label: "des expériences en ligne commencent par un moteur de recherche" },
