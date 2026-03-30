@@ -56,7 +56,7 @@ const VilleReferencementSeo = () => {
 
       <PageBreadcrumb items={[
         { label: "Accueil", href: "/" },
-        { label: "Référencement SEO", href: "/referencement-seo" },
+        { label: "Référencement SEO et GEO", href: "/referencement-seo" },
         { label: city.nameShort },
       ]} />
 
