@@ -153,12 +153,19 @@ const MetierCreationSite = () => {
               </div>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-              <div className="rounded-2xl bg-card p-8 shadow-card text-center max-w-sm">
-                <img src={geoffreyPhoto} alt={`Geoffrey, fondateur Déclic Digital - site web ${trade.nameShort.toLowerCase()}`} className="mx-auto mb-4 h-32 w-32 rounded-full object-cover" />
-                <p className="font-bold text-lg">Geoffrey</p>
-                <p className="text-sm text-muted-foreground">Expert Produit Google</p>
-                <p className="text-sm text-muted-foreground mt-2">J'accompagne les {trade.name.toLowerCase()}s dans leur visibilité en ligne avec des sites performants et un référencement ciblé.</p>
-              </div>
+              {trade.slug === "expert-comptable" ? (
+                <div className="relative">
+                  <div className="absolute -inset-3 rounded-3xl gradient-miami opacity-15 blur-2xl" />
+                  <img src={metierComptable} alt={`Expert-comptable au bureau - création site web`} className="relative w-full max-w-lg rounded-2xl shadow-2xl" />
+                </div>
+              ) : (
+                <div className="rounded-2xl bg-card p-8 shadow-card text-center max-w-sm">
+                  <img src={geoffreyPhoto} alt={`Geoffrey, fondateur Déclic Digital - site web ${trade.nameShort.toLowerCase()}`} className="mx-auto mb-4 h-32 w-32 rounded-full object-cover" />
+                  <p className="font-bold text-lg">Geoffrey</p>
+                  <p className="text-sm text-muted-foreground">Expert Produit Google</p>
+                  <p className="text-sm text-muted-foreground mt-2">J'accompagne les {trade.name.toLowerCase()}s dans leur visibilité en ligne avec des sites performants et un référencement ciblé.</p>
+                </div>
+              )}
             </motion.div>
           </div>
         </div>
