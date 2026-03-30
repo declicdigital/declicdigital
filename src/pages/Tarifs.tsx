@@ -211,7 +211,7 @@ const Tarifs = () => (
       </script>
     </Helmet>
 
-    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Tarifs" }]} />
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Création de site web", href: "/creation-site-web" }, { label: "Tarifs" }]} />
 
     <section className="gradient-hero py-16 md:py-24">
       <div className="container text-center">
