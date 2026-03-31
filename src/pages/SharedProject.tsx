@@ -366,18 +366,23 @@ const SharedProject = () => {
                               <span><Paperclip className="h-4 w-4" /></span>
                             </Button>
                             <input type="file" className="hidden" onChange={async (ev) => {
-                              if (!ev.target.files || !project) return;
+                              if (!ev.target.files || !project || !token) return;
                               const file = ev.target.files[0];
                               const path = `${project.id}/tasks/${task.id}/${Date.now()}_${file.name}`;
-                              const { error: upErr } = await supabase.storage.from("project-documents").upload(path, file);
-                              if (upErr) {
-                                toast({ title: "Erreur", description: upErr.message, variant: "destructive" });
-                              } else {
-                                await (supabase.from("task_attachments" as any) as any).insert({
-                                  task_id: task.id, file_name: file.name, file_path: path, uploaded_by: "00000000-0000-0000-0000-000000000000",
+                              try {
+                                const { signedUrl } = await getSharedSignedUrl("project-documents", path, "upload");
+                                const uploadRes = await fetch(signedUrl, { method: "PUT", headers: { "Content-Type": file.type }, body: file });
+                                if (!uploadRes.ok) throw new Error("Upload failed");
+                                await supabase.rpc("add_attachment_by_share_token", {
+                                  p_token: token,
+                                  p_task_id: task.id,
+                                  p_file_name: file.name,
+                                  p_file_path: path,
                                 });
                                 toast({ title: "Fichier ajoute" });
                                 loadData();
+                              } catch (err: any) {
+                                toast({ title: "Erreur", description: err.message, variant: "destructive" });
                               }
                               ev.target.value = "";
                             }} />
