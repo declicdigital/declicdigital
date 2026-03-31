@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Monitor, Smartphone, TrendingUp, Zap, CheckCircle, Search, Shield, Clock, Users, Target, BarChart3, HelpCircle, Star } from "lucide-react";
@@ -5,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import GoogleReviewsSection from "@/components/GoogleReviewsSection";
+const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
 import MapEmbed from "@/components/MapEmbed";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 import metierComptable from "@/assets/metier-expert-comptable.webp";

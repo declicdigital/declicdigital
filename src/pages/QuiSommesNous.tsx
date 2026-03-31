@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
@@ -5,8 +6,8 @@ import { Heart, Target, Rocket, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
-import GoogleReviewsSection from "@/components/GoogleReviewsSection";
-import LocationSection from "@/components/LocationSection";
+const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
+const LocationSection = lazy(() => import("@/components/LocationSection"));
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";

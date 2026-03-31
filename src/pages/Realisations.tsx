@@ -1,6 +1,7 @@
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Helmet } from "react-helmet-async";
-import GoogleReviewsSection from "@/components/GoogleReviewsSection";
+const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
 import { Link } from "react-router-dom";
 import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
