@@ -80,13 +80,52 @@ function generateFormPdfText(data: any): string {
   return lines.join("\n");
 }
 
+function sanitize(val: unknown): string {
+  if (typeof val !== "string") return "";
+  return val.trim().slice(0, 2000);
+}
+
+function validateEmail(email: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email) && email.length <= 255;
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
   }
 
   try {
-    const data = await req.json();
+    const raw = await req.json();
+    if (!raw || typeof raw !== "object") {
+      return new Response(
+        JSON.stringify({ success: false, error: "Données invalides" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    const data = raw;
+
+    // Validate email if provided
+    if (data.email && !validateEmail(sanitize(data.email))) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Email invalide" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Validate file_paths if provided - only allow expected extensions
+    if (data.file_paths && Array.isArray(data.file_paths)) {
+      const allowedExt = ['pdf', 'jpg', 'jpeg', 'png', 'webp', 'doc', 'docx', 'xls', 'xlsx'];
+      for (const fp of data.file_paths) {
+        if (typeof fp !== 'string') continue;
+        const ext = fp.split('.').pop()?.toLowerCase() || '';
+        if (!allowedExt.includes(ext)) {
+          return new Response(
+            JSON.stringify({ success: false, error: "Type de fichier non autorisé" }),
+            { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+          );
+        }
+      }
+    }
 
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
