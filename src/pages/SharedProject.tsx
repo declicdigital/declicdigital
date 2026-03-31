@@ -152,8 +152,12 @@ const SharedProject = () => {
   };
 
   const confirmRenameAtt = async () => {
-    if (!renamingAttId || !renameAttValue.trim()) return;
-    const { error } = await (supabase.from("task_attachments" as any) as any).update({ file_name: renameAttValue.trim() }).eq("id", renamingAttId);
+    if (!renamingAttId || !renameAttValue.trim() || !token) return;
+    const { error } = await supabase.rpc("rename_attachment_by_share_token", {
+      p_token: token,
+      p_attachment_id: renamingAttId,
+      p_new_name: renameAttValue.trim(),
+    });
     if (error) {
       toast({ title: "Erreur", description: error.message, variant: "destructive" });
     } else {
