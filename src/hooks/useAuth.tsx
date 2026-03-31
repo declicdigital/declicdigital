@@ -1,6 +1,5 @@
 import { createContext, useContext, useEffect, useState, ReactNode } from "react";
-import { supabase } from "@/integrations/supabase/client";
-import { User, Session } from "@supabase/supabase-js";
+import type { User, Session, SupabaseClient } from "@supabase/supabase-js";
 
 interface AuthContextType {
   user: User | null;
@@ -18,6 +17,16 @@ const AuthContext = createContext<AuthContextType>({
   signOut: async () => {},
 });
 
+// Lazy-loaded Supabase client — not imported at module level
+let _supabase: SupabaseClient | null = null;
+const getSupabase = async () => {
+  if (!_supabase) {
+    const { supabase } = await import("@/integrations/supabase/client");
+    _supabase = supabase;
+  }
+  return _supabase;
+};
+
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
   const [session, setSession] = useState<Session | null>(null);
@@ -27,64 +36,76 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     let mounted = true;
 
-    const handleSession = async (s: Session | null) => {
-      if (!mounted) return;
+    const init = async () => {
+      const supabase = await getSupabase();
 
-      setSession(s);
-      setUser(s?.user ?? null);
-
-      if (!s?.user) {
-        setIsAdmin(false);
-        setLoading(false);
-        return;
-      }
-
-      try {
-        const { data, error } = await supabase.rpc("has_role", {
-          _user_id: s.user.id,
-          _role: "admin",
-        });
-
+      const handleSession = async (s: Session | null) => {
         if (!mounted) return;
 
-        if (error) {
-          console.error("has_role error:", error.message);
-          setIsAdmin(false);
-        } else {
-          setIsAdmin(!!data);
-        }
-      } catch (err) {
-        if (mounted) {
-          console.error("has_role exception:", err);
-          setIsAdmin(false);
-        }
-      } finally {
-        if (mounted) setLoading(false);
-      }
-    };
+        setSession(s);
+        setUser(s?.user ?? null);
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      (_event, s) => { handleSession(s); }
-    );
-
-    supabase.auth.getSession()
-      .then(({ data: { session: s } }) => handleSession(s))
-      .catch(() => {
-        if (mounted) {
-          setUser(null);
-          setSession(null);
+        if (!s?.user) {
           setIsAdmin(false);
           setLoading(false);
+          return;
         }
-      });
+
+        try {
+          const { data, error } = await supabase.rpc("has_role", {
+            _user_id: s.user.id,
+            _role: "admin",
+          });
+
+          if (!mounted) return;
+
+          if (error) {
+            console.error("has_role error:", error.message);
+            setIsAdmin(false);
+          } else {
+            setIsAdmin(!!data);
+          }
+        } catch (err) {
+          if (mounted) {
+            console.error("has_role exception:", err);
+            setIsAdmin(false);
+          }
+        } finally {
+          if (mounted) setLoading(false);
+        }
+      };
+
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(
+        (_event, s) => { handleSession(s); }
+      );
+
+      supabase.auth.getSession()
+        .then(({ data: { session: s } }) => handleSession(s))
+        .catch(() => {
+          if (mounted) {
+            setUser(null);
+            setSession(null);
+            setIsAdmin(false);
+            setLoading(false);
+          }
+        });
+
+      return () => {
+        subscription.unsubscribe();
+      };
+    };
+
+    let cleanup: (() => void) | undefined;
+    init().then(c => { cleanup = c; });
 
     return () => {
       mounted = false;
-      subscription.unsubscribe();
+      cleanup?.();
     };
   }, []);
 
   const signOut = async () => {
+    const supabase = await getSupabase();
     await supabase.auth.signOut();
     setUser(null);
     setSession(null);
