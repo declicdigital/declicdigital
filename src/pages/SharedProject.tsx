@@ -53,8 +53,8 @@ const SharedProject = () => {
   const loadData = async () => {
     if (!initialLoadDone.current) setLoading(true);
     try {
-      const { data: projects } = await (supabase.from("projects") as any).select("*").eq("share_token", token).limit(1);
-      const proj = projects?.[0] ?? null;
+      const { data: projects } = await supabase.rpc("get_project_by_share_token", { p_token: token });
+      const proj = (projects as any[])?.[0] ?? null;
       if (!proj) { setNotFound(true); setLoading(false); return; }
       setProject(proj);
 
