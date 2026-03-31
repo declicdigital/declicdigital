@@ -141,7 +141,7 @@ const Contact = () => (
     </SectionWrapper>
 
     {/* Avis clients */}
-    <GoogleReviewsSection compact maxReviews={3} />
+    <Suspense fallback={null}><GoogleReviewsSection compact maxReviews={3} /></Suspense>
 
     {/* Maillage */}
     <SectionWrapper className="bg-section-blue">

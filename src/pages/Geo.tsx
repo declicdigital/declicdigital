@@ -473,7 +473,7 @@ const Geo = () => {
         </div>
       </section>
 
-      <LocationSection />
+      <Suspense fallback={null}><LocationSection /></Suspense>
     </PageLayout>
   );
 };

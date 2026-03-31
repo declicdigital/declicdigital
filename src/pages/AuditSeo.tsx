@@ -133,7 +133,7 @@ const AuditSeo = () => (
     </SectionWrapper>
 
     {/* Avis clients */}
-    <GoogleReviewsSection compact maxReviews={3} />
+    <Suspense fallback={null}><GoogleReviewsSection compact maxReviews={3} /></Suspense>
 
     {/* Formulaire */}
     <SectionWrapper className="bg-section-blue" id="formulaire-audit">

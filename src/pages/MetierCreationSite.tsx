@@ -333,7 +333,7 @@ const MetierCreationSite = () => {
       </SectionWrapper>
 
       {/* Avis */}
-      <GoogleReviewsSection compact maxReviews={3} />
+      <Suspense fallback={null}><GoogleReviewsSection compact maxReviews={3} /></Suspense>
 
       {/* Métiers liés */}
       {relatedTrades.length > 0 && (

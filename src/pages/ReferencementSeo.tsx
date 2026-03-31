@@ -489,7 +489,7 @@ const ReferencementSeo = () => {
         </div>
       </SectionWrapper>
 
-      <LocationSection />
+      <Suspense fallback={null}><LocationSection /></Suspense>
     </PageLayout>
   );
 };

@@ -150,7 +150,7 @@ const Realisations = () => (
     </SectionWrapper>
 
     {/* Avis clients */}
-    <GoogleReviewsSection compact maxReviews={3} />
+    <Suspense fallback={null}><GoogleReviewsSection compact maxReviews={3} /></Suspense>
 
     {/* CTA */}
     <section className="gradient-miami py-16 text-center">
