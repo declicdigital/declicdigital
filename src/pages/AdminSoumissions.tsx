@@ -129,6 +129,7 @@ const AdminSoumissions = () => {
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
   const [filterStatus, setFilterStatus] = useState<StatusType | "all">("all");
+  const [filterType, setFilterType] = useState<FormType | "all">("all");
 
   const fetchSubs = async () => {
     try {
