@@ -93,13 +93,12 @@ const SharedProject = () => {
   };
 
   const addTask = async () => {
-    if (!project || !newTaskTitle.trim()) return;
+    if (!project || !newTaskTitle.trim() || !token) return;
     const maxOrder = tasks.length > 0 ? Math.max(...tasks.map((t) => t.sort_order)) + 1 : 0;
-    const { error } = await supabase.from("project_tasks").insert({
-      project_id: project.id,
-      title: newTaskTitle.trim(),
-      status: "a_faire_dd" as any,
-      sort_order: maxOrder,
+    const { error } = await supabase.rpc("add_task_by_share_token", {
+      p_token: token,
+      p_title: newTaskTitle.trim(),
+      p_sort_order: maxOrder,
     });
     if (error) {
       toast({ title: "Erreur", description: error.message, variant: "destructive" });
