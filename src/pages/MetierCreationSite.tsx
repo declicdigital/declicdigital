@@ -158,7 +158,7 @@ const MetierCreationSite = () => {
               {{"expert-comptable": metierComptable, "plombier": metierPlombier, "electricien": metierElectricien}[trade.slug] ? (
                 <div className="relative">
                   <div className="absolute -inset-3 rounded-3xl gradient-miami opacity-15 blur-2xl" />
-                  <img src={{"expert-comptable": metierComptable, "plombier": metierPlombier, "electricien": metierElectricien}[trade.slug]} alt={`${trade.name} - création site web professionnel`} className="relative w-full max-w-lg rounded-2xl shadow-2xl" />
+                  <img src={{"expert-comptable": metierComptable, "plombier": metierPlombier, "electricien": metierElectricien}[trade.slug]} alt={`${trade.name} - création site web professionnel`} className="relative w-full max-w-lg rounded-2xl shadow-2xl" loading="lazy" decoding="async" width={512} height={341} />
                 </div>
               ) : (
                 <div className="rounded-2xl bg-card p-8 shadow-card text-center max-w-sm">
