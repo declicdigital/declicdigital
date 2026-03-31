@@ -272,7 +272,7 @@ const Index = () => {
             {[...techLogos, ...techLogos].map((t, i) => (
               <div key={`${t.name}-${i}`} className="flex flex-col items-center gap-3 shrink-0">
                 <div className="rounded-2xl bg-secondary p-5 shadow-card">
-                  <img src={t.src} alt={t.name} className="h-16 w-16 md:h-20 md:w-20 object-contain" loading="lazy" />
+                  <img src={t.src} alt={t.name} className="h-16 w-16 md:h-20 md:w-20 object-contain" loading="lazy" decoding="async" width={80} height={80} />
                 </div>
                 <span className="text-sm font-medium text-muted-foreground">{t.name}</span>
               </div>
