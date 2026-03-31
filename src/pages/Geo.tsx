@@ -161,7 +161,7 @@ const Geo = () => {
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
               <div className="relative">
                 <div className="absolute -inset-4 rounded-3xl gradient-miami opacity-20 blur-2xl" />
-                <img src={heroGeo} alt="Bureau avec analyses et graphiques pour optimisation GEO" className="relative w-full max-w-lg rounded-2xl shadow-2xl" />
+                <img src={heroGeo} alt="Bureau avec analyses et graphiques pour optimisation GEO" className="relative w-full max-w-lg rounded-2xl shadow-2xl" width={512} height={341} loading="lazy" decoding="async" />
               </div>
             </motion.div>
           </div>
