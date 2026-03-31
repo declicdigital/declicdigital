@@ -118,9 +118,9 @@ const Index = () => {
                 <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
                   <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
                 </Button>
-                <Link to="/contact" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
-                  Devis création de site
-                </Link>
+                <Button asChild size="lg" variant="outline" className="rounded-full border-2 border-[hsl(263,36%,18%)] px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)] hover:text-white transition-colors">
+                  <Link to="/contact">Devis création de site</Link>
+                </Button>
               </div>
             </div>
             <div className="flex justify-center animate-fade-in-right">
@@ -162,7 +162,7 @@ const Index = () => {
             ))}
           </div>
           <div className="mt-10">
-            <Button asChild size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 text-[hsl(263,36%,18%)] font-semibold shadow-lg btn-glow">
+            <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
               <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
             </Button>
           </div>
