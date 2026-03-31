@@ -230,7 +230,7 @@ const Index = () => {
       </SectionWrapper>
 
       {/* Avis clients Google */}
-      <Suspense fallback={<div className="py-16" />}>
+      <Suspense fallback={<div style={{ minHeight: 400 }} />}>
         <GoogleReviewsSection />
       </Suspense>
 
