@@ -462,7 +462,8 @@ const AdminSoumissions = () => {
               </div>
             )}
 
-            {/* Brief Prompt Recap */}
+            {/* Brief Prompt Recap — only for "formulaire" type */}
+            {detectFormType(selected.data) === "formulaire" && (
             <div className="border-t border-border">
               <div className="px-6 py-5 bg-muted/30">
                 <div className="flex items-center justify-between mb-3">
@@ -488,6 +489,7 @@ const AdminSoumissions = () => {
                 </pre>
               </div>
             </div>
+            )}
           </div>
         </div>
       </div>
