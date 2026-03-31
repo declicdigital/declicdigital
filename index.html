@@ -2,35 +2,29 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <!-- Google tag (gtag.js) - deferred 3s -->
+    <!-- GTM + gtag: load on first user interaction -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
-      setTimeout(function(){
-        var s = document.createElement('script');
-        s.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18047413249';
-        s.async = true;
-        s.onload = function(){
-          gtag('js', new Date());
-          gtag('config', 'AW-18047413249');
-        };
-        document.head.appendChild(s);
-      }, 3000);
+      function _loadTracking(){
+        if(window._trkLoaded)return;window._trkLoaded=true;
+        // gtag (Google Ads)
+        var g=document.createElement('script');
+        g.src='https://www.googletagmanager.com/gtag/js?id=AW-18047413249';
+        g.async=true;
+        g.onload=function(){gtag('js',new Date());gtag('config','AW-18047413249');};
+        document.head.appendChild(g);
+        // GTM
+        window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
+        var t=document.createElement('script');
+        t.async=true;
+        t.src='https://www.googletagmanager.com/gtm.js?id=GTM-KMBKVH5C';
+        document.head.appendChild(t);
+      }
+      ['scroll','click','mousemove','touchstart'].forEach(function(e){
+        window.addEventListener(e,_loadTracking,{once:true,passive:true});
+      });
     </script>
-    <!-- Google Tag Manager (deferred) -->
-    <script>
-    window.addEventListener('load', function() {
-      setTimeout(function() {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
-        var j = document.createElement('script');
-        j.async = true;
-        j.src = 'https://www.googletagmanager.com/gtm.js?id=GTM-KMBKVH5C';
-        document.head.appendChild(j);
-      }, 5000);
-    });
-    </script>
-    <!-- End Google Tag Manager -->
     <link rel="preload" href="/fonts/ClashDisplay-Variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://ubtdhicbbwasabgokzje.supabase.co">
