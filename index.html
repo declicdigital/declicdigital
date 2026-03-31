@@ -38,6 +38,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="192x192" href="/favicon.png" />
+    <style>
+      /* Critical CSS – above-the-fold rendering */
+      @font-face{font-family:'Clash Display';src:url('/fonts/ClashDisplay-Variable.woff2') format('woff2');font-weight:200 700;font-style:normal;font-display:swap}
+      @font-face{font-family:'Clash Display Fallback';src:local('Arial');size-adjust:104%;ascent-override:90%;descent-override:22%;line-gap-override:0%}
+      @font-face{font-family:'DM Serif Display';font-style:normal;font-weight:400;font-display:swap;src:url(https://fonts.gstatic.com/s/dmserifdisplay/v17/-nFnOHM81r4j6k0gjAW3mujVU2B2G_Bx0g.woff2) format('woff2')}
+      *,::before,::after{box-sizing:border-box;border-width:0;border-style:solid}
+      body{margin:0;font-family:'Clash Display','Clash Display Fallback',system-ui,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;background-color:#f6f1e9;color:hsl(263 36% 18%);font-weight:400}
+      body::before{content:"";position:fixed;inset:0;background:url('/grain.webp');background-size:256px 256px;opacity:.15;pointer-events:none;mix-blend-mode:multiply;z-index:9999}
+      h1,h2,h3{font-weight:700}
+      h1{font-family:'DM Serif Display',Georgia,serif!important;color:hsl(263 36% 18%);letter-spacing:-.025em}
+      h2,h3{font-family:'Clash Display',system-ui,sans-serif;color:hsl(263 36% 18%);letter-spacing:-.025em}
+      #root{display:flex;flex-direction:column;min-height:100vh}
+      header{position:sticky;top:0;z-index:50;border-bottom:1px solid hsl(42 25% 82%);background:hsl(43 35% 96%/.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+    </style>
     <title>Déclic Digital | Création site web, SEO</title>
     <meta name="description" content="Agence web à Paris spécialisée en création de site internet et référencement SEO pour PME. Expert Produit Google. Audit SEO gratuit. Devis en ligne.">
     <meta name="author" content="Déclic Digital" />
