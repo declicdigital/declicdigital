@@ -42,7 +42,7 @@ const CreationSite = () => (
             </Button>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroCreation} alt="Création de site internet professionnel pour TPE" className="w-full max-w-lg drop-shadow-2xl" />
+            <img src={heroCreation} alt="Création de site internet professionnel pour TPE" className="w-full max-w-lg drop-shadow-2xl" width={512} height={512} loading="lazy" decoding="async" />
           </motion.div>
         </div>
       </div>
