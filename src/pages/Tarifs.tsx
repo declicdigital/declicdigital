@@ -233,7 +233,7 @@ const Tarifs = () => (
             , est pensée pour générer un retour sur investissement concret.
           </p>
           <div className="mt-8">
-            <Button asChild className="rounded-full gradient-miami px-10 py-4 text-lg font-bold text-white shadow-xl hover:opacity-90 h-auto opacity-90 saturate-[0.85]">
+            <Button asChild className="rounded-full gradient-primary btn-glow px-10 py-4 text-lg font-bold text-white shadow-xl hover:opacity-90 h-auto">
               <Link to="/contact">Devis gratuit</Link>
             </Button>
           </div>

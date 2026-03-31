@@ -123,7 +123,7 @@ const GoogleReviewsSection = ({
           href={writeReviewUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full gradient-primary btn-glow px-6 py-3 text-sm font-semibold text-white shadow-glow transition-opacity shadow-lg"
+          className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold shadow-lg btn-glow transition-opacity ${className.includes("blue") || className.includes("rose") || className.includes("alt") ? "bg-[#f6f1e9] hover:bg-[#ede6d8] text-[hsl(263,36%,18%)]" : "gradient-primary text-white shadow-glow"}`}
         >
           <Star size={14} />
           Laisser un avis

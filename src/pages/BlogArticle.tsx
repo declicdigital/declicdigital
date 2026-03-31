@@ -71,7 +71,7 @@ const BlogArticle = () => {
             <div key={i} className="my-10 text-center">
               <Link
                 to={ctaUrl}
-                className="inline-flex items-center gap-2 rounded-full gradient-miami px-8 py-3 font-bold text-white text-lg hover:opacity-90 transition-opacity shadow-lg"
+                className="inline-flex items-center gap-2 rounded-full gradient-primary btn-glow px-8 py-3 font-bold text-white text-lg hover:opacity-90 transition-opacity shadow-lg"
               >
                 {ctaText} <ArrowRight size={18} />
               </Link>
@@ -271,7 +271,7 @@ const BlogArticle = () => {
           </p>
           <Link
             to="/audit-seo-gratuit"
-            className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary-foreground px-8 py-3 font-semibold text-foreground hover:opacity-90 transition-opacity"
+            className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 py-3 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow transition-opacity"
           >
             Audit SEO gratuit <ArrowRight size={16} />
           </Link>
