@@ -10,8 +10,16 @@ import PageBreadcrumb from "@/components/PageBreadcrumb";
 import portfolioOffg from "@/assets/site-vitrine-artiste-musical.webp";
 import portfolioAploz from "@/assets/site-aploz-agence-video-publicitaire.webp";
 import portfolioNjPhoto from "@/assets/site-photographe-professionnelle.webp";
+import portfolioTracker from "@/assets/site-artisan-tracker-solaire.jpg";
 
 const projects = [
+  {
+    name: "Un-Artisan.com",
+    description: "Site vitrine pour un artisan spécialisé dans les trackers solaires. Design moderne avec présentation des solutions et réalisations.",
+    url: "https://un-artisan-com.lovable.app",
+    image: portfolioTracker,
+    tags: ["Site vitrine", "Artisan", "Énergie solaire"],
+  },
   {
     name: "Aploz",
     description: "Site vitrine pour une agence vidéo publicitaire. Design sombre et immersif avec showreel intégré et études de cas clients.",
