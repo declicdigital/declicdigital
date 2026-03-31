@@ -223,7 +223,7 @@ const Index = () => {
           ))}
         </div>
         <div className="text-center mt-10">
-           <Button asChild size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 text-[hsl(263,36%,18%)] font-semibold shadow-lg btn-glow">
+           <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
             <Link to="/contact">Démarrer mon projet</Link>
           </Button>
         </div>
