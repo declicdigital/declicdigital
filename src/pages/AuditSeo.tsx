@@ -148,7 +148,7 @@ const AuditSeo = () => (
           <Input placeholder="Votre email" type="email" className="rounded-xl" required />
           <Input placeholder="Votre téléphone (optionnel)" type="tel" className="rounded-xl" />
           <Textarea placeholder="Votre message (optionnel)" className="rounded-xl min-h-[100px]" />
-          <Button type="submit" size="lg" className="w-full rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] text-[hsl(263,36%,18%)] font-semibold shadow-lg btn-glow">
+          <Button type="submit" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
             <CheckCircle size={18} className="mr-2" /> Recevoir mon audit SEO gratuit
           </Button>
         </form>

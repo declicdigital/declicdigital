@@ -145,12 +145,12 @@ const NosVilles = () => (
           <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
             <Link to="/creation-site-web">Création de site web</Link>
           </Button>
-          <Link to="/referencement-seo" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
-            Référencement SEO et GEO
-          </Link>
-          <Link to="/audit-seo-gratuit" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
-            Audit SEO gratuit
-          </Link>
+          <Button asChild size="lg" variant="outline" className="rounded-full border-2 border-[hsl(263,36%,18%)] px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)] hover:text-white transition-colors">
+            <Link to="/referencement-seo">Référencement SEO et GEO</Link>
+          </Button>
+          <Button asChild size="lg" variant="outline" className="rounded-full border-2 border-[hsl(263,36%,18%)] px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)] hover:text-white transition-colors">
+            <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
+          </Button>
         </div>
       </div>
     </SectionWrapper>
