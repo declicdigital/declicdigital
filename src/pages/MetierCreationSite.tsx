@@ -350,7 +350,7 @@ const MetierCreationSite = () => {
                 {t.icon} Site web {t.nameShort}
               </Link>
             ))}
-            <Link to="/nos-metiers" className="rounded-full gradient-primary btn-glow px-4 py-2 text-sm font-semibold text-white shadow-glow">
+            <Link to="/nos-metiers" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-4 py-2 text-sm font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
               Voir tous les métiers →
             </Link>
           </div>
