@@ -620,7 +620,7 @@ const FormulaireBrief = () => {
               viewport={{ once: true }}
               className="text-center pt-4"
             >
-              <Button type="submit" size="lg" disabled={sending} className="rounded-full px-12 py-6 text-lg font-bold bg-primary text-white shadow-elevated hover:opacity-90">
+              <Button type="submit" size="lg" disabled={sending} className="rounded-full px-12 py-6 text-lg font-bold gradient-primary btn-glow text-white shadow-glow hover:opacity-90">
                 {sending ? <><span className="animate-spin mr-2">⏳</span> Envoi en cours...</> : <><Send className="mr-2 h-5 w-5" /> Envoyer mon brief</>}
               </Button>
               <p className="mt-4 text-xs text-muted-foreground">
