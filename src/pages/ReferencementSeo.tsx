@@ -163,7 +163,7 @@ const ReferencementSeo = () => {
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
               <div className="relative">
                 <div className="absolute -inset-4 rounded-3xl gradient-miami opacity-20 blur-2xl" />
-                <img src={heroSeo} alt="Dashboard analytics SEO pour TPE et artisans" className="relative w-full max-w-lg rounded-2xl shadow-2xl" />
+                <img src={heroSeo} alt="Dashboard analytics SEO pour TPE et artisans" className="relative w-full max-w-lg rounded-2xl shadow-2xl" width={512} height={341} loading="lazy" decoding="async" />
               </div>
             </motion.div>
           </div>
@@ -267,7 +267,7 @@ const ReferencementSeo = () => {
         <div className="mx-auto max-w-5xl grid items-center gap-10 lg:grid-cols-2">
           <div className="relative">
             <div className="absolute -inset-3 rounded-3xl gradient-miami opacity-15 blur-2xl" />
-            <img src={seoDashboard} alt="Dashboard analytics SEO pour suivre les performances" className="relative w-full rounded-2xl shadow-2xl" />
+            <img src={seoDashboard} alt="Dashboard analytics SEO pour suivre les performances" className="relative w-full rounded-2xl shadow-2xl" width={512} height={341} loading="lazy" decoding="async" />
           </div>
           <div className="space-y-5">
             <h2 className="text-3xl font-extrabold md:text-4xl">Suivez vos résultats en temps réel</h2>

@@ -238,7 +238,7 @@ export const FaqAiChatSidebar = () => {
   return (
     <div className="sticky top-24">
       <div className="mb-4 flex items-center gap-2">
-        <img src={chatBotLogo} alt="Assistant IA" className="h-8 w-8 rounded-full object-cover" />
+        <img src={chatBotLogo} alt="Assistant IA" className="h-8 w-8 rounded-full object-cover" width={32} height={32} loading="lazy" decoding="async" />
         <div>
           <h2 className="text-lg font-bold">Assistant IA</h2>
           <p className="text-xs text-muted-foreground">Posez votre question</p>
@@ -275,7 +275,7 @@ export const AiChatWidget = () => {
             className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary bg-transparent shadow-elevated hover:scale-105 transition-transform"
             aria-label="Ouvrir l'assistant IA"
           >
-            <img src={chatBotLogo} alt="Assistant IA" className="h-11 w-11 object-contain" />
+            <img src={chatBotLogo} alt="Assistant IA" className="h-11 w-11 object-contain" width={44} height={44} loading="lazy" decoding="async" />
           </motion.button>
         )}
       </AnimatePresence>
@@ -303,7 +303,7 @@ const FloatingChatPanel = ({ onClose }: { onClose: () => void }) => {
       {/* Header */}
       <div className="flex items-center justify-between border-b bg-primary/5 px-4 py-3">
         <div className="flex items-center gap-2">
-          <img src={chatBotLogo} alt="Assistant IA" className="h-10 w-10 object-contain" />
+          <img src={chatBotLogo} alt="Assistant IA" className="h-10 w-10 object-contain" width={40} height={40} loading="lazy" decoding="async" />
           <div>
             <p className="text-sm font-bold">Assistant Déclic Digital</p>
             <p className="text-[11px] text-muted-foreground">Posez-nous votre question</p>
