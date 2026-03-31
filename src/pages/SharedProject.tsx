@@ -332,8 +332,12 @@ const SharedProject = () => {
                                   <>
                                     <button
                                       onClick={async () => {
-                                        const { data } = await supabase.storage.from("project-documents").createSignedUrl(att.file_path, 3600);
-                                        if (data?.signedUrl) window.open(data.signedUrl, "_blank");
+                                        try {
+                                          const { signedUrl } = await getSharedSignedUrl("project-documents", att.file_path);
+                                          if (signedUrl) window.open(signedUrl, "_blank");
+                                        } catch (err: any) {
+                                          toast({ title: "Erreur", description: err.message, variant: "destructive" });
+                                        }
                                       }}
                                       className="flex items-center gap-2 text-xs text-primary hover:underline"
                                     >
