@@ -92,7 +92,7 @@ const Header = () => {
               <User size={16} className="mr-1.5" /> Espace client
             </Link>
           </Button>
-          <Button asChild size="sm" className="rounded-full px-5 text-[15px] font-bold bg-[hsl(263,36%,18%)] text-white hover:bg-[hsl(263,36%,24%)]">
+          <Button asChild size="sm" className="rounded-full px-5 text-[15px] font-bold gradient-primary btn-glow text-white shadow-glow">
             <Link to="/contact">Contact</Link>
           </Button>
           <Button asChild size="sm" className="gradient-primary btn-glow rounded-full px-6 text-[15px] font-semibold text-white shadow-glow">
