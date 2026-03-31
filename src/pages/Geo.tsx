@@ -351,7 +351,7 @@ const Geo = () => {
         </div>
       </section>
 
-      <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+      <Suspense fallback={null}><GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" /></Suspense>
 
       {/* 05 - Méthode */}
       <SectionWrapper id="section-5">
