@@ -275,7 +275,7 @@ export const AiChatWidget = () => {
             className="fixed bottom-6 right-6 z-50 flex h-14 w-14 items-center justify-center rounded-full border-2 border-primary bg-transparent shadow-elevated hover:scale-105 transition-transform"
             aria-label="Ouvrir l'assistant IA"
           >
-            <img src={chatBotLogo} alt="Assistant IA" className="h-11 w-11 object-contain" />
+            <img src={chatBotLogo} alt="Assistant IA" className="h-11 w-11 object-contain" width={44} height={44} loading="lazy" decoding="async" />
           </motion.button>
         )}
       </AnimatePresence>
