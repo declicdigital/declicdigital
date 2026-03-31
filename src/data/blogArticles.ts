@@ -760,7 +760,7 @@ Vous souhaitez savoir comment votre site se positionne sur Google ? Demandez vot
     tags: ["site vitrine", "e-commerce", "TPE Paris", "création de site"],
     image: vitrineEcommerceImg,
     relatedSlugs: ["combien-coute-creation-site-web-tpe-2026", "comment-generer-clients-site-web-independant", "site-web-artisan-paris-pourquoi-il-ne-rapporte-pas"],
-    content: \`
+    content: `
 ## Site vitrine vs e-commerce : les différences essentielles
 
 Un **site vitrine** présente votre activité, vos services et vos coordonnées. Il a pour objectif d'informer et de convaincre le visiteur de vous contacter. La transaction se fait hors ligne - par téléphone, email ou en personne.
