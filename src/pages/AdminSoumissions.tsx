@@ -324,15 +324,24 @@ const AdminSoumissions = () => {
     doc.save(`fiche_${name}.pdf`);
   };
 
-  const filteredSubs = filterStatus === "all"
-    ? subs
-    : subs.filter((s) => normalizeStatus(s.status) === filterStatus);
+  const filteredSubs = subs.filter((s) => {
+    if (filterStatus !== "all" && normalizeStatus(s.status) !== filterStatus) return false;
+    if (filterType !== "all" && detectFormType(s.data) !== filterType) return false;
+    return true;
+  });
 
   const statusCounts = {
     all: subs.length,
     en_attente: subs.filter((s) => normalizeStatus(s.status) === "en_attente").length,
     lu: subs.filter((s) => normalizeStatus(s.status) === "lu").length,
     termine: subs.filter((s) => normalizeStatus(s.status) === "termine").length,
+  };
+
+  const typeCounts = {
+    all: subs.length,
+    formulaire: subs.filter((s) => detectFormType(s.data) === "formulaire").length,
+    devis: subs.filter((s) => detectFormType(s.data) === "devis").length,
+    audit: subs.filter((s) => detectFormType(s.data) === "audit").length,
   };
 
   // ==================== DETAIL VIEW ====================
