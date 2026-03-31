@@ -332,9 +332,10 @@ const Tarifs = () => (
       </div>
     </SectionWrapper>
 
-    <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
-
-    <LocationSection />
+    <Suspense fallback={null}>
+      <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+      <LocationSection />
+    </Suspense>
 
     <section className="gradient-miami py-16">
       <div className="container text-center">

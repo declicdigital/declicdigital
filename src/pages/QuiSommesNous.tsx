@@ -130,10 +130,10 @@ const QuiSommesNous = () => (
     </SectionWrapper>
 
     {/* Avis clients Google */}
-    <GoogleReviewsSection className="bg-section-blue" />
-
-    {/* Notre agence - Google Maps */}
-    <LocationSection />
+    <Suspense fallback={null}>
+      <GoogleReviewsSection className="bg-section-blue" />
+      <LocationSection />
+    </Suspense>
 
     {/* Maillage */}
     <SectionWrapper className="bg-section-blue">

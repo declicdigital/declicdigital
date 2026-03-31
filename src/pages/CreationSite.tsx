@@ -206,9 +206,10 @@ const CreationSite = () => (
     </SectionWrapper>
 
     {/* Avis clients */}
-    <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
-
-    <LocationSection />
+    <Suspense fallback={null}>
+      <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+      <LocationSection />
+    </Suspense>
 
     {/* CTA */}
     <section className="gradient-miami py-16">
