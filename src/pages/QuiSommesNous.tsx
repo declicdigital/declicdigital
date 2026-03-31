@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
@@ -5,8 +6,8 @@ import { Heart, Target, Rocket, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
-import GoogleReviewsSection from "@/components/GoogleReviewsSection";
-import LocationSection from "@/components/LocationSection";
+const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
+const LocationSection = lazy(() => import("@/components/LocationSection"));
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
@@ -129,10 +130,10 @@ const QuiSommesNous = () => (
     </SectionWrapper>
 
     {/* Avis clients Google */}
-    <GoogleReviewsSection className="bg-section-blue" />
-
-    {/* Notre agence - Google Maps */}
-    <LocationSection />
+    <Suspense fallback={null}>
+      <GoogleReviewsSection className="bg-section-blue" />
+      <LocationSection />
+    </Suspense>
 
     {/* Maillage */}
     <SectionWrapper className="bg-section-blue">

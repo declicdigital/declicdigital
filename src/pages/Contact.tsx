@@ -1,7 +1,8 @@
+import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import MapEmbed from "@/components/MapEmbed";
 import { Helmet } from "react-helmet-async";
-import GoogleReviewsSection from "@/components/GoogleReviewsSection";
+const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
 import { Link } from "react-router-dom";
 import { Mail, Phone, MapPin, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -140,7 +141,7 @@ const Contact = () => (
     </SectionWrapper>
 
     {/* Avis clients */}
-    <GoogleReviewsSection compact maxReviews={3} />
+    <Suspense fallback={null}><GoogleReviewsSection compact maxReviews={3} /></Suspense>
 
     {/* Maillage */}
     <SectionWrapper className="bg-section-blue">

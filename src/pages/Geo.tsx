@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import GoogleReviewsSection from "@/components/GoogleReviewsSection";
-import LocationSection from "@/components/LocationSection";
+const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
+const LocationSection = lazy(() => import("@/components/LocationSection"));
 import { ChevronDown, CheckCircle2, TrendingDown, MessageSquare, Zap, Target, Building2, Hammer, Laptop } from "lucide-react";
 import heroGeo from "@/assets/geo-hero-woman.webp";
 import geoWorkspace from "@/assets/geo-workspace-design.webp";
@@ -351,7 +351,7 @@ const Geo = () => {
         </div>
       </section>
 
-      <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+      <Suspense fallback={null}><GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" /></Suspense>
 
       {/* 05 - Méthode */}
       <SectionWrapper id="section-5">
@@ -473,7 +473,7 @@ const Geo = () => {
         </div>
       </section>
 
-      <LocationSection />
+      <Suspense fallback={null}><LocationSection /></Suspense>
     </PageLayout>
   );
 };
