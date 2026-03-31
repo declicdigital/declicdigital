@@ -238,7 +238,7 @@ export const FaqAiChatSidebar = () => {
   return (
     <div className="sticky top-24">
       <div className="mb-4 flex items-center gap-2">
-        <img src={chatBotLogo} alt="Assistant IA" className="h-8 w-8 rounded-full object-cover" />
+        <img src={chatBotLogo} alt="Assistant IA" className="h-8 w-8 rounded-full object-cover" width={32} height={32} loading="lazy" decoding="async" />
         <div>
           <h2 className="text-lg font-bold">Assistant IA</h2>
           <p className="text-xs text-muted-foreground">Posez votre question</p>
