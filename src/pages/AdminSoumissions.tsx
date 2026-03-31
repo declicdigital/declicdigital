@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FileText, Calendar, User, Building2, Mail, ChevronRight, Download, Copy, Check, Trash2, Clock, Eye, CheckCircle2 } from "lucide-react";
+import { FileText, Calendar, User, Building2, Mail, ChevronRight, Download, Copy, Check, Trash2, Clock, Eye, CheckCircle2, Search, ClipboardList, MessageSquare } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
