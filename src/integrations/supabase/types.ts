@@ -497,6 +497,27 @@ export type Database = {
         Args: { payload: Json; queue_name: string }
         Returns: number
       }
+      get_project_by_share_token: {
+        Args: { p_token: string }
+        Returns: {
+          client_id: string
+          created_at: string
+          description: string
+          drive_url: string | null
+          id: string
+          name: string
+          share_token: string | null
+          start_date: string
+          status: string
+          website_url: string | null
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "projects"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
