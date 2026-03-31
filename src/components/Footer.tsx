@@ -11,7 +11,7 @@ const Footer = () => (
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
           <div className="space-y-1.5">
-            <img src={logo} alt="Déclic Digital" className="h-16 w-auto" loading="lazy" />
+            <img src={logo} alt="Déclic Digital" className="h-16 w-auto" loading="lazy" decoding="async" width={160} height={88} />
             <p className="text-sm text-white/60 leading-relaxed">
               Déclic Digital accompagne les TPE et indépendants à Paris et dans les Hauts-de-Seine (92) pour développer leur visibilité en ligne. Fondée par un Expert Produit Google.
             </p>

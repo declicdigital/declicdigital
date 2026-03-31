@@ -14,9 +14,11 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
   <div className="flex min-h-screen flex-col">
     <Header />
     <main className="flex-1">{children}</main>
-    <Suspense fallback={null}>
+    <Suspense fallback={<div style={{ minHeight: 400 }} />}>
       {!hideBlogCarousel && <BlogCarousel />}
       <Footer />
+    </Suspense>
+    <Suspense fallback={null}>
       <AiChatWidget />
     </Suspense>
   </div>

@@ -404,7 +404,7 @@ const Index = () => {
       </SectionWrapper>
 
       {/* Notre agence */}
-      <Suspense fallback={null}>
+      <Suspense fallback={<div style={{ minHeight: 300 }} />}>
         <LocationSection />
       </Suspense>
 
