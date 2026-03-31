@@ -188,7 +188,7 @@ const Geo = () => {
           <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6">
             <h2 className="text-sm font-bold uppercase tracking-widest text-primary mb-3">📑 Sommaire</h2>
             <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
-              {["Qu'est-ce que le GEO ?", "SEO vs GEO", "Pourquoi c'est urgent", "TPE, artisans, indépendants", "Comment appliquer le GEO", "Plan d'action", "Checklist", "FAQ", "Mots-clés"].map((item, i) => (
+              {["Qu'est-ce que le GEO ?", "SEO vs GEO", "Pourquoi c'est urgent", "TPE, artisans, indépendants", "Comment appliquer le GEO", "Plan d'action", "Checklist", "FAQ"].map((item, i) => (
                 <a key={i} href={`#section-${i + 1}`} className="text-primary hover:underline">{i + 1}. {item}</a>
               ))}
             </div>
