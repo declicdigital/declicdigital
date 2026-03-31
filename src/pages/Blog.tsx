@@ -174,7 +174,7 @@ const Blog = () => {
           </p>
           <Link
             to="/audit-seo-gratuit"
-            className="mt-8 inline-flex items-center gap-2 rounded-full bg-white px-8 py-3 font-semibold text-foreground shadow-md hover:opacity-90 transition-opacity"
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#f6f1e9] px-8 py-3 font-semibold text-[hsl(263,36%,18%)] shadow-md hover:bg-[#ede6d8] transition-opacity btn-glow"
           >
             Demander un audit SEO gratuit <ArrowRight size={16} />
           </Link>
