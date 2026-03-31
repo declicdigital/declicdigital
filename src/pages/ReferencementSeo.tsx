@@ -255,7 +255,7 @@ const ReferencementSeo = () => {
              <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-white shadow-glow">
               <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="rounded-full border-2 border-white/40 px-8 font-semibold text-white hover:bg-white/10 transition-colors">
+            <Button asChild size="lg" className="rounded-full border-2 border-white/40 bg-transparent px-8 font-semibold text-white hover:bg-white/10 transition-colors">
               <Link to="/contact">Nous contacter</Link>
             </Button>
           </div>
