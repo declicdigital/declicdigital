@@ -110,28 +110,40 @@ const SharedProject = () => {
     }
   };
 
+  const getSharedSignedUrl = async (bucket: string, path: string, action: string = "download") => {
+    const { data, error } = await supabase.functions.invoke("shared-signed-url", {
+      body: { token, bucket, path, action },
+    });
+    if (error) throw error;
+    return data;
+  };
+
   const uploadDocument = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || !project) return;
+    if (!e.target.files || !project || !token) return;
     setUploading(true);
     const file = e.target.files[0];
     const path = `${project.id}/${Date.now()}_${file.name}`;
-    const { error: upErr } = await supabase.storage.from("project-documents").upload(path, file);
-    if (upErr) {
-      toast({ title: "Erreur", description: upErr.message, variant: "destructive" });
-    } else {
-      await supabase.from("project_documents").insert({
-        project_id: project.id, name: file.name, file_path: path,
-      });
+    try {
+      const { signedUrl, token: uploadToken } = await getSharedSignedUrl("project-documents", path, "upload");
+      const uploadRes = await fetch(signedUrl, { method: "PUT", headers: { "Content-Type": file.type }, body: file });
+      if (!uploadRes.ok) throw new Error("Upload failed");
+      await supabase.rpc("add_document_by_share_token", { p_token: token, p_name: file.name, p_file_path: path });
       toast({ title: "Fichier ajoute" });
       loadData();
+    } catch (err: any) {
+      toast({ title: "Erreur", description: err.message, variant: "destructive" });
     }
     setUploading(false);
     e.target.value = "";
   };
 
   const downloadDoc = async (path: string) => {
-    const { data } = await supabase.storage.from("project-documents").createSignedUrl(path, 3600);
-    if (data?.signedUrl) window.open(data.signedUrl, "_blank");
+    try {
+      const { signedUrl } = await getSharedSignedUrl("project-documents", path);
+      if (signedUrl) window.open(signedUrl, "_blank");
+    } catch (err: any) {
+      toast({ title: "Erreur", description: err.message, variant: "destructive" });
+    }
   };
 
   const startRenameAtt = (att: { id: string; file_name: string }) => {
