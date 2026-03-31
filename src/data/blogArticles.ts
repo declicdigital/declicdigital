@@ -8,6 +8,7 @@ import xboxImg from "@/assets/manette-xbox-carbon-black-promo.webp";
 import artisanParisImg from "@/assets/artisan-paris-site-web.webp";
 import coutSiteImg from "@/assets/cout-creation-site-web-tpe.webp";
 import genererClientsImg from "@/assets/generer-clients-site-web-independant.webp";
+import vitrineEcommerceImg from "@/assets/blog/site-vitrine-ou-ecommerce-tpe-paris.jpg";
 
 export interface BlogArticle {
   slug: string;
@@ -746,6 +747,93 @@ Ce tunnel ne nécessite pas de technologie complexe. Un bon [site web](/creation
 
 Vous souhaitez savoir comment votre site se positionne sur Google ? Demandez votre [audit SEO gratuit](/audit-seo-gratuit) : nous vous répondons en 48h, sans engagement.
     `,
+  },
+  {
+    slug: "site-vitrine-ou-ecommerce-tpe-paris",
+    title: "Site vitrine ou e-commerce : que choisir pour votre TPE parisienne ?",
+    metaTitle: "Site vitrine ou e-commerce pour TPE Paris - Que choisir ?",
+    metaDescription: "Site vitrine ou e-commerce : quelle solution choisir pour votre TPE parisienne ? Comparatif complet, tarifs et conseils par Déclic Digital.",
+    excerpt: "Comparatif complet entre site vitrine et e-commerce pour les TPE à Paris : coûts, complexité, retour sur investissement et conseils pour faire le bon choix.",
+    date: "2026-03-31",
+    readTime: "7 min",
+    category: "Création de site",
+    tags: ["site vitrine", "e-commerce", "TPE Paris", "création de site"],
+    image: vitrineEcommerceImg,
+    relatedSlugs: ["combien-coute-creation-site-web-tpe-2026", "comment-generer-clients-site-web-independant", "site-web-artisan-paris-pourquoi-il-ne-rapporte-pas"],
+    content: `
+## Site vitrine vs e-commerce : les différences essentielles
+
+Un **site vitrine** présente votre activité, vos services et vos coordonnées. Il a pour objectif d'informer et de convaincre le visiteur de vous contacter. La transaction se fait hors ligne - par téléphone, email ou en personne.
+
+Un **site e-commerce** permet à vos clients d'acheter directement en ligne, de payer, et de recevoir une confirmation automatique. Il implique une gestion des stocks, des paiements sécurisés, et souvent une logistique de livraison.
+
+Ces deux types de sites répondent à des besoins très différents, et choisir le mauvais peut vous coûter du temps et de l'argent inutilement. Pour mieux comprendre les budgets en jeu, consultez notre [guide des tarifs de création de site web](/blog/combien-coute-creation-site-web-tpe-2026).
+
+## Pour quel type d'activité parisienne choisir l'un ou l'autre
+
+### Le site vitrine convient à
+
+- Les **artisans** (plombier, électricien, peintre) - découvrez [pourquoi leur site ne rapporte pas toujours](/blog/site-web-artisan-paris-pourquoi-il-ne-rapporte-pas)
+- Les **professions libérales** (avocat, médecin, coach)
+- Les **prestataires de services** (comptable, consultant, graphiste)
+- Les **restaurateurs** (pour présenter le menu et prendre des réservations)
+- Les **commerces de proximité** sans vente en ligne
+
+### Le site e-commerce est adapté à
+
+- Les boutiques vendant des **produits physiques** (vêtements, décoration, alimentaire)
+- Les **créateurs** vendant leurs oeuvres
+- Les prestataires proposant des **formations ou des produits numériques**
+- Les artisans proposant des **produits standardisés** (bougies, bijoux, etc.)
+
+Si vous hésitez encore, posez-vous cette question : **vos clients ont-ils besoin de vous parler avant d'acheter ?** Si oui, un site vitrine suffit.
+
+[CTA:Demander un devis gratuit:/contact]
+
+## Comparatif coût, complexité et retour sur investissement
+
+### Le site vitrine
+
+Le site vitrine est moins coûteux à créer (entre 800 et 3 000 euros avec [SEO](/referencement-seo)), plus simple à maintenir, et génère des [leads qualifiés rapidement](/blog/comment-generer-clients-site-web-independant) si bien référencé. Son principal inconvénient : il ne génère pas de revenus automatisés.
+
+### Le site e-commerce
+
+Le site e-commerce demande un investissement plus important (à partir de 4 000 euros), une mise en place plus longue, et une gestion continue (stocks, commandes, SAV). En contrepartie, il peut générer des revenus 24h/24 sans intervention humaine.
+
+Pour une TPE parisienne qui débute, le site vitrine optimisé SEO offre généralement le **meilleur retour sur investissement** dans les 6 premiers mois. Google recommande d'ailleurs de [soigner la vitesse de chargement](https://developers.google.com/speed) quel que soit le type de site choisi.
+
+## Les questions à se poser avant de décider
+
+### 1. Quel type de produit ou service vendez-vous ?
+
+Vendez-vous des produits standardisés ou des prestations sur-mesure ? Si sur-mesure, le vitrine suffit.
+
+### 2. Avez-vous la logistique nécessaire ?
+
+Avez-vous la capacité de gérer des commandes en ligne, des retours, et un service client réactif ?
+
+### 3. Votre catalogue est-il prêt ?
+
+Avez-vous le temps de maintenir un catalogue produits à jour avec des fiches détaillées et des photos de qualité ?
+
+### 4. Quel est votre budget initial ?
+
+Un site vitrine bien référencé peut démarrer à [800 euros](/tarifs), tandis qu'un e-commerce fonctionnel commence autour de 4 000 euros.
+
+Si vous répondez non à l'une de ces questions, commencez par un site vitrine. Vous pourrez toujours évoluer vers l'e-commerce plus tard, une fois votre [présence en ligne établie](/creation-site-web).
+
+[CTA:Audit SEO gratuit:/audit-seo-gratuit]
+
+## Notre conseil pour les TPE parisiennes
+
+Chez Déclic Digital, nous accompagnons les TPE et indépendants de [Paris et des Hauts-de-Seine](/nos-villes) dans la création de leur site web. Notre recommandation : **commencez par un site vitrine optimisé SEO**, mesurez vos résultats, puis évoluez vers l'e-commerce si votre activité le justifie.
+
+Un site vitrine bien conçu et [bien référencé sur Google](/referencement-seo) peut générer autant de chiffre d'affaires qu'une boutique en ligne - avec beaucoup moins de contraintes techniques et logistiques.
+
+Découvrez nos [réalisations](/realisations) pour voir des exemples concrets de sites vitrines performants.
+
+[CTA:Parlons de votre projet:/contact]
+`
   },
 ];
 
