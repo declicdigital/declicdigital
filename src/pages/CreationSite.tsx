@@ -37,7 +37,7 @@ const CreationSite = () => (
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
               Nous concevons des sites modernes, rapides et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour les TPE et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou demandez un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link>.
             </p>
-            <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
               <Link to="/contact">Devis création de site</Link>
             </Button>
           </motion.div>
@@ -217,7 +217,7 @@ const CreationSite = () => (
         <h2 className="mb-4 text-3xl font-extrabold text-white">Ils nous ont fait confiance : réalisations récentes</h2>
         <p className="mb-8 text-white/80">Demandez un devis gratuit pour la création de votre site web professionnel.</p>
         <div className="flex flex-col sm:flex-row gap-4">
-          <Button asChild size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
+          <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
             <Link to="/contact">Devis création de site</Link>
           </Button>
           <Link to="/faq" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
