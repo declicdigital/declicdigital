@@ -288,7 +288,11 @@ const SharedProject = () => {
                           className="text-xs h-7"
                           onClick={async (e) => {
                             e.stopPropagation();
-                            await supabase.from("project_tasks").update({ status: "a_faire_dd" } as any).eq("id", task.id);
+                            await supabase.rpc("update_task_status_by_share_token", {
+                              p_token: token,
+                              p_task_id: task.id,
+                              p_status: "a_faire_dd",
+                            });
                             loadData();
                           }}
                         >
