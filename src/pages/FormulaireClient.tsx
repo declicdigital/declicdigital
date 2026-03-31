@@ -275,7 +275,7 @@ const FormulaireClient = () => {
                 Votre espace client a ete cree. Connectez-vous pour suivre l'avancement de votre projet.
               </p>
               <div className="flex gap-3 justify-center">
-                <Button onClick={() => window.location.href = "/connexion"} className="rounded-full gradient-miami btn-glow text-white">
+                <Button onClick={() => window.location.href = "/connexion"} className="rounded-full gradient-primary btn-glow text-white">
                   Acceder a mon espace client
                 </Button>
                 <Button onClick={() => window.location.href = "/"} variant="outline" className="rounded-full">
