@@ -40,7 +40,7 @@
 @layer base {
   :root {
     --background: 38 33% 94%;
-    --foreground: 0 0% 13%;
+    --foreground: 263 36% 18%;
     --heading: 263 36% 18%;
 
     --card: 43 35% 96%;
@@ -151,12 +151,12 @@
     position: relative;
     paint-order: stroke fill;
     text-shadow:
-      0px 1px 0px hsl(0 0% 10%),
-      0px 2px 0px hsl(0 0% 8%),
-      0px 3px 0px hsl(0 0% 6%),
-      0px 4px 0px hsl(0 0% 4%),
-      0px 5px 0px hsl(0 0% 2%),
-      0px 6px 3px hsl(0 0% 0% / 0.28);
+      0px 1px 0px hsl(263 36% 16%),
+      0px 2px 0px hsl(263 36% 14%),
+      0px 3px 0px hsl(263 36% 12%),
+      0px 4px 0px hsl(263 36% 10%),
+      0px 5px 0px hsl(263 36% 8%),
+      0px 6px 3px hsl(263 36% 6% / 0.28);
   }
 
   h2, h3 {

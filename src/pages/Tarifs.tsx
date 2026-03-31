@@ -342,7 +342,7 @@ const Tarifs = () => (
         <h2 className="mb-4 text-3xl font-extrabold text-white">Une question sur les tarifs ? Parlons-en.</h2>
         <p className="mb-8 text-white/80">Contactez-nous pour discuter de votre projet et recevoir un devis adapté.</p>
         <div className="flex flex-col justify-center gap-4 sm:flex-row">
-          <Button asChild size="lg" className="rounded-full bg-white px-8 font-semibold text-foreground shadow-lg hover:bg-white/90">
+          <Button asChild size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
             <Link to="/contact">Nous contacter</Link>
           </Button>
           <Link
