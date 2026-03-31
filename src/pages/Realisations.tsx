@@ -149,7 +149,7 @@ const Realisations = () => (
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Link
             to="/contact"
-            className="inline-block gradient-primary btn-glow rounded-full px-8 py-3 font-semibold text-white shadow-glow transition-opacity"
+            className="inline-block rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 py-3 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow transition-opacity"
           >
             Devis création de site
           </Link>

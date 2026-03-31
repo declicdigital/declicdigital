@@ -872,7 +872,7 @@ const FormulaireClient = () => {
                 type="submit"
                 size="lg"
                 disabled={sending}
-                className="rounded-full gradient-miami btn-glow text-white font-bold text-base px-10 py-6 shadow-elevated hover:opacity-90 transition-opacity"
+                className="rounded-full gradient-primary btn-glow text-white font-bold text-base px-10 py-6 shadow-elevated hover:opacity-90 transition-opacity"
               >
                 <Send className="h-5 w-5 mr-2" />
                 {sending ? "Envoi en cours…" : "Envoyer mon projet à Déclic Digital"}

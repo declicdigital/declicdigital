@@ -71,7 +71,7 @@ const BlogArticle = () => {
             <div key={i} className="my-10 text-center">
               <Link
                 to={ctaUrl}
-                className="inline-flex items-center gap-2 rounded-full gradient-miami px-8 py-3 font-bold text-white text-lg hover:opacity-90 transition-opacity shadow-lg"
+                className="inline-flex items-center gap-2 rounded-full gradient-primary btn-glow px-8 py-3 font-bold text-white text-lg hover:opacity-90 transition-opacity shadow-lg"
               >
                 {ctaText} <ArrowRight size={18} />
               </Link>
