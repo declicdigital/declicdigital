@@ -92,10 +92,10 @@ const Header = () => {
               <User size={16} className="mr-1.5" /> Espace client
             </Link>
           </Button>
-          <Button asChild size="sm" className="rounded-full px-5 text-[15px] font-bold gradient-primary btn-glow text-white shadow-glow">
+          <Button asChild variant="custom" size="sm" className="rounded-full px-5 text-[15px] font-bold gradient-primary btn-glow text-white shadow-glow">
             <Link to="/contact">Contact</Link>
           </Button>
-          <Button asChild size="sm" className="gradient-primary btn-glow rounded-full px-6 text-[15px] font-semibold text-white shadow-glow">
+          <Button asChild variant="custom" size="sm" className="gradient-primary btn-glow rounded-full px-6 text-[15px] font-semibold text-white shadow-glow">
             <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
           </Button>
         </div>
@@ -140,7 +140,7 @@ const Header = () => {
             >
               <User size={16} /> Espace client
             </Link>
-            <Button asChild size="sm" className="gradient-primary btn-glow mt-2 rounded-full font-semibold text-white shadow-glow">
+            <Button asChild variant="custom" size="sm" className="gradient-primary btn-glow mt-2 rounded-full font-semibold text-white shadow-glow">
               <Link to="/audit-seo-gratuit" onClick={() => setMobileOpen(false)}>
                 Audit SEO gratuit
               </Link>

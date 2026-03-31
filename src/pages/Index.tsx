@@ -115,7 +115,7 @@ const Index = () => {
                 Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO et GEO</Link> pour que les TPE et indépendants de Paris et du 92 attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+                <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
                   <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="rounded-full border-2 border-[hsl(263,36%,18%)] px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)] hover:text-white transition-colors">
@@ -162,7 +162,7 @@ const Index = () => {
             ))}
           </div>
           <div className="mt-10">
-            <Button asChild size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
+            <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
               <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
             </Button>
           </div>
@@ -223,7 +223,7 @@ const Index = () => {
           ))}
         </div>
         <div className="text-center mt-10">
-           <Button asChild size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
+           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
             <Link to="/contact">Démarrer mon projet</Link>
           </Button>
         </div>
@@ -334,7 +334,7 @@ const Index = () => {
             </p>
           </div>
           <div className="text-center mt-10">
-            <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
               <Link to="/contact">Discuter de votre projet</Link>
             </Button>
           </div>
@@ -396,7 +396,7 @@ const Index = () => {
             </div>
             <Input placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" />
             <Textarea placeholder="Décrivez votre projet..." className="rounded-xl min-h-[120px]" required />
-            <Button type="submit" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
+            <Button type="submit" variant="custom" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
               <CheckCircle size={18} className="mr-2" /> Envoyer ma demande
             </Button>
           </form>
@@ -419,10 +419,10 @@ const Index = () => {
               Un site optimisé peut générer des prospects tous les jours. Ne laissez plus vos concurrents capter les clients qui vous cherchent sur Google.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
+              <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
                 <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
               </Button>
-              <Button asChild size="lg" className="rounded-full border-2 border-white bg-transparent px-8 font-semibold text-white hover:bg-white/10 transition-colors">
+              <Button asChild variant="custom" size="lg" className="rounded-full border-2 border-white bg-transparent px-8 font-semibold text-white hover:bg-white/10 transition-colors">
                 <Link to="/tarifs">Voir nos tarifs</Link>
               </Button>
             </div>
