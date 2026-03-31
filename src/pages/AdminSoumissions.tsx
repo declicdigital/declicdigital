@@ -64,6 +64,25 @@ const normalizeStatus = (status?: string): StatusType => {
   return "en_attente";
 };
 
+type FormType = "formulaire" | "devis" | "audit";
+
+const detectFormType = (data: any): FormType => {
+  if (!data) return "devis";
+  if (data.form_type === "audit") return "audit";
+  if (data.form_type === "devis") return "devis";
+  if (data.form_type === "formulaire") return "formulaire";
+  // Auto-detect for existing submissions without form_type
+  if (data.pt || data.budget || data.feat || data.brand || data.pages || data.desc?.length > 100) return "formulaire";
+  if (data.current_url && !data.pt && !data.budget) return "audit";
+  return "devis";
+};
+
+const FORM_TYPE_CONFIG: Record<FormType, { label: string; icon: any; color: string }> = {
+  formulaire: { label: "Formulaire", icon: ClipboardList, color: "bg-violet-500/10 text-violet-600 border-violet-500/20" },
+  devis: { label: "Devis", icon: MessageSquare, color: "bg-sky-500/10 text-sky-600 border-sky-500/20" },
+  audit: { label: "Audit SEO", icon: Search, color: "bg-amber-500/10 text-amber-600 border-amber-500/20" },
+};
+
 const STATUS_CONFIG: Record<StatusType, { label: string; icon: any; color: string; badgeClass: string }> = {
   en_attente: { label: "En attente", icon: Clock, color: "text-amber-500", badgeClass: "bg-amber-500/10 text-amber-600 border-amber-500/20" },
   lu: { label: "Lu", icon: Eye, color: "text-blue-500", badgeClass: "bg-blue-500/10 text-blue-600 border-blue-500/20" },
