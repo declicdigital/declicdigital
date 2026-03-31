@@ -104,6 +104,29 @@ Deno.serve(async (req) => {
     }
     const data = raw;
 
+    // Validate email if provided
+    if (data.email && !validateEmail(sanitize(data.email))) {
+      return new Response(
+        JSON.stringify({ success: false, error: "Email invalide" }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
+    // Validate file_paths if provided - only allow expected extensions
+    if (data.file_paths && Array.isArray(data.file_paths)) {
+      const allowedExt = ['pdf', 'jpg', 'jpeg', 'png', 'webp', 'doc', 'docx', 'xls', 'xlsx'];
+      for (const fp of data.file_paths) {
+        if (typeof fp !== 'string') continue;
+        const ext = fp.split('.').pop()?.toLowerCase() || '';
+        if (!allowedExt.includes(ext)) {
+          return new Response(
+            JSON.stringify({ success: false, error: "Type de fichier non autorisé" }),
+            { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+          );
+        }
+      }
+    }
+
     const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
     const SUPABASE_SERVICE_ROLE_KEY = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
     const adminClient = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
