@@ -161,9 +161,11 @@ const Index = () => {
               </div>
             ))}
           </div>
-          <Button asChild size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 text-[hsl(263,36%,18%)] font-semibold shadow-lg btn-glow">
-            <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
-          </Button>
+          <div className="mt-10">
+            <Button asChild size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 text-[hsl(263,36%,18%)] font-semibold shadow-lg btn-glow">
+              <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+            </Button>
+          </div>
         </div>
       </SectionWrapper>
 
