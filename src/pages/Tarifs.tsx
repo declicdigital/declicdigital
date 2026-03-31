@@ -1,10 +1,9 @@
-import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Check, Star, AlertTriangle } from "lucide-react";
-const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
-const LocationSection = lazy(() => import("@/components/LocationSection"));
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
+import LocationSection from "@/components/LocationSection";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
@@ -332,10 +331,9 @@ const Tarifs = () => (
       </div>
     </SectionWrapper>
 
-    <Suspense fallback={null}>
-      <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
-      <LocationSection />
-    </Suspense>
+    <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+
+    <LocationSection />
 
     <section className="gradient-miami py-16">
       <div className="container text-center">

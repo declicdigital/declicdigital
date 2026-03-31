@@ -1,9 +1,8 @@
-import { lazy, Suspense } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Search, FileText, Users, Lightbulb, CheckCircle } from "lucide-react";
-const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -133,7 +132,7 @@ const AuditSeo = () => (
     </SectionWrapper>
 
     {/* Avis clients */}
-    <Suspense fallback={null}><GoogleReviewsSection compact maxReviews={3} /></Suspense>
+    <GoogleReviewsSection compact maxReviews={3} />
 
     {/* Formulaire */}
     <SectionWrapper className="bg-section-blue" id="formulaire-audit">

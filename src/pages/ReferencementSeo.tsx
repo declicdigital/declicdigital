@@ -1,4 +1,4 @@
-import { useState, lazy, Suspense } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
-const LocationSection = lazy(() => import("@/components/LocationSection"));
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
+import LocationSection from "@/components/LocationSection";
 import { ChevronDown, CheckCircle2, Building2, Hammer, Laptop } from "lucide-react";
 import { cities } from "@/data/cities";
 import heroSeo from "@/assets/seo-hero-businessman.webp";
@@ -344,7 +344,7 @@ const ReferencementSeo = () => {
         </div>
       </SectionWrapper>
 
-      <Suspense fallback={null}><GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" /></Suspense>
+      <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
 
       {/* 05 - Mythes */}
       <SectionWrapper id="idees-recues">
@@ -489,7 +489,7 @@ const ReferencementSeo = () => {
         </div>
       </SectionWrapper>
 
-      <Suspense fallback={null}><LocationSection /></Suspense>
+      <LocationSection />
     </PageLayout>
   );
 };

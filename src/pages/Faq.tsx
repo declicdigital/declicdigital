@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { lazy, Suspense } from "react";
 import { Button } from "@/components/ui/button";
-const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
-const LocationSection = lazy(() => import("@/components/LocationSection"));
+import GoogleReviewsSection from "@/components/GoogleReviewsSection";
+import LocationSection from "@/components/LocationSection";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
@@ -148,10 +148,9 @@ const Faq = () => {
         </div>
       </SectionWrapper>
 
-      <Suspense fallback={null}>
-        <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
-        <LocationSection />
-      </Suspense>
+      <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+
+      <LocationSection />
 
       {/* CTA */}
       <section className="gradient-miami py-16">
