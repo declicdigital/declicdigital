@@ -56,6 +56,11 @@ const Realisations = () => (
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
             Découvrez les sites que nous avons créés pour nos clients. Chaque projet est unique, conçu pour répondre aux besoins spécifiques de chaque entreprise et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>.
           </p>
+          <div className="mt-6">
+            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+              <Link to="/contact">Demander un devis</Link>
+            </Button>
+          </div>
         </motion.div>
       </div>
     </section>
@@ -147,15 +152,12 @@ const Realisations = () => (
           Contactez-nous pour discuter de votre projet et obtenir un devis.
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Link
-            to="/contact"
-            className="inline-block rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 py-3 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow transition-opacity"
-          >
-            Devis création de site
-          </Link>
-          <Link to="/qui-sommes-nous" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
-            Qui sommes-nous
-          </Link>
+          <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
+            <Link to="/contact">Devis création de site</Link>
+          </Button>
+          <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
+            <Link to="/qui-sommes-nous">Qui sommes-nous</Link>
+          </Button>
         </div>
       </div>
     </section>
