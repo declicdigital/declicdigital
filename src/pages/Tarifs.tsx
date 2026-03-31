@@ -175,10 +175,8 @@ const renderPlanCard = (plan: (typeof plans)[number], index: number) => (
 
     <Button
       asChild
-      className={`w-full rounded-full font-semibold ${
-        plan.highlighted ? "gradient-primary text-white shadow-lg hover:opacity-90" : ""
-      }`}
-      variant={plan.highlighted ? "default" : "outline"}
+      variant="custom"
+      className="w-full rounded-full font-semibold gradient-primary text-white shadow-lg btn-glow"
     >
       <Link to="/contact">Demander un devis</Link>
     </Button>
