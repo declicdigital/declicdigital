@@ -291,33 +291,36 @@ const AdminSoumissions = () => {
       });
     }
 
-    y += 4;
-    checkNewPage(30);
-    doc.setFillColor(14, 165, 233);
-    doc.rect(margin, y, 3, 8, "F");
-    doc.setFontSize(10);
-    doc.setFont("helvetica", "bold");
-    doc.setTextColor(23, 25, 35);
-    doc.text("Récap Brief Client (Prompt)", margin + 7, y + 6);
-    y += 14;
+    // Only include prompt section for "formulaire" type submissions
+    if (detectFormType(d) === "formulaire") {
+      y += 4;
+      checkNewPage(30);
+      doc.setFillColor(14, 165, 233);
+      doc.rect(margin, y, 3, 8, "F");
+      doc.setFontSize(10);
+      doc.setFont("helvetica", "bold");
+      doc.setTextColor(23, 25, 35);
+      doc.text("Récap Brief Client (Prompt)", margin + 7, y + 6);
+      y += 14;
 
-    doc.setFillColor(245, 245, 248);
-    const briefText = generateBriefPrompt(d);
-    const briefLines = doc.splitTextToSize(briefText, contentWidth - 12);
-    
-    briefLines.forEach((line: string) => {
-      checkNewPage(5);
-      doc.setFontSize(7);
-      doc.setFont("helvetica", "normal");
-      doc.setTextColor(60, 60, 75);
-      if (line === line.toUpperCase() && line.trim().length > 2 && !/^[-•]/.test(line)) {
-        doc.setFont("helvetica", "bold");
-        doc.setTextColor(23, 25, 35);
-        doc.setFontSize(7.5);
-      }
-      doc.text(line, margin + 6, y);
-      y += 3.8;
-    });
+      doc.setFillColor(245, 245, 248);
+      const briefText = generateBriefPrompt(d);
+      const briefLines = doc.splitTextToSize(briefText, contentWidth - 12);
+      
+      briefLines.forEach((line: string) => {
+        checkNewPage(5);
+        doc.setFontSize(7);
+        doc.setFont("helvetica", "normal");
+        doc.setTextColor(60, 60, 75);
+        if (line === line.toUpperCase() && line.trim().length > 2 && !/^[-•]/.test(line)) {
+          doc.setFont("helvetica", "bold");
+          doc.setTextColor(23, 25, 35);
+          doc.setFontSize(7.5);
+        }
+        doc.text(line, margin + 6, y);
+        y += 3.8;
+      });
+    }
 
     drawFooter(pageNum);
     const name = (d.full_name || "soumission").replace(/\s+/g, "_");
@@ -462,7 +465,8 @@ const AdminSoumissions = () => {
               </div>
             )}
 
-            {/* Brief Prompt Recap */}
+            {/* Brief Prompt Recap — only for "formulaire" type */}
+            {detectFormType(selected.data) === "formulaire" && (
             <div className="border-t border-border">
               <div className="px-6 py-5 bg-muted/30">
                 <div className="flex items-center justify-between mb-3">
@@ -488,6 +492,7 @@ const AdminSoumissions = () => {
                 </pre>
               </div>
             </div>
+            )}
           </div>
         </div>
       </div>
