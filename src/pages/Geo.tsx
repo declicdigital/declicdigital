@@ -427,7 +427,7 @@ const Geo = () => {
         <div className="container text-center">
           <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Besoin d'aide pour cocher toutes ces cases ?</h2>
           <p className="mb-6 text-white/80 max-w-xl mx-auto">On s'occupe de tout. De l'audit à la mise en place, notre équipe vous accompagne sur le SEO et le GEO.</p>
-          <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+           <Button asChild size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
             <Link to="/contact">Prendre contact</Link>
           </Button>
         </div>
