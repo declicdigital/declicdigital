@@ -59,22 +59,21 @@ const SharedProject = () => {
       setProject(proj);
 
       const [{ data: tasksData }, { data: docsData }, { data: milestonesData }] = await Promise.all([
-        supabase.from("project_tasks").select("*").eq("project_id", proj.id).order("sort_order", { ascending: true }),
-        supabase.from("project_documents").select("*").eq("project_id", proj.id).order("created_at", { ascending: false }),
-        supabase.from("project_milestones").select("*").eq("project_id", proj.id).order("sort_order", { ascending: true }),
+        supabase.rpc("get_tasks_by_share_token", { p_token: token }),
+        supabase.rpc("get_documents_by_share_token", { p_token: token }),
+        supabase.rpc("get_milestones_by_share_token", { p_token: token }),
       ]);
-      setTasks(tasksData || []);
-      setDocuments(docsData || []);
-      setMilestones(milestonesData || []);
+      setTasks((tasksData as any[]) || []);
+      setDocuments((docsData as any[]) || []);
+      setMilestones((milestonesData as any[]) || []);
 
-      if (tasksData && tasksData.length > 0) {
-        const taskIds = tasksData.map((t: any) => t.id);
+      if (tasksData && (tasksData as any[]).length > 0) {
         const [{ data: commentsData }, { data: attachData }] = await Promise.all([
-          supabase.from("task_comments").select("*").in("task_id", taskIds).order("created_at", { ascending: true }),
-          supabase.from("task_attachments" as any).select("*").in("task_id", taskIds).order("created_at", { ascending: false }),
+          supabase.rpc("get_comments_by_share_token", { p_token: token }),
+          supabase.rpc("get_attachments_by_share_token", { p_token: token }),
         ]);
         const grouped: Record<string, any[]> = {};
-        (commentsData || []).forEach((c: any) => {
+        ((commentsData as any[]) || []).forEach((c: any) => {
           if (!grouped[c.task_id]) grouped[c.task_id] = [];
           grouped[c.task_id].push(c);
         });
@@ -94,13 +93,12 @@ const SharedProject = () => {
   };
 
   const addTask = async () => {
-    if (!project || !newTaskTitle.trim()) return;
+    if (!project || !newTaskTitle.trim() || !token) return;
     const maxOrder = tasks.length > 0 ? Math.max(...tasks.map((t) => t.sort_order)) + 1 : 0;
-    const { error } = await supabase.from("project_tasks").insert({
-      project_id: project.id,
-      title: newTaskTitle.trim(),
-      status: "a_faire_dd" as any,
-      sort_order: maxOrder,
+    const { error } = await supabase.rpc("add_task_by_share_token", {
+      p_token: token,
+      p_title: newTaskTitle.trim(),
+      p_sort_order: maxOrder,
     });
     if (error) {
       toast({ title: "Erreur", description: error.message, variant: "destructive" });
@@ -112,28 +110,40 @@ const SharedProject = () => {
     }
   };
 
+  const getSharedSignedUrl = async (bucket: string, path: string, action: string = "download") => {
+    const { data, error } = await supabase.functions.invoke("shared-signed-url", {
+      body: { token, bucket, path, action },
+    });
+    if (error) throw error;
+    return data;
+  };
+
   const uploadDocument = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files || !project) return;
+    if (!e.target.files || !project || !token) return;
     setUploading(true);
     const file = e.target.files[0];
     const path = `${project.id}/${Date.now()}_${file.name}`;
-    const { error: upErr } = await supabase.storage.from("project-documents").upload(path, file);
-    if (upErr) {
-      toast({ title: "Erreur", description: upErr.message, variant: "destructive" });
-    } else {
-      await supabase.from("project_documents").insert({
-        project_id: project.id, name: file.name, file_path: path,
-      });
+    try {
+      const { signedUrl, token: uploadToken } = await getSharedSignedUrl("project-documents", path, "upload");
+      const uploadRes = await fetch(signedUrl, { method: "PUT", headers: { "Content-Type": file.type }, body: file });
+      if (!uploadRes.ok) throw new Error("Upload failed");
+      await supabase.rpc("add_document_by_share_token", { p_token: token, p_name: file.name, p_file_path: path });
       toast({ title: "Fichier ajoute" });
       loadData();
+    } catch (err: any) {
+      toast({ title: "Erreur", description: err.message, variant: "destructive" });
     }
     setUploading(false);
     e.target.value = "";
   };
 
   const downloadDoc = async (path: string) => {
-    const { data } = await supabase.storage.from("project-documents").createSignedUrl(path, 3600);
-    if (data?.signedUrl) window.open(data.signedUrl, "_blank");
+    try {
+      const { signedUrl } = await getSharedSignedUrl("project-documents", path);
+      if (signedUrl) window.open(signedUrl, "_blank");
+    } catch (err: any) {
+      toast({ title: "Erreur", description: err.message, variant: "destructive" });
+    }
   };
 
   const startRenameAtt = (att: { id: string; file_name: string }) => {
@@ -142,8 +152,12 @@ const SharedProject = () => {
   };
 
   const confirmRenameAtt = async () => {
-    if (!renamingAttId || !renameAttValue.trim()) return;
-    const { error } = await (supabase.from("task_attachments" as any) as any).update({ file_name: renameAttValue.trim() }).eq("id", renamingAttId);
+    if (!renamingAttId || !renameAttValue.trim() || !token) return;
+    const { error } = await supabase.rpc("rename_attachment_by_share_token", {
+      p_token: token,
+      p_attachment_id: renamingAttId,
+      p_new_name: renameAttValue.trim(),
+    });
     if (error) {
       toast({ title: "Erreur", description: error.message, variant: "destructive" });
     } else {
@@ -274,7 +288,11 @@ const SharedProject = () => {
                           className="text-xs h-7"
                           onClick={async (e) => {
                             e.stopPropagation();
-                            await supabase.from("project_tasks").update({ status: "a_faire_dd" } as any).eq("id", task.id);
+                            await supabase.rpc("update_task_status_by_share_token", {
+                              p_token: token,
+                              p_task_id: task.id,
+                              p_status: "a_faire_dd",
+                            });
                             loadData();
                           }}
                         >
@@ -314,8 +332,12 @@ const SharedProject = () => {
                                   <>
                                     <button
                                       onClick={async () => {
-                                        const { data } = await supabase.storage.from("project-documents").createSignedUrl(att.file_path, 3600);
-                                        if (data?.signedUrl) window.open(data.signedUrl, "_blank");
+                                        try {
+                                          const { signedUrl } = await getSharedSignedUrl("project-documents", att.file_path);
+                                          if (signedUrl) window.open(signedUrl, "_blank");
+                                        } catch (err: any) {
+                                          toast({ title: "Erreur", description: err.message, variant: "destructive" });
+                                        }
                                       }}
                                       className="flex items-center gap-2 text-xs text-primary hover:underline"
                                     >
@@ -344,18 +366,23 @@ const SharedProject = () => {
                               <span><Paperclip className="h-4 w-4" /></span>
                             </Button>
                             <input type="file" className="hidden" onChange={async (ev) => {
-                              if (!ev.target.files || !project) return;
+                              if (!ev.target.files || !project || !token) return;
                               const file = ev.target.files[0];
                               const path = `${project.id}/tasks/${task.id}/${Date.now()}_${file.name}`;
-                              const { error: upErr } = await supabase.storage.from("project-documents").upload(path, file);
-                              if (upErr) {
-                                toast({ title: "Erreur", description: upErr.message, variant: "destructive" });
-                              } else {
-                                await (supabase.from("task_attachments" as any) as any).insert({
-                                  task_id: task.id, file_name: file.name, file_path: path, uploaded_by: "00000000-0000-0000-0000-000000000000",
+                              try {
+                                const { signedUrl } = await getSharedSignedUrl("project-documents", path, "upload");
+                                const uploadRes = await fetch(signedUrl, { method: "PUT", headers: { "Content-Type": file.type }, body: file });
+                                if (!uploadRes.ok) throw new Error("Upload failed");
+                                await supabase.rpc("add_attachment_by_share_token", {
+                                  p_token: token,
+                                  p_task_id: task.id,
+                                  p_file_name: file.name,
+                                  p_file_path: path,
                                 });
                                 toast({ title: "Fichier ajoute" });
                                 loadData();
+                              } catch (err: any) {
+                                toast({ title: "Erreur", description: err.message, variant: "destructive" });
                               }
                               ev.target.value = "";
                             }} />

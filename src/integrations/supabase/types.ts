@@ -489,6 +489,23 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      add_attachment_by_share_token: {
+        Args: {
+          p_file_name: string
+          p_file_path: string
+          p_task_id: string
+          p_token: string
+        }
+        Returns: undefined
+      }
+      add_document_by_share_token: {
+        Args: { p_file_path: string; p_name: string; p_token: string }
+        Returns: undefined
+      }
+      add_task_by_share_token: {
+        Args: { p_sort_order: number; p_title: string; p_token: string }
+        Returns: undefined
+      }
       delete_email: {
         Args: { message_id: number; queue_name: string }
         Returns: boolean
@@ -496,6 +513,63 @@ export type Database = {
       enqueue_email: {
         Args: { payload: Json; queue_name: string }
         Returns: number
+      }
+      get_attachments_by_share_token: {
+        Args: { p_token: string }
+        Returns: {
+          created_at: string
+          file_name: string
+          file_path: string
+          id: string
+          task_id: string
+          uploaded_by: string
+        }[]
+      }
+      get_comments_by_share_token: {
+        Args: { p_token: string }
+        Returns: {
+          content: string
+          created_at: string
+          id: string
+          task_id: string
+          user_id: string
+        }[]
+      }
+      get_documents_by_share_token: {
+        Args: { p_token: string }
+        Returns: {
+          created_at: string
+          file_path: string
+          id: string
+          name: string
+          project_id: string
+          uploaded_by: string | null
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "project_documents"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
+      get_milestones_by_share_token: {
+        Args: { p_token: string }
+        Returns: {
+          completed: boolean
+          created_at: string
+          description: string
+          due_date: string | null
+          id: string
+          project_id: string
+          sort_order: number
+          title: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "project_milestones"
+          isOneToOne: false
+          isSetofReturn: true
+        }
       }
       get_project_by_share_token: {
         Args: { p_token: string }
@@ -514,6 +588,23 @@ export type Database = {
         SetofOptions: {
           from: "*"
           to: "projects"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
+      get_tasks_by_share_token: {
+        Args: { p_token: string }
+        Returns: {
+          created_at: string
+          id: string
+          project_id: string
+          sort_order: number
+          status: Database["public"]["Enums"]["task_status"]
+          title: string
+        }[]
+        SetofOptions: {
+          from: "*"
+          to: "project_tasks"
           isOneToOne: false
           isSetofReturn: true
         }
@@ -541,6 +632,18 @@ export type Database = {
           msg_id: number
           read_ct: number
         }[]
+      }
+      rename_attachment_by_share_token: {
+        Args: { p_attachment_id: string; p_new_name: string; p_token: string }
+        Returns: undefined
+      }
+      update_task_status_by_share_token: {
+        Args: {
+          p_status: Database["public"]["Enums"]["task_status"]
+          p_task_id: string
+          p_token: string
+        }
+        Returns: undefined
       }
     }
     Enums: {

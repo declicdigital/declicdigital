@@ -13,3 +13,5 @@ project_id = "ubtdhicbbwasabgokzje"
     verify_jwt = true
   [functions.send-form]
     verify_jwt = false
+  [functions.shared-signed-url]
+    verify_jwt = false
