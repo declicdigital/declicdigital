@@ -68,7 +68,7 @@ const Footer = () => (
               </Link>
               <Link
                 to="/formulaire-client"
-                className="inline-block rounded-full border border-white/25 px-5 py-2.5 text-sm font-semibold text-white/80 hover:text-white hover:border-white/50 hover:bg-white/5 transition-colors"
+                className="inline-block rounded-full gradient-primary btn-glow px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all"
               >
                 Formulaire client
               </Link>
