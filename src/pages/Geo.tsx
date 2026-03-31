@@ -473,41 +473,6 @@ const Geo = () => {
         </div>
       </section>
 
-      {/* 09 - Mots-clés */}
-      <SectionWrapper id="section-9">
-        <div className="mx-auto max-w-3xl space-y-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">09 - Transparence SEO</p>
-          <h2 className="text-3xl font-extrabold md:text-4xl text-center">Mots-clés utilisés dans cette page</h2>
-          <p className="text-center text-muted-foreground">Voici les mots-clés principaux et secondaires intégrés dans cette page pour maximiser votre référencement naturel et votre visibilité GEO.</p>
-
-          <h3 className="text-xl font-bold">Mots-clés primaires (haute priorité)</h3>
-          <div className="flex flex-wrap gap-2">
-            {kwPrimary.map((kw, i) => (
-              <span key={i} className="inline-block rounded-full border-2 border-primary bg-primary/5 px-4 py-1.5 text-sm font-bold text-primary">{kw}</span>
-            ))}
-          </div>
-
-          <h3 className="text-xl font-bold">Mots-clés secondaires (audience cible)</h3>
-          <div className="flex flex-wrap gap-2">
-            {kwSecondary.map((kw, i) => (
-              <span key={i} className="inline-block rounded-full border bg-background px-4 py-1.5 text-sm text-muted-foreground">{kw}</span>
-            ))}
-          </div>
-
-          <h3 className="text-xl font-bold">Mots-clés techniques et synonymes</h3>
-          <div className="flex flex-wrap gap-2">
-            {kwTechnical.map((kw, i) => (
-              <span key={i} className="inline-block rounded-full border bg-background px-4 py-1.5 text-sm text-muted-foreground">{kw}</span>
-            ))}
-          </div>
-
-          <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
-            <p className="font-bold text-primary mb-2">📊 Stratégie de ciblage des mots-clés</p>
-            <p className="text-muted-foreground">Cette page utilise une stratégie de <strong>cluster thématique</strong> centré sur le GEO. Le mot-clé principal apparaît dans le titre H1, la meta description, les titres H2, les 100 premiers mots du contenu et dans les balises Schema. Les mots-clés secondaires sont répartis naturellement dans les titres H3 et le corps du texte pour éviter le keyword stuffing et maximiser la pertinence sémantique globale - un signal fort pour les algorithmes IA.</p>
-          </div>
-        </div>
-      </SectionWrapper>
-
       <LocationSection />
     </PageLayout>
   );

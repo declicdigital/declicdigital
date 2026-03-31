@@ -464,41 +464,6 @@ const ReferencementSeo = () => {
         </div>
       </SectionWrapper>
 
-      {/* 09 - Mots-clés */}
-      <SectionWrapper className="bg-section-blue" id="mots-cles">
-        <div className="mx-auto max-w-3xl space-y-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">09 - Transparence éditoriale</p>
-          <h2 className="text-3xl font-extrabold md:text-4xl text-center">Stratégie de mots-clés de cette page</h2>
-          <p className="text-center text-muted-foreground">Comme toute page éditoriale sérieuse, celle-ci applique les principes SEO qu'elle enseigne. Voici les mots-clés ciblés.</p>
-
-          <h3 className="text-xl font-bold">Mots-clés primaires</h3>
-          <div className="flex flex-wrap gap-2">
-            {kwPrimary.map((kw, i) => (
-              <span key={i} className="inline-block rounded-full border-2 border-primary bg-primary/5 px-4 py-1.5 text-sm font-bold text-primary">{kw}</span>
-            ))}
-          </div>
-
-          <h3 className="text-xl font-bold">Mots-clés secondaires et de longue traîne</h3>
-          <div className="flex flex-wrap gap-2">
-            {kwSecondary.map((kw, i) => (
-              <span key={i} className="inline-block rounded-full border bg-background px-4 py-1.5 text-sm text-muted-foreground">{kw}</span>
-            ))}
-          </div>
-
-          <h3 className="text-xl font-bold">Questions ciblées (People Also Ask / SEO conversationnel)</h3>
-          <div className="flex flex-wrap gap-2">
-            {kwQuestions.map((kw, i) => (
-              <span key={i} className="inline-block rounded-full border bg-background px-4 py-1.5 text-sm text-muted-foreground">{kw}</span>
-            ))}
-          </div>
-
-          <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
-            <p className="font-bold text-primary mb-2">📊 Architecture sémantique</p>
-            <p className="text-muted-foreground">Cette page adopte une stratégie de <strong>contenu pilier</strong> sur le thème « SEO pour petits entrepreneurs ». Le mot-clé principal figure dans le titre H1, la meta description, les 100 premiers mots et les balises Schema.org. Les mots-clés secondaires sont répartis dans les titres H2/H3 et le corps du texte. Les questions longue traîne sont concentrées dans la FAQ, structurée en données Schema FAQPage pour maximiser les chances d'extraits enrichis dans Google.</p>
-          </div>
-        </div>
-      </SectionWrapper>
-
       {/* Villes maillage */}
       <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">Référencement SEO local à Paris et dans le 92</h2>
