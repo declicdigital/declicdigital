@@ -106,18 +106,12 @@
     @apply border-border;
   }
 
-  body, p, span, a, li, button, label, input, textarea, td, th, figcaption, blockquote {
+  body {
     @apply bg-background text-foreground font-sans antialiased;
     font-family: 'Clash Display', system-ui, sans-serif;
     font-weight: 400;
     position: relative;
     background-color: var(--bg-paper);
-  }
-
-  p, span, a, li, button, label, input, textarea, td, th, figcaption, blockquote {
-    background: unset;
-    background-color: unset;
-    position: static;
   }
 
   h1, h2, h3 {
