@@ -576,6 +576,9 @@ const AdminSoumissions = () => {
               const status = normalizeStatus(s.status);
               const cfg = STATUS_CONFIG[status];
               const StatusIcon = cfg.icon;
+              const formType = detectFormType(s.data);
+              const ftCfg = FORM_TYPE_CONFIG[formType];
+              const FtIcon = ftCfg.icon;
               return (
                 <motion.div
                   key={s.id}
@@ -587,11 +590,15 @@ const AdminSoumissions = () => {
                 >
                   <div className="flex items-start gap-3">
                     <div className="flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
-                      <FileText className="h-4 w-4 md:h-5 md:w-5" />
+                      <FtIcon className="h-4 w-4 md:h-5 md:w-5" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="font-semibold text-sm truncate">{s.data?.full_name || "Sans nom"}</span>
+                        <span className={`inline-flex items-center gap-1 text-[11px] font-medium rounded-full px-2 py-0.5 border ${ftCfg.color}`}>
+                          <FtIcon className="h-3 w-3" />
+                          {ftCfg.label}
+                        </span>
                         <span className={`inline-flex items-center gap-1 text-[11px] font-medium rounded-full px-2 py-0.5 border ${cfg.badgeClass}`}>
                           <StatusIcon className="h-3 w-3" />
                           {cfg.label}
