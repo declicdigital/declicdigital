@@ -59,22 +59,21 @@ const SharedProject = () => {
       setProject(proj);
 
       const [{ data: tasksData }, { data: docsData }, { data: milestonesData }] = await Promise.all([
-        supabase.from("project_tasks").select("*").eq("project_id", proj.id).order("sort_order", { ascending: true }),
-        supabase.from("project_documents").select("*").eq("project_id", proj.id).order("created_at", { ascending: false }),
-        supabase.from("project_milestones").select("*").eq("project_id", proj.id).order("sort_order", { ascending: true }),
+        supabase.rpc("get_tasks_by_share_token", { p_token: token }),
+        supabase.rpc("get_documents_by_share_token", { p_token: token }),
+        supabase.rpc("get_milestones_by_share_token", { p_token: token }),
       ]);
-      setTasks(tasksData || []);
-      setDocuments(docsData || []);
-      setMilestones(milestonesData || []);
+      setTasks((tasksData as any[]) || []);
+      setDocuments((docsData as any[]) || []);
+      setMilestones((milestonesData as any[]) || []);
 
-      if (tasksData && tasksData.length > 0) {
-        const taskIds = tasksData.map((t: any) => t.id);
+      if (tasksData && (tasksData as any[]).length > 0) {
         const [{ data: commentsData }, { data: attachData }] = await Promise.all([
-          supabase.from("task_comments").select("*").in("task_id", taskIds).order("created_at", { ascending: true }),
-          supabase.from("task_attachments" as any).select("*").in("task_id", taskIds).order("created_at", { ascending: false }),
+          supabase.rpc("get_comments_by_share_token", { p_token: token }),
+          supabase.rpc("get_attachments_by_share_token", { p_token: token }),
         ]);
         const grouped: Record<string, any[]> = {};
-        (commentsData || []).forEach((c: any) => {
+        ((commentsData as any[]) || []).forEach((c: any) => {
           if (!grouped[c.task_id]) grouped[c.task_id] = [];
           grouped[c.task_id].push(c);
         });
