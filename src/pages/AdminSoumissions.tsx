@@ -538,6 +538,33 @@ const AdminSoumissions = () => {
           })}
         </div>
 
+        {/* Category filter tabs */}
+        <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-1 -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap">
+          {(["all", "formulaire", "devis", "audit"] as const).map((ft) => {
+            const isAll = ft === "all";
+            const label = isAll ? "Toutes" : FORM_TYPE_CONFIG[ft].label;
+            const Icon = isAll ? FileText : FORM_TYPE_CONFIG[ft].icon;
+            const count = typeCounts[ft];
+            const isActive = filterType === ft;
+            return (
+              <button
+                key={ft}
+                onClick={() => setFilterType(ft)}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition-all border whitespace-nowrap shrink-0 ${
+                  isActive
+                    ? isAll
+                      ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                      : FORM_TYPE_CONFIG[ft as FormType].color + " shadow-sm"
+                    : "bg-card text-muted-foreground border-border hover:bg-muted"
+                }`}
+              >
+                <Icon className="h-3.5 w-3.5" />
+                {label}
+                <span className={`text-xs font-bold rounded-full px-1.5 py-0.5 ${isActive ? "bg-white/20" : "bg-muted"}`}>{count}</span>
+              </button>
+            );
+          })}
+
         {loading ? (
           <div className="text-center text-muted-foreground py-16">Chargement…</div>
         ) : filteredSubs.length === 0 ? (
