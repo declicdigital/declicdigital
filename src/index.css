@@ -18,10 +18,18 @@
 
 @font-face {
   font-family: 'Clash Display';
-  src: url('/fonts/ClashDisplay-Variable.ttf') format('truetype');
+  src: url('/fonts/ClashDisplay-Variable.woff2') format('woff2');
   font-weight: 200 700;
   font-style: normal;
   font-display: swap;
+}
+
+/* ── Global font-weight reset ── */
+body, p, span, a, li, button, label, input, textarea {
+  font-weight: 400;
+}
+h1, h2, h3 {
+  font-weight: 700;
 }
 
 @font-face {
