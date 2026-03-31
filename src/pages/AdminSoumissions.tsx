@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { FileText, Calendar, User, Building2, Mail, ChevronRight, Download, Copy, Check, Trash2, Clock, Eye, CheckCircle2 } from "lucide-react";
+import { FileText, Calendar, User, Building2, Mail, ChevronRight, Download, Copy, Check, Trash2, Clock, Eye, CheckCircle2, Search, ClipboardList, MessageSquare } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -64,6 +64,25 @@ const normalizeStatus = (status?: string): StatusType => {
   return "en_attente";
 };
 
+type FormType = "formulaire" | "devis" | "audit";
+
+const detectFormType = (data: any): FormType => {
+  if (!data) return "devis";
+  if (data.form_type === "audit") return "audit";
+  if (data.form_type === "devis") return "devis";
+  if (data.form_type === "formulaire") return "formulaire";
+  // Auto-detect for existing submissions without form_type
+  if (data.pt || data.budget || data.feat || data.brand || data.pages || data.desc?.length > 100) return "formulaire";
+  if (data.current_url && !data.pt && !data.budget) return "audit";
+  return "devis";
+};
+
+const FORM_TYPE_CONFIG: Record<FormType, { label: string; icon: any; color: string }> = {
+  formulaire: { label: "Formulaire", icon: ClipboardList, color: "bg-violet-500/10 text-violet-600 border-violet-500/20" },
+  devis: { label: "Devis", icon: MessageSquare, color: "bg-sky-500/10 text-sky-600 border-sky-500/20" },
+  audit: { label: "Audit SEO", icon: Search, color: "bg-amber-500/10 text-amber-600 border-amber-500/20" },
+};
+
 const STATUS_CONFIG: Record<StatusType, { label: string; icon: any; color: string; badgeClass: string }> = {
   en_attente: { label: "En attente", icon: Clock, color: "text-amber-500", badgeClass: "bg-amber-500/10 text-amber-600 border-amber-500/20" },
   lu: { label: "Lu", icon: Eye, color: "text-blue-500", badgeClass: "bg-blue-500/10 text-blue-600 border-blue-500/20" },
@@ -110,6 +129,7 @@ const AdminSoumissions = () => {
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
   const [filterStatus, setFilterStatus] = useState<StatusType | "all">("all");
+  const [filterType, setFilterType] = useState<FormType | "all">("all");
 
   const fetchSubs = async () => {
     try {
@@ -304,15 +324,24 @@ const AdminSoumissions = () => {
     doc.save(`fiche_${name}.pdf`);
   };
 
-  const filteredSubs = filterStatus === "all"
-    ? subs
-    : subs.filter((s) => normalizeStatus(s.status) === filterStatus);
+  const filteredSubs = subs.filter((s) => {
+    if (filterStatus !== "all" && normalizeStatus(s.status) !== filterStatus) return false;
+    if (filterType !== "all" && detectFormType(s.data) !== filterType) return false;
+    return true;
+  });
 
   const statusCounts = {
     all: subs.length,
     en_attente: subs.filter((s) => normalizeStatus(s.status) === "en_attente").length,
     lu: subs.filter((s) => normalizeStatus(s.status) === "lu").length,
     termine: subs.filter((s) => normalizeStatus(s.status) === "termine").length,
+  };
+
+  const typeCounts = {
+    all: subs.length,
+    formulaire: subs.filter((s) => detectFormType(s.data) === "formulaire").length,
+    devis: subs.filter((s) => detectFormType(s.data) === "devis").length,
+    audit: subs.filter((s) => detectFormType(s.data) === "audit").length,
   };
 
   // ==================== DETAIL VIEW ====================
@@ -509,6 +538,34 @@ const AdminSoumissions = () => {
           })}
         </div>
 
+        {/* Category filter tabs */}
+        <div className="flex items-center gap-2 mb-6 overflow-x-auto pb-1 -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap">
+          {(["all", "formulaire", "devis", "audit"] as const).map((ft) => {
+            const isAll = ft === "all";
+            const label = isAll ? "Toutes" : FORM_TYPE_CONFIG[ft].label;
+            const Icon = isAll ? FileText : FORM_TYPE_CONFIG[ft].icon;
+            const count = typeCounts[ft];
+            const isActive = filterType === ft;
+            return (
+              <button
+                key={ft}
+                onClick={() => setFilterType(ft)}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs md:text-sm font-medium transition-all border whitespace-nowrap shrink-0 ${
+                  isActive
+                    ? isAll
+                      ? "bg-primary text-primary-foreground border-primary shadow-sm"
+                      : FORM_TYPE_CONFIG[ft as FormType].color + " shadow-sm"
+                    : "bg-card text-muted-foreground border-border hover:bg-muted"
+                }`}
+              >
+                <Icon className="h-3.5 w-3.5" />
+                {label}
+                <span className={`text-xs font-bold rounded-full px-1.5 py-0.5 ${isActive ? "bg-white/20" : "bg-muted"}`}>{count}</span>
+              </button>
+            );
+          })}
+        </div>
+
         {loading ? (
           <div className="text-center text-muted-foreground py-16">Chargement…</div>
         ) : filteredSubs.length === 0 ? (
@@ -519,6 +576,9 @@ const AdminSoumissions = () => {
               const status = normalizeStatus(s.status);
               const cfg = STATUS_CONFIG[status];
               const StatusIcon = cfg.icon;
+              const formType = detectFormType(s.data);
+              const ftCfg = FORM_TYPE_CONFIG[formType];
+              const FtIcon = ftCfg.icon;
               return (
                 <motion.div
                   key={s.id}
@@ -530,11 +590,15 @@ const AdminSoumissions = () => {
                 >
                   <div className="flex items-start gap-3">
                     <div className="flex h-9 w-9 md:h-10 md:w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
-                      <FileText className="h-4 w-4 md:h-5 md:w-5" />
+                      <FtIcon className="h-4 w-4 md:h-5 md:w-5" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <span className="font-semibold text-sm truncate">{s.data?.full_name || "Sans nom"}</span>
+                        <span className={`inline-flex items-center gap-1 text-[11px] font-medium rounded-full px-2 py-0.5 border ${ftCfg.color}`}>
+                          <FtIcon className="h-3 w-3" />
+                          {ftCfg.label}
+                        </span>
                         <span className={`inline-flex items-center gap-1 text-[11px] font-medium rounded-full px-2 py-0.5 border ${cfg.badgeClass}`}>
                           <StatusIcon className="h-3 w-3" />
                           {cfg.label}

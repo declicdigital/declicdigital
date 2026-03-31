@@ -240,7 +240,7 @@ const FormulaireClient = () => {
 
       // Send to edge function (creates account + saves form + generates PDF)
       const { data: result, error } = await supabase.functions.invoke("send-form", {
-        body: { ...f, password: f.password, team: teamData, file_paths: filePaths, submission_id: submissionId },
+        body: { ...f, form_type: "formulaire", password: f.password, team: teamData, file_paths: filePaths, submission_id: submissionId },
       });
 
       if (error) throw error;
