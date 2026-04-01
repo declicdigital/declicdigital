@@ -580,7 +580,7 @@ Ce qui a changé : une page d'accueil restructurée avec un H1 optimisé, des pa
 
 ## Demandez votre audit SEO gratuit
 
-Vous souhaitez savoir comment votre site se positionne sur Google et ce qui bloque vos conversions ? Demandez votre [audit SEO gratuit](/audit-seo-gratuit) : nous analysons votre site et vous proposons un plan d'action concret. Réponse en 48h, sans engagement.
+Vous souhaitez savoir comment votre site se positionne sur Google et ce qui bloque vos conversions ? Demandez votre [audit SEO gratuit](/audit-seo-gratuit) : nous analysons votre site et vous proposons un plan d'action concret, incluant un diagnostic de votre [référencement SEO pour artisans](/referencement-seo). Réponse en 48h, sans engagement.
 
 Besoin d'un [site web performant](/creation-site-web) pour votre activité d'artisan ? Découvrez nos [tarifs](/tarifs) et nos [réalisations](/realisations). Contactez-nous dès maintenant pour transformer votre site en machine à clients.
     `,
