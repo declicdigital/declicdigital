@@ -83,7 +83,8 @@ const App = () => (
                 <Route path="/projet/:token" element={<SharedProject />} />
                 <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
                 <Route path="/brief" element={<FormulaireBrief />} />
-                <Route path="/geo" element={<Geo />} />
+                <Route path="/visibilite-ia" element={<Geo />} />
+                <Route path="/geo" element={<GeoRedirect />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
