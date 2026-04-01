@@ -221,12 +221,11 @@ const FormulaireBrief = () => {
         ? teamMembers.map(m => ({ name: m.name, role: m.role, bio: m.bio, photo_name: m.photo?.name || "" }))
         : [];
 
-      // Save as form submission only (no account creation)
-      await supabase.from("form_submissions").insert({
-        data: { ...f, team: teamData, file_paths: filePaths, submission_id: submissionId, source: "brief-externe" } as any,
-        file_paths: filePaths,
-        status: "nouveau",
+      // Save as form submission via edge function
+      const { error: fnError } = await supabase.functions.invoke("send-form", {
+        body: { ...f, team: teamData, file_paths: filePaths, submission_id: submissionId, source: "brief-externe" },
       });
+      if (fnError) throw fnError;
 
       setSent(true);
       toast({ title: "Formulaire envoye !", description: "Nous reviendrons vers vous rapidement." });
