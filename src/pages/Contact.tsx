@@ -36,8 +36,8 @@ const Contact = () => {
     if (!form.full_name || !form.email || !form.msg) return;
     setLoading(true);
     try {
-      const { error } = await supabase.from("form_submissions").insert({
-        data: { ...form, form_type: "devis" } as any,
+      const { error } = await supabase.functions.invoke("send-form", {
+        body: { ...form, form_type: "devis" },
       });
       if (error) throw error;
       setSent(true);

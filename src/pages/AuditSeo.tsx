@@ -36,8 +36,8 @@ const AuditSeo = () => {
     if (!form.full_name || !form.email || !form.current_url) return;
     setLoading(true);
     try {
-      const { error } = await supabase.from("form_submissions").insert({
-        data: { ...form, form_type: "audit" } as any,
+      const { error } = await supabase.functions.invoke("send-form", {
+        body: { ...form, form_type: "audit" },
       });
       if (error) throw error;
       setSent(true);
