@@ -1,6 +1,8 @@
 import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+
+const GeoRedirect = () => <Navigate to="/visibilite-ia" replace />;
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
@@ -83,7 +85,8 @@ const App = () => (
                 <Route path="/projet/:token" element={<SharedProject />} />
                 <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
                 <Route path="/brief" element={<FormulaireBrief />} />
-                <Route path="/geo" element={<Geo />} />
+                <Route path="/visibilite-ia" element={<Geo />} />
+                <Route path="/geo" element={<GeoRedirect />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>

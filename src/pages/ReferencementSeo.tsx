@@ -464,20 +464,43 @@ const ReferencementSeo = () => {
         </div>
       </SectionWrapper>
 
-      {/* Villes maillage */}
+      {/* GEO encart */}
+      <SectionWrapper className="bg-section-blue">
+        <div className="mx-auto max-w-3xl">
+          <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8">
+            <h2 className="text-2xl font-extrabold mb-3">Au-delà du SEO : la visibilité dans les moteurs IA</h2>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              Au-delà du SEO traditionnel, nous vous aidons aussi à apparaître dans les réponses des intelligences artificielles. ChatGPT, Perplexity, Gemini : ces moteurs génératifs deviennent un canal d'acquisition incontournable. Découvrez notre stratégie d'<Link to="/visibilite-ia" className="text-primary font-semibold hover:underline">optimisation pour les moteurs IA (GEO)</Link>.
+            </p>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* Zones d'intervention SEO */}
       <SectionWrapper>
-        <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">Référencement SEO local à Paris et dans le 92</h2>
+        <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">Nos zones d'intervention SEO</h2>
         <p className="text-center text-muted-foreground mb-8">
-          Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold hover:underline">référencement SEO local</Link> à Paris et dans les Hauts-de-Seine. Découvrez aussi notre page dédiée au <Link to="/geo" className="text-primary font-semibold hover:underline">GEO (Generative Engine Optimization)</Link>.
+          Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold hover:underline">référencement SEO local</Link> à Paris et dans les Hauts-de-Seine.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
-          {cities.slice(0, 12).map((c) => (
+          {[
+            { slug: "paris-1er", label: "SEO Paris 1er" },
+            { slug: "boulogne-billancourt", label: "SEO Boulogne-Billancourt" },
+            { slug: "neuilly-sur-seine", label: "SEO Neuilly-sur-Seine" },
+            { slug: "levallois-perret", label: "SEO Levallois-Perret" },
+            { slug: "issy-les-moulineaux", label: "SEO Issy-les-Moulineaux" },
+            { slug: "courbevoie", label: "SEO Courbevoie" },
+            { slug: "nanterre", label: "SEO Nanterre" },
+            { slug: "rueil-malmaison", label: "SEO Rueil-Malmaison" },
+            { slug: "montrouge", label: "SEO Montrouge" },
+            { slug: "asnieres-sur-seine", label: "SEO Asnières-sur-Seine" },
+          ].map((c) => (
             <Link
               key={c.slug}
               to={`/referencement-seo/${c.slug}`}
               className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors"
             >
-              SEO {c.nameShort}
+              {c.label}
             </Link>
           ))}
           <Link

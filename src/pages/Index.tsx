@@ -177,11 +177,12 @@ const Index = () => {
             Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">Déclic Digital</Link>, nous ne créons pas simplement des sites web. Nous concevons des outils de génération de clients, pensés pour les TPE et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> adaptés aux petits budgets.
           </p>
         </div>
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           {[
-            { icon: Monitor, title: "Création de site web", desc: "Nous concevons des sites modernes, rapides et responsive, optimisés pour la conversion et l'expérience utilisateur. Chaque site est pensé pour guider vos visiteurs vers l'action.", link: "/creation-site-web" },
-            { icon: TrendingUp, title: "Référencement SEO et GEO", desc: "Le SEO et le GEO sont les leviers les plus rentables pour attirer des clients. Nous optimisons votre site pour apparaître en première page Google et dans les réponses des IA.", link: "/referencement-seo" },
-            { icon: BarChart3, title: "Stratégie digitale", desc: "Analyse de marché, positionnement, contenu, suivi des performances : chaque action est mesurée et orientée résultats pour développer votre visibilité.", link: "/contact" },
+            { icon: Monitor, title: "Création de site web", desc: "Nous concevons des sites modernes, rapides et responsive, optimisés pour la conversion et l'expérience utilisateur.", link: "/creation-site-web" },
+            { icon: TrendingUp, title: "Référencement SEO", desc: "Le SEO est le levier le plus rentable pour attirer des clients. Nous optimisons votre site pour apparaître en première page Google.", link: "/referencement-seo" },
+            { icon: Eye, title: "Visibilité IA (GEO)", desc: "Apparaissez dans les réponses de ChatGPT, Perplexity et Gemini. La nouvelle frontière de la visibilité digitale pour les TPE.", link: "/visibilite-ia" },
+            { icon: BarChart3, title: "Stratégie digitale", desc: "Analyse de marché, positionnement, contenu, suivi des performances : chaque action est mesurée et orientée résultats.", link: "/contact" },
           ].map((s, i) => (
             <div key={i} className="group rounded-2xl bg-card p-8 shadow-card transition-all hover:shadow-elevated hover:-translate-y-1">
               <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">

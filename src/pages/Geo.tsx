@@ -121,18 +121,18 @@ const Geo = () => {
     description: "Tout comprendre sur le GEO, la nouvelle discipline d'optimisation pour les moteurs génératifs basés sur l'IA.",
     author: { "@type": "LocalBusiness", name: "Déclic Digital", url: "https://declicdigital.net" },
     datePublished: "2026-06-01",
-    mainEntityOfPage: { "@type": "WebPage", "@id": "https://declicdigital.net/geo/" },
+    mainEntityOfPage: { "@type": "WebPage", "@id": "https://declicdigital.net/visibilite-ia/" },
   };
 
   return (
     <PageLayout>
       <Helmet>
-        <title>GEO (Generative Engine Optimization) : Le nouveau SEO à l'ère de l'IA | Déclic Digital</title>
-        <meta name="description" content="Découvrez le GEO (Generative Engine Optimization), la stratégie incontournable pour être cité par ChatGPT, Gemini et Perplexity. Indispensable pour les TPE, artisans et indépendants." />
+        <title>Visibilité dans les IA (GEO) – Apparaître dans ChatGPT, Perplexity & Google AI | Déclic Digital</title>
+        <meta name="description" content="Optimisez votre présence dans les réponses générées par l'IA. Déclic Digital vous aide à apparaître dans ChatGPT, Perplexity, Gemini et les AI Overviews de Google." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://declicdigital.net/geo/" />
-        <meta property="og:title" content="GEO : Comprendre et appliquer la Generative Engine Optimization" />
-        <meta property="og:description" content="Tout ce que les TPE, artisans et indépendants doivent savoir sur le GEO pour être cités par les IA." />
+        <link rel="canonical" href="https://declicdigital.net/visibilite-ia/" />
+        <meta property="og:title" content="Visibilité IA (GEO) : Apparaître dans ChatGPT, Perplexity et Google AI" />
+        <meta property="og:description" content="Optimisez votre présence dans les réponses des IA génératives. Stratégie GEO pour TPE, artisans et indépendants." />
         <meta property="og:type" content="article" />
         <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
@@ -140,7 +140,7 @@ const Geo = () => {
 
       <PageBreadcrumb items={[
         { label: "Accueil", href: "/" },
-        { label: "GEO" },
+        { label: "Visibilité IA" },
       ]} />
 
       {/* Hero */}
@@ -206,11 +206,14 @@ const Geo = () => {
               Le <strong className="text-primary">GEO, ou Generative Engine Optimization</strong>, désigne l'ensemble des stratégies et techniques permettant d'optimiser la présence d'un site web ou d'une entreprise dans les réponses générées par les <strong className="text-primary">intelligences artificielles conversationnelles</strong> : ChatGPT, Google Gemini, Perplexity AI, Claude (Anthropic), Microsoft Copilot, et tous leurs successeurs.
             </p>
           </div>
-          <p className="text-muted-foreground leading-relaxed">
-            En termes simples : là où le <strong>SEO</strong> (Search Engine Optimization) vous fait apparaître dans les résultats de Google, le <strong>GEO</strong> vous fait citer, mentionner ou recommander par les IA quand un utilisateur pose une question dans leur interface.
+           <p className="text-muted-foreground leading-relaxed">
+210:             En termes simples : là où le <strong>SEO</strong> (Search Engine Optimization) vous fait apparaître dans les résultats de Google, le <strong>GEO</strong> vous fait citer, mentionner ou recommander par les IA quand un utilisateur pose une question dans leur interface.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Imaginez qu'un client potentiel tape dans ChatGPT : <em>"Quel est le meilleur plombier chauffagiste à Lyon ?"</em> ou <em>"Quelle agence web recommandes-tu pour une TPE ?"</em>. Le GEO est ce qui détermine si votre nom apparaît dans la réponse… ou si c'est celui de votre concurrent. Découvrez comment nous intégrons le GEO dans <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">notre offre de référencement SEO et GEO</Link>.
+            Imaginez qu'un client potentiel tape dans ChatGPT : <em>"Quel est le meilleur plombier chauffagiste à Lyon ?"</em> ou <em>"Quelle agence web recommandes-tu pour une TPE ?"</em>. Le GEO est ce qui détermine si votre nom apparaît dans la réponse… ou si c'est celui de votre concurrent. Le GEO est un complément naturel du <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO classique</Link>.
+          </p>
+          <p className="text-muted-foreground leading-relaxed">
+            Pour qu'une stratégie GEO fonctionne, il faut d'abord disposer d'un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web bien structuré pour les IA</Link>, avec du contenu de qualité et des données structurées. C'est la base technique indispensable. Vous pouvez aussi <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">auditer votre visibilité actuelle</Link> pour identifier vos axes de progression. Découvrez également comment la <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold hover:underline">performance technique de votre site</Link> influence les critères de sélection des IA.
           </p>
           <div className="rounded-2xl border border-amber-300/30 bg-amber-50/50 p-5">
             <p className="font-bold text-amber-700 mb-2">⚡ Pourquoi ce terme est-il encore méconnu ?</p>

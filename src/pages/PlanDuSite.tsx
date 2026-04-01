@@ -12,7 +12,7 @@ const links = [
   { label: "Création de site web", to: "/creation-site-web" },
   { label: "Référencement SEO et GEO", to: "/referencement-seo" },
   { label: "Audit SEO gratuit", to: "/audit-seo-gratuit" },
-  { label: "GEO (Generative Engine Optimization)", to: "/geo" },
+  { label: "Visibilité IA (GEO)", to: "/visibilite-ia" },
   { label: "Nos tarifs", to: "/tarifs" },
   { label: "Réalisations", to: "/realisations" },
   { label: "Nos villes", to: "/nos-villes" },

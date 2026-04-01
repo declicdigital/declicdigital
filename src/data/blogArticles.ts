@@ -138,7 +138,7 @@ Les chatbots intelligents, la personnalisation du contenu en temps réel et les 
 
 Ne suivez pas toutes les tendances en même temps. Choisissez celles qui correspondent à votre marque et à votre audience. Un artisan local n'a pas les mêmes besoins visuels qu'une startup tech. Ces principes de design s'appliquent aussi aux interfaces des [objets connectés comme les montres Garmin](/blog/whatsapp-montres-garmin-evolution-usage), où chaque pixel compte.
 
-L'essentiel reste la cohérence : un design qui reflète votre identité et facilite la conversion de vos visiteurs en clients. [Découvrez nos réalisations](/realisations) pour voir comment nous appliquons ces tendances. Besoin d'un avis sur votre site ? [Demandez un audit SEO gratuit](/audit-seo-gratuit).
+L'essentiel reste la cohérence : un design qui reflète votre identité et facilite la conversion de vos visiteurs en clients. Ces tendances sont aussi un levier pour votre [visibilité dans les IA génératives](/visibilite-ia), qui valorisent les sites modernes et bien structurés. [Découvrez nos réalisations](/realisations) pour voir comment nous appliquons ces tendances. Besoin d'un avis sur votre site ? [Demandez un audit SEO gratuit](/audit-seo-gratuit).
     `,
   },
   {
@@ -205,7 +205,7 @@ Google ne se contente pas de mesurer la vitesse : il la pondère dans son algori
 
 ## Conclusion
 
-La vitesse n'est pas un luxe technique, c'est un levier commercial. Un site qui charge en moins de 2 secondes inspire confiance, retient les visiteurs et convertit mieux. C'est aussi vrai pour les applications mobiles et les [montres connectées Garmin](/blog/whatsapp-montres-garmin-evolution-usage), où la réactivité conditionne l'adoption. C'est l'un des meilleurs investissements que vous puissiez faire pour votre entreprise. [Testez la vitesse de votre site avec notre audit gratuit](/audit-seo-gratuit).
+La vitesse n'est pas un luxe technique, c'est un levier commercial. Un site qui charge en moins de 2 secondes inspire confiance, retient les visiteurs et convertit mieux. La rapidité de votre site fait aussi partie des [critères de sélection des IA pour citer un site](/visibilite-ia). C'est aussi vrai pour les applications mobiles et les [montres connectées Garmin](/blog/whatsapp-montres-garmin-evolution-usage), où la réactivité conditionne l'adoption. C'est l'un des meilleurs investissements que vous puissiez faire pour [améliorer le référencement de votre site](/referencement-seo). [Testez la vitesse de votre site avec notre audit gratuit](/audit-seo-gratuit).
     `,
   },
   {
@@ -580,7 +580,7 @@ Ce qui a changé : une page d'accueil restructurée avec un H1 optimisé, des pa
 
 ## Demandez votre audit SEO gratuit
 
-Vous souhaitez savoir comment votre site se positionne sur Google et ce qui bloque vos conversions ? Demandez votre [audit SEO gratuit](/audit-seo-gratuit) : nous analysons votre site et vous proposons un plan d'action concret. Réponse en 48h, sans engagement.
+Vous souhaitez savoir comment votre site se positionne sur Google et ce qui bloque vos conversions ? Demandez votre [audit SEO gratuit](/audit-seo-gratuit) : nous analysons votre site et vous proposons un plan d'action concret, incluant un diagnostic de votre [référencement SEO pour artisans](/referencement-seo). Réponse en 48h, sans engagement.
 
 Besoin d'un [site web performant](/creation-site-web) pour votre activité d'artisan ? Découvrez nos [tarifs](/tarifs) et nos [réalisations](/realisations). Contactez-nous dès maintenant pour transformer votre site en machine à clients.
     `,
@@ -604,7 +604,7 @@ La question du budget est souvent la première que posent les TPE et [artisans](
 
 ### Le site vitrine simple (3 à 5 pages) : entre 800 et 2 500 euros
 
-Il présente votre activité, vos services, votre zone géographique et vos coordonnées. Idéal pour les artisans, professions libérales ou petits commerces qui veulent être visibles en ligne sans complexité. Découvrez nos [offres de création de site web](/creation-site-web) adaptées à ce besoin.
+Il présente votre activité, vos services, votre zone géographique et vos coordonnées. Idéal pour les artisans, professions libérales ou petits commerces qui veulent être visibles en ligne sans complexité. Découvrez nos offres de [création de site web pour TPE](/creation-site-web) adaptées à ce besoin et consultez [nos tarifs](/tarifs) pour une vue d'ensemble.
 
 ### Le site vitrine avec optimisation SEO : entre 2 000 et 5 000 euros
 
@@ -715,7 +715,7 @@ HTTPS, [mentions légales](/mentions-legales), [politique de confidentialité](/
 
 ## Le rôle du SEO dans la génération de leads
 
-Avoir un beau site bien conçu ne sert à rien si personne n'y vient. C'est là qu'intervient le [SEO](/referencement-seo), le référencement naturel Google. L'objectif : apparaître dans les premiers résultats quand vos clients potentiels cherchent vos services en ligne.
+Avoir un beau site bien conçu ne sert à rien si personne n'y vient. C'est là qu'intervient une [stratégie SEO pour indépendants](/referencement-seo), le référencement naturel Google. L'objectif : apparaître dans les premiers résultats quand vos clients potentiels cherchent vos services en ligne. Et avec l'émergence des IA génératives, il devient aussi crucial d'[apparaître dans les réponses de ChatGPT](/visibilite-ia).
 
 Pour un indépendant à Paris, cela signifie cibler des requêtes comme "consultant marketing Paris", "coach professionnel Île-de-France" ou "graphiste freelance Paris". Ces recherches sont faites par des personnes qui ont un besoin concret et qui cherchent activement quelqu'un comme vous.
 
