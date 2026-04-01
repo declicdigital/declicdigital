@@ -715,7 +715,7 @@ HTTPS, [mentions légales](/mentions-legales), [politique de confidentialité](/
 
 ## Le rôle du SEO dans la génération de leads
 
-Avoir un beau site bien conçu ne sert à rien si personne n'y vient. C'est là qu'intervient le [SEO](/referencement-seo), le référencement naturel Google. L'objectif : apparaître dans les premiers résultats quand vos clients potentiels cherchent vos services en ligne.
+Avoir un beau site bien conçu ne sert à rien si personne n'y vient. C'est là qu'intervient une [stratégie SEO pour indépendants](/referencement-seo), le référencement naturel Google. L'objectif : apparaître dans les premiers résultats quand vos clients potentiels cherchent vos services en ligne. Et avec l'émergence des IA génératives, il devient aussi crucial d'[apparaître dans les réponses de ChatGPT](/visibilite-ia).
 
 Pour un indépendant à Paris, cela signifie cibler des requêtes comme "consultant marketing Paris", "coach professionnel Île-de-France" ou "graphiste freelance Paris". Ces recherches sont faites par des personnes qui ont un besoin concret et qui cherchent activement quelqu'un comme vous.
 
