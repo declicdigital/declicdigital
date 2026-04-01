@@ -604,7 +604,7 @@ La question du budget est souvent la première que posent les TPE et [artisans](
 
 ### Le site vitrine simple (3 à 5 pages) : entre 800 et 2 500 euros
 
-Il présente votre activité, vos services, votre zone géographique et vos coordonnées. Idéal pour les artisans, professions libérales ou petits commerces qui veulent être visibles en ligne sans complexité. Découvrez nos [offres de création de site web](/creation-site-web) adaptées à ce besoin.
+Il présente votre activité, vos services, votre zone géographique et vos coordonnées. Idéal pour les artisans, professions libérales ou petits commerces qui veulent être visibles en ligne sans complexité. Découvrez nos offres de [création de site web pour TPE](/creation-site-web) adaptées à ce besoin et consultez [nos tarifs](/tarifs) pour une vue d'ensemble.
 
 ### Le site vitrine avec optimisation SEO : entre 2 000 et 5 000 euros
 
