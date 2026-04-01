@@ -127,12 +127,12 @@ const Geo = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>GEO (Generative Engine Optimization) : Le nouveau SEO à l'ère de l'IA | Déclic Digital</title>
-        <meta name="description" content="Découvrez le GEO (Generative Engine Optimization), la stratégie incontournable pour être cité par ChatGPT, Gemini et Perplexity. Indispensable pour les TPE, artisans et indépendants." />
+        <title>Visibilité dans les IA (GEO) – Apparaître dans ChatGPT, Perplexity & Google AI | Déclic Digital</title>
+        <meta name="description" content="Optimisez votre présence dans les réponses générées par l'IA. Déclic Digital vous aide à apparaître dans ChatGPT, Perplexity, Gemini et les AI Overviews de Google." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://declicdigital.net/geo/" />
-        <meta property="og:title" content="GEO : Comprendre et appliquer la Generative Engine Optimization" />
-        <meta property="og:description" content="Tout ce que les TPE, artisans et indépendants doivent savoir sur le GEO pour être cités par les IA." />
+        <link rel="canonical" href="https://declicdigital.net/visibilite-ia/" />
+        <meta property="og:title" content="Visibilité IA (GEO) : Apparaître dans ChatGPT, Perplexity et Google AI" />
+        <meta property="og:description" content="Optimisez votre présence dans les réponses des IA génératives. Stratégie GEO pour TPE, artisans et indépendants." />
         <meta property="og:type" content="article" />
         <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
@@ -140,7 +140,7 @@ const Geo = () => {
 
       <PageBreadcrumb items={[
         { label: "Accueil", href: "/" },
-        { label: "GEO" },
+        { label: "Visibilité IA" },
       ]} />
 
       {/* Hero */}
