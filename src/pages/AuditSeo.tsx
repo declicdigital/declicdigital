@@ -114,16 +114,16 @@ const AuditSeo = () => {
         <div className="mx-auto max-w-3xl space-y-6">
           <h2 className="text-3xl font-extrabold md:text-4xl text-center">Ce que comprend votre audit SEO gratuit</h2>
           <p className="text-muted-foreground leading-relaxed">
-            Un audit SEO est une analyse complète de votre site web qui évalue sa capacité à être bien référencé sur Google. Il identifie les points forts, les faiblesses et les opportunités d'amélioration de votre présence en ligne.
+            Un audit SEO est une analyse complète de votre site web qui évalue sa capacité à être bien référencé sur Google. Il identifie les points forts, les faiblesses et les opportunités d'amélioration de votre présence en ligne. Notre audit <Link to="/visibilite-ia" className="text-primary font-semibold hover:underline">inclut un diagnostic de votre visibilité dans les IA</Link> (ChatGPT, Perplexity, Gemini).
           </p>
           <p className="text-muted-foreground leading-relaxed">
             Concrètement, nous analysons la structure technique de votre site (vitesse, mobile, sécurité), la qualité de votre contenu (mots clés, balises, textes), et votre positionnement par rapport à vos concurrents. À l'issue de l'audit, vous recevez un rapport détaillé avec des recommandations classées par priorité.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            L'audit est la première étape indispensable pour toute stratégie de <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link> efficace. Sans diagnostic précis, il est impossible de savoir quelles actions vont réellement améliorer votre visibilité. C'est pourquoi nous proposons cet audit gratuitement : nous voulons que chaque TPE puisse comprendre sa situation et prendre les bonnes décisions.
+            L'audit est la première étape indispensable pour toute stratégie de <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">notre offre de référencement SEO</Link> efficace. Sans diagnostic précis, il est impossible de savoir quelles actions vont réellement améliorer votre visibilité. C'est pourquoi nous proposons cet audit gratuitement : nous voulons que chaque TPE puisse comprendre sa situation et prendre les bonnes décisions.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Après avoir reçu votre audit, vous pouvez choisir de mettre en oeuvre les recommandations vous-même ou de nous confier l'optimisation de votre site. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> pour découvrir nos offres. Dans tous les cas, l'audit vous appartient et vous n'avez aucune obligation.
+            Après avoir reçu votre audit, vous pouvez choisir de mettre en oeuvre les recommandations vous-même ou de nous confier l'optimisation de votre site. Nous proposons aussi la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web optimisé</Link> pour les TPE. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> pour découvrir nos offres. Dans tous les cas, l'audit vous appartient et vous n'avez aucune obligation.
           </p>
         </div>
       </SectionWrapper>
