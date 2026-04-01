@@ -61,16 +61,10 @@ const ProjectChat = ({
   useEffect(() => {
     loadMessages();
 
-    const channel = supabase
-      .channel(`project-chat-${projectId}`)
-      .on(
-        "postgres_changes",
-        { event: "*", schema: "public", table: "project_messages", filter: `project_id=eq.${projectId}` },
-        () => loadMessages()
-      )
-      .subscribe();
+    // Poll for new messages every 5 seconds (secure alternative to Realtime subscriptions)
+    const interval = setInterval(() => loadMessages(), 5000);
 
-    return () => { supabase.removeChannel(channel); };
+    return () => { clearInterval(interval); };
   }, [projectId]);
 
   useEffect(() => {
