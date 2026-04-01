@@ -121,7 +121,7 @@ const Geo = () => {
     description: "Tout comprendre sur le GEO, la nouvelle discipline d'optimisation pour les moteurs génératifs basés sur l'IA.",
     author: { "@type": "LocalBusiness", name: "Déclic Digital", url: "https://declicdigital.net" },
     datePublished: "2026-06-01",
-    mainEntityOfPage: { "@type": "WebPage", "@id": "https://declicdigital.net/geo/" },
+    mainEntityOfPage: { "@type": "WebPage", "@id": "https://declicdigital.net/visibilite-ia/" },
   };
 
   return (
