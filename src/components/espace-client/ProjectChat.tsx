@@ -51,11 +51,10 @@ const ProjectChat = ({
   };
 
   const markAsRead = async () => {
-    await (supabase.from("project_messages") as any)
-      .update({ is_read: true })
-      .eq("project_id", projectId)
-      .neq("user_id", userId)
-      .eq("is_read", false);
+    await supabase.rpc("mark_messages_as_read" as any, {
+      p_project_id: projectId,
+      p_user_id: userId,
+    });
   };
 
   useEffect(() => {
