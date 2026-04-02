@@ -9,6 +9,7 @@ import artisanParisImg from "@/assets/artisan-paris-site-web.webp";
 import coutSiteImg from "@/assets/cout-creation-site-web-tpe.webp";
 import genererClientsImg from "@/assets/generer-clients-site-web-independant.webp";
 import vitrineEcommerceImg from "@/assets/blog/site-vitrine-ou-ecommerce-tpe-paris.jpg";
+import seoLocalImg from "@/assets/blog/seo-local-paris-artisan-google-maps.webp";
 
 export interface BlogArticle {
   slug: string;
