@@ -616,6 +616,10 @@ export type Database = {
         }
         Returns: boolean
       }
+      mark_messages_as_read: {
+        Args: { p_project_id: string; p_user_id: string }
+        Returns: undefined
+      }
       move_to_dlq: {
         Args: {
           dlq_name: string
