@@ -9,6 +9,7 @@ import artisanParisImg from "@/assets/artisan-paris-site-web.webp";
 import coutSiteImg from "@/assets/cout-creation-site-web-tpe.webp";
 import genererClientsImg from "@/assets/generer-clients-site-web-independant.webp";
 import vitrineEcommerceImg from "@/assets/blog/site-vitrine-ou-ecommerce-tpe-paris.jpg";
+import seoLocalImg from "@/assets/blog/seo-local-paris-artisan-google-maps.webp";
 
 export interface BlogArticle {
   slug: string;
@@ -833,6 +834,96 @@ Un site vitrine bien conçu et [bien référencé sur Google](/referencement-seo
 Découvrez nos [réalisations](/realisations) pour voir des exemples concrets de sites vitrines performants.
 
 [CTA:Parlons de votre projet:/contact]
+`
+  },
+  {
+    slug: "seo-local-paris-artisan-google-maps",
+    title: "SEO local à Paris : comment apparaître en premier sur Google Maps quand on est artisan ?",
+    metaTitle: "SEO local Paris artisan : apparaître sur Google Maps",
+    metaDescription: "Comment un artisan parisien peut apparaître en premier sur Google Maps ? Guide SEO local complet par Déclic Digital. Audit gratuit disponible.",
+    excerpt: "Pack local, fiche Google, avis clients : le guide complet pour qu'un artisan parisien domine Google Maps dans son quartier.",
+    date: "2026-04-02",
+    readTime: "8 min",
+    category: "SEO & Performance",
+    tags: ["SEO local", "Google Maps", "artisan Paris", "fiche Google", "avis clients"],
+    image: seoLocalImg,
+    relatedSlugs: ["site-web-artisan-paris-pourquoi-il-ne-rapporte-pas", "combien-coute-creation-site-web-tpe-2026"],
+    content: `
+## Qu'est-ce que le pack local Google et pourquoi c'est crucial ?
+
+Lorsqu'un Parisien cherche "plombier Paris 15" ou "électricien près de chez moi" sur Google, les premiers résultats qu'il voit ne sont pas des sites web classiques. Ce sont les 3 fiches qui apparaissent dans un encadré avec une carte. C'est ce qu'on appelle le "pack local" ou "local 3-pack".
+
+Ces 3 fiches captent **plus de 50 % des clics** sur ce type de requête. Être dans ce pack, c'est avoir votre téléphone qui sonne. Ne pas y être, c'est laisser vos concurrents prendre tous ces appels.
+
+La bonne nouvelle : contrairement au [référencement classique](/referencement-seo), le pack local est accessible même pour une très petite structure. Avec les bonnes actions, un artisan peut y apparaître en quelques semaines.
+
+## Les 5 facteurs de classement dans Google Maps
+
+### La proximité géographique
+
+Google favorise les artisans proches de la personne qui cherche. Si vous êtes installé dans le [15ème arrondissement](/creation-site-web/paris-15eme), vous apparaîtrez naturellement pour les recherches dans cet arrondissement.
+
+### La pertinence de votre fiche
+
+Votre fiche Google Business Profile doit clairement indiquer votre métier et vos services. Une fiche incomplète ou vague est pénalisée.
+
+### La notoriété (avis et réputation)
+
+Le nombre et la qualité de vos avis Google jouent un rôle majeur. Une fiche avec 50 avis à 4,8 étoiles sera favorisée face à une fiche avec 5 avis à 4 étoiles.
+
+### La cohérence des informations (NAP)
+
+Votre nom, adresse et téléphone doivent être identiques sur votre [site web](/creation-site-web), votre fiche Google, et tous les annuaires en ligne où vous êtes présent. On appelle ça la cohérence NAP (Name, Address, Phone).
+
+### L'activité de votre fiche
+
+Les artisans qui publient régulièrement des photos et des posts sur leur fiche Google sont favorisés par l'algorithme. Google récompense les fiches actives.
+
+[CTA:Demandez votre audit SEO gratuit:/audit-seo-gratuit]
+
+## Optimiser sa fiche Google Business Profile pas à pas
+
+#### Revendiquer et compléter sa fiche
+
+Revendiquez votre fiche Google Business Profile si ce n'est pas encore fait. Remplissez absolument tous les champs : nom exact de votre entreprise, catégorie principale et catégories secondaires, adresse complète, numéro de téléphone, site web, horaires d'ouverture.
+
+#### Rédiger une description efficace
+
+Ajoutez une description de 750 caractères qui mentionne vos services principaux et votre zone d'intervention à Paris. Utilisez naturellement les mots-clés que tapent vos clients potentiels.
+
+#### Ajouter des visuels de qualité
+
+Uploadez au minimum 10 photos de qualité : façade, équipe, réalisations, matériel. Les fiches avec des photos reçoivent [42 % de demandes d'itinéraire en plus](https://support.google.com/business/answer/3038177) selon Google.
+
+#### Activer les interactions
+
+Activez les messages pour permettre aux clients de vous contacter directement depuis Google. Et répondez systématiquement aux avis, qu'ils soient positifs ou négatifs. Cela montre votre sérieux et améliore votre classement.
+
+Voici à quoi ressemble une fiche Google Maps bien optimisée :
+
+[MAP]
+
+## Comment obtenir des avis clients 5 étoiles
+
+### La méthode simple et efficace
+
+Les avis Google sont le carburant de votre référencement local. La méthode la plus simple : envoyez un SMS ou un email à chaque client satisfait, avec un lien direct vers votre fiche Google pour laisser un avis.
+
+Vous pouvez créer ce lien directement depuis votre espace Google Business Profile. Certains artisans impriment ce lien sous forme de QR code sur leurs factures ou cartes de visite.
+
+### Ce qu'il ne faut jamais faire
+
+N'achetez jamais de faux avis. Google les détecte et peut suspendre votre fiche. Concentrez-vous sur la satisfaction client et les avis viendront naturellement. Un artisan qui fait du bon travail et qui demande poliment un avis obtient facilement 2 à 3 avis par semaine.
+
+## Pourquoi confier son SEO local à un expert parisien
+
+Le SEO local demande du temps, de la régularité et une connaissance fine des spécificités de chaque arrondissement parisien. Chez [Déclic Digital](/qui-sommes-nous), nous travaillons exclusivement avec des artisans et TPE d'Île-de-France. Nous connaissons votre marché, vos concurrents, et les mots-clés que tapent vos clients.
+
+Un [site web professionnel](/creation-site-web) couplé à une fiche Google optimisée, c'est la combinaison gagnante pour dominer les résultats locaux. Découvrez [nos tarifs](/tarifs) et [nos réalisations](/realisations) pour vous faire une idée.
+
+[CTA:Parlons de votre projet:/contact]
+
+Vous souhaitez savoir comment votre site se positionne sur Google ? [Demandez votre audit SEO gratuit](/audit-seo-gratuit). Nous vous répondons en 48h.
 `
   },
 ];

@@ -5,6 +5,7 @@ import { Calendar, Clock, ArrowLeft, ArrowRight, Tag, Share2, Copy, Check } from
 import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
+import MapEmbed from "@/components/MapEmbed";
 import { getArticleBySlug, getRelatedArticles, getCategorySlug, type BlogArticle as BlogArticleType } from "@/data/blogArticles";
 
 const getShareUrl = (slug: string) =>
@@ -78,6 +79,19 @@ const BlogArticle = () => {
             </div>
           );
         }
+        if (trimmed === "[MAP]") {
+          return (
+            <div key={i} className="my-10">
+              <MapEmbed title="Notre fiche Google Maps" subtitle="Déclic Digital — 57 Rue d'Alleray, Paris 15e" />
+            </div>
+          );
+        }
+        if (trimmed.startsWith("#### "))
+          return (
+            <h4 key={i} className="mt-6 mb-2 text-lg font-bold text-foreground">
+              {trimmed.slice(5)}
+            </h4>
+          );
         if (trimmed.startsWith("### "))
           return (
             <h3 key={i} className="mt-8 mb-3 text-xl font-bold text-foreground">
