@@ -5,6 +5,7 @@ import { Calendar, Clock, ArrowLeft, ArrowRight, Tag, Share2, Copy, Check } from
 import { useState } from "react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
+import MapEmbed from "@/components/MapEmbed";
 import { getArticleBySlug, getRelatedArticles, getCategorySlug, type BlogArticle as BlogArticleType } from "@/data/blogArticles";
 
 const getShareUrl = (slug: string) =>
