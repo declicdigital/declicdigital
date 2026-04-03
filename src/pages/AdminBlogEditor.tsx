@@ -202,7 +202,7 @@ const AdminBlogEditor = () => {
     } else {
       ({ data: savedPost, error } = await supabase
         .from("cms_blog_posts")
-        .update(postData)
+        .update(postData as any)
         .eq("id", id)
         .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at, tags")
         .single());
