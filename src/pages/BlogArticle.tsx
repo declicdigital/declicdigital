@@ -48,9 +48,20 @@ const ShareBar = ({ article, formattedDate }: { article: BlogArticleType; format
 
 const CmsBlogArticle = lazy(() => import("./CmsBlogArticle"));
 
-const BlogArticle = () => {
+const BlogArticleInner = () => {
   const { slug } = useParams<{ slug: string }>();
   const article = slug ? getArticleBySlug(slug) : undefined;
+  const [latestCms, setLatestCms] = useState<any[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from("cms_blog_posts")
+      .select("id, title, slug, cover_image_url, category, read_time, created_at")
+      .eq("status", "published")
+      .order("created_at", { ascending: false })
+      .limit(6)
+      .then(({ data }) => { if (data) setLatestCms(data); });
+  }, []);
 
   // If no static article found, try CMS
   if (!article) {
