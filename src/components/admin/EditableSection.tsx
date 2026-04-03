@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
-import { Pencil, Trash2, Tag, X, Save, Plus, Trash } from "lucide-react";
+import { Pencil, Trash2, Tag, X, Save, Plus, Trash, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -48,41 +48,22 @@ interface Override {
   content: { structured?: StructuredContent; label?: string; [key: string]: any };
 }
 
-/** Parse DOM element into structured fields */
-function parseDomToStructured(el: HTMLElement, fallbackLabel: string): StructuredContent {
-  const result: StructuredContent = {
-    label: fallbackLabel, heading: "", text: "", image: "", imageAlt: "", ctas: [],
-  };
+const emptyStructured = (label = ""): StructuredContent => ({
+  label, heading: "", text: "", image: "", imageAlt: "", ctas: [], items: [],
+});
 
-  const h1 = el.querySelector("h1");
-  if (h1) result.heading = h1.textContent?.trim() || "";
-
-  const imgs = el.querySelectorAll("img");
-  for (const img of imgs) {
-    const w = img.getAttribute("width");
-    if (w && parseInt(w) < 64) continue;
-    result.image = img.getAttribute("src") || "";
-    result.imageAlt = img.getAttribute("alt") || "";
-    break;
-  }
-
-  const paragraphs = el.querySelectorAll("p");
-  const texts: string[] = [];
-  paragraphs.forEach((p) => {
-    const t = p.textContent?.trim();
-    if (t && t.length > 10) texts.push(t);
-  });
-  result.text = texts.slice(0, 3).join("\n\n");
-
-  const links = el.querySelectorAll("a");
+/** Detect CTA links inside an element */
+function extractCtas(el: Element): CtaItem[] {
+  const ctas: CtaItem[] = [];
   let ctaId = 0;
+  const links = el.querySelectorAll("a");
   links.forEach((a) => {
     const parent = a.closest("button, .btn, [class*='btn'], [class*='Button']");
     const cls = (a.className || "") + " " + (parent?.className || "");
     const isCta = parent || cls.includes("gradient") || cls.includes("rounded-full") || cls.includes("btn") || cls.includes("shadow");
     if (isCta) {
       const isPrimary = cls.includes("gradient-primary") || cls.includes("gradient-miami") || !cls.includes("outline");
-      result.ctas.push({
+      ctas.push({
         id: `cta-${ctaId++}`,
         text: a.textContent?.trim() || "",
         url: a.getAttribute("href") || "",
@@ -91,13 +72,130 @@ function parseDomToStructured(el: HTMLElement, fallbackLabel: string): Structure
       });
     }
   });
+  return ctas;
+}
+
+/** Extract paragraphs text from an element */
+function extractTexts(el: Element): string {
+  const paragraphs = el.querySelectorAll("p");
+  const texts: string[] = [];
+  paragraphs.forEach((p) => {
+    const t = p.textContent?.trim();
+    if (t && t.length > 10) texts.push(t);
+  });
+  return texts.slice(0, 3).join("\n\n");
+}
+
+/** Extract first significant image */
+function extractImage(el: Element): { src: string; alt: string } {
+  const imgs = el.querySelectorAll("img");
+  for (const img of imgs) {
+    const w = img.getAttribute("width");
+    if (w && parseInt(w) < 64) continue;
+    return { src: img.getAttribute("src") || "", alt: img.getAttribute("alt") || "" };
+  }
+  return { src: "", alt: "" };
+}
+
+/** Parse DOM element into structured fields, detecting sub-items */
+function parseDomToStructured(el: HTMLElement, fallbackLabel: string): StructuredContent {
+  const result = emptyStructured(fallbackLabel);
+
+  // Find h1
+  const h1 = el.querySelector("h1");
+  if (h1) result.heading = h1.textContent?.trim() || "";
+
+  // Find first significant image at the top level (before sub-sections)
+  const img = extractImage(el);
+  result.image = img.src;
+  result.imageAlt = img.alt;
+
+  // Look for repeated sub-sections (cards, pricing tiers, etc.)
+  // Strategy: find containers with multiple sibling children that each have a heading
+  const subSections = detectSubItems(el);
+
+  if (subSections.length >= 2) {
+    result.items = subSections;
+    // Top-level text/ctas are those outside sub-items
+    result.text = "";
+    result.ctas = extractCtas(el);
+    // Remove CTAs that belong to sub-items
+    const subCtaTexts = new Set(subSections.flatMap(s => s.ctas.map(c => c.text)));
+    result.ctas = result.ctas.filter(c => !subCtaTexts.has(c.text));
+  } else {
+    result.text = extractTexts(el);
+    result.ctas = extractCtas(el);
+  }
 
   return result;
 }
 
+/** Detect repeating card/item patterns within a section */
+function detectSubItems(el: HTMLElement): SubItem[] {
+  const items: SubItem[] = [];
+
+  // Strategy 1: Look for grid/flex containers with children that each have headings
+  const containers = el.querySelectorAll("[class*='grid'], [class*='flex']");
+  for (const container of containers) {
+    const children = Array.from(container.children);
+    const withHeadings = children.filter(child =>
+      child.querySelector("h2, h3, h4") || child.querySelector("[class*='font-bold'], [class*='font-semibold']")
+    );
+
+    if (withHeadings.length >= 2 && withHeadings.length === children.length) {
+      // Found a repeating pattern
+      return withHeadings.map((child, i) => {
+        const heading = child.querySelector("h2, h3, h4");
+        const boldEl = !heading ? child.querySelector("[class*='font-bold'], [class*='font-semibold']") : null;
+        const img = extractImage(child);
+        return {
+          id: `item-${i}`,
+          heading: heading?.textContent?.trim() || boldEl?.textContent?.trim() || `Élément ${i + 1}`,
+          text: extractTexts(child),
+          image: img.src,
+          imageAlt: img.alt,
+          ctas: extractCtas(child),
+        };
+      });
+    }
+  }
+
+  // Strategy 2: Look for multiple h2/h3 at the same depth, splitting content between them
+  const headings = el.querySelectorAll("h2, h3");
+  if (headings.length >= 2) {
+    // Check if they're siblings or near-siblings
+    const parentMap = new Map<Element, Element[]>();
+    headings.forEach(h => {
+      const p = h.parentElement;
+      if (p) {
+        if (!parentMap.has(p)) parentMap.set(p, []);
+        parentMap.get(p)!.push(h);
+      }
+    });
+
+    for (const [parent, hs] of parentMap) {
+      if (hs.length >= 2) {
+        return hs.map((h, i) => {
+          // Get the sibling container or parent
+          const container = h.closest("div, section, article") || h.parentElement;
+          return {
+            id: `item-${i}`,
+            heading: h.textContent?.trim() || `Élément ${i + 1}`,
+            text: container ? extractTexts(container) : "",
+            image: container ? extractImage(container).src : "",
+            imageAlt: container ? extractImage(container).alt : "",
+            ctas: container ? extractCtas(container) : [],
+          };
+        });
+      }
+    }
+  }
+
+  return items;
+}
+
 /**
  * Apply saved structured content onto the live DOM without replacing children.
- * This patches text/attributes in-place so layout & styling are preserved.
  */
 function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
   // Patch H1
@@ -118,8 +216,8 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
     }
   }
 
-  // Patch paragraphs
-  if (s.text) {
+  // Patch paragraphs (only if no sub-items, to avoid messing up card content)
+  if (s.text && s.items.length === 0) {
     const newTexts = s.text.split("\n\n").filter(t => t.trim());
     const paragraphs = el.querySelectorAll("p");
     const significantPs: HTMLParagraphElement[] = [];
@@ -132,8 +230,69 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
     });
   }
 
+  // Patch sub-items
+  if (s.items.length > 0) {
+    applySubItemsToDOM(el, s.items);
+  }
+
   // Patch CTA links
   const enabledCtas = s.ctas.filter(c => c.enabled && c.text && c.url);
+  patchCtaLinks(el, enabledCtas);
+}
+
+function applySubItemsToDOM(el: HTMLElement, items: SubItem[]) {
+  // Find the same containers as in detection
+  const containers = el.querySelectorAll("[class*='grid'], [class*='flex']");
+  for (const container of containers) {
+    const children = Array.from(container.children);
+    const withHeadings = children.filter(child =>
+      child.querySelector("h2, h3, h4") || child.querySelector("[class*='font-bold'], [class*='font-semibold']")
+    );
+
+    if (withHeadings.length >= 2 && withHeadings.length === children.length) {
+      withHeadings.forEach((child, i) => {
+        if (!items[i]) return;
+        const item = items[i];
+
+        // Patch heading
+        const heading = child.querySelector("h2, h3, h4");
+        const boldEl = !heading ? child.querySelector("[class*='font-bold'], [class*='font-semibold']") : null;
+        if (heading && item.heading) heading.textContent = item.heading;
+        else if (boldEl && item.heading) boldEl.textContent = item.heading;
+
+        // Patch text
+        if (item.text) {
+          const newTexts = item.text.split("\n\n").filter(t => t.trim());
+          const paragraphs = child.querySelectorAll("p");
+          const significantPs: HTMLParagraphElement[] = [];
+          paragraphs.forEach(p => {
+            const t = p.textContent?.trim();
+            if (t && t.length > 10) significantPs.push(p);
+          });
+          newTexts.forEach((txt, j) => {
+            if (significantPs[j]) significantPs[j].textContent = txt.trim();
+          });
+        }
+
+        // Patch image
+        if (item.image) {
+          const img = child.querySelector("img");
+          if (img) {
+            img.setAttribute("src", item.image);
+            if (item.imageAlt) img.setAttribute("alt", item.imageAlt);
+          }
+        }
+
+        // Patch CTAs
+        const enabledCtas = item.ctas.filter(c => c.enabled && c.text && c.url);
+        patchCtaLinks(child as HTMLElement, enabledCtas);
+      });
+      return;
+    }
+  }
+}
+
+function patchCtaLinks(el: Element, enabledCtas: CtaItem[]) {
   const links = el.querySelectorAll("a");
   const ctaLinks: HTMLAnchorElement[] = [];
   links.forEach(a => {
@@ -144,12 +303,10 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
   });
   enabledCtas.forEach((cta, i) => {
     if (ctaLinks[i]) {
-      // Preserve inner structure (icons etc) — only change text nodes
       const textNode = Array.from(ctaLinks[i].childNodes).find(n => n.nodeType === Node.TEXT_NODE);
       if (textNode) {
         textNode.textContent = cta.text;
       } else {
-        // If link has child elements (icons), append/replace text
         const span = ctaLinks[i].querySelector("span");
         if (span) span.textContent = cta.text;
         else ctaLinks[i].textContent = cta.text;
@@ -159,13 +316,92 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
   });
 }
 
+// ─── Sub-item editor component ───
+const SubItemEditor = ({ item, index, onChange, onRemove }: {
+  item: SubItem; index: number;
+  onChange: (updated: SubItem) => void;
+  onRemove: () => void;
+}) => {
+  const [collapsed, setCollapsed] = useState(false);
+
+  const updateField = (field: keyof SubItem, value: any) => onChange({ ...item, [field]: value });
+
+  const addCta = () => onChange({
+    ...item,
+    ctas: [...item.ctas, { id: `cta-${Date.now()}`, text: "", url: "", style: "primary" as const, enabled: true }],
+  });
+
+  const updateCta = (id: string, field: keyof CtaItem, value: any) => onChange({
+    ...item,
+    ctas: item.ctas.map(c => c.id === id ? { ...c, [field]: value } : c),
+  });
+
+  const removeCta = (id: string) => onChange({
+    ...item,
+    ctas: item.ctas.filter(c => c.id !== id),
+  });
+
+  return (
+    <div className="rounded-lg border bg-card p-3 space-y-3">
+      <div className="flex items-center gap-2 cursor-pointer" onClick={() => setCollapsed(!collapsed)}>
+        {collapsed ? <ChevronDown size={14} /> : <ChevronUp size={14} />}
+        <span className="text-sm font-semibold flex-1 truncate">
+          {item.heading || `Élément ${index + 1}`}
+        </span>
+        <button onClick={(e) => { e.stopPropagation(); onRemove(); }} className="rounded p-1 text-destructive hover:bg-destructive/10" title="Supprimer">
+          <Trash size={14} />
+        </button>
+      </div>
+
+      {!collapsed && (
+        <div className="space-y-3 pl-1">
+          <div>
+            <Label className="text-xs font-medium">Titre</Label>
+            <Input value={item.heading} onChange={e => updateField("heading", e.target.value)} className="mt-1 text-sm" />
+          </div>
+          <div>
+            <Label className="text-xs font-medium">Texte</Label>
+            <Textarea value={item.text} onChange={e => updateField("text", e.target.value)} rows={3} className="mt-1 text-sm" />
+          </div>
+          {(item.image || true) && (
+            <div>
+              <Label className="text-xs font-medium">Image</Label>
+              {item.image && <img src={item.image} alt={item.imageAlt} className="w-full h-20 object-cover rounded mt-1" />}
+              <Input value={item.image} onChange={e => updateField("image", e.target.value)} placeholder="URL image" className="mt-1 text-sm" />
+              <Input value={item.imageAlt} onChange={e => updateField("imageAlt", e.target.value)} placeholder="Alt" className="mt-1 text-sm" />
+            </div>
+          )}
+          <div>
+            <div className="flex items-center justify-between mb-1">
+              <Label className="text-xs font-medium">CTAs</Label>
+              <Button type="button" variant="ghost" size="sm" onClick={addCta} className="h-6 text-xs gap-1">
+                <Plus size={12} /> CTA
+              </Button>
+            </div>
+            {item.ctas.map((cta, ci) => (
+              <div key={cta.id} className={`rounded border p-2 mb-2 space-y-1 ${cta.enabled ? "border-primary/20" : "opacity-50"}`}>
+                <div className="flex items-center gap-2">
+                  <Checkbox checked={cta.enabled} onCheckedChange={v => updateCta(cta.id, "enabled", !!v)} />
+                  <span className="text-xs flex-1">CTA {ci + 1}</span>
+                  <button onClick={() => removeCta(cta.id)} className="text-destructive"><Trash size={12} /></button>
+                </div>
+                <Input value={cta.text} onChange={e => updateCta(cta.id, "text", e.target.value)} placeholder="Texte" className="text-xs h-7" />
+                <Input value={cta.url} onChange={e => updateCta(cta.id, "url", e.target.value)} placeholder="Lien" className="text-xs h-7" />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+// ─── Main Component ───
 const EditableSection = ({ blockId, pagePath, children, label }: EditableSectionProps) => {
   const { isAdmin } = useAuth();
   const [override, setOverride] = useState<Override | null>(null);
   const [editing, setEditing] = useState(false);
-  const [structured, setStructured] = useState<StructuredContent>({
-    label: "", heading: "", text: "", image: "", imageAlt: "", ctas: [],
-  });
+  const [structured, setStructured] = useState<StructuredContent>(emptyStructured());
   const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -188,10 +424,8 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
       });
   }, [compositeKey]);
 
-  // Apply DOM patches when override data is loaded and children are rendered
   useEffect(() => {
     if (!loaded || !override?.content?.structured || !contentRef.current) return;
-    // Use a small delay to ensure React has finished rendering children
     const timer = setTimeout(() => {
       if (contentRef.current) {
         applyOverrideToDOM(contentRef.current, override.content.structured!);
@@ -203,11 +437,13 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
   const openEditor = () => {
     const fallbackLabel = override?.content?.label || label || blockId;
     if (override?.content?.structured) {
-      setStructured(override.content.structured);
+      // Ensure items array exists for backward compat
+      const s = override.content.structured;
+      setStructured({ ...s, items: s.items || [] });
     } else if (contentRef.current) {
       setStructured(parseDomToStructured(contentRef.current, fallbackLabel));
     } else {
-      setStructured({ label: fallbackLabel, heading: "", text: "", image: "", imageAlt: "", ctas: [] });
+      setStructured(emptyStructured(fallbackLabel));
     }
     setEditing(true);
   };
@@ -231,7 +467,6 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
       if (data) setOverride({ id: data.id, content });
     }
 
-    // Apply immediately to DOM
     if (contentRef.current) {
       applyOverrideToDOM(contentRef.current, structured);
     }
@@ -247,7 +482,6 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
     await supabase.from("cms_page_blocks").delete().eq("id", override.id);
     setOverride(null);
     toast({ title: "Section réinitialisée" });
-    // Reload to get original content back
     window.location.reload();
   };
 
@@ -273,38 +507,49 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
     setStructured((prev) => ({ ...prev, ctas: prev.ctas.filter((c) => c.id !== id) }));
   };
 
+  const updateItem = (index: number, updated: SubItem) => {
+    setStructured(prev => ({
+      ...prev,
+      items: prev.items.map((it, i) => i === index ? updated : it),
+    }));
+  };
+
+  const removeItem = (index: number) => {
+    setStructured(prev => ({
+      ...prev,
+      items: prev.items.filter((_, i) => i !== index),
+    }));
+  };
+
   if (!loaded) return <>{children}</>;
 
-  // Always render original children — both for visitors and admins
-  // Override is applied via DOM patching, not HTML replacement
   if (!isAdmin) {
     return <div ref={contentRef}>{children}</div>;
   }
 
-  // Admin mode
   return (
     <>
       <div className="group relative">
         <div className="pointer-events-none absolute inset-0 z-[100] rounded-lg border-2 border-transparent transition group-hover:border-primary/30 group-hover:bg-primary/[0.02]" />
         <div className="absolute top-2 right-2 z-[101] flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition">
-          <span className="rounded bg-gray-800/90 px-2 py-1 text-[11px] font-medium text-white flex items-center gap-1">
+          <span className="rounded bg-foreground/80 px-2 py-1 text-[11px] font-medium text-background flex items-center gap-1">
             <Tag size={10} />
             {override?.content?.label || label || blockId}
           </span>
-          <button onClick={openEditor} className="rounded bg-blue-600 p-1.5 text-white hover:bg-blue-500 transition" title="Modifier cette section">
+          <button onClick={openEditor} className="rounded bg-primary p-1.5 text-primary-foreground hover:bg-primary/80 transition" title="Modifier cette section">
             <Pencil size={14} />
           </button>
           {override && (
-            <button onClick={resetOverride} className="rounded bg-red-600 p-1.5 text-white hover:bg-red-500 transition" title="Réinitialiser">
+            <button onClick={resetOverride} className="rounded bg-destructive p-1.5 text-destructive-foreground hover:bg-destructive/80 transition" title="Réinitialiser">
               <Trash2 size={14} />
             </button>
           )}
-          </div>
+        </div>
 
         <div ref={contentRef}>{children}</div>
       </div>
 
-      {/* Structured Editor Panel */}
+      {/* Editor Panel */}
       {editing && (
         <div className="fixed inset-0 z-[9999] flex">
           <div className="absolute inset-0 bg-black/30" onClick={() => setEditing(false)} />
@@ -315,22 +560,13 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
             </div>
 
             <div className="p-6 space-y-6">
+              {/* Block label */}
               <div>
                 <Label className="mb-1.5 block text-sm font-semibold">🏷️ Nom du bloc</Label>
                 <Input value={structured.label} onChange={(e) => updateField("label", e.target.value)} placeholder="Ex: Hero HP" />
               </div>
 
-              <div className="rounded-lg border p-4 space-y-3">
-                <Label className="text-sm font-semibold flex items-center gap-2">🖼️ Image</Label>
-                {structured.image && (
-                  <div className="relative rounded-lg overflow-hidden bg-muted">
-                    <img src={structured.image} alt={structured.imageAlt} className="w-full h-32 object-cover" />
-                  </div>
-                )}
-                <Input value={structured.image} onChange={(e) => updateField("image", e.target.value)} placeholder="URL de l'image" />
-                <Input value={structured.imageAlt} onChange={(e) => updateField("imageAlt", e.target.value)} placeholder="Texte alternatif (alt)" className="text-sm" />
-              </div>
-
+              {/* Global heading */}
               <div className="rounded-lg border p-4 space-y-2">
                 <Label className="text-sm font-semibold">📝 Titre principal (H1)</Label>
                 <Input
@@ -341,17 +577,51 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
                 />
               </div>
 
-              <div className="rounded-lg border p-4 space-y-2">
-                <Label className="text-sm font-semibold">📄 Texte / sous-titre</Label>
-                <Textarea
-                  value={structured.text}
-                  onChange={(e) => updateField("text", e.target.value)}
-                  placeholder="Paragraphe(s) du bloc. Séparez par une ligne vide pour plusieurs paragraphes."
-                  rows={5}
-                  className="leading-relaxed"
-                />
-              </div>
+              {/* If there are sub-items, show them */}
+              {structured.items.length > 0 ? (
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between">
+                    <Label className="text-sm font-semibold">📦 Sous-éléments ({structured.items.length})</Label>
+                  </div>
+                  {structured.items.map((item, i) => (
+                    <SubItemEditor
+                      key={item.id}
+                      item={item}
+                      index={i}
+                      onChange={(updated) => updateItem(i, updated)}
+                      onRemove={() => removeItem(i)}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <>
+                  {/* Global image */}
+                  <div className="rounded-lg border p-4 space-y-3">
+                    <Label className="text-sm font-semibold flex items-center gap-2">🖼️ Image</Label>
+                    {structured.image && (
+                      <div className="relative rounded-lg overflow-hidden bg-muted">
+                        <img src={structured.image} alt={structured.imageAlt} className="w-full h-32 object-cover" />
+                      </div>
+                    )}
+                    <Input value={structured.image} onChange={(e) => updateField("image", e.target.value)} placeholder="URL de l'image" />
+                    <Input value={structured.imageAlt} onChange={(e) => updateField("imageAlt", e.target.value)} placeholder="Texte alternatif (alt)" className="text-sm" />
+                  </div>
 
+                  {/* Global text */}
+                  <div className="rounded-lg border p-4 space-y-2">
+                    <Label className="text-sm font-semibold">📄 Texte / sous-titre</Label>
+                    <Textarea
+                      value={structured.text}
+                      onChange={(e) => updateField("text", e.target.value)}
+                      placeholder="Paragraphe(s) du bloc. Séparez par une ligne vide pour plusieurs paragraphes."
+                      rows={5}
+                      className="leading-relaxed"
+                    />
+                  </div>
+                </>
+              )}
+
+              {/* Global CTAs */}
               <div className="rounded-lg border p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <Label className="text-sm font-semibold">🔘 Boutons CTA</Label>
