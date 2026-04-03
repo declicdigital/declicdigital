@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
@@ -5,6 +6,7 @@ import { Calendar, Clock, ArrowRight, Tag, Sparkles } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { blogArticles, blogCategories, getCategorySlug } from "@/data/blogArticles";
+import { supabase } from "@/integrations/supabase/client";
 
 const categoryColors: Record<string, string> = {
   "Technique": "bg-amber-500/15 text-amber-700 dark:text-amber-400",
@@ -16,10 +18,61 @@ const categoryColors: Record<string, string> = {
 
 const sorted = [...blogArticles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
+interface CmsPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  cover_image_url: string | null;
+  category: string;
+  read_time: string;
+  created_at: string;
+  tags: string[];
+}
+
 const Blog = () => {
-  const featured = sorted[0];
-  const rest = sorted.slice(1);
-  const newestDate = featured.date;
+  const [cmsPosts, setCmsPosts] = useState<CmsPost[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from("cms_blog_posts")
+      .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at, tags")
+      .eq("status", "published")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (data) setCmsPosts(data);
+      });
+  }, []);
+
+  // Merge static + CMS articles into a unified list
+  const allArticles = [
+    ...sorted.map(a => ({
+      slug: a.slug,
+      title: a.title,
+      excerpt: a.excerpt,
+      image: a.image,
+      category: a.category,
+      readTime: a.readTime,
+      date: a.date,
+      tags: a.tags,
+      isCms: false,
+    })),
+    ...cmsPosts.map(p => ({
+      slug: p.slug,
+      title: p.title,
+      excerpt: p.excerpt,
+      image: p.cover_image_url || "",
+      category: p.category,
+      readTime: p.read_time,
+      date: p.created_at,
+      tags: p.tags || [],
+      isCms: true,
+    })),
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  const featured = allArticles[0];
+  const rest = allArticles.slice(1);
+  const newestDate = featured?.date;
 
   return (
     <PageLayout hideBlogCarousel>
@@ -63,7 +116,7 @@ const Blog = () => {
 
       {/* Featured article */}
       <section className="container -mt-12 relative z-10 mb-16">
-        <Link to={`/blog/${featured.slug}`} className="group block">
+        <Link to={featured.isCms ? `/blog/cms/${featured.slug}` : `/blog/${featured.slug}`} className="group block">
           <motion.article
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -116,7 +169,7 @@ const Blog = () => {
           {rest.map((article, i) => {
             const isNew = article.date === newestDate;
             return (
-              <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
+              <Link key={article.slug} to={article.isCms ? `/blog/cms/${article.slug}` : `/blog/${article.slug}`} className="group block">
                 <motion.article
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}

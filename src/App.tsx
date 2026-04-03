@@ -42,6 +42,9 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite"));
 const FormulaireBrief = lazy(() => import("./pages/FormulaireBrief"));
 const Geo = lazy(() => import("./pages/Geo"));
+const AdminBlog = lazy(() => import("./pages/AdminBlog"));
+const AdminBlogEditor = lazy(() => import("./pages/AdminBlogEditor"));
+const CmsBlogArticle = lazy(() => import("./pages/CmsBlogArticle"));
 
 const queryClient = new QueryClient();
 
@@ -87,6 +90,9 @@ const App = () => (
                 <Route path="/brief" element={<FormulaireBrief />} />
                 <Route path="/visibilite-ia" element={<Geo />} />
                 <Route path="/geo" element={<GeoRedirect />} />
+                <Route path="/admin/blog" element={<AdminBlog />} />
+                <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
+                <Route path="/blog/cms/:slug" element={<CmsBlogArticle />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
