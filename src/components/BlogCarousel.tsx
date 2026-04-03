@@ -1,12 +1,33 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Clock, Sparkles } from "lucide-react";
 import { blogArticles } from "@/data/blogArticles";
-
-const sortedArticles = [...blogArticles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+import { supabase } from "@/integrations/supabase/client";
 
 const BlogCarousel = () => {
-  const latest = sortedArticles.slice(0, 4);
+  const [cmsPosts, setCmsPosts] = useState<any[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from("cms_blog_posts")
+      .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at")
+      .eq("status", "published")
+      .order("created_at", { ascending: false })
+      .limit(4)
+      .then(({ data }) => { if (data) setCmsPosts(data); });
+  }, []);
+
+  const allArticles = [
+    ...blogArticles.map(a => ({
+      slug: a.slug, title: a.title, excerpt: a.excerpt, image: a.image, category: a.category, readTime: a.readTime, date: a.date,
+    })),
+    ...cmsPosts.map(p => ({
+      slug: p.slug, title: p.title, excerpt: p.excerpt, image: p.cover_image_url || "", category: p.category, readTime: p.read_time, date: p.created_at,
+    })),
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  const latest = allArticles.slice(0, 4);
   const newestDate = latest[0]?.date;
 
   return (
