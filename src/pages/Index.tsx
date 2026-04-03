@@ -173,6 +173,7 @@ const Index = () => {
           </div>
         </div>
       </SectionWrapper>
+      </EditableSection>
 
       {/* Solutions */}
       <SectionWrapper>
