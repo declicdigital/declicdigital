@@ -107,10 +107,15 @@ const CmsBlogArticle = () => {
   const others = relatedCms.filter(p => p.category !== post.category);
   const related = [...sameCategory, ...others].slice(0, 3);
 
-  // Latest articles for bottom section (mix static + CMS)
-  const latestStatic = [...blogArticles]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 4);
+  // Latest articles for bottom section (mix static + CMS, exclude current)
+  const latestMixed = [
+    ...blogArticles.filter(a => a.slug !== post.slug).map(a => ({
+      slug: a.slug, title: a.title, image: a.image, category: a.category, readTime: a.readTime, date: a.date, isCms: false,
+    })),
+    ...relatedCms.filter(r => r.slug !== post.slug).map(r => ({
+      slug: r.slug, title: r.title, image: r.cover_image_url || "", category: r.category, readTime: r.read_time, date: r.created_at, isCms: true,
+    })),
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 4);
 
   // Sanitize and process content for CTA blocks
   const processContent = (html: string) => {
