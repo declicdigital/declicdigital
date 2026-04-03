@@ -294,15 +294,38 @@ function patchCtaLinks(el: Element, enabledCtas: CtaItem[]) {
   });
   enabledCtas.forEach((cta, i) => {
     if (ctaLinks[i]) {
-      const textNode = Array.from(ctaLinks[i].childNodes).find(n => n.nodeType === Node.TEXT_NODE);
+      const a = ctaLinks[i];
+      // Update text
+      const textNode = Array.from(a.childNodes).find(n => n.nodeType === Node.TEXT_NODE);
       if (textNode) {
         textNode.textContent = cta.text;
       } else {
-        const span = ctaLinks[i].querySelector("span");
+        const span = a.querySelector("span");
         if (span) span.textContent = cta.text;
-        else ctaLinks[i].textContent = cta.text;
+        else a.textContent = cta.text;
       }
-      ctaLinks[i].setAttribute("href", cta.url);
+      a.setAttribute("href", cta.url);
+
+      // Apply style: primary = gradient-primary btn-glow, secondary = outline style
+      const primaryClasses = ["gradient-primary", "btn-glow", "shadow-glow"];
+      const secondaryIndicators = ["border", "outline"];
+
+      if (cta.style === "primary") {
+        // Add primary gradient classes, remove outline-like classes
+        a.classList.remove("border", "border-white", "border-foreground", "bg-transparent", "bg-secondary");
+        a.classList.add("gradient-primary", "btn-glow", "shadow-glow");
+        a.style.removeProperty("background");
+        // Ensure text is white
+        a.classList.remove("text-foreground", "text-primary");
+        a.classList.add("text-white");
+      } else {
+        // Secondary: remove gradient, add outline/border
+        a.classList.remove("gradient-primary", "btn-glow", "shadow-glow");
+        a.style.background = "transparent";
+        a.classList.add("border", "border-white");
+        a.classList.remove("text-foreground");
+        a.classList.add("text-white");
+      }
     }
   });
 }
