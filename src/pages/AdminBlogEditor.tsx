@@ -121,6 +121,8 @@ const AdminBlogEditor = () => {
             setCoverImageUrl(data.cover_image_url || "");
             setStatus(data.status);
             setSlugManual(true);
+            // Parse date from created_at
+            setPublishDate(data.created_at ? data.created_at.slice(0, 10) : "");
           }
         });
     }
