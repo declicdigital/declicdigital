@@ -236,6 +236,7 @@ const Index = () => {
           </Button>
         </div>
       </SectionWrapper>
+      </EditableSection>
 
       {/* Avis clients Google */}
       <Suspense fallback={<div style={{ minHeight: 400 }} />}>
