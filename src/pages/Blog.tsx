@@ -116,7 +116,7 @@ const Blog = () => {
 
       {/* Featured article */}
       <section className="container -mt-12 relative z-10 mb-16">
-        <Link to={`/blog/${featured.slug}`} className="group block">
+        <Link to={featured.isCms ? `/blog/cms/${featured.slug}` : `/blog/${featured.slug}`} className="group block">
           <motion.article
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
