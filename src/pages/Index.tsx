@@ -205,7 +205,7 @@ const Index = () => {
       </SectionWrapper>
       </EditableSection>
 
-      {/* Notre méthode */}
+      <EditableSection blockId="methode" pagePath="/" label="Notre méthode">
       <SectionWrapper className="bg-section-blue">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold md:text-4xl">Référencement naturel Google : soyez visible localement</h2>
