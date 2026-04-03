@@ -8,6 +8,7 @@ import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import ArticleEndBlocks from "@/components/ArticleEndBlocks";
 import { blogArticles } from "@/data/blogArticles";
+import { mergeBlogArticles } from "@/lib/blog";
 import DOMPurify from "dompurify";
 
 interface CmsPost {
@@ -80,14 +81,17 @@ const CmsBlogArticle = () => {
 
   // Latest: mix static + CMS, exclude current + related
   const relatedSlugs = new Set(related.map(r => r.slug));
-  const latest = [
-    ...blogArticles.filter(a => a.slug !== post.slug && !relatedSlugs.has(a.slug)).map(a => ({
-      slug: a.slug, title: a.title, image: a.image, category: a.category, date: a.date,
-    })),
-    ...relatedCms.filter(r => r.slug !== post.slug && !relatedSlugs.has(r.slug)).map(r => ({
-      slug: r.slug, title: r.title, image: r.cover_image_url || "", category: r.category, date: r.created_at,
-    })),
-  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
+  const latest = mergeBlogArticles(
+    blogArticles.filter((a) => a.slug !== post.slug && !relatedSlugs.has(a.slug)),
+    relatedCms.filter((r) => r.slug !== post.slug && !relatedSlugs.has(r.slug))
+  )
+    .slice(0, 3)
+    .map((item) => ({
+      slug: item.slug,
+      title: item.title,
+      image: item.image,
+      category: item.category,
+    }));
 
   const processContent = (html: string) => {
     let sanitized = DOMPurify.sanitize(html, { ADD_ATTR: ['class', 'data-cta-style'] });

@@ -10,6 +10,7 @@ import PageBreadcrumb from "@/components/PageBreadcrumb";
 import MapEmbed from "@/components/MapEmbed";
 import ArticleEndBlocks from "@/components/ArticleEndBlocks";
 import { blogArticles, getArticleBySlug, getRelatedArticles, getCategorySlug, type BlogArticle as BlogArticleType } from "@/data/blogArticles";
+import { mergeBlogArticles, type CmsBlogPostSummary } from "@/lib/blog";
 
 const getShareUrl = (slug: string) =>
   `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/og-meta?path=/blog/${slug}`;
@@ -52,7 +53,7 @@ const CmsBlogArticle = lazy(() => import("./CmsBlogArticle"));
 const BlogArticleInner = () => {
   const { slug } = useParams<{ slug: string }>();
   const article = slug ? getArticleBySlug(slug) : undefined;
-  const [latestCms, setLatestCms] = useState<any[]>([]);
+  const [latestCms, setLatestCms] = useState<CmsBlogPostSummary[]>([]);
 
   useEffect(() => {
     supabase
@@ -171,14 +172,17 @@ const BlogArticleInner = () => {
 
   // Build latest articles (mix static + CMS, exclude current, exclude related)
   const relatedSlugs = new Set(related.map(r => r.slug));
-  const latest = [
-    ...blogArticles.filter(a => a.slug !== article.slug && !relatedSlugs.has(a.slug)).map(a => ({
-      slug: a.slug, title: a.title, image: a.image, category: a.category, date: a.date,
-    })),
-    ...latestCms.filter(c => c.slug !== article.slug && !relatedSlugs.has(c.slug)).map(c => ({
-      slug: c.slug, title: c.title, image: c.cover_image_url || "", category: c.category, date: c.created_at,
-    })),
-  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 3);
+  const latest = mergeBlogArticles(
+    blogArticles.filter((a) => a.slug !== article.slug && !relatedSlugs.has(a.slug)),
+    latestCms.filter((c) => c.slug !== article.slug && !relatedSlugs.has(c.slug))
+  )
+    .slice(0, 3)
+    .map((item) => ({
+      slug: item.slug,
+      title: item.title,
+      image: item.image,
+      category: item.category,
+    }));
 
   return (
     <PageLayout hideBlogCarousel>

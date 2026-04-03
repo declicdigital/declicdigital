@@ -98,6 +98,7 @@ const AdminBlog = () => {
       cover_image_url: typeof article.image === "string" && article.image.startsWith("http") ? article.image : null,
       status: "published",
       related_slugs: article.relatedSlugs || [],
+      created_at: `${article.date}T10:00:00+01:00`,
     });
 
     if (error) {
