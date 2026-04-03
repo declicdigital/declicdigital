@@ -58,7 +58,7 @@ const BlogArticleInner = () => {
   useEffect(() => {
     supabase
       .from("cms_blog_posts")
-      .select("id, title, slug, cover_image_url, category, read_time, created_at")
+      .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at")
       .eq("status", "published")
       .order("created_at", { ascending: false })
       .limit(6)
