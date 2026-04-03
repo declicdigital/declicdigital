@@ -1,4 +1,4 @@
-import { useState, useEffect, ReactNode, lazy, Suspense } from "react";
+import { useState, useEffect, useRef, ReactNode, lazy, Suspense } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { GripVertical, Pencil, Trash2, Tag, X, Save } from "lucide-react";
@@ -11,13 +11,9 @@ import DOMPurify from "dompurify";
 const RichTextEditor = lazy(() => import("./RichTextEditor"));
 
 interface EditableSectionProps {
-  /** Unique block identifier within the page, e.g. "hero", "problems" */
   blockId: string;
-  /** Page path, e.g. "/" or "/creation-site-web" */
   pagePath: string;
-  /** Original hardcoded children */
   children: ReactNode;
-  /** Optional label shown in admin overlay */
   label?: string;
 }
 
@@ -26,10 +22,6 @@ interface Override {
   content: { html?: string; label?: string; [key: string]: any };
 }
 
-/**
- * Wraps an existing hardcoded section. In admin mode, shows edit controls.
- * If an HTML override exists in Supabase, renders it instead of children.
- */
 const EditableSection = ({ blockId, pagePath, children, label }: EditableSectionProps) => {
   const { isAdmin } = useAuth();
   const [override, setOverride] = useState<Override | null>(null);
@@ -38,6 +30,7 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
   const [editLabel, setEditLabel] = useState("");
   const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const compositeKey = `${pagePath}::${blockId}`;
 
@@ -58,7 +51,13 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
   }, [compositeKey]);
 
   const openEditor = () => {
-    setEditHtml(override?.content?.html || "");
+    // Pre-fill with override content, or capture current DOM content
+    if (override?.content?.html) {
+      setEditHtml(override.content.html);
+    } else if (contentRef.current) {
+      // Capture the actual rendered HTML from the DOM
+      setEditHtml(contentRef.current.innerHTML);
+    }
     setEditLabel(override?.content?.label || label || blockId);
     setEditing(true);
   };
@@ -100,10 +99,9 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
     toast({ title: "Section réinitialisée" });
   };
 
-  // If not loaded yet, render original children
   if (!loaded) return <>{children}</>;
 
-  // If there's an override and user is NOT admin, render the override
+  // Non-admin with override
   if (override?.content?.html && !isAdmin) {
     return (
       <div
@@ -113,12 +111,11 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
     );
   }
 
-  // Admin mode: show overlay controls
+  // Admin mode
   if (isAdmin) {
     return (
       <>
         <div className="group relative">
-          {/* Admin overlay controls */}
           <div className="pointer-events-none absolute inset-0 z-[100] rounded-lg border-2 border-transparent transition group-hover:border-primary/30 group-hover:bg-primary/[0.02]" />
           <div className="absolute top-2 right-2 z-[101] flex items-center gap-1.5 opacity-0 group-hover:opacity-100 transition">
             <span className="rounded bg-gray-800/90 px-2 py-1 text-[11px] font-medium text-white flex items-center gap-1">
@@ -146,51 +143,61 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
             </div>
           </div>
 
-          {/* Render override or original children */}
+          {/* Content wrapper with ref for DOM capture */}
           {override?.content?.html ? (
             <div
+              ref={contentRef}
               className="cms-article-content"
               dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(override.content.html) }}
             />
           ) : (
-            children
+            <div ref={contentRef}>
+              {children}
+            </div>
           )}
         </div>
 
         {/* Editor panel */}
         {editing && (
-          <div className="fixed inset-y-0 right-0 z-[10000] w-[520px] max-w-full bg-background border-l shadow-2xl overflow-y-auto p-6 animate-in slide-in-from-right">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-lg font-semibold">Modifier la section</h3>
-              <button onClick={() => setEditing(false)} className="rounded p-1 hover:bg-muted">
-                <X size={20} />
-              </button>
-            </div>
-            <div className="space-y-4">
-              <div>
-                <Label className="mb-1 block">Nom du bloc</Label>
-                <Input value={editLabel} onChange={(e) => setEditLabel(e.target.value)} placeholder="Ex: Hero HP" />
+          <div className="fixed inset-0 z-[9999] flex">
+            {/* Backdrop */}
+            <div className="absolute inset-0 bg-black/30" onClick={() => setEditing(false)} />
+            {/* Panel */}
+            <div className="relative ml-auto w-[600px] max-w-full h-full bg-background border-l shadow-2xl overflow-y-auto p-6 animate-in slide-in-from-right">
+              <div className="flex items-center justify-between mb-6">
+                <h3 className="text-lg font-semibold">Modifier : {editLabel}</h3>
+                <button onClick={() => setEditing(false)} className="rounded p-1 hover:bg-muted">
+                  <X size={20} />
+                </button>
               </div>
-              <div>
-                <Label className="mb-1 block">Contenu HTML</Label>
-                <Suspense fallback={<div className="h-[300px] bg-muted animate-pulse rounded" />}>
-                  <RichTextEditor content={editHtml} onChange={setEditHtml} />
-                </Suspense>
+              <div className="space-y-4">
+                <div>
+                  <Label className="mb-1 block text-sm font-medium">Nom du bloc</Label>
+                  <Input value={editLabel} onChange={(e) => setEditLabel(e.target.value)} placeholder="Ex: Hero HP" />
+                </div>
+                <div>
+                  <Label className="mb-1 block text-sm font-medium">Contenu (éditeur visuel)</Label>
+                  <div className="text-xs text-muted-foreground mb-2">
+                    Le contenu actuel du bloc est pré-rempli ci-dessous. Modifiez directement ce que vous souhaitez.
+                  </div>
+                  <Suspense fallback={<div className="h-[400px] bg-muted animate-pulse rounded" />}>
+                    <RichTextEditor content={editHtml} onChange={setEditHtml} />
+                  </Suspense>
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  Laissez vide et sauvegardez pour revenir au contenu d'origine.
+                </p>
               </div>
-              <p className="text-xs text-muted-foreground">
-                Laissez vide pour garder le contenu d'origine codé en dur.
-              </p>
+              <Button onClick={saveOverride} disabled={saving} className="mt-6 w-full gap-2">
+                <Save size={16} /> {saving ? "Sauvegarde..." : "Enregistrer"}
+              </Button>
             </div>
-            <Button onClick={saveOverride} disabled={saving} className="mt-6 w-full gap-2">
-              <Save size={16} /> {saving ? "Sauvegarde..." : "Enregistrer"}
-            </Button>
           </div>
         )}
       </>
     );
   }
 
-  // Non-admin, no override
   return <>{children}</>;
 };
 

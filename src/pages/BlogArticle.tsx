@@ -1,12 +1,14 @@
 import { useParams, Link, Navigate } from "react-router-dom";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowLeft, ArrowRight, Tag, Share2, Copy, Check } from "lucide-react";
-import { useState, lazy, Suspense } from "react";
+import { supabase } from "@/integrations/supabase/client";
+
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import MapEmbed from "@/components/MapEmbed";
-import { getArticleBySlug, getRelatedArticles, getCategorySlug, type BlogArticle as BlogArticleType } from "@/data/blogArticles";
+import { blogArticles, getArticleBySlug, getRelatedArticles, getCategorySlug, type BlogArticle as BlogArticleType } from "@/data/blogArticles";
 
 const getShareUrl = (slug: string) =>
   `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/og-meta?path=/blog/${slug}`;
@@ -46,9 +48,20 @@ const ShareBar = ({ article, formattedDate }: { article: BlogArticleType; format
 
 const CmsBlogArticle = lazy(() => import("./CmsBlogArticle"));
 
-const BlogArticle = () => {
+const BlogArticleInner = () => {
   const { slug } = useParams<{ slug: string }>();
   const article = slug ? getArticleBySlug(slug) : undefined;
+  const [latestCms, setLatestCms] = useState<any[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from("cms_blog_posts")
+      .select("id, title, slug, cover_image_url, category, read_time, created_at")
+      .eq("status", "published")
+      .order("created_at", { ascending: false })
+      .limit(6)
+      .then(({ data }) => { if (data) setLatestCms(data); });
+  }, []);
 
   // If no static article found, try CMS
   if (!article) {
@@ -300,8 +313,42 @@ const BlogArticle = () => {
           </Link>
         </div>
       </section>
+
+      {/* C) Latest blog articles */}
+      <section className="py-16">
+        <div className="container">
+          <h2 className="mb-8 text-2xl font-bold">Le Blog — Nos derniers articles</h2>
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+            {(() => {
+              const latest = [
+                ...blogArticles.filter(a => a.slug !== article.slug).map(a => ({
+                  slug: a.slug, title: a.title, image: a.image, category: a.category, date: a.date, isCms: false,
+                })),
+                ...latestCms.filter(c => c.slug !== article.slug).map(c => ({
+                  slug: c.slug, title: c.title, image: c.cover_image_url || "", category: c.category, date: c.created_at, isCms: true,
+                })),
+              ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 4);
+              return latest.map((a) => (
+                <Link key={a.slug} to={`/blog/${a.slug}`} className="group block">
+                  <article className="overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-elevated transition-shadow">
+                    <div className="aspect-[16/9] overflow-hidden">
+                      <img src={a.image} alt={a.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    </div>
+                    <div className="p-5">
+                      <span className="text-xs font-semibold text-primary">{a.category}</span>
+                      <h3 className="mt-2 text-sm font-bold group-hover:text-primary transition-colors line-clamp-2">{a.title}</h3>
+                      <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-primary">Lire <ArrowRight size={12} /></span>
+                    </div>
+                  </article>
+                </Link>
+              ));
+            })()}
+          </div>
+        </div>
+      </section>
     </PageLayout>
   );
 };
 
+const BlogArticle = BlogArticleInner;
 export default BlogArticle;

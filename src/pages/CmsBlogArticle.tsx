@@ -107,10 +107,15 @@ const CmsBlogArticle = () => {
   const others = relatedCms.filter(p => p.category !== post.category);
   const related = [...sameCategory, ...others].slice(0, 3);
 
-  // Latest articles for bottom section (mix static + CMS)
-  const latestStatic = [...blogArticles]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 4);
+  // Latest articles for bottom section (mix static + CMS, exclude current)
+  const latestMixed = [
+    ...blogArticles.filter(a => a.slug !== post.slug).map(a => ({
+      slug: a.slug, title: a.title, image: a.image, category: a.category, readTime: a.readTime, date: a.date, isCms: false,
+    })),
+    ...relatedCms.filter(r => r.slug !== post.slug).map(r => ({
+      slug: r.slug, title: r.title, image: r.cover_image_url || "", category: r.category, readTime: r.read_time, date: r.created_at, isCms: true,
+    })),
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()).slice(0, 4);
 
   // Sanitize and process content for CTA blocks
   const processContent = (html: string) => {
@@ -282,7 +287,7 @@ const CmsBlogArticle = () => {
         <div className="container">
           <h2 className="mb-8 text-2xl font-bold">Le Blog - Nos derniers articles</h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {latestStatic.map((article) => (
+            {latestMixed.map((article) => (
               <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
                 <article className="overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-elevated transition-shadow">
                   <div className="aspect-[16/9] overflow-hidden">
