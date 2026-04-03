@@ -137,6 +137,7 @@ const Index = () => {
           </div>
         </div>
       </section>
+      </EditableSection>
 
 
       {/* Problème */}
