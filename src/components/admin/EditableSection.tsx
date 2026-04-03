@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
-import { Pencil, Trash2, Tag, X, Save, Plus, Trash, ChevronDown, ChevronUp } from "lucide-react";
+import { Pencil, Trash2, Tag, X, Save, Plus, Trash, ChevronDown, ChevronUp, ArrowUp, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,11 +9,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
 
-interface EditableSectionProps {
+export interface EditableSectionProps {
   blockId: string;
   pagePath: string;
   children: ReactNode;
   label?: string;
+  onMoveUp?: () => void;
+  onMoveDown?: () => void;
+  displayIndex?: number;
 }
 
 interface CtaItem {
@@ -75,15 +78,23 @@ function extractCtas(el: Element): CtaItem[] {
   return ctas;
 }
 
-/** Extract paragraphs text from an element */
-function extractTexts(el: Element): string {
-  const paragraphs = el.querySelectorAll("p");
+/** Extract ALL text content from an element - headings and paragraphs */
+function extractAllTexts(el: Element): string {
   const texts: string[] = [];
-  paragraphs.forEach((p) => {
-    const t = p.textContent?.trim();
-    if (t && t.length > 10) texts.push(t);
+  // Get all headings (h2, h3, h4, h5, h6) and paragraphs
+  const elements = el.querySelectorAll("h2, h3, h4, h5, h6, p, li");
+  elements.forEach((node) => {
+    const t = node.textContent?.trim();
+    if (t && t.length > 3) {
+      const tag = node.tagName.toLowerCase();
+      if (tag.startsWith("h")) {
+        texts.push(`[${tag.toUpperCase()}] ${t}`);
+      } else {
+        texts.push(t);
+      }
+    }
   });
-  return texts.slice(0, 3).join("\n\n");
+  return texts.join("\n\n");
 }
 
 /** Extract first significant image */
@@ -101,29 +112,27 @@ function extractImage(el: Element): { src: string; alt: string } {
 function parseDomToStructured(el: HTMLElement, fallbackLabel: string): StructuredContent {
   const result = emptyStructured(fallbackLabel);
 
-  // Find h1
+  // Find h1 or first major heading
   const h1 = el.querySelector("h1");
   if (h1) result.heading = h1.textContent?.trim() || "";
 
-  // Find first significant image at the top level (before sub-sections)
+  // Find first significant image at the top level
   const img = extractImage(el);
   result.image = img.src;
   result.imageAlt = img.alt;
 
   // Look for repeated sub-sections (cards, pricing tiers, etc.)
-  // Strategy: find containers with multiple sibling children that each have a heading
   const subSections = detectSubItems(el);
 
   if (subSections.length >= 2) {
     result.items = subSections;
-    // Top-level text/ctas are those outside sub-items
     result.text = "";
     result.ctas = extractCtas(el);
-    // Remove CTAs that belong to sub-items
     const subCtaTexts = new Set(subSections.flatMap(s => s.ctas.map(c => c.text)));
     result.ctas = result.ctas.filter(c => !subCtaTexts.has(c.text));
   } else {
-    result.text = extractTexts(el);
+    // Extract ALL text content
+    result.text = extractAllTexts(el);
     result.ctas = extractCtas(el);
   }
 
@@ -132,9 +141,6 @@ function parseDomToStructured(el: HTMLElement, fallbackLabel: string): Structure
 
 /** Detect repeating card/item patterns within a section */
 function detectSubItems(el: HTMLElement): SubItem[] {
-  const items: SubItem[] = [];
-
-  // Strategy 1: Look for grid/flex containers with children that each have headings
   const containers = el.querySelectorAll("[class*='grid'], [class*='flex']");
   for (const container of containers) {
     const children = Array.from(container.children);
@@ -143,7 +149,6 @@ function detectSubItems(el: HTMLElement): SubItem[] {
     );
 
     if (withHeadings.length >= 2 && withHeadings.length === children.length) {
-      // Found a repeating pattern
       return withHeadings.map((child, i) => {
         const heading = child.querySelector("h2, h3, h4");
         const boldEl = !heading ? child.querySelector("[class*='font-bold'], [class*='font-semibold']") : null;
@@ -151,7 +156,7 @@ function detectSubItems(el: HTMLElement): SubItem[] {
         return {
           id: `item-${i}`,
           heading: heading?.textContent?.trim() || boldEl?.textContent?.trim() || `Élément ${i + 1}`,
-          text: extractTexts(child),
+          text: extractAllTexts(child),
           image: img.src,
           imageAlt: img.alt,
           ctas: extractCtas(child),
@@ -160,51 +165,18 @@ function detectSubItems(el: HTMLElement): SubItem[] {
     }
   }
 
-  // Strategy 2: Look for multiple h2/h3 at the same depth, splitting content between them
-  const headings = el.querySelectorAll("h2, h3");
-  if (headings.length >= 2) {
-    // Check if they're siblings or near-siblings
-    const parentMap = new Map<Element, Element[]>();
-    headings.forEach(h => {
-      const p = h.parentElement;
-      if (p) {
-        if (!parentMap.has(p)) parentMap.set(p, []);
-        parentMap.get(p)!.push(h);
-      }
-    });
-
-    for (const [parent, hs] of parentMap) {
-      if (hs.length >= 2) {
-        return hs.map((h, i) => {
-          // Get the sibling container or parent
-          const container = h.closest("div, section, article") || h.parentElement;
-          return {
-            id: `item-${i}`,
-            heading: h.textContent?.trim() || `Élément ${i + 1}`,
-            text: container ? extractTexts(container) : "",
-            image: container ? extractImage(container).src : "",
-            imageAlt: container ? extractImage(container).alt : "",
-            ctas: container ? extractCtas(container) : [],
-          };
-        });
-      }
-    }
-  }
-
-  return items;
+  return [];
 }
 
 /**
  * Apply saved structured content onto the live DOM without replacing children.
  */
 function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
-  // Patch H1
   if (s.heading) {
     const h1 = el.querySelector("h1");
     if (h1) h1.textContent = s.heading;
   }
 
-  // Patch first significant image
   if (s.image) {
     const imgs = el.querySelectorAll("img");
     for (const img of imgs) {
@@ -216,32 +188,50 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
     }
   }
 
-  // Patch paragraphs (only if no sub-items, to avoid messing up card content)
+  // Patch text content - handle tagged headings
   if (s.text && s.items.length === 0) {
-    const newTexts = s.text.split("\n\n").filter(t => t.trim());
-    const paragraphs = el.querySelectorAll("p");
-    const significantPs: HTMLParagraphElement[] = [];
-    paragraphs.forEach(p => {
-      const t = p.textContent?.trim();
-      if (t && t.length > 10) significantPs.push(p);
+    const lines = s.text.split("\n\n").filter(t => t.trim());
+    const taggedLines: { tag: string | null; text: string }[] = lines.map(line => {
+      const match = line.match(/^\[(H[2-6])\]\s*(.*)/i);
+      if (match) return { tag: match[1].toLowerCase(), text: match[2] };
+      return { tag: null, text: line };
     });
-    newTexts.forEach((txt, i) => {
-      if (significantPs[i]) significantPs[i].textContent = txt.trim();
+
+    // Apply heading changes
+    const headingElements = el.querySelectorAll("h2, h3, h4, h5, h6");
+    const paragraphElements = el.querySelectorAll("p");
+    
+    let hIdx = 0, pIdx = 0;
+    taggedLines.forEach(({ tag, text }) => {
+      if (tag) {
+        if (headingElements[hIdx]) {
+          headingElements[hIdx].textContent = text.trim();
+          hIdx++;
+        }
+      } else {
+        // Find next significant paragraph
+        while (pIdx < paragraphElements.length) {
+          const pt = paragraphElements[pIdx].textContent?.trim();
+          if (pt && pt.length > 3) {
+            paragraphElements[pIdx].textContent = text.trim();
+            pIdx++;
+            break;
+          }
+          pIdx++;
+        }
+      }
     });
   }
 
-  // Patch sub-items
   if (s.items.length > 0) {
     applySubItemsToDOM(el, s.items);
   }
 
-  // Patch CTA links
   const enabledCtas = s.ctas.filter(c => c.enabled && c.text && c.url);
   patchCtaLinks(el, enabledCtas);
 }
 
 function applySubItemsToDOM(el: HTMLElement, items: SubItem[]) {
-  // Find the same containers as in detection
   const containers = el.querySelectorAll("[class*='grid'], [class*='flex']");
   for (const container of containers) {
     const children = Array.from(container.children);
@@ -254,27 +244,29 @@ function applySubItemsToDOM(el: HTMLElement, items: SubItem[]) {
         if (!items[i]) return;
         const item = items[i];
 
-        // Patch heading
         const heading = child.querySelector("h2, h3, h4");
         const boldEl = !heading ? child.querySelector("[class*='font-bold'], [class*='font-semibold']") : null;
         if (heading && item.heading) heading.textContent = item.heading;
         else if (boldEl && item.heading) boldEl.textContent = item.heading;
 
-        // Patch text
         if (item.text) {
-          const newTexts = item.text.split("\n\n").filter(t => t.trim());
+          const lines = item.text.split("\n\n").filter(t => t.trim());
           const paragraphs = child.querySelectorAll("p");
           const significantPs: HTMLParagraphElement[] = [];
           paragraphs.forEach(p => {
             const t = p.textContent?.trim();
-            if (t && t.length > 10) significantPs.push(p);
+            if (t && t.length > 3) significantPs.push(p);
           });
-          newTexts.forEach((txt, j) => {
-            if (significantPs[j]) significantPs[j].textContent = txt.trim();
+          let pIdx = 0;
+          lines.forEach(txt => {
+            if (txt.match(/^\[H[2-6]\]/i)) return; // skip heading tags in sub-items
+            if (significantPs[pIdx]) {
+              significantPs[pIdx].textContent = txt.trim();
+              pIdx++;
+            }
           });
         }
 
-        // Patch image
         if (item.image) {
           const img = child.querySelector("img");
           if (img) {
@@ -283,7 +275,6 @@ function applySubItemsToDOM(el: HTMLElement, items: SubItem[]) {
           }
         }
 
-        // Patch CTAs
         const enabledCtas = item.ctas.filter(c => c.enabled && c.text && c.url);
         patchCtaLinks(child as HTMLElement, enabledCtas);
       });
@@ -361,7 +352,7 @@ const SubItemEditor = ({ item, index, onChange, onRemove }: {
           </div>
           <div>
             <Label className="text-xs font-medium">Texte</Label>
-            <Textarea value={item.text} onChange={e => updateField("text", e.target.value)} rows={3} className="mt-1 text-sm" />
+            <Textarea value={item.text} onChange={e => updateField("text", e.target.value)} rows={4} className="mt-1 text-sm" />
           </div>
           {(item.image || true) && (
             <div>
@@ -397,7 +388,7 @@ const SubItemEditor = ({ item, index, onChange, onRemove }: {
 };
 
 // ─── Main Component ───
-const EditableSection = ({ blockId, pagePath, children, label }: EditableSectionProps) => {
+const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveDown, displayIndex }: EditableSectionProps) => {
   const { isAdmin } = useAuth();
   const [override, setOverride] = useState<Override | null>(null);
   const [editing, setEditing] = useState(false);
@@ -437,7 +428,6 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
   const openEditor = () => {
     const fallbackLabel = override?.content?.label || label || blockId;
     if (override?.content?.structured) {
-      // Ensure items array exists for backward compat
       const s = override.content.structured;
       setStructured({ ...s, items: s.items || [] });
     } else if (contentRef.current) {
@@ -536,6 +526,27 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
             <Tag size={10} />
             {override?.content?.label || label || blockId}
           </span>
+
+          {/* Move up/down buttons */}
+          {onMoveUp && (
+            <button
+              onClick={onMoveUp}
+              className="rounded bg-accent p-1.5 text-accent-foreground hover:bg-accent/80 transition"
+              title="Déplacer vers le haut"
+            >
+              <ArrowUp size={14} />
+            </button>
+          )}
+          {onMoveDown && (
+            <button
+              onClick={onMoveDown}
+              className="rounded bg-accent p-1.5 text-accent-foreground hover:bg-accent/80 transition"
+              title="Déplacer vers le bas"
+            >
+              <ArrowDown size={14} />
+            </button>
+          )}
+
           <button onClick={openEditor} className="rounded bg-primary p-1.5 text-primary-foreground hover:bg-primary/80 transition" title="Modifier cette section">
             <Pencil size={14} />
           </button>
@@ -607,15 +618,18 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
                     <Input value={structured.imageAlt} onChange={(e) => updateField("imageAlt", e.target.value)} placeholder="Texte alternatif (alt)" className="text-sm" />
                   </div>
 
-                  {/* Global text */}
+                  {/* Global text - full content */}
                   <div className="rounded-lg border p-4 space-y-2">
-                    <Label className="text-sm font-semibold">📄 Texte / sous-titre</Label>
+                    <Label className="text-sm font-semibold">📄 Contenu complet</Label>
+                    <p className="text-xs text-muted-foreground">
+                      Les titres sont préfixés [H2], [H3], etc. Le reste est du texte. Séparez par une ligne vide.
+                    </p>
                     <Textarea
                       value={structured.text}
                       onChange={(e) => updateField("text", e.target.value)}
-                      placeholder="Paragraphe(s) du bloc. Séparez par une ligne vide pour plusieurs paragraphes."
-                      rows={5}
-                      className="leading-relaxed"
+                      placeholder="[H2] Titre de section&#10;&#10;Paragraphe de texte...&#10;&#10;[H3] Sous-titre..."
+                      rows={12}
+                      className="leading-relaxed text-sm font-mono"
                     />
                   </div>
                 </>

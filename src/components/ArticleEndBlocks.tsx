@@ -73,9 +73,14 @@ const ArticleEndBlocks = ({ related, latest }: ArticleEndBlocksProps) => {
       <section className="py-10 md:py-12">
         <div className="container">
           <div className="mx-auto max-w-6xl">
-            <h2 className="mb-5 text-xl font-bold">Le Blog — Nos derniers articles</h2>
-            <div className="grid gap-5 md:grid-cols-3">
-              {latest.slice(0, 3).map((article) => (
+            <div className="flex items-center justify-between mb-5">
+              <h2 className="text-xl font-bold">Nos derniers articles</h2>
+              <Link to="/blog" className="text-sm font-semibold text-primary hover:underline flex items-center gap-1">
+                Tous les articles <ArrowRight size={14} />
+              </Link>
+            </div>
+            <div className="grid gap-5 sm:grid-cols-2 md:grid-cols-3">
+              {latest.slice(0, 6).map((article) => (
                 <ArticleCard key={article.slug} article={article} />
               ))}
             </div>
