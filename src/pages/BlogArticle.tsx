@@ -45,11 +45,20 @@ const ShareBar = ({ article, formattedDate }: { article: BlogArticleType; format
   );
 };
 
+const CmsBlogArticle = lazy(() => import("./CmsBlogArticle"));
+
 const BlogArticle = () => {
   const { slug } = useParams<{ slug: string }>();
   const article = slug ? getArticleBySlug(slug) : undefined;
 
-  if (!article) return <Navigate to="/blog" replace />;
+  // If no static article found, try CMS
+  if (!article) {
+    return (
+      <Suspense fallback={<div className="min-h-screen" />}>
+        <CmsBlogArticle />
+      </Suspense>
+    );
+  }
 
   const related = getRelatedArticles(article);
   const formattedDate = new Date(article.date).toLocaleDateString("fr-FR", {
