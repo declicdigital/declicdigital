@@ -287,7 +287,7 @@ const CmsBlogArticle = () => {
         <div className="container">
           <h2 className="mb-8 text-2xl font-bold">Le Blog - Nos derniers articles</h2>
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {latestStatic.map((article) => (
+            {latestMixed.map((article) => (
               <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
                 <article className="overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-elevated transition-shadow">
                   <div className="aspect-[16/9] overflow-hidden">
