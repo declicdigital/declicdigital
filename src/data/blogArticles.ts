@@ -202,7 +202,7 @@ Google ne se contente pas de mesurer la vitesse : il la pondère dans son algori
 
 ## Conclusion
 
-La vitesse n'est pas un luxe technique, c'est un levier commercial. Un site qui charge en moins de 2 secondes inspire confiance, retient les visiteurs et convertit mieux. La rapidité de votre site fait aussi partie des [critères de sélection des IA pour citer un site](/visibilite-ia). C'est aussi vrai pour les applications mobiles et les [montres connectées Garmin](/blog/whatsapp-montres-garmin-evolution-usage), où la réactivité conditionne l'adoption. C'est l'un des meilleurs investissements que vous puissiez faire pour [améliorer le référencement de votre site](/referencement-seo). [Testez la vitesse de votre site avec notre audit gratuit](/audit-seo-gratuit).
+La vitesse n'est pas un luxe technique, c'est un levier commercial. Un site qui charge en moins de 2 secondes inspire confiance, retient les visiteurs et convertit mieux. La rapidité de votre site fait aussi partie des [critères de sélection des IA pour citer un site](/visibilite-ia). C'est l'un des meilleurs investissements que vous puissiez faire pour [améliorer le référencement de votre site](/referencement-seo). [Testez la vitesse de votre site avec notre audit gratuit](/audit-seo-gratuit).
     `,
   },
   {
