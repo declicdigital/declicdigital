@@ -6,6 +6,7 @@ import { Calendar, Clock, ArrowLeft, ArrowRight, Tag, Share2, Check } from "luci
 import { supabase } from "@/integrations/supabase/client";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
+import ArticleEndBlocks from "@/components/ArticleEndBlocks";
 import { blogArticles } from "@/data/blogArticles";
 import DOMPurify from "dompurify";
 
@@ -155,66 +156,20 @@ const CmsBlogArticle = () => {
         </div>
       </article>
 
-      {/* A) Related articles — 2 max, compact */}
-      {related.length > 0 && (
-        <section className="border-t border-border bg-secondary/30 py-10">
-          <div className="container">
-            <h2 className="mb-6 text-xl font-bold">Articles similaires</h2>
-            <div className="grid gap-6 md:grid-cols-2 max-w-3xl">
-              {related.map((r) => (
-                <Link key={r.slug} to={`/blog/${r.slug}`} className="group block">
-                  <article className="overflow-hidden rounded-xl bg-card shadow-card hover:shadow-elevated transition-shadow">
-                    {r.cover_image_url && (
-                      <div className="aspect-[2/1] overflow-hidden">
-                        <img src={r.cover_image_url} alt={r.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-                      </div>
-                    )}
-                    <div className="p-4">
-                      <span className="text-xs font-semibold text-primary">{r.category}</span>
-                      <h3 className="mt-1 text-sm font-bold group-hover:text-primary transition-colors line-clamp-2">{r.title}</h3>
-                      <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">Lire <ArrowRight size={12} /></span>
-                    </div>
-                  </article>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* B) CTA SEO */}
-      <section className="gradient-miami py-12">
-        <div className="container text-center text-white">
-          <h2 className="text-2xl font-bold md:text-3xl">Envie d'un site qui performe ?</h2>
-          <p className="mt-3 text-white/80">Demandez votre audit SEO gratuit et découvrez comment améliorer votre visibilité.</p>
-          <Link to="/audit-seo-gratuit" className="mt-6 inline-flex items-center gap-2 rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 py-3 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow transition-opacity">
-            Audit SEO gratuit <ArrowRight size={16} />
-          </Link>
-        </div>
-      </section>
-
-      {/* C) Latest blog articles — 3 articles */}
-      <section className="py-12">
-        <div className="container">
-          <h2 className="mb-6 text-xl font-bold">Le Blog — Nos derniers articles</h2>
-          <div className="grid gap-6 md:grid-cols-3">
-            {latest.map((a) => (
-              <Link key={a.slug} to={`/blog/${a.slug}`} className="group block">
-                <article className="overflow-hidden rounded-xl bg-card shadow-card hover:shadow-elevated transition-shadow">
-                  <div className="aspect-[2/1] overflow-hidden">
-                    <img src={a.image} alt={a.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-                  </div>
-                  <div className="p-4">
-                    <span className="text-xs font-semibold text-primary">{a.category}</span>
-                    <h3 className="mt-1 text-sm font-bold group-hover:text-primary transition-colors line-clamp-2">{a.title}</h3>
-                    <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary">Lire <ArrowRight size={12} /></span>
-                  </div>
-                </article>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ArticleEndBlocks
+        related={related.map((r) => ({
+          slug: r.slug,
+          title: r.title,
+          image: r.cover_image_url || "",
+          category: r.category,
+        }))}
+        latest={latest.map((a) => ({
+          slug: a.slug,
+          title: a.title,
+          image: a.image,
+          category: a.category,
+        }))}
+      />
     </PageLayout>
   );
 };
