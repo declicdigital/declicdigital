@@ -203,6 +203,7 @@ const Index = () => {
           ))}
         </div>
       </SectionWrapper>
+      </EditableSection>
 
       {/* Notre méthode */}
       <SectionWrapper className="bg-section-blue">
