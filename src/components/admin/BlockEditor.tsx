@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, lazy, Suspense } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { GripVertical, Pencil, Trash2, Plus, X, Save } from "lucide-react";
@@ -9,6 +9,9 @@ import { Slider } from "@/components/ui/slider";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
+import DOMPurify from "dompurify";
+
+const RichTextEditor = lazy(() => import("./RichTextEditor"));
 
 interface Block {
   id: string;
@@ -26,6 +29,7 @@ const BLOCK_TYPES = [
   { value: "gallery", label: "Galerie" },
   { value: "contact_form", label: "Formulaire de contact" },
   { value: "separator", label: "Séparateur" },
+  { value: "content", label: "Contenu / Éditeur libre" },
 ];
 
 const defaultContent: Record<string, Record<string, any>> = {
@@ -36,13 +40,13 @@ const defaultContent: Record<string, Record<string, any>> = {
   gallery: { title: "Nos réalisations", images: [] },
   contact_form: { title: "Contactez-nous", subtitle: "Nous vous répondons en 24h" },
   separator: { height: 40, style: "line" },
+  content: { html: "<h2>Titre de section</h2><p>Votre contenu ici...</p>", targetPage: "/", contentType: "section" },
 };
 
 // Renders a CMS block
 export const BlockRenderer = ({ block }: { block: Block }) => {
   const c = block.content;
   const py = c.paddingY ?? 16;
-  const px = c.paddingX ?? 0;
 
   switch (block.block_type) {
     case "hero":
@@ -126,6 +130,15 @@ export const BlockRenderer = ({ block }: { block: Block }) => {
           </div>
         </section>
       );
+    case "content":
+      return (
+        <section className="py-16 px-6" style={{ paddingTop: py, paddingBottom: py }}>
+          <div
+            className="mx-auto max-w-3xl cms-article-content"
+            dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(c.html || "") }}
+          />
+        </section>
+      );
     default:
       return <div className="p-8 text-center text-muted-foreground">Bloc inconnu : {block.block_type}</div>;
   }
@@ -134,31 +147,58 @@ export const BlockRenderer = ({ block }: { block: Block }) => {
 // Inline block editor panel
 const BlockEditPanel = ({ block, onSave, onClose }: { block: Block; onSave: (content: Record<string, any>) => void; onClose: () => void }) => {
   const [content, setContent] = useState({ ...block.content });
+  const isContentBlock = block.block_type === "content";
 
   const update = (key: string, value: any) => setContent(prev => ({ ...prev, [key]: value }));
 
   return (
-    <div className="fixed inset-y-0 right-0 z-[10000] w-96 bg-background border-l shadow-2xl overflow-y-auto p-6 animate-in slide-in-from-right">
+    <div className="fixed inset-y-0 right-0 z-[10000] w-[480px] max-w-full bg-background border-l shadow-2xl overflow-y-auto p-6 animate-in slide-in-from-right">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-semibold">Modifier le bloc</h3>
         <button onClick={onClose} className="rounded p-1 hover:bg-muted"><X size={20} /></button>
       </div>
       <div className="space-y-4">
-        {Object.entries(content).filter(([k]) => !["images"].includes(k)).map(([key, val]) => (
-          <div key={key}>
-            <Label className="capitalize mb-1 block">{key.replace(/([A-Z])/g, " $1")}</Label>
-            {typeof val === "number" ? (
-              <div className="flex items-center gap-3">
-                <Slider value={[val]} onValueChange={([v]) => update(key, v)} min={0} max={200} step={4} className="flex-1" />
-                <span className="text-sm text-muted-foreground w-10">{val}px</span>
-              </div>
-            ) : typeof val === "string" && val.length > 100 ? (
-              <Textarea value={val} onChange={e => update(key, e.target.value)} rows={4} />
-            ) : typeof val === "string" ? (
-              <Input value={val} onChange={e => update(key, e.target.value)} />
-            ) : null}
-          </div>
-        ))}
+        {isContentBlock ? (
+          <>
+            <div>
+              <Label className="mb-1 block">Page cible</Label>
+              <Input value={content.targetPage || "/"} onChange={e => update("targetPage", e.target.value)} placeholder="/" />
+            </div>
+            <div>
+              <Label className="mb-1 block">Type de contenu</Label>
+              <Select value={content.contentType || "section"} onValueChange={v => update("contentType", v)}>
+                <SelectTrigger><SelectValue /></SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="section">Section custom</SelectItem>
+                  <SelectItem value="editorial">Encart éditorial</SelectItem>
+                  <SelectItem value="blog">Article de blog</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
+              <Label className="mb-1 block">Contenu</Label>
+              <Suspense fallback={<div className="h-[300px] bg-muted animate-pulse rounded" />}>
+                <RichTextEditor content={content.html || ""} onChange={html => update("html", html)} />
+              </Suspense>
+            </div>
+          </>
+        ) : (
+          Object.entries(content).filter(([k]) => !["images"].includes(k)).map(([key, val]) => (
+            <div key={key}>
+              <Label className="capitalize mb-1 block">{key.replace(/([A-Z])/g, " $1")}</Label>
+              {typeof val === "number" ? (
+                <div className="flex items-center gap-3">
+                  <Slider value={[val]} onValueChange={([v]) => update(key, v)} min={0} max={200} step={4} className="flex-1" />
+                  <span className="text-sm text-muted-foreground w-10">{val}px</span>
+                </div>
+              ) : typeof val === "string" && val.length > 100 ? (
+                <Textarea value={val} onChange={e => update(key, e.target.value)} rows={4} />
+              ) : typeof val === "string" ? (
+                <Input value={val} onChange={e => update(key, e.target.value)} />
+              ) : null}
+            </div>
+          ))
+        )}
       </div>
       <Button onClick={() => onSave(content)} className="mt-6 w-full gap-2">
         <Save size={16} /> Enregistrer
@@ -225,7 +265,7 @@ const AddBlockButton = ({ onAdd }: { onAdd: (type: string) => void }) => {
         <Plus size={14} /> Ajouter un bloc
       </button>
       {open && (
-        <div className="absolute top-full mt-2 z-[200] bg-background border rounded-lg shadow-xl p-2 min-w-[200px]">
+        <div className="absolute top-full mt-2 z-[200] bg-background border rounded-lg shadow-xl p-2 min-w-[220px]">
           {BLOCK_TYPES.map(t => (
             <button
               key={t.value}
@@ -295,7 +335,6 @@ const BlockEditorOverlay = ({ pagePath }: { pagePath: string }) => {
     const newBlocks = [...blocks];
     const swapIndex = direction === "up" ? index - 1 : index + 1;
     [newBlocks[index], newBlocks[swapIndex]] = [newBlocks[swapIndex], newBlocks[index]];
-    // Update sort orders
     for (let i = 0; i < newBlocks.length; i++) {
       await supabase.from("cms_page_blocks").update({ sort_order: i * 10 }).eq("id", newBlocks[i].id);
     }
