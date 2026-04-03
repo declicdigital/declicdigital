@@ -1,4 +1,4 @@
-import { lazy, ReactNode, Suspense, Children, isValidElement, cloneElement } from "react";
+import { lazy, ReactNode, Suspense, Children, isValidElement, useState, useEffect, useCallback } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import { useAuth } from "@/hooks/useAuth";
@@ -29,16 +29,11 @@ function flattenChildren(children: ReactNode): ReactNode[] {
 function guessLabel(child: any, index: number): string {
   if (!isValidElement(child)) return `Section ${index + 1}`;
   const props = child.props as any;
-  
-  // If it's already an EditableSection, skip wrapping
-  // Check className or id for hints
   const className = props?.className || "";
   const id = props?.id || "";
-  
   if (id) return id;
   if (className.includes("gradient-hero")) return "Hero";
   if (className.includes("gradient-miami")) return "CTA Miami";
-  
   return `Section ${index + 1}`;
 }
 
@@ -46,35 +41,67 @@ function guessLabel(child: any, index: number): string {
 function isAlreadyEditable(child: any): boolean {
   if (!isValidElement(child)) return false;
   const type = (child as any).type;
-  // Check displayName or name
   const name = type?.displayName || type?.name || type?._payload?.value?.name || "";
   if (name === "EditableSection") return true;
-  // Check if it's a lazy component wrapping EditableSection — we check the rendered type via a custom prop
   const props = child.props as any;
   if (props?.blockId !== undefined && props?.pagePath !== undefined) return true;
   return false;
 }
+
+const ALTERNATING_BG = [
+  "", // original
+  "bg-secondary/30",
+];
 
 const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => {
   const { isAdmin } = useAuth();
   const location = useLocation();
   const pagePath = location.pathname;
 
+  const flat = flattenChildren(children);
+  const [order, setOrder] = useState<number[]>(() => flat.map((_, i) => i));
+
+  // Reset order when children count changes (page navigation)
+  useEffect(() => {
+    setOrder(flat.map((_, i) => i));
+  }, [flat.length, pagePath]);
+
+  const moveBlock = useCallback((fromIdx: number, direction: "up" | "down") => {
+    setOrder(prev => {
+      const newOrder = [...prev];
+      const toIdx = direction === "up" ? fromIdx - 1 : fromIdx + 1;
+      if (toIdx < 0 || toIdx >= newOrder.length) return prev;
+      [newOrder[fromIdx], newOrder[toIdx]] = [newOrder[toIdx], newOrder[fromIdx]];
+      return newOrder;
+    });
+  }, []);
+
   const wrappedChildren = (() => {
     if (!isAdmin) return children;
-    
-    const flat = flattenChildren(children);
-    return flat.map((child, index) => {
-      // Skip non-elements, Suspense wrappers, or already-editable sections
+
+    // Reorder flat children according to order
+    const orderedChildren = order.map(originalIdx => ({
+      child: flat[originalIdx],
+      originalIdx,
+    }));
+
+    return orderedChildren.map(({ child, originalIdx }, displayIdx) => {
       if (!isValidElement(child)) return child;
       if (isAlreadyEditable(child)) return child;
-      
-      const blockId = `auto-${index}`;
-      const label = guessLabel(child, index);
-      
+
+      const blockId = `auto-${originalIdx}`;
+      const label = guessLabel(child, originalIdx);
+
       return (
-        <Suspense key={index} fallback={child}>
-          <EditableSection blockId={blockId} pagePath={pagePath} label={label}>
+        <Suspense key={`${originalIdx}-${displayIdx}`} fallback={child}>
+          <EditableSection
+            blockId={blockId}
+            pagePath={pagePath}
+            label={label}
+            onMoveUp={displayIdx > 0 ? () => moveBlock(displayIdx, "up") : undefined}
+            onMoveDown={displayIdx < orderedChildren.length - 1 ? () => moveBlock(displayIdx, "down") : undefined}
+            displayIndex={displayIdx}
+          >
             {child}
           </EditableSection>
         </Suspense>
