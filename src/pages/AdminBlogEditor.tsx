@@ -94,6 +94,7 @@ const AdminBlogEditor = () => {
   const [status, setStatus] = useState("draft");
   const [saving, setSaving] = useState(false);
   const [slugManual, setSlugManual] = useState(false);
+  const [publishDate, setPublishDate] = useState("");
 
   useEffect(() => {
     if (!authLoading && !isAdmin) navigate("/connexion");
@@ -120,6 +121,8 @@ const AdminBlogEditor = () => {
             setCoverImageUrl(data.cover_image_url || "");
             setStatus(data.status);
             setSlugManual(true);
+            // Parse date from created_at
+            setPublishDate(data.created_at ? data.created_at.slice(0, 10) : "");
           }
         });
     }
@@ -169,7 +172,7 @@ const AdminBlogEditor = () => {
     }
     setSaving(true);
     const finalStatus = publishStatus || status;
-    const postData = {
+    const postData: Record<string, any> = {
       title,
       slug,
       content,
@@ -183,19 +186,23 @@ const AdminBlogEditor = () => {
       status: finalStatus,
       updated_at: new Date().toISOString(),
     };
+    // Include created_at (publish date) if set
+    if (publishDate) {
+      postData.created_at = `${publishDate}T10:00:00+01:00`;
+    }
 
     let savedPost: CmsBlogPostSummary | null = null;
     let error;
     if (isNew) {
       ({ data: savedPost, error } = await supabase
         .from("cms_blog_posts")
-        .insert(postData)
+        .insert(postData as any)
         .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at, tags")
         .single());
     } else {
       ({ data: savedPost, error } = await supabase
         .from("cms_blog_posts")
-        .update(postData)
+        .update(postData as any)
         .eq("id", id)
         .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at, tags")
         .single());
@@ -273,8 +280,8 @@ const AdminBlogEditor = () => {
             )}
           </div>
 
-          {/* Category & read time */}
-          <div className="grid grid-cols-2 gap-4">
+          {/* Category, read time & date */}
+          <div className="grid grid-cols-3 gap-4">
             <div>
               <Label>Catégorie</Label>
               <Select value={category} onValueChange={setCategory}>
@@ -289,6 +296,10 @@ const AdminBlogEditor = () => {
             <div>
               <Label>Temps de lecture</Label>
               <Input value={readTime} onChange={e => setReadTime(e.target.value)} placeholder="5 min" className="mt-1" />
+            </div>
+            <div>
+              <Label>Date de publication</Label>
+              <Input type="date" value={publishDate} onChange={e => setPublishDate(e.target.value)} className="mt-1" />
             </div>
           </div>
 
