@@ -172,7 +172,7 @@ const AdminBlogEditor = () => {
     }
     setSaving(true);
     const finalStatus = publishStatus || status;
-    const postData = {
+    const postData: Record<string, any> = {
       title,
       slug,
       content,
@@ -186,6 +186,10 @@ const AdminBlogEditor = () => {
       status: finalStatus,
       updated_at: new Date().toISOString(),
     };
+    // Include created_at (publish date) if set
+    if (publishDate) {
+      postData.created_at = `${publishDate}T10:00:00+01:00`;
+    }
 
     let savedPost: CmsBlogPostSummary | null = null;
     let error;
