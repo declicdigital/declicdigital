@@ -32,6 +32,7 @@ interface CmsPost {
 
 const Blog = () => {
   const [cmsPosts, setCmsPosts] = useState<CmsPost[]>([]);
+  const [cmsLoaded, setCmsLoaded] = useState(false);
 
   useEffect(() => {
     supabase
@@ -41,6 +42,7 @@ const Blog = () => {
       .order("created_at", { ascending: false })
       .then(({ data }) => {
         if (data) setCmsPosts(data);
+        setCmsLoaded(true);
       });
   }, []);
 
