@@ -280,8 +280,8 @@ const AdminBlogEditor = () => {
             )}
           </div>
 
-          {/* Category & read time */}
-          <div className="grid grid-cols-2 gap-4">
+          {/* Category, read time & date */}
+          <div className="grid grid-cols-3 gap-4">
             <div>
               <Label>Catégorie</Label>
               <Select value={category} onValueChange={setCategory}>
@@ -296,6 +296,10 @@ const AdminBlogEditor = () => {
             <div>
               <Label>Temps de lecture</Label>
               <Input value={readTime} onChange={e => setReadTime(e.target.value)} placeholder="5 min" className="mt-1" />
+            </div>
+            <div>
+              <Label>Date de publication</Label>
+              <Input type="date" value={publishDate} onChange={e => setPublishDate(e.target.value)} className="mt-1" />
             </div>
           </div>
 
