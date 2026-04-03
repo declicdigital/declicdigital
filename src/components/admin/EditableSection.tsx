@@ -24,6 +24,15 @@ interface CtaItem {
   enabled: boolean;
 }
 
+interface SubItem {
+  id: string;
+  heading: string;
+  text: string;
+  image: string;
+  imageAlt: string;
+  ctas: CtaItem[];
+}
+
 interface StructuredContent {
   label: string;
   heading: string;
@@ -31,6 +40,7 @@ interface StructuredContent {
   image: string;
   imageAlt: string;
   ctas: CtaItem[];
+  items: SubItem[];
 }
 
 interface Override {

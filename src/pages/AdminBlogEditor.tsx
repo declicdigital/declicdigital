@@ -94,6 +94,7 @@ const AdminBlogEditor = () => {
   const [status, setStatus] = useState("draft");
   const [saving, setSaving] = useState(false);
   const [slugManual, setSlugManual] = useState(false);
+  const [publishDate, setPublishDate] = useState("");
 
   useEffect(() => {
     if (!authLoading && !isAdmin) navigate("/connexion");
