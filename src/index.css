@@ -358,3 +358,75 @@ h1, h2, h3 {
     animation: fade-in-up 0.6s ease-out both;
   }
 }
+
+/* CMS Article Content Typography - matches static article styling */
+.cms-article-content h2 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  line-height: 1.3;
+  color: hsl(var(--foreground));
+}
+.cms-article-content h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
+  color: hsl(var(--foreground));
+}
+.cms-article-content h4 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
+  color: hsl(var(--foreground));
+}
+.cms-article-content p {
+  line-height: 1.75;
+  margin-bottom: 1rem;
+  color: hsl(var(--muted-foreground));
+}
+.cms-article-content img {
+  width: 100%;
+  border-radius: 0.75rem;
+  object-fit: cover;
+  margin: 1.5rem 0;
+}
+.cms-article-content ul,
+.cms-article-content ol {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.75;
+}
+.cms-article-content ul li {
+  list-style-type: disc;
+  margin-bottom: 0.5rem;
+}
+.cms-article-content ol li {
+  list-style-type: decimal;
+  margin-bottom: 0.5rem;
+}
+.cms-article-content a {
+  color: hsl(var(--primary));
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.cms-article-content a:hover {
+  opacity: 0.8;
+}
+.cms-article-content blockquote {
+  border-left: 4px solid hsl(var(--primary));
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: hsl(var(--muted-foreground));
+}
+.cms-article-content strong {
+  font-weight: 600;
+  color: hsl(var(--foreground));
+}
