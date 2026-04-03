@@ -169,7 +169,7 @@ const Blog = () => {
           {rest.map((article, i) => {
             const isNew = article.date === newestDate;
             return (
-              <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
+              <Link key={article.slug} to={article.isCms ? `/blog/cms/${article.slug}` : `/blog/${article.slug}`} className="group block">
                 <motion.article
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
