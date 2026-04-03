@@ -59,7 +59,7 @@ const AdminBlog = () => {
   return (
     <PageLayout>
       <Helmet><title>Gestion du blog | Admin</title></Helmet>
-      <div className="pt-16" /> {/* space for admin bar */}
+      <div className="pt-4" />
       <div className="mx-auto max-w-5xl px-4 py-10">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-2xl font-bold">Gestion du blog</h1>

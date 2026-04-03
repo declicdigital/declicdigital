@@ -141,7 +141,7 @@ const AdminBlogEditor = () => {
   return (
     <PageLayout>
       <Helmet><title>{isNew ? "Nouvel article" : "Modifier l'article"} | Admin</title></Helmet>
-      <div className="pt-16" />
+      <div className="pt-4" />
       <div className="mx-auto max-w-4xl px-4 py-8">
         <button onClick={() => navigate("/admin/blog")} className="flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground mb-6">
           <ArrowLeft size={16} /> Retour au blog
