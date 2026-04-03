@@ -342,8 +342,8 @@ const Geo = () => {
       <section className="gradient-miami py-14">
         <div className="container text-center">
           <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Vous voulez être cité par les IA ?</h2>
-          <p className="mb-6 text-white/80 max-w-xl mx-auto">Nos experts analysent votre visibilité dans ChatGPT, Gemini et Perplexity et vous donnent un plan d'action concret.</p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <p className="mx-auto mb-6 max-w-xl text-white/80">Nos experts analysent votre visibilité dans ChatGPT, Gemini et Perplexity et vous donnent un plan d'action concret.</p>
+          <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Button asChild variant="custom" size="lg" className="rounded-full bg-secondary px-8 font-semibold text-foreground shadow-lg btn-glow hover:bg-secondary/90">
               <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
             </Button>

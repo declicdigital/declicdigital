@@ -6,6 +6,7 @@ import { Calendar, Clock, ArrowLeft, ArrowRight, Tag, Share2, Check } from "luci
 import { supabase } from "@/integrations/supabase/client";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
+import ArticleEndBlocks from "@/components/ArticleEndBlocks";
 import { blogArticles } from "@/data/blogArticles";
 import DOMPurify from "dompurify";
 

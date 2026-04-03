@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import MapEmbed from "@/components/MapEmbed";
+import ArticleEndBlocks from "@/components/ArticleEndBlocks";
 import { blogArticles, getArticleBySlug, getRelatedArticles, getCategorySlug, type BlogArticle as BlogArticleType } from "@/data/blogArticles";
 
 const getShareUrl = (slug: string) =>
