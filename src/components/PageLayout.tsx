@@ -27,6 +27,7 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
       <AiChatWidget />
     </Suspense>
   </div>
-);
+  );
+};
 
 export default PageLayout;
