@@ -72,6 +72,15 @@ const Blog = () => {
     })),
   ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
+  // Wait for CMS posts before rendering to avoid layout shift
+  if (!cmsLoaded) {
+    return (
+      <PageLayout hideBlogCarousel>
+        <div className="min-h-screen" />
+      </PageLayout>
+    );
+  }
+
   const featured = allArticles[0];
   const rest = allArticles.slice(1);
   const newestDate = featured?.date;
