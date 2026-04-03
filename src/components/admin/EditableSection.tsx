@@ -172,7 +172,7 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
   const saveOverride = async () => {
     setSaving(true);
     const html = structuredToHtml(structured);
-    const content = { structured, html, label: structured.label };
+    const content = { structured: structured as any, html, label: structured.label } as any;
 
     if (override) {
       await supabase
@@ -183,7 +183,7 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
     } else {
       const { data } = await supabase
         .from("cms_page_blocks")
-        .insert({ page_path: compositeKey, block_type: "section_override", content, sort_order: 0 })
+        .insert([{ page_path: compositeKey, block_type: "section_override", content, sort_order: 0 }])
         .select("id")
         .single();
       if (data) setOverride({ id: data.id, content });
