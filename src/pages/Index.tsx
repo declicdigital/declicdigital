@@ -141,6 +141,7 @@ const Index = () => {
 
 
       {/* Problème */}
+      <EditableSection blockId="probleme" pagePath="/" label="Problème">
       <SectionWrapper className="bg-section-blue">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mb-6 text-3xl font-extrabold md:text-4xl">Vous n'avez pas de site, ou il ne génère aucun client ?</h2>
