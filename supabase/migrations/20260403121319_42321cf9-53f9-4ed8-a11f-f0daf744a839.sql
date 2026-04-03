@@ -1,0 +1,1 @@
+DELETE FROM cms_page_blocks WHERE id = 'bc54fc15-8364-4c9b-abe5-3c92ee6a14ea';
