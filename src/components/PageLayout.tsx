@@ -18,9 +18,7 @@ interface PageLayoutProps {
 function flattenChildren(children: ReactNode): ReactNode[] {
   const flat: ReactNode[] = [];
   Children.forEach(children, (child) => {
-    if (isValidElement(child) && child.type === Symbol.for("react.fragment")) {
-      flat.push(...flattenChildren(child.props.children));
-    } else if (child != null && child !== false && child !== true) {
+    if (child != null && child !== false && child !== true) {
       flat.push(child);
     }
   });
