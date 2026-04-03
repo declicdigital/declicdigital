@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
-import { GripVertical, Pencil, Trash2, Tag, X, Save, Plus, Trash } from "lucide-react";
+import { Pencil, Trash2, Tag, X, Save, Plus, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -289,10 +289,7 @@ const EditableSection = ({ blockId, pagePath, children, label }: EditableSection
               <Trash2 size={14} />
             </button>
           )}
-          <div className="rounded bg-gray-800/90 p-1.5 text-white cursor-grab">
-            <GripVertical size={14} />
           </div>
-        </div>
 
         <div ref={contentRef}>{children}</div>
       </div>

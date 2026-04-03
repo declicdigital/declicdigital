@@ -32,6 +32,7 @@ interface CmsPost {
 
 const Blog = () => {
   const [cmsPosts, setCmsPosts] = useState<CmsPost[]>([]);
+  const [cmsLoaded, setCmsLoaded] = useState(false);
 
   useEffect(() => {
     supabase
@@ -41,6 +42,7 @@ const Blog = () => {
       .order("created_at", { ascending: false })
       .then(({ data }) => {
         if (data) setCmsPosts(data);
+        setCmsLoaded(true);
       });
   }, []);
 
@@ -69,6 +71,15 @@ const Blog = () => {
       isCms: true,
     })),
   ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  // Wait for CMS posts before rendering to avoid layout shift
+  if (!cmsLoaded) {
+    return (
+      <PageLayout hideBlogCarousel>
+        <div className="min-h-screen" />
+      </PageLayout>
+    );
+  }
 
   const featured = allArticles[0];
   const rest = allArticles.slice(1);
