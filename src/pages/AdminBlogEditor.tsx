@@ -196,7 +196,7 @@ const AdminBlogEditor = () => {
     if (isNew) {
       ({ data: savedPost, error } = await supabase
         .from("cms_blog_posts")
-        .insert(postData)
+        .insert(postData as any)
         .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at, tags")
         .single());
     } else {
