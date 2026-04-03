@@ -18,10 +18,61 @@ const categoryColors: Record<string, string> = {
 
 const sorted = [...blogArticles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
+interface CmsPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  cover_image_url: string | null;
+  category: string;
+  read_time: string;
+  created_at: string;
+  tags: string[];
+}
+
 const Blog = () => {
-  const featured = sorted[0];
-  const rest = sorted.slice(1);
-  const newestDate = featured.date;
+  const [cmsPosts, setCmsPosts] = useState<CmsPost[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from("cms_blog_posts")
+      .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at, tags")
+      .eq("status", "published")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (data) setCmsPosts(data);
+      });
+  }, []);
+
+  // Merge static + CMS articles into a unified list
+  const allArticles = [
+    ...sorted.map(a => ({
+      slug: a.slug,
+      title: a.title,
+      excerpt: a.excerpt,
+      image: a.image,
+      category: a.category,
+      readTime: a.readTime,
+      date: a.date,
+      tags: a.tags,
+      isCms: false,
+    })),
+    ...cmsPosts.map(p => ({
+      slug: p.slug,
+      title: p.title,
+      excerpt: p.excerpt,
+      image: p.cover_image_url || "",
+      category: p.category,
+      readTime: p.read_time,
+      date: p.created_at,
+      tags: p.tags || [],
+      isCms: true,
+    })),
+  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+  const featured = allArticles[0];
+  const rest = allArticles.slice(1);
+  const newestDate = featured?.date;
 
   return (
     <PageLayout hideBlogCarousel>
