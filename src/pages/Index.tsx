@@ -175,7 +175,7 @@ const Index = () => {
       </SectionWrapper>
       </EditableSection>
 
-      {/* Solutions */}
+      <EditableSection blockId="solutions" pagePath="/" label="Solutions">
       <SectionWrapper>
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold md:text-4xl">Création de site web professionnel pour indépendants</h2>
