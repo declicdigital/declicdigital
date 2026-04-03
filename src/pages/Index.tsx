@@ -430,6 +430,7 @@ const Index = () => {
             </div>
           </div>
         </div>
+      </section>
       {/* CMS Blocks */}
       <Suspense fallback={null}>
         <PageBlocksLazy pagePath="/" />
