@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
@@ -5,6 +6,7 @@ import { Calendar, Clock, ArrowRight, Tag, Sparkles } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { blogArticles, blogCategories, getCategorySlug } from "@/data/blogArticles";
+import { supabase } from "@/integrations/supabase/client";
 
 const categoryColors: Record<string, string> = {
   "Technique": "bg-amber-500/15 text-amber-700 dark:text-amber-400",
