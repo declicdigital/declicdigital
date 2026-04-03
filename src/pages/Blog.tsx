@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight, Tag, Sparkles } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { blogArticles, blogCategories, getCategorySlug } from "@/data/blogArticles";
 import { supabase } from "@/integrations/supabase/client";
+import { loadCachedCmsPosts, mergeBlogArticles, saveCachedCmsPosts, type CmsBlogPostSummary } from "@/lib/blog";
 
 const categoryColors: Record<string, string> = {
   "Technique": "bg-amber-500/15 text-amber-700 dark:text-amber-400",
@@ -16,23 +16,40 @@ const categoryColors: Record<string, string> = {
   "Tech & Gadgets": "bg-sky-500/15 text-sky-700 dark:text-sky-400",
 };
 
-const sorted = [...blogArticles].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+const BlogPageSkeleton = () => (
+  <PageLayout hideBlogCarousel>
+    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Blog" }]} />
+    <section className="relative overflow-hidden" style={{ background: "hsl(263, 36%, 18%)" }}>
+      <div className="container relative py-20 md:py-28">
+        <div className="max-w-2xl animate-pulse">
+          <div className="mb-4 h-8 w-24 rounded-full bg-white/15" />
+          <div className="h-14 w-full max-w-xl rounded-lg bg-white/10" />
+          <div className="mt-3 h-14 w-3/4 rounded-lg bg-white/10" />
+          <div className="mt-6 h-5 w-full max-w-lg rounded bg-white/10" />
+          <div className="mt-3 h-5 w-2/3 rounded bg-white/10" />
+        </div>
+      </div>
+    </section>
 
-interface CmsPost {
-  id: string;
-  title: string;
-  slug: string;
-  excerpt: string;
-  cover_image_url: string | null;
-  category: string;
-  read_time: string;
-  created_at: string;
-  tags: string[];
-}
+    <section className="container -mt-12 relative z-10 mb-16">
+      <div className="grid overflow-hidden rounded-2xl bg-card shadow-elevated md:grid-cols-2 animate-pulse">
+        <div className="aspect-[16/10] bg-muted" />
+        <div className="p-8 md:p-12">
+          <div className="h-6 w-28 rounded-full bg-muted" />
+          <div className="mt-4 h-10 w-full rounded bg-muted" />
+          <div className="mt-3 h-10 w-5/6 rounded bg-muted" />
+          <div className="mt-4 h-5 w-full rounded bg-muted" />
+          <div className="mt-2 h-5 w-4/5 rounded bg-muted" />
+        </div>
+      </div>
+    </section>
+  </PageLayout>
+);
 
 const Blog = () => {
-  const [cmsPosts, setCmsPosts] = useState<CmsPost[]>([]);
-  const [cmsLoaded, setCmsLoaded] = useState(false);
+  const cachedPosts = loadCachedCmsPosts();
+  const [cmsPosts, setCmsPosts] = useState<CmsBlogPostSummary[]>(cachedPosts);
+  const [cmsLoaded, setCmsLoaded] = useState(cachedPosts.length > 0);
 
   useEffect(() => {
     supabase
@@ -40,50 +57,31 @@ const Blog = () => {
       .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at, tags")
       .eq("status", "published")
       .order("created_at", { ascending: false })
-      .then(({ data }) => {
-        if (data) setCmsPosts(data);
+      .then(({ data, error }) => {
+        if (data) {
+          setCmsPosts(data);
+          saveCachedCmsPosts(data);
+        }
+        if (error && cachedPosts.length === 0) {
+          setCmsPosts([]);
+        }
         setCmsLoaded(true);
       });
   }, []);
 
-  // Merge static + CMS articles into a unified list
-  const allArticles = [
-    ...sorted.map(a => ({
-      slug: a.slug,
-      title: a.title,
-      excerpt: a.excerpt,
-      image: a.image,
-      category: a.category,
-      readTime: a.readTime,
-      date: a.date,
-      tags: a.tags,
-      isCms: false,
-    })),
-    ...cmsPosts.map(p => ({
-      slug: p.slug,
-      title: p.title,
-      excerpt: p.excerpt,
-      image: p.cover_image_url || "",
-      category: p.category,
-      readTime: p.read_time,
-      date: p.created_at,
-      tags: p.tags || [],
-      isCms: true,
-    })),
-  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const allArticles = mergeBlogArticles(blogArticles, cmsPosts);
 
-  // Wait for CMS posts before rendering to avoid layout shift
   if (!cmsLoaded) {
-    return (
-      <PageLayout hideBlogCarousel>
-        <div className="min-h-screen" />
-      </PageLayout>
-    );
+    return <BlogPageSkeleton />;
   }
 
   const featured = allArticles[0];
   const rest = allArticles.slice(1);
   const newestDate = featured?.date;
+
+  if (!featured) {
+    return <BlogPageSkeleton />;
+  }
 
   return (
     <PageLayout hideBlogCarousel>
@@ -113,7 +111,7 @@ const Blog = () => {
           backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
         }} />
         <div className="container relative py-20 md:py-28">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-2xl">
+          <div className="max-w-2xl">
             <span className="mb-4 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">Blog</span>
             <h1 className="text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl text-white">
               Veille web, SEO<br /><span className="text-gradient">& tech</span>
@@ -121,21 +119,16 @@ const Blog = () => {
             <p className="mt-6 text-lg text-white/70 leading-relaxed max-w-lg">
               Des articles pratiques pour comprendre le web, améliorer votre visibilité et faire les bons choix pour votre entreprise.
             </p>
-          </motion.div>
+          </div>
         </div>
       </section>
 
       {/* Featured article */}
       <section className="container -mt-12 relative z-10 mb-16">
         <Link to={`/blog/${featured.slug}`} className="group block">
-          <motion.article
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="grid overflow-hidden rounded-2xl bg-card shadow-elevated md:grid-cols-2"
-          >
+          <article className="grid overflow-hidden rounded-2xl bg-card shadow-elevated md:grid-cols-2">
             <div className="aspect-[16/10] md:aspect-auto overflow-hidden relative">
-              <img src={featured.image} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <img src={featured.image} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" decoding="async" fetchPriority="high" width={1280} height={800} />
               <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full gradient-primary px-4 py-1.5 text-xs font-bold text-white shadow-lg">
                 <Sparkles size={14} /> Nouvel article
               </span>
@@ -154,7 +147,7 @@ const Blog = () => {
                 Lire l'article <ArrowRight size={16} />
               </span>
             </div>
-          </motion.article>
+          </article>
         </Link>
       </section>
 
@@ -181,15 +174,9 @@ const Blog = () => {
             const isNew = article.date === newestDate;
             return (
               <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
-                <motion.article
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-elevated transition-shadow"
-                >
+                <article className="overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-elevated transition-shadow">
                   <div className="aspect-[16/9] overflow-hidden relative">
-                    <img src={article.image} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                    <img src={article.image} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" width={960} height={540} />
                     {isNew && (
                       <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full gradient-primary px-3 py-1 text-[11px] font-bold text-white shadow-md">
                         <Sparkles size={12} /> Nouvel article
@@ -222,7 +209,7 @@ const Blog = () => {
                       </span>
                     </div>
                   </div>
-                </motion.article>
+                </article>
               </Link>
             );
           })}

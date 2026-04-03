@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Plus, Pencil, Trash2, Eye, FileText, Upload } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 import { blogArticles } from "@/data/blogArticles";
+import { removeCachedCmsPost, upsertCachedCmsPost } from "@/lib/blog";
 
 interface CmsBlogPost {
   id: string;
@@ -47,10 +48,12 @@ const AdminBlog = () => {
 
   const deletePost = async (id: string, title: string) => {
     if (!confirm(`Supprimer "${title}" ?`)) return;
+    const target = posts.find((post) => post.id === id);
     const { error } = await supabase.from("cms_blog_posts").delete().eq("id", id);
     if (error) {
       toast({ title: "Erreur", description: error.message, variant: "destructive" });
     } else {
+      if (target) removeCachedCmsPost(target.slug);
       toast({ title: "Article supprimé" });
       loadPosts();
     }
@@ -85,7 +88,7 @@ const AdminBlog = () => {
       });
     html = `<p>${html}</p>`.replace(/<p><\/p>/g, "").replace(/<p>(<h[2-4]>)/g, "$1").replace(/(<\/h[2-4]>)<\/p>/g, "$1");
 
-    const { error } = await supabase.from("cms_blog_posts").insert({
+    const { data, error } = await supabase.from("cms_blog_posts").insert({
       title: article.title,
       slug: article.slug,
       content: html,
@@ -98,11 +101,13 @@ const AdminBlog = () => {
       cover_image_url: typeof article.image === "string" && article.image.startsWith("http") ? article.image : null,
       status: "published",
       related_slugs: article.relatedSlugs || [],
-    });
+      created_at: `${article.date}T10:00:00+01:00`,
+    }).select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at, tags").single();
 
     if (error) {
       toast({ title: "Erreur d'import", description: error.message, variant: "destructive" });
     } else {
+      if (data) upsertCachedCmsPost(data);
       toast({ title: `"${article.title}" importé dans le CMS ✅` });
       loadPosts();
     }

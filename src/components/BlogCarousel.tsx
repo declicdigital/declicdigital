@@ -4,9 +4,10 @@ import { motion } from "framer-motion";
 import { ArrowRight, Calendar, Clock, Sparkles } from "lucide-react";
 import { blogArticles } from "@/data/blogArticles";
 import { supabase } from "@/integrations/supabase/client";
+import { loadCachedCmsPosts, mergeBlogArticles, saveCachedCmsPosts, type CmsBlogPostSummary } from "@/lib/blog";
 
 const BlogCarousel = () => {
-  const [cmsPosts, setCmsPosts] = useState<any[]>([]);
+  const [cmsPosts, setCmsPosts] = useState<CmsBlogPostSummary[]>(() => loadCachedCmsPosts().slice(0, 4));
 
   useEffect(() => {
     supabase
@@ -15,17 +16,15 @@ const BlogCarousel = () => {
       .eq("status", "published")
       .order("created_at", { ascending: false })
       .limit(4)
-      .then(({ data }) => { if (data) setCmsPosts(data); });
+      .then(({ data }) => {
+        if (data) {
+          setCmsPosts(data);
+          saveCachedCmsPosts(data);
+        }
+      });
   }, []);
 
-  const allArticles = [
-    ...blogArticles.map(a => ({
-      slug: a.slug, title: a.title, excerpt: a.excerpt, image: a.image, category: a.category, readTime: a.readTime, date: a.date,
-    })),
-    ...cmsPosts.map(p => ({
-      slug: p.slug, title: p.title, excerpt: p.excerpt, image: p.cover_image_url || "", category: p.category, readTime: p.read_time, date: p.created_at,
-    })),
-  ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+  const allArticles = mergeBlogArticles(blogArticles, cmsPosts);
 
   const latest = allArticles.slice(0, 4);
   const newestDate = latest[0]?.date;
@@ -67,6 +66,8 @@ const BlogCarousel = () => {
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                       loading="lazy"
                       decoding="async"
+                      width={640}
+                      height={360}
                     />
                     {isNewest && (
                       <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-[11px] font-bold text-primary-foreground shadow-md">

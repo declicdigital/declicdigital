@@ -12,6 +12,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
 import { ArrowLeft, Save, Send, Upload } from "lucide-react";
+import { removeCachedCmsPost, upsertCachedCmsPost, type CmsBlogPostSummary } from "@/lib/blog";
 
 const CATEGORIES = [
   "Technique",
@@ -28,6 +29,51 @@ const slugify = (str: string) =>
     .replace(/[\u0300-\u036f]/g, "")
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
+
+const MAX_COVER_IMAGE_DIMENSION = 1600;
+const COVER_IMAGE_QUALITY = 0.76;
+
+const optimizeImageToJpeg = async (file: File) => {
+  const objectUrl = URL.createObjectURL(file);
+
+  try {
+    const image = await new Promise<HTMLImageElement>((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = () => reject(new Error("Impossible de lire l'image"));
+      img.src = objectUrl;
+    });
+
+    const ratio = Math.min(
+      1,
+      MAX_COVER_IMAGE_DIMENSION / Math.max(image.naturalWidth, image.naturalHeight)
+    );
+
+    const width = Math.max(1, Math.round(image.naturalWidth * ratio));
+    const height = Math.max(1, Math.round(image.naturalHeight * ratio));
+    const canvas = document.createElement("canvas");
+    canvas.width = width;
+    canvas.height = height;
+
+    const context = canvas.getContext("2d");
+    if (!context) throw new Error("Canvas indisponible");
+
+    context.fillStyle = "#ffffff";
+    context.fillRect(0, 0, width, height);
+    context.drawImage(image, 0, 0, width, height);
+
+    const blob = await new Promise<Blob | null>((resolve) => {
+      canvas.toBlob(resolve, "image/jpeg", COVER_IMAGE_QUALITY);
+    });
+
+    if (!blob) throw new Error("Compression impossible");
+
+    const baseName = file.name.replace(/\.[^.]+$/, "") || "cover";
+    return new File([blob], `${baseName}.jpg`, { type: "image/jpeg" });
+  } finally {
+    URL.revokeObjectURL(objectUrl);
+  }
+};
 
 const AdminBlogEditor = () => {
   const { id } = useParams();
@@ -88,15 +134,32 @@ const AdminBlogEditor = () => {
   const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    const path = `blog/${Date.now()}-${file.name}`;
-    const { error } = await supabase.storage.from("cms-images").upload(path, file);
+
+    let optimizedFile: File;
+
+    try {
+      optimizedFile = await optimizeImageToJpeg(file);
+    } catch (error) {
+      toast({
+        title: "Erreur image",
+        description: error instanceof Error ? error.message : "Impossible d'optimiser l'image.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const path = `blog/${Date.now()}-${optimizedFile.name}`;
+    const { error } = await supabase.storage.from("cms-images").upload(path, optimizedFile, {
+      contentType: "image/jpeg",
+      upsert: false,
+    });
     if (error) {
       toast({ title: "Erreur upload", description: error.message, variant: "destructive" });
       return;
     }
     const { data: { publicUrl } } = supabase.storage.from("cms-images").getPublicUrl(path);
     setCoverImageUrl(publicUrl);
-    toast({ title: "Image uploadée ✅" });
+    toast({ title: "Image optimisée en JPEG ✅" });
   };
 
   const save = async (publishStatus?: string) => {
@@ -105,6 +168,7 @@ const AdminBlogEditor = () => {
       return;
     }
     setSaving(true);
+    const finalStatus = publishStatus || status;
     const postData = {
       title,
       slug,
@@ -116,22 +180,38 @@ const AdminBlogEditor = () => {
       meta_title: metaTitle || title,
       meta_description: metaDescription || excerpt,
       cover_image_url: coverImageUrl || null,
-      status: publishStatus || status,
+      status: finalStatus,
       updated_at: new Date().toISOString(),
     };
 
+    let savedPost: CmsBlogPostSummary | null = null;
     let error;
     if (isNew) {
-      ({ error } = await supabase.from("cms_blog_posts").insert(postData));
+      ({ data: savedPost, error } = await supabase
+        .from("cms_blog_posts")
+        .insert(postData)
+        .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at, tags")
+        .single());
     } else {
-      ({ error } = await supabase.from("cms_blog_posts").update(postData).eq("id", id));
+      ({ data: savedPost, error } = await supabase
+        .from("cms_blog_posts")
+        .update(postData)
+        .eq("id", id)
+        .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at, tags")
+        .single());
     }
 
     setSaving(false);
     if (error) {
       toast({ title: "Erreur", description: error.message, variant: "destructive" });
     } else {
-      toast({ title: publishStatus === "published" ? "Article publié ✅" : "Brouillon enregistré ✅" });
+      if (finalStatus === "published" && savedPost) {
+        upsertCachedCmsPost(savedPost);
+      } else {
+        removeCachedCmsPost(slug);
+      }
+
+      toast({ title: finalStatus === "published" ? "Article publié ✅" : "Brouillon enregistré ✅" });
       navigate("/admin/blog");
     }
   };
