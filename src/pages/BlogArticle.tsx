@@ -8,7 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import MapEmbed from "@/components/MapEmbed";
-import { getArticleBySlug, getRelatedArticles, getCategorySlug, type BlogArticle as BlogArticleType } from "@/data/blogArticles";
+import { blogArticles, getArticleBySlug, getRelatedArticles, getCategorySlug, type BlogArticle as BlogArticleType } from "@/data/blogArticles";
 
 const getShareUrl = (slug: string) =>
   `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/og-meta?path=/blog/${slug}`;
