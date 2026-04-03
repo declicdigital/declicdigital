@@ -3,8 +3,8 @@ import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
 import Underline from "@tiptap/extension-underline";
-import { useState, useEffect } from "react";
-import { Bold, Italic, Underline as UnderlineIcon, Heading1, Heading2, Heading3, List, ListOrdered, Link as LinkIcon, ImageIcon, Code } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Bold, Italic, Underline as UnderlineIcon, Heading1, Heading2, Heading3, Heading4, List, ListOrdered, Link as LinkIcon, ImageIcon, Code, MousePointerClick } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 
@@ -24,13 +24,27 @@ const MenuButton = ({ active, onClick, children, title }: { active?: boolean; on
   </button>
 );
 
+const getActiveBlockLabel = (editor: any): string => {
+  if (!editor) return "Paragraphe";
+  if (editor.isActive("heading", { level: 1 })) return "H1";
+  if (editor.isActive("heading", { level: 2 })) return "H2";
+  if (editor.isActive("heading", { level: 3 })) return "H3";
+  if (editor.isActive("heading", { level: 4 })) return "H4";
+  if (editor.isActive("bulletList")) return "Liste";
+  if (editor.isActive("orderedList")) return "Liste num.";
+  if (editor.isActive("blockquote")) return "Citation";
+  if (editor.isActive("codeBlock")) return "Code";
+  return "Paragraphe";
+};
+
 const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
   const [mode, setMode] = useState<string>("visual");
   const [rawHtml, setRawHtml] = useState(content);
+  const [activeBlock, setActiveBlock] = useState("Paragraphe");
 
   const editor = useEditor({
     extensions: [
-      StarterKit.configure({ heading: { levels: [1, 2, 3] } }),
+      StarterKit.configure({ heading: { levels: [1, 2, 3, 4] } }),
       Link.configure({ openOnClick: false }),
       Image,
       Underline,
@@ -40,6 +54,10 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
       const html = editor.getHTML();
       onChange(html);
       setRawHtml(html);
+      setActiveBlock(getActiveBlockLabel(editor));
+    },
+    onSelectionUpdate: ({ editor }) => {
+      setActiveBlock(getActiveBlockLabel(editor));
     },
   });
 
@@ -64,6 +82,18 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
     }
   };
 
+  const insertCta = () => {
+    const text = prompt("Texte du bouton CTA :", "Demander un audit SEO gratuit");
+    if (!text) return;
+    const link = prompt("Lien du CTA :", "/audit-seo-gratuit");
+    if (!link) return;
+    const style = prompt("Style (primary / secondary) :", "primary");
+    const ctaHtml = `<div class="cta-block" data-cta-style="${style || 'primary'}"><a href="${link}">${text}</a></div>`;
+    if (editor) {
+      editor.chain().focus().insertContent(ctaHtml).run();
+    }
+  };
+
   const handleRawChange = (val: string) => {
     setRawHtml(val);
     onChange(val);
@@ -78,9 +108,15 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
         <div className="flex items-center justify-between border-b px-2 py-1">
           {mode === "visual" && editor && (
             <div className="flex flex-wrap items-center gap-0.5">
+              {/* Active block indicator */}
+              <span className="mr-2 rounded bg-muted px-2 py-1 text-xs font-semibold text-muted-foreground min-w-[70px] text-center">
+                {activeBlock}
+              </span>
+              <div className="mx-1 h-5 w-px bg-border" />
               <MenuButton active={editor.isActive("heading", { level: 1 })} onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()} title="H1"><Heading1 size={16} /></MenuButton>
               <MenuButton active={editor.isActive("heading", { level: 2 })} onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()} title="H2"><Heading2 size={16} /></MenuButton>
               <MenuButton active={editor.isActive("heading", { level: 3 })} onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()} title="H3"><Heading3 size={16} /></MenuButton>
+              <MenuButton active={editor.isActive("heading", { level: 4 })} onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()} title="H4"><Heading4 size={16} /></MenuButton>
               <div className="mx-1 h-5 w-px bg-border" />
               <MenuButton active={editor.isActive("bold")} onClick={() => editor.chain().focus().toggleBold().run()} title="Gras"><Bold size={16} /></MenuButton>
               <MenuButton active={editor.isActive("italic")} onClick={() => editor.chain().focus().toggleItalic().run()} title="Italique"><Italic size={16} /></MenuButton>
@@ -91,6 +127,8 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
               <div className="mx-1 h-5 w-px bg-border" />
               <MenuButton active={editor.isActive("link")} onClick={addLink} title="Lien"><LinkIcon size={16} /></MenuButton>
               <MenuButton onClick={addImage} title="Image"><ImageIcon size={16} /></MenuButton>
+              <div className="mx-1 h-5 w-px bg-border" />
+              <MenuButton onClick={insertCta} title="Insérer un bouton CTA"><MousePointerClick size={16} /></MenuButton>
             </div>
           )}
           {mode !== "visual" && <div />}

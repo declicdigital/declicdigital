@@ -4,6 +4,8 @@ import { Menu, X, ChevronDown, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo-declic-digital-new.webp";
 
+const ADMIN_BAR_HEIGHT = 40;
+
 const navLinks = [
   { label: "Création de site", to: "/creation-site-web" },
   { label: "SEO", to: "/referencement-seo" },
@@ -20,7 +22,11 @@ const moreLinks = [
   { label: "FAQ", to: "/faq" },
 ];
 
-const Header = () => {
+interface HeaderProps {
+  isAdmin?: boolean;
+}
+
+const Header = ({ isAdmin = false }: HeaderProps) => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
@@ -45,7 +51,10 @@ const Header = () => {
     }`;
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-lg">
+    <header
+      className="sticky z-50 border-b border-border bg-card/80 backdrop-blur-lg"
+      style={{ top: isAdmin ? ADMIN_BAR_HEIGHT : 0 }}
+    >
       <div className="container flex h-[4.5rem] items-center justify-between md:h-20">
         <Link to="/" className="flex shrink-0 items-center" onClick={() => { if (window.location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }}>
           <img src={logo} alt="Déclic Digital" className="h-14 md:h-16 w-auto object-contain" width={160} height={88} />

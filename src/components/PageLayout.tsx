@@ -17,8 +17,8 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
   return (
   <div className="flex min-h-screen flex-col">
     {isAdmin && <Suspense fallback={null}><AdminBar /></Suspense>}
-    <Header />
-    <main className={`flex-1 ${isAdmin ? "pt-10" : ""}`}>{children}</main>
+    <Header isAdmin={isAdmin} />
+    <main className="flex-1">{children}</main>
     <Suspense fallback={<div style={{ minHeight: 400 }} />}>
       {!hideBlogCarousel && <BlogCarousel />}
       <Footer />
