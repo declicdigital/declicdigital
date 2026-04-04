@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import jsPDF from "jspdf";
 import logoImg from "@/assets/logo-declic-digital-new.webp";
+import AdminBar from "@/components/admin/AdminBar";
 
 const generateBriefPrompt = (d: any): string => {
   const lines: string[] = [];
