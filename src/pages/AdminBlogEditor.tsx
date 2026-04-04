@@ -31,50 +31,6 @@ const slugify = (str: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
-const MAX_COVER_IMAGE_DIMENSION = 1600;
-const COVER_IMAGE_QUALITY = 0.76;
-
-const optimizeImageToJpeg = async (file: File) => {
-  const objectUrl = URL.createObjectURL(file);
-
-  try {
-    const image = await new Promise<HTMLImageElement>((resolve, reject) => {
-      const img = new Image();
-      img.onload = () => resolve(img);
-      img.onerror = () => reject(new Error("Impossible de lire l'image"));
-      img.src = objectUrl;
-    });
-
-    const ratio = Math.min(
-      1,
-      MAX_COVER_IMAGE_DIMENSION / Math.max(image.naturalWidth, image.naturalHeight)
-    );
-
-    const width = Math.max(1, Math.round(image.naturalWidth * ratio));
-    const height = Math.max(1, Math.round(image.naturalHeight * ratio));
-    const canvas = document.createElement("canvas");
-    canvas.width = width;
-    canvas.height = height;
-
-    const context = canvas.getContext("2d");
-    if (!context) throw new Error("Canvas indisponible");
-
-    context.fillStyle = "#ffffff";
-    context.fillRect(0, 0, width, height);
-    context.drawImage(image, 0, 0, width, height);
-
-    const blob = await new Promise<Blob | null>((resolve) => {
-      canvas.toBlob(resolve, "image/jpeg", COVER_IMAGE_QUALITY);
-    });
-
-    if (!blob) throw new Error("Compression impossible");
-
-    const baseName = file.name.replace(/\.[^.]+$/, "") || "cover";
-    return new File([blob], `${baseName}.jpg`, { type: "image/jpeg" });
-  } finally {
-    URL.revokeObjectURL(objectUrl);
-  }
-};
 
 const AdminBlogEditor = () => {
   const { id } = useParams();
