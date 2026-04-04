@@ -234,11 +234,12 @@ const AdminClientDetail = () => {
   const uploadDocument = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || !project || !user) return;
     setUploading(true);
+    const file = e.target.files[0];
     const compressed = file.type.startsWith("image/") ? await compressImage(file) : file;
     const path = `${project.id}/${Date.now()}_${compressed.name}`;
     const { error: upErr } = await supabase.storage.from("project-documents").upload(path, compressed, UPLOAD_OPTIONS);
     if (upErr) { toast({ title: "Erreur", description: upErr.message, variant: "destructive" }); }
-    else { await supabase.from("project_documents").insert({ project_id: project.id, name: file.name, file_path: path, uploaded_by: user.id }); loadAll(); }
+    else { await supabase.from("project_documents").insert({ project_id: project.id, name: compressed.name, file_path: path, uploaded_by: user.id }); loadAll(); }
     setUploading(false);
     e.target.value = "";
   };
