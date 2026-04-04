@@ -16,6 +16,7 @@ import {
   KeyRound, Mail, Globe, Save, Paperclip, Share2, Pencil, Check, X, FolderOpen,
 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital-new.webp";
+import AdminBar from "@/components/admin/AdminBar";
 import ProjectChat from "@/components/espace-client/ProjectChat";
 import PageSpeedScores from "@/components/PageSpeedScores";
 
