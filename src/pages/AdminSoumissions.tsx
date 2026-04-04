@@ -356,6 +356,7 @@ const AdminSoumissions = () => {
 
     return (
       <div className="min-h-screen bg-background">
+        <AdminBar />
         <div className="border-b border-border bg-card">
           <div className="container py-3 md:py-4 space-y-2">
             <div className="flex items-center gap-2">
