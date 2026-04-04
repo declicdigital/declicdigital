@@ -98,7 +98,7 @@ const AdminBlogEditor = () => {
     let optimizedFile: File;
 
     try {
-      optimizedFile = await optimizeImageToJpeg(file);
+      optimizedFile = await compressImage(file);
     } catch (error) {
       toast({
         title: "Erreur image",
@@ -110,8 +110,8 @@ const AdminBlogEditor = () => {
 
     const path = `blog/${Date.now()}-${optimizedFile.name}`;
     const { error } = await supabase.storage.from("cms-images").upload(path, optimizedFile, {
-      contentType: "image/jpeg",
-      upsert: false,
+      ...UPLOAD_OPTIONS,
+      contentType: "image/webp",
     });
     if (error) {
       toast({ title: "Erreur upload", description: error.message, variant: "destructive" });
