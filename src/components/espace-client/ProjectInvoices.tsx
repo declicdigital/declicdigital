@@ -43,7 +43,7 @@ const ProjectInvoices = ({ invoices, projectId, userId, onRefresh }: ProjectInvo
     setUploading(true);
     const file = e.target.files[0];
     const path = `${projectId}/${Date.now()}_${file.name}`;
-    const { error: upErr } = await supabase.storage.from("project-invoices").upload(path, file);
+    const { error: upErr } = await supabase.storage.from("project-invoices").upload(path, file, UPLOAD_OPTIONS);
     if (upErr) {
       toast({ title: "Erreur", description: upErr.message, variant: "destructive" });
     } else {

@@ -211,8 +211,9 @@ const FormulaireBrief = () => {
       if (f.team_enabled && f.team_photos_enabled) {
         for (const member of teamMembers) {
           if (member.photo) {
-            const path = `${submissionId}/equipe/${member.photo.name}`;
-            const { error } = await supabase.storage.from("form-files").upload(path, member.photo);
+            const compressed = await compressImage(member.photo);
+            const path = `${submissionId}/equipe/${compressed.name}`;
+            const { error } = await supabase.storage.from("form-files").upload(path, compressed, UPLOAD_OPTIONS);
             if (!error) filePaths.push(path);
           }
         }
