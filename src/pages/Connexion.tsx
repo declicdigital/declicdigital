@@ -22,7 +22,7 @@ const Connexion = () => {
 
   useEffect(() => {
     if (!authLoading && user) {
-      navigate(isAdmin ? "/admin/clients" : "/espace-client", { replace: true });
+      navigate(isAdmin ? "/" : "/espace-client", { replace: true });
     }
   }, [user, isAdmin, authLoading, navigate]);
 
