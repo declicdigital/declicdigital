@@ -9,6 +9,7 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { compressImage, UPLOAD_OPTIONS } from "@/lib/imageCompression";
 
 /* ───── types ───── */
 interface TeamMember {

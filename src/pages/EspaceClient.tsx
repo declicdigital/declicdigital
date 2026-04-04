@@ -492,6 +492,7 @@ const EspaceClient = () => {
                                 </Button>
                                 <input type="file" className="hidden" onChange={async (e) => {
                                   if (!e.target.files || !user || !project) return;
+                                   const file = e.target.files[0];
                                    const compressed = file.type.startsWith("image/") ? await compressImage(file) : file;
                                    const path = `${project.id}/tasks/${task.id}/${Date.now()}_${compressed.name}`;
                                    const { error: upErr } = await supabase.storage.from("project-documents").upload(path, compressed, UPLOAD_OPTIONS);
@@ -499,7 +500,7 @@ const EspaceClient = () => {
                                     toast({ title: "Erreur", description: upErr.message, variant: "destructive" });
                                   } else {
                                     await (supabase.from("task_attachments" as any) as any).insert({
-                                      task_id: task.id, uploaded_by: user.id, file_name: file.name, file_path: path,
+                                      task_id: task.id, uploaded_by: user.id, file_name: compressed.name, file_path: path,
                                     });
                                     toast({ title: "Fichier ajoute" });
                                     loadData();
