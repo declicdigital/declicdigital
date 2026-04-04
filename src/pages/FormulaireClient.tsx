@@ -217,8 +217,9 @@ const FormulaireClient = () => {
       const filePaths: string[] = [];
       const submissionId = crypto.randomUUID();
       for (const file of files) {
-        const path = `${submissionId}/${file.name}`;
-        const { error } = await supabase.storage.from("form-files").upload(path, file);
+        const compressed = file.type.startsWith("image/") ? await compressImage(file) : file;
+        const path = `${submissionId}/${compressed.name}`;
+        const { error } = await supabase.storage.from("form-files").upload(path, compressed, UPLOAD_OPTIONS);
         if (!error) filePaths.push(path);
       }
 
