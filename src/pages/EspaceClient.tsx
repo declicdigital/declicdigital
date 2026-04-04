@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { compressImage, UPLOAD_OPTIONS } from "@/lib/imageCompression";
 import LinkifyText from "@/components/LinkifyText";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
