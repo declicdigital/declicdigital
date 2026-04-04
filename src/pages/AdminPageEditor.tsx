@@ -35,9 +35,11 @@ const PARENT_OPTIONS = [
   { value: "/blog", label: "Blog" },
 ];
 
-const AdminPageEditor = ({ pageType = "edito" }: { pageType?: "edito" | "landing" }) => {
+const AdminPageEditor = () => {
   const { isAdmin } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const pageType = (searchParams.get("type") === "landing" ? "landing" : "edito") as "edito" | "landing";
 
   const [page, setPage] = useState<PageData>({
     title: "",
