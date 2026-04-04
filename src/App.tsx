@@ -44,6 +44,7 @@ const FormulaireBrief = lazy(() => import("./pages/FormulaireBrief"));
 const Geo = lazy(() => import("./pages/Geo"));
 const AdminBlog = lazy(() => import("./pages/AdminBlog"));
 const AdminBlogEditor = lazy(() => import("./pages/AdminBlogEditor"));
+const AdminPageEditor = lazy(() => import("./pages/AdminPageEditor"));
 const CmsBlogArticle = lazy(() => import("./pages/CmsBlogArticle"));
 
 const queryClient = new QueryClient();
