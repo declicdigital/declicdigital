@@ -7,6 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { compressImage, UPLOAD_OPTIONS } from "@/lib/imageCompression";
 
 /* ───── types ───── */
 interface TeamMember {
@@ -202,16 +203,18 @@ const FormulaireBrief = () => {
       const filePaths: string[] = [];
       const submissionId = crypto.randomUUID();
       for (const file of files) {
-        const path = `${submissionId}/${file.name}`;
-        const { error } = await supabase.storage.from("form-files").upload(path, file);
+        const compressed = file.type.startsWith("image/") ? await compressImage(file) : file;
+        const path = `${submissionId}/${compressed.name}`;
+        const { error } = await supabase.storage.from("form-files").upload(path, compressed, UPLOAD_OPTIONS);
         if (!error) filePaths.push(path);
       }
 
       if (f.team_enabled && f.team_photos_enabled) {
         for (const member of teamMembers) {
           if (member.photo) {
-            const path = `${submissionId}/equipe/${member.photo.name}`;
-            const { error } = await supabase.storage.from("form-files").upload(path, member.photo);
+            const compressed = await compressImage(member.photo);
+            const path = `${submissionId}/equipe/${compressed.name}`;
+            const { error } = await supabase.storage.from("form-files").upload(path, compressed, UPLOAD_OPTIONS);
             if (!error) filePaths.push(path);
           }
         }

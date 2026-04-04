@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
+import { UPLOAD_OPTIONS } from "@/lib/imageCompression";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -43,7 +44,7 @@ const ProjectInvoices = ({ invoices, projectId, userId, onRefresh }: ProjectInvo
     setUploading(true);
     const file = e.target.files[0];
     const path = `${projectId}/${Date.now()}_${file.name}`;
-    const { error: upErr } = await supabase.storage.from("project-invoices").upload(path, file);
+    const { error: upErr } = await supabase.storage.from("project-invoices").upload(path, file, UPLOAD_OPTIONS);
     if (upErr) {
       toast({ title: "Erreur", description: upErr.message, variant: "destructive" });
     } else {

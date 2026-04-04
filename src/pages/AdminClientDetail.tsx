@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from "react";
+import { compressImage, UPLOAD_OPTIONS } from "@/lib/imageCompression";
 import LinkifyText from "@/components/LinkifyText";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
@@ -234,10 +235,11 @@ const AdminClientDetail = () => {
     if (!e.target.files || !project || !user) return;
     setUploading(true);
     const file = e.target.files[0];
-    const path = `${project.id}/${Date.now()}_${file.name}`;
-    const { error: upErr } = await supabase.storage.from("project-documents").upload(path, file);
+    const compressed = file.type.startsWith("image/") ? await compressImage(file) : file;
+    const path = `${project.id}/${Date.now()}_${compressed.name}`;
+    const { error: upErr } = await supabase.storage.from("project-documents").upload(path, compressed, UPLOAD_OPTIONS);
     if (upErr) { toast({ title: "Erreur", description: upErr.message, variant: "destructive" }); }
-    else { await supabase.from("project_documents").insert({ project_id: project.id, name: file.name, file_path: path, uploaded_by: user.id }); loadAll(); }
+    else { await supabase.from("project_documents").insert({ project_id: project.id, name: compressed.name, file_path: path, uploaded_by: user.id }); loadAll(); }
     setUploading(false);
     e.target.value = "";
   };
@@ -605,13 +607,14 @@ const AdminClientDetail = () => {
                               <input type="file" className="hidden" onChange={async (e) => {
                                 if (!e.target.files || !user || !project) return;
                                 const file = e.target.files[0];
-                                const path = `${project.id}/tasks/${task.id}/${Date.now()}_${file.name}`;
-                                const { error: upErr } = await supabase.storage.from("project-documents").upload(path, file);
+                                const compressed = file.type.startsWith("image/") ? await compressImage(file) : file;
+                                const path = `${project.id}/tasks/${task.id}/${Date.now()}_${compressed.name}`;
+                                const { error: upErr } = await supabase.storage.from("project-documents").upload(path, compressed, UPLOAD_OPTIONS);
                                 if (upErr) {
                                   toast({ title: "Erreur", description: upErr.message, variant: "destructive" });
                                 } else {
                                   await (supabase.from("task_attachments" as any) as any).insert({
-                                    task_id: task.id, uploaded_by: user.id, file_name: file.name, file_path: path,
+                                    task_id: task.id, uploaded_by: user.id, file_name: compressed.name, file_path: path,
                                   });
                                   toast({ title: "Fichier ajoute" });
                                   loadAll();
