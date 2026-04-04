@@ -93,6 +93,7 @@ const App = () => (
                 <Route path="/geo" element={<GeoRedirect />} />
                 <Route path="/admin/blog" element={<AdminBlog />} />
                 <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
+                <Route path="/admin/page/new" element={<AdminPageEditor />} />
                 <Route path="/blog/cms/:slug" element={<CmsBlogArticle />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
