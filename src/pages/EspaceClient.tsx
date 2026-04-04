@@ -156,9 +156,9 @@ const EspaceClient = () => {
   const uploadDocument = async (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files || !project || !user) return;
     setUploading(true);
-    const file = e.target.files[0];
-    const path = `${project.id}/${Date.now()}_${file.name}`;
-    const { error: upErr } = await supabase.storage.from("project-documents").upload(path, file);
+    const compressed = file.type.startsWith("image/") ? await compressImage(file) : file;
+    const path = `${project.id}/${Date.now()}_${compressed.name}`;
+    const { error: upErr } = await supabase.storage.from("project-documents").upload(path, compressed, UPLOAD_OPTIONS);
     if (upErr) {
       toast({ title: "Erreur", description: upErr.message, variant: "destructive" });
     } else {
