@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { toast } from "@/hooks/use-toast";
 import { ArrowLeft, Save, Send, Upload } from "lucide-react";
 import { removeCachedCmsPost, upsertCachedCmsPost, type CmsBlogPostSummary } from "@/lib/blog";
+import { compressImage, UPLOAD_OPTIONS } from "@/lib/imageCompression";
 
 const CATEGORIES = [
   "Technique",
