@@ -40,10 +40,10 @@ const AdminBar = () => {
       className="sticky top-0 z-[9999] flex items-center justify-between bg-gradient-to-r from-gray-900 to-gray-800 px-4 text-white shadow-lg"
       style={{ height: ADMIN_BAR_HEIGHT }}
     >
-      <span className="flex items-center gap-2 text-sm font-semibold">
+      <Link to="/" className="flex items-center gap-2 text-sm font-semibold hover:text-white/80 transition">
         <Settings size={16} className="animate-spin-slow" />
         Mode Admin 🛠️
-      </span>
+      </Link>
       <div className="flex items-center gap-3">
         {/* + Contenu dropdown */}
         <div ref={menuRef} className="relative">

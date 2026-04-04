@@ -11,6 +11,7 @@ import { toast } from "@/hooks/use-toast";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Loader2, Plus, Users, FileText, LogOut, ChevronRight, Search } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital-new.webp";
+import AdminBar from "@/components/admin/AdminBar";
 
 const AdminClients = () => {
   const { user, isAdmin, loading: authLoading, signOut } = useAuth();
@@ -91,6 +92,7 @@ const AdminClients = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <AdminBar />
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container flex h-[4.5rem] md:h-20 items-center justify-between gap-2">
           <div className="flex items-center gap-2 shrink-0 -my-2">

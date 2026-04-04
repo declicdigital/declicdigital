@@ -16,6 +16,7 @@ import {
   KeyRound, Mail, Globe, Save, Paperclip, Share2, Pencil, Check, X, FolderOpen,
 } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital-new.webp";
+import AdminBar from "@/components/admin/AdminBar";
 import ProjectChat from "@/components/espace-client/ProjectChat";
 import PageSpeedScores from "@/components/PageSpeedScores";
 
@@ -299,6 +300,7 @@ const AdminClientDetail = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <AdminBar />
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container flex h-[4.5rem] md:h-20 items-center justify-between">
           <div className="flex items-center gap-4 -my-2">

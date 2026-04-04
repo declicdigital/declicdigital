@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import jsPDF from "jspdf";
 import logoImg from "@/assets/logo-declic-digital-new.webp";
+import AdminBar from "@/components/admin/AdminBar";
 
 const generateBriefPrompt = (d: any): string => {
   const lines: string[] = [];
@@ -355,6 +356,7 @@ const AdminSoumissions = () => {
 
     return (
       <div className="min-h-screen bg-background">
+        <AdminBar />
         <div className="border-b border-border bg-card">
           <div className="container py-3 md:py-4 space-y-2">
             <div className="flex items-center gap-2">
@@ -502,6 +504,7 @@ const AdminSoumissions = () => {
   // ==================== LIST VIEW ====================
   return (
     <div className="min-h-screen bg-background">
+      <AdminBar />
       <div className="border-b border-border bg-card">
         <div className="container flex h-[4.5rem] md:h-20 items-center justify-between">
           <div className="flex items-center gap-4 -my-2">
