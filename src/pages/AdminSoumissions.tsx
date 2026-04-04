@@ -504,6 +504,7 @@ const AdminSoumissions = () => {
   // ==================== LIST VIEW ====================
   return (
     <div className="min-h-screen bg-background">
+      <AdminBar />
       <div className="border-b border-border bg-card">
         <div className="container flex h-[4.5rem] md:h-20 items-center justify-between">
           <div className="flex items-center gap-4 -my-2">

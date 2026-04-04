@@ -92,6 +92,7 @@ const AdminClients = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <AdminBar />
       <header className="border-b border-border bg-card sticky top-0 z-50">
         <div className="container flex h-[4.5rem] md:h-20 items-center justify-between gap-2">
           <div className="flex items-center gap-2 shrink-0 -my-2">
