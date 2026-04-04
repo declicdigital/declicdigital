@@ -30,8 +30,8 @@ const AdminBar = () => {
 
   const contentItems = [
     { icon: FileText, label: "Article de blog", emoji: "📝", to: "/admin/blog/new" },
-    { icon: Layout, label: "Page édito", emoji: "📄", to: "/admin/blog" },
-    { icon: Rocket, label: "Landing Page", emoji: "🚀", to: "/admin/blog" },
+    { icon: Layout, label: "Page édito", emoji: "📄", to: "/admin/page/new?type=edito" },
+    { icon: Rocket, label: "Landing Page", emoji: "🚀", to: "/admin/page/new?type=landing" },
     { icon: Puzzle, label: "Bloc custom", emoji: "🧩", to: "/admin/blog" },
   ];
 
