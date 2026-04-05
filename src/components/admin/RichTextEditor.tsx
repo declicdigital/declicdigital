@@ -3,10 +3,15 @@ import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
 import Underline from "@tiptap/extension-underline";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Bold, Italic, Underline as UnderlineIcon, Heading1, Heading2, Heading3, Heading4, List, ListOrdered, Link as LinkIcon, ImageIcon, Code, MousePointerClick } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import CtaNode from "./CtaNode";
 
 interface RichTextEditorProps {
   content: string;
@@ -37,10 +42,21 @@ const getActiveBlockLabel = (editor: any): string => {
   return "Paragraphe";
 };
 
+interface CtaEditState {
+  pos: number;
+  label: string;
+  href: string;
+  ctaStyle: "primary" | "secondary";
+  rect: { top: number; left: number; width: number; bottom: number };
+}
+
 const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
   const [mode, setMode] = useState<string>("visual");
   const [rawHtml, setRawHtml] = useState(content);
   const [activeBlock, setActiveBlock] = useState("Paragraphe");
+  const [ctaEdit, setCtaEdit] = useState<CtaEditState | null>(null);
+  const popupRef = useRef<HTMLDivElement>(null);
+  const editorWrapperRef = useRef<HTMLDivElement>(null);
 
   const editor = useEditor({
     extensions: [
@@ -48,6 +64,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
       Link.configure({ openOnClick: false }),
       Image,
       Underline,
+      CtaNode,
     ],
     content,
     onUpdate: ({ editor }) => {
@@ -68,6 +85,34 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
     }
   }, [content]);
 
+  // Listen for CTA edit events
+  useEffect(() => {
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      setCtaEdit({
+        pos: detail.pos,
+        label: detail.label,
+        href: detail.href,
+        ctaStyle: detail.ctaStyle,
+        rect: detail.rect,
+      });
+    };
+    document.addEventListener("edit-cta", handler);
+    return () => document.removeEventListener("edit-cta", handler);
+  }, []);
+
+  // Close popup on outside click
+  useEffect(() => {
+    if (!ctaEdit) return;
+    const handler = (e: MouseEvent) => {
+      if (popupRef.current && !popupRef.current.contains(e.target as Node)) {
+        setCtaEdit(null);
+      }
+    };
+    setTimeout(() => document.addEventListener("mousedown", handler), 0);
+    return () => document.removeEventListener("mousedown", handler);
+  }, [ctaEdit]);
+
   const addLink = () => {
     const url = prompt("URL du lien :");
     if (url && editor) {
@@ -83,15 +128,30 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
   };
 
   const insertCta = () => {
-    const text = prompt("Texte du bouton CTA :", "Demander un audit SEO gratuit");
-    if (!text) return;
-    const link = prompt("Lien du CTA :", "/audit-seo-gratuit");
-    if (!link) return;
-    const style = prompt("Style (primary / secondary) :", "primary");
-    const ctaHtml = `<div class="cta-block" data-cta-style="${style || 'primary'}"><a href="${link}">${text}</a></div>`;
-    if (editor) {
-      editor.chain().focus().insertContent(ctaHtml).run();
+    if (!editor) return;
+    editor.chain().focus().insertContent({
+      type: "ctaBlock",
+      attrs: {
+        label: "Demander un audit SEO gratuit",
+        href: "/audit-seo-gratuit",
+        ctaStyle: "primary",
+      },
+    }).run();
+  };
+
+  const saveCtaEdit = () => {
+    if (!ctaEdit || !editor) return;
+    const { state } = editor;
+    const node = state.doc.nodeAt(ctaEdit.pos);
+    if (node && node.type.name === "ctaBlock") {
+      const tr = state.tr.setNodeMarkup(ctaEdit.pos, undefined, {
+        label: ctaEdit.label,
+        href: ctaEdit.href,
+        ctaStyle: ctaEdit.ctaStyle,
+      });
+      editor.view.dispatch(tr);
     }
+    setCtaEdit(null);
   };
 
   const handleRawChange = (val: string) => {
@@ -102,13 +162,24 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
     }
   };
 
+  // Calculate popup position relative to the editor wrapper
+  const getPopupStyle = (): React.CSSProperties => {
+    if (!ctaEdit || !editorWrapperRef.current) return { display: "none" };
+    const wrapperRect = editorWrapperRef.current.getBoundingClientRect();
+    return {
+      position: "absolute",
+      top: ctaEdit.rect.bottom - wrapperRect.top + 8,
+      left: Math.max(0, ctaEdit.rect.left - wrapperRect.left),
+      zIndex: 50,
+    };
+  };
+
   return (
-    <div className="rounded-lg border border-input bg-background">
+    <div className="rounded-lg border border-input bg-background relative" ref={editorWrapperRef}>
       <Tabs value={mode} onValueChange={setMode}>
         <div className="flex items-center justify-between border-b px-2 py-1">
           {mode === "visual" && editor && (
             <div className="flex flex-wrap items-center gap-0.5">
-              {/* Active block indicator */}
               <span className="mr-2 rounded bg-muted px-2 py-1 text-xs font-semibold text-muted-foreground min-w-[70px] text-center">
                 {activeBlock}
               </span>
@@ -150,6 +221,52 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
           />
         </TabsContent>
       </Tabs>
+
+      {/* CTA Edit Popup */}
+      {ctaEdit && (
+        <div ref={popupRef} style={getPopupStyle()} className="w-80 rounded-lg border bg-popover p-4 shadow-lg">
+          <h4 className="text-sm font-semibold mb-3">Modifier le CTA</h4>
+          <div className="space-y-3">
+            <div>
+              <Label className="text-xs">Texte</Label>
+              <Input
+                value={ctaEdit.label}
+                onChange={(e) => setCtaEdit({ ...ctaEdit, label: e.target.value })}
+                className="mt-1 h-8 text-sm"
+              />
+            </div>
+            <div>
+              <Label className="text-xs">Lien</Label>
+              <Input
+                value={ctaEdit.href}
+                onChange={(e) => setCtaEdit({ ...ctaEdit, href: e.target.value })}
+                className="mt-1 h-8 text-sm"
+              />
+            </div>
+            <div>
+              <Label className="text-xs">Style</Label>
+              <RadioGroup
+                value={ctaEdit.ctaStyle}
+                onValueChange={(v) => setCtaEdit({ ...ctaEdit, ctaStyle: v as "primary" | "secondary" })}
+                className="mt-1.5 flex gap-4"
+              >
+                <div className="flex items-center gap-1.5">
+                  <RadioGroupItem value="primary" id="cta-primary" />
+                  <label htmlFor="cta-primary" className="text-xs cursor-pointer">Primaire (violet)</label>
+                </div>
+                <div className="flex items-center gap-1.5">
+                  <RadioGroupItem value="secondary" id="cta-secondary" />
+                  <label htmlFor="cta-secondary" className="text-xs cursor-pointer">Secondaire (dégradé)</label>
+                </div>
+              </RadioGroup>
+            </div>
+            <div className="flex gap-2 pt-1">
+              <Button size="sm" onClick={saveCtaEdit} className="text-xs h-7">Appliquer</Button>
+              <Button size="sm" variant="outline" onClick={() => setCtaEdit(null)} className="text-xs h-7">Annuler</Button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
