@@ -53,6 +53,7 @@ const ShareBar = ({ post, formattedDate }: { post: CmsPost; formattedDate: strin
 
 const CmsBlogArticle = () => {
   const { slug } = useParams();
+  const { isAdmin } = useAuth();
   const [post, setPost] = useState<CmsPost | null>(null);
   const [relatedCms, setRelatedCms] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
