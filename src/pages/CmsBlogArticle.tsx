@@ -95,11 +95,20 @@ const CmsBlogArticle = () => {
 
   const processContent = (html: string) => {
     let sanitized = DOMPurify.sanitize(html, { ADD_ATTR: ['class', 'data-cta-style'] });
+    // Match <div class="cta-block"> format
     sanitized = sanitized.replace(
       /<div class="cta-block"[^>]*data-cta-style="([^"]*)"[^>]*><a href="([^"]*)">(.*?)<\/a><\/div>/g,
       (_, style, href, text) => {
         const isPrimary = style !== "secondary";
-        return `<div style="text-align:center;margin:2.5rem 0"><a href="${href}" class="inline-flex items-center gap-2 rounded-full ${isPrimary ? 'gradient-primary btn-glow' : 'border-2 border-primary'} px-8 py-3 font-bold ${isPrimary ? 'text-white' : 'text-primary'} text-lg hover:opacity-90 transition-opacity shadow-lg">${text}</a></div>`;
+        return `<div class="cta-wrapper"><a href="${href}" class="cta-button ${isPrimary ? 'cta-primary' : 'cta-secondary'}">${text} →</a></div>`;
+      }
+    );
+    // Match standalone <p><a>text</a></p> (paragraph containing only a link = CTA)
+    sanitized = sanitized.replace(
+      /<p>\s*<a\s+[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>\s*<\/p>/g,
+      (_, href, text) => {
+        const cleanText = text.replace(/\s*→\s*$/, '');
+        return `<div class="cta-wrapper"><a href="${href}" class="cta-button cta-primary">${cleanText} →</a></div>`;
       }
     );
     return sanitized;
