@@ -449,12 +449,38 @@ h1, h2, h3 {
   opacity: 0.9;
 }
 .cms-article-content .cta-primary {
-  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+  background: hsl(var(--primary));
   color: white;
   box-shadow: 0 4px 20px hsl(var(--primary) / 0.3);
 }
 .cms-article-content .cta-secondary {
-  background: transparent;
-  border: 2px solid hsl(var(--primary));
-  color: hsl(var(--primary));
+  background: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(330, 100%, 70%));
+  color: white;
+  box-shadow: 0 4px 20px hsl(183 70% 63% / 0.3);
+}
+
+/* ── CTA preview in TipTap editor ── */
+.cta-block-wrapper {
+  text-align: center;
+  margin: 1.5rem 0;
+  cursor: pointer;
+  user-select: none;
+}
+.cta-editor-preview {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.65rem 1.75rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  pointer-events: none;
+}
+.cta-editor-primary {
+  background: hsl(270, 60%, 52%);
+  color: white;
+}
+.cta-editor-secondary {
+  background: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(330, 100%, 70%));
+  color: white;
 }
