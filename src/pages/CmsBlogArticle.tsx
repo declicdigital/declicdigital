@@ -2,8 +2,9 @@ import { useState, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
-import { Calendar, Clock, ArrowLeft, ArrowRight, Tag, Share2, Check } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, ArrowRight, Tag, Share2, Check, Pencil } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import ArticleEndBlocks from "@/components/ArticleEndBlocks";
@@ -52,6 +53,7 @@ const ShareBar = ({ post, formattedDate }: { post: CmsPost; formattedDate: strin
 
 const CmsBlogArticle = () => {
   const { slug } = useParams();
+  const { isAdmin } = useAuth();
   const [post, setPost] = useState<CmsPost | null>(null);
   const [relatedCms, setRelatedCms] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -144,9 +146,19 @@ const CmsBlogArticle = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 container pb-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <Link to="/blog" className="mb-4 inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors">
-              <ArrowLeft size={14} /> Retour au blog
-            </Link>
+            <div className="flex items-center justify-between mb-4">
+              <Link to="/blog" className="inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors">
+                <ArrowLeft size={14} /> Retour au blog
+              </Link>
+              {isAdmin && (
+                <Link
+                  to={`/admin/blog/${post.id}`}
+                  className="inline-flex items-center gap-1.5 rounded-full bg-white/20 backdrop-blur-sm px-4 py-1.5 text-sm font-medium text-white hover:bg-white/30 transition-colors"
+                >
+                  <Pencil size={14} /> Modifier
+                </Link>
+              )}
+            </div>
             <h1 className="text-3xl font-extrabold text-white md:text-4xl lg:text-5xl leading-tight max-w-3xl">{post.title}</h1>
           </motion.div>
         </div>
