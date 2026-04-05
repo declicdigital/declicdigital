@@ -101,8 +101,8 @@ const CmsBlogArticle = () => {
     sanitized = sanitized.replace(
       /<div class="cta-block"[^>]*data-cta-style="([^"]*)"[^>]*><a href="([^"]*)">(.*?)<\/a><\/div>/g,
       (_, style, href, text) => {
-        const isPrimary = style !== "secondary";
-        return `<div class="cta-wrapper"><a href="${href}" class="cta-button ${isPrimary ? 'cta-primary' : 'cta-secondary'}">${text} →</a></div>`;
+        const cls = style === "secondary" ? "cta-secondary" : "cta-primary";
+        return `<div class="cta-wrapper"><a href="${href}" class="cta-button ${cls}">${text} →</a></div>`;
       }
     );
     // Match standalone <p><a>text</a></p> (paragraph containing only a link = CTA)
