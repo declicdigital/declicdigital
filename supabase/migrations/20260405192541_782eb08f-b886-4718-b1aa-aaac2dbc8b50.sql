@@ -1,0 +1,1 @@
+UPDATE cms_blog_posts SET cover_image_url = 'https://ubtdhicbbwasabgokzje.supabase.co/storage/v1/object/public/cms-images/blog/1775214684982-portrait-focus-man-working-home.webp' WHERE id = '8149e774-fa51-463d-bbc0-254717aacb75';
