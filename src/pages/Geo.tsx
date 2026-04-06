@@ -148,8 +148,8 @@ const Geo = () => {
         <div className="container">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
-              <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-                Le <span className="gradient-text">GEO</span> : quand l'IA devient votre meilleur commercial
+              <h1 className="mb-6 text-4xl font-extrabold md:text-5xl gradient-text">
+                Le GEO : quand l'IA devient votre meilleur commercial
               </h1>
               <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
                 Generative Engine Optimization - la stratégie qui permet à votre entreprise d'être citée par ChatGPT, Gemini et Perplexity. Indispensable pour les TPE, artisans et indépendants.

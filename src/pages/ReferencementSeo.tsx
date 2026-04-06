@@ -150,8 +150,8 @@ const ReferencementSeo = () => {
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
               <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">Référencement naturel</p>
-              <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-                Le SEO : le meilleur allié de <span className="gradient-text">l'entrepreneur solo</span>
+              <h1 className="mb-6 text-4xl font-extrabold md:text-5xl gradient-text">
+                Le SEO : le meilleur allié de l'entrepreneur solo
               </h1>
               <p className="mb-8 text-lg text-muted-foreground leading-relaxed italic">
                 Vous n'avez pas le budget d'une multinationale. Vous n'avez pas une équipe marketing. Mais vous avez quelque chose qu'aucune grande entreprise ne peut acheter : une vraie expertise, un vrai territoire, une vraie relation client. Le SEO est l'outil qui transforme ça en visibilité.
