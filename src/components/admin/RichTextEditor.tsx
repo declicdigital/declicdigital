@@ -223,7 +223,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
       </Tabs>
 
       {/* CTA Edit Popup */}
-      {ctaEdit && (
+      {ctaEdit && createPortal(
         <div ref={popupRef} style={getPopupStyle()} className="w-80 rounded-lg border bg-popover p-4 shadow-lg">
           <h4 className="text-sm font-semibold mb-3">Modifier le CTA</h4>
           <div className="space-y-3">
@@ -265,7 +265,8 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
               <Button size="sm" variant="outline" onClick={() => setCtaEdit(null)} className="text-xs h-7">Annuler</Button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
