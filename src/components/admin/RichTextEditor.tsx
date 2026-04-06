@@ -1,4 +1,5 @@
 import { useEditor, EditorContent } from "@tiptap/react";
+import { createPortal } from "react-dom";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
@@ -162,22 +163,21 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
     }
   };
 
-  // Calculate popup position relative to the editor wrapper
+  // Calculate popup position fixed to viewport so it doesn't cause scroll jumps
   const getPopupStyle = (): React.CSSProperties => {
-    if (!ctaEdit || !editorWrapperRef.current) return { display: "none" };
-    const wrapperRect = editorWrapperRef.current.getBoundingClientRect();
+    if (!ctaEdit) return { display: "none" };
     return {
-      position: "absolute",
-      top: ctaEdit.rect.bottom - wrapperRect.top + 8,
-      left: Math.max(0, ctaEdit.rect.left - wrapperRect.left),
-      zIndex: 50,
+      position: "fixed",
+      top: Math.min(ctaEdit.rect.bottom + 8, window.innerHeight - 320),
+      left: Math.max(16, ctaEdit.rect.left),
+      zIndex: 9999,
     };
   };
 
   return (
     <div className="rounded-lg border border-input bg-background relative" ref={editorWrapperRef}>
       <Tabs value={mode} onValueChange={setMode}>
-        <div className="flex items-center justify-between border-b px-2 py-1">
+        <div className="flex items-center justify-between border-b px-2 py-1 sticky top-0 z-30 bg-background rounded-t-lg">
           {mode === "visual" && editor && (
             <div className="flex flex-wrap items-center gap-0.5">
               <span className="mr-2 rounded bg-muted px-2 py-1 text-xs font-semibold text-muted-foreground min-w-[70px] text-center">
@@ -223,7 +223,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
       </Tabs>
 
       {/* CTA Edit Popup */}
-      {ctaEdit && (
+      {ctaEdit && createPortal(
         <div ref={popupRef} style={getPopupStyle()} className="w-80 rounded-lg border bg-popover p-4 shadow-lg">
           <h4 className="text-sm font-semibold mb-3">Modifier le CTA</h4>
           <div className="space-y-3">
@@ -265,7 +265,8 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
               <Button size="sm" variant="outline" onClick={() => setCtaEdit(null)} className="text-xs h-7">Annuler</Button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </div>
   );
