@@ -162,15 +162,14 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
     }
   };
 
-  // Calculate popup position relative to the editor wrapper
+  // Calculate popup position fixed to viewport so it doesn't cause scroll jumps
   const getPopupStyle = (): React.CSSProperties => {
-    if (!ctaEdit || !editorWrapperRef.current) return { display: "none" };
-    const wrapperRect = editorWrapperRef.current.getBoundingClientRect();
+    if (!ctaEdit) return { display: "none" };
     return {
-      position: "absolute",
-      top: ctaEdit.rect.bottom - wrapperRect.top + 8,
-      left: Math.max(0, ctaEdit.rect.left - wrapperRect.left),
-      zIndex: 50,
+      position: "fixed",
+      top: Math.min(ctaEdit.rect.bottom + 8, window.innerHeight - 320),
+      left: Math.max(16, ctaEdit.rect.left),
+      zIndex: 9999,
     };
   };
 
