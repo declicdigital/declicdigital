@@ -55,15 +55,16 @@ const emptyStructured = (label = ""): StructuredContent => ({
   label, heading: "", text: "", image: "", imageAlt: "", ctas: [], items: [],
 });
 
-/** Detect CTA links inside an element */
+/** Detect CTA links inside an element — only real button-style CTAs */
 function extractCtas(el: Element): CtaItem[] {
   const ctas: CtaItem[] = [];
   let ctaId = 0;
   const links = el.querySelectorAll("a");
   links.forEach((a) => {
-    const parent = a.closest("button, .btn, [class*='btn'], [class*='Button']");
+    const parent = a.closest("button, .btn, [class*='Button']");
     const cls = (a.className || "") + " " + (parent?.className || "");
-    const isCta = parent || cls.includes("gradient") || cls.includes("rounded-full") || cls.includes("btn") || cls.includes("shadow");
+    // Must be inside a Button component OR have explicit CTA-like classes (gradient, btn-glow, shadow-glow/shadow-lg)
+    const isCta = parent || cls.includes("gradient-primary") || cls.includes("gradient-miami") || cls.includes("btn-glow") || cls.includes("shadow-glow") || cls.includes("shadow-lg");
     if (isCta) {
       const isPrimary = cls.includes("gradient-primary") || cls.includes("gradient-miami") || !cls.includes("outline");
       ctas.push({
