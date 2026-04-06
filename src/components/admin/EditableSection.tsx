@@ -288,9 +288,9 @@ function patchCtaLinks(el: Element, enabledCtas: CtaItem[]) {
   const links = el.querySelectorAll("a");
   const ctaLinks: HTMLAnchorElement[] = [];
   links.forEach(a => {
-    const parent = a.closest("button, .btn, [class*='btn'], [class*='Button']");
+    const parent = a.closest("button, .btn, [class*='Button']");
     const cls = (a.className || "") + " " + (parent?.className || "");
-    const isCta = parent || cls.includes("gradient") || cls.includes("rounded-full") || cls.includes("btn") || cls.includes("shadow");
+    const isCta = parent || cls.includes("gradient-primary") || cls.includes("gradient-miami") || cls.includes("btn-glow") || cls.includes("shadow-glow") || cls.includes("shadow-lg");
     if (isCta) ctaLinks.push(a);
   });
   enabledCtas.forEach((cta, i) => {
