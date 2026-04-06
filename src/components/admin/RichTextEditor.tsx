@@ -177,7 +177,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
   return (
     <div className="rounded-lg border border-input bg-background relative" ref={editorWrapperRef}>
       <Tabs value={mode} onValueChange={setMode}>
-        <div className="flex items-center justify-between border-b px-2 py-1">
+        <div className="flex items-center justify-between border-b px-2 py-1 sticky top-0 z-30 bg-background rounded-t-lg">
           {mode === "visual" && editor && (
             <div className="flex flex-wrap items-center gap-0.5">
               <span className="mr-2 rounded bg-muted px-2 py-1 text-xs font-semibold text-muted-foreground min-w-[70px] text-center">
