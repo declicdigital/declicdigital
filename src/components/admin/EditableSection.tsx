@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef, ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
-import { Pencil, Trash2, Tag, X, Save, Plus, Trash, ChevronDown, ChevronUp, ArrowUp, ArrowDown } from "lucide-react";
+import { Pencil, Trash2, Tag, X, Save, Plus, Trash, ChevronDown, ChevronUp, ArrowUp, ArrowDown, Upload, GripVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
+import { compressImage, UPLOAD_OPTIONS } from "@/lib/imageCompression";
+import RichTextEditor from "./RichTextEditor";
 
 export interface EditableSectionProps {
   blockId: string;
@@ -36,6 +38,12 @@ interface SubItem {
   ctas: CtaItem[];
 }
 
+interface LogoItem {
+  id: string;
+  name: string;
+  src: string;
+}
+
 interface StructuredContent {
   label: string;
   heading: string;
@@ -44,6 +52,7 @@ interface StructuredContent {
   imageAlt: string;
   ctas: CtaItem[];
   items: SubItem[];
+  logos: LogoItem[];
 }
 
 interface Override {
@@ -52,7 +61,7 @@ interface Override {
 }
 
 const emptyStructured = (label = ""): StructuredContent => ({
-  label, heading: "", text: "", image: "", imageAlt: "", ctas: [], items: [],
+  label, heading: "", text: "", image: "", imageAlt: "", ctas: [], items: [], logos: [],
 });
 
 /** Detect CTA links inside an element — only real button-style CTAs */
@@ -113,16 +122,19 @@ function extractImage(el: Element): { src: string; alt: string } {
 function parseDomToStructured(el: HTMLElement, fallbackLabel: string): StructuredContent {
   const result = emptyStructured(fallbackLabel);
 
-  // Find h1 or first major heading
   const h1 = el.querySelector("h1");
   if (h1) result.heading = h1.textContent?.trim() || "";
 
-  // Find first significant image at the top level
   const img = extractImage(el);
   result.image = img.src;
   result.imageAlt = img.alt;
 
-  // Look for repeated sub-sections (cards, pricing tiers, etc.)
+  // Detect logo carousel items
+  const logos = detectLogos(el);
+  if (logos.length > 0) {
+    result.logos = logos;
+  }
+
   const subSections = detectSubItems(el);
 
   if (subSections.length >= 2) {
@@ -132,12 +144,37 @@ function parseDomToStructured(el: HTMLElement, fallbackLabel: string): Structure
     const subCtaTexts = new Set(subSections.flatMap(s => s.ctas.map(c => c.text)));
     result.ctas = result.ctas.filter(c => !subCtaTexts.has(c.text));
   } else {
-    // Extract ALL text content
     result.text = extractAllTexts(el);
     result.ctas = extractCtas(el);
   }
 
   return result;
+}
+
+/** Detect logo/tech items in a scrolling carousel or logo grid */
+function detectLogos(el: HTMLElement): LogoItem[] {
+  // Look for repeated img elements inside a scrolling container
+  const scrollContainers = el.querySelectorAll("[class*='animate-scroll'], [class*='overflow-hidden'] > [class*='flex']");
+  for (const container of scrollContainers) {
+    const items = container.querySelectorAll(":scope > div");
+    if (items.length < 2) continue;
+    
+    const logos: LogoItem[] = [];
+    const seen = new Set<string>();
+    items.forEach((item) => {
+      const img = item.querySelector("img");
+      const nameEl = item.querySelector("span");
+      if (!img) return;
+      const src = img.getAttribute("src") || "";
+      const name = nameEl?.textContent?.trim() || img.getAttribute("alt") || "";
+      const key = name + src;
+      if (seen.has(key)) return; // skip duplicates from the doubled carousel
+      seen.add(key);
+      logos.push({ id: `logo-${logos.length}`, name, src });
+    });
+    if (logos.length >= 2) return logos;
+  }
+  return [];
 }
 
 /** Detect repeating card/item patterns within a section */
@@ -228,8 +265,35 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
     applySubItemsToDOM(el, s.items);
   }
 
+  // Apply logo overrides
+  if (s.logos && s.logos.length > 0) {
+    applyLogosToDOM(el, s.logos);
+  }
+
   const enabledCtas = s.ctas.filter(c => c.enabled && c.text && c.url);
   patchCtaLinks(el, enabledCtas);
+}
+
+/** Rebuild the logo carousel from saved logos */
+function applyLogosToDOM(el: HTMLElement, logos: LogoItem[]) {
+  const scrollContainers = el.querySelectorAll("[class*='animate-scroll'], [class*='overflow-hidden'] > [class*='flex']");
+  for (const container of scrollContainers) {
+    // Clear and rebuild with doubled logos for infinite scroll
+    container.innerHTML = "";
+    const allLogos = [...logos, ...logos]; // duplicate for seamless scroll
+    allLogos.forEach((logo) => {
+      const div = document.createElement("div");
+      div.className = "flex flex-col items-center gap-3 shrink-0";
+      div.innerHTML = `
+        <div class="rounded-2xl bg-secondary p-5 shadow-card">
+          <img src="${logo.src}" alt="${logo.name}" class="h-16 w-16 md:h-20 md:w-20 object-contain" loading="lazy" decoding="async" width="80" height="80" />
+        </div>
+        <span class="text-sm font-medium text-muted-foreground">${logo.name}</span>
+      `;
+      container.appendChild(div);
+    });
+    return; // only patch the first matching container
+  }
 }
 
 function applySubItemsToDOM(el: HTMLElement, items: SubItem[]) {
@@ -407,6 +471,129 @@ const SubItemEditor = ({ item, index, onChange, onRemove }: {
           </div>
         </div>
       )}
+    </div>
+  );
+};
+// ─── Helpers: tagged text ↔ HTML ───
+function taggedTextToHtml(text: string): string {
+  if (!text) return "";
+  // If already HTML, return as-is
+  if (text.trim().startsWith("<")) return text;
+  const lines = text.split("\n\n").filter(t => t.trim());
+  return lines.map(line => {
+    const match = line.match(/^\[(H[2-6])\]\s*(.*)/i);
+    if (match) {
+      const tag = match[1].toLowerCase();
+      return `<${tag}>${match[2].trim()}</${tag}>`;
+    }
+    return `<p>${line.trim()}</p>`;
+  }).join("");
+}
+
+function htmlToTaggedText(html: string): string {
+  if (!html) return "";
+  const div = document.createElement("div");
+  div.innerHTML = html;
+  const parts: string[] = [];
+  div.childNodes.forEach(node => {
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const el = node as HTMLElement;
+      const tag = el.tagName.toLowerCase();
+      const text = el.textContent?.trim() || "";
+      if (!text) return;
+      if (/^h[2-6]$/.test(tag)) {
+        parts.push(`[${tag.toUpperCase()}] ${text}`);
+      } else {
+        parts.push(text);
+      }
+    } else if (node.nodeType === Node.TEXT_NODE) {
+      const t = node.textContent?.trim();
+      if (t) parts.push(t);
+    }
+  });
+  return parts.join("\n\n");
+}
+
+// ─── Logo Editor Component ───
+const LogoEditor = ({ logos, onChange }: { logos: LogoItem[]; onChange: (logos: LogoItem[]) => void }) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const compressed = await compressImage(file);
+      const path = `logos/${Date.now()}-${compressed.name}`;
+      const { error } = await supabase.storage.from("cms-images").upload(path, compressed, UPLOAD_OPTIONS);
+      if (error) throw error;
+      const { data: urlData } = supabase.storage.from("cms-images").getPublicUrl(path);
+      const newLogo: LogoItem = {
+        id: `logo-${Date.now()}`,
+        name: file.name.replace(/\.[^.]+$/, ""),
+        src: urlData.publicUrl,
+      };
+      onChange([...logos, newLogo]);
+      toast({ title: "Logo ajouté ✅" });
+    } catch (err: any) {
+      toast({ title: "Erreur upload", description: err.message, variant: "destructive" });
+    }
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const handleReplace = async (logoId: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const compressed = await compressImage(file);
+      const path = `logos/${Date.now()}-${compressed.name}`;
+      const { error } = await supabase.storage.from("cms-images").upload(path, compressed, UPLOAD_OPTIONS);
+      if (error) throw error;
+      const { data: urlData } = supabase.storage.from("cms-images").getPublicUrl(path);
+      onChange(logos.map(l => l.id === logoId ? { ...l, src: urlData.publicUrl } : l));
+      toast({ title: "Logo remplacé ✅" });
+    } catch (err: any) {
+      toast({ title: "Erreur upload", description: err.message, variant: "destructive" });
+    }
+  };
+
+  const removeLogo = (id: string) => onChange(logos.filter(l => l.id !== id));
+  const updateName = (id: string, name: string) => onChange(logos.map(l => l.id === id ? { ...l, name } : l));
+
+  return (
+    <div className="rounded-lg border p-4 space-y-3">
+      <div className="flex items-center justify-between">
+        <Label className="text-sm font-semibold">🏢 Logos / Outils ({logos.length})</Label>
+        <Button type="button" variant="outline" size="sm" onClick={() => fileInputRef.current?.click()} className="gap-1 text-xs">
+          <Plus size={14} /> Ajouter
+        </Button>
+        <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleUpload} />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        {logos.map((logo) => (
+          <div key={logo.id} className="rounded-lg border bg-card p-3 space-y-2">
+            <div className="flex items-center justify-center bg-muted rounded-lg p-3 h-20">
+              <img src={logo.src} alt={logo.name} className="max-h-full max-w-full object-contain" />
+            </div>
+            <Input
+              value={logo.name}
+              onChange={(e) => updateName(logo.id, e.target.value)}
+              className="text-xs h-7"
+              placeholder="Nom"
+            />
+            <div className="flex gap-1">
+              <label className="flex-1">
+                <input type="file" accept="image/*" className="hidden" onChange={(e) => handleReplace(logo.id, e)} />
+                <Button type="button" variant="outline" size="sm" className="w-full text-xs h-7 gap-1" asChild>
+                  <span><Upload size={12} /> Remplacer</span>
+                </Button>
+              </label>
+              <Button type="button" variant="ghost" size="sm" onClick={() => removeLogo(logo.id)} className="h-7 text-destructive hover:bg-destructive/10 px-2">
+                <Trash size={12} />
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
@@ -642,21 +829,23 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
                     <Input value={structured.imageAlt} onChange={(e) => updateField("imageAlt", e.target.value)} placeholder="Texte alternatif (alt)" className="text-sm" />
                   </div>
 
-                  {/* Global text - full content */}
+                  {/* Global text - rich editor with sticky toolbar */}
                   <div className="rounded-lg border p-4 space-y-2">
                     <Label className="text-sm font-semibold">📄 Contenu complet</Label>
-                    <p className="text-xs text-muted-foreground">
-                      Les titres sont préfixés [H2], [H3], etc. Le reste est du texte. Séparez par une ligne vide.
-                    </p>
-                    <Textarea
-                      value={structured.text}
-                      onChange={(e) => updateField("text", e.target.value)}
-                      placeholder="[H2] Titre de section&#10;&#10;Paragraphe de texte...&#10;&#10;[H3] Sous-titre..."
-                      rows={12}
-                      className="leading-relaxed text-sm font-mono"
+                    <RichTextEditor
+                      content={taggedTextToHtml(structured.text)}
+                      onChange={(html) => updateField("text", htmlToTaggedText(html))}
                     />
                   </div>
                 </>
+              )}
+
+              {/* Logo carousel editor */}
+              {structured.logos.length > 0 && (
+                <LogoEditor
+                  logos={structured.logos}
+                  onChange={(logos) => updateField("logos", logos)}
+                />
               )}
 
               {/* Global CTAs */}

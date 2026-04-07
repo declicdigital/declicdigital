@@ -269,6 +269,7 @@ const Index = () => {
       </SectionWrapper>
 
       {/* Technologies */}
+      <EditableSection blockId="technologies" pagePath="/" label="Nos outils / Logos">
       <SectionWrapper className="bg-section-blue">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Nos réalisations pour des TPE et artisans parisiens</h2>
@@ -289,6 +290,7 @@ const Index = () => {
           </div>
         </div>
       </SectionWrapper>
+      </EditableSection>
 
       {/* Contenu SEO riche */}
       <SectionWrapper>
