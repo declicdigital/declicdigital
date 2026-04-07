@@ -5,7 +5,7 @@ import Link from "@tiptap/extension-link";
 import Image from "@tiptap/extension-image";
 import Underline from "@tiptap/extension-underline";
 import { useState, useEffect, useRef } from "react";
-import { Bold, Italic, Underline as UnderlineIcon, Heading1, Heading2, Heading3, Heading4, List, ListOrdered, Link as LinkIcon, ImageIcon, Code, MousePointerClick } from "lucide-react";
+import { Bold, Italic, Underline as UnderlineIcon, Heading1, Heading2, Heading3, Heading4, List, ListOrdered, Link as LinkIcon, ImageIcon, Code, MousePointerClick, Pilcrow, SeparatorHorizontal } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -62,7 +62,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ heading: { levels: [1, 2, 3, 4] } }),
-      Link.configure({ openOnClick: false }),
+      Link.configure({ openOnClick: false, HTMLAttributes: { class: "text-primary underline decoration-primary/50" } }),
       Image,
       Underline,
       CtaNode,
@@ -140,6 +140,16 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
     }).run();
   };
 
+  const insertParagraphBlock = () => {
+    if (!editor) return;
+    editor.chain().focus().insertContent("<p>Nouveau paragraphe…</p>").run();
+  };
+
+  const insertHr = () => {
+    if (!editor) return;
+    editor.chain().focus().setHorizontalRule().run();
+  };
+
   const saveCtaEdit = () => {
     if (!ctaEdit || !editor) return;
     const { state } = editor;
@@ -200,6 +210,8 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
               <MenuButton onClick={addImage} title="Image"><ImageIcon size={16} /></MenuButton>
               <div className="mx-1 h-5 w-px bg-border" />
               <MenuButton onClick={insertCta} title="Insérer un bouton CTA"><MousePointerClick size={16} /></MenuButton>
+              <MenuButton onClick={insertParagraphBlock} title="Insérer un paragraphe"><Pilcrow size={16} /></MenuButton>
+              <MenuButton onClick={insertHr} title="Séparateur horizontal"><SeparatorHorizontal size={16} /></MenuButton>
             </div>
           )}
           {mode !== "visual" && <div />}
@@ -209,7 +221,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
           </TabsList>
         </div>
         <TabsContent value="visual" className="m-0">
-          <div className="prose prose-sm max-w-none p-4 min-h-[300px] focus-within:outline-none [&_.ProseMirror]:outline-none [&_.ProseMirror]:min-h-[280px]">
+          <div className="prose prose-sm max-w-none p-4 min-h-[300px] focus-within:outline-none [&_.ProseMirror]:outline-none [&_.ProseMirror]:min-h-[280px] [&_.ProseMirror_a]:text-primary [&_.ProseMirror_a]:underline [&_.ProseMirror_a]:decoration-primary/50 [&_.ProseMirror_a]:font-medium">
             <EditorContent editor={editor} />
           </div>
         </TabsContent>

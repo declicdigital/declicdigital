@@ -11,7 +11,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { toast } from "@/hooks/use-toast";
-import { ArrowLeft, Save, Send, Upload } from "lucide-react";
+import { ArrowLeft, Save, Send, Upload, CalendarClock } from "lucide-react";
 import { removeCachedCmsPost, upsertCachedCmsPost, type CmsBlogPostSummary } from "@/lib/blog";
 import { compressImage, UPLOAD_OPTIONS } from "@/lib/imageCompression";
 
@@ -31,6 +31,13 @@ const slugify = (str: string) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
+/** Estimate read time from HTML content (~250 words/min) */
+const estimateReadTime = (html: string): string => {
+  const text = html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  const words = text.split(" ").filter(Boolean).length;
+  const minutes = Math.max(1, Math.round(words / 250));
+  return `${minutes} min`;
+};
 
 const AdminBlogEditor = () => {
   const { id } = useParams();
@@ -44,7 +51,7 @@ const AdminBlogEditor = () => {
   const [excerpt, setExcerpt] = useState("");
   const [category, setCategory] = useState("");
   const [tags, setTags] = useState("");
-  const [readTime, setReadTime] = useState("5 min");
+  const [readTime, setReadTime] = useState("1 min");
   const [metaTitle, setMetaTitle] = useState("");
   const [metaDescription, setMetaDescription] = useState("");
   const [coverImageUrl, setCoverImageUrl] = useState("");
@@ -52,6 +59,7 @@ const AdminBlogEditor = () => {
   const [saving, setSaving] = useState(false);
   const [slugManual, setSlugManual] = useState(false);
   const [publishDate, setPublishDate] = useState("");
+  const [scheduledDate, setScheduledDate] = useState("");
 
   useEffect(() => {
     if (!authLoading && !isAdmin) navigate("/connexion");
@@ -78,8 +86,11 @@ const AdminBlogEditor = () => {
             setCoverImageUrl(data.cover_image_url || "");
             setStatus(data.status);
             setSlugManual(true);
-            // Parse date from created_at
             setPublishDate(data.created_at ? data.created_at.slice(0, 10) : "");
+            // If status is scheduled, populate scheduled date
+            if (data.status === "scheduled" && data.created_at) {
+              setScheduledDate(data.created_at.slice(0, 16));
+            }
           }
         });
     }
@@ -90,6 +101,13 @@ const AdminBlogEditor = () => {
       setSlug(slugify(title));
     }
   }, [title, slugManual]);
+
+  // Auto-estimate read time when content changes
+  useEffect(() => {
+    if (content) {
+      setReadTime(estimateReadTime(content));
+    }
+  }, [content]);
 
   const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -119,7 +137,7 @@ const AdminBlogEditor = () => {
     }
     const { data: { publicUrl } } = supabase.storage.from("cms-images").getPublicUrl(path);
     setCoverImageUrl(publicUrl);
-    toast({ title: "Image optimisée en JPEG ✅" });
+    toast({ title: "Image optimisée en WebP ✅" });
   };
 
   const save = async (publishStatus?: string) => {
@@ -140,11 +158,15 @@ const AdminBlogEditor = () => {
       meta_title: metaTitle || title,
       meta_description: metaDescription || excerpt,
       cover_image_url: coverImageUrl || null,
-      status: finalStatus,
+      status: finalStatus === "scheduled" ? "draft" : finalStatus,
       updated_at: new Date().toISOString(),
     };
-    // Include created_at (publish date) if set
-    if (publishDate) {
+
+    // Handle dates
+    if (finalStatus === "scheduled" && scheduledDate) {
+      postData.created_at = new Date(scheduledDate).toISOString();
+      postData.status = "scheduled";
+    } else if (publishDate) {
       postData.created_at = `${publishDate}T10:00:00+01:00`;
     }
 
@@ -175,7 +197,12 @@ const AdminBlogEditor = () => {
         removeCachedCmsPost(slug);
       }
 
-      toast({ title: finalStatus === "published" ? "Article publié ✅" : "Brouillon enregistré ✅" });
+      const messages: Record<string, string> = {
+        published: "Article publié ✅",
+        scheduled: `Article programmé pour le ${new Date(scheduledDate).toLocaleDateString("fr-FR")} ✅`,
+        draft: "Brouillon enregistré ✅",
+      };
+      toast({ title: messages[finalStatus] || "Enregistré ✅" });
       navigate("/admin/blog");
     }
   };
@@ -238,7 +265,7 @@ const AdminBlogEditor = () => {
           </div>
 
           {/* Category, read time & date */}
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             <div>
               <Label>Catégorie</Label>
               <Select value={category} onValueChange={setCategory}>
@@ -251,12 +278,26 @@ const AdminBlogEditor = () => {
               </Select>
             </div>
             <div>
-              <Label>Temps de lecture</Label>
-              <Input value={readTime} onChange={e => setReadTime(e.target.value)} placeholder="5 min" className="mt-1" />
+              <Label>Temps de lecture (auto)</Label>
+              <Input value={readTime} readOnly className="mt-1 bg-muted/50 cursor-default" />
             </div>
             <div>
               <Label>Date de publication</Label>
               <Input type="date" value={publishDate} onChange={e => setPublishDate(e.target.value)} className="mt-1" />
+            </div>
+            <div>
+              <Label className="flex items-center gap-1"><CalendarClock size={14} /> Programmer</Label>
+              <Input
+                type="datetime-local"
+                value={scheduledDate}
+                onChange={e => setScheduledDate(e.target.value)}
+                className="mt-1"
+              />
+              {scheduledDate && (
+                <p className="text-xs text-muted-foreground mt-1">
+                  Sera publié le {new Date(scheduledDate).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric", hour: "2-digit", minute: "2-digit" })}
+                </p>
+              )}
             </div>
           </div>
 
@@ -303,8 +344,13 @@ const AdminBlogEditor = () => {
           {/* Actions */}
           <div className="flex items-center justify-end gap-3 pt-4 border-t">
             <Button variant="outline" onClick={() => save("draft")} disabled={saving} className="gap-2">
-              <Save size={16} /> Enregistrer brouillon
+              <Save size={16} /> Brouillon
             </Button>
+            {scheduledDate && (
+              <Button variant="secondary" onClick={() => save("scheduled")} disabled={saving} className="gap-2">
+                <CalendarClock size={16} /> Programmer
+              </Button>
+            )}
             <Button onClick={() => save("published")} disabled={saving} className="gap-2">
               <Send size={16} /> Publier
             </Button>
