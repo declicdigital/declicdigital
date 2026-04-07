@@ -706,21 +706,23 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
                     <Input value={structured.imageAlt} onChange={(e) => updateField("imageAlt", e.target.value)} placeholder="Texte alternatif (alt)" className="text-sm" />
                   </div>
 
-                  {/* Global text - full content */}
+                  {/* Global text - rich editor with sticky toolbar */}
                   <div className="rounded-lg border p-4 space-y-2">
                     <Label className="text-sm font-semibold">📄 Contenu complet</Label>
-                    <p className="text-xs text-muted-foreground">
-                      Les titres sont préfixés [H2], [H3], etc. Le reste est du texte. Séparez par une ligne vide.
-                    </p>
-                    <Textarea
-                      value={structured.text}
-                      onChange={(e) => updateField("text", e.target.value)}
-                      placeholder="[H2] Titre de section&#10;&#10;Paragraphe de texte...&#10;&#10;[H3] Sous-titre..."
-                      rows={12}
-                      className="leading-relaxed text-sm font-mono"
+                    <RichTextEditor
+                      content={taggedTextToHtml(structured.text)}
+                      onChange={(html) => updateField("text", htmlToTaggedText(html))}
                     />
                   </div>
                 </>
+              )}
+
+              {/* Logo carousel editor */}
+              {structured.logos.length > 0 && (
+                <LogoEditor
+                  logos={structured.logos}
+                  onChange={(logos) => updateField("logos", logos)}
+                />
               )}
 
               {/* Global CTAs */}
