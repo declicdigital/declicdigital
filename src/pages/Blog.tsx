@@ -1,10 +1,10 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Calendar, Clock, ArrowRight, Tag, Sparkles } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import { blogArticles, blogCategories, getCategorySlug } from "@/data/blogArticles";
+import { blogArticles, getCategorySlug } from "@/data/blogArticles";
 import { supabase } from "@/integrations/supabase/client";
 import { loadCachedCmsPosts, mergeBlogArticles, saveCachedCmsPosts, type CmsBlogPostSummary } from "@/lib/blog";
 
@@ -70,6 +70,13 @@ const Blog = () => {
   }, []);
 
   const allArticles = mergeBlogArticles(blogArticles, cmsPosts);
+
+  // Derive categories from actual articles (CMS + static)
+  const derivedCategories = useMemo(() => {
+    const cats = new Set<string>();
+    allArticles.forEach((a) => { if (a.category) cats.add(a.category); });
+    return Array.from(cats);
+  }, [allArticles]);
 
   if (!cmsLoaded) {
     return <BlogPageSkeleton />;
@@ -152,20 +159,22 @@ const Blog = () => {
       </section>
 
       {/* Categories */}
-      <section className="container mb-10">
-        <h2 className="text-lg font-bold mb-4">Parcourir par catégorie</h2>
-        <div className="flex flex-wrap gap-2">
-          {blogCategories.map((cat) => (
-            <Link
-              key={cat}
-              to={`/blog/categorie/${getCategorySlug(cat)}`}
-              className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors hover:opacity-80 ${categoryColors[cat] || "bg-secondary text-secondary-foreground"}`}
-            >
-              {cat}
-            </Link>
-          ))}
-        </div>
-      </section>
+      {derivedCategories.length > 0 && (
+        <section className="container mb-10">
+          <h2 className="text-lg font-bold mb-4">Parcourir par catégorie</h2>
+          <div className="flex flex-wrap gap-2">
+            {derivedCategories.map((cat) => (
+              <Link
+                key={cat}
+                to={`/blog/categorie/${getCategorySlug(cat)}`}
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors hover:opacity-80 ${categoryColors[cat] || "bg-secondary text-secondary-foreground"}`}
+              >
+                {cat}
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* Other articles */}
       <section className="container pb-20">

@@ -1,10 +1,13 @@
 import { useParams, Link, Navigate } from "react-router-dom";
+import { useState, useEffect, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "framer-motion";
 import { Calendar, Clock, ArrowRight, Tag, ArrowLeft } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import { blogArticles, getCategoryFromSlug, getCategorySlug, getArticlesByCategory, blogCategories } from "@/data/blogArticles";
+import { blogArticles, getCategorySlug } from "@/data/blogArticles";
+import { supabase } from "@/integrations/supabase/client";
+import { loadCachedCmsPosts, mergeBlogArticles, saveCachedCmsPosts, type CmsBlogPostSummary, type BlogFeedItem } from "@/lib/blog";
 
 const categoryColors: Record<string, string> = {
   "Technique": "bg-amber-500/15 text-amber-700 dark:text-amber-400",
@@ -16,13 +19,43 @@ const categoryColors: Record<string, string> = {
 
 const BlogCategory = () => {
   const { categorySlug } = useParams<{ categorySlug: string }>();
-  const category = categorySlug ? getCategoryFromSlug(categorySlug) : undefined;
+
+  const cachedPosts = loadCachedCmsPosts();
+  const [cmsPosts, setCmsPosts] = useState<CmsBlogPostSummary[]>(cachedPosts);
+
+  useEffect(() => {
+    supabase
+      .from("cms_blog_posts")
+      .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at, tags")
+      .eq("status", "published")
+      .order("created_at", { ascending: false })
+      .then(({ data }) => {
+        if (data) {
+          setCmsPosts(data);
+          saveCachedCmsPosts(data);
+        }
+      });
+  }, []);
+
+  const allArticles = mergeBlogArticles(blogArticles, cmsPosts);
+
+  // Derive all categories from merged articles
+  const allCategories = useMemo(() => {
+    const cats = new Set<string>();
+    allArticles.forEach((a) => { if (a.category) cats.add(a.category); });
+    return Array.from(cats);
+  }, [allArticles]);
+
+  // Find the category matching the slug
+  const category = useMemo(() => {
+    return allCategories.find((c) => getCategorySlug(c) === categorySlug);
+  }, [allCategories, categorySlug]);
 
   if (!category) return <Navigate to="/blog" replace />;
 
-  const articles = getArticlesByCategory(category).sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  const articles = allArticles
+    .filter((a) => a.category === category)
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <PageLayout hideBlogCarousel>
@@ -48,7 +81,7 @@ const BlogCategory = () => {
 
         {/* Other categories */}
         <div className="flex flex-wrap gap-2 mb-10">
-          {blogCategories.filter((c) => c !== category).map((c) => (
+          {allCategories.filter((c) => c !== category).map((c) => (
             <Link
               key={c}
               to={`/blog/categorie/${getCategorySlug(c)}`}
