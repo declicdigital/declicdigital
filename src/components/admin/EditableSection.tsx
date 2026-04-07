@@ -1,13 +1,15 @@
 import { useState, useEffect, useRef, ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
-import { Pencil, Trash2, Tag, X, Save, Plus, Trash, ChevronDown, ChevronUp, ArrowUp, ArrowDown } from "lucide-react";
+import { Pencil, Trash2, Tag, X, Save, Plus, Trash, ChevronDown, ChevronUp, ArrowUp, ArrowDown, Upload, GripVertical } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
+import { compressImage, UPLOAD_OPTIONS } from "@/lib/imageCompression";
+import RichTextEditor from "./RichTextEditor";
 
 export interface EditableSectionProps {
   blockId: string;
