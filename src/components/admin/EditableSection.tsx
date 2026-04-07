@@ -38,6 +38,12 @@ interface SubItem {
   ctas: CtaItem[];
 }
 
+interface LogoItem {
+  id: string;
+  name: string;
+  src: string;
+}
+
 interface StructuredContent {
   label: string;
   heading: string;
@@ -46,6 +52,7 @@ interface StructuredContent {
   imageAlt: string;
   ctas: CtaItem[];
   items: SubItem[];
+  logos: LogoItem[];
 }
 
 interface Override {
@@ -54,7 +61,7 @@ interface Override {
 }
 
 const emptyStructured = (label = ""): StructuredContent => ({
-  label, heading: "", text: "", image: "", imageAlt: "", ctas: [], items: [],
+  label, heading: "", text: "", image: "", imageAlt: "", ctas: [], items: [], logos: [],
 });
 
 /** Detect CTA links inside an element — only real button-style CTAs */
