@@ -265,8 +265,35 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
     applySubItemsToDOM(el, s.items);
   }
 
+  // Apply logo overrides
+  if (s.logos && s.logos.length > 0) {
+    applyLogosToDOM(el, s.logos);
+  }
+
   const enabledCtas = s.ctas.filter(c => c.enabled && c.text && c.url);
   patchCtaLinks(el, enabledCtas);
+}
+
+/** Rebuild the logo carousel from saved logos */
+function applyLogosToDOM(el: HTMLElement, logos: LogoItem[]) {
+  const scrollContainers = el.querySelectorAll("[class*='animate-scroll'], [class*='overflow-hidden'] > [class*='flex']");
+  for (const container of scrollContainers) {
+    // Clear and rebuild with doubled logos for infinite scroll
+    container.innerHTML = "";
+    const allLogos = [...logos, ...logos]; // duplicate for seamless scroll
+    allLogos.forEach((logo) => {
+      const div = document.createElement("div");
+      div.className = "flex flex-col items-center gap-3 shrink-0";
+      div.innerHTML = `
+        <div class="rounded-2xl bg-secondary p-5 shadow-card">
+          <img src="${logo.src}" alt="${logo.name}" class="h-16 w-16 md:h-20 md:w-20 object-contain" loading="lazy" decoding="async" width="80" height="80" />
+        </div>
+        <span class="text-sm font-medium text-muted-foreground">${logo.name}</span>
+      `;
+      container.appendChild(div);
+    });
+    return; // only patch the first matching container
+  }
 }
 
 function applySubItemsToDOM(el: HTMLElement, items: SubItem[]) {
