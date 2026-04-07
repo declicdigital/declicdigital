@@ -474,6 +474,129 @@ const SubItemEditor = ({ item, index, onChange, onRemove }: {
     </div>
   );
 };
+// ─── Helpers: tagged text ↔ HTML ───
+function taggedTextToHtml(text: string): string {
+  if (!text) return "";
+  // If already HTML, return as-is
+  if (text.trim().startsWith("<")) return text;
+  const lines = text.split("\n\n").filter(t => t.trim());
+  return lines.map(line => {
+    const match = line.match(/^\[(H[2-6])\]\s*(.*)/i);
+    if (match) {
+      const tag = match[1].toLowerCase();
+      return `<${tag}>${match[2].trim()}</${tag}>`;
+    }
+    return `<p>${line.trim()}</p>`;
+  }).join("");
+}
+
+function htmlToTaggedText(html: string): string {
+  if (!html) return "";
+  const div = document.createElement("div");
+  div.innerHTML = html;
+  const parts: string[] = [];
+  div.childNodes.forEach(node => {
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const el = node as HTMLElement;
+      const tag = el.tagName.toLowerCase();
+      const text = el.textContent?.trim() || "";
+      if (!text) return;
+      if (/^h[2-6]$/.test(tag)) {
+        parts.push(`[${tag.toUpperCase()}] ${text}`);
+      } else {
+        parts.push(text);
+      }
+    } else if (node.nodeType === Node.TEXT_NODE) {
+      const t = node.textContent?.trim();
+      if (t) parts.push(t);
+    }
+  });
+  return parts.join("\n\n");
+}
+
+// ─── Logo Editor Component ───
+const LogoEditor = ({ logos, onChange }: { logos: LogoItem[]; onChange: (logos: LogoItem[]) => void }) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const compressed = await compressImage(file);
+      const path = `logos/${Date.now()}-${compressed.name}`;
+      const { error } = await supabase.storage.from("cms-images").upload(path, compressed, UPLOAD_OPTIONS);
+      if (error) throw error;
+      const { data: urlData } = supabase.storage.from("cms-images").getPublicUrl(path);
+      const newLogo: LogoItem = {
+        id: `logo-${Date.now()}`,
+        name: file.name.replace(/\.[^.]+$/, ""),
+        src: urlData.publicUrl,
+      };
+      onChange([...logos, newLogo]);
+      toast({ title: "Logo ajouté ✅" });
+    } catch (err: any) {
+      toast({ title: "Erreur upload", description: err.message, variant: "destructive" });
+    }
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
+
+  const handleReplace = async (logoId: string, e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const compressed = await compressImage(file);
+      const path = `logos/${Date.now()}-${compressed.name}`;
+      const { error } = await supabase.storage.from("cms-images").upload(path, compressed, UPLOAD_OPTIONS);
+      if (error) throw error;
+      const { data: urlData } = supabase.storage.from("cms-images").getPublicUrl(path);
+      onChange(logos.map(l => l.id === logoId ? { ...l, src: urlData.publicUrl } : l));
+      toast({ title: "Logo remplacé ✅" });
+    } catch (err: any) {
+      toast({ title: "Erreur upload", description: err.message, variant: "destructive" });
+    }
+  };
+
+  const removeLogo = (id: string) => onChange(logos.filter(l => l.id !== id));
+  const updateName = (id: string, name: string) => onChange(logos.map(l => l.id === id ? { ...l, name } : l));
+
+  return (
+    <div className="rounded-lg border p-4 space-y-3">
+      <div className="flex items-center justify-between">
+        <Label className="text-sm font-semibold">🏢 Logos / Outils ({logos.length})</Label>
+        <Button type="button" variant="outline" size="sm" onClick={() => fileInputRef.current?.click()} className="gap-1 text-xs">
+          <Plus size={14} /> Ajouter
+        </Button>
+        <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleUpload} />
+      </div>
+      <div className="grid grid-cols-2 gap-3">
+        {logos.map((logo) => (
+          <div key={logo.id} className="rounded-lg border bg-card p-3 space-y-2">
+            <div className="flex items-center justify-center bg-muted rounded-lg p-3 h-20">
+              <img src={logo.src} alt={logo.name} className="max-h-full max-w-full object-contain" />
+            </div>
+            <Input
+              value={logo.name}
+              onChange={(e) => updateName(logo.id, e.target.value)}
+              className="text-xs h-7"
+              placeholder="Nom"
+            />
+            <div className="flex gap-1">
+              <label className="flex-1">
+                <input type="file" accept="image/*" className="hidden" onChange={(e) => handleReplace(logo.id, e)} />
+                <Button type="button" variant="outline" size="sm" className="w-full text-xs h-7 gap-1" asChild>
+                  <span><Upload size={12} /> Remplacer</span>
+                </Button>
+              </label>
+              <Button type="button" variant="ghost" size="sm" onClick={() => removeLogo(logo.id)} className="h-7 text-destructive hover:bg-destructive/10 px-2">
+                <Trash size={12} />
+              </Button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
 // ─── Main Component ───
 const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveDown, displayIndex }: EditableSectionProps) => {
