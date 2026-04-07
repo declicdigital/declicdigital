@@ -122,16 +122,19 @@ function extractImage(el: Element): { src: string; alt: string } {
 function parseDomToStructured(el: HTMLElement, fallbackLabel: string): StructuredContent {
   const result = emptyStructured(fallbackLabel);
 
-  // Find h1 or first major heading
   const h1 = el.querySelector("h1");
   if (h1) result.heading = h1.textContent?.trim() || "";
 
-  // Find first significant image at the top level
   const img = extractImage(el);
   result.image = img.src;
   result.imageAlt = img.alt;
 
-  // Look for repeated sub-sections (cards, pricing tiers, etc.)
+  // Detect logo carousel items
+  const logos = detectLogos(el);
+  if (logos.length > 0) {
+    result.logos = logos;
+  }
+
   const subSections = detectSubItems(el);
 
   if (subSections.length >= 2) {
@@ -141,12 +144,37 @@ function parseDomToStructured(el: HTMLElement, fallbackLabel: string): Structure
     const subCtaTexts = new Set(subSections.flatMap(s => s.ctas.map(c => c.text)));
     result.ctas = result.ctas.filter(c => !subCtaTexts.has(c.text));
   } else {
-    // Extract ALL text content
     result.text = extractAllTexts(el);
     result.ctas = extractCtas(el);
   }
 
   return result;
+}
+
+/** Detect logo/tech items in a scrolling carousel or logo grid */
+function detectLogos(el: HTMLElement): LogoItem[] {
+  // Look for repeated img elements inside a scrolling container
+  const scrollContainers = el.querySelectorAll("[class*='animate-scroll'], [class*='overflow-hidden'] > [class*='flex']");
+  for (const container of scrollContainers) {
+    const items = container.querySelectorAll(":scope > div");
+    if (items.length < 2) continue;
+    
+    const logos: LogoItem[] = [];
+    const seen = new Set<string>();
+    items.forEach((item) => {
+      const img = item.querySelector("img");
+      const nameEl = item.querySelector("span");
+      if (!img) return;
+      const src = img.getAttribute("src") || "";
+      const name = nameEl?.textContent?.trim() || img.getAttribute("alt") || "";
+      const key = name + src;
+      if (seen.has(key)) return; // skip duplicates from the doubled carousel
+      seen.add(key);
+      logos.push({ id: `logo-${logos.length}`, name, src });
+    });
+    if (logos.length >= 2) return logos;
+  }
+  return [];
 }
 
 /** Detect repeating card/item patterns within a section */
