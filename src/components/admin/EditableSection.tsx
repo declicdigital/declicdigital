@@ -101,7 +101,7 @@ interface Override {
 }
 
 const emptyStructured = (label = ""): StructuredContent => ({
-  label, heading: "", text: "", image: "", imageAlt: "", ctas: [], items: [], logos: [],
+  label, heading: "", text: "", image: "", imageAlt: "", ctas: [], items: [], logos: [], bgColor: "none",
 });
 
 function normalizeStructuredContent(content?: Partial<StructuredContent> | null, fallbackLabel = ""): StructuredContent {
