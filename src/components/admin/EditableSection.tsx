@@ -631,6 +631,22 @@ const LogoEditor = ({ logos, onChange }: { logos: LogoItem[]; onChange: (logos: 
   );
 };
 
+// ─── Keyboard shortcut component for undo/redo ───
+const UndoRedoKeys = ({ onUndo, onRedo, canUndo, canRedo }: { onUndo: () => void; onRedo: () => void; canUndo: boolean; canRedo: boolean }) => {
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "z") {
+        e.preventDefault();
+        if (e.shiftKey) { if (canRedo) onRedo(); }
+        else { if (canUndo) onUndo(); }
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onUndo, onRedo, canUndo, canRedo]);
+  return null;
+};
+
 // ─── Main Component ───
 const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveDown, displayIndex }: EditableSectionProps) => {
   const { isAdmin } = useAuth();
