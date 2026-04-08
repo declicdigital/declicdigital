@@ -104,6 +104,12 @@ const emptyStructured = (label = ""): StructuredContent => ({
   label, heading: "", text: "", image: "", imageAlt: "", ctas: [], items: [], logos: [], bgColor: "none",
 });
 
+const BG_CLASS_MAP: Record<BgColor, string> = {
+  none: "",
+  blue: "bg-section-blue",
+  beige: "bg-section-rose",
+};
+
 function normalizeStructuredContent(content?: Partial<StructuredContent> | null, fallbackLabel = ""): StructuredContent {
   return {
     label: typeof content?.label === "string" ? content.label : fallbackLabel,
@@ -114,6 +120,7 @@ function normalizeStructuredContent(content?: Partial<StructuredContent> | null,
     ctas: Array.isArray(content?.ctas) ? content.ctas : [],
     items: Array.isArray(content?.items) ? content.items : [],
     logos: Array.isArray(content?.logos) ? content.logos : [],
+    bgColor: (content?.bgColor === "blue" || content?.bgColor === "beige") ? content.bgColor : "none",
   };
 }
 
