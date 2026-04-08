@@ -101,6 +101,19 @@ const emptyStructured = (label = ""): StructuredContent => ({
   label, heading: "", text: "", image: "", imageAlt: "", ctas: [], items: [], logos: [],
 });
 
+function normalizeStructuredContent(content?: Partial<StructuredContent> | null, fallbackLabel = ""): StructuredContent {
+  return {
+    label: typeof content?.label === "string" ? content.label : fallbackLabel,
+    heading: typeof content?.heading === "string" ? content.heading : "",
+    text: typeof content?.text === "string" ? content.text : "",
+    image: typeof content?.image === "string" ? content.image : "",
+    imageAlt: typeof content?.imageAlt === "string" ? content.imageAlt : "",
+    ctas: Array.isArray(content?.ctas) ? content.ctas : [],
+    items: Array.isArray(content?.items) ? content.items : [],
+    logos: Array.isArray(content?.logos) ? content.logos : [],
+  };
+}
+
 /** Detect CTA links inside an element — only real button-style CTAs */
 function extractCtas(el: Element): CtaItem[] {
   const ctas: CtaItem[] = [];
@@ -247,6 +260,8 @@ function detectSubItems(el: HTMLElement): SubItem[] {
  * Apply saved structured content onto the live DOM without replacing children.
  */
 function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
+  s = normalizeStructuredContent(s);
+
   if (s.heading) {
     const h1 = el.querySelector("h1");
     if (h1) h1.textContent = s.heading;
@@ -656,7 +671,9 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
   const { isAdmin } = useAuth();
   const [override, setOverride] = useState<Override | null>(null);
   const [editing, setEditing] = useState(false);
-  const { current: structured, set: setStructured, undo, redo, canUndo, canRedo, reset: resetHistory } = useUndoRedo<StructuredContent>(emptyStructured());
+  const fallbackStructuredLabel = label || blockId;
+  const { current: rawStructured, set: setStructured, undo, redo, canUndo, canRedo, reset: resetHistory } = useUndoRedo<StructuredContent>(emptyStructured(fallbackStructuredLabel));
+  const structured = normalizeStructuredContent(rawStructured, override?.content?.label || fallbackStructuredLabel);
   const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -693,10 +710,9 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
     const fallbackLabel = override?.content?.label || label || blockId;
     let initial: StructuredContent;
     if (override?.content?.structured) {
-      const s = override.content.structured;
-      initial = { ...s, items: s.items || [] };
+      initial = normalizeStructuredContent(override.content.structured, fallbackLabel);
     } else if (contentRef.current) {
-      initial = parseDomToStructured(contentRef.current, fallbackLabel);
+      initial = normalizeStructuredContent(parseDomToStructured(contentRef.current, fallbackLabel), fallbackLabel);
     } else {
       initial = emptyStructured(fallbackLabel);
     }
@@ -742,39 +758,54 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
   };
 
   const updateField = <K extends keyof StructuredContent>(key: K, value: StructuredContent[K]) => {
-    setStructured((prev) => ({ ...prev, [key]: value }));
+    setStructured((prev) => ({ ...normalizeStructuredContent(prev, fallbackStructuredLabel), [key]: value }));
   };
 
   const addCta = () => {
-    setStructured((prev) => ({
-      ...prev,
-      ctas: [...prev.ctas, { id: `cta-${Date.now()}`, text: "", url: "", style: "primary", enabled: true }],
-    }));
+    setStructured((prev) => {
+      const safePrev = normalizeStructuredContent(prev, fallbackStructuredLabel);
+      return {
+        ...safePrev,
+        ctas: [...safePrev.ctas, { id: `cta-${Date.now()}`, text: "", url: "", style: "primary", enabled: true }],
+      };
+    });
   };
 
   const updateCta = (id: string, field: keyof CtaItem, value: any) => {
-    setStructured((prev) => ({
-      ...prev,
-      ctas: prev.ctas.map((c) => (c.id === id ? { ...c, [field]: value } : c)),
-    }));
+    setStructured((prev) => {
+      const safePrev = normalizeStructuredContent(prev, fallbackStructuredLabel);
+      return {
+        ...safePrev,
+        ctas: safePrev.ctas.map((c) => (c.id === id ? { ...c, [field]: value } : c)),
+      };
+    });
   };
 
   const removeCta = (id: string) => {
-    setStructured((prev) => ({ ...prev, ctas: prev.ctas.filter((c) => c.id !== id) }));
+    setStructured((prev) => {
+      const safePrev = normalizeStructuredContent(prev, fallbackStructuredLabel);
+      return { ...safePrev, ctas: safePrev.ctas.filter((c) => c.id !== id) };
+    });
   };
 
   const updateItem = (index: number, updated: SubItem) => {
-    setStructured(prev => ({
-      ...prev,
-      items: prev.items.map((it, i) => i === index ? updated : it),
-    }));
+    setStructured(prev => {
+      const safePrev = normalizeStructuredContent(prev, fallbackStructuredLabel);
+      return {
+        ...safePrev,
+        items: safePrev.items.map((it, i) => i === index ? updated : it),
+      };
+    });
   };
 
   const removeItem = (index: number) => {
-    setStructured(prev => ({
-      ...prev,
-      items: prev.items.filter((_, i) => i !== index),
-    }));
+    setStructured(prev => {
+      const safePrev = normalizeStructuredContent(prev, fallbackStructuredLabel);
+      return {
+        ...safePrev,
+        items: safePrev.items.filter((_, i) => i !== index),
+      };
+    });
   };
 
   if (!loaded) return <>{children}</>;
