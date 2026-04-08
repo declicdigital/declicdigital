@@ -81,6 +81,8 @@ interface LogoItem {
   src: string;
 }
 
+type BgColor = "none" | "blue" | "beige";
+
 interface StructuredContent {
   label: string;
   heading: string;
@@ -90,6 +92,7 @@ interface StructuredContent {
   ctas: CtaItem[];
   items: SubItem[];
   logos: LogoItem[];
+  bgColor: BgColor;
 }
 
 interface Override {
