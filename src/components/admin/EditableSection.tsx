@@ -208,6 +208,14 @@ function parseDomToStructured(el: HTMLElement, fallbackLabel: string): Structure
     result.ctas = extractCtas(el);
   }
 
+  // Detect current background color
+  const elCls = el.className || "";
+  const firstChild = el.firstElementChild as HTMLElement | null;
+  const childCls = firstChild?.className || "";
+  const allCls = elCls + " " + childCls;
+  if (allCls.includes("bg-section-blue")) result.bgColor = "blue";
+  else if (allCls.includes("bg-section-rose") || allCls.includes("bg-section-alt")) result.bgColor = "beige";
+
   return result;
 }
 
