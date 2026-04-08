@@ -638,7 +638,6 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
   const [editing, setEditing] = useState(false);
   const { current: structured, set: setStructured, undo, redo, canUndo, canRedo, reset: resetHistory } = useUndoRedo<StructuredContent>(emptyStructured());
   const [saving, setSaving] = useState(false);
-  const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
 
