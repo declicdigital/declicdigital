@@ -1,7 +1,40 @@
-import { useState, useEffect, useRef, ReactNode } from "react";
+import { useState, useEffect, useRef, useCallback, ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
-import { Pencil, Trash2, Tag, X, Save, Plus, Trash, ChevronDown, ChevronUp, ArrowUp, ArrowDown, Upload, GripVertical } from "lucide-react";
+import { Pencil, Trash2, Tag, X, Save, Plus, Trash, ChevronDown, ChevronUp, ArrowUp, ArrowDown, Upload, GripVertical, Undo2, Redo2 } from "lucide-react";
+
+// ─── Undo/Redo Hook ───
+function useUndoRedo<T>(initial: T) {
+  const [history, setHistory] = useState<T[]>([initial]);
+  const [index, setIndex] = useState(0);
+
+  const current = history[index];
+
+  const set = useCallback((val: T | ((prev: T) => T)) => {
+    setHistory(prev => {
+      const resolved = typeof val === "function" ? (val as (p: T) => T)(prev[index]) : val;
+      // Trim future states and append new
+      const newHistory = [...prev.slice(0, index + 1), resolved];
+      // Keep max 50 states
+      if (newHistory.length > 50) newHistory.shift();
+      return newHistory;
+    });
+    setIndex(prev => Math.min(prev + 1, 49));
+  }, [index]);
+
+  const undo = useCallback(() => setIndex(i => Math.max(0, i - 1)), []);
+  const redo = useCallback(() => setIndex(i => Math.min(history.length - 1, i + 1)), [history.length]);
+
+  const canUndo = index > 0;
+  const canRedo = index < history.length - 1;
+
+  const reset = useCallback((val: T) => {
+    setHistory([val]);
+    setIndex(0);
+  }, []);
+
+  return { current, set, undo, redo, canUndo, canRedo, reset };
+}
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -598,12 +631,28 @@ const LogoEditor = ({ logos, onChange }: { logos: LogoItem[]; onChange: (logos: 
   );
 };
 
+// ─── Keyboard shortcut component for undo/redo ───
+const UndoRedoKeys = ({ onUndo, onRedo, canUndo, canRedo }: { onUndo: () => void; onRedo: () => void; canUndo: boolean; canRedo: boolean }) => {
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "z") {
+        e.preventDefault();
+        if (e.shiftKey) { if (canRedo) onRedo(); }
+        else { if (canUndo) onUndo(); }
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, [onUndo, onRedo, canUndo, canRedo]);
+  return null;
+};
+
 // ─── Main Component ───
 const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveDown, displayIndex }: EditableSectionProps) => {
   const { isAdmin } = useAuth();
   const [override, setOverride] = useState<Override | null>(null);
   const [editing, setEditing] = useState(false);
-  const [structured, setStructured] = useState<StructuredContent>(emptyStructured());
+  const { current: structured, set: setStructured, undo, redo, canUndo, canRedo, reset: resetHistory } = useUndoRedo<StructuredContent>(emptyStructured());
   const [saving, setSaving] = useState(false);
   const [loaded, setLoaded] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -638,14 +687,16 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
 
   const openEditor = () => {
     const fallbackLabel = override?.content?.label || label || blockId;
+    let initial: StructuredContent;
     if (override?.content?.structured) {
       const s = override.content.structured;
-      setStructured({ ...s, items: s.items || [] });
+      initial = { ...s, items: s.items || [] };
     } else if (contentRef.current) {
-      setStructured(parseDomToStructured(contentRef.current, fallbackLabel));
+      initial = parseDomToStructured(contentRef.current, fallbackLabel);
     } else {
-      setStructured(emptyStructured(fallbackLabel));
+      initial = emptyStructured(fallbackLabel);
     }
+    resetHistory(initial);
     setEditing(true);
   };
 
@@ -771,14 +822,25 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
         <div ref={contentRef}>{children}</div>
       </div>
 
+      {/* Keyboard shortcuts for undo/redo */}
+      {editing && <UndoRedoKeys onUndo={undo} onRedo={redo} canUndo={canUndo} canRedo={canRedo} />}
+
       {/* Editor Panel */}
       {editing && (
         <div className="fixed inset-0 z-[9999] flex">
           <div className="absolute inset-0 bg-black/30" onClick={() => setEditing(false)} />
           <div className="relative ml-auto w-[560px] max-w-full h-full bg-background border-l shadow-2xl overflow-y-auto animate-in slide-in-from-right">
             <div className="sticky top-0 bg-background border-b px-6 py-4 flex items-center justify-between z-10">
-              <h3 className="text-lg font-semibold">Modifier : {structured.label || blockId}</h3>
-              <button onClick={() => setEditing(false)} className="rounded p-1 hover:bg-muted"><X size={20} /></button>
+              <h3 className="text-lg font-semibold truncate flex-1">Modifier : {structured.label || blockId}</h3>
+              <div className="flex items-center gap-1 ml-2">
+                <Button variant="ghost" size="sm" onClick={undo} disabled={!canUndo} className="h-8 w-8 p-0" title="Annuler (Undo)">
+                  <Undo2 size={16} />
+                </Button>
+                <Button variant="ghost" size="sm" onClick={redo} disabled={!canRedo} className="h-8 w-8 p-0" title="Rétablir (Redo)">
+                  <Redo2 size={16} />
+                </Button>
+                <button onClick={() => setEditing(false)} className="rounded p-1 hover:bg-muted ml-1"><X size={20} /></button>
+              </div>
             </div>
 
             <div className="p-6 space-y-6">
