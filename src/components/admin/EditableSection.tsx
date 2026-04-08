@@ -280,6 +280,20 @@ function detectSubItems(el: HTMLElement): SubItem[] {
 function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
   s = normalizeStructuredContent(s);
 
+  // Apply background color
+  if (s.bgColor && s.bgColor !== "none") {
+    const target = el.firstElementChild as HTMLElement || el;
+    // Remove existing bg-section-* classes
+    target.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+    el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+    const newClass = BG_CLASS_MAP[s.bgColor];
+    if (newClass) target.classList.add(newClass);
+  } else if (s.bgColor === "none") {
+    const target = el.firstElementChild as HTMLElement || el;
+    target.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+    el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+  }
+
   if (s.heading) {
     const h1 = el.querySelector("h1");
     if (h1) h1.textContent = s.heading;
