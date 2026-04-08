@@ -812,8 +812,16 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
           <div className="absolute inset-0 bg-black/30" onClick={() => setEditing(false)} />
           <div className="relative ml-auto w-[560px] max-w-full h-full bg-background border-l shadow-2xl overflow-y-auto animate-in slide-in-from-right">
             <div className="sticky top-0 bg-background border-b px-6 py-4 flex items-center justify-between z-10">
-              <h3 className="text-lg font-semibold">Modifier : {structured.label || blockId}</h3>
-              <button onClick={() => setEditing(false)} className="rounded p-1 hover:bg-muted"><X size={20} /></button>
+              <h3 className="text-lg font-semibold truncate flex-1">Modifier : {structured.label || blockId}</h3>
+              <div className="flex items-center gap-1 ml-2">
+                <Button variant="ghost" size="sm" onClick={undo} disabled={!canUndo} className="h-8 w-8 p-0" title="Annuler (Undo)">
+                  <Undo2 size={16} />
+                </Button>
+                <Button variant="ghost" size="sm" onClick={redo} disabled={!canRedo} className="h-8 w-8 p-0" title="Rétablir (Redo)">
+                  <Redo2 size={16} />
+                </Button>
+                <button onClick={() => setEditing(false)} className="rounded p-1 hover:bg-muted ml-1"><X size={20} /></button>
+              </div>
             </div>
 
             <div className="p-6 space-y-6">
