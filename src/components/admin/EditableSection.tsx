@@ -81,6 +81,8 @@ interface LogoItem {
   src: string;
 }
 
+type BgColor = "none" | "blue" | "beige";
+
 interface StructuredContent {
   label: string;
   heading: string;
@@ -90,6 +92,7 @@ interface StructuredContent {
   ctas: CtaItem[];
   items: SubItem[];
   logos: LogoItem[];
+  bgColor: BgColor;
 }
 
 interface Override {
@@ -98,8 +101,14 @@ interface Override {
 }
 
 const emptyStructured = (label = ""): StructuredContent => ({
-  label, heading: "", text: "", image: "", imageAlt: "", ctas: [], items: [], logos: [],
+  label, heading: "", text: "", image: "", imageAlt: "", ctas: [], items: [], logos: [], bgColor: "none",
 });
+
+const BG_CLASS_MAP: Record<BgColor, string> = {
+  none: "",
+  blue: "bg-section-blue",
+  beige: "bg-section-rose",
+};
 
 function normalizeStructuredContent(content?: Partial<StructuredContent> | null, fallbackLabel = ""): StructuredContent {
   return {
@@ -111,6 +120,7 @@ function normalizeStructuredContent(content?: Partial<StructuredContent> | null,
     ctas: Array.isArray(content?.ctas) ? content.ctas : [],
     items: Array.isArray(content?.items) ? content.items : [],
     logos: Array.isArray(content?.logos) ? content.logos : [],
+    bgColor: (content?.bgColor === "blue" || content?.bgColor === "beige") ? content.bgColor : "none",
   };
 }
 
@@ -198,6 +208,14 @@ function parseDomToStructured(el: HTMLElement, fallbackLabel: string): Structure
     result.ctas = extractCtas(el);
   }
 
+  // Detect current background color
+  const elCls = el.className || "";
+  const firstChild = el.firstElementChild as HTMLElement | null;
+  const childCls = firstChild?.className || "";
+  const allCls = elCls + " " + childCls;
+  if (allCls.includes("bg-section-blue")) result.bgColor = "blue";
+  else if (allCls.includes("bg-section-rose") || allCls.includes("bg-section-alt")) result.bgColor = "beige";
+
   return result;
 }
 
@@ -261,6 +279,20 @@ function detectSubItems(el: HTMLElement): SubItem[] {
  */
 function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
   s = normalizeStructuredContent(s);
+
+  // Apply background color
+  if (s.bgColor && s.bgColor !== "none") {
+    const target = el.firstElementChild as HTMLElement || el;
+    // Remove existing bg-section-* classes
+    target.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+    el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+    const newClass = BG_CLASS_MAP[s.bgColor];
+    if (newClass) target.classList.add(newClass);
+  } else if (s.bgColor === "none") {
+    const target = el.firstElementChild as HTMLElement || el;
+    target.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+    el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+  }
 
   if (s.heading) {
     const h1 = el.querySelector("h1");
@@ -885,7 +917,32 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
                 <Input value={structured.label} onChange={(e) => updateField("label", e.target.value)} placeholder="Ex: Hero HP" />
               </div>
 
-              {/* Global heading */}
+              {/* Background color */}
+              <div className="rounded-lg border p-4 space-y-2">
+                <Label className="text-sm font-semibold">🎨 Couleur de fond</Label>
+                <div className="flex gap-3">
+                  {([
+                    { value: "none" as BgColor, label: "Par défaut", color: "bg-background" },
+                    { value: "blue" as BgColor, label: "Bleu", color: "bg-[#e9f2f4]" },
+                    { value: "beige" as BgColor, label: "Beige", color: "bg-[#f3e8ef]" },
+                  ]).map((opt) => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => updateField("bgColor", opt.value)}
+                      className={`flex-1 rounded-lg border-2 p-3 text-center text-sm font-medium transition ${
+                        structured.bgColor === opt.value
+                          ? "border-primary ring-2 ring-primary/20"
+                          : "border-muted hover:border-primary/30"
+                      }`}
+                    >
+                      <div className={`mx-auto mb-2 h-8 w-full rounded ${opt.color} border`} />
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div className="rounded-lg border p-4 space-y-2">
                 <Label className="text-sm font-semibold">📝 Titre principal (H1)</Label>
                 <Input
