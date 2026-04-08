@@ -806,6 +806,9 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
         <div ref={contentRef}>{children}</div>
       </div>
 
+      {/* Keyboard shortcuts for undo/redo */}
+      {editing && <UndoRedoKeys onUndo={undo} onRedo={redo} canUndo={canUndo} canRedo={canRedo} />}
+
       {/* Editor Panel */}
       {editing && (
         <div className="fixed inset-0 z-[9999] flex">
