@@ -1,7 +1,40 @@
-import { useState, useEffect, useRef, ReactNode } from "react";
+import { useState, useEffect, useRef, useCallback, ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
-import { Pencil, Trash2, Tag, X, Save, Plus, Trash, ChevronDown, ChevronUp, ArrowUp, ArrowDown, Upload, GripVertical } from "lucide-react";
+import { Pencil, Trash2, Tag, X, Save, Plus, Trash, ChevronDown, ChevronUp, ArrowUp, ArrowDown, Upload, GripVertical, Undo2, Redo2 } from "lucide-react";
+
+// ─── Undo/Redo Hook ───
+function useUndoRedo<T>(initial: T) {
+  const [history, setHistory] = useState<T[]>([initial]);
+  const [index, setIndex] = useState(0);
+
+  const current = history[index];
+
+  const set = useCallback((val: T | ((prev: T) => T)) => {
+    setHistory(prev => {
+      const resolved = typeof val === "function" ? (val as (p: T) => T)(prev[index]) : val;
+      // Trim future states and append new
+      const newHistory = [...prev.slice(0, index + 1), resolved];
+      // Keep max 50 states
+      if (newHistory.length > 50) newHistory.shift();
+      return newHistory;
+    });
+    setIndex(prev => Math.min(prev + 1, 49));
+  }, [index]);
+
+  const undo = useCallback(() => setIndex(i => Math.max(0, i - 1)), []);
+  const redo = useCallback(() => setIndex(i => Math.min(history.length - 1, i + 1)), [history.length]);
+
+  const canUndo = index > 0;
+  const canRedo = index < history.length - 1;
+
+  const reset = useCallback((val: T) => {
+    setHistory([val]);
+    setIndex(0);
+  }, []);
+
+  return { current, set, undo, redo, canUndo, canRedo, reset };
+}
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
