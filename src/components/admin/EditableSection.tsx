@@ -917,7 +917,32 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
                 <Input value={structured.label} onChange={(e) => updateField("label", e.target.value)} placeholder="Ex: Hero HP" />
               </div>
 
-              {/* Global heading */}
+              {/* Background color */}
+              <div className="rounded-lg border p-4 space-y-2">
+                <Label className="text-sm font-semibold">🎨 Couleur de fond</Label>
+                <div className="flex gap-3">
+                  {([
+                    { value: "none" as BgColor, label: "Par défaut", color: "bg-background" },
+                    { value: "blue" as BgColor, label: "Bleu", color: "bg-[#e9f2f4]" },
+                    { value: "beige" as BgColor, label: "Beige", color: "bg-[#f3e8ef]" },
+                  ]).map((opt) => (
+                    <button
+                      key={opt.value}
+                      type="button"
+                      onClick={() => updateField("bgColor", opt.value)}
+                      className={`flex-1 rounded-lg border-2 p-3 text-center text-sm font-medium transition ${
+                        structured.bgColor === opt.value
+                          ? "border-primary ring-2 ring-primary/20"
+                          : "border-muted hover:border-primary/30"
+                      }`}
+                    >
+                      <div className={`mx-auto mb-2 h-8 w-full rounded ${opt.color} border`} />
+                      {opt.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               <div className="rounded-lg border p-4 space-y-2">
                 <Label className="text-sm font-semibold">📝 Titre principal (H1)</Label>
                 <Input
