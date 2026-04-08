@@ -671,14 +671,16 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
 
   const openEditor = () => {
     const fallbackLabel = override?.content?.label || label || blockId;
+    let initial: StructuredContent;
     if (override?.content?.structured) {
       const s = override.content.structured;
-      setStructured({ ...s, items: s.items || [] });
+      initial = { ...s, items: s.items || [] };
     } else if (contentRef.current) {
-      setStructured(parseDomToStructured(contentRef.current, fallbackLabel));
+      initial = parseDomToStructured(contentRef.current, fallbackLabel);
     } else {
-      setStructured(emptyStructured(fallbackLabel));
+      initial = emptyStructured(fallbackLabel);
     }
+    resetHistory(initial);
     setEditing(true);
   };
 
