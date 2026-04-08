@@ -5,32 +5,36 @@ import { Pencil, Trash2, Tag, X, Save, Plus, Trash, ChevronDown, ChevronUp, Arro
 
 // ─── Undo/Redo Hook ───
 function useUndoRedo<T>(initial: T) {
-  const [history, setHistory] = useState<T[]>([initial]);
-  const [index, setIndex] = useState(0);
+  const historyRef = useRef<T[]>([initial]);
+  const indexRef = useRef(0);
+  const [, forceRender] = useState(0);
 
-  const current = history[index];
+  const current = historyRef.current[indexRef.current];
 
   const set = useCallback((val: T | ((prev: T) => T)) => {
-    setHistory(prev => {
-      const resolved = typeof val === "function" ? (val as (p: T) => T)(prev[index]) : val;
-      // Trim future states and append new
-      const newHistory = [...prev.slice(0, index + 1), resolved];
-      // Keep max 50 states
-      if (newHistory.length > 50) newHistory.shift();
-      return newHistory;
-    });
-    setIndex(prev => Math.min(prev + 1, 49));
-  }, [index]);
+    const idx = indexRef.current;
+    const resolved = typeof val === "function" ? (val as (p: T) => T)(historyRef.current[idx]) : val;
+    historyRef.current = [...historyRef.current.slice(0, idx + 1), resolved];
+    if (historyRef.current.length > 50) historyRef.current.shift();
+    else indexRef.current = idx + 1;
+    forceRender(n => n + 1);
+  }, []);
 
-  const undo = useCallback(() => setIndex(i => Math.max(0, i - 1)), []);
-  const redo = useCallback(() => setIndex(i => Math.min(history.length - 1, i + 1)), [history.length]);
+  const undo = useCallback(() => {
+    if (indexRef.current > 0) { indexRef.current--; forceRender(n => n + 1); }
+  }, []);
 
-  const canUndo = index > 0;
-  const canRedo = index < history.length - 1;
+  const redo = useCallback(() => {
+    if (indexRef.current < historyRef.current.length - 1) { indexRef.current++; forceRender(n => n + 1); }
+  }, []);
+
+  const canUndo = indexRef.current > 0;
+  const canRedo = indexRef.current < historyRef.current.length - 1;
 
   const reset = useCallback((val: T) => {
-    setHistory([val]);
-    setIndex(0);
+    historyRef.current = [val];
+    indexRef.current = 0;
+    forceRender(n => n + 1);
   }, []);
 
   return { current, set, undo, redo, canUndo, canRedo, reset };
