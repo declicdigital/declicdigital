@@ -158,14 +158,13 @@ const AdminBlogEditor = () => {
       meta_title: metaTitle || title,
       meta_description: metaDescription || excerpt,
       cover_image_url: coverImageUrl || null,
-      status: finalStatus === "scheduled" ? "draft" : finalStatus,
+      status: finalStatus,
       updated_at: new Date().toISOString(),
     };
 
     // Handle dates
     if (finalStatus === "scheduled" && scheduledDate) {
       postData.created_at = new Date(scheduledDate).toISOString();
-      postData.status = "scheduled";
     } else if (publishDate) {
       postData.created_at = `${publishDate}T10:00:00+01:00`;
     }
@@ -191,8 +190,11 @@ const AdminBlogEditor = () => {
     if (error) {
       toast({ title: "Erreur", description: error.message, variant: "destructive" });
     } else {
-      if (finalStatus === "published" && savedPost) {
+      if ((finalStatus === "published") && savedPost) {
         upsertCachedCmsPost(savedPost);
+      } else if (finalStatus === "scheduled") {
+        // scheduled = not visible yet, remove from cache
+        removeCachedCmsPost(slug);
       } else {
         removeCachedCmsPost(slug);
       }
