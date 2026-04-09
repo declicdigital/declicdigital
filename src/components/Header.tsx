@@ -46,7 +46,7 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
     location.pathname === to || (to !== "/" && location.pathname.startsWith(to));
 
   const linkClass = (to: string) =>
-    `rounded-lg px-3 py-2 text-[15px] font-medium transition-colors hover:bg-secondary ${
+    `rounded-lg px-2 xl:px-3 py-2 text-[13px] xl:text-[15px] font-medium whitespace-nowrap transition-colors hover:bg-secondary ${
       isActive(to) ? "text-primary" : "text-muted-foreground"
     }`;
 
