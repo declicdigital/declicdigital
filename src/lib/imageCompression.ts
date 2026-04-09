@@ -42,8 +42,8 @@ export async function compressImage(file: File): Promise<File> {
 
     // If still too large, reduce quality progressively
     let quality = INITIAL_QUALITY;
-    while (blob && blob.size > TARGET_SIZE && quality > 0.4) {
-      quality -= 0.1;
+    while (blob && blob.size > TARGET_SIZE && quality > 0.2) {
+      quality -= 0.05;
       blob = await canvasToBlob(canvas, "image/webp", quality);
     }
 
