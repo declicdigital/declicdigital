@@ -82,7 +82,7 @@ const VilleCreationSite = () => {
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-                  <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
+                  <Link to="/rendez-vous">Prendre rendez-vous</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="rounded-full border-2 border-[hsl(263,36%,18%)] px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)] hover:text-white transition-colors">
                   <Link to="/contact">Audit SEO gratuit</Link>
@@ -207,7 +207,7 @@ const VilleCreationSite = () => {
                 </div>
               ))}
               <p className="text-muted-foreground leading-relaxed">
-                Prêt à créer votre site web à {city.nameShort} ? <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Prenez rendez-vous</a>, consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+                Prêt à créer votre site web à {city.nameShort} ? <Link to="/rendez-vous" className="text-primary font-semibold hover:underline">Prenez rendez-vous</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
               </p>
             </div>
           </SectionWrapper>
@@ -329,7 +329,7 @@ const VilleCreationSite = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-              <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
+              <Link to="/rendez-vous">Prendre rendez-vous</Link>
             </Button>
             <Link to="/contact" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
               Audit SEO gratuit

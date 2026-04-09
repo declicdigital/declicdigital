@@ -256,7 +256,7 @@ const ReferencementSeo = () => {
               <Link to="/contact">Audit SEO gratuit</Link>
             </Button>
             <Button asChild variant="custom" size="lg" className="rounded-full border-2 border-white/40 bg-transparent px-8 font-semibold text-white hover:bg-white/10 transition-colors">
-              <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
+              <Link to="/rendez-vous">Prendre rendez-vous</Link>
             </Button>
           </div>
         </div>
