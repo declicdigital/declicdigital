@@ -46,7 +46,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
 import { compressImage, UPLOAD_OPTIONS } from "@/lib/imageCompression";
-import RichTextEditor from "./RichTextEditor";
+import { lazy, Suspense } from "react";
+const RichTextEditor = lazy(() => import("./RichTextEditor"));
 
 export interface EditableSectionProps {
   blockId: string;
@@ -1035,10 +1036,12 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
                   {/* Global text - rich editor with sticky toolbar */}
                   <div className="rounded-lg border p-4 space-y-2">
                     <Label className="text-sm font-semibold">📄 Contenu complet</Label>
-                    <RichTextEditor
-                      content={taggedTextToHtml(structured.text)}
-                      onChange={(html) => updateField("text", htmlToTaggedText(html))}
-                    />
+                    <Suspense fallback={<div className="h-40 animate-pulse bg-muted rounded" />}>
+                      <RichTextEditor
+                        content={taggedTextToHtml(structured.text)}
+                        onChange={(html) => updateField("text", htmlToTaggedText(html))}
+                      />
+                    </Suspense>
                   </div>
                 </>
               )}
