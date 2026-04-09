@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Calendar } from "lucide-react";
@@ -7,38 +6,9 @@ import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import SectionWrapper from "@/components/SectionWrapper";
 
+const CAL_URL = "https://cal.com/declic-digital/rendez-vous?embed=true&layout=month_view&theme=light";
+
 const RendezVous = () => {
-  useEffect(() => {
-    // Load Cal.com embed script
-    const script = document.createElement("script");
-    script.src = "https://app.cal.com/embed/embed.js";
-    script.async = true;
-    document.body.appendChild(script);
-
-    script.onload = () => {
-      // @ts-ignore
-      if (window.Cal) {
-        // @ts-ignore
-        window.Cal("init", { origin: "https://cal.com" });
-        // @ts-ignore
-        window.Cal("inline", {
-          calLink: "declic-digital/rendez-vous",
-          elementOrSelector: "#cal-embed",
-          config: { layout: "month_view" },
-        });
-        // @ts-ignore
-        window.Cal("ui", {
-          styles: { branding: { brandColor: "#7c3aed" } },
-          hideEventTypeDetails: false,
-          layout: "month_view",
-        });
-      }
-    };
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
 
   return (
     <PageLayout>
