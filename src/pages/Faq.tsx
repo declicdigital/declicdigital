@@ -84,7 +84,7 @@ const Faq = () => {
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
           "@type": "FAQPage",
-          mainEntity: faqSchemaItems.slice(0, 15)
+          mainEntity: faqSchemaItems
         })}</script>
       </Helmet>
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Qui sommes-nous", href: "/qui-sommes-nous" }, { label: "FAQ" }]} />
