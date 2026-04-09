@@ -83,8 +83,13 @@ const RendezVous = () => {
               transition={{ duration: 0.7, delay: 0.2 }}
               className="lg:col-span-3"
             >
-              <div className="rounded-2xl border border-border bg-card p-4 md:p-6 shadow-card overflow-hidden">
-                <div id="cal-embed" style={{ width: "100%", minHeight: 600 }} />
+              <div className="rounded-2xl border border-border bg-card shadow-card overflow-hidden">
+                <iframe
+                  src={CAL_URL}
+                  title="Réserver un rendez-vous avec Déclic Digital"
+                  style={{ width: "100%", height: 700, border: "none" }}
+                  loading="lazy"
+                />
               </div>
             </motion.div>
           </div>
