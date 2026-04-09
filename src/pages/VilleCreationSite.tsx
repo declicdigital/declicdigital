@@ -207,7 +207,7 @@ const VilleCreationSite = () => {
                 </div>
               ))}
               <p className="text-muted-foreground leading-relaxed">
-                Prêt à créer votre site web à {city.nameShort} ? <Link to="/contact" className="text-primary font-semibold hover:underline">Demandez votre devis gratuit</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+                Prêt à créer votre site web à {city.nameShort} ? <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Prenez rendez-vous</a>, consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
               </p>
             </div>
           </SectionWrapper>

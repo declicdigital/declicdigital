@@ -147,7 +147,7 @@ const MetierCreationSite = () => {
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-                  <Link to="/contact">Devis gratuit {trade.nameShort.toLowerCase()}</Link>
+                  <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Devis gratuit {trade.nameShort.toLowerCase()}</a>
                 </Button>
                 <Link to="/audit-seo-gratuit" className="inline-flex items-center justify-center rounded-full border-2 border-foreground/20 bg-transparent px-8 py-3 text-base font-semibold text-foreground hover:bg-secondary transition-colors">
                   Audit SEO gratuit
@@ -280,7 +280,7 @@ const MetierCreationSite = () => {
               </div>
             ))}
             <p className="text-muted-foreground leading-relaxed">
-              Prêt à passer à l'action ? <Link to="/contact" className="text-primary font-semibold hover:underline">Demandez votre devis gratuit</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+              Prêt à passer à l'action ? <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">Prenez rendez-vous</a>, consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
             </p>
           </div>
         </SectionWrapper>

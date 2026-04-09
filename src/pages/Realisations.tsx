@@ -162,7 +162,7 @@ const Realisations = () => (
         </p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-            <Link to="/contact">Devis création de site</Link>
+            <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
           </Button>
           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
             <Link to="/qui-sommes-nous">Qui sommes-nous</Link>

@@ -232,7 +232,7 @@ const Tarifs = () => (
           </p>
           <div className="mt-8">
             <Button asChild variant="custom" className="rounded-full gradient-primary btn-glow px-10 py-4 text-lg font-bold text-white shadow-xl hover:opacity-90 h-auto">
-              <Link to="/contact">Devis gratuit</Link>
+              <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
             </Button>
           </div>
         </motion.div>
@@ -254,7 +254,7 @@ const Tarifs = () => (
           <h2 className="mb-3 text-xl font-extrabold">Ce qui est toujours inclus dans nos prestations</h2>
           <p className="text-sm leading-relaxed text-muted-foreground">
             Engagement de 6 mois renouvelable. Toutes les prestations peuvent être adaptées selon vos besoins. Chaque
-            projet est unique, <Link to="/contact" className="font-semibold text-primary hover:underline">contactez-nous</Link> pour
+            projet est unique, <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">prenez rendez-vous</a> pour
             un devis personnalisé. Vous pouvez aussi commencer par un{" "}
             <Link to="/audit-seo-gratuit" className="font-semibold text-primary hover:underline">
               audit SEO gratuit
