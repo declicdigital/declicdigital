@@ -6,7 +6,7 @@ import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import SectionWrapper from "@/components/SectionWrapper";
 
-const CAL_URL = "https://cal.com/declic-digital/rendez-vous?embed=true&layout=week_view&theme=light";
+const CAL_URL = "https://cal.com/declic-digital/rendez-vous?embed=true&layout=month_view&theme=light";
 
 const RendezVous = () => {
 
@@ -25,73 +25,57 @@ const RendezVous = () => {
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Prendre rendez-vous" }]} />
 
       {/* Hero */}
-      <section className="gradient-hero py-10 md:py-14">
+      <section className="gradient-hero py-8 md:py-10">
         <div className="container">
-          <div className="grid items-start gap-8 lg:grid-cols-5">
+          <div className="text-center mb-6">
             <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7 }}
-              className="lg:col-span-2 flex flex-col justify-center lg:sticky lg:top-32"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
             >
               <span className="mb-3 inline-block rounded-full bg-brand-violet/10 px-4 py-1.5 text-xs font-semibold text-brand-violet">
                 <Calendar size={14} className="inline mr-1.5 -mt-0.5" />
                 Rendez-vous gratuit
               </span>
-              <h1 className="mb-3 text-3xl font-extrabold md:text-4xl lg:text-[2.5rem] leading-tight">
+              <h1 className="text-3xl font-extrabold md:text-4xl mb-2">
                 Échangeons sur votre projet
               </h1>
-              <p className="text-base text-muted-foreground mb-6">
+              <p className="text-base text-muted-foreground max-w-xl mx-auto">
                 Choisissez un créneau pour discuter de votre{" "}
-                <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">
-                  site web
-                </Link>
-                ,{" "}
-                <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">
-                  SEO
-                </Link>{" "}
-                ou{" "}
-                <Link to="/visibilite-ia" className="text-primary font-semibold hover:underline">
-                  visibilité IA
-                </Link>
-                . 30 minutes, en visio ou par téléphone.
+                <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link>,{" "}
+                <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link>{" "}ou{" "}
+                <Link to="/visibilite-ia" className="text-primary font-semibold hover:underline">visibilité IA</Link>.
               </p>
-
-              <div className="space-y-3">
-                {[
-                  { icon: Mail, label: "Email", value: "contact@declicdigital.net" },
-                  { icon: Phone, label: "Téléphone", value: "06.02.22.89.39" },
-                  { icon: MapPin, label: "Localisation", value: "Paris et Hauts-de-Seine (92)" },
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
-                      <item.icon size={16} />
-                    </div>
-                    <div>
-                      <p className="text-xs text-muted-foreground">{item.label}</p>
-                      <p className="font-semibold text-sm">{item.value}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </motion.div>
+          </div>
 
-            {/* Cal.com embed */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="lg:col-span-3"
-            >
-              <div className="rounded-2xl border border-border bg-card shadow-card overflow-hidden">
-                <iframe
-                  src={CAL_URL}
-                  title="Réserver un rendez-vous avec Déclic Digital"
-                  style={{ width: "100%", height: "calc(100vh - 200px)", minHeight: 500, border: "none" }}
-                  loading="lazy"
-                />
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="mx-auto max-w-4xl"
+          >
+            <div className="rounded-2xl border border-border bg-card shadow-card overflow-hidden">
+              <iframe
+                src={CAL_URL}
+                title="Réserver un rendez-vous avec Déclic Digital"
+                style={{ width: "100%", height: 520, border: "none" }}
+                loading="lazy"
+              />
+            </div>
+          </motion.div>
+
+          <div className="flex flex-wrap justify-center gap-6 mt-6 text-sm text-muted-foreground">
+            {[
+              { icon: Mail, value: "contact@declicdigital.net" },
+              { icon: Phone, value: "06.02.22.89.39" },
+              { icon: MapPin, value: "Paris & Hauts-de-Seine (92)" },
+            ].map((item, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <item.icon size={15} className="text-primary" />
+                <span className="font-medium">{item.value}</span>
               </div>
-            </motion.div>
+            ))}
           </div>
         </div>
       </section>
