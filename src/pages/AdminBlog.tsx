@@ -164,10 +164,12 @@ const AdminBlog = () => {
                       className={`px-2 py-0.5 rounded-full ${
                         post.status === "published"
                           ? "bg-emerald-100 text-emerald-700"
+                          : post.status === "scheduled"
+                          ? "bg-blue-100 text-blue-700"
                           : "bg-amber-100 text-amber-700"
                       }`}
                     >
-                      {post.status === "published" ? "Publié" : "Brouillon"}
+                      {post.status === "published" ? "Publié" : post.status === "scheduled" ? "Programmé" : "Brouillon"}
                     </span>
                     {post.category && <span>{post.category}</span>}
                     <span>{new Date(post.created_at).toLocaleDateString("fr-FR")}</span>
