@@ -105,7 +105,7 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
             <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre RDV</a>
           </Button>
           <Button asChild variant="custom" size="sm" className="gradient-primary btn-glow rounded-full px-6 text-[15px] font-semibold text-white shadow-glow">
-            <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
+            <Link to="/contact">Audit SEO gratuit</Link>
           </Button>
         </div>
 
@@ -152,7 +152,7 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
               <User size={16} /> Espace client
             </Link>
             <Button asChild variant="custom" size="sm" className="gradient-primary btn-glow mt-2 rounded-full font-semibold text-white shadow-glow">
-              <Link to="/audit-seo-gratuit" onClick={() => setMobileOpen(false)}>
+              <Link to="/contact" onClick={() => setMobileOpen(false)}>
                 Audit SEO gratuit
               </Link>
             </Button>

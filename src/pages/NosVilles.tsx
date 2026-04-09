@@ -126,7 +126,7 @@ const NosVilles = () => (
           Le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement local</Link> permet à votre entreprise d'apparaître dans les résultats de recherche quand un internaute effectue une recherche géolocalisée. Par exemple, "plombier Boulogne-Billancourt" ou "restaurant Paris 15". C'est un levier puissant pour les TPE qui ciblent une clientèle de proximité.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          Chez Déclic Digital, nous optimisons chaque <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour le référencement local : fiche Google Business Profile, pages dédiées par ville, contenu géolocalisé et citations sur les annuaires locaux. Cette approche vous permet de dominer les résultats Google dans votre zone de chalandise. Demandez votre <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour évaluer votre situation.
+          Chez Déclic Digital, nous optimisons chaque <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> pour le référencement local : fiche Google Business Profile, pages dédiées par ville, contenu géolocalisé et citations sur les annuaires locaux. Cette approche vous permet de dominer les résultats Google dans votre zone de chalandise. Demandez votre <Link to="/contact" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour évaluer votre situation.
         </p>
         <p className="text-muted-foreground leading-relaxed">
           Que vous soyez situé à Paris, Boulogne-Billancourt, Issy-les-Moulineaux ou Neuilly-sur-Seine, nous adaptons notre stratégie à votre marché local. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link>.
@@ -149,7 +149,7 @@ const NosVilles = () => (
             <Link to="/referencement-seo">Référencement SEO et GEO</Link>
           </Button>
           <Button asChild size="lg" variant="outline" className="rounded-full border-2 border-[hsl(263,36%,18%)] px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)] hover:text-white transition-colors">
-            <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
+            <Link to="/contact">Audit SEO gratuit</Link>
           </Button>
         </div>
       </div>

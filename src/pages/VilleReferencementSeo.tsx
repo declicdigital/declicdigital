@@ -76,7 +76,7 @@ const VilleReferencementSeo = () => {
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-                  <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
+                  <Link to="/contact">Audit SEO gratuit</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="rounded-full border-2 border-[hsl(263,36%,18%)] px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)] hover:text-white transition-colors">
                   <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
@@ -219,7 +219,7 @@ const VilleReferencementSeo = () => {
                 </div>
               ))}
               <p className="text-muted-foreground leading-relaxed">
-                Améliorez votre visibilité Google à {city.nameShort} dès maintenant. <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">Demandez votre audit SEO gratuit</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+                Améliorez votre visibilité Google à {city.nameShort} dès maintenant. <Link to="/contact" className="text-primary font-semibold hover:underline">Demandez votre audit SEO gratuit</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
               </p>
             </div>
           </SectionWrapper>
@@ -258,7 +258,7 @@ const VilleReferencementSeo = () => {
             <Link to={`/creation-site-web/${city.slug}`} className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
               Site web à {city.nameShort}
             </Link>
-            <Link to="/audit-seo-gratuit" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            <Link to="/contact" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
               Audit SEO gratuit
             </Link>
             <Link to="/tarifs" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
@@ -321,7 +321,7 @@ const VilleReferencementSeo = () => {
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-              <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
+              <Link to="/contact">Audit SEO gratuit</Link>
             </Button>
             <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
               Prendre rendez-vous

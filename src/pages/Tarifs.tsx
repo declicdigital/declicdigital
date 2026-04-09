@@ -256,7 +256,7 @@ const Tarifs = () => (
             Engagement de 6 mois renouvelable. Toutes les prestations peuvent être adaptées selon vos besoins. Chaque
             projet est unique, <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">prenez rendez-vous</a> pour
             un devis personnalisé. Vous pouvez aussi commencer par un{" "}
-            <Link to="/audit-seo-gratuit" className="font-semibold text-primary hover:underline">
+            <Link to="/contact" className="font-semibold text-primary hover:underline">
               audit SEO gratuit
             </Link>
             .
@@ -312,7 +312,7 @@ const Tarifs = () => (
           <Link to="/referencement-seo" className="rounded-full border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary">
             Référencement SEO et GEO
           </Link>
-          <Link to="/audit-seo-gratuit" className="rounded-full border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary">
+          <Link to="/contact" className="rounded-full border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary">
             Audit SEO gratuit
           </Link>
           <Link to="/realisations" className="rounded-full border bg-card px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary">
@@ -344,7 +344,7 @@ const Tarifs = () => (
             <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
           </Button>
           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-            <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
+            <Link to="/contact">Audit SEO gratuit</Link>
           </Button>
         </div>
       </div>

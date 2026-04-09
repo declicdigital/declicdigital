@@ -155,7 +155,7 @@ const Geo = () => {
                 Generative Engine Optimization - la stratégie qui permet à votre entreprise d'être citée par ChatGPT, Gemini et Perplexity. Indispensable pour les TPE, artisans et indépendants.
               </p>
               <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-                <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+                <Link to="/contact">Demander un audit SEO gratuit</Link>
               </Button>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
@@ -213,7 +213,7 @@ const Geo = () => {
             Imaginez qu'un client potentiel tape dans ChatGPT : <em>"Quel est le meilleur plombier chauffagiste à Lyon ?"</em> ou <em>"Quelle agence web recommandes-tu pour une TPE ?"</em>. Le GEO est ce qui détermine si votre nom apparaît dans la réponse… ou si c'est celui de votre concurrent. Le GEO est un complément naturel du <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO classique</Link>.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Pour qu'une stratégie GEO fonctionne, il faut d'abord disposer d'un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web bien structuré pour les IA</Link>, avec du contenu de qualité et des données structurées. C'est la base technique indispensable. Vous pouvez aussi <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">auditer votre visibilité actuelle</Link> pour identifier vos axes de progression. Découvrez également comment la <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold hover:underline">performance technique de votre site</Link> influence les critères de sélection des IA.
+            Pour qu'une stratégie GEO fonctionne, il faut d'abord disposer d'un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web bien structuré pour les IA</Link>, avec du contenu de qualité et des données structurées. C'est la base technique indispensable. Vous pouvez aussi <Link to="/contact" className="text-primary font-semibold hover:underline">auditer votre visibilité actuelle</Link> pour identifier vos axes de progression. Découvrez également comment la <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold hover:underline">performance technique de votre site</Link> influence les critères de sélection des IA.
           </p>
           <div className="rounded-2xl border border-amber-300/30 bg-amber-50/50 p-5">
             <p className="font-bold text-amber-700 mb-2">⚡ Pourquoi ce terme est-il encore méconnu ?</p>
@@ -345,7 +345,7 @@ const Geo = () => {
           <p className="mx-auto mb-6 max-w-xl text-white/80">Nos experts analysent votre visibilité dans ChatGPT, Gemini et Perplexity et vous donnent un plan d'action concret.</p>
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Button asChild variant="custom" size="lg" className="rounded-full bg-secondary px-8 font-semibold text-foreground shadow-lg btn-glow hover:bg-secondary/90">
-              <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
+              <Link to="/contact">Audit SEO gratuit</Link>
             </Button>
             <Button asChild variant="custom" size="lg" className="rounded-full bg-secondary px-8 font-semibold text-foreground shadow-lg btn-glow hover:bg-secondary/90">
               <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
@@ -467,7 +467,7 @@ const Geo = () => {
           <p className="mb-8 text-white/80 max-w-xl mx-auto">Votre entreprise mérite d'être citée par les intelligences artificielles. Nos experts vous accompagnent pour construire une stratégie GEO sur mesure, adaptée à votre secteur et à vos objectifs.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-              <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+              <Link to="/contact">Demander un audit SEO gratuit</Link>
             </Button>
             <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
               Prendre rendez-vous

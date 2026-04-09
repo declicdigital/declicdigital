@@ -119,7 +119,7 @@ const Index = () => {
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-                  <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+                  <Link to="/contact">Demander un audit SEO gratuit</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="rounded-full border-2 border-[hsl(263,36%,18%)] px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)] hover:text-white transition-colors">
                   <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
@@ -168,7 +168,7 @@ const Index = () => {
           </div>
           <div className="mt-10">
             <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-              <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+              <Link to="/contact">Demander un audit SEO gratuit</Link>
             </Button>
           </div>
         </div>
@@ -320,7 +320,7 @@ const Index = () => {
               La majorité des TPE qui nous contactent partagent un constat commun : elles ont investi dans un site web il y a quelques années, mais celui-ci ne leur apporte aucun retour. Les raisons sont souvent les mêmes : un design daté, un temps de chargement excessif, une absence totale de stratégie de mots clés, et un contenu qui ne répond pas aux questions que se posent réellement leurs prospects.
             </p>
             <p className="text-base md:text-lg">
-              Notre approche est différente. Nous commençons par une analyse approfondie de votre secteur d'activité, de vos concurrents et des requêtes que tapent vos futurs clients sur Google. À partir de cette analyse, nous définissons une arborescence de site optimisée, nous rédigeons des contenus ciblés et nous mettons en place une architecture technique irréprochable. Le résultat : un site qui se positionne durablement sur les mots clés stratégiques de votre activité. Demandez votre <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour en savoir plus.
+              Notre approche est différente. Nous commençons par une analyse approfondie de votre secteur d'activité, de vos concurrents et des requêtes que tapent vos futurs clients sur Google. À partir de cette analyse, nous définissons une arborescence de site optimisée, nous rédigeons des contenus ciblés et nous mettons en place une architecture technique irréprochable. Le résultat : un site qui se positionne durablement sur les mots clés stratégiques de votre activité. Demandez votre <Link to="/contact" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour en savoir plus.
             </p>
             <div className="rounded-2xl bg-card p-6 shadow-card not-prose">
               <h3 className="text-lg font-bold mb-3">Ce qui fait la différence avec Déclic Digital</h3>
@@ -365,7 +365,7 @@ const Index = () => {
             <Link to="/referencement-seo" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
               Référencement SEO et GEO
             </Link>
-            <Link to="/audit-seo-gratuit" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
+            <Link to="/contact" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
               Audit SEO gratuit
             </Link>
             <Link to="/tarifs" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
@@ -431,7 +431,7 @@ const Index = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-                <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+                <Link to="/contact">Demander un audit SEO gratuit</Link>
               </Button>
               <Button asChild variant="custom" size="lg" className="rounded-full border-2 border-white bg-transparent px-8 font-semibold text-white hover:bg-white/10 transition-colors">
                 <Link to="/tarifs">Voir nos tarifs</Link>
