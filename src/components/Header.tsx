@@ -104,7 +104,7 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
           <Button asChild variant="custom" size="sm" className="rounded-full px-4 xl:px-5 text-[13px] xl:text-[15px] font-bold gradient-primary btn-glow text-white shadow-glow whitespace-nowrap">
             <Link to="/rendez-vous">Prendre RDV</Link>
           </Button>
-          <Button asChild variant="custom" size="sm" className="gradient-primary btn-glow rounded-full px-4 xl:px-6 text-[13px] xl:text-[15px] font-semibold text-white shadow-glow whitespace-nowrap">
+          <Button asChild variant="custom" size="sm" className="hidden xl:inline-flex gradient-primary btn-glow rounded-full px-4 xl:px-6 text-[13px] xl:text-[15px] font-semibold text-white shadow-glow whitespace-nowrap">
             <Link to="/contact">Audit SEO gratuit</Link>
           </Button>
         </div>
