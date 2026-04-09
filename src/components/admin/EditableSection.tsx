@@ -46,7 +46,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { toast } from "@/hooks/use-toast";
 import { compressImage, UPLOAD_OPTIONS } from "@/lib/imageCompression";
-import RichTextEditor from "./RichTextEditor";
+import { lazy, Suspense } from "react";
+const RichTextEditor = lazy(() => import("./RichTextEditor"));
 
 export interface EditableSectionProps {
   blockId: string;
