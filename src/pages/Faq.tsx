@@ -67,10 +67,10 @@ const faqItems: FaqItem[] = [
 const Faq = () => {
   const faqSchemaItems = faqItems.map(item => ({
     "@type": "Question",
-    name: typeof item.q === "string" ? item.q : "",
+    name: item.q,
     acceptedAnswer: {
       "@type": "Answer",
-      text: typeof item.a === "string" ? item.a : "Consultez notre site pour la réponse détaillée."
+      text: item.aText,
     }
   }));
 
