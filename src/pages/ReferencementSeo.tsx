@@ -157,7 +157,7 @@ const ReferencementSeo = () => {
                 Vous n'avez pas le budget d'une multinationale. Vous n'avez pas une équipe marketing. Mais vous avez quelque chose qu'aucune grande entreprise ne peut acheter : une vraie expertise, un vrai territoire, une vraie relation client. Le SEO est l'outil qui transforme ça en visibilité.
               </p>
               <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-                <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+                <Link to="/contact">Demander un audit SEO gratuit</Link>
               </Button>
             </motion.div>
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
@@ -253,7 +253,7 @@ const ReferencementSeo = () => {
           <p className="mb-6 text-white/80 max-w-xl mx-auto">Nos experts analysent votre site et identifient les quick wins SEO pour votre activité.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
              <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-white shadow-glow">
-              <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
+              <Link to="/contact">Audit SEO gratuit</Link>
             </Button>
             <Button asChild variant="custom" size="lg" className="rounded-full border-2 border-white/40 bg-transparent px-8 font-semibold text-white hover:bg-white/10 transition-colors">
               <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
@@ -376,7 +376,7 @@ const ReferencementSeo = () => {
           <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Vous vous reconnaissez dans ces freins ?</h2>
           <p className="mb-6 text-white/80 max-w-xl mx-auto">On démystifie le SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
           <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-            <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
+            <Link to="/contact">Demander un audit SEO gratuit</Link>
           </Button>
         </div>
       </section>
@@ -431,7 +431,7 @@ const ReferencementSeo = () => {
           <p className="mb-6 text-white/80 max-w-xl mx-auto">Nos experts analysent votre site, identifient les quick wins SEO et construisent une stratégie adaptée à votre activité, votre zone et votre budget.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-white shadow-glow">
-              <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
+              <Link to="/contact">Audit SEO gratuit</Link>
             </Button>
             <Link to="/tarifs" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
               Voir nos tarifs

@@ -233,7 +233,7 @@ const Blog = () => {
             Nous créons des sites web rapides, optimisés SEO et conçus pour convertir vos visiteurs en clients.
           </p>
           <Link
-            to="/audit-seo-gratuit"
+            to="/contact"
             className="mt-8 inline-flex items-center gap-2 rounded-full gradient-primary btn-glow px-8 py-3 font-semibold text-white shadow-glow transition-opacity"
           >
             Demander un audit SEO gratuit <ArrowRight size={16} />

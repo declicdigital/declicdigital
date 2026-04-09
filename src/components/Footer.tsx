@@ -31,7 +31,7 @@ const Footer = () => (
             <ul className="space-y-2 text-sm">
               <li><Link to="/creation-site-web" className="text-white/60 hover:text-white transition-colors">Création de site web</Link></li>
               <li><Link to="/referencement-seo" className="text-white/60 hover:text-white transition-colors">Référencement SEO</Link></li>
-              <li><Link to="/audit-seo-gratuit" className="text-white/60 hover:text-white transition-colors">Audit SEO gratuit</Link></li>
+              <li><Link to="/contact" className="text-white/60 hover:text-white transition-colors">Audit SEO gratuit</Link></li>
               <li><Link to="/visibilite-ia" className="text-white/60 hover:text-white transition-colors">Visibilité IA (GEO)</Link></li>
               <li><Link to="/tarifs" className="text-white/60 hover:text-white transition-colors">Nos tarifs</Link></li>
               <li><a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">Prendre rendez-vous</a></li>
@@ -61,7 +61,7 @@ const Footer = () => (
             </p>
             <div className="flex flex-col items-start gap-2.5">
               <Link
-                to="/audit-seo-gratuit"
+                to="/contact"
                 className="inline-block gradient-primary btn-glow rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all"
               >
                 Audit SEO gratuit
