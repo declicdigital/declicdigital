@@ -28,7 +28,7 @@ export default defineConfig(({ mode }) => ({
           'vendor-supabase': ['@supabase/supabase-js'],
           'vendor-helmet': ['react-helmet-async'],
           'vendor-query': ['@tanstack/react-query'],
-          'vendor-editor': ['@tiptap/react', '@tiptap/starter-kit', '@tiptap/extension-link', '@tiptap/extension-image', '@tiptap/extension-underline', '@tiptap/pm'],
+          'vendor-editor': ['@tiptap/react', '@tiptap/starter-kit', '@tiptap/extension-link', '@tiptap/extension-image', '@tiptap/extension-underline'],
           'vendor-charts': ['recharts'],
           'vendor-sanitize': ['dompurify'],
         },
