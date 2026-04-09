@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Calendar } from "lucide-react";
+import { Phone, Mail, MapPin, Calendar, CheckCircle2, Clock, Lightbulb } from "lucide-react";
 import { motion } from "framer-motion";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
@@ -25,51 +25,51 @@ const RendezVous = () => {
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Prendre rendez-vous" }]} />
 
       {/* Hero */}
-      <section className="gradient-hero py-16 md:py-24">
+      <section className="gradient-hero py-10 md:py-14">
         <div className="container">
-          <div className="grid items-start gap-10 lg:grid-cols-5">
+          <div className="grid items-start gap-8 lg:grid-cols-5">
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
               className="lg:col-span-2 flex flex-col justify-center lg:sticky lg:top-32"
             >
-              <span className="mb-4 inline-block rounded-full bg-brand-violet/10 px-4 py-1.5 text-xs font-semibold text-brand-violet">
+              <span className="mb-3 inline-block rounded-full bg-brand-violet/10 px-4 py-1.5 text-xs font-semibold text-brand-violet">
                 <Calendar size={14} className="inline mr-1.5 -mt-0.5" />
                 Rendez-vous gratuit
               </span>
-              <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
-                Réservez votre rendez-vous gratuit
+              <h1 className="mb-3 text-3xl font-extrabold md:text-4xl lg:text-[2.5rem] leading-tight">
+                Échangeons sur votre projet
               </h1>
-              <p className="text-lg text-muted-foreground mb-8">
-                Choisissez un créneau qui vous convient pour échanger sur votre projet de{" "}
+              <p className="text-base text-muted-foreground mb-6">
+                Choisissez un créneau pour discuter de votre{" "}
                 <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">
-                  création de site web
+                  site web
                 </Link>
                 ,{" "}
                 <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">
-                  référencement SEO
+                  SEO
                 </Link>{" "}
                 ou{" "}
                 <Link to="/visibilite-ia" className="text-primary font-semibold hover:underline">
                   visibilité IA
                 </Link>
-                . C'est gratuit et sans engagement.
+                . 30 minutes, en visio ou par téléphone.
               </p>
 
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {[
                   { icon: Mail, label: "Email", value: "contact@declicdigital.net" },
                   { icon: Phone, label: "Téléphone", value: "06.02.22.89.39" },
                   { icon: MapPin, label: "Localisation", value: "Paris et Hauts-de-Seine (92)" },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
-                      <item.icon size={18} />
+                  <div key={i} className="flex items-center gap-3">
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
+                      <item.icon size={16} />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">{item.label}</p>
-                      <p className="font-semibold">{item.value}</p>
+                      <p className="text-xs text-muted-foreground">{item.label}</p>
+                      <p className="font-semibold text-sm">{item.value}</p>
                     </div>
                   </div>
                 ))}
@@ -87,7 +87,7 @@ const RendezVous = () => {
                 <iframe
                   src={CAL_URL}
                   title="Réserver un rendez-vous avec Déclic Digital"
-                  style={{ width: "100%", height: 700, border: "none" }}
+                  style={{ width: "100%", height: 580, border: "none" }}
                   loading="lazy"
                 />
               </div>
@@ -97,19 +97,29 @@ const RendezVous = () => {
       </section>
 
       {/* Reassurance */}
-      <SectionWrapper className="bg-section-blue">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl font-extrabold mb-4">Pourquoi prendre rendez-vous ?</h2>
-          <div className="grid gap-4 sm:grid-cols-3 mt-6">
+      <SectionWrapper className="bg-section-blue py-10">
+        <div className="mx-auto max-w-4xl">
+          <h2 className="text-2xl font-extrabold mb-6 text-center">Ce que vous obtenez</h2>
+          <div className="grid gap-5 sm:grid-cols-3">
             {[
-              { title: "100% gratuit", desc: "Aucun engagement, aucun frais. Un simple échange pour comprendre vos besoins." },
-              { title: "Conseil personnalisé", desc: "Geoffrey, Expert Produit Google, analyse votre situation et vous recommande les meilleures actions." },
-              { title: "Devis sous 24h", desc: "Après notre échange, recevez une proposition détaillée et adaptée à votre budget." },
+              { icon: Lightbulb, title: "Audit express offert", desc: "On analyse votre présence en ligne et on identifie vos axes d'amélioration prioritaires." },
+              { icon: CheckCircle2, title: "Recommandations concrètes", desc: "Vous repartez avec un plan d'action clair, adapté à votre activité et votre budget." },
+              { icon: Clock, title: "Devis détaillé sous 24h", desc: "Après notre échange, recevez une proposition chiffrée et personnalisée par email." },
             ].map((item, i) => (
-              <div key={i} className="rounded-2xl bg-card p-6 shadow-card">
-                <h3 className="font-bold text-lg mb-2">{item.title}</h3>
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="rounded-2xl bg-card p-6 shadow-card flex flex-col items-start gap-3"
+              >
+                <div className="flex h-10 w-10 items-center justify-center rounded-xl gradient-primary text-white">
+                  <item.icon size={20} />
+                </div>
+                <h3 className="font-bold text-lg">{item.title}</h3>
                 <p className="text-sm text-muted-foreground">{item.desc}</p>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
