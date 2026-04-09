@@ -190,8 +190,11 @@ const AdminBlogEditor = () => {
     if (error) {
       toast({ title: "Erreur", description: error.message, variant: "destructive" });
     } else {
-      if (finalStatus === "published" && savedPost) {
+      if ((finalStatus === "published") && savedPost) {
         upsertCachedCmsPost(savedPost);
+      } else if (finalStatus === "scheduled") {
+        // scheduled = not visible yet, remove from cache
+        removeCachedCmsPost(slug);
       } else {
         removeCachedCmsPost(slug);
       }
