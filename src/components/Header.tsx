@@ -72,7 +72,7 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
           <div ref={moreRef} className="relative">
             <button
               onClick={() => setMoreOpen(!moreOpen)}
-              className={`flex items-center gap-1 rounded-lg px-3 py-2 text-[15px] font-medium transition-colors hover:bg-secondary text-muted-foreground`}
+              className={`flex items-center gap-1 rounded-lg px-2 xl:px-3 py-2 text-[13px] xl:text-[15px] font-medium whitespace-nowrap transition-colors hover:bg-secondary text-muted-foreground`}
             >
               Plus <ChevronDown size={15} className={`transition-transform ${moreOpen ? "rotate-180" : ""}`} />
             </button>
