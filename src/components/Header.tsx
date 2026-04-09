@@ -95,16 +95,16 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
           </div>
         </nav>
 
-        <div className="hidden lg:flex items-center gap-2">
-          <Button asChild variant="ghost" size="sm" className="rounded-full px-4 text-[15px] font-semibold text-muted-foreground hover:text-primary">
+        <div className="hidden lg:flex items-center gap-1.5 shrink-0">
+          <Button asChild variant="ghost" size="sm" className="rounded-full px-3 text-[13px] xl:text-[15px] font-semibold text-muted-foreground hover:text-primary whitespace-nowrap">
             <Link to="/connexion">
-              <User size={16} className="mr-1.5" /> Espace client
+              <User size={16} className="mr-1" /> Espace client
             </Link>
           </Button>
-          <Button asChild variant="custom" size="sm" className="rounded-full px-5 text-[15px] font-bold gradient-primary btn-glow text-white shadow-glow">
+          <Button asChild variant="custom" size="sm" className="rounded-full px-4 xl:px-5 text-[13px] xl:text-[15px] font-bold gradient-primary btn-glow text-white shadow-glow whitespace-nowrap">
             <Link to="/rendez-vous">Prendre RDV</Link>
           </Button>
-          <Button asChild variant="custom" size="sm" className="gradient-primary btn-glow rounded-full px-6 text-[15px] font-semibold text-white shadow-glow">
+          <Button asChild variant="custom" size="sm" className="gradient-primary btn-glow rounded-full px-4 xl:px-6 text-[13px] xl:text-[15px] font-semibold text-white shadow-glow whitespace-nowrap">
             <Link to="/contact">Audit SEO gratuit</Link>
           </Button>
         </div>
