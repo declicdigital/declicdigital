@@ -333,7 +333,7 @@ const Geo = () => {
               Un artisan qui documente ses techniques, un consultant qui partage son expertise, une TPE qui répond avec précision aux questions de ses clients - c'est exactement ce que ChatGPT, Gemini et Perplexity mettent en avant.
             </p>
             <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-              <Link to="/contact">Discuter de votre stratégie GEO</Link>
+              <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
             </Button>
           </div>
         </div>
@@ -348,7 +348,7 @@ const Geo = () => {
               <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
             </Button>
             <Button asChild variant="custom" size="lg" className="rounded-full bg-secondary px-8 font-semibold text-foreground shadow-lg btn-glow hover:bg-secondary/90">
-              <Link to="/contact">Nous contacter</Link>
+              <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
             </Button>
           </div>
         </div>
@@ -431,7 +431,7 @@ const Geo = () => {
           <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Besoin d'aide pour cocher toutes ces cases ?</h2>
           <p className="mb-6 text-white/80 max-w-xl mx-auto">On s'occupe de tout. De l'audit à la mise en place, notre équipe vous accompagne sur le SEO et le GEO.</p>
            <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-            <Link to="/contact">Prendre contact</Link>
+            <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
           </Button>
         </div>
       </section>
@@ -469,9 +469,9 @@ const Geo = () => {
             <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
               <Link to="/audit-seo-gratuit">Demander un audit SEO gratuit</Link>
             </Button>
-            <Link to="/contact" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
-              Nous contacter
-            </Link>
+            <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
+              Prendre rendez-vous
+            </a>
           </div>
         </div>
       </section>

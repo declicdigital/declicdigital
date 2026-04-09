@@ -38,7 +38,7 @@ const CreationSite = () => (
               Nous concevons des sites modernes, rapides et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour les TPE et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou demandez un <Link to="/audit-seo-gratuit" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link>.
             </p>
             <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-              <Link to="/contact">Devis création de site</Link>
+              <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
             </Button>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
@@ -174,7 +174,7 @@ const CreationSite = () => (
           Le prix d'un site web dépend de sa complexité, du nombre de pages et des fonctionnalités souhaitées. Chez Déclic Digital, nous proposons des <Link to="/tarifs" className="text-primary font-semibold hover:underline">tarifs adaptés aux budgets des TPE</Link> : une landing page dès 200€ de mise en service + 50€/mois, un site vitrine complet dès 590€ + 50€/mois. Ces forfaits incluent le design, le développement, l'hébergement, la maintenance et l'optimisation SEO de base.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          L'avantage de notre modèle par abonnement : pas de grosse facture au démarrage, et un site toujours à jour, sécurisé et performant. Vous avez une question ? Consultez <Link to="/faq" className="text-primary font-semibold hover:underline">notre FAQ</Link> ou <Link to="/contact" className="text-primary font-semibold hover:underline">demandez un devis gratuit</Link>.
+          L'avantage de notre modèle par abonnement : pas de grosse facture au démarrage, et un site toujours à jour, sécurisé et performant. Vous avez une question ? Consultez <Link to="/faq" className="text-primary font-semibold hover:underline">notre FAQ</Link> ou <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">prenez rendez-vous</a>.
         </p>
       </div>
     </SectionWrapper>
@@ -218,7 +218,7 @@ const CreationSite = () => (
         <p className="mb-8 text-white/80">Demandez un devis gratuit pour la création de votre site web professionnel.</p>
         <div className="flex flex-col sm:flex-row gap-4">
           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-            <Link to="/contact">Devis création de site</Link>
+            <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
           </Button>
           <Link to="/faq" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
             Questions fréquentes

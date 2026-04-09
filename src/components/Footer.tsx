@@ -34,7 +34,7 @@ const Footer = () => (
               <li><Link to="/audit-seo-gratuit" className="text-white/60 hover:text-white transition-colors">Audit SEO gratuit</Link></li>
               <li><Link to="/visibilite-ia" className="text-white/60 hover:text-white transition-colors">Visibilité IA (GEO)</Link></li>
               <li><Link to="/tarifs" className="text-white/60 hover:text-white transition-colors">Nos tarifs</Link></li>
-              <li><Link to="/contact" className="text-white/60 hover:text-white transition-colors">Demande de devis</Link></li>
+              <li><a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="text-white/60 hover:text-white transition-colors">Prendre rendez-vous</a></li>
               <li><Link to="/nos-villes" className="text-white/60 hover:text-white font-semibold transition-colors">Nos villes →</Link></li>
               <li><Link to="/nos-metiers" className="text-white/60 hover:text-white font-semibold transition-colors">Nos métiers →</Link></li>
             </ul>

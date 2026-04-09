@@ -102,7 +102,7 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
             </Link>
           </Button>
           <Button asChild variant="custom" size="sm" className="rounded-full px-5 text-[15px] font-bold gradient-primary btn-glow text-white shadow-glow">
-            <Link to="/contact">Contact</Link>
+            <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre RDV</a>
           </Button>
           <Button asChild variant="custom" size="sm" className="gradient-primary btn-glow rounded-full px-6 text-[15px] font-semibold text-white shadow-glow">
             <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
@@ -133,13 +133,15 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
                 {l.label}
               </Link>
             ))}
-            <Link
-              to="/contact"
+            <a
+              href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true"
+              target="_blank"
+              rel="noopener noreferrer"
               onClick={() => setMobileOpen(false)}
               className="rounded-lg px-4 py-2.5 text-sm font-bold text-primary transition-colors hover:bg-primary/10 border border-primary mt-1"
             >
-              Contact
-            </Link>
+              Prendre RDV
+            </a>
             <Link
               to="/connexion"
               onClick={() => setMobileOpen(false)}
