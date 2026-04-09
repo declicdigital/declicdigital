@@ -728,15 +728,18 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
       });
   }, [compositeKey]);
 
+  // Re-apply overrides after every render (React re-renders overwrite DOM patches)
+  const overrideRef = useRef(override);
+  overrideRef.current = override;
   useEffect(() => {
-    if (!loaded || !override?.content?.structured || !contentRef.current) return;
+    if (!loaded || !overrideRef.current?.content?.structured || !contentRef.current) return;
     const timer = setTimeout(() => {
-      if (contentRef.current) {
-        applyOverrideToDOM(contentRef.current, override.content.structured!);
+      if (contentRef.current && overrideRef.current?.content?.structured) {
+        applyOverrideToDOM(contentRef.current, overrideRef.current.content.structured);
       }
     }, 50);
     return () => clearTimeout(timer);
-  }, [loaded, override]);
+  }); // no deps = runs after every render
 
   const openEditor = () => {
     const fallbackLabel = override?.content?.label || label || blockId;
@@ -979,7 +982,30 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
                         <img src={structured.image} alt={structured.imageAlt} className="w-full h-32 object-cover" />
                       </div>
                     )}
-                    <Input value={structured.image} onChange={(e) => updateField("image", e.target.value)} placeholder="URL de l'image" />
+                    <div className="flex gap-2">
+                      <Input value={structured.image} onChange={(e) => updateField("image", e.target.value)} placeholder="URL de l'image" className="flex-1" />
+                      <label>
+                        <input type="file" accept="image/*" className="hidden" onChange={async (e) => {
+                          const file = e.target.files?.[0];
+                          if (!file) return;
+                          try {
+                            const compressed = await compressImage(file);
+                            const path = `sections/${Date.now()}-${compressed.name}`;
+                            const { error } = await supabase.storage.from("cms-images").upload(path, compressed, UPLOAD_OPTIONS);
+                            if (error) throw error;
+                            const { data: urlData } = supabase.storage.from("cms-images").getPublicUrl(path);
+                            updateField("image", urlData.publicUrl);
+                            toast({ title: "Image uploadée ✅" });
+                          } catch (err: any) {
+                            toast({ title: "Erreur upload", description: err.message, variant: "destructive" });
+                          }
+                          e.target.value = "";
+                        }} />
+                        <Button type="button" variant="outline" size="sm" className="gap-1 whitespace-nowrap" asChild>
+                          <span><Upload size={14} /> Upload</span>
+                        </Button>
+                      </label>
+                    </div>
                     <Input value={structured.imageAlt} onChange={(e) => updateField("imageAlt", e.target.value)} placeholder="Texte alternatif (alt)" className="text-sm" />
                   </div>
 

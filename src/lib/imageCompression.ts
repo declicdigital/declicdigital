@@ -6,9 +6,9 @@
  * - Target: < 300 Ko
  */
 
-const MAX_WIDTH = 1200;
-const INITIAL_QUALITY = 0.80;
-const TARGET_SIZE = 300 * 1024; // 300 Ko
+const MAX_WIDTH = 800;
+const INITIAL_QUALITY = 0.75;
+const TARGET_SIZE = 70 * 1024; // 70 Ko max
 
 export async function compressImage(file: File): Promise<File> {
   // Skip non-image files
@@ -42,8 +42,8 @@ export async function compressImage(file: File): Promise<File> {
 
     // If still too large, reduce quality progressively
     let quality = INITIAL_QUALITY;
-    while (blob && blob.size > TARGET_SIZE && quality > 0.4) {
-      quality -= 0.1;
+    while (blob && blob.size > TARGET_SIZE && quality > 0.2) {
+      quality -= 0.05;
       blob = await canvasToBlob(canvas, "image/webp", quality);
     }
 
