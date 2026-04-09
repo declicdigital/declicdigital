@@ -504,6 +504,23 @@ const SubItemEditor = ({ item, index, onChange, onRemove }: {
     ctas: item.ctas.filter(c => c.id !== id),
   });
 
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const compressed = await compressImage(file);
+      const path = `sections/${Date.now()}-${compressed.name}`;
+      const { error } = await supabase.storage.from("cms-images").upload(path, compressed, UPLOAD_OPTIONS);
+      if (error) throw error;
+      const { data: urlData } = supabase.storage.from("cms-images").getPublicUrl(path);
+      onChange({ ...item, image: urlData.publicUrl });
+      toast({ title: "Image uploadée ✅" });
+    } catch (err: any) {
+      toast({ title: "Erreur upload", description: err.message, variant: "destructive" });
+    }
+    e.target.value = "";
+  };
+
   return (
     <div className="rounded-lg border bg-card p-3 space-y-3">
       <div className="flex items-center gap-2 cursor-pointer" onClick={() => setCollapsed(!collapsed)}>
@@ -526,14 +543,20 @@ const SubItemEditor = ({ item, index, onChange, onRemove }: {
             <Label className="text-xs font-medium">Texte</Label>
             <Textarea value={item.text} onChange={e => updateField("text", e.target.value)} rows={4} className="mt-1 text-sm" />
           </div>
-          {(item.image || true) && (
-            <div>
-              <Label className="text-xs font-medium">Image</Label>
-              {item.image && <img src={item.image} alt={item.imageAlt} className="w-full h-20 object-cover rounded mt-1" />}
-              <Input value={item.image} onChange={e => updateField("image", e.target.value)} placeholder="URL image" className="mt-1 text-sm" />
-              <Input value={item.imageAlt} onChange={e => updateField("imageAlt", e.target.value)} placeholder="Alt" className="mt-1 text-sm" />
+          <div>
+            <Label className="text-xs font-medium">Image</Label>
+            {item.image && <img src={item.image} alt={item.imageAlt} className="w-full h-20 object-cover rounded mt-1" />}
+            <div className="flex gap-2 mt-1">
+              <Input value={item.image} onChange={e => updateField("image", e.target.value)} placeholder="URL image" className="text-sm flex-1" />
+              <label>
+                <input type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+                <Button type="button" variant="outline" size="sm" className="gap-1 whitespace-nowrap text-xs" asChild>
+                  <span><Upload size={12} /> Upload</span>
+                </Button>
+              </label>
             </div>
-          )}
+            <Input value={item.imageAlt} onChange={e => updateField("imageAlt", e.target.value)} placeholder="Alt" className="mt-1 text-sm" />
+          </div>
           <div>
             <div className="flex items-center justify-between mb-1">
               <Label className="text-xs font-medium">CTAs</Label>
