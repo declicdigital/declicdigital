@@ -42,6 +42,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite"));
 const FormulaireBrief = lazy(() => import("./pages/FormulaireBrief"));
 const Geo = lazy(() => import("./pages/Geo"));
+const RendezVous = lazy(() => import("./pages/RendezVous"));
 const AdminBlog = lazy(() => import("./pages/AdminBlog"));
 const AdminBlogEditor = lazy(() => import("./pages/AdminBlogEditor"));
 const AdminPageEditor = lazy(() => import("./pages/AdminPageEditor"));
@@ -90,6 +91,7 @@ const App = () => (
                 <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
                 <Route path="/brief" element={<FormulaireBrief />} />
                 <Route path="/visibilite-ia" element={<Geo />} />
+                <Route path="/rendez-vous" element={<RendezVous />} />
                 <Route path="/geo" element={<GeoRedirect />} />
                 <Route path="/admin/blog" element={<AdminBlog />} />
                 <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />

@@ -122,7 +122,7 @@ const Index = () => {
                   <Link to="/contact">Demander un audit SEO gratuit</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="rounded-full border-2 border-[hsl(263,36%,18%)] px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)] hover:text-white transition-colors">
-                  <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
+                  <Link to="/rendez-vous">Prendre rendez-vous</Link>
                 </Button>
               </div>
             </div>
@@ -232,7 +232,7 @@ const Index = () => {
         </div>
         <div className="text-center mt-10">
            <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-            <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
+            <Link to="/rendez-vous">Prendre rendez-vous</Link>
           </Button>
         </div>
       </SectionWrapper>
@@ -346,7 +346,7 @@ const Index = () => {
           </div>
           <div className="text-center mt-10">
             <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-              <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
+              <Link to="/rendez-vous">Prendre rendez-vous</Link>
             </Button>
           </div>
         </div>

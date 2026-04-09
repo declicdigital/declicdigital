@@ -102,7 +102,7 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
             </Link>
           </Button>
           <Button asChild variant="custom" size="sm" className="rounded-full px-5 text-[15px] font-bold gradient-primary btn-glow text-white shadow-glow">
-            <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre RDV</a>
+            <Link to="/rendez-vous">Prendre RDV</Link>
           </Button>
           <Button asChild variant="custom" size="sm" className="gradient-primary btn-glow rounded-full px-6 text-[15px] font-semibold text-white shadow-glow">
             <Link to="/contact">Audit SEO gratuit</Link>

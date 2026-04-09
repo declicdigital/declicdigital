@@ -178,7 +178,7 @@ const renderPlanCard = (plan: (typeof plans)[number], index: number) => (
       variant="custom"
       className="w-full rounded-full font-semibold gradient-primary text-white shadow-lg btn-glow"
     >
-      <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
+      <Link to="/rendez-vous">Prendre rendez-vous</Link>
     </Button>
   </motion.div>
 );
@@ -232,7 +232,7 @@ const Tarifs = () => (
           </p>
           <div className="mt-8">
             <Button asChild variant="custom" className="rounded-full gradient-primary btn-glow px-10 py-4 text-lg font-bold text-white shadow-xl hover:opacity-90 h-auto">
-              <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
+              <Link to="/rendez-vous">Prendre rendez-vous</Link>
             </Button>
           </div>
         </motion.div>
@@ -254,7 +254,7 @@ const Tarifs = () => (
           <h2 className="mb-3 text-xl font-extrabold">Ce qui est toujours inclus dans nos prestations</h2>
           <p className="text-sm leading-relaxed text-muted-foreground">
             Engagement de 6 mois renouvelable. Toutes les prestations peuvent être adaptées selon vos besoins. Chaque
-            projet est unique, <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer" className="font-semibold text-primary hover:underline">prenez rendez-vous</a> pour
+            projet est unique, <Link to="/rendez-vous" className="font-semibold text-primary hover:underline">prenez rendez-vous</Link> pour
             un devis personnalisé. Vous pouvez aussi commencer par un{" "}
             <Link to="/contact" className="font-semibold text-primary hover:underline">
               audit SEO gratuit
@@ -341,7 +341,7 @@ const Tarifs = () => (
         <p className="mb-8 text-white/80">Contactez-nous pour discuter de votre projet et recevoir un devis adapté.</p>
         <div className="flex flex-col justify-center gap-4 sm:flex-row">
           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-            <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
+            <Link to="/rendez-vous">Prendre rendez-vous</Link>
           </Button>
           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
             <Link to="/contact">Audit SEO gratuit</Link>
