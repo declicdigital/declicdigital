@@ -728,15 +728,18 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
       });
   }, [compositeKey]);
 
+  // Re-apply overrides after every render (React re-renders overwrite DOM patches)
+  const overrideRef = useRef(override);
+  overrideRef.current = override;
   useEffect(() => {
-    if (!loaded || !override?.content?.structured || !contentRef.current) return;
+    if (!loaded || !overrideRef.current?.content?.structured || !contentRef.current) return;
     const timer = setTimeout(() => {
-      if (contentRef.current) {
-        applyOverrideToDOM(contentRef.current, override.content.structured!);
+      if (contentRef.current && overrideRef.current?.content?.structured) {
+        applyOverrideToDOM(contentRef.current, overrideRef.current.content.structured);
       }
     }, 50);
     return () => clearTimeout(timer);
-  }, [loaded, override]);
+  }); // no deps = runs after every render
 
   const openEditor = () => {
     const fallbackLabel = override?.content?.label || label || blockId;
