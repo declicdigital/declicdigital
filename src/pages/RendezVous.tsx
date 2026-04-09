@@ -6,7 +6,7 @@ import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import SectionWrapper from "@/components/SectionWrapper";
 
-const CAL_URL = "https://cal.com/declic-digital/rendez-vous?embed=true&layout=month_view&theme=light";
+const CAL_URL = "https://cal.com/declic-digital/rendez-vous?embed=true&layout=week_view&theme=light";
 
 const RendezVous = () => {
 
@@ -87,7 +87,7 @@ const RendezVous = () => {
                 <iframe
                   src={CAL_URL}
                   title="Réserver un rendez-vous avec Déclic Digital"
-                  style={{ width: "100%", height: 580, border: "none" }}
+                  style={{ width: "100%", height: "calc(100vh - 200px)", minHeight: 500, border: "none" }}
                   loading="lazy"
                 />
               </div>
