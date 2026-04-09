@@ -67,7 +67,7 @@ const Realisations = () => (
           </p>
           <div className="mt-6">
             <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-              <Link to="/contact">Demander un devis</Link>
+              <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
             </Button>
           </div>
         </motion.div>

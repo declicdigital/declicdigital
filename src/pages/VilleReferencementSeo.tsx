@@ -79,7 +79,7 @@ const VilleReferencementSeo = () => {
                   <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
                 </Button>
                 <Button asChild size="lg" variant="outline" className="rounded-full border-2 border-[hsl(263,36%,18%)] px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)] hover:text-white transition-colors">
-                  <Link to="/contact">Nous contacter</Link>
+                  <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
                 </Button>
               </div>
             </motion.div>

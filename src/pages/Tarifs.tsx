@@ -178,7 +178,7 @@ const renderPlanCard = (plan: (typeof plans)[number], index: number) => (
       variant="custom"
       className="w-full rounded-full font-semibold gradient-primary text-white shadow-lg btn-glow"
     >
-      <Link to="/contact">Demander un devis</Link>
+      <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
     </Button>
   </motion.div>
 );
@@ -341,7 +341,7 @@ const Tarifs = () => (
         <p className="mb-8 text-white/80">Contactez-nous pour discuter de votre projet et recevoir un devis adapté.</p>
         <div className="flex flex-col justify-center gap-4 sm:flex-row">
           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-            <Link to="/contact">Nous contacter</Link>
+            <a href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true" target="_blank" rel="noopener noreferrer">Prendre rendez-vous</a>
           </Button>
           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
             <Link to="/audit-seo-gratuit">Audit SEO gratuit</Link>
