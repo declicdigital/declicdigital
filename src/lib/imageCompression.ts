@@ -6,9 +6,9 @@
  * - Target: < 300 Ko
  */
 
-const MAX_WIDTH = 1200;
-const INITIAL_QUALITY = 0.80;
-const TARGET_SIZE = 300 * 1024; // 300 Ko
+const MAX_WIDTH = 800;
+const INITIAL_QUALITY = 0.75;
+const TARGET_SIZE = 70 * 1024; // 70 Ko max
 
 export async function compressImage(file: File): Promise<File> {
   // Skip non-image files
