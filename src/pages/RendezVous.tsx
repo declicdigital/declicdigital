@@ -6,7 +6,7 @@ import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import SectionWrapper from "@/components/SectionWrapper";
 
-const CAL_URL = "https://cal.com/declic-digital/rendez-vous?embed=true&layout=week_view&theme=light";
+const CAL_URL = "https://cal.com/declic-digital/rendez-vous?embed=true&layout=month_view&theme=light";
 
 const RendezVous = () => {
 
