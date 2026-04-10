@@ -205,7 +205,7 @@ const VilleReferencementSeo = () => {
             </div>
 
             <p className="text-muted-foreground leading-relaxed">
-              Complétez votre stratégie avec un <Link to={`/creation-site-web/${city.slug}`} className="text-primary font-semibold hover:underline">site web professionnel à {city.nameShort}</Link>. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+              Complétez votre stratégie avec un <Link to={`/creation-site-web/${city.slug}`} className="text-primary font-semibold">site web professionnel à {city.nameShort}</Link>. Consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold">nos réalisations</Link>.
             </p>
             <div className="rounded-2xl bg-background p-6 shadow-card">
               <p className="text-sm font-semibold text-primary mb-1">Le saviez-vous ?</p>
@@ -232,7 +232,7 @@ const VilleReferencementSeo = () => {
                 </div>
               ))}
               <p className="text-muted-foreground leading-relaxed">
-                Améliorez votre visibilité Google à {city.nameShort} dès maintenant. <Link to="/contact" className="text-primary font-semibold hover:underline">Demandez votre audit SEO gratuit</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+                Améliorez votre visibilité Google à {city.nameShort} dès maintenant. <Link to="/contact" className="text-primary font-semibold">Demandez votre audit SEO gratuit</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold">nos réalisations</Link>.
               </p>
             </div>
           </SectionWrapper>
@@ -258,7 +258,7 @@ const VilleReferencementSeo = () => {
           ))}
         </div>
         <p className="text-center mt-6">
-          <Link to="/faq" className="text-primary font-semibold hover:underline">Voir toutes les questions fréquentes →</Link>
+          <Link to="/faq" className="text-primary font-semibold">Voir toutes les questions fréquentes →</Link>
         </p>
       </SectionWrapper>
 

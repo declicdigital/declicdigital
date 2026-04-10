@@ -143,7 +143,7 @@ const MetierCreationSite = () => {
                 Création de site internet pour {trade.name.toLowerCase()} : attirez plus de clients
               </h1>
               <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-                {trade.whyWebsite} Déclic Digital crée des sites web professionnels et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> spécifiquement adaptés aux {trade.name.toLowerCase()}s à Paris et dans les Hauts-de-Seine (92). <Link to="/tarifs" className="text-primary font-semibold hover:underline">Consultez nos tarifs</Link>.
+                {trade.whyWebsite} Déclic Digital crée des sites web professionnels et optimisés <Link to="/referencement-seo" className="text-primary font-semibold">SEO</Link> spécifiquement adaptés aux {trade.name.toLowerCase()}s à Paris et dans les Hauts-de-Seine (92). <Link to="/tarifs" className="text-primary font-semibold">Consultez nos tarifs</Link>.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
@@ -227,7 +227,7 @@ const MetierCreationSite = () => {
           </p>
           <h3 className="text-xl font-bold">Vos clients vous cherchent sur Google</h3>
           <p className="text-muted-foreground leading-relaxed">
-            Les recherches fréquentes pour votre métier incluent : {trade.seoKeywords.map(k => `"${k}"`).join(", ")}. Si votre site n'apparaît pas sur ces requêtes, vos concurrents récupèrent ces clients à votre place. Un site bien optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement naturel</Link> vous positionne durablement sur ces mots clés.
+            Les recherches fréquentes pour votre métier incluent : {trade.seoKeywords.map(k => `"${k}"`).join(", ")}. Si votre site n'apparaît pas sur ces requêtes, vos concurrents récupèrent ces clients à votre place. Un site bien optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold">référencement naturel</Link> vous positionne durablement sur ces mots clés.
           </p>
           <h3 className="text-xl font-bold">Apparaître dans Google Maps</h3>
           <p className="text-muted-foreground leading-relaxed">
@@ -244,7 +244,7 @@ const MetierCreationSite = () => {
 
           <h3 className="text-xl font-bold">Un investissement rentable pour un {trade.name.toLowerCase()}</h3>
           <p className="text-muted-foreground leading-relaxed">
-            Un site web professionnel coûte bien moins cher qu'une campagne publicitaire et génère des résultats durables. Chez Déclic Digital, nos <Link to="/tarifs" className="text-primary font-semibold hover:underline">forfaits démarrent à 50€/mois</Link> et incluent le design, l'hébergement, la maintenance et l'optimisation SEO. En moyenne, nos clients {trade.description} obtiennent leurs premières demandes de contact dans les 2 à 4 semaines suivant la mise en ligne.
+            Un site web professionnel coûte bien moins cher qu'une campagne publicitaire et génère des résultats durables. Chez Déclic Digital, nos <Link to="/tarifs" className="text-primary font-semibold">forfaits démarrent à 50€/mois</Link> et incluent le design, l'hébergement, la maintenance et l'optimisation SEO. En moyenne, nos clients {trade.description} obtiennent leurs premières demandes de contact dans les 2 à 4 semaines suivant la mise en ligne.
           </p>
           <h3 className="text-xl font-bold">Ce que nous incluons dans votre site de {trade.name.toLowerCase()}</h3>
           <ul className="space-y-2 text-muted-foreground">
@@ -280,7 +280,7 @@ const MetierCreationSite = () => {
               </div>
             ))}
             <p className="text-muted-foreground leading-relaxed">
-              Prêt à passer à l'action ? <Link to="/rendez-vous" className="text-primary font-semibold hover:underline">Prenez rendez-vous</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+              Prêt à passer à l'action ? <Link to="/rendez-vous" className="text-primary font-semibold">Prenez rendez-vous</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold">nos réalisations</Link>.
             </p>
           </div>
         </SectionWrapper>
@@ -290,7 +290,7 @@ const MetierCreationSite = () => {
       <SectionWrapper className="bg-section-blue">
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre processus en 4 étapes pour votre site de {trade.name.toLowerCase()}</h2>
         <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-          Un accompagnement personnalisé de A à Z. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre équipe</Link>.
+          Un accompagnement personnalisé de A à Z. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold">notre équipe</Link>.
         </p>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
@@ -327,7 +327,7 @@ const MetierCreationSite = () => {
           ))}
         </div>
         <p className="text-center mt-6">
-          <Link to="/faq" className="text-primary font-semibold hover:underline">Voir toutes les questions fréquentes →</Link>
+          <Link to="/faq" className="text-primary font-semibold">Voir toutes les questions fréquentes →</Link>
         </p>
       </SectionWrapper>
 

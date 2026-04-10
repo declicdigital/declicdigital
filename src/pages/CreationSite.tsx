@@ -35,7 +35,7 @@ const CreationSite = () => (
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
             <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">Création de site internet sur-mesure pour les artisans, TPE et indépendants à Paris</h1>
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
-              Nous concevons des sites modernes, rapides et optimisés <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">SEO</Link> pour les TPE et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou demandez un <Link to="/contact" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link>.
+              Nous concevons des sites modernes, rapides et optimisés <Link to="/referencement-seo" className="text-primary font-semibold">SEO</Link> pour les TPE et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> ou demandez un <Link to="/contact" className="text-primary font-semibold">audit SEO gratuit</Link>.
             </p>
             <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
               <Link to="/rendez-vous">Prendre rendez-vous</Link>
@@ -52,7 +52,7 @@ const CreationSite = () => (
     <SectionWrapper className="bg-section-blue">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Pourquoi votre activité a besoin d'un site web professionnel</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-        Un site web professionnel ne se limite pas à une simple vitrine en ligne. C'est un outil stratégique qui renforce votre crédibilité, attire de nouveaux clients grâce au <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement naturel</Link> et vous différencie de vos concurrents.
+        Un site web professionnel ne se limite pas à une simple vitrine en ligne. C'est un outil stratégique qui renforce votre crédibilité, attire de nouveaux clients grâce au <Link to="/referencement-seo" className="text-primary font-semibold">référencement naturel</Link> et vous différencie de vos concurrents.
       </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
@@ -100,7 +100,7 @@ const CreationSite = () => (
     <SectionWrapper className="bg-section-blue">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre méthode : de la maquette à la mise en ligne</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-        Nos solutions s'adaptent à tous les profils d'entreprises. Que vous soyez artisan, commerçant, profession libérale ou dirigeant de TPE, nous concevons un site adapté à votre métier et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement Google</Link>.
+        Nos solutions s'adaptent à tous les profils d'entreprises. Que vous soyez artisan, commerçant, profession libérale ou dirigeant de TPE, nous concevons un site adapté à votre métier et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold">référencement Google</Link>.
       </p>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {[
@@ -135,13 +135,13 @@ const CreationSite = () => (
               Un bon site web pour une TPE, c'est avant tout un site qui remplit son objectif : attirer des visiteurs et les convertir en clients. Il ne suffit pas d'avoir un site "joli". Il doit être rapide, bien structuré, adapté aux mobiles et surtout visible sur Google.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Chaque page doit être pensée pour répondre à une intention de recherche précise. Par exemple, si vous êtes plombier à Bordeaux, votre site doit apparaître quand un internaute tape "plombier Bordeaux" dans Google. C'est le rôle du <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement naturel</Link>, et c'est ce que nous intégrons dès la conception de chaque projet.
+              Chaque page doit être pensée pour répondre à une intention de recherche précise. Par exemple, si vous êtes plombier à Bordeaux, votre site doit apparaître quand un internaute tape "plombier Bordeaux" dans Google. C'est le rôle du <Link to="/referencement-seo" className="text-primary font-semibold">référencement naturel</Link>, et c'est ce que nous intégrons dès la conception de chaque projet.
             </p>
             <p className="text-muted-foreground leading-relaxed">
               Chez Déclic Digital, nous créons des sites orientés résultats. Cela signifie que chaque élément, le design, les textes, les appels à l'action, la navigation, est conçu pour maximiser vos chances de transformer un visiteur en prospect. Nous ne livrons pas simplement un site, nous livrons un outil commercial.
             </p>
             <p className="text-muted-foreground leading-relaxed">
-              Nos sites incluent systématiquement : un design professionnel sur mesure, une <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">optimisation SEO complète</Link>, une compatibilité mobile parfaite, une vitesse de chargement optimisée, et un formulaire de contact pour capturer vos prospects. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> pour en savoir plus.
+              Nos sites incluent systématiquement : un design professionnel sur mesure, une <Link to="/referencement-seo" className="text-primary font-semibold">optimisation SEO complète</Link>, une compatibilité mobile parfaite, une vitesse de chargement optimisée, et un formulaire de contact pour capturer vos prospects. Consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> pour en savoir plus.
             </p>
           </div>
         </div>
@@ -153,7 +153,7 @@ const CreationSite = () => (
       <div className="mx-auto max-w-3xl space-y-6">
         <h2 className="text-3xl font-extrabold md:text-4xl text-center">Création de site web pour artisan à Paris : pourquoi c'est indispensable</h2>
         <p className="text-muted-foreground leading-relaxed">
-          En tant qu'artisan ou indépendant à Paris, votre visibilité en ligne détermine directement votre volume de clients. 97% des consommateurs recherchent un professionnel local sur internet avant de le contacter. Sans site web, vous êtes invisible pour cette audience. Avec un site bien conçu et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement local</Link>, vous captez des demandes de devis chaque semaine.
+          En tant qu'artisan ou indépendant à Paris, votre visibilité en ligne détermine directement votre volume de clients. 97% des consommateurs recherchent un professionnel local sur internet avant de le contacter. Sans site web, vous êtes invisible pour cette audience. Avec un site bien conçu et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold">référencement local</Link>, vous captez des demandes de devis chaque semaine.
         </p>
         <h3 className="text-xl font-bold">Un site vitrine qui inspire confiance et génère des contacts</h3>
         <p className="text-muted-foreground leading-relaxed">
@@ -161,7 +161,7 @@ const CreationSite = () => (
         </p>
         <h3 className="text-xl font-bold">Technologies modernes pour des performances optimales</h3>
         <p className="text-muted-foreground leading-relaxed">
-          Nous utilisons les technologies les plus adaptées selon votre projet : WordPress pour les sites éditoriaux, Shopify pour le e-commerce, ou des solutions sur-mesure pour les besoins spécifiques. Quel que soit l'outil, nous garantissons un site rapide (score PageSpeed supérieur à 90), sécurisé (HTTPS), et conforme aux standards d'accessibilité. Consultez nos <Link to="/realisations" className="text-primary font-semibold hover:underline">réalisations récentes</Link> pour voir des exemples concrets.
+          Nous utilisons les technologies les plus adaptées selon votre projet : WordPress pour les sites éditoriaux, Shopify pour le e-commerce, ou des solutions sur-mesure pour les besoins spécifiques. Quel que soit l'outil, nous garantissons un site rapide (score PageSpeed supérieur à 90), sécurisé (HTTPS), et conforme aux standards d'accessibilité. Consultez nos <Link to="/realisations" className="text-primary font-semibold">réalisations récentes</Link> pour voir des exemples concrets.
         </p>
       </div>
     </SectionWrapper>
@@ -171,10 +171,10 @@ const CreationSite = () => (
       <div className="mx-auto max-w-3xl space-y-6">
         <h2 className="text-3xl font-extrabold md:text-4xl text-center">Combien coûte la création d'un site internet pour une TPE ?</h2>
         <p className="text-muted-foreground leading-relaxed">
-          Le prix d'un site web dépend de sa complexité, du nombre de pages et des fonctionnalités souhaitées. Chez Déclic Digital, nous proposons des <Link to="/tarifs" className="text-primary font-semibold hover:underline">tarifs adaptés aux budgets des TPE</Link> : une landing page dès 200€ de mise en service + 50€/mois, un site vitrine complet dès 590€ + 50€/mois. Ces forfaits incluent le design, le développement, l'hébergement, la maintenance et l'optimisation SEO de base.
+          Le prix d'un site web dépend de sa complexité, du nombre de pages et des fonctionnalités souhaitées. Chez Déclic Digital, nous proposons des <Link to="/tarifs" className="text-primary font-semibold">tarifs adaptés aux budgets des TPE</Link> : une landing page dès 200€ de mise en service + 50€/mois, un site vitrine complet dès 590€ + 50€/mois. Ces forfaits incluent le design, le développement, l'hébergement, la maintenance et l'optimisation SEO de base.
         </p>
         <p className="text-muted-foreground leading-relaxed">
-          L'avantage de notre modèle par abonnement : pas de grosse facture au démarrage, et un site toujours à jour, sécurisé et performant. Vous avez une question ? Consultez <Link to="/faq" className="text-primary font-semibold hover:underline">notre FAQ</Link> ou <Link to="/rendez-vous" className="text-primary font-semibold hover:underline">prenez rendez-vous</Link>.
+          L'avantage de notre modèle par abonnement : pas de grosse facture au démarrage, et un site toujours à jour, sécurisé et performant. Vous avez une question ? Consultez <Link to="/faq" className="text-primary font-semibold">notre FAQ</Link> ou <Link to="/rendez-vous" className="text-primary font-semibold">prenez rendez-vous</Link>.
         </p>
       </div>
     </SectionWrapper>
@@ -183,7 +183,7 @@ const CreationSite = () => (
     <SectionWrapper className="bg-section-blue">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">Création de site internet à Paris et dans les Hauts-de-Seine</h2>
       <p className="text-center text-muted-foreground mb-8">
-        Nous intervenons à Paris et dans les Hauts-de-Seine pour la <Link to="/nos-villes" className="text-primary font-semibold hover:underline">création de sites web professionnels</Link>.
+        Nous intervenons à Paris et dans les Hauts-de-Seine pour la <Link to="/nos-villes" className="text-primary font-semibold">création de sites web professionnels</Link>.
       </p>
       <div className="flex flex-wrap justify-center gap-3">
         {cities.slice(0, 12).map((c) => (
