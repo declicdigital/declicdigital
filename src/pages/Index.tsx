@@ -111,7 +111,7 @@ const Index = () => {
               <span className="mb-4 inline-block rounded-full bg-brand-violet/10 px-4 py-1.5 text-xs font-semibold text-brand-violet">
                 Expert Produit Google · Agence digitale
               </span>
-              <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
+              <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl min-h-[108px] md:min-h-[120px] lg:min-h-[144px]">
                 On crée votre site web à Paris et dans le 92 pour briller sur Google et l'IA
               </h1>
               <p className="mb-8 max-w-lg text-lg md:text-xl text-muted-foreground leading-relaxed">
