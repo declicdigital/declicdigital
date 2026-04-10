@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Send, CheckCircle, Plus, X, Upload, FileText, Users, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

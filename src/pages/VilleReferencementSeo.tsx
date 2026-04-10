@@ -1,5 +1,5 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Eye, Users, TrendingUp, Search, BarChart3, FileText, Target, CheckCircle, HelpCircle, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";

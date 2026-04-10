@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Search, FileText, Users, Lightbulb, CheckCircle, Loader2 } from "lucide-react";

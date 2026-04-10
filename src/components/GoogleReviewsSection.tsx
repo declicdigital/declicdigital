@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Star, ExternalLink } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { supabase } from "@/integrations/supabase/client";
 import ReviewCard, { type ReviewData } from "./ReviewCard";
 import { Skeleton } from "@/components/ui/skeleton";

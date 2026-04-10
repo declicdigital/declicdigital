@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import MapEmbed from "@/components/MapEmbed";
 import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";

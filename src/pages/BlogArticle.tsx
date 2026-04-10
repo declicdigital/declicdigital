@@ -1,7 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { useState, useEffect, lazy, Suspense } from "react";
 import { Helmet } from "react-helmet-async";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Calendar, Clock, ArrowLeft, ArrowRight, Tag, Share2, Copy, Check } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 

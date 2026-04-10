@@ -1,7 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { useState, useEffect, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Calendar, Clock, ArrowRight, Tag, ArrowLeft } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";

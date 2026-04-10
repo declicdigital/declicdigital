@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Monitor, Smartphone, TrendingUp, Zap, CheckCircle, Search, Shield, Clock, Users, Target, BarChart3, HelpCircle, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
