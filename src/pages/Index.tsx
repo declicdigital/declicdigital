@@ -124,7 +124,7 @@ const Index = () => {
                 </Button>
               </div>
             </div>
-            <div className="flex justify-center animate-fade-in-right">
+            <div className="flex justify-center">
               <div className="rounded-2xl bg-card p-8 shadow-card text-center max-w-sm">
                 <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital - Expert Produit Google" className="mx-auto mb-4 h-32 w-32 rounded-full object-cover" width={128} height={128} fetchPriority="high" />
                 <p className="font-bold text-lg">Geoffrey</p>
@@ -411,7 +411,7 @@ const Index = () => {
       {/* CTA Final */}
       <section className="gradient-miami py-16 md:py-24 text-white">
         <div className="container">
-          <div className="flex flex-col items-center text-center animate-fade-in-up">
+          <div className="flex flex-col items-center text-center">
             <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-white/30 shadow-lg mb-4" width={80} height={80} loading="lazy" />
             <p className="text-sm font-semibold text-white mb-1">Geoffrey, Expert Produit Google</p>
             <h3 className="mb-4 text-3xl font-extrabold text-white md:text-4xl">Et si votre site devenait votre meilleur commercial ?</h3>

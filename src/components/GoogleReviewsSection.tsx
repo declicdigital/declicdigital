@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Star, ExternalLink } from "lucide-react";
-import { motion } from "motion/react";
 import { supabase } from "@/integrations/supabase/client";
 import ReviewCard, { type ReviewData } from "./ReviewCard";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -40,24 +39,28 @@ const GoogleReviewsSection = ({
   const [writeReviewUrl, setWriteReviewUrl] = useState(FALLBACK_WRITE_REVIEW_URL);
 
   useEffect(() => {
+    const CACHE_KEY = "dd_google_reviews";
+    const CACHE_TTL = 1000 * 60 * 60; // 1 hour
+
+    // Try cache first for instant render
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (cached) {
+        const { data: cachedData, ts } = JSON.parse(cached);
+        if (Date.now() - ts < CACHE_TTL && cachedData.reviews?.length) {
+          applyData(cachedData);
+          setLoading(false);
+          return; // skip fetch
+        }
+      }
+    } catch {}
+
     const fetchReviews = async () => {
       try {
         const { data, error } = await supabase.functions.invoke("google-reviews");
         if (!error && data && !data.fallback && data.reviews) {
-          const apiReviewsUrl = data.googleMapsLinks?.reviewsUri || FALLBACK_REVIEWS_URL;
-          const apiWriteReviewUrl = data.googleMapsLinks?.writeAReviewUri || FALLBACK_WRITE_REVIEW_URL;
-          setReviewsUrl(apiReviewsUrl);
-          setWriteReviewUrl(apiWriteReviewUrl);
-          const mapped: ReviewData[] = data.reviews.slice(0, maxReviews).map((r: any) => ({
-            author: r.authorAttribution?.displayName || r.author_name || "Client",
-            rating: r.rating || 5,
-            text: r.text?.text || r.text || "",
-            time: r.relativePublishTimeDescription || r.relative_time_description || "",
-            reviewUrl: r.googleMapsUri || apiReviewsUrl,
-          }));
-          setReviews(mapped);
-          if (data.rating) setRating(data.rating);
-          if (data.userRatingCount) setTotalReviews(data.userRatingCount);
+          applyData(data);
+          try { localStorage.setItem(CACHE_KEY, JSON.stringify({ data, ts: Date.now() })); } catch {}
         } else {
           setReviews(MOCK_REVIEWS.slice(0, maxReviews));
         }
@@ -66,6 +69,24 @@ const GoogleReviewsSection = ({
       }
       setLoading(false);
     };
+
+    function applyData(data: any) {
+      const apiReviewsUrl = data.googleMapsLinks?.reviewsUri || FALLBACK_REVIEWS_URL;
+      const apiWriteReviewUrl = data.googleMapsLinks?.writeAReviewUri || FALLBACK_WRITE_REVIEW_URL;
+      setReviewsUrl(apiReviewsUrl);
+      setWriteReviewUrl(apiWriteReviewUrl);
+      const mapped: ReviewData[] = data.reviews.slice(0, maxReviews).map((r: any) => ({
+        author: r.authorAttribution?.displayName || r.author_name || "Client",
+        rating: r.rating || 5,
+        text: r.text?.text || r.text || "",
+        time: r.relativePublishTimeDescription || r.relative_time_description || "",
+        reviewUrl: r.googleMapsUri || apiReviewsUrl,
+      }));
+      setReviews(mapped);
+      if (data.rating) setRating(data.rating);
+      if (data.userRatingCount) setTotalReviews(data.userRatingCount);
+    }
+
     fetchReviews();
   }, [maxReviews]);
 
@@ -95,17 +116,13 @@ const GoogleReviewsSection = ({
           ))}
         </div>
       ) : (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+        <div
           className={`grid gap-6 ${compact ? "md:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"}`}
         >
           {reviews.map((review, i) => (
             <ReviewCard key={i} review={review} />
           ))}
-        </motion.div>
+        </div>
       )}
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
