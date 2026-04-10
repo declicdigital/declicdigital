@@ -2,6 +2,7 @@ import { lazy, ReactNode, Suspense, Children, isValidElement, useState, useEffec
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import { useAuth } from "@/hooks/useAuth";
+import { CmsOverridesProvider } from "@/hooks/useCmsOverrides";
 
 const Footer = lazy(() => import("./Footer"));
 const BlogCarousel = lazy(() => import("./BlogCarousel"));
@@ -107,18 +108,20 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
   })();
 
   return (
-    <div className="flex min-h-screen flex-col">
-      {isAdmin && <Suspense fallback={null}><AdminBar /></Suspense>}
-      <Header isAdmin={isAdmin} />
-      <main className="flex-1">{wrappedChildren}</main>
-      <Suspense fallback={<div style={{ minHeight: 400 }} />}>
-        {!hideBlogCarousel && <BlogCarousel />}
-        <Footer />
-      </Suspense>
-      <Suspense fallback={null}>
-        <AiChatWidget />
-      </Suspense>
-    </div>
+    <CmsOverridesProvider pagePath={pagePath}>
+      <div className="flex min-h-screen flex-col">
+        {isAdmin && <Suspense fallback={null}><AdminBar /></Suspense>}
+        <Header isAdmin={isAdmin} />
+        <main className="flex-1">{wrappedChildren}</main>
+        <Suspense fallback={<div style={{ minHeight: 400 }} />}>
+          {!hideBlogCarousel && <BlogCarousel />}
+          <Footer />
+        </Suspense>
+        <Suspense fallback={null}>
+          <AiChatWidget />
+        </Suspense>
+      </div>
+    </CmsOverridesProvider>
   );
 };
 

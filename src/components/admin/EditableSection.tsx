@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback, ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
+import { useCmsOverrides } from "@/hooks/useCmsOverrides";
 import { Pencil, Trash2, Tag, X, Save, Plus, Trash, ChevronDown, ChevronUp, ArrowUp, ArrowDown, Upload, GripVertical, Undo2, Redo2 } from "lucide-react";
 
 // ─── Undo/Redo Hook ───
@@ -1005,22 +1006,16 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
   const contentRef = useRef<HTMLDivElement>(null);
 
   const compositeKey = `${pagePath}::${blockId}`;
+  const { getOverride: getCmsOverride, loaded: cmsLoaded, refresh: refreshCms } = useCmsOverrides();
 
   useEffect(() => {
-    supabase
-      .from("cms_page_blocks")
-      .select("id, content")
-      .eq("page_path", compositeKey)
-      .eq("block_type", "section_override")
-      .maybeSingle()
-      .then(({ data }) => {
-        if (data) {
-          const content = data.content as Override["content"];
-          setOverride({ id: data.id, content });
-        }
-        setLoaded(true);
-      });
-  }, [compositeKey]);
+    if (!cmsLoaded) return;
+    const cached = getCmsOverride(compositeKey);
+    if (cached) {
+      setOverride({ id: cached.id, content: cached.content as Override["content"] });
+    }
+    setLoaded(true);
+  }, [compositeKey, cmsLoaded, getCmsOverride]);
 
   // Re-apply overrides after every render (React re-renders overwrite DOM patches)
   const overrideRef = useRef(override);
