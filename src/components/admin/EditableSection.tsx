@@ -269,6 +269,8 @@ function detectLogos(el: HTMLElement): LogoItem[] {
 function detectSubItems(el: HTMLElement): SubItem[] {
   const containers = el.querySelectorAll("[class*='grid'], [class*='flex']");
   for (const container of containers) {
+    if (container.querySelector("h1")) continue;
+
     const children = Array.from(container.children);
     const withHeadings = children.filter(child =>
       child.querySelector("h2, h3, h4") || child.querySelector("[class*='font-bold'], [class*='font-semibold']")
@@ -1034,11 +1036,31 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
 
   const openEditor = () => {
     const fallbackLabel = override?.content?.label || label || blockId;
+    const parsedFromDom = contentRef.current
+      ? normalizeStructuredContent(parseDomToStructured(contentRef.current, fallbackLabel), fallbackLabel)
+      : null;
+
     let initial: StructuredContent;
     if (override?.content?.structured) {
-      initial = normalizeStructuredContent(override.content.structured, fallbackLabel);
-    } else if (contentRef.current) {
-      initial = normalizeStructuredContent(parseDomToStructured(contentRef.current, fallbackLabel), fallbackLabel);
+      const overrideStructured = normalizeStructuredContent(override.content.structured, fallbackLabel);
+      const shouldPreferDomStructure = !!parsedFromDom
+        && parsedFromDom.items.length === 0
+        && overrideStructured.items.length > 0
+        && !!contentRef.current?.querySelector("h1");
+
+      initial = shouldPreferDomStructure
+        ? parsedFromDom
+        : {
+            ...overrideStructured,
+            heading: overrideStructured.heading || parsedFromDom?.heading || "",
+            text: overrideStructured.text || parsedFromDom?.text || "",
+            textHtml: overrideStructured.textHtml || parsedFromDom?.textHtml || "",
+            image: overrideStructured.image || parsedFromDom?.image || "",
+            imageAlt: overrideStructured.imageAlt || parsedFromDom?.imageAlt || "",
+            ctas: overrideStructured.ctas.length > 0 ? overrideStructured.ctas : (parsedFromDom?.ctas || []),
+          };
+    } else if (parsedFromDom) {
+      initial = parsedFromDom;
     } else {
       initial = emptyStructured(fallbackLabel);
     }
