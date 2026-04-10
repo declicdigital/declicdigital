@@ -8,7 +8,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
-const Index = lazy(() => import("./pages/Index"));
+import Index from "./pages/Index";
 import ScrollToTop from "./components/ScrollToTop";
 
 // Lazy-loaded pages for code splitting
