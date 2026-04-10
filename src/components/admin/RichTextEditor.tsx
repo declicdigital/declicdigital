@@ -133,7 +133,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
 
     const currentHtml = editor.getHTML();
     if (content === currentHtml || content === lastEmittedHtmlRef.current) {
-      if (rawHtml !== content) setRawHtml(content);
+      setRawHtml((prev) => (prev === content ? prev : content));
       return;
     }
 
@@ -149,7 +149,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
 
     lastEmittedHtmlRef.current = content;
     setRawHtml(content);
-  }, [content, editor, rawHtml]);
+  }, [content, editor]);
 
   // Listen for CTA edit events
   useEffect(() => {
