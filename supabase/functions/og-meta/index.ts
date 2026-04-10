@@ -117,6 +117,15 @@ const blogArticles: Record<string, PageMeta> = {
   },
 };
 
+const cityPages: Record<string, PageMeta> = {
+  "asnieres-sur-seine": {
+    title: "Agence SEO Asnières-sur-Seine | Déclic Digital",
+    description:
+      "Référencement naturel, GEO et netlinking à Asnières-sur-Seine. Audit SEO offert, résultats mesurables en 3 à 6 mois. Devis gratuit.",
+    image: DEFAULT_IMAGE,
+  },
+};
+
 function getMeta(path: string): PageMeta {
   // Exact match for static pages
   if (staticPages[path]) return staticPages[path];
@@ -124,6 +133,14 @@ function getMeta(path: string): PageMeta {
   // Blog article
   const blogMatch = path.match(/^\/blog\/([^/]+)$/);
   if (blogMatch && blogArticles[blogMatch[1]]) {
+    return blogArticles[blogMatch[1]];
+  }
+
+  // City SEO page
+  const cityMatch = path.match(/^\/referencement-seo\/([^/]+)$/);
+  if (cityMatch && cityPages[cityMatch[1]]) {
+    return cityPages[cityMatch[1]];
+  }
     return blogArticles[blogMatch[1]];
   }
 

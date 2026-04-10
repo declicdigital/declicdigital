@@ -321,7 +321,7 @@ export const cityContent: Record<string, CityContent> = {
       "Asnières-sur-Seine allie vie de quartier et proximité parisienne. Les artisans, commerçants et professions libérales locaux disposent d'un bassin de clientèle fidèle qui cherche avant tout des prestataires proches de chez eux.",
       "Des bords de Seine au centre-ville, Asnières offre un cadre agréable qui attire familles et jeunes actifs. Votre site web capte cette clientèle locale qui recherche la proximité et la confiance.",
     ],
-    seoIntro: "Rendez votre entreprise d'Asnières incontournable sur Google. Les 86 000 habitants de la ville cherchent leurs prestataires locaux en ligne.",
+    seoIntro: "Votre entreprise est implantée à Asnières-sur-Seine et vous cherchez à gagner de la visibilité sur Google ? Déclic Digital est votre agence SEO locale, spécialisée dans le référencement naturel, le GEO et les stratégies de netlinking adaptées aux entreprises des Hauts-de-Seine.",
     seoWhyText: "Asnières est une ville de proximité. Vos clients habitent à quelques rues de votre commerce. Le SEO local les guide vers vous au moment exact où ils ont besoin de vos services.",
     seoLocalText: "Notre stratégie SEO pour Asnières couvre le Centre-Ville, Bac-Bécon, Flachat et les Grésillons. Nous adaptons le référencement à chaque quartier pour maximiser votre visibilité locale.",
     localFact: "Asnières-sur-Seine est connectée à Paris en moins de 10 minutes par le métro ligne 13 et le RER C.",
