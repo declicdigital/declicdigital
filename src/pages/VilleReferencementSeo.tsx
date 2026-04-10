@@ -12,6 +12,15 @@ import { cityContent } from "@/data/cityContent";
 import { getCityGuide } from "@/data/cityGuideContent";
 import { Helmet } from "react-helmet-async";
 
+const seoFaqsByCity: Record<string, { q: string; a: string }[]> = {
+  "asnieres-sur-seine": [
+    { q: "Combien de temps faut-il pour voir des résultats SEO ?", a: "Le SEO est un investissement sur le moyen terme. Les premières améliorations de positions sont généralement visibles entre 3 et 6 mois après le début des travaux. Pour des mots-clés compétitifs à Asnières ou dans les Hauts-de-Seine, comptez 6 à 12 mois pour atteindre les premières positions et les maintenir durablement." },
+    { q: "Mon site est déjà en ligne. Peut-il être optimisé sans refonte ?", a: "Dans la grande majorité des cas, oui. Nous travaillons sur votre site existant : optimisation des balises, amélioration du contenu, correction des erreurs techniques, ajout de données structurées. Une refonte complète n'est nécessaire que si la structure du site est fondamentalement problématique." },
+    { q: "Quelle est la différence entre SEO et SEA ?", a: "Le SEA (Google Ads) génère du trafic immédiat mais payant — dès que vous coupez le budget, la visibilité disparaît. Le SEO (référencement naturel) demande plus de temps mais crée une présence durable et gratuite à long terme. Nous recommandons souvent une approche complémentaire : SEA pour l'urgence, SEO pour la rentabilité durable." },
+    { q: "Travaillez-vous uniquement avec des entreprises d'Asnières ?", a: "Non. Déclic Digital accompagne des clients dans tout le département des Hauts-de-Seine (Boulogne-Billancourt, Nanterre, Suresnes, Courbevoie, Levallois-Perret…) et en Île-de-France. Mais notre ancrage local dans le 92 est un vrai plus pour comprendre votre marché de proximité." },
+  ],
+};
+
 const seoFaqsByRegion: Record<string, { q: string; a: string }[]> = {
   paris: [
     { q: "Combien de temps faut-il pour voir des résultats SEO ?", a: "Les premiers résultats apparaissent généralement entre 3 et 6 mois. Le SEO est un investissement à moyen terme qui s'amplifie avec le temps : les positions gagnées restent durables." },
@@ -37,7 +46,7 @@ const VilleReferencementSeo = () => {
   const nearCities = cities
     .filter((c) => c.region === city.region && c.slug !== city.slug)
     .slice(0, 6);
-  const faqs = seoFaqsByRegion[city.region] || seoFaqsByRegion.paris;
+  const faqs = seoFaqsByCity[city.slug] || seoFaqsByRegion[city.region] || seoFaqsByRegion.paris;
 
   return (
     <PageLayout>
@@ -71,7 +80,9 @@ const VilleReferencementSeo = () => {
                 Agence SEO {city.description}
               </span>
               <h1 className="mb-6 text-4xl font-extrabold md:text-5xl">
-                {`Référencement SEO et GEO local pour les artisans et TPE de ${city.nameShort}`}
+                {city.slug === "asnieres-sur-seine"
+                  ? "Agence SEO à Asnières-sur-Seine – Référencement naturel & Netlinking"
+                  : `Référencement SEO et GEO local pour les artisans et TPE de ${city.nameShort}`}
               </h1>
               <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
                 {content?.seoIntro || `Votre entreprise ${city.description} mérite d'être visible sur Google. Notre agence SEO optimise votre site pour attirer des clients qualifiés et développer votre activité grâce au référencement naturel.`}
@@ -231,7 +242,9 @@ const VilleReferencementSeo = () => {
       {/* FAQ */}
       <SectionWrapper className="bg-section-blue">
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-10">
-          Questions fréquentes sur le SEO à {city.nameShort}
+          {city.slug === "asnieres-sur-seine"
+            ? "Questions fréquentes des entreprises à Asnières-sur-Seine"
+            : `Questions fréquentes sur le SEO à ${city.nameShort}`}
         </h2>
         <div className="mx-auto max-w-3xl space-y-4">
           {faqs.map((faq, i) => (
