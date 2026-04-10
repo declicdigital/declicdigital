@@ -180,7 +180,7 @@ const VilleCreationSite = () => {
             </div>
 
             <p className="text-muted-foreground leading-relaxed">
-              Découvrez nos <Link to="/tarifs" className="text-primary font-semibold hover:underline">tarifs adaptés aux TPE</Link>, nos <Link to="/realisations" className="text-primary font-semibold hover:underline">réalisations</Link> ou demandez un <Link to="/contact" className="text-primary font-semibold hover:underline">audit SEO gratuit</Link> pour évaluer votre visibilité actuelle.
+              Découvrez nos <Link to="/tarifs" className="text-primary font-semibold">tarifs adaptés aux TPE</Link>, nos <Link to="/realisations" className="text-primary font-semibold">réalisations</Link> ou demandez un <Link to="/contact" className="text-primary font-semibold">audit SEO gratuit</Link> pour évaluer votre visibilité actuelle.
             </p>
             <div className="rounded-2xl bg-background p-6 shadow-card">
               <p className="text-sm font-semibold text-primary mb-1">Le saviez-vous ?</p>
@@ -207,7 +207,7 @@ const VilleCreationSite = () => {
                 </div>
               ))}
               <p className="text-muted-foreground leading-relaxed">
-                Prêt à créer votre site web à {city.nameShort} ? <Link to="/rendez-vous" className="text-primary font-semibold hover:underline">Prenez rendez-vous</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+                Prêt à créer votre site web à {city.nameShort} ? <Link to="/rendez-vous" className="text-primary font-semibold">Prenez rendez-vous</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold">nos réalisations</Link>.
               </p>
             </div>
           </SectionWrapper>
@@ -254,7 +254,7 @@ const VilleCreationSite = () => {
           ))}
         </div>
         <p className="text-center mt-6">
-          <Link to="/faq" className="text-primary font-semibold hover:underline">Voir toutes les questions fréquentes →</Link>
+          <Link to="/faq" className="text-primary font-semibold">Voir toutes les questions fréquentes →</Link>
         </p>
       </SectionWrapper>
 

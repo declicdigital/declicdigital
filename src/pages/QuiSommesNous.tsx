@@ -37,7 +37,7 @@ const QuiSommesNous = () => (
               Déclic Digital : votre agence web et SEO freelance spécialisée TPE à Paris
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Une agence fondée par un Expert Produit Google, avec la conviction que chaque entreprise, quelle que soit sa taille, mérite d'être visible en ligne et d'attirer des clients grâce à un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web professionnel</Link>.
+              Une agence fondée par un Expert Produit Google, avec la conviction que chaque entreprise, quelle que soit sa taille, mérite d'être visible en ligne et d'attirer des clients grâce à un <Link to="/creation-site-web" className="text-primary font-semibold">site web professionnel</Link>.
             </p>
           </motion.div>
       </div>
@@ -62,7 +62,7 @@ const QuiSommesNous = () => (
           Passionné par le web depuis plus de 8 ans, il a commencé en aidant son père à développer la visibilité de son entreprise de BTP. Puis il a accompagné un artiste dans la création de son site internet. Ces deux expériences lui ont fait prendre conscience d'un constat : la plupart des petites entreprises n'ont pas les moyens ni les connaissances pour créer un site qui génère réellement des clients.
         </p>
         <p>
-          C'est de ce constat qu'est née Déclic Digital : une agence web pensée pour les TPE, les artisans et les indépendants. L'idée est simple : proposer des <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">sites web professionnels</Link>, performants et optimisés pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement Google</Link>, à des <Link to="/tarifs" className="text-primary font-semibold hover:underline">tarifs accessibles</Link>.
+          C'est de ce constat qu'est née Déclic Digital : une agence web pensée pour les TPE, les artisans et les indépendants. L'idée est simple : proposer des <Link to="/creation-site-web" className="text-primary font-semibold">sites web professionnels</Link>, performants et optimisés pour le <Link to="/referencement-seo" className="text-primary font-semibold">référencement Google</Link>, à des <Link to="/tarifs" className="text-primary font-semibold">tarifs accessibles</Link>.
         </p>
         <div className="rounded-2xl bg-card p-6 shadow-card flex items-start gap-4">
           <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl gradient-primary text-white">
@@ -79,10 +79,10 @@ const QuiSommesNous = () => (
           "Les petites entreprises ont besoin d'outils simples et efficaces pour trouver des clients en ligne."
         </blockquote>
         <p>
-          Aujourd'hui, Déclic Digital accompagne des TPE et indépendants <Link to="/nos-villes" className="text-primary font-semibold hover:underline">à Paris et dans les Hauts-de-Seine</Link>. Chaque projet est abordé avec la même rigueur et la même passion : comprendre les besoins du client, concevoir un site qui lui ressemble, l'optimiser pour Google et mesurer les résultats.
+          Aujourd'hui, Déclic Digital accompagne des TPE et indépendants <Link to="/nos-villes" className="text-primary font-semibold">à Paris et dans les Hauts-de-Seine</Link>. Chaque projet est abordé avec la même rigueur et la même passion : comprendre les besoins du client, concevoir un site qui lui ressemble, l'optimiser pour Google et mesurer les résultats.
         </p>
         <p>
-          Notre force, c'est la proximité. Nous ne sommes pas une grande agence impersonnelle. Nous prenons le temps d'échanger avec chaque client, de comprendre son métier et de proposer des solutions sur mesure. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+          Notre force, c'est la proximité. Nous ne sommes pas une grande agence impersonnelle. Nous prenons le temps d'échanger avec chaque client, de comprendre son métier et de proposer des solutions sur mesure. Découvrez <Link to="/realisations" className="text-primary font-semibold">nos réalisations</Link>.
         </p>
       </div>
     </SectionWrapper>
@@ -92,7 +92,7 @@ const QuiSommesNous = () => (
       <div className="text-center mb-10">
         <h2 className="text-3xl font-extrabold md:text-4xl">Notre mission</h2>
         <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-          Rendre la visibilité en ligne accessible à toutes les entreprises grâce à la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de sites web</Link> et le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO et GEO</Link>. Nous croyons que chaque TPE mérite un site qui attire des clients.
+          Rendre la visibilité en ligne accessible à toutes les entreprises grâce à la <Link to="/creation-site-web" className="text-primary font-semibold">création de sites web</Link> et le <Link to="/referencement-seo" className="text-primary font-semibold">référencement SEO et GEO</Link>. Nous croyons que chaque TPE mérite un site qui attire des clients.
         </p>
       </div>
       <div className="grid gap-6 md:grid-cols-3 max-w-4xl mx-auto">
@@ -117,7 +117,7 @@ const QuiSommesNous = () => (
       <div className="mx-auto max-w-3xl space-y-6">
         <h2 className="text-3xl font-extrabold md:text-4xl text-center">Nos valeurs</h2>
         <p className="text-muted-foreground leading-relaxed">
-          Chez <Link to="/faq" className="text-primary font-semibold hover:underline">Déclic Digital</Link>, nous croyons en la transparence totale. Pas de contrat obscur, pas de termes compliqués, pas de promesses irréalistes. Nous vous expliquons clairement ce que nous faisons, pourquoi nous le faisons, et quels résultats vous pouvez attendre. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link>.
+          Chez <Link to="/faq" className="text-primary font-semibold">Déclic Digital</Link>, nous croyons en la transparence totale. Pas de contrat obscur, pas de termes compliqués, pas de promesses irréalistes. Nous vous expliquons clairement ce que nous faisons, pourquoi nous le faisons, et quels résultats vous pouvez attendre. Consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link>.
         </p>
         <p className="text-muted-foreground leading-relaxed">
           Nous croyons aussi que la technologie doit être au service de l'humain. Un site web n'est qu'un outil. Ce qui compte, c'est ce qu'il apporte à votre entreprise et à vos clients.

@@ -28,7 +28,7 @@ const NosMetiers = () => (
             Un site web adapté à <span className="text-gradient">chaque métier</span>
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Chaque profession a ses spécificités. Nous créons des sites internet sur-mesure, optimisés pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement Google</Link>, adaptés à votre activité et à vos clients.
+            Chaque profession a ses spécificités. Nous créons des sites internet sur-mesure, optimisés pour le <Link to="/referencement-seo" className="text-primary font-semibold">référencement Google</Link>, adaptés à votre activité et à vos clients.
           </p>
         </motion.div>
       </div>

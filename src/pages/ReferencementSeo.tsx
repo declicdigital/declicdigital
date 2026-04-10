@@ -272,7 +272,7 @@ const ReferencementSeo = () => {
           <div className="space-y-5">
             <h2 className="text-3xl font-extrabold md:text-4xl">Suivez vos résultats en temps réel</h2>
             <p className="text-muted-foreground leading-relaxed">
-              Le SEO n'est pas une boîte noire. Grâce aux outils d'analyse, vous suivez chaque progression : mots-clés qui montent, trafic organique, demandes de devis générées par votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link>.
+              Le SEO n'est pas une boîte noire. Grâce aux outils d'analyse, vous suivez chaque progression : mots-clés qui montent, trafic organique, demandes de devis générées par votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link>.
             </p>
             <p className="text-muted-foreground leading-relaxed">
               C'est cette transparence qui fait du SEO un investissement mesurable, contrairement à bien d'autres canaux marketing.
@@ -311,7 +311,7 @@ const ReferencementSeo = () => {
           </div>
           <div className="rounded-2xl border border-amber-300/30 bg-amber-50/50 p-5">
             <p className="font-bold text-amber-700 mb-2">⚠️ Google Ads n'est pas votre ennemi</p>
-            <p className="text-muted-foreground">Google Ads reste un outil utile, notamment pour lancer une activité ou capter de la demande en urgence. Mais il ne construit rien de durable. Le combo idéal pour une TPE : <strong>SEO pour le long terme + Google Ads en appoint ponctuel</strong> pendant la montée en puissance du référencement naturel. Découvrez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link>.</p>
+            <p className="text-muted-foreground">Google Ads reste un outil utile, notamment pour lancer une activité ou capter de la demande en urgence. Mais il ne construit rien de durable. Le combo idéal pour une TPE : <strong>SEO pour le long terme + Google Ads en appoint ponctuel</strong> pendant la montée en puissance du référencement naturel. Découvrez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link>.</p>
           </div>
         </div>
       </SectionWrapper>
@@ -402,7 +402,7 @@ const ReferencementSeo = () => {
           </div>
           <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
             <p className="font-bold text-primary mb-2">📌 Conseil pratique</p>
-            <p className="text-muted-foreground">Avant tout investissement SEO, vérifiez que votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> se charge en moins de 3 secondes sur mobile et qu'il est responsive. Un site lent est pénalisé par Google et fait fuir vos visiteurs. Testez avec <strong>PageSpeed Insights</strong> de Google - c'est gratuit et prend 30 secondes. Consultez aussi notre article sur <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold hover:underline">l'impact de la vitesse sur votre chiffre d'affaires</Link>.</p>
+            <p className="text-muted-foreground">Avant tout investissement SEO, vérifiez que votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link> se charge en moins de 3 secondes sur mobile et qu'il est responsive. Un site lent est pénalisé par Google et fait fuir vos visiteurs. Testez avec <strong>PageSpeed Insights</strong> de Google - c'est gratuit et prend 30 secondes. Consultez aussi notre article sur <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold">l'impact de la vitesse sur votre chiffre d'affaires</Link>.</p>
           </div>
         </div>
       </SectionWrapper>
@@ -470,7 +470,7 @@ const ReferencementSeo = () => {
           <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8">
             <h2 className="text-2xl font-extrabold mb-3">Au-delà du SEO : la visibilité dans les moteurs IA</h2>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              Au-delà du SEO traditionnel, nous vous aidons aussi à apparaître dans les réponses des intelligences artificielles. ChatGPT, Perplexity, Gemini : ces moteurs génératifs deviennent un canal d'acquisition incontournable. Découvrez notre stratégie d'<Link to="/visibilite-ia" className="text-primary font-semibold hover:underline">optimisation pour les moteurs IA (GEO)</Link>.
+              Au-delà du SEO traditionnel, nous vous aidons aussi à apparaître dans les réponses des intelligences artificielles. ChatGPT, Perplexity, Gemini : ces moteurs génératifs deviennent un canal d'acquisition incontournable. Découvrez notre stratégie d'<Link to="/visibilite-ia" className="text-primary font-semibold">optimisation pour les moteurs IA (GEO)</Link>.
             </p>
           </div>
         </div>
@@ -480,7 +480,7 @@ const ReferencementSeo = () => {
       <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">Nos zones d'intervention SEO</h2>
         <p className="text-center text-muted-foreground mb-8">
-          Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold hover:underline">référencement SEO local</Link> à Paris et dans les Hauts-de-Seine.
+          Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold">référencement SEO local</Link> à Paris et dans les Hauts-de-Seine.
         </p>
         <div className="flex flex-wrap justify-center gap-3">
           {[

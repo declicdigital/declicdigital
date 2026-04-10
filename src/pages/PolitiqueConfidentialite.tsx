@@ -105,7 +105,7 @@ const PolitiqueConfidentialite = () => (
             <li><strong className="text-foreground">Droit de retrait du consentement :</strong> retirer votre consentement à tout moment</li>
           </ul>
           <p className="mt-4">
-            Pour exercer vos droits, contactez-nous à : <a href="mailto:contact@declicdigital.net" className="text-primary font-semibold hover:underline">contact@declicdigital.net</a>
+            Pour exercer vos droits, contactez-nous à : <a href="mailto:contact@declicdigital.net" className="text-primary font-semibold">contact@declicdigital.net</a>
           </p>
           <p className="mt-2">
             Vous pouvez également introduire une réclamation auprès de la <strong className="text-foreground">CNIL</strong> (Commission Nationale de l'Informatique et des Libertés) : <a href="https://www.cnil.fr" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">www.cnil.fr</a>
@@ -151,7 +151,7 @@ const PolitiqueConfidentialite = () => (
             Pour toute question relative à cette politique de confidentialité ou à vos données personnelles, contactez-nous :
           </p>
           <ul className="mt-3 space-y-1">
-            <li>Email : <a href="mailto:contact@declicdigital.net" className="text-primary font-semibold hover:underline">contact@declicdigital.net</a></li>
+            <li>Email : <a href="mailto:contact@declicdigital.net" className="text-primary font-semibold">contact@declicdigital.net</a></li>
             <li>Téléphone : 06.02.22.89.39</li>
           </ul>
         </section>

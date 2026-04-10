@@ -63,7 +63,7 @@ const Realisations = () => (
             Nos réalisations : sites web professionnels créés pour des artisans et TPE en Île-de-France
           </h1>
           <p className="mx-auto max-w-2xl text-lg text-muted-foreground">
-            Découvrez les sites que nous avons créés pour nos clients. Chaque projet est unique, conçu pour répondre aux besoins spécifiques de chaque entreprise et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO</Link>.
+            Découvrez les sites que nous avons créés pour nos clients. Chaque projet est unique, conçu pour répondre aux besoins spécifiques de chaque entreprise et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold">référencement SEO</Link>.
           </p>
           <div className="mt-6">
             <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">

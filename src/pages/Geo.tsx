@@ -210,17 +210,17 @@ const Geo = () => {
 210:             En termes simples : là où le <strong>SEO</strong> (Search Engine Optimization) vous fait apparaître dans les résultats de Google, le <strong>GEO</strong> vous fait citer, mentionner ou recommander par les IA quand un utilisateur pose une question dans leur interface.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Imaginez qu'un client potentiel tape dans ChatGPT : <em>"Quel est le meilleur plombier chauffagiste à Lyon ?"</em> ou <em>"Quelle agence web recommandes-tu pour une TPE ?"</em>. Le GEO est ce qui détermine si votre nom apparaît dans la réponse… ou si c'est celui de votre concurrent. Le GEO est un complément naturel du <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO classique</Link>.
+            Imaginez qu'un client potentiel tape dans ChatGPT : <em>"Quel est le meilleur plombier chauffagiste à Lyon ?"</em> ou <em>"Quelle agence web recommandes-tu pour une TPE ?"</em>. Le GEO est ce qui détermine si votre nom apparaît dans la réponse… ou si c'est celui de votre concurrent. Le GEO est un complément naturel du <Link to="/referencement-seo" className="text-primary font-semibold">référencement SEO classique</Link>.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Pour qu'une stratégie GEO fonctionne, il faut d'abord disposer d'un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web bien structuré pour les IA</Link>, avec du contenu de qualité et des données structurées. C'est la base technique indispensable. Vous pouvez aussi <Link to="/contact" className="text-primary font-semibold hover:underline">auditer votre visibilité actuelle</Link> pour identifier vos axes de progression. Découvrez également comment la <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold hover:underline">performance technique de votre site</Link> influence les critères de sélection des IA.
+            Pour qu'une stratégie GEO fonctionne, il faut d'abord disposer d'un <Link to="/creation-site-web" className="text-primary font-semibold">site web bien structuré pour les IA</Link>, avec du contenu de qualité et des données structurées. C'est la base technique indispensable. Vous pouvez aussi <Link to="/contact" className="text-primary font-semibold">auditer votre visibilité actuelle</Link> pour identifier vos axes de progression. Découvrez également comment la <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold">performance technique de votre site</Link> influence les critères de sélection des IA.
           </p>
           <div className="rounded-2xl border border-amber-300/30 bg-amber-50/50 p-5">
             <p className="font-bold text-amber-700 mb-2">⚡ Pourquoi ce terme est-il encore méconnu ?</p>
             <p className="text-muted-foreground">Le GEO est une discipline émergente - le terme a été formalisé par des chercheurs de Princeton, IIT Delhi et Georgia Tech en 2023. Il est encore peu maîtrisé par les agences et consultants traditionnels, ce qui représente une <strong>opportunité majeure</strong> pour les entreprises qui s'y mettent dès maintenant.</p>
           </div>
           <p className="text-muted-foreground leading-relaxed">
-            On retrouve également ce concept sous d'autres appellations : <strong>AEO</strong> (Answer Engine Optimization), <strong>LLMO</strong> (Large Language Model Optimization), ou encore <strong>AI SEO</strong>. Ces termes recouvrent la même réalité : adapter sa présence digitale aux moteurs de recherche génératifs. Pour approfondir, consultez <a href="https://searchengineland.com/generative-engine-optimization-geo-guide-448582" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold hover:underline">le guide Search Engine Land sur le GEO</a>.
+            On retrouve également ce concept sous d'autres appellations : <strong>AEO</strong> (Answer Engine Optimization), <strong>LLMO</strong> (Large Language Model Optimization), ou encore <strong>AI SEO</strong>. Ces termes recouvrent la même réalité : adapter sa présence digitale aux moteurs de recherche génératifs. Pour approfondir, consultez <a href="https://searchengineland.com/generative-engine-optimization-geo-guide-448582" target="_blank" rel="noopener noreferrer" className="text-primary font-semibold">le guide Search Engine Land sur le GEO</a>.
           </p>
         </div>
       </SectionWrapper>
@@ -253,7 +253,7 @@ const Geo = () => {
           </div>
           <div className="rounded-2xl border border-green-300/30 bg-green-50/50 p-5">
             <p className="font-bold text-green-700 mb-2">✅ La bonne nouvelle</p>
-            <p className="text-muted-foreground">Les fondements restent communs : un contenu de qualité, une expertise réelle, une structure claire et une présence cohérente sur le web favorisent à la fois le SEO et le GEO. Si vous avez déjà un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">bon site web</Link>, vous avez déjà les bases.</p>
+            <p className="text-muted-foreground">Les fondements restent communs : un contenu de qualité, une expertise réelle, une structure claire et une présence cohérente sur le web favorisent à la fois le SEO et le GEO. Si vous avez déjà un <Link to="/creation-site-web" className="text-primary font-semibold">bon site web</Link>, vous avez déjà les bases.</p>
           </div>
         </div>
       </SectionWrapper>
@@ -312,7 +312,7 @@ const Geo = () => {
           </div>
           <div className="rounded-2xl border border-violet-300/30 bg-violet-50/50 p-5">
             <p className="font-bold text-violet-700 mb-2">🔑 L'avantage des petites structures</p>
-            <p className="text-muted-foreground">Les IA génératives sont entraînées à détecter l'expertise réelle et la précision des réponses. Un artisan qui explique en détail son processus, un indépendant qui partage son expérience concrète, une TPE qui répond avec précision aux questions de ses clients - voilà exactement ce que les algorithmes d'IA cherchent à mettre en avant. Découvrez <Link to="/nos-metiers" className="text-primary font-semibold hover:underline">nos solutions par métier</Link>.</p>
+            <p className="text-muted-foreground">Les IA génératives sont entraînées à détecter l'expertise réelle et la précision des réponses. Un artisan qui explique en détail son processus, un indépendant qui partage son expérience concrète, une TPE qui répond avec précision aux questions de ses clients - voilà exactement ce que les algorithmes d'IA cherchent à mettre en avant. Découvrez <Link to="/nos-metiers" className="text-primary font-semibold">nos solutions par métier</Link>.</p>
           </div>
         </div>
       </SectionWrapper>
