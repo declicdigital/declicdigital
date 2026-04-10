@@ -105,7 +105,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
 
     const { from, to } = editor.state.selection;
     isSyncingFromOutsideRef.current = true;
-    editor.commands.setContent(content, false);
+    editor.commands.setContent(content, { emitUpdate: false });
 
     const maxPos = Math.max(0, editor.state.doc.content.size);
     editor.commands.setTextSelection({
@@ -202,7 +202,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
     onChange(val);
     if (editor && val !== editor.getHTML()) {
       isSyncingFromOutsideRef.current = true;
-      editor.commands.setContent(val, false);
+      editor.commands.setContent(val, { emitUpdate: false });
     }
   };
 
