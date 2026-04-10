@@ -1007,7 +1007,6 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
   const compositeKey = `${pagePath}::${blockId}`;
 
   useEffect(() => {
-    if (!isAdmin) { setLoaded(true); return; }
     supabase
       .from("cms_page_blocks")
       .select("id, content")
@@ -1021,7 +1020,7 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
         }
         setLoaded(true);
       });
-  }, [compositeKey, isAdmin]);
+  }, [compositeKey]);
 
   // Re-apply overrides after every render (React re-renders overwrite DOM patches)
   const overrideRef = useRef(override);
