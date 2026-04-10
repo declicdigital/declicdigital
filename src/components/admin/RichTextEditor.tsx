@@ -332,7 +332,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
           </TabsList>
         </div>
         <TabsContent value="visual" className="m-0">
-          <div className="prose prose-sm max-w-none p-4 min-h-[300px] focus-within:outline-none [&_.ProseMirror]:outline-none [&_.ProseMirror]:min-h-[280px] [&_.ProseMirror_a]:text-primary [&_.ProseMirror_a]:underline [&_.ProseMirror_a]:decoration-primary/50 [&_.ProseMirror_a]:font-medium">
+          <div className="prose prose-sm max-w-none p-4 min-h-[300px] focus-within:outline-none [&_.ProseMirror]:outline-none [&_.ProseMirror]:min-h-[280px] [&_.ProseMirror_a]:text-primary [&_.ProseMirror_a]:no-underline [&_.ProseMirror_a]:font-medium">
             <EditorContent editor={editor} />
           </div>
         </TabsContent>
