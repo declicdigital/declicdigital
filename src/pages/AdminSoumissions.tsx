@@ -174,6 +174,7 @@ const AdminSoumissions = () => {
   };
 
   const downloadPdf = async (sub: Submission) => {
+    const { default: jsPDF } = await import("jspdf");
     const d = sub.data;
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
