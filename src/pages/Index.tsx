@@ -102,7 +102,6 @@ const Index = () => {
       </Helmet>
 
       {/* Hero */}
-      <EditableSection blockId="hero" pagePath="/" label="Hero HP">
       <section className="gradient-hero relative overflow-hidden">
         <div className="container py-16 md:py-24 lg:py-32">
           <div className="grid items-center gap-10 lg:grid-cols-2">
@@ -136,7 +135,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-      </EditableSection>
 
 
       {/* Problème */}
