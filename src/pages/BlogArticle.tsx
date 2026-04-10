@@ -159,7 +159,7 @@ const BlogArticleInner = () => {
           <Link
             key={i}
             to={url}
-            className="text-primary underline underline-offset-2 hover:text-primary/80 transition-colors"
+            className="text-primary font-medium hover:text-primary/80 transition-colors"
             {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           >
             {linkText}
