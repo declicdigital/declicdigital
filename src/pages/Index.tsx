@@ -13,7 +13,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
-import heroDashboard from "@/assets/tableau-bord-seo-professionnel.webp";
+
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 
 import logoWordpress from "@/assets/logos/wordpress.webp";

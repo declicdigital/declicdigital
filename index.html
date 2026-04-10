@@ -2,28 +2,25 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <!-- GTM + gtag: load on first user interaction -->
+    <!-- GTM + gtag: load after page is fully rendered + 2s delay -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       function _loadTracking(){
         if(window._trkLoaded)return;window._trkLoaded=true;
-        // gtag (Google Ads)
         var g=document.createElement('script');
         g.src='https://www.googletagmanager.com/gtag/js?id=AW-18047413249';
         g.async=true;
         g.onload=function(){gtag('js',new Date());gtag('config','AW-18047413249');};
         document.head.appendChild(g);
-        // GTM
         window.dataLayer.push({'gtm.start':new Date().getTime(),event:'gtm.js'});
         var t=document.createElement('script');
         t.async=true;
         t.src='https://www.googletagmanager.com/gtm.js?id=GTM-KMBKVH5C';
         document.head.appendChild(t);
       }
-      ['scroll','click','mousemove','touchstart'].forEach(function(e){
-        window.addEventListener(e,_loadTracking,{once:true,passive:true});
-      });
+      if(document.readyState==='complete'){setTimeout(_loadTracking,2000)}
+      else{window.addEventListener('load',function(){setTimeout(_loadTracking,2000)},{once:true})}
     </script>
     <link rel="preload" href="/fonts/ClashDisplay-Variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/DMSerifDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
@@ -121,19 +118,19 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div id="root">
-      <!-- Above-the-fold skeleton – visible avant que React s'hydrate -->
+      <!-- LCP skeleton : H1 réel rendu immédiatement en HTML pur -->
       <div style="display:flex;flex-direction:column;min-height:100vh">
         <div style="position:sticky;top:0;z-index:50;border-bottom:1px solid hsl(42 25% 82%);background:hsl(43 35% 96%/.8);backdrop-filter:blur(12px);height:5rem"></div>
-        <div style="flex:1;padding:4rem 1rem;max-width:72rem;margin:0 auto;width:100%">
-          <div style="max-width:36rem">
-            <div style="height:1.5rem;width:12rem;border-radius:9999px;background:hsl(263 36% 18%/.08);margin-bottom:1rem"></div>
-            <div style="height:3rem;width:100%;border-radius:.5rem;background:hsl(263 36% 18%/.06);margin-bottom:.75rem"></div>
-            <div style="height:3rem;width:80%;border-radius:.5rem;background:hsl(263 36% 18%/.06);margin-bottom:1.5rem"></div>
-            <div style="height:1.25rem;width:100%;border-radius:.25rem;background:hsl(263 36% 18%/.04);margin-bottom:.5rem"></div>
-            <div style="height:1.25rem;width:90%;border-radius:.25rem;background:hsl(263 36% 18%/.04);margin-bottom:2rem"></div>
-            <div style="display:flex;gap:.75rem">
-              <div style="height:3rem;width:12rem;border-radius:9999px;background:linear-gradient(135deg,hsl(263 70% 50%),hsl(280 70% 55%))"></div>
-              <div style="height:3rem;width:10rem;border-radius:9999px;border:2px solid hsl(263 36% 18%)"></div>
+        <div style="background:linear-gradient(135deg,hsl(43 35% 96%),hsl(38 33% 94%));padding:4rem 1rem">
+          <div style="max-width:72rem;margin:0 auto;display:grid;grid-template-columns:1fr;gap:2.5rem;align-items:center">
+            <div style="max-width:36rem">
+              <span style="display:inline-block;border-radius:9999px;background:hsl(263 70% 50%/.1);padding:.375rem 1rem;font-size:.75rem;font-weight:600;color:hsl(263 70% 50%);margin-bottom:1rem;font-family:'Clash Display',system-ui,sans-serif">Expert Produit Google · Agence digitale</span>
+              <h1 style="font-family:'DM Serif Display',Georgia,serif;font-size:clamp(2.25rem,5vw,3.75rem);font-weight:700;line-height:1.1;color:hsl(263 36% 18%);letter-spacing:-.025em;margin:0 0 1.5rem">On crée votre site web à Paris et dans le 92 pour briller sur Google et l'IA</h1>
+              <p style="font-family:'Clash Display',system-ui,sans-serif;font-size:1.125rem;color:hsl(263 20% 40%);line-height:1.7;margin:0 0 2rem;max-width:32rem">Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des sites performants et optimisés SEO et GEO pour que les TPE et indépendants de Paris et du 92 attirent enfin les bons clients.</p>
+              <div style="display:flex;gap:.75rem;flex-wrap:wrap">
+                <a href="/contact" style="display:inline-flex;align-items:center;height:3rem;padding:0 2rem;border-radius:9999px;background:linear-gradient(135deg,hsl(263 70% 50%),hsl(280 70% 55%));color:#fff;font-family:'Clash Display',system-ui,sans-serif;font-weight:600;font-size:.9375rem;text-decoration:none">Demander un audit SEO gratuit</a>
+                <a href="/rendez-vous" style="display:inline-flex;align-items:center;height:3rem;padding:0 2rem;border-radius:9999px;border:2px solid hsl(263 36% 18%);color:hsl(263 36% 18%);font-family:'Clash Display',system-ui,sans-serif;font-weight:600;font-size:.9375rem;text-decoration:none">Prendre rendez-vous</a>
+              </div>
             </div>
           </div>
         </div>
