@@ -196,6 +196,11 @@ h1, h2, h3 {
       0 0.5px 0px hsl(40 30% 80% / 0.3);
   }
 
+  p {
+    text-align: justify;
+    text-justify: inter-word;
+  }
+
   /* ── Stronger shadow on bold / semibold text ── */
   strong, b, .font-bold, .font-extrabold, .font-semibold {
     text-shadow:
