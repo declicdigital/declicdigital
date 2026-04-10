@@ -380,6 +380,13 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
   patchCtaLinks(el, enabledCtas);
 }
 
+function applyInlineLinkStyles(container: ParentNode) {
+  container.querySelectorAll("a").forEach((link) => {
+    if (link.closest("[data-inline-cta='true']") || link.hasAttribute("data-inline-cta-link")) return;
+    link.classList.add("text-primary", "underline", "decoration-primary/50", "font-medium");
+  });
+}
+
 function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
   const temp = document.createElement("div");
   temp.innerHTML = html;
@@ -419,13 +426,6 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
 
   const matchedBlocks: Array<{ source: HTMLElement; target: HTMLElement | null }> = [];
 
-  const applyLinkStyles = (container: ParentNode) => {
-    container.querySelectorAll("a").forEach((link) => {
-      if (link.closest("[data-inline-cta='true']") || link.hasAttribute("data-inline-cta-link")) return;
-      link.classList.add("text-primary", "underline", "decoration-primary/50", "font-medium");
-    });
-  };
-
   const buildInlineRichTextBlock = (block: HTMLElement): HTMLElement | null => {
     const tag = block.tagName.toLowerCase();
 
@@ -456,7 +456,7 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
     if (tag === "hr" && !clone.className) {
       clone.className = "my-6 border-border";
     }
-    applyLinkStyles(clone);
+    applyInlineLinkStyles(clone);
     return clone;
   };
 
@@ -473,7 +473,7 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
     if (/^h[2-6]$/.test(tag)) {
       if (headingElements[headingIndex]) {
         headingElements[headingIndex].innerHTML = block.innerHTML;
-        applyLinkStyles(headingElements[headingIndex]);
+        applyInlineLinkStyles(headingElements[headingIndex]);
         matchedBlocks.push({ source: block, target: headingElements[headingIndex] });
         headingIndex++;
       } else {
@@ -485,7 +485,7 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
     if (tag === "p") {
       if (paragraphElements[paragraphIndex]) {
         paragraphElements[paragraphIndex].innerHTML = block.innerHTML;
-        applyLinkStyles(paragraphElements[paragraphIndex]);
+        applyInlineLinkStyles(paragraphElements[paragraphIndex]);
         matchedBlocks.push({ source: block, target: paragraphElements[paragraphIndex] });
         paragraphIndex++;
       } else {
@@ -497,7 +497,7 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
     if (tag === "ul" || tag === "ol") {
       if (listElements[listIndex]) {
         listElements[listIndex].innerHTML = block.innerHTML;
-        applyLinkStyles(listElements[listIndex]);
+        applyInlineLinkStyles(listElements[listIndex]);
         matchedBlocks.push({ source: block, target: listElements[listIndex] });
         listIndex++;
       } else {
@@ -509,7 +509,7 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
     if (tag === "blockquote") {
       if (quoteElements[quoteIndex]) {
         quoteElements[quoteIndex].innerHTML = block.innerHTML;
-        applyLinkStyles(quoteElements[quoteIndex]);
+        applyInlineLinkStyles(quoteElements[quoteIndex]);
         matchedBlocks.push({ source: block, target: quoteElements[quoteIndex] });
         quoteIndex++;
       } else {
@@ -610,21 +610,53 @@ function applySubItemsToDOM(el: HTMLElement, items: SubItem[]) {
         else if (boldEl && item.heading) boldEl.textContent = item.heading;
 
         if (item.text) {
-          const lines = item.text.split("\n\n").filter(t => t.trim());
           const paragraphs = child.querySelectorAll("p");
           const significantPs: HTMLParagraphElement[] = [];
           paragraphs.forEach(p => {
             const t = p.textContent?.trim();
             if (t && t.length > 3) significantPs.push(p);
           });
-          let pIdx = 0;
-          lines.forEach(txt => {
-            if (txt.match(/^\[H[2-6]\]/i)) return; // skip heading tags in sub-items
-            if (significantPs[pIdx]) {
-              significantPs[pIdx].textContent = txt.trim();
-              pIdx++;
-            }
-          });
+
+          if (item.text.trim().startsWith("<")) {
+            const temp = document.createElement("div");
+            temp.innerHTML = item.text;
+
+            const richBlocks = Array.from(temp.childNodes).flatMap((node) => {
+              if (node.nodeType === Node.TEXT_NODE) {
+                const text = node.textContent?.trim();
+                if (!text) return [];
+                const p = document.createElement("p");
+                p.textContent = text;
+                return [p];
+              }
+
+              if (node.nodeType === Node.ELEMENT_NODE) {
+                return [node as HTMLElement];
+              }
+
+              return [];
+            });
+
+            let pIdx = 0;
+            richBlocks.forEach((block) => {
+              const tag = block.tagName.toLowerCase();
+              if ((tag === "p" || tag === "blockquote") && significantPs[pIdx]) {
+                significantPs[pIdx].innerHTML = block.innerHTML;
+                applyInlineLinkStyles(significantPs[pIdx]);
+                pIdx++;
+              }
+            });
+          } else {
+            const lines = item.text.split("\n\n").filter(t => t.trim());
+            let pIdx = 0;
+            lines.forEach(txt => {
+              if (txt.match(/^\[H[2-6]\]/i)) return;
+              if (significantPs[pIdx]) {
+                significantPs[pIdx].textContent = txt.trim();
+                pIdx++;
+              }
+            });
+          }
         }
 
         if (item.image) {
@@ -770,7 +802,14 @@ const SubItemEditor = ({ item, index, onChange, onRemove }: {
           </div>
           <div>
             <Label className="text-xs font-medium">Texte</Label>
-            <Textarea value={item.text} onChange={e => updateField("text", e.target.value)} rows={4} className="mt-1 text-sm" />
+            <div className="mt-1">
+              <Suspense fallback={<div className="h-40 animate-pulse rounded bg-muted" />}>
+                <RichTextEditor
+                  content={item.text.trim().startsWith("<") ? item.text : taggedTextToHtml(item.text)}
+                  onChange={(html) => updateField("text", html)}
+                />
+              </Suspense>
+            </div>
           </div>
           <div>
             <Label className="text-xs font-medium">Image</Label>
