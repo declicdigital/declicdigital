@@ -1,0 +1,1 @@
+UPDATE cms_blog_posts SET slug = RTRIM(slug, '/') WHERE slug LIKE '%/';
