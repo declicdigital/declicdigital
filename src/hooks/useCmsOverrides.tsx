@@ -31,26 +31,49 @@ interface Props {
  * Loads ALL cms_page_blocks for a given page_path prefix in a single query,
  * then distributes results to EditableSection children via context.
  */
+const CACHE_TTL = 300_000; // 5 min
+
 export const CmsOverridesProvider = ({ pagePath, children }: Props) => {
-  const [overrides, setOverrides] = useState<Map<string, CmsOverride>>(new Map());
-  const [loaded, setLoaded] = useState(false);
+  const [overrides, setOverrides] = useState<Map<string, CmsOverride>>(() => {
+    // Hydrate from localStorage cache immediately
+    try {
+      const raw = localStorage.getItem(`dd_cms_${pagePath}`);
+      if (raw) {
+        const { entries, ts } = JSON.parse(raw);
+        if (Date.now() - ts < CACHE_TTL) {
+          return new Map<string, CmsOverride>(entries);
+        }
+      }
+    } catch {}
+    return new Map();
+  });
+  const [loaded, setLoaded] = useState(() => {
+    try {
+      const raw = localStorage.getItem(`dd_cms_${pagePath}`);
+      if (raw) {
+        const { ts } = JSON.parse(raw);
+        return Date.now() - ts < CACHE_TTL;
+      }
+    } catch {}
+    return false;
+  });
   const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
-    setLoaded(false);
     supabase
       .from("cms_page_blocks")
       .select("id, content, page_path")
       .like("page_path", `${pagePath}::%`)
       .eq("block_type", "section_override")
       .then(({ data }) => {
-        const map = new Map<string, CmsOverride>();
+        const entries: [string, CmsOverride][] = [];
         if (data) {
           for (const row of data) {
-            map.set(row.page_path, { id: row.id, content: row.content as any });
+            entries.push([row.page_path, { id: row.id, content: row.content as any }]);
           }
         }
-        setOverrides(map);
+        try { localStorage.setItem(`dd_cms_${pagePath}`, JSON.stringify({ entries, ts: Date.now() })); } catch {}
+        setOverrides(new Map(entries));
         setLoaded(true);
       });
   }, [pagePath, refreshKey]);
