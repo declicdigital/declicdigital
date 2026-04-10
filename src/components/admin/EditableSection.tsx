@@ -140,6 +140,7 @@ function extractCtas(el: Element): CtaItem[] {
   let ctaId = 0;
   const links = el.querySelectorAll("a");
   links.forEach((a) => {
+    if (a.closest("[data-inline-cta='true']") || a.hasAttribute("data-inline-cta-link")) return;
     const parent = a.closest("button, .btn, [class*='Button']");
     const cls = (a.className || "") + " " + (parent?.className || "");
     // Must be inside a Button component OR have explicit CTA-like classes (gradient, btn-glow, shadow-glow/shadow-lg)
@@ -383,6 +384,8 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
   const temp = document.createElement("div");
   temp.innerHTML = html;
 
+   el.querySelectorAll("[data-inline-rich-text-block='true']").forEach((node) => node.remove());
+
   const blocks = Array.from(temp.childNodes).flatMap((node) => {
     if (node.nodeType === Node.TEXT_NODE) {
       const text = node.textContent?.trim();
@@ -406,11 +409,57 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
   }) as HTMLElement[];
   const listElements = Array.from(el.querySelectorAll("ul, ol")) as HTMLElement[];
   const quoteElements = Array.from(el.querySelectorAll("blockquote")) as HTMLElement[];
+  const hrElements = Array.from(el.querySelectorAll("hr")) as HTMLElement[];
 
   let headingIndex = 0;
   let paragraphIndex = 0;
   let listIndex = 0;
   let quoteIndex = 0;
+  let hrIndex = 0;
+
+  const matchedBlocks: Array<{ source: HTMLElement; target: HTMLElement | null }> = [];
+
+  const buildInlineRichTextBlock = (block: HTMLElement): HTMLElement | null => {
+    const tag = block.tagName.toLowerCase();
+
+    if (tag === "div" && block.classList.contains("cta-block")) {
+      const ctaStyle = block.getAttribute("data-cta-style") === "secondary" ? "secondary" : "primary";
+      const href = block.getAttribute("data-href") || block.querySelector("a")?.getAttribute("href") || "/";
+      const label = block.getAttribute("data-label") || block.querySelector("a")?.textContent?.trim() || block.textContent?.trim() || "CTA";
+
+      const wrapper = document.createElement("div");
+      wrapper.setAttribute("data-inline-rich-text-block", "true");
+      wrapper.setAttribute("data-inline-cta", "true");
+      wrapper.className = "my-6";
+
+      const link = document.createElement("a");
+      link.setAttribute("href", href);
+      link.setAttribute("data-inline-cta-link", "true");
+      link.className = ctaStyle === "secondary"
+        ? "inline-flex items-center justify-center rounded-full gradient-miami btn-glow px-6 py-3 font-semibold text-primary-foreground shadow-glow transition-opacity hover:opacity-90"
+        : "inline-flex items-center justify-center rounded-full gradient-primary btn-glow px-6 py-3 font-semibold text-primary-foreground shadow-glow transition-opacity hover:opacity-90";
+      link.textContent = label;
+
+      wrapper.appendChild(link);
+      return wrapper;
+    }
+
+    if (tag === "hr") {
+      const hr = document.createElement("hr");
+      hr.setAttribute("data-inline-rich-text-block", "true");
+      hr.className = block.className || "my-6 border-border";
+      return hr;
+    }
+
+    return null;
+  };
+
+  const defaultContainer = headingElements[0]?.parentElement
+    || paragraphElements[0]?.parentElement
+    || listElements[0]?.parentElement
+    || quoteElements[0]?.parentElement
+    || hrElements[0]?.parentElement
+    || el;
 
   blocks.forEach((block) => {
     const tag = block.tagName.toLowerCase();
@@ -418,7 +467,10 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
     if (/^h[2-6]$/.test(tag)) {
       if (headingElements[headingIndex]) {
         headingElements[headingIndex].innerHTML = block.innerHTML;
+        matchedBlocks.push({ source: block, target: headingElements[headingIndex] });
         headingIndex++;
+      } else {
+        matchedBlocks.push({ source: block, target: null });
       }
       return;
     }
@@ -426,7 +478,10 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
     if (tag === "p") {
       if (paragraphElements[paragraphIndex]) {
         paragraphElements[paragraphIndex].innerHTML = block.innerHTML;
+        matchedBlocks.push({ source: block, target: paragraphElements[paragraphIndex] });
         paragraphIndex++;
+      } else {
+        matchedBlocks.push({ source: block, target: null });
       }
       return;
     }
@@ -434,7 +489,10 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
     if (tag === "ul" || tag === "ol") {
       if (listElements[listIndex]) {
         listElements[listIndex].innerHTML = block.innerHTML;
+        matchedBlocks.push({ source: block, target: listElements[listIndex] });
         listIndex++;
+      } else {
+        matchedBlocks.push({ source: block, target: null });
       }
       return;
     }
@@ -442,9 +500,51 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
     if (tag === "blockquote") {
       if (quoteElements[quoteIndex]) {
         quoteElements[quoteIndex].innerHTML = block.innerHTML;
+        matchedBlocks.push({ source: block, target: quoteElements[quoteIndex] });
         quoteIndex++;
+      } else {
+        matchedBlocks.push({ source: block, target: null });
       }
+      return;
     }
+
+    if (tag === "hr") {
+      if (hrElements[hrIndex]) {
+        matchedBlocks.push({ source: block, target: hrElements[hrIndex] });
+        hrIndex++;
+      } else {
+        matchedBlocks.push({ source: block, target: null });
+      }
+      return;
+    }
+
+    if (tag === "div" && block.classList.contains("cta-block")) {
+      matchedBlocks.push({ source: block, target: null });
+    }
+  });
+
+  let previousAnchor: HTMLElement | null = null;
+
+  matchedBlocks.forEach((entry, index) => {
+    if (entry.target) {
+      previousAnchor = entry.target;
+      return;
+    }
+
+    const injectedBlock = buildInlineRichTextBlock(entry.source);
+    if (!injectedBlock) return;
+
+    const nextTarget = matchedBlocks.slice(index + 1).find((candidate) => candidate.target)?.target ?? null;
+
+    if (nextTarget?.parentElement) {
+      nextTarget.parentElement.insertBefore(injectedBlock, nextTarget);
+    } else if (previousAnchor) {
+      previousAnchor.insertAdjacentElement("afterend", injectedBlock);
+    } else {
+      defaultContainer.appendChild(injectedBlock);
+    }
+
+    previousAnchor = injectedBlock;
   });
 }
 
@@ -526,6 +626,7 @@ function patchCtaLinks(el: Element, enabledCtas: CtaItem[]) {
   const links = el.querySelectorAll("a");
   const ctaLinks: HTMLAnchorElement[] = [];
   links.forEach(a => {
+    if (a.closest("[data-inline-cta='true']") || a.hasAttribute("data-inline-cta-link")) return;
     const parent = a.closest("button, .btn, [class*='Button']");
     const cls = (a.className || "") + " " + (parent?.className || "");
     const isCta = parent || cls.includes("gradient-primary") || cls.includes("gradient-miami") || cls.includes("btn-glow") || cls.includes("shadow-glow") || cls.includes("shadow-lg");
