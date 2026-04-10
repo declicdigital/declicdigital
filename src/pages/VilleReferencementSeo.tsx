@@ -63,6 +63,15 @@ const VilleReferencementSeo = () => {
         } />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href={`https://declicdigital.net/referencement-seo/${city.slug}`} />
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        })}</script>
       </Helmet>
 
       <PageBreadcrumb items={[

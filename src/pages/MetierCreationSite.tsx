@@ -122,6 +122,15 @@ const MetierCreationSite = () => {
           provider: { "@type": "LocalBusiness", name: "Déclic Digital", url: "https://declicdigital.net" },
           areaServed: [{ "@type": "City", name: "Paris" }, { "@type": "AdministrativeArea", name: "Hauts-de-Seine" }],
         })}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faqs.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        })}</script>
       </Helmet>
 
       <PageBreadcrumb items={[
