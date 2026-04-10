@@ -201,12 +201,13 @@ h1, h2, h3 {
     text-justify: inter-word;
   }
 
-  /* Remove justify inside cards / grid items */
+  /* Remove justify inside cards, grids, and centered blocks */
   .bg-card p,
   .shadow-card p,
   .card-rough p,
-  [class*="grid"] > * p {
-    text-align: left;
+  [class*="grid"] > * p,
+  .text-center p {
+    text-align: inherit;
   }
 
   /* ── Stronger shadow on bold / semibold text ── */
