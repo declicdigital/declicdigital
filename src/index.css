@@ -201,6 +201,14 @@ h1, h2, h3 {
     text-justify: inter-word;
   }
 
+  /* Remove justify inside cards / grid items */
+  .bg-card p,
+  .shadow-card p,
+  .card-rough p,
+  [class*="grid"] > * p {
+    text-align: left;
+  }
+
   /* ── Stronger shadow on bold / semibold text ── */
   strong, b, .font-bold, .font-extrabold, .font-semibold {
     text-shadow:
