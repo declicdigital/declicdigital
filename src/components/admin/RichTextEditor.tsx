@@ -22,6 +22,9 @@ interface RichTextEditorProps {
 const MenuButton = ({ active, onClick, children, title }: { active?: boolean; onClick: () => void; children: React.ReactNode; title: string }) => (
   <button
     type="button"
+    onMouseDown={(e) => {
+      e.preventDefault();
+    }}
     onClick={onClick}
     title={title}
     className={`rounded p-1.5 transition ${active ? "bg-primary text-primary-foreground" : "hover:bg-muted"}`}
