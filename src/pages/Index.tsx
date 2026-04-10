@@ -7,7 +7,6 @@ const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSectio
 const LocationSection = lazy(() => import("@/components/LocationSection"));
 const PageBlocksLazy = lazy(() => import("@/components/admin/BlockEditor").then(m => ({ default: m.PageBlocks })));
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import EditableSection from "@/components/admin/EditableSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -103,7 +102,6 @@ const Index = () => {
       </Helmet>
 
       {/* Hero */}
-      <EditableSection blockId="hero" pagePath="/" label="Hero HP">
       <section className="gradient-hero relative overflow-hidden">
         <div className="container py-16 md:py-24 lg:py-32">
           <div className="grid items-center gap-10 lg:grid-cols-2">
@@ -137,11 +135,9 @@ const Index = () => {
           </div>
         </div>
       </section>
-      </EditableSection>
 
 
       {/* Problème */}
-      <EditableSection blockId="probleme" pagePath="/" label="Problème">
       <SectionWrapper className="bg-section-blue">
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="mb-6 text-3xl font-extrabold md:text-4xl">Vous n'avez pas de site, ou il ne génère aucun client ?</h2>
@@ -173,9 +169,7 @@ const Index = () => {
           </div>
         </div>
       </SectionWrapper>
-      </EditableSection>
 
-      <EditableSection blockId="solutions" pagePath="/" label="Solutions">
       <SectionWrapper>
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold md:text-4xl">Création de site web professionnel pour indépendants</h2>
@@ -203,9 +197,7 @@ const Index = () => {
           ))}
         </div>
       </SectionWrapper>
-      </EditableSection>
 
-      <EditableSection blockId="methode" pagePath="/" label="Notre méthode">
       <SectionWrapper className="bg-section-blue">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-extrabold md:text-4xl">Référencement naturel Google : soyez visible localement</h2>
@@ -236,7 +228,6 @@ const Index = () => {
           </Button>
         </div>
       </SectionWrapper>
-      </EditableSection>
 
       {/* Avis clients Google */}
       <Suspense fallback={<div style={{ minHeight: 400 }} />}>
@@ -269,7 +260,6 @@ const Index = () => {
       </SectionWrapper>
 
       {/* Technologies */}
-      <EditableSection blockId="technologies" pagePath="/" label="Nos outils / Logos">
       <SectionWrapper className="bg-section-blue">
         <div className="text-center mb-10">
           <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Nos réalisations pour des TPE et artisans parisiens</h2>
@@ -290,7 +280,6 @@ const Index = () => {
           </div>
         </div>
       </SectionWrapper>
-      </EditableSection>
 
       {/* Contenu SEO riche */}
       <SectionWrapper>
