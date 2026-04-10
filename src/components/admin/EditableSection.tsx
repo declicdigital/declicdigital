@@ -419,6 +419,13 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
 
   const matchedBlocks: Array<{ source: HTMLElement; target: HTMLElement | null }> = [];
 
+  const applyLinkStyles = (container: ParentNode) => {
+    container.querySelectorAll("a").forEach((link) => {
+      if (link.closest("[data-inline-cta='true']") || link.hasAttribute("data-inline-cta-link")) return;
+      link.classList.add("text-primary", "underline", "decoration-primary/50", "font-medium");
+    });
+  };
+
   const buildInlineRichTextBlock = (block: HTMLElement): HTMLElement | null => {
     const tag = block.tagName.toLowerCase();
 
@@ -444,14 +451,13 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
       return wrapper;
     }
 
-    if (tag === "hr") {
-      const hr = document.createElement("hr");
-      hr.setAttribute("data-inline-rich-text-block", "true");
-      hr.className = block.className || "my-6 border-border";
-      return hr;
+    const clone = block.cloneNode(true) as HTMLElement;
+    clone.setAttribute("data-inline-rich-text-block", "true");
+    if (tag === "hr" && !clone.className) {
+      clone.className = "my-6 border-border";
     }
-
-    return null;
+    applyLinkStyles(clone);
+    return clone;
   };
 
   const defaultContainer = headingElements[0]?.parentElement
@@ -467,6 +473,7 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
     if (/^h[2-6]$/.test(tag)) {
       if (headingElements[headingIndex]) {
         headingElements[headingIndex].innerHTML = block.innerHTML;
+        applyLinkStyles(headingElements[headingIndex]);
         matchedBlocks.push({ source: block, target: headingElements[headingIndex] });
         headingIndex++;
       } else {
@@ -478,6 +485,7 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
     if (tag === "p") {
       if (paragraphElements[paragraphIndex]) {
         paragraphElements[paragraphIndex].innerHTML = block.innerHTML;
+        applyLinkStyles(paragraphElements[paragraphIndex]);
         matchedBlocks.push({ source: block, target: paragraphElements[paragraphIndex] });
         paragraphIndex++;
       } else {
@@ -489,6 +497,7 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
     if (tag === "ul" || tag === "ol") {
       if (listElements[listIndex]) {
         listElements[listIndex].innerHTML = block.innerHTML;
+        applyLinkStyles(listElements[listIndex]);
         matchedBlocks.push({ source: block, target: listElements[listIndex] });
         listIndex++;
       } else {
@@ -500,6 +509,7 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
     if (tag === "blockquote") {
       if (quoteElements[quoteIndex]) {
         quoteElements[quoteIndex].innerHTML = block.innerHTML;
+        applyLinkStyles(quoteElements[quoteIndex]);
         matchedBlocks.push({ source: block, target: quoteElements[quoteIndex] });
         quoteIndex++;
       } else {
@@ -546,6 +556,17 @@ function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
 
     previousAnchor = injectedBlock;
   });
+}
+
+function buildGeneratedCtaLink(cta: CtaItem): HTMLAnchorElement {
+  const link = document.createElement("a");
+  link.setAttribute("href", cta.url);
+  link.setAttribute("data-inline-cta-link", "true");
+  link.className = cta.style === "secondary"
+    ? "inline-flex items-center justify-center rounded-full gradient-miami btn-glow px-6 py-3 font-semibold text-primary-foreground shadow-glow transition-opacity hover:opacity-90"
+    : "inline-flex items-center justify-center rounded-full gradient-primary btn-glow px-6 py-3 font-semibold text-primary-foreground shadow-glow transition-opacity hover:opacity-90";
+  link.textContent = cta.text.trim();
+  return link;
 }
 
 /** Rebuild the logo carousel from saved logos */
@@ -623,6 +644,8 @@ function applySubItemsToDOM(el: HTMLElement, items: SubItem[]) {
 }
 
 function patchCtaLinks(el: Element, enabledCtas: CtaItem[]) {
+  el.querySelectorAll("[data-generated-cta-group='true']").forEach((node) => node.remove());
+
   const links = el.querySelectorAll("a");
   const ctaLinks: HTMLAnchorElement[] = [];
   links.forEach(a => {
@@ -632,6 +655,20 @@ function patchCtaLinks(el: Element, enabledCtas: CtaItem[]) {
     const isCta = parent || cls.includes("gradient-primary") || cls.includes("gradient-miami") || cls.includes("btn-glow") || cls.includes("shadow-glow") || cls.includes("shadow-lg");
     if (isCta) ctaLinks.push(a);
   });
+
+  const applyCtaStyles = (a: HTMLAnchorElement, cta: CtaItem) => {
+    a.classList.remove("border", "border-white", "border-foreground", "bg-transparent", "bg-secondary", "text-foreground", "text-primary", "text-white");
+    a.classList.add("inline-flex", "items-center", "justify-center", "rounded-full", "px-6", "py-3", "font-semibold", "text-primary-foreground");
+
+    if (cta.style === "secondary") {
+      a.classList.remove("gradient-primary");
+      a.classList.add("gradient-miami", "btn-glow", "shadow-glow");
+    } else {
+      a.classList.remove("gradient-miami");
+      a.classList.add("gradient-primary", "btn-glow", "shadow-glow");
+    }
+  };
+
   enabledCtas.forEach((cta, i) => {
     if (ctaLinks[i]) {
       const a = ctaLinks[i];
@@ -645,29 +682,30 @@ function patchCtaLinks(el: Element, enabledCtas: CtaItem[]) {
         else a.textContent = cta.text;
       }
       a.setAttribute("href", cta.url);
-
-      // Apply style: primary = gradient-primary btn-glow, secondary = outline style
-      const primaryClasses = ["gradient-primary", "btn-glow", "shadow-glow"];
-      const secondaryIndicators = ["border", "outline"];
-
-      if (cta.style === "primary") {
-        // Add primary gradient classes, remove outline-like classes
-        a.classList.remove("border", "border-white", "border-foreground", "bg-transparent", "bg-secondary");
-        a.classList.add("gradient-primary", "btn-glow", "shadow-glow");
-        a.style.removeProperty("background");
-        // Ensure text is white
-        a.classList.remove("text-foreground", "text-primary");
-        a.classList.add("text-white");
-      } else {
-        // Secondary: remove gradient, add outline/border
-        a.classList.remove("gradient-primary", "btn-glow", "shadow-glow");
-        a.style.background = "transparent";
-        a.classList.add("border", "border-white");
-        a.classList.remove("text-foreground");
-        a.classList.add("text-white");
-      }
+      a.style.removeProperty("background");
+      applyCtaStyles(a, cta);
     }
   });
+
+  const missingCtas = enabledCtas.slice(ctaLinks.length).filter((cta) => cta.text.trim() && cta.url.trim());
+
+  if (missingCtas.length > 0) {
+    const group = document.createElement("div");
+    group.setAttribute("data-generated-cta-group", "true");
+    group.className = "mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap";
+
+    missingCtas.forEach((cta) => {
+      group.appendChild(buildGeneratedCtaLink(cta));
+    });
+
+    const insertionAnchor = Array.from(el.querySelectorAll("[data-inline-rich-text-block='true'], h1, h2, h3, h4, h5, h6, p, ul, ol, blockquote, hr")).pop() as HTMLElement | undefined;
+
+    if (insertionAnchor) {
+      insertionAnchor.insertAdjacentElement("afterend", group);
+    } else {
+      (el.firstElementChild as HTMLElement | null)?.appendChild(group) ?? el.appendChild(group);
+    }
+  }
 }
 
 // ─── Sub-item editor component ───
