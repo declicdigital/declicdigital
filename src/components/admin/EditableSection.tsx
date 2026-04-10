@@ -385,7 +385,8 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
 function applyInlineLinkStyles(container: ParentNode) {
   container.querySelectorAll("a").forEach((link) => {
     if (link.closest("[data-inline-cta='true']") || link.hasAttribute("data-inline-cta-link")) return;
-    link.classList.add("text-primary", "underline", "decoration-primary/50", "font-medium");
+    link.classList.remove("underline", "decoration-primary/50");
+    link.classList.add("text-primary", "font-medium");
   });
 }
 

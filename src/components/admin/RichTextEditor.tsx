@@ -66,7 +66,7 @@ const isInternalHref = (href: string) => /^(\/|#|\?)/.test(href);
 
 const buildLinkAttributes = (href: string) => ({
   href,
-  class: "text-primary underline decoration-primary/50 font-medium",
+  class: "text-primary font-medium",
   ...(isInternalHref(href)
     ? { target: null, rel: null }
     : { target: "_blank", rel: "noopener noreferrer" }),
@@ -96,7 +96,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
           return ctx.defaultValidate(trimmedUrl);
         },
         HTMLAttributes: {
-          class: "text-primary underline decoration-primary/50 font-medium",
+          class: "text-primary font-medium",
         },
       }),
       Image,
