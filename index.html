@@ -19,8 +19,8 @@
         t.src='https://www.googletagmanager.com/gtm.js?id=GTM-KMBKVH5C';
         document.head.appendChild(t);
       }
-      if(document.readyState==='complete'){setTimeout(_loadTracking,2000)}
-      else{window.addEventListener('load',function(){setTimeout(_loadTracking,2000)},{once:true})}
+      function _scheduleTracking(){if(document.readyState==='complete'){setTimeout(_loadTracking,3500)}else{window.addEventListener('load',function(){setTimeout(_loadTracking,3500)},{once:true})}}
+      ['scroll','click','touchstart','keydown'].forEach(function(e){document.addEventListener(e,_loadTracking,{once:true,passive:true})});_scheduleTracking();
     </script>
     <link rel="preload" href="/fonts/ClashDisplay-Variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/DMSerifDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>

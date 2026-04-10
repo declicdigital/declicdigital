@@ -7,7 +7,7 @@ const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSectio
 const LocationSection = lazy(() => import("@/components/LocationSection"));
 const PageBlocksLazy = lazy(() => import("@/components/admin/BlockEditor").then(m => ({ default: m.PageBlocks })));
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import EditableSection from "@/components/admin/EditableSection";
+const EditableSection = lazy(() => import("@/components/admin/EditableSection"));
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
