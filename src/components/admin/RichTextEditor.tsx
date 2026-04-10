@@ -13,6 +13,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import CtaNode from "./CtaNode";
+import LinkEditPopover from "./LinkEditPopover";
 
 interface RichTextEditorProps {
   content: string;
@@ -54,11 +55,29 @@ interface CtaEditState {
   rect: { top: number; left: number; width: number; bottom: number };
 }
 
+interface LinkEditState {
+  from: number;
+  to: number;
+  href: string;
+  rect: { top: number; left: number; width: number; bottom: number };
+}
+
+const isInternalHref = (href: string) => /^(\/|#|\?)/.test(href);
+
+const buildLinkAttributes = (href: string) => ({
+  href,
+  class: "text-primary underline decoration-primary/50 font-medium",
+  ...(isInternalHref(href)
+    ? { target: null, rel: null }
+    : { target: "_blank", rel: "noopener noreferrer" }),
+});
+
 const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
   const [mode, setMode] = useState<string>("visual");
   const [rawHtml, setRawHtml] = useState(content);
   const [activeBlock, setActiveBlock] = useState("Paragraphe");
   const [ctaEdit, setCtaEdit] = useState<CtaEditState | null>(null);
+  const [linkEdit, setLinkEdit] = useState<LinkEditState | null>(null);
   const popupRef = useRef<HTMLDivElement>(null);
   const editorWrapperRef = useRef<HTMLDivElement>(null);
   const lastEmittedHtmlRef = useRef(content);
@@ -69,10 +88,15 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
       StarterKit.configure({ heading: { levels: [1, 2, 3, 4] } }),
       Link.configure({
         openOnClick: true,
+        autolink: false,
+        isAllowedUri: (url, ctx) => {
+          const trimmedUrl = url.trim();
+          if (!trimmedUrl) return false;
+          if (isInternalHref(trimmedUrl)) return true;
+          return ctx.defaultValidate(trimmedUrl);
+        },
         HTMLAttributes: {
           class: "text-primary underline decoration-primary/50 font-medium",
-          target: "_blank",
-          rel: "noopener noreferrer",
         },
       }),
       Image,
@@ -155,7 +179,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
     return () => document.removeEventListener("mousedown", handler);
   }, [ctaEdit]);
 
-  const addLink = () => {
+  const openLinkEditor = () => {
     if (!editor) return;
 
     const { from, to, empty } = editor.state.selection;
@@ -166,19 +190,22 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
       return;
     }
 
-    const url = prompt("URL du lien :", currentHref || "/");
-    if (url === null) return;
+    const start = Math.max(1, from);
+    const end = Math.max(start, to);
+    const startRect = editor.view.coordsAtPos(start);
+    const endRect = editor.view.coordsAtPos(end);
 
-    const trimmedUrl = url.trim();
-
-    const chain = editor.chain().focus().setTextSelection({ from, to }).extendMarkRange("link");
-
-    if (!trimmedUrl) {
-      chain.unsetLink().run();
-      return;
-    }
-
-    chain.setLink({ href: trimmedUrl }).run();
+    setLinkEdit({
+      from,
+      to,
+      href: currentHref || "/",
+      rect: {
+        top: startRect.top,
+        left: startRect.left,
+        width: Math.max(180, endRect.right - startRect.left),
+        bottom: Math.max(startRect.bottom, endRect.bottom),
+      },
+    });
   };
 
   const addImage = () => {
@@ -225,6 +252,28 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
     setCtaEdit(null);
   };
 
+  const saveLinkEdit = () => {
+    if (!linkEdit || !editor) return;
+
+    const trimmedUrl = linkEdit.href.trim();
+    const chain = editor.chain().focus().setTextSelection({ from: linkEdit.from, to: linkEdit.to }).extendMarkRange("link");
+
+    if (!trimmedUrl) {
+      chain.unsetLink().run();
+      setLinkEdit(null);
+      return;
+    }
+
+    const applied = chain.setLink(buildLinkAttributes(trimmedUrl)).run();
+
+    if (!applied) {
+      window.alert("Le lien saisi n'est pas valide.");
+      return;
+    }
+
+    setLinkEdit(null);
+  };
+
   const handleRawChange = (val: string) => {
     setRawHtml(val);
     lastEmittedHtmlRef.current = val;
@@ -268,7 +317,7 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
               <MenuButton active={editor.isActive("bulletList")} onClick={() => editor.chain().focus().toggleBulletList().run()} title="Liste à puces"><List size={16} /></MenuButton>
               <MenuButton active={editor.isActive("orderedList")} onClick={() => editor.chain().focus().toggleOrderedList().run()} title="Liste numérotée"><ListOrdered size={16} /></MenuButton>
               <div className="mx-1 h-5 w-px bg-border" />
-              <MenuButton active={editor.isActive("link")} onClick={addLink} title="Lien"><LinkIcon size={16} /></MenuButton>
+               <MenuButton active={editor.isActive("link")} onClick={openLinkEditor} title="Lien"><LinkIcon size={16} /></MenuButton>
               <MenuButton onClick={addImage} title="Image"><ImageIcon size={16} /></MenuButton>
               <div className="mx-1 h-5 w-px bg-border" />
               <MenuButton onClick={insertCta} title="Insérer un bouton CTA"><MousePointerClick size={16} /></MenuButton>
@@ -295,6 +344,16 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
           />
         </TabsContent>
       </Tabs>
+
+      {linkEdit && (
+        <LinkEditPopover
+          href={linkEdit.href}
+          rect={linkEdit.rect}
+          onChange={(href) => setLinkEdit({ ...linkEdit, href })}
+          onSave={saveLinkEdit}
+          onClose={() => setLinkEdit(null)}
+        />
+      )}
 
       {/* CTA Edit Popup */}
       {ctaEdit && createPortal(
