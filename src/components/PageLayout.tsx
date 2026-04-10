@@ -77,10 +77,7 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
   }, []);
 
   const wrappedChildren = (() => {
-    if (!isAdmin) return children;
-
-    // Reorder flat children according to order
-    const orderedChildren = order.map(originalIdx => ({
+    const orderedChildren = (isAdmin ? order : flat.map((_, index) => index)).map(originalIdx => ({
       child: flat[originalIdx],
       originalIdx,
     }));
@@ -98,8 +95,8 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
             blockId={blockId}
             pagePath={pagePath}
             label={label}
-            onMoveUp={displayIdx > 0 ? () => moveBlock(displayIdx, "up") : undefined}
-            onMoveDown={displayIdx < orderedChildren.length - 1 ? () => moveBlock(displayIdx, "down") : undefined}
+            onMoveUp={isAdmin && displayIdx > 0 ? () => moveBlock(displayIdx, "up") : undefined}
+            onMoveDown={isAdmin && displayIdx < orderedChildren.length - 1 ? () => moveBlock(displayIdx, "down") : undefined}
             displayIndex={displayIdx}
           >
             {child}
