@@ -64,7 +64,14 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({ heading: { levels: [1, 2, 3, 4] } }),
-      Link.configure({ openOnClick: false, HTMLAttributes: { class: "text-primary underline decoration-primary/50" } }),
+      Link.configure({
+        openOnClick: true,
+        HTMLAttributes: {
+          class: "text-primary underline decoration-primary/50 font-medium",
+          target: "_blank",
+          rel: "noopener noreferrer",
+        },
+      }),
       Image,
       Underline,
       CtaNode,
@@ -146,10 +153,29 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
   }, [ctaEdit]);
 
   const addLink = () => {
-    const url = prompt("URL du lien :");
-    if (url && editor) {
-      editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+    if (!editor) return;
+
+    const { from, to, empty } = editor.state.selection;
+    const currentHref = editor.getAttributes("link").href as string | undefined;
+
+    if (empty && !currentHref) {
+      window.alert("Sélectionnez d'abord un mot ou un groupe de mots.");
+      return;
     }
+
+    const url = prompt("URL du lien :", currentHref || "/");
+    if (url === null) return;
+
+    const trimmedUrl = url.trim();
+
+    const chain = editor.chain().focus().setTextSelection({ from, to }).extendMarkRange("link");
+
+    if (!trimmedUrl) {
+      chain.unsetLink().run();
+      return;
+    }
+
+    chain.setLink({ href: trimmedUrl }).run();
   };
 
   const addImage = () => {
