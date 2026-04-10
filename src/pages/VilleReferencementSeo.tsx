@@ -44,10 +44,12 @@ const VilleReferencementSeo = () => {
       <Helmet>
         <title>{
           city.slug === "boulogne-billancourt" ? "SEO local Boulogne-Billancourt | TPE & artisans" :
+          city.slug === "asnieres-sur-seine" ? "Agence SEO Asnières-sur-Seine | Déclic Digital" :
           `Référencement SEO et GEO ${city.nameShort} | TPE & artisans`
         }</title>
         <meta name="description" content={
           city.slug === "boulogne-billancourt" ? "Référencement Google local pour les TPE et artisans de Boulogne-Billancourt. Déclic Digital booste votre visibilité à Paris et dans le 92. Audit gratuit." :
+          city.slug === "asnieres-sur-seine" ? "Référencement naturel, GEO et netlinking à Asnières-sur-Seine. Audit SEO offert, résultats mesurables en 3 à 6 mois. Devis gratuit." :
           `Boostez votre visibilité Google à ${city.nameShort}. Déclic Digital, agence SEO locale pour TPE, artisans et indépendants à Paris et dans les Hauts-de-Seine (92). Audit gratuit.`
         } />
         <meta name="robots" content="index, follow" />
