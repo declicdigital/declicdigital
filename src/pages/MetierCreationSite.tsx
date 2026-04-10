@@ -44,6 +44,7 @@ const TradeGuideSection = ({ tradeSlug }: { tradeSlug: string }) => {
   );
 };
 
+const tradeFaqs: Record<string, { q: string; a: string }[]> = {
   artisanat: [
     { q: "Combien coûte un site web pour un artisan ?", a: "Nos forfaits démarrent avec un premier mois de mise en service puis 50€/mois tout compris : design sur-mesure, hébergement, maintenance et optimisation SEO. Pas de frais cachés." },
     { q: "Mon site sera-t-il visible sur Google ?", a: "Oui. Chaque site est optimisé pour le référencement local dès la conception. Nous ciblons les mots clés que vos clients tapent : 'plombier Paris', 'électricien 92', etc." },
