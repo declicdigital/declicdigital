@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { useParams, Link, Navigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Monitor, Smartphone, TrendingUp, Zap, CheckCircle, Search, Shield, Clock, Users, Target, BarChart3, HelpCircle, Star } from "lucide-react";
@@ -12,7 +13,6 @@ import metierComptable from "@/assets/metier-expert-comptable.webp";
 import metierPlombier from "@/assets/metier-plombier.webp";
 import metierElectricien from "@/assets/metier-electricien.webp";
 import { getTradeBySlug, trades, tradeCategories } from "@/data/trades";
-import { tradeGuideContent } from "@/data/tradeGuideContent";
 import { Helmet } from "react-helmet-async";
 
 const tradeFaqs: Record<string, { q: string; a: string }[]> = {
@@ -275,25 +275,9 @@ const MetierCreationSite = () => {
         </div>
       </SectionWrapper>
 
-      {/* Guide unique par métier */}
-      {tradeGuideContent[trade.slug] && (
-        <SectionWrapper>
-          <div className="mx-auto max-w-3xl space-y-6">
-            <h2 className="text-3xl font-extrabold md:text-4xl text-center">
-              {tradeGuideContent[trade.slug].title}
-            </h2>
-            {tradeGuideContent[trade.slug].sections.map((section, i) => (
-              <div key={i}>
-                <h3 className="text-xl font-bold">{section.heading}</h3>
-                <p className="text-muted-foreground leading-relaxed">{section.text}</p>
-              </div>
-            ))}
-            <p className="text-muted-foreground leading-relaxed">
-              Prêt à passer à l'action ? <Link to="/rendez-vous" className="text-primary font-semibold">Prenez rendez-vous</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold">nos réalisations</Link>.
-            </p>
-          </div>
-        </SectionWrapper>
-      )}
+      {/* Guide unique par métier – chargé en différé */}
+      <TradeGuideSection tradeSlug={trade.slug} />
+
 
       {/* Process */}
       <SectionWrapper className="bg-section-blue">
