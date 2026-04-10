@@ -1192,11 +1192,11 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
     });
   };
 
-  if (!loaded) return <>{children}</>;
-
   if (!isAdmin) {
     return <div ref={contentRef}>{children}</div>;
   }
+
+  if (!loaded) return <>{children}</>;
 
   return (
     <>
