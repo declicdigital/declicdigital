@@ -26,6 +26,7 @@
       });
     </script>
     <link rel="preload" href="/fonts/ClashDisplay-Variable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="https://fonts.gstatic.com/s/dmserifdisplay/v17/-nFnOHM81r4j6k0gjAW3mujVU2B2G_Bx0g.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://ubtdhicbbwasabgokzje.supabase.co">
     <link rel="dns-prefetch" href="https://ubtdhicbbwasabgokzje.supabase.co">
@@ -120,7 +121,25 @@
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KMBKVH5C"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
-    <div id="root"></div>
+    <div id="root">
+      <!-- Above-the-fold skeleton – visible avant que React s'hydrate -->
+      <div style="display:flex;flex-direction:column;min-height:100vh">
+        <div style="position:sticky;top:0;z-index:50;border-bottom:1px solid hsl(42 25% 82%);background:hsl(43 35% 96%/.8);backdrop-filter:blur(12px);height:5rem"></div>
+        <div style="flex:1;padding:4rem 1rem;max-width:72rem;margin:0 auto;width:100%">
+          <div style="max-width:36rem">
+            <div style="height:1.5rem;width:12rem;border-radius:9999px;background:hsl(263 36% 18%/.08);margin-bottom:1rem"></div>
+            <div style="height:3rem;width:100%;border-radius:.5rem;background:hsl(263 36% 18%/.06);margin-bottom:.75rem"></div>
+            <div style="height:3rem;width:80%;border-radius:.5rem;background:hsl(263 36% 18%/.06);margin-bottom:1.5rem"></div>
+            <div style="height:1.25rem;width:100%;border-radius:.25rem;background:hsl(263 36% 18%/.04);margin-bottom:.5rem"></div>
+            <div style="height:1.25rem;width:90%;border-radius:.25rem;background:hsl(263 36% 18%/.04);margin-bottom:2rem"></div>
+            <div style="display:flex;gap:.75rem">
+              <div style="height:3rem;width:12rem;border-radius:9999px;background:linear-gradient(135deg,hsl(263 70% 50%),hsl(280 70% 55%))"></div>
+              <div style="height:3rem;width:10rem;border-radius:9999px;border:2px solid hsl(263 36% 18%)"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
