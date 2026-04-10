@@ -88,6 +88,7 @@ interface StructuredContent {
   label: string;
   heading: string;
   text: string;
+  textHtml: string;
   image: string;
   imageAlt: string;
   ctas: CtaItem[];
@@ -96,13 +97,20 @@ interface StructuredContent {
   bgColor: BgColor;
 }
 
+interface SectionRevision {
+  id: string;
+  savedAt: string;
+  label: string;
+  structured: StructuredContent;
+}
+
 interface Override {
   id: string;
-  content: { structured?: StructuredContent; label?: string; [key: string]: any };
+  content: { structured?: StructuredContent; label?: string; revisions?: SectionRevision[]; [key: string]: any };
 }
 
 const emptyStructured = (label = ""): StructuredContent => ({
-  label, heading: "", text: "", image: "", imageAlt: "", ctas: [], items: [], logos: [], bgColor: "none",
+  label, heading: "", text: "", textHtml: "", image: "", imageAlt: "", ctas: [], items: [], logos: [], bgColor: "none",
 });
 
 const BG_CLASS_MAP: Record<BgColor, string> = {
@@ -116,6 +124,7 @@ function normalizeStructuredContent(content?: Partial<StructuredContent> | null,
     label: typeof content?.label === "string" ? content.label : fallbackLabel,
     heading: typeof content?.heading === "string" ? content.heading : "",
     text: typeof content?.text === "string" ? content.text : "",
+    textHtml: typeof content?.textHtml === "string" ? content.textHtml : "",
     image: typeof content?.image === "string" ? content.image : "",
     imageAlt: typeof content?.imageAlt === "string" ? content.imageAlt : "",
     ctas: Array.isArray(content?.ctas) ? content.ctas : [],
@@ -168,6 +177,13 @@ function extractAllTexts(el: Element): string {
   return texts.join("\n\n");
 }
 
+function extractRichTextHtml(el: Element): string {
+  const blocks = Array.from(el.querySelectorAll("h2, h3, h4, h5, h6, p, ul, ol, blockquote, hr"));
+  return blocks
+    .map((node) => node.outerHTML)
+    .join("");
+}
+
 /** Extract first significant image */
 function extractImage(el: Element): { src: string; alt: string } {
   const imgs = el.querySelectorAll("img");
@@ -201,11 +217,13 @@ function parseDomToStructured(el: HTMLElement, fallbackLabel: string): Structure
   if (subSections.length >= 2) {
     result.items = subSections;
     result.text = "";
+    result.textHtml = "";
     result.ctas = extractCtas(el);
     const subCtaTexts = new Set(subSections.flatMap(s => s.ctas.map(c => c.text)));
     result.ctas = result.ctas.filter(c => !subCtaTexts.has(c.text));
   } else {
     result.text = extractAllTexts(el);
+    result.textHtml = extractRichTextHtml(el);
     result.ctas = extractCtas(el);
   }
 
@@ -312,7 +330,9 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
   }
 
   // Patch text content - handle tagged headings
-  if (s.text && s.items.length === 0) {
+  if (s.textHtml && s.items.length === 0) {
+    applyRichTextHtmlToDOM(el, s.textHtml);
+  } else if (s.text && s.items.length === 0) {
     const lines = s.text.split("\n\n").filter(t => t.trim());
     const taggedLines: { tag: string | null; text: string }[] = lines.map(line => {
       const match = line.match(/^\[(H[2-6])\]\s*(.*)/i);
@@ -357,6 +377,75 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
 
   const enabledCtas = s.ctas.filter(c => c.enabled && c.text && c.url);
   patchCtaLinks(el, enabledCtas);
+}
+
+function applyRichTextHtmlToDOM(el: HTMLElement, html: string) {
+  const temp = document.createElement("div");
+  temp.innerHTML = html;
+
+  const blocks = Array.from(temp.childNodes).flatMap((node) => {
+    if (node.nodeType === Node.TEXT_NODE) {
+      const text = node.textContent?.trim();
+      if (!text) return [];
+      const p = document.createElement("p");
+      p.textContent = text;
+      return [p];
+    }
+
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      return [node as HTMLElement];
+    }
+
+    return [];
+  });
+
+  const headingElements = Array.from(el.querySelectorAll("h2, h3, h4, h5, h6")) as HTMLElement[];
+  const paragraphElements = Array.from(el.querySelectorAll("p")).filter((p) => {
+    const text = p.textContent?.trim();
+    return !!text && text.length > 1;
+  }) as HTMLElement[];
+  const listElements = Array.from(el.querySelectorAll("ul, ol")) as HTMLElement[];
+  const quoteElements = Array.from(el.querySelectorAll("blockquote")) as HTMLElement[];
+
+  let headingIndex = 0;
+  let paragraphIndex = 0;
+  let listIndex = 0;
+  let quoteIndex = 0;
+
+  blocks.forEach((block) => {
+    const tag = block.tagName.toLowerCase();
+
+    if (/^h[2-6]$/.test(tag)) {
+      if (headingElements[headingIndex]) {
+        headingElements[headingIndex].innerHTML = block.innerHTML;
+        headingIndex++;
+      }
+      return;
+    }
+
+    if (tag === "p") {
+      if (paragraphElements[paragraphIndex]) {
+        paragraphElements[paragraphIndex].innerHTML = block.innerHTML;
+        paragraphIndex++;
+      }
+      return;
+    }
+
+    if (tag === "ul" || tag === "ol") {
+      if (listElements[listIndex]) {
+        listElements[listIndex].innerHTML = block.innerHTML;
+        listIndex++;
+      }
+      return;
+    }
+
+    if (tag === "blockquote") {
+      if (quoteElements[quoteIndex]) {
+        quoteElements[quoteIndex].innerHTML = block.innerHTML;
+        quoteIndex++;
+      }
+    }
+  });
 }
 
 /** Rebuild the logo carousel from saved logos */
@@ -779,9 +868,33 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
     setEditing(true);
   };
 
+  const savedRevisions: SectionRevision[] = Array.isArray(override?.content?.revisions)
+    ? override.content.revisions.map((revision) => ({
+        ...revision,
+        structured: normalizeStructuredContent(revision.structured, revision.label || fallbackStructuredLabel),
+      }))
+    : [];
+
   const saveOverride = async () => {
     setSaving(true);
-    const content = { structured: structured as any, label: structured.label } as any;
+    const previousStructured = override?.content?.structured
+      ? normalizeStructuredContent(override.content.structured, fallbackStructuredLabel)
+      : null;
+    const previousRevisions = Array.isArray(override?.content?.revisions) ? override.content.revisions : [];
+    const hasChanged = previousStructured
+      ? JSON.stringify(previousStructured) !== JSON.stringify(structured)
+      : false;
+
+    const revisions = previousStructured && hasChanged
+      ? [{
+          id: crypto.randomUUID(),
+          savedAt: new Date().toISOString(),
+          label: previousStructured.label || fallbackStructuredLabel,
+          structured: previousStructured,
+        }, ...previousRevisions].slice(0, 15)
+      : previousRevisions;
+
+    const content = { structured: structured as any, label: structured.label, revisions } as any;
 
     if (override) {
       await supabase
@@ -818,6 +931,22 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
 
   const updateField = <K extends keyof StructuredContent>(key: K, value: StructuredContent[K]) => {
     setStructured((prev) => ({ ...normalizeStructuredContent(prev, fallbackStructuredLabel), [key]: value }));
+  };
+
+  const updateRichText = (html: string) => {
+    setStructured((prev) => {
+      const safePrev = normalizeStructuredContent(prev, fallbackStructuredLabel);
+      return {
+        ...safePrev,
+        textHtml: html,
+        text: htmlToTaggedText(html),
+      };
+    });
+  };
+
+  const restoreRevision = (revision: SectionRevision) => {
+    setStructured(normalizeStructuredContent(revision.structured, revision.label || fallbackStructuredLabel));
+    toast({ title: "Révision chargée", description: "Enregistrez pour la remettre sur le site." });
   };
 
   const addCta = () => {
@@ -1038,12 +1167,34 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
                     <Label className="text-sm font-semibold">📄 Contenu complet</Label>
                     <Suspense fallback={<div className="h-40 animate-pulse bg-muted rounded" />}>
                       <RichTextEditor
-                        content={taggedTextToHtml(structured.text)}
-                        onChange={(html) => updateField("text", htmlToTaggedText(html))}
+                        content={structured.textHtml || taggedTextToHtml(structured.text)}
+                        onChange={updateRichText}
                       />
                     </Suspense>
                   </div>
                 </>
+              )}
+
+              {savedRevisions.length > 0 && (
+                <div className="rounded-lg border p-4 space-y-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <Label className="text-sm font-semibold">🕘 Révisions précédentes</Label>
+                    <p className="text-xs text-muted-foreground">Restaurer puis enregistrer.</p>
+                  </div>
+                  <div className="space-y-2">
+                    {savedRevisions.map((revision, index) => (
+                      <div key={revision.id || `${revision.savedAt}-${index}`} className="flex items-center justify-between gap-3 rounded-lg border bg-muted/30 px-3 py-2">
+                        <div className="min-w-0">
+                          <p className="truncate text-sm font-medium">{revision.label || `Révision ${savedRevisions.length - index}`}</p>
+                          <p className="text-xs text-muted-foreground">{new Date(revision.savedAt).toLocaleString("fr-FR")}</p>
+                        </div>
+                        <Button type="button" variant="outline" size="sm" onClick={() => restoreRevision(revision)}>
+                          Restaurer
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               )}
 
               {/* Logo carousel editor */}
