@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { FileText, Calendar, User, Building2, Mail, ChevronRight, Download, Copy, Check, Trash2, Clock, Eye, CheckCircle2, Search, ClipboardList, MessageSquare } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import jsPDF from "jspdf";
+// jsPDF loaded dynamically in downloadPdf()
 import logoImg from "@/assets/logo-declic-digital-new.webp";
 import AdminBar from "@/components/admin/AdminBar";
 
@@ -174,6 +174,7 @@ const AdminSoumissions = () => {
   };
 
   const downloadPdf = async (sub: Submission) => {
+    const { default: jsPDF } = await import("jspdf");
     const d = sub.data;
     const doc = new jsPDF();
     const pageWidth = doc.internal.pageSize.getWidth();
