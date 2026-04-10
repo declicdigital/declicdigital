@@ -5,7 +5,7 @@ import { FileText, Calendar, User, Building2, Mail, ChevronRight, Download, Copy
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import jsPDF from "jspdf";
+// jsPDF loaded dynamically in downloadPdf()
 import logoImg from "@/assets/logo-declic-digital-new.webp";
 import AdminBar from "@/components/admin/AdminBar";
 
