@@ -60,7 +60,8 @@ const CmsBlogArticle = () => {
 
   useEffect(() => {
     if (!slug) return;
-    supabase.from("cms_blog_posts").select("*").eq("slug", slug).eq("status", "published").single()
+    const cleanSlug = slug.replace(/\/+$/, "");
+    supabase.from("cms_blog_posts").select("*").eq("slug", cleanSlug).eq("status", "published").single()
       .then(({ data }) => { setPost(data as CmsPost | null); setLoading(false); });
   }, [slug]);
 
