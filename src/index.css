@@ -210,6 +210,11 @@ h1, h2, h3 {
     text-align: inherit;
   }
 
+  /* Inline links: violet only, no underline */
+  a.text-primary {
+    text-decoration: none !important;
+  }
+
   /* ── Stronger shadow on bold / semibold text ── */
   strong, b, .font-bold, .font-extrabold, .font-semibold {
     text-shadow:
