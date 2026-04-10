@@ -121,30 +121,17 @@ h1, h2, h3 {
     background-color: var(--bg-paper);
   }
 
-  /* ── Heavy grain texture overlay (real grain.png) ── */
+  /* ── Grain texture overlay — single lightweight layer ── */
   body::before {
     content: "";
     position: fixed;
     inset: 0;
     background: url('/grain.webp');
     background-size: 256px 256px;
-    opacity: 0.15;
+    opacity: 0.12;
     pointer-events: none;
-    mix-blend-mode: multiply;
     z-index: 9999;
-  }
-
-  /* ── Secondary subtle overlay for paper fiber ── */
-  body::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 9998;
-    opacity: 0.08;
-    background: url('/grain.webp');
-    background-size: 128px 128px;
-    mix-blend-mode: overlay;
+    will-change: auto;
   }
 
   /* ── Headings ── */
