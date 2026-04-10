@@ -58,6 +58,8 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
   const [ctaEdit, setCtaEdit] = useState<CtaEditState | null>(null);
   const popupRef = useRef<HTMLDivElement>(null);
   const editorWrapperRef = useRef<HTMLDivElement>(null);
+  const lastEmittedHtmlRef = useRef(content);
+  const isSyncingFromOutsideRef = useRef(false);
 
   const editor = useEditor({
     extensions: [
@@ -68,11 +70,24 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
       CtaNode,
     ],
     content,
+    onCreate: ({ editor }) => {
+      const initialHtml = editor.getHTML();
+      lastEmittedHtmlRef.current = initialHtml;
+      setRawHtml(initialHtml);
+      setActiveBlock(getActiveBlockLabel(editor));
+    },
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
-      onChange(html);
+      lastEmittedHtmlRef.current = html;
       setRawHtml(html);
       setActiveBlock(getActiveBlockLabel(editor));
+
+      if (isSyncingFromOutsideRef.current) {
+        isSyncingFromOutsideRef.current = false;
+        return;
+      }
+
+      onChange(html);
     },
     onSelectionUpdate: ({ editor }) => {
       setActiveBlock(getActiveBlockLabel(editor));
@@ -80,11 +95,27 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
   });
 
   useEffect(() => {
-    if (editor && content !== editor.getHTML()) {
-      editor.commands.setContent(content);
-      setRawHtml(content);
+    if (!editor) return;
+
+    const currentHtml = editor.getHTML();
+    if (content === currentHtml || content === lastEmittedHtmlRef.current) {
+      if (rawHtml !== content) setRawHtml(content);
+      return;
     }
-  }, [content]);
+
+    const { from, to } = editor.state.selection;
+    isSyncingFromOutsideRef.current = true;
+    editor.commands.setContent(content, false);
+
+    const maxPos = Math.max(0, editor.state.doc.content.size);
+    editor.commands.setTextSelection({
+      from: Math.min(from, maxPos),
+      to: Math.min(to, maxPos),
+    });
+
+    lastEmittedHtmlRef.current = content;
+    setRawHtml(content);
+  }, [content, editor, rawHtml]);
 
   // Listen for CTA edit events
   useEffect(() => {
@@ -167,9 +198,11 @@ const RichTextEditor = ({ content, onChange }: RichTextEditorProps) => {
 
   const handleRawChange = (val: string) => {
     setRawHtml(val);
+    lastEmittedHtmlRef.current = val;
     onChange(val);
-    if (editor) {
-      editor.commands.setContent(val);
+    if (editor && val !== editor.getHTML()) {
+      isSyncingFromOutsideRef.current = true;
+      editor.commands.setContent(val, false);
     }
   };
 
