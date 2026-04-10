@@ -329,10 +329,14 @@ const VilleReferencementSeo = () => {
       <section className="gradient-miami py-16">
         <div className="container text-center">
           <h2 className="mb-4 text-3xl font-extrabold text-white">
-            Demandez votre audit SEO gratuit : réponse en 48h
+            {city.slug === "asnieres-sur-seine"
+              ? "Prêt à booster votre visibilité à Asnières-sur-Seine ?"
+              : "Demandez votre audit SEO gratuit : réponse en 48h"}
           </h2>
           <p className="mb-8 text-white/80">
-            Découvrez comment attirer plus de clients à {city.nameShort} grâce au référencement Google.
+            {city.slug === "asnieres-sur-seine"
+              ? "Chaque mois sans stratégie SEO, ce sont des prospects qui cliquent sur vos concurrents. Contactez Déclic Digital pour un audit SEO offert et sans engagement."
+              : `Découvrez comment attirer plus de clients à ${city.nameShort} grâce au référencement Google.`}
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
