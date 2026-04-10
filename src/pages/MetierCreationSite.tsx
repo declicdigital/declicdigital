@@ -15,7 +15,35 @@ import metierElectricien from "@/assets/metier-electricien.webp";
 import { getTradeBySlug, trades, tradeCategories } from "@/data/trades";
 import { Helmet } from "react-helmet-async";
 
-const tradeFaqs: Record<string, { q: string; a: string }[]> = {
+type GuideData = { title: string; sections: { heading: string; text: string }[] } | null;
+
+const TradeGuideSection = ({ tradeSlug }: { tradeSlug: string }) => {
+  const [guide, setGuide] = useState<GuideData>(null);
+  useEffect(() => {
+    import("@/data/tradeGuideContent").then((m) => {
+      const data = m.tradeGuideContent[tradeSlug];
+      if (data) setGuide(data);
+    });
+  }, [tradeSlug]);
+  if (!guide) return null;
+  return (
+    <SectionWrapper>
+      <div className="mx-auto max-w-3xl space-y-6">
+        <h2 className="text-3xl font-extrabold md:text-4xl text-center">{guide.title}</h2>
+        {guide.sections.map((section, i) => (
+          <div key={i}>
+            <h3 className="text-xl font-bold">{section.heading}</h3>
+            <p className="text-muted-foreground leading-relaxed">{section.text}</p>
+          </div>
+        ))}
+        <p className="text-muted-foreground leading-relaxed">
+          Prêt à passer à l'action ? <Link to="/rendez-vous" className="text-primary font-semibold">Prenez rendez-vous</Link>, consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> ou découvrez <Link to="/realisations" className="text-primary font-semibold">nos réalisations</Link>.
+        </p>
+      </div>
+    </SectionWrapper>
+  );
+};
+
   artisanat: [
     { q: "Combien coûte un site web pour un artisan ?", a: "Nos forfaits démarrent avec un premier mois de mise en service puis 50€/mois tout compris : design sur-mesure, hébergement, maintenance et optimisation SEO. Pas de frais cachés." },
     { q: "Mon site sera-t-il visible sur Google ?", a: "Oui. Chaque site est optimisé pour le référencement local dès la conception. Nous ciblons les mots clés que vos clients tapent : 'plombier Paris', 'électricien 92', etc." },
