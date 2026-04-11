@@ -3,12 +3,12 @@ import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import { useAuth } from "@/hooks/useAuth";
 import { CmsOverridesProvider } from "@/hooks/useCmsOverrides";
+import EditableSection from "./admin/EditableSection";
 
 const Footer = lazy(() => import("./Footer"));
 const BlogCarousel = lazy(() => import("./BlogCarousel"));
 const AiChatWidget = lazy(() => import("./FaqAiChat").then(m => ({ default: m.AiChatWidget })));
 const AdminBar = lazy(() => import("./admin/AdminBar"));
-const EditableSection = lazy(() => import("./admin/EditableSection"));
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -91,18 +91,17 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
       const label = guessLabel(child, originalIdx);
 
       return (
-        <Suspense key={`${originalIdx}-${displayIdx}`} fallback={child}>
-          <EditableSection
-            blockId={blockId}
-            pagePath={pagePath}
-            label={label}
-            onMoveUp={isAdmin && displayIdx > 0 ? () => moveBlock(displayIdx, "up") : undefined}
-            onMoveDown={isAdmin && displayIdx < orderedChildren.length - 1 ? () => moveBlock(displayIdx, "down") : undefined}
-            displayIndex={displayIdx}
-          >
-            {child}
-          </EditableSection>
-        </Suspense>
+        <EditableSection
+          key={`${originalIdx}-${displayIdx}`}
+          blockId={blockId}
+          pagePath={pagePath}
+          label={label}
+          onMoveUp={isAdmin && displayIdx > 0 ? () => moveBlock(displayIdx, "up") : undefined}
+          onMoveDown={isAdmin && displayIdx < orderedChildren.length - 1 ? () => moveBlock(displayIdx, "down") : undefined}
+          displayIndex={displayIdx}
+        >
+          {child}
+        </EditableSection>
       );
     });
   })();
