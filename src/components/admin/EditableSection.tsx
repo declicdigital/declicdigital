@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, ReactNode } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, useCallback, ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useCmsOverrides } from "@/hooks/useCmsOverrides";
@@ -996,17 +996,21 @@ const UndoRedoKeys = ({ onUndo, onRedo, canUndo, canRedo }: { onUndo: () => void
 // ─── Main Component ───
 const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveDown, displayIndex }: EditableSectionProps) => {
   const { isAdmin } = useAuth();
-  const [override, setOverride] = useState<Override | null>(null);
+  const { getOverride: getCmsOverride, loaded: cmsLoaded, refresh: refreshCms } = useCmsOverrides();
+  const compositeKey = `${pagePath}::${blockId}`;
+
+  // Hydrate override synchronously from cache on first render
+  const [override, setOverride] = useState<Override | null>(() => {
+    const cached = getCmsOverride(compositeKey);
+    return cached ? { id: cached.id, content: cached.content as Override["content"] } : null;
+  });
   const [editing, setEditing] = useState(false);
   const fallbackStructuredLabel = label || blockId;
   const { current: rawStructured, set: setStructured, undo, redo, canUndo, canRedo, reset: resetHistory } = useUndoRedo<StructuredContent>(emptyStructured(fallbackStructuredLabel));
   const structured = normalizeStructuredContent(rawStructured, override?.content?.label || fallbackStructuredLabel);
   const [saving, setSaving] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(cmsLoaded);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  const compositeKey = `${pagePath}::${blockId}`;
-  const { getOverride: getCmsOverride, loaded: cmsLoaded, refresh: refreshCms } = useCmsOverrides();
 
   useEffect(() => {
     if (!cmsLoaded) return;
@@ -1017,17 +1021,12 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
     setLoaded(true);
   }, [compositeKey, cmsLoaded, getCmsOverride]);
 
-  // Re-apply overrides after every render (React re-renders overwrite DOM patches)
+  // Re-apply overrides synchronously before paint to avoid layout shift
   const overrideRef = useRef(override);
   overrideRef.current = override;
-  useEffect(() => {
-    if (!loaded || !overrideRef.current?.content?.structured || !contentRef.current) return;
-    const timer = setTimeout(() => {
-      if (contentRef.current && overrideRef.current?.content?.structured) {
-        applyOverrideToDOM(contentRef.current, overrideRef.current.content.structured);
-      }
-    }, 50);
-    return () => clearTimeout(timer);
+  useLayoutEffect(() => {
+    if (!overrideRef.current?.content?.structured || !contentRef.current) return;
+    applyOverrideToDOM(contentRef.current, overrideRef.current.content.structured);
   }); // no deps = runs after every render
 
   const openEditor = () => {
@@ -1193,7 +1192,10 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
   };
 
   if (!isAdmin) {
-    return <div ref={contentRef}>{children}</div>;
+    // Apply bgColor immediately to avoid layout shift on cached overrides
+    const cachedBg = override?.content?.structured?.bgColor;
+    const bgClass = cachedBg ? BG_CLASS_MAP[cachedBg as BgColor] || "" : "";
+    return <div ref={contentRef} className={bgClass || undefined}>{children}</div>;
   }
 
   if (!loaded) return <>{children}</>;
