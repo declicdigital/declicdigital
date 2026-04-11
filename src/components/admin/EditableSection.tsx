@@ -996,17 +996,21 @@ const UndoRedoKeys = ({ onUndo, onRedo, canUndo, canRedo }: { onUndo: () => void
 // ─── Main Component ───
 const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveDown, displayIndex }: EditableSectionProps) => {
   const { isAdmin } = useAuth();
-  const [override, setOverride] = useState<Override | null>(null);
+  const { getOverride: getCmsOverride, loaded: cmsLoaded, refresh: refreshCms } = useCmsOverrides();
+  const compositeKey = `${pagePath}::${blockId}`;
+
+  // Hydrate override synchronously from cache on first render
+  const [override, setOverride] = useState<Override | null>(() => {
+    const cached = getCmsOverride(compositeKey);
+    return cached ? { id: cached.id, content: cached.content as Override["content"] } : null;
+  });
   const [editing, setEditing] = useState(false);
   const fallbackStructuredLabel = label || blockId;
   const { current: rawStructured, set: setStructured, undo, redo, canUndo, canRedo, reset: resetHistory } = useUndoRedo<StructuredContent>(emptyStructured(fallbackStructuredLabel));
   const structured = normalizeStructuredContent(rawStructured, override?.content?.label || fallbackStructuredLabel);
   const [saving, setSaving] = useState(false);
-  const [loaded, setLoaded] = useState(false);
+  const [loaded, setLoaded] = useState(cmsLoaded);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  const compositeKey = `${pagePath}::${blockId}`;
-  const { getOverride: getCmsOverride, loaded: cmsLoaded, refresh: refreshCms } = useCmsOverrides();
 
   useEffect(() => {
     if (!cmsLoaded) return;
