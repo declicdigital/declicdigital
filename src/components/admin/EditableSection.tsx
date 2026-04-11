@@ -809,12 +809,10 @@ const SubItemEditor = ({ item, index, onChange, onRemove }: {
 
       {!collapsed && (
         <div className="space-y-3 pl-1">
-          {item.url !== undefined && item.url !== "" && (
-            <div>
-              <Label className="text-xs font-medium">🔗 Lien de la carte</Label>
-              <Input value={item.url} onChange={e => updateField("url", e.target.value)} placeholder="https://..." className="mt-1 text-sm" />
-            </div>
-          )}
+          <div>
+            <Label className="text-xs font-medium">🔗 Lien</Label>
+            <Input value={item.url || ""} onChange={e => updateField("url", e.target.value)} placeholder="https://..." className="mt-1 text-sm" />
+          </div>
           <div>
             <Label className="text-xs font-medium">Titre</Label>
             <Input value={item.heading} onChange={e => updateField("heading", e.target.value)} className="mt-1 text-sm" />
@@ -843,25 +841,6 @@ const SubItemEditor = ({ item, index, onChange, onRemove }: {
               </label>
             </div>
             <Input value={item.imageAlt} onChange={e => updateField("imageAlt", e.target.value)} placeholder="Alt" className="mt-1 text-sm" />
-          </div>
-          <div>
-            <div className="flex items-center justify-between mb-1">
-              <Label className="text-xs font-medium">CTAs</Label>
-              <Button type="button" variant="ghost" size="sm" onClick={addCta} className="h-6 text-xs gap-1">
-                <Plus size={12} /> CTA
-              </Button>
-            </div>
-            {item.ctas.map((cta, ci) => (
-              <div key={cta.id} className={`rounded border p-2 mb-2 space-y-1 ${cta.enabled ? "border-primary/20" : "opacity-50"}`}>
-                <div className="flex items-center gap-2">
-                  <Checkbox checked={cta.enabled} onCheckedChange={v => updateCta(cta.id, "enabled", !!v)} />
-                  <span className="text-xs flex-1">CTA {ci + 1}</span>
-                  <button onClick={() => removeCta(cta.id)} className="text-destructive"><Trash size={12} /></button>
-                </div>
-                <Input value={cta.text} onChange={e => updateCta(cta.id, "text", e.target.value)} placeholder="Texte" className="text-xs h-7" />
-                <Input value={cta.url} onChange={e => updateCta(cta.id, "url", e.target.value)} placeholder="Lien" className="text-xs h-7" />
-              </div>
-            ))}
           </div>
         </div>
       )}
