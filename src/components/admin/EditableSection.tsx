@@ -1192,10 +1192,11 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
   };
 
   if (!isAdmin) {
-    // Apply bgColor immediately to avoid layout shift on cached overrides
     const cachedBg = override?.content?.structured?.bgColor;
     const bgClass = cachedBg ? BG_CLASS_MAP[cachedBg as BgColor] || "" : "";
-    return <div ref={contentRef} className={bgClass || undefined}>{children}</div>;
+    const visitorClassName = [bgClass, !loaded ? "invisible" : ""].filter(Boolean).join(" ");
+
+    return <div ref={contentRef} className={visitorClassName || undefined}>{children}</div>;
   }
 
   if (!loaded) return <>{children}</>;
