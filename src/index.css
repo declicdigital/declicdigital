@@ -490,3 +490,9 @@ h1, h2, h3 {
   background: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(330, 100%, 70%));
   color: white;
 }
+
+/* Disable framer-motion entrance animations for Speed Index/CLS */
+[style*="opacity: 0"], [style*="transform: translateY"] {
+  opacity: 1 !important;
+  transform: none !important;
+}

@@ -3,8 +3,9 @@ import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import { useAuth } from "@/hooks/useAuth";
 import { CmsOverridesProvider } from "@/hooks/useCmsOverrides";
-import EditableSection from "./admin/EditableSection";
+import CmsPatcher from "./CmsPatcher";
 
+const EditableSection = lazy(() => import("./admin/EditableSection"));
 const Footer = lazy(() => import("./Footer"));
 const BlogCarousel = lazy(() => import("./BlogCarousel"));
 const AiChatWidget = lazy(() => import("./FaqAiChat").then(m => ({ default: m.AiChatWidget })));
@@ -49,11 +50,6 @@ function isAlreadyEditable(child: any): boolean {
   return false;
 }
 
-const ALTERNATING_BG = [
-  "", // original
-  "bg-secondary/30",
-];
-
 const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => {
   const { isAdmin } = useAuth();
   const location = useLocation();
@@ -62,7 +58,6 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
   const flat = flattenChildren(children);
   const [order, setOrder] = useState<number[]>(() => flat.map((_, i) => i));
 
-  // Reset order when children count changes (page navigation)
   useEffect(() => {
     setOrder(flat.map((_, i) => i));
   }, [flat.length, pagePath]);
@@ -78,7 +73,19 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
   }, []);
 
   const wrappedChildren = (() => {
-    const orderedChildren = (isAdmin ? order : flat.map((_, index) => index)).map(originalIdx => ({
+    if (!isAdmin) {
+      // Lightweight CMS patching only — no admin UI loaded
+      return flat.map((child, i) => {
+        if (!isValidElement(child)) return child;
+        return (
+          <CmsPatcher key={i} blockId={`auto-${i}`} pagePath={pagePath}>
+            {child}
+          </CmsPatcher>
+        );
+      });
+    }
+
+    const orderedChildren = order.map(originalIdx => ({
       child: flat[originalIdx],
       originalIdx,
     }));
@@ -91,17 +98,18 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
       const label = guessLabel(child, originalIdx);
 
       return (
-        <EditableSection
-          key={`${originalIdx}-${displayIdx}`}
-          blockId={blockId}
-          pagePath={pagePath}
-          label={label}
-          onMoveUp={isAdmin && displayIdx > 0 ? () => moveBlock(displayIdx, "up") : undefined}
-          onMoveDown={isAdmin && displayIdx < orderedChildren.length - 1 ? () => moveBlock(displayIdx, "down") : undefined}
-          displayIndex={displayIdx}
-        >
-          {child}
-        </EditableSection>
+        <Suspense key={`${originalIdx}-${displayIdx}`} fallback={child}>
+          <EditableSection
+            blockId={blockId}
+            pagePath={pagePath}
+            label={label}
+            onMoveUp={displayIdx > 0 ? () => moveBlock(displayIdx, "up") : undefined}
+            onMoveDown={displayIdx < orderedChildren.length - 1 ? () => moveBlock(displayIdx, "down") : undefined}
+            displayIndex={displayIdx}
+          >
+            {child}
+          </EditableSection>
+        </Suspense>
       );
     });
   })();
