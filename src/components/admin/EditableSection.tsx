@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, useCallback, ReactNode } from "react";
+import { useState, useEffect, useLayoutEffect, useRef, useCallback, ReactNode } from "react";
 import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { useCmsOverrides } from "@/hooks/useCmsOverrides";
