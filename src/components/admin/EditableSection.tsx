@@ -1017,17 +1017,12 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
     setLoaded(true);
   }, [compositeKey, cmsLoaded, getCmsOverride]);
 
-  // Re-apply overrides after every render (React re-renders overwrite DOM patches)
+  // Re-apply overrides synchronously before paint to avoid layout shift
   const overrideRef = useRef(override);
   overrideRef.current = override;
-  useEffect(() => {
-    if (!loaded || !overrideRef.current?.content?.structured || !contentRef.current) return;
-    const timer = setTimeout(() => {
-      if (contentRef.current && overrideRef.current?.content?.structured) {
-        applyOverrideToDOM(contentRef.current, overrideRef.current.content.structured);
-      }
-    }, 50);
-    return () => clearTimeout(timer);
+  useLayoutEffect(() => {
+    if (!overrideRef.current?.content?.structured || !contentRef.current) return;
+    applyOverrideToDOM(contentRef.current, overrideRef.current.content.structured);
   }); // no deps = runs after every render
 
   const openEditor = () => {
