@@ -97,23 +97,36 @@ const CmsBlogArticle = () => {
     }));
 
   const processContent = (html: string) => {
-    let sanitized = DOMPurify.sanitize(html, { ADD_ATTR: ['class', 'data-cta-style'] });
-    // Match <div class="cta-block"> format
-    sanitized = sanitized.replace(
-      /<div class="cta-block"[^>]*data-cta-style="([^"]*)"[^>]*><a href="([^"]*)">(.*?)<\/a><\/div>/g,
-      (_, style, href, text) => {
+    // Pre-process CTA blocks BEFORE sanitization:
+    // TipTap renders: <div class="cta-block" data-cta-style="..." data-href="..." data-label="..."><span>text</span></div>
+    // Convert to proper <a> tags before DOMPurify strips data-* attributes
+    let processed = html.replace(
+      /<div\s+class="cta-block"[^>]*data-cta-style="([^"]*)"[^>]*data-href="([^"]*)"[^>]*data-label="([^"]*)"[^>]*>.*?<\/div>/g,
+      (_, style, href, label) => {
         const cls = style === "secondary" ? "cta-secondary" : "cta-primary";
-        return `<div class="cta-wrapper"><a href="${href}" class="cta-button ${cls}">${text} →</a></div>`;
+        return `<div class="cta-wrapper"><a href="${href}" class="cta-button ${cls}">${label} →</a></div>`;
       }
     );
-    // Match standalone <p><a>text</a></p> (paragraph containing only a link = CTA)
-    sanitized = sanitized.replace(
-      /<p>\s*<a\s+[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>\s*<\/p>/g,
-      (_, href, text) => {
-        const cleanText = text.replace(/\s*→\s*$/, '');
-        return `<div class="cta-wrapper"><a href="${href}" class="cta-button cta-primary">${cleanText} →</a></div>`;
+    // Also handle when data attributes are in different order
+    processed = processed.replace(
+      /<div\s+class="cta-block"[^>]*?data-href="([^"]*)"[^>]*?data-label="([^"]*)"[^>]*?data-cta-style="([^"]*)"[^>]*>.*?<\/div>/g,
+      (_, href, label, style) => {
+        const cls = style === "secondary" ? "cta-secondary" : "cta-primary";
+        return `<div class="cta-wrapper"><a href="${href}" class="cta-button ${cls}">${label} →</a></div>`;
       }
     );
+    // Fallback: any remaining cta-block divs with data-href
+    processed = processed.replace(
+      /<div\s+class="cta-block"[^>]*?data-href="([^"]*)"[^>]*?>.*?<\/div>/g,
+      (_, href) => {
+        // Extract text content from inside the div
+        const textMatch = _.match(/>([^<]+)</);
+        const label = textMatch ? textMatch[1].trim() : "En savoir plus";
+        return `<div class="cta-wrapper"><a href="${href}" class="cta-button cta-primary">${label} →</a></div>`;
+      }
+    );
+
+    const sanitized = DOMPurify.sanitize(processed, { ADD_ATTR: ['class'] });
     return sanitized;
   };
 
