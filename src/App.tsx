@@ -55,7 +55,7 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AuthProvider>
-          <MotionConfig reducedMotion="always">
+          <>
             <Toaster />
             <Sonner />
             <BrowserRouter>
