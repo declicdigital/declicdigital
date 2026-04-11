@@ -491,10 +491,8 @@ h1, h2, h3 {
   color: white;
 }
 
-/* Force instant animations — replaces MotionConfig reducedMotion="always" */
-*, *::before, *::after {
-  animation-duration: 0.001ms !important;
-  animation-delay: 0ms !important;
-  transition-duration: 0.001ms !important;
-  transition-delay: 0ms !important;
+/* Disable framer-motion entrance animations for Speed Index/CLS */
+[style*="opacity: 0"], [style*="transform: translateY"] {
+  opacity: 1 !important;
+  transform: none !important;
 }
