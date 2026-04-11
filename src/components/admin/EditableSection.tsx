@@ -809,6 +809,12 @@ const SubItemEditor = ({ item, index, onChange, onRemove }: {
 
       {!collapsed && (
         <div className="space-y-3 pl-1">
+          {item.url !== undefined && item.url !== "" && (
+            <div>
+              <Label className="text-xs font-medium">🔗 Lien de la carte</Label>
+              <Input value={item.url} onChange={e => updateField("url", e.target.value)} placeholder="https://..." className="mt-1 text-sm" />
+            </div>
+          )}
           <div>
             <Label className="text-xs font-medium">Titre</Label>
             <Input value={item.heading} onChange={e => updateField("heading", e.target.value)} className="mt-1 text-sm" />
