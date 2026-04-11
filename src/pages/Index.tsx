@@ -94,10 +94,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Below the fold - lazy loaded */}
-      <Suspense fallback={<div style={{ minHeight: 800 }} />}>
-        <IndexBelow />
-      </Suspense>
+      <IndexBelow />
     </PageLayout>
   );
 };
