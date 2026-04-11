@@ -1,37 +1,11 @@
 import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-
-import { Search, BarChart3, Eye, Users, TrendingUp, ChevronRight, Monitor, Gauge, CheckCircle, Shield, Clock, Target, MessageSquare, Phone as PhoneIcon, FileText, Rocket } from "lucide-react";
-const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
-const LocationSection = lazy(() => import("@/components/LocationSection"));
-const PageBlocksLazy = lazy(() => import("@/components/admin/BlockEditor").then(m => ({ default: m.PageBlocks })));
-import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
-import SectionWrapper from "@/components/SectionWrapper";
-
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 
-import logoWordpress from "@/assets/logos/wordpress.webp";
-import logoShopify from "@/assets/logos/shopify.webp";
-import logoLovable from "@/assets/logos/lovable.webp";
-import logoClaude from "@/assets/logos/claude.svg";
-import logoSemrush from "@/assets/logos/semrush.webp";
-import logoSearchConsole from "@/assets/logos/search-console.webp";
-import logoChatgpt from "@/assets/logos/chatgpt.webp";
-
-const techLogos = [
-  { name: "WordPress", src: logoWordpress },
-  { name: "Shopify", src: logoShopify },
-  { name: "Lovable", src: logoLovable },
-  { name: "Claude AI", src: logoClaude },
-  { name: "ChatGPT", src: logoChatgpt },
-  { name: "Semrush", src: logoSemrush },
-  { name: "Search Console", src: logoSearchConsole },
-];
+const IndexBelow = lazy(() => import("./IndexBelow"));
 
 const Index = () => {
   return (
@@ -72,16 +46,8 @@ const Index = () => {
               longitude: 2.3004,
             },
             areaServed: [
-              {
-                "@type": "City",
-                name: "Paris",
-                sameAs: "https://fr.wikipedia.org/wiki/Paris",
-              },
-              {
-                "@type": "AdministrativeArea",
-                name: "Hauts-de-Seine (92)",
-                sameAs: "https://fr.wikipedia.org/wiki/Hauts-de-Seine",
-              },
+              { "@type": "City", name: "Paris", sameAs: "https://fr.wikipedia.org/wiki/Paris" },
+              { "@type": "AdministrativeArea", name: "Hauts-de-Seine (92)", sameAs: "https://fr.wikipedia.org/wiki/Hauts-de-Seine" },
             ],
             openingHoursSpecification: {
               "@type": "OpeningHoursSpecification",
@@ -89,14 +55,8 @@ const Index = () => {
               opens: "09:00",
               closes: "18:00",
             },
-            founder: {
-              "@type": "Person",
-              name: "Geoffrey",
-              jobTitle: "Expert Produit Google",
-            },
-            sameAs: [
-              "https://share.google/8Ifh8V9cpPGinQXkY",
-            ],
+            founder: { "@type": "Person", name: "Geoffrey", jobTitle: "Expert Produit Google" },
+            sameAs: ["https://share.google/8Ifh8V9cpPGinQXkY"],
           })}
         </script>
       </Helmet>
@@ -136,302 +96,9 @@ const Index = () => {
         </div>
       </section>
 
-
-      {/* Problème */}
-      <SectionWrapper className="bg-section-blue">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="mb-6 text-3xl font-extrabold md:text-4xl">Vous n'avez pas de site, ou il ne génère aucun client ?</h2>
-          <p className="mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
-            De nombreuses TPE investissent dans un site web, mais celui-ci reste invisible sur Google. Sans stratégie de <Link to="/referencement-seo" className="text-primary font-semibold">référencement</Link>, sans optimisation technique et sans contenu adapté, votre site ne peut pas attirer de visiteurs qualifiés. Résultat : zéro contact, zéro prospect, zéro retour sur investissement.
-          </p>
-          <div className="grid gap-4 sm:grid-cols-2 mt-8">
-            {[
-              { icon: Eye, text: "Site invisible sur Google", detail: "93% des expériences en ligne commencent par un moteur de recherche. Si votre site n'apparaît pas, vos clients vont chez vos concurrents." },
-              { icon: Users, text: "Mauvaise expérience utilisateur", detail: "Un site lent, non adapté mobile ou difficile à naviguer fait fuir les visiteurs en quelques secondes." },
-              { icon: Search, text: "Absence de stratégie SEO", detail: "Sans optimisation des mots clés, des balises et du contenu, Google ne peut pas comprendre ni classer votre site." },
-              { icon: Gauge, text: "Site trop lent", detail: "Un temps de chargement supérieur à 3 secondes augmente le taux de rebond de plus de 50%." },
-            ].map((item, i) => (
-              <div key={i} className="flex items-start gap-4 rounded-xl bg-secondary p-5 text-left shadow-card">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
-                  <item.icon size={22} />
-                </div>
-                <div>
-                  <span className="font-semibold block">{item.text}</span>
-                  <p className="text-sm md:text-base text-muted-foreground mt-1">{item.detail}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="mt-10">
-            <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-              <Link to="/contact">Demander un audit SEO gratuit</Link>
-            </Button>
-          </div>
-        </div>
-      </SectionWrapper>
-
-      <SectionWrapper>
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold md:text-4xl">Création de site web professionnel pour indépendants</h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold">Déclic Digital</Link>, nous ne créons pas simplement des sites web. Nous concevons des outils de génération de clients, pensés pour les TPE et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> adaptés aux petits budgets.
-          </p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {[
-            { icon: Monitor, title: "Création de site web", desc: "Nous concevons des sites modernes, rapides et responsive, optimisés pour la conversion et l'expérience utilisateur.", link: "/creation-site-web" },
-            { icon: TrendingUp, title: "Référencement SEO", desc: "Le SEO est le levier le plus rentable pour attirer des clients. Nous optimisons votre site pour apparaître en première page Google.", link: "/referencement-seo" },
-            { icon: Eye, title: "Visibilité IA (GEO)", desc: "Apparaissez dans les réponses de ChatGPT, Perplexity et Gemini. La nouvelle frontière de la visibilité digitale pour les TPE.", link: "/visibilite-ia" },
-            { icon: BarChart3, title: "Stratégie digitale", desc: "Analyse de marché, positionnement, contenu, suivi des performances : chaque action est mesurée et orientée résultats.", link: "/contact" },
-          ].map((s, i) => (
-            <div key={i} className="group rounded-2xl bg-card p-8 shadow-card transition-all hover:shadow-elevated hover:-translate-y-1">
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">
-                <s.icon size={26} />
-              </div>
-              <h3 className="mb-3 text-xl font-bold">{s.title}</h3>
-              <p className="text-muted-foreground text-base leading-relaxed">{s.desc}</p>
-              <Link to={s.link} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">
-                En savoir plus <ChevronRight size={16} />
-              </Link>
-            </div>
-          ))}
-        </div>
-      </SectionWrapper>
-
-      <SectionWrapper className="bg-section-blue">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold md:text-4xl">Référencement naturel Google : soyez visible localement</h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Un processus simple et transparent pour vous accompagner de A à Z. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold">notre équipe</Link> et <Link to="/realisations" className="text-primary font-semibold">nos réalisations</Link>.
-          </p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-5">
-          {[
-            { step: "1", icon: MessageSquare, title: "Formulaire", desc: "Remplissez notre formulaire de contact pour nous décrire votre projet et vos objectifs." },
-            { step: "2", icon: PhoneIcon, title: "Rendez-vous", desc: "Nous échangeons par téléphone pour comprendre vos besoins, votre marché et vos attentes." },
-            { step: "3", icon: FileText, title: "Proposition", desc: "Nous vous présentons une solution adaptée à votre activité, vos objectifs et votre budget." },
-            { step: "4", icon: Rocket, title: "Création", desc: "Nous concevons et mettons en ligne votre site optimisé SEO, prêt à attirer des clients." },
-            { step: "5", icon: BarChart3, title: "Suivi", desc: "Nous suivons les performances et optimisons en continu pour maximiser vos résultats." },
-          ].map((p, i) => (
-            <div key={i} className="relative text-center">
-              <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full gradient-primary text-white text-lg font-bold">
-                {p.step}
-              </div>
-              <h3 className="mb-1 font-bold">{p.title}</h3>
-              <p className="text-sm md:text-base text-muted-foreground">{p.desc}</p>
-            </div>
-          ))}
-        </div>
-        <div className="text-center mt-10">
-           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-            <Link to="/rendez-vous">Prendre rendez-vous</Link>
-          </Button>
-        </div>
-      </SectionWrapper>
-
-      {/* Avis clients Google */}
-      <Suspense fallback={<div style={{ minHeight: 400 }} />}>
-        <GoogleReviewsSection />
-      </Suspense>
-
-      {/* Pourquoi un site web est essentiel */}
-      <SectionWrapper>
-        <div className="mx-auto max-w-5xl">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold md:text-4xl">Pourquoi choisir Déclic Digital pour votre projet web ?</h2>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { icon: Clock, title: "Disponible 24h/24", desc: "Contrairement à un commerce physique, votre site travaille pour vous en permanence. Vos prospects peuvent vous découvrir et vous contacter à tout moment." },
-              { icon: Target, title: "Attirez des clients ciblés", desc: "Un site bien référencé attire des visiteurs qui recherchent activement vos services. Ce sont des prospects qualifiés prêts à passer à l'action." },
-              { icon: Shield, title: "Renforcez votre crédibilité", desc: "En 2026, ne pas avoir de site web professionnel peut nuire à votre image. Un site soigné rassure vos prospects." },
-              { icon: TrendingUp, title: "Rentabilité sur le long terme", desc: "Contrairement à la publicité payante, le référencement naturel génère du trafic durable sans coût par clic." },
-            ].map((item, i) => (
-              <div key={i} className="rounded-2xl bg-card p-6 shadow-card">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-miami text-white">
-                  <item.icon size={22} />
-                </div>
-                <h3 className="mb-2 font-bold text-lg">{item.title}</h3>
-                <p className="text-sm md:text-base text-muted-foreground leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* Technologies */}
-      <SectionWrapper className="bg-section-blue">
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Nos réalisations pour des TPE et artisans parisiens</h2>
-          <p className="text-muted-foreground max-w-2xl mx-auto">
-            Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="text-primary font-semibold">créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold">SEO et GEO</Link>.
-          </p>
-        </div>
-        <div className="overflow-hidden">
-          <div className="flex animate-scroll-left gap-10 md:gap-14 w-max">
-            {[...techLogos, ...techLogos].map((t, i) => (
-              <div key={`${t.name}-${i}`} className="flex flex-col items-center gap-3 shrink-0">
-                <div className="rounded-2xl bg-secondary p-5 shadow-card">
-                  <img src={t.src} alt={t.name} className="h-16 w-16 md:h-20 md:w-20 object-contain" loading="lazy" decoding="async" width={80} height={80} />
-                </div>
-                <span className="text-sm font-medium text-muted-foreground">{t.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* Contenu SEO riche */}
-      <SectionWrapper>
-        <div className="mx-auto max-w-4xl">
-          <div className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold md:text-4xl">Demandez votre audit SEO gratuit dès aujourd'hui</h2>
-          </div>
-          <div className="prose prose-lg max-w-none text-muted-foreground space-y-6">
-            <p className="text-base md:text-lg">
-              Créer un <Link to="/creation-site-web" className="text-primary font-semibold">site internet</Link> ne se résume pas à assembler quelques pages et publier du contenu. Dans un environnement numérique de plus en plus concurrentiel, la réussite d'un projet web repose sur une combinaison d'expertise technique, de vision stratégique et de compréhension fine de votre marché. Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold">Déclic Digital</Link>, nous accompagnons les TPE, artisans, professions libérales et indépendants de <Link to="/nos-villes" className="text-primary font-semibold">Paris et des Hauts-de-Seine</Link> dans la conception de sites web qui génèrent réellement des contacts qualifiés.
-            </p>
-            <div className="grid gap-6 md:grid-cols-2 not-prose">
-              <div className="rounded-2xl bg-card p-6 shadow-card">
-                <h3 className="text-lg font-bold mb-2">Un site pensé pour convertir</h3>
-                <p className="text-base text-muted-foreground leading-relaxed">
-                  Chaque élément de votre site est pensé pour guider le visiteur vers une action précise : demande de devis, appel téléphonique, prise de rendez-vous. Nous structurons vos pages selon les meilleures pratiques UX et les standards d'accessibilité pour maximiser votre taux de conversion. Un site qui ne convertit pas est un site qui coûte de l'argent au lieu d'en rapporter.
-                </p>
-              </div>
-              <div className="rounded-2xl bg-card p-6 shadow-card">
-                <h3 className="text-lg font-bold mb-2">Le SEO au coeur de la conception</h3>
-                <p className="text-base text-muted-foreground leading-relaxed">
-                  Nous ne construisons pas un site web puis nous pensons au <Link to="/referencement-seo" className="text-primary font-semibold">référencement</Link> ensuite. Le SEO est intégré dès la phase de conception : architecture des pages, balisage sémantique, vitesse de chargement, maillage interne, contenu optimisé. Cette approche garantit que votre site est prêt à se positionner sur Google dès sa mise en ligne.
-                </p>
-              </div>
-            </div>
-            <p className="text-base md:text-lg">
-              La majorité des TPE qui nous contactent partagent un constat commun : elles ont investi dans un site web il y a quelques années, mais celui-ci ne leur apporte aucun retour. Les raisons sont souvent les mêmes : un design daté, un temps de chargement excessif, une absence totale de stratégie de mots clés, et un contenu qui ne répond pas aux questions que se posent réellement leurs prospects.
-            </p>
-            <p className="text-base md:text-lg">
-              Notre approche est différente. Nous commençons par une analyse approfondie de votre secteur d'activité, de vos concurrents et des requêtes que tapent vos futurs clients sur Google. À partir de cette analyse, nous définissons une arborescence de site optimisée, nous rédigeons des contenus ciblés et nous mettons en place une architecture technique irréprochable. Le résultat : un site qui se positionne durablement sur les mots clés stratégiques de votre activité. Demandez votre <Link to="/contact" className="text-primary font-semibold">audit SEO gratuit</Link> pour en savoir plus.
-            </p>
-            <div className="rounded-2xl bg-card p-6 shadow-card not-prose">
-              <h3 className="text-lg font-bold mb-3">Ce qui fait la différence avec Déclic Digital</h3>
-              <ul className="grid gap-2 sm:grid-cols-2">
-                {[
-                  "Audit SEO complet offert avant chaque projet",
-                  "Suivi personnalisé via votre espace client dédié",
-                  "Expertise Google certifiée (Expert Produit Google)",
-                  "Sites rapides : score PageSpeed supérieur à 90",
-                  "Accompagnement sur-mesure, pas de template générique",
-                  "Tarifs adaptés aux budgets des TPE et indépendants",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-base text-muted-foreground">
-                    <CheckCircle size={16} className="text-brand-violet mt-0.5 shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <p className="text-base md:text-lg">
-              Nous croyons que chaque entreprise, quelle que soit sa taille, mérite une présence en ligne professionnelle et performante. C'est pourquoi nous proposons des <Link to="/tarifs" className="text-primary font-semibold">formules accessibles</Link> sans sacrifier la qualité. De la <Link to="/creation-site-web" className="text-primary font-semibold">création de votre site vitrine</Link> à la mise en place d'une stratégie de <Link to="/referencement-seo" className="text-primary font-semibold">référencement naturel</Link> complète, nous vous accompagnons à chaque étape avec transparence et réactivité. Votre succès en ligne est notre priorité.
-            </p>
-          </div>
-          <div className="text-center mt-10">
-            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-              <Link to="/rendez-vous">Prendre rendez-vous</Link>
-            </Button>
-          </div>
-        </div>
-      </SectionWrapper>
-
-
-      {/* Maillage interne */}
-      <SectionWrapper className="bg-section-blue">
-        <div className="mx-auto max-w-3xl text-center">
-          <h3 className="text-2xl font-extrabold mb-4">Explorez nos services</h3>
-          <p className="text-lg text-muted-foreground mb-6">Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link to="/creation-site-web" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Création de site web
-            </Link>
-            <Link to="/referencement-seo" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Référencement SEO et GEO
-            </Link>
-            <Link to="/contact" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Audit SEO gratuit
-            </Link>
-            <Link to="/tarifs" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Nos tarifs
-            </Link>
-            <Link to="/realisations" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Nos réalisations
-            </Link>
-            <Link to="/qui-sommes-nous" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Qui sommes-nous
-            </Link>
-            <Link to="/nos-villes" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Nos villes
-            </Link>
-            <Link to="/faq" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Questions fréquentes
-            </Link>
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* Formulaire de contact */}
-      <SectionWrapper>
-        <div className="mx-auto max-w-2xl">
-          <div className="text-center mb-10">
-            <h3 className="text-3xl font-extrabold md:text-4xl">Parlez-nous de votre projet</h3>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold">création de votre site web</Link>.
-            </p>
-          </div>
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Input placeholder="Votre nom" className="rounded-xl" required />
-              <Input placeholder="Nom de votre entreprise" className="rounded-xl" required />
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Input placeholder="Votre email" type="email" className="rounded-xl" required />
-              <Input placeholder="Votre téléphone" type="tel" className="rounded-xl" />
-            </div>
-            <Input placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" />
-            <Textarea placeholder="Décrivez votre projet..." className="rounded-xl min-h-[120px]" required />
-            <Button type="submit" variant="custom" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
-              <CheckCircle size={18} className="mr-2" /> Envoyer ma demande
-            </Button>
-          </form>
-        </div>
-      </SectionWrapper>
-
-      {/* Notre agence */}
-      <Suspense fallback={<div style={{ minHeight: 300 }} />}>
-        <LocationSection />
-      </Suspense>
-
-      {/* CTA Final */}
-      <section className="gradient-miami py-16 md:py-24 text-white">
-        <div className="container">
-          <div className="flex flex-col items-center text-center">
-            <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-white/30 shadow-lg mb-4" width={80} height={80} loading="lazy" />
-            <p className="text-sm font-semibold text-white mb-1">Geoffrey, Expert Produit Google</p>
-            <h3 className="mb-4 text-3xl font-extrabold text-white md:text-4xl">Et si votre site devenait votre meilleur commercial ?</h3>
-            <p className="mb-8 text-lg text-white/80 max-w-2xl">
-              Un site optimisé peut générer des prospects tous les jours. Ne laissez plus vos concurrents capter les clients qui vous cherchent sur Google.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-                <Link to="/contact">Demander un audit SEO gratuit</Link>
-              </Button>
-              <Button asChild variant="custom" size="lg" className="rounded-full border-2 border-white bg-transparent px-8 font-semibold text-white hover:bg-white/10 transition-colors">
-                <Link to="/tarifs">Voir nos tarifs</Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-      {/* CMS Blocks */}
-      <Suspense fallback={null}>
-        <PageBlocksLazy pagePath="/" />
+      {/* Below the fold - lazy loaded */}
+      <Suspense fallback={<div style={{ minHeight: 800 }} />}>
+        <IndexBelow />
       </Suspense>
     </PageLayout>
   );
