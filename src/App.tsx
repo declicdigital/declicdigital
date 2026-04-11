@@ -1,6 +1,7 @@
 import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { MotionConfig } from "motion/react";
 
 const GeoRedirect = () => <Navigate to="/visibilite-ia" replace />;
 import { HelmetProvider } from "react-helmet-async";
@@ -55,52 +56,54 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AuthProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <ScrollToTop />
-            <Suspense fallback={<div className="min-h-screen" />}>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/audit-seo-gratuit" element={<AuditSeo />} />
-                <Route path="/creation-site-web" element={<CreationSite />} />
-                <Route path="/creation-site-web/metier/:metier" element={<MetierCreationSite />} />
-                <Route path="/creation-site-web/:ville" element={<VilleCreationSite />} />
-                <Route path="/nos-metiers" element={<NosMetiers2 />} />
-                <Route path="/referencement-seo" element={<ReferencementSeo />} />
-                <Route path="/referencement-seo/:ville" element={<VilleReferencementSeo />} />
-                <Route path="/nos-villes" element={<NosVilles />} />
-                <Route path="/realisations" element={<Realisations />} />
-                <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/faq" element={<Faq />} />
-                <Route path="/tarifs" element={<Tarifs />} />
-                <Route path="/mentions-legales" element={<MentionsLegales />} />
-                <Route path="/plan-du-site" element={<PlanDuSite />} />
-                <Route path="/formulaire-client" element={<FormulaireClient />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/categorie/:categorySlug" element={<BlogCategory />} />
-                <Route path="/blog/:slug" element={<BlogArticle />} />
-                <Route path="/connexion" element={<Connexion />} />
-                <Route path="/espace-client" element={<EspaceClient />} />
-                <Route path="/reset-password" element={<ResetPassword />} />
-                <Route path="/admin/clients" element={<AdminClients />} />
-                <Route path="/admin/client/:clientId" element={<AdminClientDetail />} />
-                <Route path="/admin/soumissions" element={<AdminSoumissions />} />
-                <Route path="/projet/:token" element={<SharedProject />} />
-                <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
-                <Route path="/brief" element={<FormulaireBrief />} />
-                <Route path="/visibilite-ia" element={<Geo />} />
-                <Route path="/rendez-vous" element={<RendezVous />} />
-                <Route path="/geo" element={<GeoRedirect />} />
-                <Route path="/admin/blog" element={<AdminBlog />} />
-                <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
-                <Route path="/admin/page/new" element={<AdminPageEditor />} />
-                <Route path="/blog/cms/:slug" element={<CmsBlogArticle />} />
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
+          <MotionConfig reducedMotion="always">
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <ScrollToTop />
+              <Suspense fallback={<div className="min-h-screen" />}>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/audit-seo-gratuit" element={<AuditSeo />} />
+                  <Route path="/creation-site-web" element={<CreationSite />} />
+                  <Route path="/creation-site-web/metier/:metier" element={<MetierCreationSite />} />
+                  <Route path="/creation-site-web/:ville" element={<VilleCreationSite />} />
+                  <Route path="/nos-metiers" element={<NosMetiers2 />} />
+                  <Route path="/referencement-seo" element={<ReferencementSeo />} />
+                  <Route path="/referencement-seo/:ville" element={<VilleReferencementSeo />} />
+                  <Route path="/nos-villes" element={<NosVilles />} />
+                  <Route path="/realisations" element={<Realisations />} />
+                  <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/faq" element={<Faq />} />
+                  <Route path="/tarifs" element={<Tarifs />} />
+                  <Route path="/mentions-legales" element={<MentionsLegales />} />
+                  <Route path="/plan-du-site" element={<PlanDuSite />} />
+                  <Route path="/formulaire-client" element={<FormulaireClient />} />
+                  <Route path="/blog" element={<Blog />} />
+                  <Route path="/blog/categorie/:categorySlug" element={<BlogCategory />} />
+                  <Route path="/blog/:slug" element={<BlogArticle />} />
+                  <Route path="/connexion" element={<Connexion />} />
+                  <Route path="/espace-client" element={<EspaceClient />} />
+                  <Route path="/reset-password" element={<ResetPassword />} />
+                  <Route path="/admin/clients" element={<AdminClients />} />
+                  <Route path="/admin/client/:clientId" element={<AdminClientDetail />} />
+                  <Route path="/admin/soumissions" element={<AdminSoumissions />} />
+                  <Route path="/projet/:token" element={<SharedProject />} />
+                  <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
+                  <Route path="/brief" element={<FormulaireBrief />} />
+                  <Route path="/visibilite-ia" element={<Geo />} />
+                  <Route path="/rendez-vous" element={<RendezVous />} />
+                  <Route path="/geo" element={<GeoRedirect />} />
+                  <Route path="/admin/blog" element={<AdminBlog />} />
+                  <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
+                  <Route path="/admin/page/new" element={<AdminPageEditor />} />
+                  <Route path="/blog/cms/:slug" element={<CmsBlogArticle />} />
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </BrowserRouter>
+          </MotionConfig>
         </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
