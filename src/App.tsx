@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import { MotionConfig } from "motion/react";
 
 const GeoRedirect = () => <Navigate to="/visibilite-ia" replace />;
 import { HelmetProvider } from "react-helmet-async";
