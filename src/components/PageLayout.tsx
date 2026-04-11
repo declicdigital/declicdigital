@@ -78,7 +78,12 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
   }, []);
 
   const wrappedChildren = (() => {
-    const orderedChildren = (isAdmin ? order : flat.map((_, index) => index)).map(originalIdx => ({
+    // Non-admin: render children directly without EditableSection wrapper
+    if (!isAdmin) {
+      return flat.map((child, i) => child);
+    }
+
+    const orderedChildren = order.map(originalIdx => ({
       child: flat[originalIdx],
       originalIdx,
     }));
@@ -91,17 +96,18 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
       const label = guessLabel(child, originalIdx);
 
       return (
-        <EditableSection
-          key={`${originalIdx}-${displayIdx}`}
-          blockId={blockId}
-          pagePath={pagePath}
-          label={label}
-          onMoveUp={isAdmin && displayIdx > 0 ? () => moveBlock(displayIdx, "up") : undefined}
-          onMoveDown={isAdmin && displayIdx < orderedChildren.length - 1 ? () => moveBlock(displayIdx, "down") : undefined}
-          displayIndex={displayIdx}
-        >
-          {child}
-        </EditableSection>
+        <Suspense key={`${originalIdx}-${displayIdx}`} fallback={child}>
+          <EditableSection
+            blockId={blockId}
+            pagePath={pagePath}
+            label={label}
+            onMoveUp={displayIdx > 0 ? () => moveBlock(displayIdx, "up") : undefined}
+            onMoveDown={displayIdx < orderedChildren.length - 1 ? () => moveBlock(displayIdx, "down") : undefined}
+            displayIndex={displayIdx}
+          >
+            {child}
+          </EditableSection>
+        </Suspense>
       );
     });
   })();
