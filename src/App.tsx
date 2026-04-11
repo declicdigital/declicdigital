@@ -1,6 +1,7 @@
-import { lazy, Suspense, useEffect, useState, ReactNode } from "react";
+import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
+import { MotionConfig } from "motion/react";
 
 const GeoRedirect = () => <Navigate to="/visibilite-ia" replace />;
 import { HelmetProvider } from "react-helmet-async";
@@ -10,21 +11,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/hooks/useAuth";
 import Index from "./pages/Index";
 import ScrollToTop from "./components/ScrollToTop";
-
-/** Lazy-load MotionConfig to keep motion out of critical render path */
-const LazyMotionWrapper = ({ children }: { children: ReactNode }) => {
-  const [Wrapper, setWrapper] = useState<React.ComponentType<{ children: ReactNode }> | null>(null);
-  useEffect(() => {
-    import("motion/react").then(m => {
-      const Cfg = m.MotionConfig;
-      setWrapper(() => ({ children: c }: { children: ReactNode }) => (
-        <Cfg reducedMotion="always">{c}</Cfg>
-      ));
-    });
-  }, []);
-  if (!Wrapper) return <>{children}</>;
-  return <Wrapper>{children}</Wrapper>;
-};
 
 // Lazy-loaded pages for code splitting
 const AuditSeo = lazy(() => import("./pages/AuditSeo"));
@@ -70,7 +56,7 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AuthProvider>
-          <LazyMotionWrapper>
+          <MotionConfig reducedMotion="always">
             <Toaster />
             <Sonner />
             <BrowserRouter>
@@ -117,7 +103,7 @@ const App = () => (
                 </Routes>
               </Suspense>
             </BrowserRouter>
-          </LazyMotionWrapper>
+          </MotionConfig>
         </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
