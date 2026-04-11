@@ -3,6 +3,7 @@ import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import { useAuth } from "@/hooks/useAuth";
 import { CmsOverridesProvider } from "@/hooks/useCmsOverrides";
+import CmsPatcher from "./CmsPatcher";
 
 const EditableSection = lazy(() => import("./admin/EditableSection"));
 const Footer = lazy(() => import("./Footer"));
@@ -49,11 +50,6 @@ function isAlreadyEditable(child: any): boolean {
   return false;
 }
 
-const ALTERNATING_BG = [
-  "", // original
-  "bg-secondary/30",
-];
-
 const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => {
   const { isAdmin } = useAuth();
   const location = useLocation();
@@ -62,7 +58,6 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
   const flat = flattenChildren(children);
   const [order, setOrder] = useState<number[]>(() => flat.map((_, i) => i));
 
-  // Reset order when children count changes (page navigation)
   useEffect(() => {
     setOrder(flat.map((_, i) => i));
   }, [flat.length, pagePath]);
@@ -78,9 +73,16 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
   }, []);
 
   const wrappedChildren = (() => {
-    // Non-admin: render children directly without EditableSection wrapper
     if (!isAdmin) {
-      return flat.map((child, i) => child);
+      // Lightweight CMS patching only — no admin UI loaded
+      return flat.map((child, i) => {
+        if (!isValidElement(child)) return child;
+        return (
+          <CmsPatcher key={i} blockId={`auto-${i}`} pagePath={pagePath}>
+            {child}
+          </CmsPatcher>
+        );
+      });
     }
 
     const orderedChildren = order.map(originalIdx => ({
