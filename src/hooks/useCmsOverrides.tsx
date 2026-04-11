@@ -1,5 +1,11 @@
 import { createContext, useContext, useEffect, useState, ReactNode, useMemo } from "react";
-import { supabase } from "@/integrations/supabase/client";
+import type { SupabaseClient } from "@supabase/supabase-js";
+
+let _sb: SupabaseClient | null = null;
+const getSb = async () => {
+  if (!_sb) { const { supabase } = await import("@/integrations/supabase/client"); _sb = supabase; }
+  return _sb;
+};
 
 interface CmsOverride {
   id: string;
@@ -60,22 +66,24 @@ export const CmsOverridesProvider = ({ pagePath, children }: Props) => {
   const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
-    supabase
-      .from("cms_page_blocks")
-      .select("id, content, page_path")
-      .like("page_path", `${pagePath}::%`)
-      .eq("block_type", "section_override")
-      .then(({ data }) => {
-        const entries: [string, CmsOverride][] = [];
-        if (data) {
-          for (const row of data) {
-            entries.push([row.page_path, { id: row.id, content: row.content as any }]);
+    getSb().then(supabase =>
+      supabase
+        .from("cms_page_blocks")
+        .select("id, content, page_path")
+        .like("page_path", `${pagePath}::%`)
+        .eq("block_type", "section_override")
+        .then(({ data }) => {
+          const entries: [string, CmsOverride][] = [];
+          if (data) {
+            for (const row of data) {
+              entries.push([row.page_path, { id: row.id, content: row.content as any }]);
+            }
           }
-        }
-        try { localStorage.setItem(`dd_cms_${pagePath}`, JSON.stringify({ entries, ts: Date.now() })); } catch {}
-        setOverrides(new Map(entries));
-        setLoaded(true);
-      });
+          try { localStorage.setItem(`dd_cms_${pagePath}`, JSON.stringify({ entries, ts: Date.now() })); } catch {}
+          setOverrides(new Map(entries));
+          setLoaded(true);
+        })
+    );
   }, [pagePath, refreshKey]);
 
   const value = useMemo<CmsOverridesContextValue>(() => ({
