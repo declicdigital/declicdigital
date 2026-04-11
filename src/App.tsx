@@ -70,7 +70,7 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <AuthProvider>
-          <MotionConfig reducedMotion="always">
+          <LazyMotionWrapper>
             <Toaster />
             <Sonner />
             <BrowserRouter>
@@ -117,7 +117,7 @@ const App = () => (
                 </Routes>
               </Suspense>
             </BrowserRouter>
-          </MotionConfig>
+          </LazyMotionWrapper>
         </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
