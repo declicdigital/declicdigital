@@ -102,7 +102,7 @@ const App = () => (
                 </Routes>
               </Suspense>
             </BrowserRouter>
-          </MotionConfig>
+          </>
         </AuthProvider>
       </TooltipProvider>
     </QueryClientProvider>
