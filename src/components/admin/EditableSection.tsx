@@ -74,6 +74,7 @@ interface SubItem {
   text: string;
   image: string;
   imageAlt: string;
+  url: string;
   ctas: CtaItem[];
 }
 
@@ -282,12 +283,15 @@ function detectSubItems(el: HTMLElement): SubItem[] {
         const heading = child.querySelector("h2, h3, h4");
         const boldEl = !heading ? child.querySelector("[class*='font-bold'], [class*='font-semibold']") : null;
         const img = extractImage(child);
+        // Detect if the card itself is an <a> (clickable card pattern)
+        const cardLink = child.tagName === "A" ? (child as HTMLAnchorElement).href : "";
         return {
           id: `item-${i}`,
           heading: heading?.textContent?.trim() || boldEl?.textContent?.trim() || `Élément ${i + 1}`,
           text: extractAllTexts(child),
           image: img.src,
           imageAlt: img.alt,
+          url: cardLink,
           ctas: extractCtas(child),
         };
       });
@@ -608,6 +612,11 @@ function applySubItemsToDOM(el: HTMLElement, items: SubItem[]) {
         if (!items[i]) return;
         const item = items[i];
 
+        // Patch wrapping <a> href if the card is a link
+        if (item.url && child.tagName === "A") {
+          (child as HTMLAnchorElement).href = item.url;
+        }
+
         const heading = child.querySelector("h2, h3, h4");
         const boldEl = !heading ? child.querySelector("[class*='font-bold'], [class*='font-semibold']") : null;
         if (heading && item.heading) heading.textContent = item.heading;
@@ -800,6 +809,12 @@ const SubItemEditor = ({ item, index, onChange, onRemove }: {
 
       {!collapsed && (
         <div className="space-y-3 pl-1">
+          {item.url !== undefined && item.url !== "" && (
+            <div>
+              <Label className="text-xs font-medium">🔗 Lien de la carte</Label>
+              <Input value={item.url} onChange={e => updateField("url", e.target.value)} placeholder="https://..." className="mt-1 text-sm" />
+            </div>
+          )}
           <div>
             <Label className="text-xs font-medium">Titre</Label>
             <Input value={item.heading} onChange={e => updateField("heading", e.target.value)} className="mt-1 text-sm" />
