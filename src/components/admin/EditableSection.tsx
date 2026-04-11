@@ -74,6 +74,7 @@ interface SubItem {
   text: string;
   image: string;
   imageAlt: string;
+  url: string;
   ctas: CtaItem[];
 }
 
@@ -282,12 +283,15 @@ function detectSubItems(el: HTMLElement): SubItem[] {
         const heading = child.querySelector("h2, h3, h4");
         const boldEl = !heading ? child.querySelector("[class*='font-bold'], [class*='font-semibold']") : null;
         const img = extractImage(child);
+        // Detect if the card itself is an <a> (clickable card pattern)
+        const cardLink = child.tagName === "A" ? (child as HTMLAnchorElement).href : "";
         return {
           id: `item-${i}`,
           heading: heading?.textContent?.trim() || boldEl?.textContent?.trim() || `Élément ${i + 1}`,
           text: extractAllTexts(child),
           image: img.src,
           imageAlt: img.alt,
+          url: cardLink,
           ctas: extractCtas(child),
         };
       });
@@ -607,6 +611,11 @@ function applySubItemsToDOM(el: HTMLElement, items: SubItem[]) {
       withHeadings.forEach((child, i) => {
         if (!items[i]) return;
         const item = items[i];
+
+        // Patch wrapping <a> href if the card is a link
+        if (item.url && child.tagName === "A") {
+          (child as HTMLAnchorElement).href = item.url;
+        }
 
         const heading = child.querySelector("h2, h3, h4");
         const boldEl = !heading ? child.querySelector("[class*='font-bold'], [class*='font-semibold']") : null;
