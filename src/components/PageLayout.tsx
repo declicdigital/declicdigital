@@ -3,8 +3,8 @@ import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import { useAuth } from "@/hooks/useAuth";
 import { CmsOverridesProvider } from "@/hooks/useCmsOverrides";
-import EditableSection from "./admin/EditableSection";
 
+const EditableSection = lazy(() => import("./admin/EditableSection"));
 const Footer = lazy(() => import("./Footer"));
 const BlogCarousel = lazy(() => import("./BlogCarousel"));
 const AiChatWidget = lazy(() => import("./FaqAiChat").then(m => ({ default: m.AiChatWidget })));
