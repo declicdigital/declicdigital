@@ -1,11 +1,9 @@
-import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
-
-const IndexBelow = lazy(() => import("./IndexBelow"));
+import IndexBelow from "./IndexBelow";
 
 const Index = () => {
   return (
