@@ -65,10 +65,11 @@ const normalizeStatus = (status?: string): StatusType => {
   return "en_attente";
 };
 
-type FormType = "formulaire" | "devis" | "audit";
+type FormType = "formulaire" | "devis" | "audit" | "premier_contact";
 
 const detectFormType = (data: any): FormType => {
   if (!data) return "devis";
+  if (data.form_type === "premier_contact") return "premier_contact";
   if (data.form_type === "audit") return "audit";
   if (data.form_type === "devis") return "devis";
   if (data.form_type === "formulaire") return "formulaire";
@@ -79,6 +80,7 @@ const detectFormType = (data: any): FormType => {
 };
 
 const FORM_TYPE_CONFIG: Record<FormType, { label: string; icon: any; color: string }> = {
+  premier_contact: { label: "Premier contact", icon: Calendar, color: "bg-emerald-500/10 text-emerald-600 border-emerald-500/20" },
   formulaire: { label: "Formulaire", icon: ClipboardList, color: "bg-violet-500/10 text-violet-600 border-violet-500/20" },
   devis: { label: "Devis", icon: MessageSquare, color: "bg-sky-500/10 text-sky-600 border-sky-500/20" },
   audit: { label: "Audit SEO", icon: Search, color: "bg-amber-500/10 text-amber-600 border-amber-500/20" },
@@ -344,6 +346,7 @@ const AdminSoumissions = () => {
 
   const typeCounts = {
     all: subs.length,
+    premier_contact: subs.filter((s) => detectFormType(s.data) === "premier_contact").length,
     formulaire: subs.filter((s) => detectFormType(s.data) === "formulaire").length,
     devis: subs.filter((s) => detectFormType(s.data) === "devis").length,
     audit: subs.filter((s) => detectFormType(s.data) === "audit").length,

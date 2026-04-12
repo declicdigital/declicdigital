@@ -47,6 +47,7 @@ const AdminBlog = lazy(() => import("./pages/AdminBlog"));
 const AdminBlogEditor = lazy(() => import("./pages/AdminBlogEditor"));
 const AdminPageEditor = lazy(() => import("./pages/AdminPageEditor"));
 const CmsBlogArticle = lazy(() => import("./pages/CmsBlogArticle"));
+const PremierContact = lazy(() => import("./pages/PremierContact"));
 
 const queryClient = new QueryClient();
 
@@ -93,6 +94,7 @@ const App = () => (
                   <Route path="/brief" element={<FormulaireBrief />} />
                   <Route path="/visibilite-ia" element={<Geo />} />
                   <Route path="/rendez-vous" element={<RendezVous />} />
+                  <Route path="/premier-contact" element={<PremierContact />} />
                   <Route path="/geo" element={<GeoRedirect />} />
                   <Route path="/admin/blog" element={<AdminBlog />} />
                   <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
