@@ -1,9 +1,13 @@
+import { lazy, Suspense } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
-import IndexBelow from "./IndexBelow";
+
+// Lazy but preloaded: starts fetching immediately without blocking initial render
+const indexBelowPromise = import("./IndexBelow");
+const IndexBelow = lazy(() => indexBelowPromise);
 
 const Index = () => {
   return (
