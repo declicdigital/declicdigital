@@ -98,7 +98,9 @@ const Index = () => {
         </div>
       </section>
 
-      <IndexBelow />
+      <Suspense fallback={<div style={{ minHeight: "200vh" }} />}>
+        <IndexBelow />
+      </Suspense>
     </PageLayout>
   );
 };
