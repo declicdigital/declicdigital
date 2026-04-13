@@ -133,15 +133,13 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
                 {l.label}
               </Link>
             ))}
-            <a
-              href="https://cal.com/declic-digital/rendez-vous?overlayCalendar=true"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/rendez-vous"
               onClick={() => setMobileOpen(false)}
               className="rounded-lg px-4 py-2.5 text-sm font-bold text-primary transition-colors hover:bg-primary/10 border border-primary mt-1"
             >
               Prendre RDV
-            </a>
+            </Link>
             <Link
               to="/connexion"
               onClick={() => setMobileOpen(false)}
