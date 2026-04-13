@@ -68,7 +68,7 @@ const Index = () => {
         <div className="container py-16 md:py-24 lg:py-32">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
-              <span className="mb-4 inline-block rounded-full bg-brand-violet/10 px-4 py-1.5 text-xs font-semibold text-brand-violet">
+              <span className="mb-4 inline-block rounded-full bg-brand-violet/10 px-4 py-1.5 text-xs font-semibold text-primary">
                 Expert Produit Google · Agence digitale
               </span>
               <h1 className="mb-6 text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl">
