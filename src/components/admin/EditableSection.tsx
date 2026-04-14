@@ -307,7 +307,7 @@ function detectSubItems(el: HTMLElement): SubItem[] {
 function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
   s = normalizeStructuredContent(s);
 
-  // Apply background color
+  // Only apply background changes for explicit choices (blue/beige), never strip existing bg for "none"
   if (s.bgColor && s.bgColor !== "none") {
     const target = el.firstElementChild as HTMLElement || el;
     // Remove existing bg-section-* classes
@@ -315,10 +315,6 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
     el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
     const newClass = BG_CLASS_MAP[s.bgColor];
     if (newClass) target.classList.add(newClass);
-  } else if (s.bgColor === "none") {
-    const target = el.firstElementChild as HTMLElement || el;
-    target.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-    el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
   }
 
   if (s.heading) {
