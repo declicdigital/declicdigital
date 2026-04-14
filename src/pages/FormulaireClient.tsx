@@ -105,7 +105,7 @@ const SectionCard = ({ num, title, sub, accent = "primary", children }: {
 const ChoiceItem = ({ checked, onChange, label, type = "checkbox", accent = false }: {
   checked: boolean; onChange: () => void; label: string; type?: "checkbox" | "radio"; accent?: boolean;
 }) => (
-  <label className={`flex cursor-pointer items-start gap-3 rounded-xl border px-4 py-3 text-sm leading-relaxed transition-all ${
+  <label className={`flex cursor-pointer items-start gap-3 rounded-xl border px-4 py-3 text-sm leading-snug transition-all ${
     checked
       ? accent
         ? "border-accent/40 bg-accent/10 font-medium text-accent"
@@ -116,9 +116,9 @@ const ChoiceItem = ({ checked, onChange, label, type = "checkbox", accent = fals
       type={type}
       checked={checked}
       onChange={onChange}
-      className="h-4 w-4 shrink-0 accent-primary"
+      className="mt-0.5 h-4 w-4 shrink-0 accent-primary"
     />
-    <span className="min-w-0 break-words">{label}</span>
+    <span className="min-w-0 break-normal text-left">{label}</span>
   </label>
 );
 
@@ -742,7 +742,7 @@ const FormulaireClient = () => {
               </div>
               <div>
                 <Label className="text-sm text-muted-foreground mb-3 block">Expérience avec une agence ou un freelance ?</Label>
-                <div className="grid grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 gap-2 sm:grid-cols-3">
                   {[
                     ["bien","Oui, bonne exp."],["mal","Oui, mauvaise exp."],["non","🆕 Première fois"],
                   ].map(([v, l]) => (
@@ -861,12 +861,12 @@ const FormulaireClient = () => {
             initial={{ opacity: 0, y: 28 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative rounded-2xl border border-border bg-card p-10 md:p-14 text-center shadow-card overflow-hidden"
+            className="relative overflow-hidden rounded-2xl border border-border bg-card p-5 text-center shadow-card sm:p-8 md:p-14"
           >
             <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
             <div className="relative">
               <p className="text-xs font-bold uppercase tracking-widest text-accent mb-4">Réponse sous 24 à 48h</p>
-              <h3 className="text-2xl md:text-3xl font-extrabold mb-3">
+              <h3 className="text-xl sm:text-2xl md:text-3xl font-extrabold mb-3 leading-tight">
                 Prêt(e) à faire <span className="text-gradient">décoller votre site ?</span>
               </h3>
               <p className="text-muted-foreground max-w-md mx-auto mb-8">
@@ -876,10 +876,10 @@ const FormulaireClient = () => {
                 type="submit"
                 size="lg"
                 disabled={sending}
-                className="rounded-full gradient-primary btn-glow text-white font-bold text-base px-10 py-6 shadow-elevated hover:opacity-90 transition-opacity"
+                className="h-auto min-h-14 w-full max-w-full whitespace-normal break-normal rounded-full px-5 py-4 text-center text-base font-bold leading-tight text-white shadow-elevated transition-opacity hover:opacity-90 sm:w-auto sm:max-w-[32rem] sm:px-8 sm:py-5 gradient-primary btn-glow"
               >
-                <Send className="h-5 w-5 mr-2" />
-                {sending ? "Envoi en cours…" : "Envoyer mon projet à Déclic Digital"}
+                <Send className="mr-2 h-5 w-5 shrink-0 self-center" />
+                <span className="text-center">{sending ? "Envoi en cours…" : "Envoyer mon projet à Déclic Digital"}</span>
               </Button>
               <div className="flex flex-wrap items-center justify-center gap-5 mt-6 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1.5"><Shield className="h-4 w-4 text-primary" /> Données confidentielles</span>
