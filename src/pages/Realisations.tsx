@@ -122,9 +122,9 @@ const Realisations = () => {
         {projects.map((project, i) => (
           <div key={project.id} className="relative">
             {isAdmin && (
-              <div className="absolute -top-3 right-2 z-20 flex gap-1">
+              <div className="absolute -top-3 right-2 z-[9999] flex gap-1" style={{ pointerEvents: "auto" }}>
                 <button
-                  onClick={() => moveProject(i, "up")}
+                  onClick={(e) => { e.stopPropagation(); e.preventDefault(); moveProject(i, "up"); }}
                   disabled={i === 0}
                   className="rounded-full bg-primary p-1.5 text-primary-foreground shadow-md hover:bg-primary/90 disabled:opacity-30 transition-opacity"
                   title="Monter"
@@ -132,7 +132,7 @@ const Realisations = () => {
                   <ArrowUp size={14} />
                 </button>
                 <button
-                  onClick={() => moveProject(i, "down")}
+                  onClick={(e) => { e.stopPropagation(); e.preventDefault(); moveProject(i, "down"); }}
                   disabled={i === projects.length - 1}
                   className="rounded-full bg-primary p-1.5 text-primary-foreground shadow-md hover:bg-primary/90 disabled:opacity-30 transition-opacity"
                   title="Descendre"
