@@ -11,7 +11,7 @@ interface Props {
   children: ReactNode;
 }
 
-type BgColor = "none" | "blue" | "beige";
+type BgColor = "none" | "blue" | "sable";
 
 interface CtaItem { id: string; text: string; url: string; style: "primary" | "secondary"; enabled: boolean; }
 interface SubItem { id: string; heading: string; text: string; image: string; imageAlt: string; url: string; ctas: CtaItem[]; }
@@ -22,7 +22,7 @@ interface StructuredContent {
   logos: LogoItem[]; bgColor: BgColor;
 }
 
-const BG_CLASS_MAP: Record<BgColor, string> = { none: "", blue: "bg-section-blue", beige: "bg-section-rose" };
+const BG_CLASS_MAP: Record<BgColor, string> = { none: "", blue: "bg-section-blue", sable: "bg-section-rose" };
 
 function normalize(c?: any): StructuredContent | null {
   if (!c) return null;
@@ -31,7 +31,7 @@ function normalize(c?: any): StructuredContent | null {
     textHtml: c.textHtml || "", image: c.image || "", imageAlt: c.imageAlt || "",
     ctas: Array.isArray(c.ctas) ? c.ctas : [], items: Array.isArray(c.items) ? c.items : [],
     logos: Array.isArray(c.logos) ? c.logos : [],
-    bgColor: (c.bgColor === "blue" || c.bgColor === "beige") ? c.bgColor : "none",
+    bgColor: (c.bgColor === "blue" || c.bgColor === "sable") ? c.bgColor : (c.bgColor === "beige" ? "sable" : "none"),
   };
 }
 
@@ -212,13 +212,11 @@ function applyLogosToDOM(el: HTMLElement, logos: LogoItem[]) {
 }
 
 function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
-  // Only apply background changes for explicit choices (blue/beige), never strip existing bg for "none"
-  if (s.bgColor && s.bgColor !== "none") {
-    const t = el.firstElementChild as HTMLElement || el;
-    t.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-    el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-    const nc = BG_CLASS_MAP[s.bgColor]; if (nc) t.classList.add(nc);
-  }
+  // Apply background color — always apply, including "none" to reset
+  const bgTarget = el.firstElementChild as HTMLElement || el;
+  bgTarget.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+  el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+  const nc = BG_CLASS_MAP[s.bgColor || "none"]; if (nc) bgTarget.classList.add(nc);
   if (s.heading) { const h1 = el.querySelector("h1"); if (h1) h1.textContent = s.heading; }
   if (s.image) { const imgs = el.querySelectorAll("img"); for (const img of imgs) { const w = img.getAttribute("width"); if (w && parseInt(w) < 64) continue; img.setAttribute("src", s.image); if (s.imageAlt) img.setAttribute("alt", s.imageAlt); break; } }
   if (s.textHtml && s.items.length === 0) applyRichTextHtmlToDOM(el, s.textHtml);
