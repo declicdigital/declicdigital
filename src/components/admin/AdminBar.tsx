@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { LogOut, Settings, Users, Inbox, Plus, FileText, Layout, Rocket, Puzzle, ChevronDown } from "lucide-react";
+import { LogOut, Settings, Users, Inbox, Plus, FileText, Layout, Rocket, Puzzle, ChevronDown, Image as ImageIcon } from "lucide-react";
 
 const ADMIN_BAR_HEIGHT = 40;
 
@@ -91,6 +91,13 @@ const AdminBar = () => {
         >
           <Inbox size={14} />
           Soumissions
+        </Link>
+        <Link
+          to="/admin/media"
+          className="flex items-center gap-1.5 rounded-md bg-white/10 px-3 py-1.5 text-xs font-medium transition hover:bg-white/20"
+        >
+          <ImageIcon size={14} />
+          Média
         </Link>
         <button
           onClick={handleLogout}
