@@ -227,7 +227,7 @@ const AdminMedia = () => {
         <title>Médiathèque | Admin</title>
         <meta name="robots" content="noindex, nofollow" />
       </Helmet>
-      <Header isAdmin />
+      <AdminBar />
       <main className="min-h-screen bg-background">
         <div className="container py-8 max-w-6xl">
           <div className="flex flex-col gap-6">
