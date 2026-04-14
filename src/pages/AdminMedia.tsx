@@ -67,6 +67,8 @@ const AdminMedia = () => {
   const [renamingId, setRenamingId] = useState<string | null>(null);
   const [renameValue, setRenameValue] = useState("");
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewPages, setPreviewPages] = useState<string[]>([]);
+  const [loadingPages, setLoadingPages] = useState(false);
   const [filterType, setFilterType] = useState<"all" | "image" | "video" | "pdf">("all");
 
   // Fetch all files from bucket (list all folders recursively)
