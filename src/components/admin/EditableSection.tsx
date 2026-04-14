@@ -778,10 +778,14 @@ function patchCtaLinks(el: Element, enabledCtas: CtaItem[]) {
 }
 
 // ─── Sub-item editor component ───
-const SubItemEditor = ({ item, index, onChange, onRemove }: {
+const SubItemEditor = ({ item, index, onChange, onRemove, onMoveUp, onMoveDown, canMoveUp, canMoveDown }: {
   item: SubItem; index: number;
   onChange: (updated: SubItem) => void;
   onRemove: () => void;
+  onMoveUp: () => void;
+  onMoveDown: () => void;
+  canMoveUp: boolean;
+  canMoveDown: boolean;
 }) => {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -826,9 +830,27 @@ const SubItemEditor = ({ item, index, onChange, onRemove }: {
         <span className="text-sm font-semibold flex-1 truncate">
           {item.heading || `Élément ${index + 1}`}
         </span>
-        <button onClick={(e) => { e.stopPropagation(); onRemove(); }} className="rounded p-1 text-destructive hover:bg-destructive/10" title="Supprimer">
-          <Trash size={14} />
-        </button>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={(e) => { e.stopPropagation(); onMoveUp(); }}
+            disabled={!canMoveUp}
+            className="rounded p-1 text-muted-foreground hover:bg-muted disabled:opacity-30"
+            title="Monter"
+          >
+            <ArrowUp size={14} />
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); onMoveDown(); }}
+            disabled={!canMoveDown}
+            className="rounded p-1 text-muted-foreground hover:bg-muted disabled:opacity-30"
+            title="Descendre"
+          >
+            <ArrowDown size={14} />
+          </button>
+          <button onClick={(e) => { e.stopPropagation(); onRemove(); }} className="rounded p-1 text-destructive hover:bg-destructive/10" title="Supprimer">
+            <Trash size={14} />
+          </button>
+        </div>
       </div>
 
       {!collapsed && (
