@@ -345,7 +345,8 @@ const FormulaireClient = () => {
       </div>
 
       {/* Form */}
-      <SectionWrapper>
+      <section className="py-16 md:py-24">
+        <div className="container">
         <form onSubmit={handleSubmit} className="mx-auto max-w-3xl space-y-6">
 
           {/* 1. PROFIL */}
@@ -888,7 +889,8 @@ const FormulaireClient = () => {
             </div>
           </motion.div>
         </form>
-      </SectionWrapper>
+        </div>
+      </section>
     </PageLayout>
   );
 };
