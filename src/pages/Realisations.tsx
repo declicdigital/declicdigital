@@ -81,64 +81,42 @@ const Realisations = () => (
     {/* Projects grid */}
     <SectionWrapper>
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-        {projects.map((project, i) => (
-          <div key={project.id} className="relative">
-            {isAdmin && (
-              <div className="absolute -top-3 right-2 z-[9999] flex gap-1" style={{ pointerEvents: "auto" }}>
-                <button
-                  onClick={(e) => { e.stopPropagation(); e.preventDefault(); moveProject(i, "up"); }}
-                  disabled={i === 0}
-                  className="rounded-full bg-primary p-1.5 text-primary-foreground shadow-md hover:bg-primary/90 disabled:opacity-30 transition-opacity"
-                  title="Monter"
-                >
-                  <ArrowUp size={14} />
-                </button>
-                <button
-                  onClick={(e) => { e.stopPropagation(); e.preventDefault(); moveProject(i, "down"); }}
-                  disabled={i === projects.length - 1}
-                  className="rounded-full bg-primary p-1.5 text-primary-foreground shadow-md hover:bg-primary/90 disabled:opacity-30 transition-opacity"
-                  title="Descendre"
-                >
-                  <ArrowDown size={14} />
-                </button>
+        {projects.map((project) => (
+          <motion.a
+            key={project.id}
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={false}
+            className="group block overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-xl transition-all duration-300"
+          >
+            <div className="relative overflow-hidden">
+              <img
+                src={project.image}
+                alt={`Réalisation site web ${project.name}`}
+                className="aspect-video w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300 flex items-center justify-center">
+                <ExternalLink className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={32} />
               </div>
-            )}
-            <motion.a
-              key={project.id}
-              href={project.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={false}
-              className="group block overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-xl transition-all duration-300"
-            >
-              <div className="relative overflow-hidden">
-                <img
-                  src={project.image}
-                  alt={`Réalisation site web ${project.name}`}
-                  className="aspect-video w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300 flex items-center justify-center">
-                  <ExternalLink className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={32} />
-                </div>
+            </div>
+            <div className="p-6">
+              <h2 className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                {project.name}
+              </h2>
+              <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
+                {project.description}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <span key={tag} className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+                    {tag}
+                  </span>
+                ))}
               </div>
-              <div className="p-6">
-                <h2 className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                  {project.name}
-                </h2>
-                <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {project.tags.map((tag) => (
-                    <span key={tag} className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.a>
-          </div>
+            </div>
+          </motion.a>
         ))}
       </div>
     </SectionWrapper>
