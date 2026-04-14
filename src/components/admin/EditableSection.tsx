@@ -595,17 +595,48 @@ function applyLogosToDOM(el: HTMLElement, logos: LogoItem[]) {
 function applySubItemsToDOM(el: HTMLElement, items: SubItem[]) {
   const containers = el.querySelectorAll("[class*='grid'], [class*='flex']");
   for (const container of containers) {
-    const children = Array.from(container.children);
+    const children = Array.from(container.children) as HTMLElement[];
     const withHeadings = children.filter(child =>
       child.querySelector("h2, h3, h4") || child.querySelector("[class*='font-bold'], [class*='font-semibold']")
-    );
+    ) as HTMLElement[];
 
     if (withHeadings.length >= 2 && withHeadings.length === children.length) {
       withHeadings.forEach((child, i) => {
+        if (!child.dataset.cmsItemId && items[i]?.id) {
+          child.dataset.cmsItemId = items[i].id;
+        }
+      });
+
+      const childById = new Map<string, HTMLElement>();
+      withHeadings.forEach((child) => {
+        const itemId = child.dataset.cmsItemId;
+        if (itemId) childById.set(itemId, child);
+      });
+
+      const orderedChildren: HTMLElement[] = [];
+      const usedChildren = new Set<HTMLElement>();
+
+      items.forEach((item, i) => {
+        const matchedChild = childById.get(item.id) || withHeadings[i];
+        if (matchedChild && !usedChildren.has(matchedChild)) {
+          usedChildren.add(matchedChild);
+          orderedChildren.push(matchedChild);
+        }
+      });
+
+      withHeadings.forEach((child) => {
+        if (!usedChildren.has(child)) {
+          orderedChildren.push(child);
+        }
+      });
+
+      orderedChildren.forEach((child) => container.appendChild(child));
+
+      orderedChildren.forEach((child, i) => {
         if (!items[i]) return;
         const item = items[i];
+        child.dataset.cmsItemId = item.id;
 
-        // Patch wrapping <a> href if the card is a link
         if (item.url && child.tagName === "A") {
           (child as HTMLAnchorElement).href = item.url;
         }
