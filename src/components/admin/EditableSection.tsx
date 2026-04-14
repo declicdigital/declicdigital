@@ -84,7 +84,7 @@ interface LogoItem {
   src: string;
 }
 
-type BgColor = "none" | "blue" | "beige";
+type BgColor = "none" | "blue" | "sable";
 
 interface StructuredContent {
   label: string;
@@ -118,7 +118,7 @@ const emptyStructured = (label = ""): StructuredContent => ({
 const BG_CLASS_MAP: Record<BgColor, string> = {
   none: "",
   blue: "bg-section-blue",
-  beige: "bg-section-rose",
+  sable: "bg-section-rose",
 };
 
 function normalizeStructuredContent(content?: Partial<StructuredContent> | null, fallbackLabel = ""): StructuredContent {
@@ -132,7 +132,7 @@ function normalizeStructuredContent(content?: Partial<StructuredContent> | null,
     ctas: Array.isArray(content?.ctas) ? content.ctas : [],
     items: Array.isArray(content?.items) ? content.items : [],
     logos: Array.isArray(content?.logos) ? content.logos : [],
-    bgColor: (content?.bgColor === "blue" || content?.bgColor === "beige") ? content.bgColor : "none",
+    bgColor: (content?.bgColor === "blue" || content?.bgColor === "sable") ? content.bgColor : (content?.bgColor === "beige" ? "sable" : "none"),
   };
 }
 
@@ -236,7 +236,7 @@ function parseDomToStructured(el: HTMLElement, fallbackLabel: string): Structure
   const childCls = firstChild?.className || "";
   const allCls = elCls + " " + childCls;
   if (allCls.includes("bg-section-blue")) result.bgColor = "blue";
-  else if (allCls.includes("bg-section-rose") || allCls.includes("bg-section-alt")) result.bgColor = "beige";
+  else if (allCls.includes("bg-section-rose") || allCls.includes("bg-section-alt")) result.bgColor = "sable";
 
   return result;
 }
@@ -307,15 +307,12 @@ function detectSubItems(el: HTMLElement): SubItem[] {
 function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
   s = normalizeStructuredContent(s);
 
-  // Only apply background changes for explicit choices (blue/beige), never strip existing bg for "none"
-  if (s.bgColor && s.bgColor !== "none") {
-    const target = el.firstElementChild as HTMLElement || el;
-    // Remove existing bg-section-* classes
-    target.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-    el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-    const newClass = BG_CLASS_MAP[s.bgColor];
-    if (newClass) target.classList.add(newClass);
-  }
+  // Apply background color — always apply, including "none" to reset
+  const bgTarget = el.firstElementChild as HTMLElement || el;
+  bgTarget.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+  el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+  const newBgClass = BG_CLASS_MAP[s.bgColor || "none"];
+  if (newBgClass) bgTarget.classList.add(newBgClass);
 
   if (s.heading) {
     const h1 = el.querySelector("h1");
@@ -1268,8 +1265,8 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
                 <div className="flex gap-3">
                   {([
                     { value: "none" as BgColor, label: "Par défaut", color: "bg-background" },
+                    { value: "sable" as BgColor, label: "Sable", color: "bg-[#f3e8ef]" },
                     { value: "blue" as BgColor, label: "Bleu", color: "bg-[#e9f2f4]" },
-                    { value: "beige" as BgColor, label: "Beige", color: "bg-[#f3e8ef]" },
                   ]).map((opt) => (
                     <button
                       key={opt.value}
