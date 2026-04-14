@@ -171,6 +171,36 @@ const AdminMedia = () => {
     toast({ title: "URL copiée 📋" });
   }, []);
 
+  const openPreview = useCallback(async (publicUrl: string) => {
+    setPreviewUrl(publicUrl);
+    setPreviewPages([]);
+    setLoadingPages(true);
+    try {
+      const { data } = await supabase
+        .from("cms_page_blocks")
+        .select("page_path, content")
+        .eq("block_type", "section_override");
+      const pages = new Set<string>();
+      if (data) {
+        for (const row of data) {
+          const json = JSON.stringify(row.content || "");
+          // Check if the image URL (or filename) appears in the content
+          const filename = publicUrl.split("/").pop() || "";
+          if (json.includes(publicUrl) || (filename && json.includes(filename))) {
+            // page_path format is "/page::blockId" — extract just the page
+            const pagePath = row.page_path.split("::")[0];
+            pages.add(pagePath || "/");
+          }
+        }
+      }
+      setPreviewPages(Array.from(pages));
+    } catch {
+      // ignore
+    } finally {
+      setLoadingPages(false);
+    }
+  }, []);
+
   const startRename = (file: (typeof files)[0]) => {
     setRenamingId(file.path);
     setRenameValue(file.name);
