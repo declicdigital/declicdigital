@@ -1,20 +1,18 @@
-import { useState, useCallback } from "react";
 import { motion } from "motion/react";
 import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Link } from "react-router-dom";
-import { ExternalLink, ArrowUp, ArrowDown } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import { useAuth } from "@/hooks/useAuth";
 import portfolioOffg from "@/assets/site-vitrine-artiste-musical.webp";
 import portfolioAploz from "@/assets/site-aploz-agence-video-publicitaire.webp";
 import portfolioNjPhoto from "@/assets/site-photographe-professionnelle.webp";
 import portfolioTracker from "@/assets/site-artisan-tracker-solaire.jpg";
 
-const defaultProjects = [
+const projects = [
   {
     id: "un-artisan",
     name: "Un-Artisan.com",
@@ -49,43 +47,7 @@ const defaultProjects = [
   },
 ];
 
-const STORAGE_KEY = "realisations-order";
-
-function getOrderedProjects() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const order: string[] = JSON.parse(saved);
-      const sorted = [...defaultProjects].sort((a, b) => {
-        const ia = order.indexOf(a.id);
-        const ib = order.indexOf(b.id);
-        if (ia === -1 && ib === -1) return 0;
-        if (ia === -1) return 1;
-        if (ib === -1) return -1;
-        return ia - ib;
-      });
-      return sorted;
-    }
-  } catch {}
-  return defaultProjects;
-}
-
-const Realisations = () => {
-  const { isAdmin } = useAuth();
-  const [projects, setProjects] = useState(getOrderedProjects);
-
-  const moveProject = useCallback((index: number, direction: "up" | "down") => {
-    setProjects(prev => {
-      const next = [...prev];
-      const target = direction === "up" ? index - 1 : index + 1;
-      if (target < 0 || target >= next.length) return prev;
-      [next[index], next[target]] = [next[target], next[index]];
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(next.map(p => p.id)));
-      return next;
-    });
-  }, []);
-
-  return (
+const Realisations = () => (
   <PageLayout>
     <Helmet>
       <title>Portfolio : sites web créés pour TPE et artisans | Déclic Digital</title>
