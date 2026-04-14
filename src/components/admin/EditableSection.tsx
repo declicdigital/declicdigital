@@ -1221,6 +1221,20 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
     });
   };
 
+  const moveItem = (index: number, direction: "up" | "down") => {
+    setStructured(prev => {
+      const safePrev = normalizeStructuredContent(prev, fallbackStructuredLabel);
+      const nextItems = [...safePrev.items];
+      const targetIndex = direction === "up" ? index - 1 : index + 1;
+      if (targetIndex < 0 || targetIndex >= nextItems.length) return safePrev;
+      [nextItems[index], nextItems[targetIndex]] = [nextItems[targetIndex], nextItems[index]];
+      return {
+        ...safePrev,
+        items: nextItems,
+      };
+    });
+  };
+
   const removeItem = (index: number) => {
     setStructured(prev => {
       const safePrev = normalizeStructuredContent(prev, fallbackStructuredLabel);
