@@ -295,7 +295,7 @@ const FormulaireClient = () => {
   return (
     <PageLayout>
       {/* Progress floating bubble */}
-      <div className="fixed bottom-8 right-8 z-50 flex h-16 w-16 flex-col items-center justify-center rounded-full gradient-miami shadow-elevated cursor-default">
+      <div className="fixed bottom-8 right-8 z-50 hidden h-16 w-16 flex-col items-center justify-center rounded-full gradient-miami shadow-elevated cursor-default md:flex">
         <span className="text-lg font-black text-primary-foreground leading-none">{pct}%</span>
         <span className="text-[8px] font-bold text-primary-foreground/80 uppercase tracking-wider">complet</span>
       </div>
@@ -304,7 +304,7 @@ const FormulaireClient = () => {
       <section className="gradient-hero py-16 md:py-24">
         <div className="container text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-5 py-2 text-xs font-semibold text-accent uppercase tracking-wider mb-6">
+            <span className="mb-6 inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-2 text-center text-xs font-semibold uppercase tracking-wider text-accent leading-tight">
               Formulaire de brief client
             </span>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-5">
@@ -313,11 +313,11 @@ const FormulaireClient = () => {
             <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-8">
               Quelques minutes de votre temps pour que Déclic Digital vous prépare une proposition sur mesure.
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-2 md:gap-3">
               {["Votre profil", "Votre projet", "Objectifs & budget", "Contenu & design", "L'équipe", "Délais", "Message", "Fichiers"].map((s, i) => (
-                <div key={i} className="flex items-center gap-2 rounded-full bg-secondary border border-border px-4 py-2 text-sm text-muted-foreground">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary">{i + 1}</span>
-                  {s}
+                <div key={i} className="flex max-w-full items-center justify-center gap-2 rounded-full bg-secondary border border-border px-3 py-2 text-center text-sm leading-tight text-muted-foreground md:px-4">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary">{i + 1}</span>
+                  <span className="break-words">{s}</span>
                 </div>
               ))}
             </div>
@@ -328,15 +328,15 @@ const FormulaireClient = () => {
       {/* Progress bar */}
       <div className="sticky top-[80px] z-40 bg-background/95 backdrop-blur border-b border-border py-3">
         <div className="container">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex gap-1 text-[11px] font-semibold uppercase tracking-wider">
+          <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-wrap gap-x-2 gap-y-1 text-[10px] font-semibold uppercase tracking-wider sm:text-[11px]">
               {["Profil", "Projet", "Objectifs", "Design", "Équipe", "Délais", "Message", "Fichiers"].map((s, i) => (
-                <span key={i} className={pct >= ((i + 1) / 8) * 100 ? "text-accent" : pct >= (i / 8) * 100 ? "text-primary" : "text-muted-foreground/50"}>
-                  {s}&nbsp;
+                <span key={i} className={`${pct >= ((i + 1) / 8) * 100 ? "text-accent" : pct >= (i / 8) * 100 ? "text-primary" : "text-muted-foreground/50"} leading-tight`}>
+                  {s}
                 </span>
               ))}
             </div>
-            <span className="text-xs font-bold text-primary bg-primary/10 border border-primary/20 rounded-full px-3 py-1">{pct}%</span>
+            <span className="self-start text-xs font-bold text-primary bg-primary/10 border border-primary/20 rounded-full px-3 py-1 sm:self-auto">{pct}%</span>
           </div>
           <div className="h-[3px] rounded-full bg-border overflow-hidden">
             <div className="h-full gradient-miami rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
