@@ -48,6 +48,7 @@ const AdminBlogEditor = lazy(() => import("./pages/AdminBlogEditor"));
 const AdminPageEditor = lazy(() => import("./pages/AdminPageEditor"));
 const CmsBlogArticle = lazy(() => import("./pages/CmsBlogArticle"));
 const PremierContact = lazy(() => import("./pages/PremierContact"));
+const AdminMedia = lazy(() => import("./pages/AdminMedia"));
 
 const queryClient = new QueryClient();
 
@@ -100,6 +101,7 @@ const App = () => (
                   <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
                   <Route path="/admin/page/new" element={<AdminPageEditor />} />
                   <Route path="/blog/cms/:slug" element={<CmsBlogArticle />} />
+                  <Route path="/admin/media" element={<AdminMedia />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>
