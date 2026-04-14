@@ -132,7 +132,7 @@ function normalizeStructuredContent(content?: Partial<StructuredContent> | null,
     ctas: Array.isArray(content?.ctas) ? content.ctas : [],
     items: Array.isArray(content?.items) ? content.items : [],
     logos: Array.isArray(content?.logos) ? content.logos : [],
-    bgColor: (content?.bgColor === "blue" || content?.bgColor === "sable") ? content.bgColor : (content?.bgColor === "beige" ? "sable" : "none"),
+    bgColor: (content?.bgColor === "blue" || content?.bgColor === "sable") ? content.bgColor : ((content?.bgColor as string) === "beige" ? "sable" : "none"),
   };
 }
 
