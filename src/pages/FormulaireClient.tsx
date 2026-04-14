@@ -313,11 +313,11 @@ const FormulaireClient = () => {
             <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-8">
               Quelques minutes de votre temps pour que Déclic Digital vous prépare une proposition sur mesure.
             </p>
-            <div className="flex flex-wrap justify-center gap-2 md:gap-3">
+            <div className="flex flex-wrap justify-center gap-1.5 md:gap-3">
               {["Votre profil", "Votre projet", "Objectifs & budget", "Contenu & design", "L'équipe", "Délais", "Message", "Fichiers"].map((s, i) => (
-                <div key={i} className="flex max-w-full items-center justify-center gap-2 rounded-full bg-secondary border border-border px-3 py-2 text-center text-sm leading-tight text-muted-foreground md:px-4">
-                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary">{i + 1}</span>
-                  <span className="break-words">{s}</span>
+                <div key={i} className="flex items-center gap-1.5 rounded-full bg-secondary border border-border px-2.5 py-1.5 text-xs text-muted-foreground md:gap-2 md:px-4 md:py-2 md:text-sm">
+                  <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-[9px] font-bold text-primary md:h-5 md:w-5 md:text-[10px]">{i + 1}</span>
+                  {s}
                 </div>
               ))}
             </div>
@@ -879,7 +879,7 @@ const FormulaireClient = () => {
                 className="h-auto min-h-14 w-full max-w-full whitespace-normal break-normal rounded-full px-5 py-4 text-center text-base font-bold leading-tight text-white shadow-elevated transition-opacity hover:opacity-90 sm:w-auto sm:max-w-[32rem] sm:px-8 sm:py-5 gradient-primary btn-glow"
               >
                 <Send className="mr-2 h-5 w-5 shrink-0 self-center" />
-                <span className="text-center">{sending ? "Envoi en cours…" : "Envoyer mon projet à Déclic Digital"}</span>
+                <span className="text-center">{sending ? "Envoi en cours…" : "Envoyer"}</span>
               </Button>
               <div className="flex flex-wrap items-center justify-center gap-5 mt-6 text-xs text-muted-foreground">
                 <span className="flex items-center gap-1.5"><Shield className="h-4 w-4 text-primary" /> Données confidentielles</span>
