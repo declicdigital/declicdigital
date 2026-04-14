@@ -212,15 +212,12 @@ function applyLogosToDOM(el: HTMLElement, logos: LogoItem[]) {
 }
 
 function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
+  // Only apply background changes for explicit choices (blue/beige), never strip existing bg for "none"
   if (s.bgColor && s.bgColor !== "none") {
     const t = el.firstElementChild as HTMLElement || el;
     t.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
     el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
     const nc = BG_CLASS_MAP[s.bgColor]; if (nc) t.classList.add(nc);
-  } else if (s.bgColor === "none") {
-    const t = el.firstElementChild as HTMLElement || el;
-    t.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-    el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
   }
   if (s.heading) { const h1 = el.querySelector("h1"); if (h1) h1.textContent = s.heading; }
   if (s.image) { const imgs = el.querySelectorAll("img"); for (const img of imgs) { const w = img.getAttribute("width"); if (w && parseInt(w) < 64) continue; img.setAttribute("src", s.image); if (s.imageAlt) img.setAttribute("alt", s.imageAlt); break; } }
