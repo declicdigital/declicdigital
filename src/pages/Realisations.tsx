@@ -142,13 +142,11 @@ const Realisations = () => {
               </div>
             )}
             <motion.a
+              key={project.id}
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.15 }}
+              initial={false}
               className="group block overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-xl transition-all duration-300"
             >
               <div className="relative overflow-hidden">
