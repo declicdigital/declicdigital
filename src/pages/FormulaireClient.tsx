@@ -80,7 +80,7 @@ const SectionCard = ({ num, title, sub, accent = "primary", children }: {
   <motion.div
     initial={{ opacity: 0, y: 28 }}
     whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-60px" }}
+    viewport={{ once: true, margin: "200px 0px -20px 0px" }}
     transition={{ duration: 0.5 }}
     className="relative rounded-2xl border border-border bg-card p-8 md:p-10 shadow-card overflow-hidden"
   >
