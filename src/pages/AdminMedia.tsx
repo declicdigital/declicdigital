@@ -328,7 +328,7 @@ const AdminMedia = () => {
                       {/* Preview */}
                       <div
                         className="aspect-square bg-muted flex items-center justify-center cursor-pointer overflow-hidden"
-                        onClick={() => type === "image" && setPreviewUrl(file.publicUrl)}
+                        onClick={() => type === "image" && openPreview(file.publicUrl)}
                       >
                         {type === "image" ? (
                           <img
