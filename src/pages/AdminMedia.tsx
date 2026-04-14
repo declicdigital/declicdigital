@@ -23,7 +23,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "@/hooks/use-toast";
-import Header from "@/components/Header";
+import AdminBar from "@/components/admin/AdminBar";
 import { compressImage, UPLOAD_OPTIONS } from "@/lib/imageCompression";
 
 const BUCKET = "cms-images";
