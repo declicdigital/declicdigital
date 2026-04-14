@@ -595,17 +595,48 @@ function applyLogosToDOM(el: HTMLElement, logos: LogoItem[]) {
 function applySubItemsToDOM(el: HTMLElement, items: SubItem[]) {
   const containers = el.querySelectorAll("[class*='grid'], [class*='flex']");
   for (const container of containers) {
-    const children = Array.from(container.children);
+    const children = Array.from(container.children) as HTMLElement[];
     const withHeadings = children.filter(child =>
       child.querySelector("h2, h3, h4") || child.querySelector("[class*='font-bold'], [class*='font-semibold']")
-    );
+    ) as HTMLElement[];
 
     if (withHeadings.length >= 2 && withHeadings.length === children.length) {
       withHeadings.forEach((child, i) => {
+        if (!child.dataset.cmsItemId && items[i]?.id) {
+          child.dataset.cmsItemId = items[i].id;
+        }
+      });
+
+      const childById = new Map<string, HTMLElement>();
+      withHeadings.forEach((child) => {
+        const itemId = child.dataset.cmsItemId;
+        if (itemId) childById.set(itemId, child);
+      });
+
+      const orderedChildren: HTMLElement[] = [];
+      const usedChildren = new Set<HTMLElement>();
+
+      items.forEach((item, i) => {
+        const matchedChild = childById.get(item.id) || withHeadings[i];
+        if (matchedChild && !usedChildren.has(matchedChild)) {
+          usedChildren.add(matchedChild);
+          orderedChildren.push(matchedChild);
+        }
+      });
+
+      withHeadings.forEach((child) => {
+        if (!usedChildren.has(child)) {
+          orderedChildren.push(child);
+        }
+      });
+
+      orderedChildren.forEach((child) => container.appendChild(child));
+
+      orderedChildren.forEach((child, i) => {
         if (!items[i]) return;
         const item = items[i];
+        child.dataset.cmsItemId = item.id;
 
-        // Patch wrapping <a> href if the card is a link
         if (item.url && child.tagName === "A") {
           (child as HTMLAnchorElement).href = item.url;
         }
@@ -747,10 +778,14 @@ function patchCtaLinks(el: Element, enabledCtas: CtaItem[]) {
 }
 
 // ─── Sub-item editor component ───
-const SubItemEditor = ({ item, index, onChange, onRemove }: {
+const SubItemEditor = ({ item, index, onChange, onRemove, onMoveUp, onMoveDown, canMoveUp, canMoveDown }: {
   item: SubItem; index: number;
   onChange: (updated: SubItem) => void;
   onRemove: () => void;
+  onMoveUp: () => void;
+  onMoveDown: () => void;
+  canMoveUp: boolean;
+  canMoveDown: boolean;
 }) => {
   const [collapsed, setCollapsed] = useState(false);
 
@@ -795,9 +830,27 @@ const SubItemEditor = ({ item, index, onChange, onRemove }: {
         <span className="text-sm font-semibold flex-1 truncate">
           {item.heading || `Élément ${index + 1}`}
         </span>
-        <button onClick={(e) => { e.stopPropagation(); onRemove(); }} className="rounded p-1 text-destructive hover:bg-destructive/10" title="Supprimer">
-          <Trash size={14} />
-        </button>
+        <div className="flex items-center gap-1">
+          <button
+            onClick={(e) => { e.stopPropagation(); onMoveUp(); }}
+            disabled={!canMoveUp}
+            className="rounded p-1 text-muted-foreground hover:bg-muted disabled:opacity-30"
+            title="Monter"
+          >
+            <ArrowUp size={14} />
+          </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); onMoveDown(); }}
+            disabled={!canMoveDown}
+            className="rounded p-1 text-muted-foreground hover:bg-muted disabled:opacity-30"
+            title="Descendre"
+          >
+            <ArrowDown size={14} />
+          </button>
+          <button onClick={(e) => { e.stopPropagation(); onRemove(); }} className="rounded p-1 text-destructive hover:bg-destructive/10" title="Supprimer">
+            <Trash size={14} />
+          </button>
+        </div>
       </div>
 
       {!collapsed && (
@@ -1168,6 +1221,20 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
     });
   };
 
+  const moveItem = (index: number, direction: "up" | "down") => {
+    setStructured(prev => {
+      const safePrev = normalizeStructuredContent(prev, fallbackStructuredLabel);
+      const nextItems = [...safePrev.items];
+      const targetIndex = direction === "up" ? index - 1 : index + 1;
+      if (targetIndex < 0 || targetIndex >= nextItems.length) return safePrev;
+      [nextItems[index], nextItems[targetIndex]] = [nextItems[targetIndex], nextItems[index]];
+      return {
+        ...safePrev,
+        items: nextItems,
+      };
+    });
+  };
+
   const removeItem = (index: number) => {
     setStructured(prev => {
       const safePrev = normalizeStructuredContent(prev, fallbackStructuredLabel);
@@ -1308,6 +1375,10 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
                       index={i}
                       onChange={(updated) => updateItem(i, updated)}
                       onRemove={() => removeItem(i)}
+                      onMoveUp={() => moveItem(i, "up")}
+                      onMoveDown={() => moveItem(i, "down")}
+                      canMoveUp={i > 0}
+                      canMoveDown={i < structured.items.length - 1}
                     />
                   ))}
                 </div>
