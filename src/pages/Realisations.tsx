@@ -172,7 +172,6 @@ const Realisations = () => (
       </div>
     </section>
   </PageLayout>
-  );
-};
+);
 
 export default Realisations;
