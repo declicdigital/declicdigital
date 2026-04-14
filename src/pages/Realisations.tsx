@@ -1,19 +1,22 @@
+import { useState, useCallback } from "react";
 import { motion } from "motion/react";
 import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Link } from "react-router-dom";
-import { ExternalLink } from "lucide-react";
+import { ExternalLink, ArrowUp, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
+import { useAuth } from "@/hooks/useAuth";
 import portfolioOffg from "@/assets/site-vitrine-artiste-musical.webp";
 import portfolioAploz from "@/assets/site-aploz-agence-video-publicitaire.webp";
 import portfolioNjPhoto from "@/assets/site-photographe-professionnelle.webp";
 import portfolioTracker from "@/assets/site-artisan-tracker-solaire.jpg";
 
-const projects = [
+const defaultProjects = [
   {
+    id: "un-artisan",
     name: "Un-Artisan.com",
     description: "Site vitrine pour un artisan spécialisé dans les trackers solaires. Design moderne avec présentation des solutions et réalisations.",
     url: "https://un-artisan-com.lovable.app",
@@ -21,6 +24,7 @@ const projects = [
     tags: ["Site vitrine", "Artisan", "Énergie solaire"],
   },
   {
+    id: "aploz",
     name: "Aploz",
     description: "Site vitrine pour une agence vidéo publicitaire. Design sombre et immersif avec showreel intégré et études de cas clients.",
     url: "https://aploz.lovable.app/",
@@ -28,6 +32,7 @@ const projects = [
     tags: ["Site vitrine", "Vidéo", "Publicité"],
   },
   {
+    id: "offg",
     name: "Off G",
     description: "Site vitrine pour un artiste musical. Design sombre et immersif avec intégration Spotify.",
     url: "https://offg.lovable.app/",
@@ -35,6 +40,7 @@ const projects = [
     tags: ["Site vitrine", "Musique"],
   },
   {
+    id: "njphoto",
     name: "NJ Photography",
     description: "Site vitrine pour une photographe professionnelle. Design élégant et immersif avec portfolio visuel.",
     url: "https://njphotography.lovable.app/",
@@ -43,7 +49,43 @@ const projects = [
   },
 ];
 
-const Realisations = () => (
+const STORAGE_KEY = "realisations-order";
+
+function getOrderedProjects() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const order: string[] = JSON.parse(saved);
+      const sorted = [...defaultProjects].sort((a, b) => {
+        const ia = order.indexOf(a.id);
+        const ib = order.indexOf(b.id);
+        if (ia === -1 && ib === -1) return 0;
+        if (ia === -1) return 1;
+        if (ib === -1) return -1;
+        return ia - ib;
+      });
+      return sorted;
+    }
+  } catch {}
+  return defaultProjects;
+}
+
+const Realisations = () => {
+  const { isAdmin } = useAuth();
+  const [projects, setProjects] = useState(getOrderedProjects);
+
+  const moveProject = useCallback((index: number, direction: "up" | "down") => {
+    setProjects(prev => {
+      const next = [...prev];
+      const target = direction === "up" ? index - 1 : index + 1;
+      if (target < 0 || target >= next.length) return prev;
+      [next[index], next[target]] = [next[target], next[index]];
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(next.map(p => p.id)));
+      return next;
+    });
+  }, []);
+
+  return (
   <PageLayout>
     <Helmet>
       <title>Portfolio : sites web créés pour TPE et artisans | Déclic Digital</title>
@@ -78,44 +120,65 @@ const Realisations = () => (
     <SectionWrapper>
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, i) => (
-          <motion.a
-            key={project.name}
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: i * 0.15 }}
-            className="group overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-xl transition-all duration-300"
-          >
-            <div className="relative overflow-hidden">
-              <img
-                src={project.image}
-                alt={`Réalisation site web ${project.name}`}
-                className="aspect-video w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
-              <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300 flex items-center justify-center">
-                <ExternalLink className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={32} />
+          <div key={project.id} className="relative">
+            {isAdmin && (
+              <div className="absolute -top-3 right-2 z-20 flex gap-1">
+                <button
+                  onClick={() => moveProject(i, "up")}
+                  disabled={i === 0}
+                  className="rounded-full bg-primary p-1.5 text-primary-foreground shadow-md hover:bg-primary/90 disabled:opacity-30 transition-opacity"
+                  title="Monter"
+                >
+                  <ArrowUp size={14} />
+                </button>
+                <button
+                  onClick={() => moveProject(i, "down")}
+                  disabled={i === projects.length - 1}
+                  className="rounded-full bg-primary p-1.5 text-primary-foreground shadow-md hover:bg-primary/90 disabled:opacity-30 transition-opacity"
+                  title="Descendre"
+                >
+                  <ArrowDown size={14} />
+                </button>
               </div>
-            </div>
-            <div className="p-6">
-              <h2 className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                {project.name}
-              </h2>
-              <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span key={tag} className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
-                    {tag}
-                  </span>
-                ))}
+            )}
+            <motion.a
+              href={project.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.15 }}
+              className="group block overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-xl transition-all duration-300"
+            >
+              <div className="relative overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={`Réalisation site web ${project.name}`}
+                  className="aspect-video w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300 flex items-center justify-center">
+                  <ExternalLink className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={32} />
+                </div>
               </div>
-            </div>
-          </motion.a>
+              <div className="p-6">
+                <h2 className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                  {project.name}
+                </h2>
+                <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
+                  {project.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {project.tags.map((tag) => (
+                    <span key={tag} className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.a>
+          </div>
         ))}
       </div>
     </SectionWrapper>
@@ -171,6 +234,7 @@ const Realisations = () => (
       </div>
     </section>
   </PageLayout>
-);
+  );
+};
 
 export default Realisations;
