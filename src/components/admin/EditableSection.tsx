@@ -1375,6 +1375,10 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
                       index={i}
                       onChange={(updated) => updateItem(i, updated)}
                       onRemove={() => removeItem(i)}
+                      onMoveUp={() => moveItem(i, "up")}
+                      onMoveDown={() => moveItem(i, "down")}
+                      canMoveUp={i > 0}
+                      canMoveDown={i < structured.items.length - 1}
                     />
                   ))}
                 </div>
