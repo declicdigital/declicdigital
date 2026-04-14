@@ -82,20 +82,20 @@ const SectionCard = ({ num, title, sub, accent = "primary", children }: {
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true, margin: "200px 0px -20px 0px" }}
     transition={{ duration: 0.5 }}
-    className="relative rounded-2xl border border-border bg-card p-8 md:p-10 shadow-card overflow-hidden"
+    className="relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-card sm:p-8 md:p-10"
   >
     <div className={`absolute top-0 left-10 h-[3px] w-12 rounded-b ${
       accent === "accent" ? "bg-accent" : accent === "gradient" ? "gradient-miami" : "bg-primary"
     }`} />
-    <div className="flex items-center gap-4 mb-8 pb-6 border-b border-border">
+    <div className="mb-8 flex items-start gap-4 border-b border-border pb-6 sm:items-center">
       <div className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-xl text-lg font-extrabold ${
-        accent === "accent" ? "bg-accent/10 text-accent border border-accent/20" : "bg-primary/10 text-primary border border-primary/20"
+        accent === "accent" ? "border border-accent/20 bg-accent/10 text-accent" : "border border-primary/20 bg-primary/10 text-primary"
       }`}>
         {num}
       </div>
-      <div>
-        <h2 className="text-lg font-extrabold">{title}</h2>
-        <p className="text-sm text-muted-foreground">{sub}</p>
+      <div className="min-w-0">
+        <h2 className="break-words text-lg font-extrabold leading-tight">{title}</h2>
+        <p className="break-words text-sm leading-relaxed text-muted-foreground">{sub}</p>
       </div>
     </div>
     {children}
@@ -105,45 +105,45 @@ const SectionCard = ({ num, title, sub, accent = "primary", children }: {
 const ChoiceItem = ({ checked, onChange, label, type = "checkbox", accent = false }: {
   checked: boolean; onChange: () => void; label: string; type?: "checkbox" | "radio"; accent?: boolean;
 }) => (
-  <label className={`flex items-center gap-3 rounded-xl border px-4 py-3 cursor-pointer transition-all text-sm ${
+  <label className={`flex cursor-pointer items-start gap-3 rounded-xl border px-4 py-3 text-sm leading-relaxed transition-all ${
     checked
       ? accent
-        ? "bg-accent/10 border-accent/40 text-accent font-medium"
-        : "bg-primary/10 border-primary/40 text-primary font-medium"
-      : "border-border hover:bg-primary/5 hover:border-primary/20 text-muted-foreground"
+        ? "border-accent/40 bg-accent/10 font-medium text-accent"
+        : "border-primary/40 bg-primary/10 font-medium text-primary"
+      : "border-border text-muted-foreground hover:border-primary/20 hover:bg-primary/5"
   }`}>
     <input
       type={type}
       checked={checked}
       onChange={onChange}
-      className="accent-primary w-4 h-4 shrink-0"
+      className="h-4 w-4 shrink-0 accent-primary"
     />
-    <span>{label}</span>
+    <span className="min-w-0 break-words">{label}</span>
   </label>
 );
 
 const ScaleButtons = ({ value, onChange, leftLabel, rightLabel }: {
   value: string; onChange: (v: string) => void; leftLabel: string; rightLabel: string;
 }) => (
-  <div className="flex items-center gap-3">
-    <span className="text-xs text-muted-foreground italic hidden sm:block">{leftLabel}</span>
-    <div className="flex gap-2 flex-1">
+  <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
+    <span className="hidden text-xs italic text-muted-foreground sm:block">{leftLabel}</span>
+    <div className="flex flex-1 gap-2">
       {["1", "2", "3", "4", "5"].map(v => (
         <button
           key={v}
           type="button"
           onClick={() => onChange(v)}
-          className={`flex-1 h-10 rounded-lg font-bold text-sm transition-all ${
+          className={`h-10 flex-1 rounded-lg text-sm font-bold transition-all ${
             value === v
               ? "gradient-primary text-white shadow-glow"
-              : "border border-border text-muted-foreground hover:border-primary hover:text-primary hover:bg-primary/5"
+              : "border border-border text-muted-foreground hover:border-primary hover:bg-primary/5 hover:text-primary"
           }`}
         >
           {v}
         </button>
       ))}
     </div>
-    <span className="text-xs text-muted-foreground italic hidden sm:block">{rightLabel}</span>
+    <span className="hidden text-xs italic text-muted-foreground sm:block">{rightLabel}</span>
   </div>
 );
 
@@ -295,7 +295,7 @@ const FormulaireClient = () => {
   return (
     <PageLayout>
       {/* Progress floating bubble */}
-      <div className="fixed bottom-8 right-8 z-50 flex h-16 w-16 flex-col items-center justify-center rounded-full gradient-miami shadow-elevated cursor-default">
+      <div className="fixed bottom-8 right-8 z-50 hidden h-16 w-16 flex-col items-center justify-center rounded-full gradient-miami shadow-elevated cursor-default md:flex">
         <span className="text-lg font-black text-primary-foreground leading-none">{pct}%</span>
         <span className="text-[8px] font-bold text-primary-foreground/80 uppercase tracking-wider">complet</span>
       </div>
@@ -304,7 +304,7 @@ const FormulaireClient = () => {
       <section className="gradient-hero py-16 md:py-24">
         <div className="container text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <span className="inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-5 py-2 text-xs font-semibold text-accent uppercase tracking-wider mb-6">
+            <span className="mb-6 inline-flex max-w-full items-center justify-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-2 text-center text-xs font-semibold uppercase tracking-wider text-accent leading-tight">
               Formulaire de brief client
             </span>
             <h1 className="text-4xl md:text-5xl font-extrabold mb-5">
@@ -313,11 +313,11 @@ const FormulaireClient = () => {
             <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-8">
               Quelques minutes de votre temps pour que Déclic Digital vous prépare une proposition sur mesure.
             </p>
-            <div className="flex flex-wrap justify-center gap-3">
+            <div className="flex flex-wrap justify-center gap-2 md:gap-3">
               {["Votre profil", "Votre projet", "Objectifs & budget", "Contenu & design", "L'équipe", "Délais", "Message", "Fichiers"].map((s, i) => (
-                <div key={i} className="flex items-center gap-2 rounded-full bg-secondary border border-border px-4 py-2 text-sm text-muted-foreground">
-                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary">{i + 1}</span>
-                  {s}
+                <div key={i} className="flex max-w-full items-center justify-center gap-2 rounded-full bg-secondary border border-border px-3 py-2 text-center text-sm leading-tight text-muted-foreground md:px-4">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-[10px] font-bold text-primary">{i + 1}</span>
+                  <span className="break-words">{s}</span>
                 </div>
               ))}
             </div>
@@ -328,15 +328,15 @@ const FormulaireClient = () => {
       {/* Progress bar */}
       <div className="sticky top-[80px] z-40 bg-background/95 backdrop-blur border-b border-border py-3">
         <div className="container">
-          <div className="flex items-center justify-between mb-2">
-            <div className="flex gap-1 text-[11px] font-semibold uppercase tracking-wider">
+          <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex flex-wrap gap-x-2 gap-y-1 text-[10px] font-semibold uppercase tracking-wider sm:text-[11px]">
               {["Profil", "Projet", "Objectifs", "Design", "Équipe", "Délais", "Message", "Fichiers"].map((s, i) => (
-                <span key={i} className={pct >= ((i + 1) / 8) * 100 ? "text-accent" : pct >= (i / 8) * 100 ? "text-primary" : "text-muted-foreground/50"}>
-                  {s}&nbsp;
+                <span key={i} className={`${pct >= ((i + 1) / 8) * 100 ? "text-accent" : pct >= (i / 8) * 100 ? "text-primary" : "text-muted-foreground/50"} leading-tight`}>
+                  {s}
                 </span>
               ))}
             </div>
-            <span className="text-xs font-bold text-primary bg-primary/10 border border-primary/20 rounded-full px-3 py-1">{pct}%</span>
+            <span className="self-start text-xs font-bold text-primary bg-primary/10 border border-primary/20 rounded-full px-3 py-1 sm:self-auto">{pct}%</span>
           </div>
           <div className="h-[3px] rounded-full bg-border overflow-hidden">
             <div className="h-full gradient-miami rounded-full transition-all duration-500" style={{ width: `${pct}%` }} />
