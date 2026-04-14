@@ -499,15 +499,35 @@ const AdminMedia = () => {
 
       {/* Image preview modal */}
       {previewUrl && (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70" onClick={() => setPreviewUrl(null)}>
-          <div className="relative max-w-[90vw] max-h-[90vh]" onClick={(e) => e.stopPropagation()}>
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 p-4" onClick={() => setPreviewUrl(null)}>
+          <div className="relative max-w-[90vw] max-h-[90vh] flex flex-col items-center gap-4" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={() => setPreviewUrl(null)}
               className="absolute -top-10 right-0 rounded-full bg-white/20 p-2 text-white hover:bg-white/40 transition"
             >
               <X size={20} />
             </button>
-            <img src={previewUrl} alt="Preview" className="max-w-full max-h-[85vh] rounded-xl shadow-2xl" />
+            <img src={previewUrl} alt="Preview" className="max-w-full max-h-[70vh] rounded-xl shadow-2xl" />
+            <div className="bg-card rounded-xl p-4 w-full max-w-lg text-sm">
+              <h4 className="font-semibold mb-2 flex items-center gap-2">
+                <Eye size={14} /> Pages utilisant cette image
+              </h4>
+              {loadingPages ? (
+                <p className="text-muted-foreground text-xs">Recherche...</p>
+              ) : previewPages.length === 0 ? (
+                <p className="text-muted-foreground text-xs">Aucune page CMS ne référence cette image.</p>
+              ) : (
+                <ul className="space-y-1">
+                  {previewPages.map((page) => (
+                    <li key={page}>
+                      <a href={page} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline text-xs">
+                        {page === "/" ? "Accueil (/)" : page}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
         </div>
       )}
