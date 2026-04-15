@@ -60,15 +60,21 @@ const BlogCarousel = () => {
                   className="overflow-hidden rounded-xl bg-card shadow-card hover:shadow-elevated transition-all h-full flex flex-col"
                 >
                   <div className="aspect-[16/9] overflow-hidden relative">
-                    <img
-                      src={article.image}
-                      alt={article.title}
-                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="lazy"
-                      decoding="async"
-                      width={640}
-                      height={360}
-                    />
+                    {article.image ? (
+                      <img
+                        src={article.image}
+                        alt={article.title}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy"
+                        decoding="async"
+                        width={640}
+                        height={360}
+                      />
+                    ) : (
+                      <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                        <span className="text-3xl font-bold text-primary/30">{article.title.charAt(0)}</span>
+                      </div>
+                    )}
                     {isNewest && (
                       <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-[11px] font-bold text-primary-foreground shadow-md">
                         <Sparkles size={12} /> Nouvel article
