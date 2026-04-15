@@ -316,10 +316,10 @@ const FormulaireClient = () => {
             <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-8">
               Quelques minutes de votre temps pour que Déclic Digital vous prépare une proposition sur mesure.
             </p>
-            <div className="grid grid-cols-4 gap-2 md:hidden">
+            <div className="grid grid-cols-4 gap-1.5 md:hidden">
               {STEP_LABELS_COMPACT.map((s, i) => (
-                <div key={s} className="flex min-w-0 items-center justify-center gap-1 rounded-full border border-border bg-secondary px-2 py-2 text-[10px] font-medium leading-none text-muted-foreground">
-                  <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-[8px] font-bold text-primary">{i + 1}</span>
+                <div key={s} className="flex min-w-0 items-center justify-center gap-1 rounded-full border border-border bg-secondary px-1.5 py-1.5 text-[9px] font-medium leading-none text-muted-foreground">
+                  <span className="flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-[7px] font-bold text-primary">{i + 1}</span>
                   <span className="truncate">{s}</span>
                 </div>
               ))}
@@ -339,8 +339,8 @@ const FormulaireClient = () => {
       {/* Progress bar */}
       <div className="sticky top-[80px] z-40 bg-background/95 backdrop-blur border-b border-border py-3">
         <div className="container">
-          <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex flex-wrap gap-x-2 gap-y-1 text-[10px] font-semibold uppercase tracking-wider sm:text-[11px]">
+            <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div className="grid grid-cols-4 gap-x-2 gap-y-1 text-[9px] font-semibold uppercase tracking-wide sm:flex sm:flex-wrap sm:gap-x-2 sm:text-[11px]">
               {STEP_LABELS_COMPACT.map((s, i) => (
                 <span key={i} className={`${pct >= ((i + 1) / 8) * 100 ? "text-accent" : pct >= (i / 8) * 100 ? "text-primary" : "text-muted-foreground/50"} leading-tight`}>
                   {s}
