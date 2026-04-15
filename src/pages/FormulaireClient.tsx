@@ -73,6 +73,9 @@ const initial: FormData = {
   file_link: "", file_notes: "",
 };
 
+const HERO_STEP_LABELS = ["Votre profil", "Votre projet", "Objectifs & budget", "Contenu & design", "L'équipe", "Délais", "Message", "Fichiers"];
+const STEP_LABELS_COMPACT = ["Profil", "Projet", "Objectifs", "Design", "Équipe", "Délais", "Message", "Fichiers"];
+
 /* ───── helpers ───── */
 const SectionCard = ({ num, title, sub, accent = "primary", children }: {
   num: string; title: string; sub: string; accent?: "primary" | "accent" | "gradient"; children: React.ReactNode;
@@ -313,10 +316,18 @@ const FormulaireClient = () => {
             <p className="text-muted-foreground text-lg max-w-xl mx-auto mb-8">
               Quelques minutes de votre temps pour que Déclic Digital vous prépare une proposition sur mesure.
             </p>
-            <div className="flex flex-wrap justify-center gap-1.5 md:gap-3">
-              {["Votre profil", "Votre projet", "Objectifs & budget", "Contenu & design", "L'équipe", "Délais", "Message", "Fichiers"].map((s, i) => (
-                <div key={i} className="flex items-center gap-1.5 rounded-full bg-secondary border border-border px-2.5 py-1.5 text-xs text-muted-foreground md:gap-2 md:px-4 md:py-2 md:text-sm">
-                  <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-primary/10 border border-primary/20 text-[9px] font-bold text-primary md:h-5 md:w-5 md:text-[10px]">{i + 1}</span>
+            <div className="grid grid-cols-4 gap-1.5 md:hidden">
+              {STEP_LABELS_COMPACT.map((s, i) => (
+                <div key={s} className="flex min-w-0 items-center justify-center gap-1 rounded-full border border-border bg-secondary px-1.5 py-1.5 text-[9px] font-medium leading-none text-muted-foreground">
+                  <span className="flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-[7px] font-bold text-primary">{i + 1}</span>
+                  <span className="truncate">{s}</span>
+                </div>
+              ))}
+            </div>
+            <div className="hidden flex-wrap justify-center gap-3 md:flex">
+              {HERO_STEP_LABELS.map((s, i) => (
+                <div key={s} className="flex items-center gap-2 rounded-full border border-border bg-secondary px-4 py-2 text-sm text-muted-foreground">
+                  <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-primary/20 bg-primary/10 text-[10px] font-bold text-primary">{i + 1}</span>
                   {s}
                 </div>
               ))}
@@ -328,9 +339,9 @@ const FormulaireClient = () => {
       {/* Progress bar */}
       <div className="sticky top-[80px] z-40 bg-background/95 backdrop-blur border-b border-border py-3">
         <div className="container">
-          <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex flex-wrap gap-x-2 gap-y-1 text-[10px] font-semibold uppercase tracking-wider sm:text-[11px]">
-              {["Profil", "Projet", "Objectifs", "Design", "Équipe", "Délais", "Message", "Fichiers"].map((s, i) => (
+            <div className="mb-2 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <div className="grid grid-cols-4 gap-x-2 gap-y-1 text-[9px] font-semibold uppercase tracking-wide sm:flex sm:flex-wrap sm:gap-x-2 sm:text-[11px]">
+              {STEP_LABELS_COMPACT.map((s, i) => (
                 <span key={i} className={`${pct >= ((i + 1) / 8) * 100 ? "text-accent" : pct >= (i / 8) * 100 ? "text-primary" : "text-muted-foreground/50"} leading-tight`}>
                   {s}
                 </span>
