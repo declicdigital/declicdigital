@@ -9,11 +9,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { loadCachedCmsPosts, mergeBlogArticles, saveCachedCmsPosts, type CmsBlogPostSummary } from "@/lib/blog";
 
 const categoryColors: Record<string, string> = {
-  "Technique": "bg-amber-500/15 text-amber-700 dark:text-amber-400",
   "Création de site": "bg-violet-500/15 text-violet-700 dark:text-violet-400",
   "SEO & Performance": "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
   "Stratégie digitale": "bg-rose-500/15 text-rose-700 dark:text-rose-400",
-  "Tech & Gadgets": "bg-sky-500/15 text-sky-700 dark:text-sky-400",
+  "GEO, Visibilité IA": "bg-sky-500/15 text-sky-700 dark:text-sky-400",
+  "Business": "bg-amber-500/15 text-amber-700 dark:text-amber-400",
 };
 
 const BlogPageSkeleton = () => (
