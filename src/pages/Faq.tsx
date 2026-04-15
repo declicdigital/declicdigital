@@ -90,7 +90,7 @@ const Faq = () => {
     <PageLayout>
       <Helmet>
         <title>FAQ : questions sur la création de site web et le SEO | Déclic Digital</title>
-        <meta name="description" content="Combien coûte un site web ? Combien de temps pour apparaitre sur Google ? Retrouvez toutes les réponses sur la création de site et le SEO pour TPE et artisans." />
+        <meta name="description" content="Combien coûte un site web ? Qu'est-ce que le GEO ? Retrouvez toutes les réponses sur la création de site, le SEO et la visibilité IA pour TPE et artisans." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://declicdigital.net/faq" />
         <script type="application/ld+json">{JSON.stringify({
