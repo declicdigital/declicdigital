@@ -121,7 +121,7 @@ const Blog = () => {
           <div className="max-w-2xl">
             <span className="mb-4 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">Blog</span>
             <h1 className="text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl text-white">
-              Veille web, SEO<br /><span className="text-gradient">& tech</span>
+              Veille web, SEO, GEO<br /><span className="text-gradient">& tech</span>
             </h1>
             <p className="mt-6 text-lg text-white/70 leading-relaxed max-w-lg">
               Des articles pratiques pour comprendre le web, améliorer votre visibilité et faire les bons choix pour votre entreprise.
@@ -135,7 +135,13 @@ const Blog = () => {
         <Link to={`/blog/${featured.slug}`} className="group block">
           <article className="grid overflow-hidden rounded-2xl bg-card shadow-elevated md:grid-cols-2">
             <div className="aspect-[16/10] md:aspect-auto overflow-hidden relative">
-              <img src={featured.image} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" decoding="async" fetchPriority="high" width={1280} height={800} />
+              {featured.image ? (
+                <img src={featured.image} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" decoding="async" fetchPriority="high" width={1280} height={800} />
+              ) : (
+                <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                  <span className="text-4xl font-bold text-primary/30">{featured.title.charAt(0)}</span>
+                </div>
+              )}
               <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full gradient-primary px-4 py-1.5 text-xs font-bold text-white shadow-lg">
                 <Sparkles size={14} /> Nouvel article
               </span>
@@ -185,7 +191,13 @@ const Blog = () => {
               <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
                 <article className="overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-elevated transition-shadow">
                   <div className="aspect-[16/9] overflow-hidden relative">
-                    <img src={article.image} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" width={960} height={540} />
+                    {article.image ? (
+                      <img src={article.image} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" width={960} height={540} />
+                    ) : (
+                      <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                        <span className="text-3xl font-bold text-primary/30">{article.title.charAt(0)}</span>
+                      </div>
+                    )}
                     {isNew && (
                       <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full gradient-primary px-3 py-1 text-[11px] font-bold text-white shadow-md">
                         <Sparkles size={12} /> Nouvel article
