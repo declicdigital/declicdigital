@@ -1,0 +1,1 @@
+DELETE FROM cms_page_blocks WHERE page_path = '/faq::auto-3';
