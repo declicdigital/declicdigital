@@ -116,7 +116,7 @@ const Faq = () => {
       </section>
 
       {/* FAQ + AI Sidebar */}
-      <SectionWrapper>
+      <SectionWrapper data-cms-skip>
         <div className="grid gap-10 lg:grid-cols-[1fr_380px]">
           {/* FAQ Accordion */}
           <div>

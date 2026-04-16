@@ -77,6 +77,9 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
       // Lightweight CMS patching only — no admin UI loaded
       return flat.map((child, i) => {
         if (!isValidElement(child)) return child;
+        // Skip CMS patching for elements marked with data-cms-skip
+        const childProps = (child as any).props;
+        if (childProps?.["data-cms-skip"] != null) return child;
         return (
           <CmsPatcher key={i} blockId={`auto-${i}`} pagePath={pagePath}>
             {child}
