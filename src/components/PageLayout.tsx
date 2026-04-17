@@ -1,4 +1,4 @@
-import { lazy, ReactNode, Suspense, Children, isValidElement, useState, useEffect, useCallback } from "react";
+import { lazy, ReactNode, Suspense, Children, isValidElement, useState, useEffect, useCallback, useLayoutEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import { useAuth } from "@/hooks/useAuth";
