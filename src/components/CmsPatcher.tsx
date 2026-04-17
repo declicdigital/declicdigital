@@ -12,19 +12,8 @@ interface Props {
   displayIndex?: number;
 }
 
-/** Apply alternating blue background on odd display indices.
- *  Skip sections that already have a special background (hero gradient, miami CTA, etc.). */
-function applyAlternatingBg(el: HTMLElement, displayIndex: number) {
-  const target = el.firstElementChild as HTMLElement | null;
-  if (!target) return;
-  // Always clear first
-  target.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-  el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-  const cls = target.className || "";
-  // Skip sections that have their own background styling
-  if (/gradient-|bg-gradient|bg-foreground|bg-primary|bg-card|bg-muted|bg-secondary/.test(cls)) return;
-  if (displayIndex % 2 === 1) target.classList.add("bg-section-blue");
-}
+// Background alternation is handled centrally in PageLayout (DOM-based).
+// CmsPatcher no longer manipulates section backgrounds.
 
 type BgColor = "none" | "blue" | "sable";
 
@@ -258,7 +247,6 @@ const CmsPatcher = ({ blockId, pagePath, children, displayIndex = 0 }: Props) =>
   overrideRef.current = override;
 
   useLayoutEffect(() => {
-    if (ref.current) applyAlternatingBg(ref.current, displayIndex);
     const s = normalize(overrideRef.current?.content?.structured);
     if (!s || !ref.current) return;
     applyOverrideToDOM(ref.current, s);

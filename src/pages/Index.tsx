@@ -87,7 +87,7 @@ const Index = () => {
 
       {/* Hero */}
       <section className="gradient-hero relative overflow-hidden">
-        <div className="container py-16 md:py-24 lg:py-32">
+        <div className="container pt-6 pb-16 md:pt-8 md:pb-24 lg:pt-10 lg:pb-32">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
               <span className="mb-4 inline-block rounded-full bg-brand-violet/10 px-4 py-1.5 text-xs font-semibold text-primary">

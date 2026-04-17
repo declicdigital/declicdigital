@@ -1063,18 +1063,7 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
   const overrideRef = useRef(override);
   overrideRef.current = override;
   useLayoutEffect(() => {
-    // Auto-alternate background based on display index
-    if (contentRef.current) {
-      const target = contentRef.current.firstElementChild as HTMLElement | null;
-      if (target) {
-        target.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-        const cls = target.className || "";
-        const skip = /gradient-|bg-gradient|bg-foreground|bg-primary|bg-card|bg-muted|bg-secondary/.test(cls);
-        if (!skip && (displayIndex ?? 0) % 2 === 1) {
-          target.classList.add("bg-section-blue");
-        }
-      }
-    }
+    // Background alternation handled centrally in PageLayout (DOM-based).
     if (!overrideRef.current?.content?.structured || !contentRef.current) return;
     applyOverrideToDOM(contentRef.current, overrideRef.current.content.structured);
   }); // no deps = runs after every render

@@ -1,4 +1,4 @@
-import { lazy, ReactNode, Suspense, Children, isValidElement, useState, useEffect, useCallback } from "react";
+import { lazy, ReactNode, Suspense, Children, isValidElement, useState, useEffect, useCallback, useLayoutEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import { useAuth } from "@/hooks/useAuth";
@@ -119,12 +119,51 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
     });
   })();
 
+  const mainRef = useRef<HTMLElement>(null);
+
+  // Central DOM-based section background alternation.
+  // Scans the rendered <main> for top-level section-like blocks and applies
+  // alternating bg-section-blue, ignoring sections with their own background.
+  useLayoutEffect(() => {
+    const apply = () => {
+      const main = mainRef.current;
+      if (!main) return;
+      // Collect candidate <section> elements that are reasonably "top-level":
+      // direct sections, or sections nested at most 2 levels (covers CmsPatcher
+      // and EditableSection wrapper divs).
+      const all = Array.from(main.querySelectorAll("section")) as HTMLElement[];
+      const candidates = all.filter((sec) => {
+        // depth from main
+        let depth = 0;
+        let p: HTMLElement | null = sec.parentElement;
+        while (p && p !== main) { depth++; p = p.parentElement; if (depth > 4) return false; }
+        // not nested inside another section
+        return !sec.parentElement?.closest("section");
+      });
+      let i = 0;
+      const skipRe = /gradient-|bg-foreground|bg-primary\b|bg-card|bg-muted|bg-secondary|bg-miami/;
+      candidates.forEach((sec) => {
+        sec.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+        const cls = sec.className || "";
+        if (skipRe.test(cls)) return;
+        if (i % 2 === 1) sec.classList.add("bg-section-blue");
+        i++;
+      });
+    };
+    apply();
+    // Re-apply shortly after to catch lazy-loaded sections (Suspense boundaries).
+    const t1 = window.setTimeout(apply, 100);
+    const t2 = window.setTimeout(apply, 600);
+    const t3 = window.setTimeout(apply, 1500);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+  }, [pagePath, wrappedChildren]);
+
   return (
     <CmsOverridesProvider pagePath={pagePath}>
       <div className="flex min-h-screen flex-col">
         {isAdmin && <Suspense fallback={null}><AdminBar /></Suspense>}
         <Header isAdmin={isAdmin} />
-        <main className="flex-1">{wrappedChildren}</main>
+        <main ref={mainRef} className="flex-1">{wrappedChildren}</main>
         <Suspense fallback={<div style={{ minHeight: 400 }} />}>
           {!hideBlogCarousel && <BlogCarousel />}
           <Footer />
