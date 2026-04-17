@@ -227,11 +227,10 @@ function applyLogosToDOM(el: HTMLElement, logos: LogoItem[]) {
 }
 
 function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
-  // Apply background color — always apply, including "none" to reset
+  // Background color is now managed by alternation in PageLayout — ignore saved bgColor.
   const bgTarget = el.firstElementChild as HTMLElement || el;
-  bgTarget.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-  el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-  const nc = BG_CLASS_MAP[s.bgColor || "none"]; if (nc) bgTarget.classList.add(nc);
+  bgTarget.classList.remove("bg-section-rose", "bg-section-alt");
+  el.classList.remove("bg-section-rose", "bg-section-alt");
   if (s.heading) { const h1 = el.querySelector("h1"); if (h1) h1.textContent = s.heading; }
   if (s.image) { const imgs = el.querySelectorAll("img"); for (const img of imgs) { const w = img.getAttribute("width"); if (w && parseInt(w) < 64) continue; img.setAttribute("src", s.image); if (s.imageAlt) img.setAttribute("alt", s.imageAlt); break; } }
   if (s.textHtml && s.items.length === 0) applyRichTextHtmlToDOM(el, s.textHtml);
