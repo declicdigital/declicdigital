@@ -249,7 +249,7 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
   patchCtaLinks(el, s.ctas.filter(c => c.enabled && c.text && c.url));
 }
 
-const CmsPatcher = ({ blockId, pagePath, children }: Props) => {
+const CmsPatcher = ({ blockId, pagePath, children, displayIndex = 0 }: Props) => {
   const { getOverride } = useCmsOverrides();
   const compositeKey = `${pagePath}::${blockId}`;
   const override = getOverride(compositeKey);
@@ -258,6 +258,7 @@ const CmsPatcher = ({ blockId, pagePath, children }: Props) => {
   overrideRef.current = override;
 
   useLayoutEffect(() => {
+    if (ref.current) applyAlternatingBg(ref.current, displayIndex);
     const s = normalize(overrideRef.current?.content?.structured);
     if (!s || !ref.current) return;
     applyOverrideToDOM(ref.current, s);
