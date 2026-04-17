@@ -75,13 +75,15 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
   const wrappedChildren = (() => {
     if (!isAdmin) {
       // Lightweight CMS patching only — no admin UI loaded
+      let visitorIdx = 0;
       return flat.map((child, i) => {
         if (!isValidElement(child)) return child;
         // Skip CMS patching for elements marked with data-cms-skip
         const childProps = (child as any).props;
         if (childProps?.["data-cms-skip"] != null) return child;
+        const idx = visitorIdx++;
         return (
-          <CmsPatcher key={i} blockId={`auto-${i}`} pagePath={pagePath}>
+          <CmsPatcher key={i} blockId={`auto-${i}`} pagePath={pagePath} displayIndex={idx}>
             {child}
           </CmsPatcher>
         );
