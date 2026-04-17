@@ -9,6 +9,21 @@ interface Props {
   blockId: string;
   pagePath: string;
   children: ReactNode;
+  displayIndex?: number;
+}
+
+/** Apply alternating blue background on odd display indices.
+ *  Skip sections that already have a special background (hero gradient, miami CTA, etc.). */
+function applyAlternatingBg(el: HTMLElement, displayIndex: number) {
+  const target = el.firstElementChild as HTMLElement | null;
+  if (!target) return;
+  // Always clear first
+  target.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+  el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+  const cls = target.className || "";
+  // Skip sections that have their own background styling
+  if (/gradient-|bg-gradient|bg-foreground|bg-primary|bg-card|bg-muted|bg-secondary/.test(cls)) return;
+  if (displayIndex % 2 === 1) target.classList.add("bg-section-blue");
 }
 
 type BgColor = "none" | "blue" | "sable";
@@ -212,11 +227,10 @@ function applyLogosToDOM(el: HTMLElement, logos: LogoItem[]) {
 }
 
 function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
-  // Apply background color — always apply, including "none" to reset
+  // Background color is now managed by alternation in PageLayout — ignore saved bgColor.
   const bgTarget = el.firstElementChild as HTMLElement || el;
-  bgTarget.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-  el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-  const nc = BG_CLASS_MAP[s.bgColor || "none"]; if (nc) bgTarget.classList.add(nc);
+  bgTarget.classList.remove("bg-section-rose", "bg-section-alt");
+  el.classList.remove("bg-section-rose", "bg-section-alt");
   if (s.heading) { const h1 = el.querySelector("h1"); if (h1) h1.textContent = s.heading; }
   if (s.image) { const imgs = el.querySelectorAll("img"); for (const img of imgs) { const w = img.getAttribute("width"); if (w && parseInt(w) < 64) continue; img.setAttribute("src", s.image); if (s.imageAlt) img.setAttribute("alt", s.imageAlt); break; } }
   if (s.textHtml && s.items.length === 0) applyRichTextHtmlToDOM(el, s.textHtml);
@@ -235,7 +249,7 @@ function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
   patchCtaLinks(el, s.ctas.filter(c => c.enabled && c.text && c.url));
 }
 
-const CmsPatcher = ({ blockId, pagePath, children }: Props) => {
+const CmsPatcher = ({ blockId, pagePath, children, displayIndex = 0 }: Props) => {
   const { getOverride } = useCmsOverrides();
   const compositeKey = `${pagePath}::${blockId}`;
   const override = getOverride(compositeKey);
@@ -244,6 +258,7 @@ const CmsPatcher = ({ blockId, pagePath, children }: Props) => {
   overrideRef.current = override;
 
   useLayoutEffect(() => {
+    if (ref.current) applyAlternatingBg(ref.current, displayIndex);
     const s = normalize(overrideRef.current?.content?.structured);
     if (!s || !ref.current) return;
     applyOverrideToDOM(ref.current, s);

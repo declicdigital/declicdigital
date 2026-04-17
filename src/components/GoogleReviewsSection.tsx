@@ -39,8 +39,8 @@ const GoogleReviewsSection = ({
   const [writeReviewUrl, setWriteReviewUrl] = useState(FALLBACK_WRITE_REVIEW_URL);
 
   useEffect(() => {
-    const CACHE_KEY = "dd_google_reviews";
-    const CACHE_TTL = 1000 * 60 * 60; // 1 hour
+    const CACHE_KEY = "dd_google_reviews_v2";
+    const CACHE_TTL = 1000 * 60 * 5; // 5 minutes
 
     // Try cache first for instant render
     try {

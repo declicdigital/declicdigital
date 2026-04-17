@@ -307,12 +307,10 @@ function detectSubItems(el: HTMLElement): SubItem[] {
 function applyOverrideToDOM(el: HTMLElement, s: StructuredContent) {
   s = normalizeStructuredContent(s);
 
-  // Apply background color — always apply, including "none" to reset
+  // Background is now auto-alternated by EditableSection wrapper — clear any saved bg.
   const bgTarget = el.firstElementChild as HTMLElement || el;
-  bgTarget.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-  el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
-  const newBgClass = BG_CLASS_MAP[s.bgColor || "none"];
-  if (newBgClass) bgTarget.classList.add(newBgClass);
+  bgTarget.classList.remove("bg-section-rose", "bg-section-alt");
+  el.classList.remove("bg-section-rose", "bg-section-alt");
 
   if (s.heading) {
     const h1 = el.querySelector("h1");
@@ -1065,6 +1063,18 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
   const overrideRef = useRef(override);
   overrideRef.current = override;
   useLayoutEffect(() => {
+    // Auto-alternate background based on display index
+    if (contentRef.current) {
+      const target = contentRef.current.firstElementChild as HTMLElement | null;
+      if (target) {
+        target.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+        const cls = target.className || "";
+        const skip = /gradient-|bg-gradient|bg-foreground|bg-primary|bg-card|bg-muted|bg-secondary/.test(cls);
+        if (!skip && (displayIndex ?? 0) % 2 === 1) {
+          target.classList.add("bg-section-blue");
+        }
+      }
+    }
     if (!overrideRef.current?.content?.structured || !contentRef.current) return;
     applyOverrideToDOM(contentRef.current, overrideRef.current.content.structured);
   }); // no deps = runs after every render
@@ -1326,32 +1336,7 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
                 <Input value={structured.label} onChange={(e) => updateField("label", e.target.value)} placeholder="Ex: Hero HP" />
               </div>
 
-              {/* Background color */}
-              <div className="rounded-lg border p-4 space-y-2">
-                <Label className="text-sm font-semibold">🎨 Couleur de fond</Label>
-                <div className="flex gap-3">
-                  {([
-                    { value: "none" as BgColor, label: "Par défaut", color: "bg-background" },
-                    { value: "sable" as BgColor, label: "Sable", color: "bg-[#f3e8ef]" },
-                    { value: "blue" as BgColor, label: "Bleu", color: "bg-[#e9f2f4]" },
-                  ]).map((opt) => (
-                    <button
-                      key={opt.value}
-                      type="button"
-                      onClick={() => updateField("bgColor", opt.value)}
-                      className={`flex-1 rounded-lg border-2 p-3 text-center text-sm font-medium transition ${
-                        structured.bgColor === opt.value
-                          ? "border-primary ring-2 ring-primary/20"
-                          : "border-muted hover:border-primary/30"
-                      }`}
-                    >
-                      <div className={`mx-auto mb-2 h-8 w-full rounded ${opt.color} border`} />
-                      {opt.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
+              {/* Background color is now auto-alternated site-wide — no picker. */}
               <div className="rounded-lg border p-4 space-y-2">
                 <Label className="text-sm font-semibold">📝 Titre principal (H1)</Label>
                 <Input
