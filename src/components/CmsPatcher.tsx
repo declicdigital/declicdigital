@@ -247,7 +247,6 @@ const CmsPatcher = ({ blockId, pagePath, children, displayIndex = 0 }: Props) =>
   overrideRef.current = override;
 
   useLayoutEffect(() => {
-    if (ref.current) applyAlternatingBg(ref.current, displayIndex);
     const s = normalize(overrideRef.current?.content?.structured);
     if (!s || !ref.current) return;
     applyOverrideToDOM(ref.current, s);
