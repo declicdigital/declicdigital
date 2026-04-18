@@ -134,14 +134,14 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
       const candidates = all.filter((sec) => !sec.parentElement?.closest("section"));
       // Patterns indicating the section already has its own background and must be skipped.
       const skipRe = /\bgradient-hero\b|\bgradient-miami\b|\bgradient-primary\b|\bbg-foreground\b|\bbg-primary\b|\bbg-card\b|\bbg-muted\b|\bbg-secondary\b|\bbg-miami\b|bg-\[hsl/;
-      let i = 0;
-      candidates.forEach((sec) => {
+      candidates.forEach((sec, i) => {
         // Always strip our managed classes first (so re-renders can re-flip correctly).
         sec.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
         const cls = sec.className || "";
         if (skipRe.test(cls)) return; // skip — this section keeps its own background
+        // Strict positional alternation: bloc 1 (i=0) défaut, bloc 2 (i=1) bleu, etc.
+        // Skipped sections still consume their slot so neutral sections keep their position.
         if (i % 2 === 1) sec.classList.add("bg-section-blue");
-        i++;
       });
     };
     apply();
