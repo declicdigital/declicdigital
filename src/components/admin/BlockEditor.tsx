@@ -141,6 +141,8 @@ export const BlockRenderer = ({ block }: { block: Block }) => {
           />
         </section>
       );
+    case "pricing_plans":
+      return <PricingPlansBlock heading={c.heading} />;
     default:
       return <div className="p-8 text-center text-muted-foreground">Bloc inconnu : {block.block_type}</div>;
   }
