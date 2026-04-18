@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import DOMPurify from "dompurify";
+import PricingPlansBlock from "@/components/PricingPlansBlock";
 
 const RichTextEditor = lazy(() => import("./RichTextEditor"));
 
