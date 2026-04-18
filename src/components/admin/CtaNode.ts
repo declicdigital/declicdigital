@@ -26,10 +26,15 @@ const CtaNode = Node.create({
         getAttrs(dom) {
           const el = dom as HTMLElement;
           const anchor = el.querySelector("a");
+          // Prioritise data-* attributes (set by renderHTML), then fallback to anchor or span content.
+          const dataHref = el.getAttribute("data-href");
+          const dataLabel = el.getAttribute("data-label");
+          const span = el.querySelector("span");
+          const innerLabel = span?.textContent?.trim() || anchor?.textContent?.trim() || el.textContent?.trim() || "";
           return {
             ctaStyle: el.getAttribute("data-cta-style") || "primary",
-            href: anchor?.getAttribute("href") || "/",
-            label: anchor?.textContent || "CTA",
+            href: dataHref || anchor?.getAttribute("href") || "/",
+            label: dataLabel || innerLabel || "CTA",
           };
         },
       },
