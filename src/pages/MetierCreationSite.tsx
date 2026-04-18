@@ -212,7 +212,7 @@ const MetierCreationSite = () => {
       </section>
 
       {/* Pourquoi un site web */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">
           Pourquoi un {trade.name.toLowerCase()} a besoin d'un site internet en 2026
         </h2>
@@ -255,7 +255,7 @@ const MetierCreationSite = () => {
       </SectionWrapper>
 
       {/* Contenu SEO long */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <div className="mx-auto max-w-3xl space-y-6">
           <h2 className="text-3xl font-extrabold md:text-4xl text-center">
             Comment un site web transforme l'activité d'un {trade.name.toLowerCase()}
@@ -309,7 +309,7 @@ const MetierCreationSite = () => {
 
 
       {/* Process */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre processus en 4 étapes pour votre site de {trade.name.toLowerCase()}</h2>
         <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
           Un accompagnement personnalisé de A à Z. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold">notre équipe</Link>.
@@ -333,7 +333,7 @@ const MetierCreationSite = () => {
       </SectionWrapper>
 
       {/* FAQ */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-10">
           Questions fréquentes : site web pour {trade.name.toLowerCase()}
         </h2>
@@ -358,7 +358,7 @@ const MetierCreationSite = () => {
 
       {/* Métiers liés */}
       {relatedTrades.length > 0 && (
-        <SectionWrapper className="bg-section-blue">
+        <SectionWrapper>
           <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">
             Sites web pour d'autres métiers {tradeCategories.find(c => c.key === trade.category)?.label.toLowerCase()}
           </h2>

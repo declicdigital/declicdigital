@@ -167,7 +167,7 @@ const Faq = () => {
         </div>
       </SectionWrapper>
 
-      <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+      <GoogleReviewsSection compact maxReviews={3} />
 
       <LocationSection />
 

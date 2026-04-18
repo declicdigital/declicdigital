@@ -81,7 +81,7 @@ const RendezVous = () => {
       </section>
 
       {/* Reassurance */}
-      <SectionWrapper className="bg-section-blue py-10">
+      <SectionWrapper className="py-10">
         <div className="mx-auto max-w-4xl">
           <h2 className="text-2xl font-extrabold mb-6 text-center">Ce que vous obtenez</h2>
           <div className="grid gap-5 sm:grid-cols-3">

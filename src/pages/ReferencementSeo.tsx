@@ -215,7 +215,7 @@ const ReferencementSeo = () => {
       </SectionWrapper>
 
       {/* 02 - Pourquoi */}
-      <SectionWrapper className="bg-section-blue" id="pourquoi">
+      <SectionWrapper id="pourquoi">
         <div className="mx-auto max-w-3xl space-y-6">
           <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">02 - Le cœur du sujet</p>
           <h2 className="text-3xl font-extrabold md:text-4xl">Pourquoi le SEO est particulièrement adapté aux TPE, artisans et indépendants</h2>
@@ -317,7 +317,7 @@ const ReferencementSeo = () => {
       </SectionWrapper>
 
       {/* 04 - Profils */}
-      <SectionWrapper className="bg-section-blue" id="profils">
+      <SectionWrapper id="profils">
         <div className="mx-auto max-w-4xl space-y-8">
           <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">04 - Cas concrets</p>
           <h2 className="text-3xl font-extrabold md:text-4xl text-center">Ce que le SEO change concrètement selon votre profil</h2>
@@ -344,7 +344,7 @@ const ReferencementSeo = () => {
         </div>
       </SectionWrapper>
 
-      <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+      <GoogleReviewsSection compact maxReviews={3} />
 
       {/* 05 - Mythes */}
       <SectionWrapper id="idees-recues">
@@ -408,7 +408,7 @@ const ReferencementSeo = () => {
       </SectionWrapper>
 
       {/* 07 - Checklist */}
-      <SectionWrapper className="bg-section-blue" id="checklist">
+      <SectionWrapper id="checklist">
         <div className="mx-auto max-w-3xl space-y-8">
           <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">07 - Auto-évaluation</p>
           <h2 className="text-3xl font-extrabold md:text-4xl text-center">Votre checklist SEO de départ</h2>
@@ -465,7 +465,7 @@ const ReferencementSeo = () => {
       </SectionWrapper>
 
       {/* GEO encart */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <div className="mx-auto max-w-3xl">
           <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8">
             <h2 className="text-2xl font-extrabold mb-3">Au-delà du SEO : la visibilité dans les moteurs IA</h2>

@@ -32,7 +32,7 @@ const techLogos = [
 const IndexBelow = () => (
   <>
     {/* Problème */}
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="mb-6 text-3xl font-extrabold md:text-4xl">Vous n'avez pas de site, ou il ne génère aucun client ?</h2>
         <p className="mb-8 text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -92,7 +92,7 @@ const IndexBelow = () => (
       </div>
     </SectionWrapper>
 
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <div className="text-center mb-12">
         <h2 className="text-3xl font-extrabold md:text-4xl">Référencement naturel Google : soyez visible localement</h2>
         <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -151,7 +151,7 @@ const IndexBelow = () => (
       </div>
     </SectionWrapper>
 
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <div className="text-center mb-10">
         <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Nos réalisations pour des TPE et artisans parisiens</h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
@@ -231,7 +231,7 @@ const IndexBelow = () => (
       </div>
     </SectionWrapper>
 
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <div className="mx-auto max-w-3xl text-center">
         <h3 className="text-2xl font-extrabold mb-4">Explorez nos services</h3>
         <p className="text-lg text-muted-foreground mb-6">Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.</p>

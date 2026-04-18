@@ -84,7 +84,7 @@ const AuditSeo = () => {
       </section>
 
       {/* Contenu audit */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <div className="text-center mb-4">
           <h2 className="text-3xl font-extrabold md:text-4xl">Qu'est-ce qu'un audit SEO et à quoi ça sert ?</h2>
         </div>
@@ -129,7 +129,7 @@ const AuditSeo = () => {
       </SectionWrapper>
 
       {/* Pourquoi c'est gratuit */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-3xl font-extrabold md:text-4xl mb-6">En quoi votre site perd-il des clients chaque jour ?</h2>
           <p className="text-muted-foreground leading-relaxed mb-4">
@@ -172,7 +172,7 @@ const AuditSeo = () => {
       <GoogleReviewsSection compact maxReviews={3} />
 
       {/* Formulaire */}
-      <SectionWrapper className="bg-section-blue" id="formulaire-audit">
+      <SectionWrapper id="formulaire-audit">
         <div className="mx-auto max-w-xl">
           <h2 className="mb-4 text-center text-3xl font-extrabold">Demandez votre audit maintenant : réponse en 48h</h2>
           <p className="text-center text-muted-foreground mb-8">

@@ -226,7 +226,7 @@ const Geo = () => {
       </SectionWrapper>
 
       {/* 02 - SEO vs GEO */}
-      <SectionWrapper className="bg-section-blue" id="section-2">
+      <SectionWrapper id="section-2">
         <div className="mx-auto max-w-3xl space-y-6">
           <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">02 - Comparaison</p>
           <h2 className="text-3xl font-extrabold md:text-4xl">SEO traditionnel vs GEO : quelles différences concrètes ?</h2>
@@ -286,7 +286,7 @@ const Geo = () => {
       </SectionWrapper>
 
       {/* 04 - Pour qui */}
-      <SectionWrapper className="bg-section-blue" id="section-4">
+      <SectionWrapper id="section-4">
         <div className="mx-auto max-w-4xl space-y-8">
           <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">04 - Pour qui ?</p>
           <h2 className="text-3xl font-extrabold md:text-4xl text-center">GEO pour les TPE, artisans et indépendants : pourquoi c'est fait pour vous</h2>
@@ -354,7 +354,7 @@ const Geo = () => {
         </div>
       </section>
 
-      <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+      <GoogleReviewsSection compact maxReviews={3} />
 
       {/* 05 - Méthode */}
       <SectionWrapper id="section-5">
@@ -379,7 +379,7 @@ const Geo = () => {
       </SectionWrapper>
 
       {/* 06 - Plan d'action */}
-      <SectionWrapper className="bg-section-blue" id="section-6">
+      <SectionWrapper id="section-6">
         <div className="mx-auto max-w-4xl space-y-8">
           <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">06 - Plan d'action</p>
           <h2 className="text-3xl font-extrabold md:text-4xl text-center">Tableau de bord : vos actions GEO par priorité</h2>
@@ -437,7 +437,7 @@ const Geo = () => {
       </section>
 
       {/* 08 - FAQ */}
-      <SectionWrapper className="bg-section-blue" id="section-8">
+      <SectionWrapper id="section-8">
         <div className="mx-auto max-w-3xl space-y-8">
           <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">08 - Questions fréquentes</p>
           <h2 className="text-3xl font-extrabold md:text-4xl text-center">FAQ : toutes vos questions sur le GEO</h2>
