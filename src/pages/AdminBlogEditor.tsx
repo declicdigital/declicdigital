@@ -16,11 +16,11 @@ import { removeCachedCmsPost, upsertCachedCmsPost, type CmsBlogPostSummary } fro
 import { compressImage, UPLOAD_OPTIONS } from "@/lib/imageCompression";
 
 const CATEGORIES = [
-  "Technique",
   "Création de site",
   "SEO & Performance",
+  "GEO, Visibilité IA",
   "Stratégie digitale",
-  "Tech & Gadgets",
+  "Business",
 ];
 
 const slugify = (str: string) =>

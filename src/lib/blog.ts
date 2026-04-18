@@ -24,7 +24,7 @@ export interface BlogFeedItem {
   isCms: boolean;
 }
 
-const BLOG_CMS_CACHE_KEY = "declic-blog-cms-cache";
+const BLOG_CMS_CACHE_KEY = "declic-blog-cms-cache-v3";
 
 const toStaticFeedItem = (article: BlogArticle): BlogFeedItem => ({
   slug: article.slug,
