@@ -122,40 +122,36 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
   const mainRef = useRef<HTMLElement>(null);
 
   // Central DOM-based section background alternation.
-  // Scans the rendered <main> for top-level section-like blocks and applies
-  // alternating bg-section-blue, ignoring sections with their own background.
+  // Strict rule: count ALL top-level <section> elements inside <main> (in order).
+  // Sections with their own dedicated background (gradient hero, miami CTA, etc.)
+  // are SKIPPED and do not consume an index slot, so neutral sections always alternate:
+  // bloc 1 défaut, 2 bleu, 3 défaut, 4 bleu, etc. — figé par position.
   useLayoutEffect(() => {
     const apply = () => {
       const main = mainRef.current;
       if (!main) return;
-      // Collect candidate <section> elements that are reasonably "top-level":
-      // direct sections, or sections nested at most 2 levels (covers CmsPatcher
-      // and EditableSection wrapper divs).
       const all = Array.from(main.querySelectorAll("section")) as HTMLElement[];
-      const candidates = all.filter((sec) => {
-        // depth from main
-        let depth = 0;
-        let p: HTMLElement | null = sec.parentElement;
-        while (p && p !== main) { depth++; p = p.parentElement; if (depth > 4) return false; }
-        // not nested inside another section
-        return !sec.parentElement?.closest("section");
-      });
+      const candidates = all.filter((sec) => !sec.parentElement?.closest("section"));
+      // Patterns indicating the section already has its own background and must be skipped.
+      const skipRe = /\bgradient-hero\b|\bgradient-miami\b|\bgradient-primary\b|\bbg-foreground\b|\bbg-primary\b|\bbg-card\b|\bbg-muted\b|\bbg-secondary\b|\bbg-miami\b|bg-\[hsl/;
       let i = 0;
-      const skipRe = /gradient-|bg-foreground|bg-primary\b|bg-card|bg-muted|bg-secondary|bg-miami/;
       candidates.forEach((sec) => {
+        // Always strip our managed classes first (so re-renders can re-flip correctly).
         sec.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
         const cls = sec.className || "";
-        if (skipRe.test(cls)) return;
+        if (skipRe.test(cls)) return; // skip — this section keeps its own background
         if (i % 2 === 1) sec.classList.add("bg-section-blue");
         i++;
       });
     };
     apply();
-    // Re-apply shortly after to catch lazy-loaded sections (Suspense boundaries).
     const t1 = window.setTimeout(apply, 100);
     const t2 = window.setTimeout(apply, 600);
     const t3 = window.setTimeout(apply, 1500);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+    // Re-apply when lazy components insert/remove sections later.
+    const obs = new MutationObserver(() => apply());
+    if (mainRef.current) obs.observe(mainRef.current, { childList: true, subtree: true });
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); obs.disconnect(); };
   }, [pagePath, wrappedChildren]);
 
   return (
