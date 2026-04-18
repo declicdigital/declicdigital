@@ -265,7 +265,7 @@ const Tarifs = () => (
       </div>
     </SectionWrapper>
 
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <div className="mx-auto max-w-3xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -331,7 +331,7 @@ const Tarifs = () => (
       </div>
     </SectionWrapper>
 
-    <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+    <GoogleReviewsSection compact maxReviews={3} />
 
     <LocationSection />
 

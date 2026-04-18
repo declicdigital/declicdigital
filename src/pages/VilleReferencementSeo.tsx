@@ -136,7 +136,7 @@ const VilleReferencementSeo = () => {
       </SectionWrapper>
 
       {/* Bénéfices SEO local */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">
           Pourquoi le SEO local est indispensable à {city.nameShort}
         </h2>
@@ -195,7 +195,7 @@ const VilleReferencementSeo = () => {
 
       {/* Contenu SEO unique + Map */}
       {content && (
-        <SectionWrapper className="bg-section-blue">
+        <SectionWrapper>
           <div className="mx-auto max-w-3xl space-y-6">
             <h2 className="text-3xl font-extrabold md:text-4xl text-center">
               Apparaître dans Google Maps et les recherches locales à {city.nameShort}
@@ -249,7 +249,7 @@ const VilleReferencementSeo = () => {
       })()}
 
       {/* FAQ */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-10">
           {city.slug === "asnieres-sur-seine"
             ? "Questions fréquentes des entreprises à Asnières-sur-Seine"
@@ -272,7 +272,7 @@ const VilleReferencementSeo = () => {
       </SectionWrapper>
 
       {/* Liens services */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-extrabold mb-4">Découvrez aussi nos autres services</h2>
           <div className="flex flex-wrap justify-center gap-3">

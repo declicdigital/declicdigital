@@ -39,7 +39,7 @@ const NosMetiers = () => (
       const catTrades = trades.filter((t) => t.category === cat.key);
       if (catTrades.length === 0) return null;
       return (
-        <SectionWrapper key={cat.key} className={tradeCategories.indexOf(cat) % 2 === 0 ? "" : "bg-section-blue"}>
+        <SectionWrapper key={cat.key} >
           <h2 className="text-2xl font-extrabold md:text-3xl mb-6">{cat.label}</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
             {catTrades.map((trade) => (

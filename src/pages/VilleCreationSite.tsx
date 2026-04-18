@@ -111,7 +111,7 @@ const VilleCreationSite = () => {
       </section>
 
       {/* Pourquoi un site web */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">
           {`Pourquoi les professionnels de ${city.nameShort} ont besoin d'un site web`}
         </h2>
@@ -168,7 +168,7 @@ const VilleCreationSite = () => {
 
       {/* Contenu SEO unique + Map */}
       {content && (
-        <SectionWrapper className="bg-section-blue">
+        <SectionWrapper>
           <div className="mx-auto max-w-3xl space-y-6">
             <h2 className="text-3xl font-extrabold md:text-4xl text-center">
               Référencement local {city.nameShort} : apparaissez dans Google Maps
@@ -224,7 +224,7 @@ const VilleCreationSite = () => {
       })()}
 
       {/* Process */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-10">
           Comment se déroule votre projet ?
         </h2>
@@ -247,7 +247,7 @@ const VilleCreationSite = () => {
       </SectionWrapper>
 
       {/* FAQ */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-10">
           Questions fréquentes sur la création de site à {city.nameShort}
         </h2>
@@ -296,7 +296,7 @@ const VilleCreationSite = () => {
 
       {/* Maillage interne */}
       {nearCities.length > 0 && (
-        <SectionWrapper className="bg-section-blue">
+        <SectionWrapper>
           <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">
             Création de site web près de {city.nameShort}
           </h2>

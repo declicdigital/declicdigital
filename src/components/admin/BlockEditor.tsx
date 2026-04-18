@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import DOMPurify from "dompurify";
+import PricingPlansBlock from "@/components/PricingPlansBlock";
 
 const RichTextEditor = lazy(() => import("./RichTextEditor"));
 
@@ -26,6 +27,7 @@ const BLOCK_TYPES = [
   { value: "text_image", label: "Texte + Image" },
   { value: "testimonial", label: "Témoignage" },
   { value: "cta", label: "CTA (Appel à l'action)" },
+  { value: "pricing_plans", label: "Nos formules (Création + SEO + GEO)" },
   { value: "gallery", label: "Galerie" },
   { value: "contact_form", label: "Formulaire de contact" },
   { value: "separator", label: "Séparateur" },
@@ -37,6 +39,7 @@ const defaultContent: Record<string, Record<string, any>> = {
   text_image: { title: "Titre", text: "Votre texte ici...", imageUrl: "", imageAlt: "", imagePosition: "right" },
   testimonial: { quote: "Témoignage client...", author: "Nom du client", role: "Fonction", avatar: "" },
   cta: { title: "Prêt à démarrer ?", text: "Contactez-nous dès maintenant.", buttonLabel: "Nous contacter", buttonLink: "/contact", backgroundColor: "#7c3aed" },
+  pricing_plans: { heading: "Nos formules création de site et référencement SEO et GEO" },
   gallery: { title: "Nos réalisations", images: [] },
   contact_form: { title: "Contactez-nous", subtitle: "Nous vous répondons en 24h" },
   separator: { height: 40, style: "line" },
@@ -139,6 +142,8 @@ export const BlockRenderer = ({ block }: { block: Block }) => {
           />
         </section>
       );
+    case "pricing_plans":
+      return <PricingPlansBlock heading={c.heading} />;
     default:
       return <div className="p-8 text-center text-muted-foreground">Bloc inconnu : {block.block_type}</div>;
   }

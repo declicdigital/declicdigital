@@ -122,7 +122,7 @@ const Realisations = () => (
     </SectionWrapper>
 
     {/* Maillage */}
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="text-2xl font-extrabold mb-4">Nos services</h2>
         <p className="text-muted-foreground mb-6">Vous aussi, vous voulez un site qui attire des clients ? Découvrez nos solutions.</p>

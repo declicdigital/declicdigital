@@ -158,7 +158,7 @@ const Contact = () => {
       </section>
 
       {/* Google Maps */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <div className="text-center mb-8">
           <h2 className="text-3xl font-extrabold md:text-4xl">Retrouvez-nous</h2>
           <p className="mt-4 text-muted-foreground">Nous intervenons <Link to="/nos-villes" className="text-primary font-semibold hover:underline">à Paris et dans le 92</Link>, en présentiel ou à distance.</p>
@@ -186,7 +186,7 @@ const Contact = () => {
       <GoogleReviewsSection compact maxReviews={3} />
 
       {/* Maillage */}
-      <SectionWrapper className="bg-section-blue">
+      <SectionWrapper>
         <div className="mx-auto max-w-3xl text-center">
           <h2 className="text-2xl font-extrabold mb-4">Nos services</h2>
           <div className="flex flex-wrap justify-center gap-3">

@@ -26,7 +26,7 @@ const PageBreadcrumb = ({ items }: { items: BreadcrumbItem[] }) => {
       </Helmet>
       <nav
         aria-label="Fil d'Ariane"
-        className="container py-3 mb-2"
+        className="container pt-1 pb-2"
       >
         <ol className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
           {items.map((item, i) => (

@@ -14,7 +14,7 @@ const SectionWrapper = ({ children, className = "", id }: Props) => {
     <section
       ref={ref}
       id={id}
-      className={`py-16 md:py-24 reveal ${className}`}
+      className={`py-12 md:py-16 reveal ${className}`}
     >
       <div className="container">{children}</div>
     </section>

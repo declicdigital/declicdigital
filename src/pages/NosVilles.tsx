@@ -39,7 +39,7 @@ const NosVilles = () => (
     </section>
 
     {/* Paris */}
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <h2 className="text-3xl font-extrabold md:text-4xl mb-4 text-center">
         <MapPin className="inline-block mr-2 text-primary" size={28} />
         Paris - Arrondissements
@@ -119,7 +119,7 @@ const NosVilles = () => (
     </SectionWrapper>
 
     {/* Contenu SEO */}
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <div className="mx-auto max-w-3xl space-y-6">
         <h2 className="text-3xl font-extrabold md:text-4xl text-center">Pourquoi le référencement local est essentiel ?</h2>
         <p className="text-muted-foreground leading-relaxed">

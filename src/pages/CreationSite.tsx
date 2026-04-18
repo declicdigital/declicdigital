@@ -49,7 +49,7 @@ const CreationSite = () => (
     </section>
 
     {/* Avantages */}
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Pourquoi votre activité a besoin d'un site web professionnel</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
         Un site web professionnel ne se limite pas à une simple vitrine en ligne. C'est un outil stratégique qui renforce votre crédibilité, attire de nouveaux clients grâce au <Link to="/referencement-seo" className="text-primary font-semibold">référencement naturel</Link> et vous différencie de vos concurrents.
@@ -97,7 +97,7 @@ const CreationSite = () => (
     </SectionWrapper>
 
     {/* Pour qui */}
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Notre méthode : de la maquette à la mise en ligne</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
         Nos solutions s'adaptent à tous les profils d'entreprises. Que vous soyez artisan, commerçant, profession libérale ou dirigeant de TPE, nous concevons un site adapté à votre métier et optimisé pour le <Link to="/referencement-seo" className="text-primary font-semibold">référencement Google</Link>.
@@ -149,7 +149,7 @@ const CreationSite = () => (
     </SectionWrapper>
 
     {/* Création site web artisan Paris */}
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <div className="mx-auto max-w-3xl space-y-6">
         <h2 className="text-3xl font-extrabold md:text-4xl text-center">Création de site web pour artisan à Paris : pourquoi c'est indispensable</h2>
         <p className="text-muted-foreground leading-relaxed">
@@ -180,7 +180,7 @@ const CreationSite = () => (
     </SectionWrapper>
 
     {/* Villes maillage */}
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">Création de site internet à Paris et dans les Hauts-de-Seine</h2>
       <p className="text-center text-muted-foreground mb-8">
         Nous intervenons à Paris et dans les Hauts-de-Seine pour la <Link to="/nos-villes" className="text-primary font-semibold">création de sites web professionnels</Link>.
@@ -205,7 +205,7 @@ const CreationSite = () => (
     </SectionWrapper>
 
     {/* Avis clients */}
-    <GoogleReviewsSection compact maxReviews={3} className="bg-section-blue" />
+    <GoogleReviewsSection compact maxReviews={3} />
 
     <LocationSection />
 

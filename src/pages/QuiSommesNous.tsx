@@ -88,7 +88,7 @@ const QuiSommesNous = () => (
     </SectionWrapper>
 
     {/* Mission */}
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <div className="text-center mb-10">
         <h2 className="text-3xl font-extrabold md:text-4xl">Notre mission</h2>
         <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
@@ -129,13 +129,13 @@ const QuiSommesNous = () => (
     </SectionWrapper>
 
     {/* Avis clients Google */}
-    <GoogleReviewsSection className="bg-section-blue" />
+    <GoogleReviewsSection />
 
     {/* Notre agence - Google Maps */}
     <LocationSection />
 
     {/* Maillage */}
-    <SectionWrapper className="bg-section-blue">
+    <SectionWrapper>
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="text-2xl font-extrabold mb-4">Nos services</h2>
         <div className="flex flex-wrap justify-center gap-3">

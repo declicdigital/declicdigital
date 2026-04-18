@@ -1,4 +1,4 @@
-import { LayoutTemplate, Type, Image, Columns, Layers, PanelLeft, PanelRight, Sparkles, Plus } from "lucide-react";
+import { LayoutTemplate, Type, Image, Columns, Layers, PanelLeft, PanelRight, Sparkles, Plus, Tag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { useState } from "react";
@@ -69,6 +69,15 @@ export const BLOCK_TEMPLATES: { type: string; label: string; icon: React.ReactNo
       card1Title: "Fonctionnalité 1", card1Text: "Description…",
       card2Title: "Fonctionnalité 2", card2Text: "Description…",
       card3Title: "Fonctionnalité 3", card3Text: "Description…",
+    },
+  },
+  {
+    type: "pricing-plans",
+    label: "Nos formules (Création + SEO + GEO)",
+    icon: <Tag size={20} />,
+    description: "Bloc complet des 5 formules Déclic Digital avec CTA prendre rendez-vous",
+    defaultContent: {
+      heading: "Nos formules création de site et référencement SEO et GEO",
     },
   },
 ];
