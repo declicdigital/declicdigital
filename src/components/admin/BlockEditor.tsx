@@ -389,21 +389,27 @@ const BlockEditorOverlay = ({ pagePath }: { pagePath: string }) => {
 export const PageBlocks = ({ pagePath }: { pagePath: string }) => {
   const { isAdmin } = useAuth();
   const [blocks, setBlocks] = useState<Block[]>([]);
+  const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    let cancelled = false;
+    setLoaded(false);
     supabase
       .from("cms_page_blocks")
       .select("*")
       .eq("page_path", pagePath)
       .order("sort_order")
       .then(({ data }) => {
+        if (cancelled) return;
         if (data) setBlocks(data as Block[]);
+        setLoaded(true);
       });
-  }, [pagePath]);
+    return () => { cancelled = true; };
+  }, [pagePath, isAdmin]);
 
   if (isAdmin) return <BlockEditorOverlay pagePath={pagePath} />;
 
-  if (blocks.length === 0) return null;
+  if (!loaded || blocks.length === 0) return null;
 
   return (
     <div>
