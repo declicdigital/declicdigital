@@ -122,10 +122,10 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
   const mainRef = useRef<HTMLElement>(null);
 
   // Central DOM-based section background alternation.
-  // Strict rule: count ALL top-level <section> elements inside <main> (in order).
-  // Sections with their own dedicated background (gradient hero, miami CTA, etc.)
-  // are SKIPPED and do not consume an index slot, so neutral sections always alternate:
-  // bloc 1 défaut, 2 bleu, 3 défaut, 4 bleu, etc. — figé par position.
+  // Strict positional rule: count ALL top-level <section> elements inside <main> (in order),
+  // including those with their own background (hero, miami CTA…). Bloc 1 défaut, 2 bleu,
+  // 3 défaut, 4 bleu, etc. Sections with a dedicated background simply keep theirs but
+  // still consume their position slot, so the alternation stays figée par position.
   useLayoutEffect(() => {
     const apply = () => {
       const main = mainRef.current;
