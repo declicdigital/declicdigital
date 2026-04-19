@@ -394,17 +394,37 @@ export const PageBlocks = ({ pagePath }: { pagePath: string }) => {
   useEffect(() => {
     let cancelled = false;
     setLoaded(false);
-    supabase
-      .from("cms_page_blocks")
-      .select("*")
-      .eq("page_path", pagePath)
-      .order("sort_order")
-      .then(({ data }) => {
-        if (cancelled) return;
-        if (data) setBlocks(data as Block[]);
-        setLoaded(true);
-      });
-    return () => { cancelled = true; };
+    const load = async () => {
+      const { data } = await supabase
+        .from("cms_page_blocks")
+        .select("*")
+        .eq("page_path", pagePath)
+        .order("sort_order");
+      if (cancelled) return;
+      if (data) setBlocks(data as Block[]);
+      setLoaded(true);
+    };
+
+    void load();
+
+    const channel = supabase
+      .channel(`cms-page-blocks:${pagePath}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "cms_page_blocks" },
+        (payload) => {
+          const row = ((payload.new && Object.keys(payload.new).length > 0 ? payload.new : payload.old) || {}) as { page_path?: string };
+          if (row.page_path === pagePath) {
+            void load();
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      cancelled = true;
+      supabase.removeChannel(channel);
+    };
   }, [pagePath, isAdmin]);
 
   if (isAdmin) return <BlockEditorOverlay pagePath={pagePath} />;

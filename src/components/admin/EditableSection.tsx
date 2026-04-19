@@ -1139,11 +1139,13 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
     } else {
       const { data } = await supabase
         .from("cms_page_blocks")
-        .insert([{ page_path: compositeKey, block_type: "section_override", content, sort_order: 0 }])
+        .insert([{ page_path: compositeKey, block_type: "section_override", content, sort_order: (displayIndex ?? 0) * 10 }])
         .select("id")
         .single();
       if (data) setOverride({ id: data.id, content });
     }
+
+    refreshCms();
 
     if (contentRef.current) {
       applyOverrideToDOM(contentRef.current, structured);
@@ -1159,6 +1161,7 @@ const EditableSection = ({ blockId, pagePath, children, label, onMoveUp, onMoveD
     if (!confirm("Supprimer les modifications et revenir au contenu d'origine ?")) return;
     await supabase.from("cms_page_blocks").delete().eq("id", override.id);
     setOverride(null);
+    refreshCms();
     toast({ title: "Section réinitialisée" });
     window.location.reload();
   };
