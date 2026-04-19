@@ -120,6 +120,11 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Dynamic CMS blocks (rendered in 2nd position) */}
+      <Suspense fallback={null}>
+        <PageBlocksLazy pagePath="/" />
+      </Suspense>
+
       {/* Problème */}
       <SectionWrapper id="probleme">
         <div className="mx-auto max-w-3xl text-center">
@@ -397,11 +402,6 @@ const Index = () => {
           </div>
         </div>
       </section>
-
-      {/* Dynamic CMS blocks */}
-      <Suspense fallback={null}>
-        <PageBlocksLazy pagePath="/" />
-      </Suspense>
     </PageLayout>
   );
 };
