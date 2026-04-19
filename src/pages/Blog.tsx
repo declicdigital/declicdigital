@@ -49,7 +49,7 @@ const BlogPageSkeleton = () => (
 const Blog = () => {
   const cachedPosts = loadCachedCmsPosts();
   const [cmsPosts, setCmsPosts] = useState<CmsBlogPostSummary[]>(cachedPosts);
-  const [cmsLoaded, setCmsLoaded] = useState(cachedPosts.length > 0);
+  const [cmsLoaded, setCmsLoaded] = useState(false);
 
   useEffect(() => {
     supabase
@@ -61,6 +61,8 @@ const Blog = () => {
         if (data) {
           setCmsPosts(data);
           saveCachedCmsPosts(data);
+        } else if (cachedPosts.length > 0) {
+          setCmsPosts(cachedPosts);
         }
         if (error && cachedPosts.length === 0) {
           setCmsPosts([]);

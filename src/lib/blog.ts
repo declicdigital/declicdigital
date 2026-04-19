@@ -26,6 +26,32 @@ export interface BlogFeedItem {
 
 const BLOG_CMS_CACHE_KEY = "declic-blog-cms-cache-v3";
 
+const sortByNewest = <T extends { created_at?: string; date?: string }>(items: T[]) =>
+  [...items].sort((a, b) => {
+    const left = new Date(("created_at" in a ? a.created_at : a.date) || 0).getTime();
+    const right = new Date(("created_at" in b ? b.created_at : b.date) || 0).getTime();
+    return right - left;
+  });
+
+const normalizeCmsPosts = (posts: CmsBlogPostSummary[]): CmsBlogPostSummary[] => {
+  const deduped = new Map<string, CmsBlogPostSummary>();
+
+  sortByNewest(posts)
+    .filter((post): post is CmsBlogPostSummary => Boolean(post?.slug))
+    .forEach((post) => {
+      const existing = deduped.get(post.slug);
+
+      deduped.set(post.slug, {
+        ...existing,
+        ...post,
+        cover_image_url: post.cover_image_url ?? existing?.cover_image_url ?? null,
+        tags: post.tags ?? existing?.tags ?? [],
+      });
+    });
+
+  return sortByNewest(Array.from(deduped.values()));
+};
+
 const toStaticFeedItem = (article: BlogArticle): BlogFeedItem => ({
   slug: article.slug,
   title: article.title,
@@ -48,7 +74,7 @@ export const mergeBlogArticles = (
     merged.set(article.slug, toStaticFeedItem(article));
   });
 
-  cmsPosts.forEach((post) => {
+  normalizeCmsPosts(cmsPosts).forEach((post) => {
     const existing = merged.get(post.slug);
 
     merged.set(post.slug, {
@@ -64,9 +90,7 @@ export const mergeBlogArticles = (
     });
   });
 
-  return Array.from(merged.values()).sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  return sortByNewest(Array.from(merged.values()));
 };
 
 export const loadCachedCmsPosts = (): CmsBlogPostSummary[] => {
@@ -74,7 +98,12 @@ export const loadCachedCmsPosts = (): CmsBlogPostSummary[] => {
 
   try {
     const cached = window.sessionStorage.getItem(BLOG_CMS_CACHE_KEY);
-    return cached ? (JSON.parse(cached) as CmsBlogPostSummary[]) : [];
+    if (!cached) return [];
+
+    const parsed = JSON.parse(cached) as CmsBlogPostSummary[] | { posts?: CmsBlogPostSummary[] };
+    const posts = Array.isArray(parsed) ? parsed : parsed.posts;
+
+    return Array.isArray(posts) ? normalizeCmsPosts(posts) : [];
   } catch {
     return [];
   }
@@ -82,15 +111,18 @@ export const loadCachedCmsPosts = (): CmsBlogPostSummary[] => {
 
 export const saveCachedCmsPosts = (posts: CmsBlogPostSummary[]) => {
   if (typeof window === "undefined") return;
-  window.sessionStorage.setItem(BLOG_CMS_CACHE_KEY, JSON.stringify(posts));
+  window.sessionStorage.setItem(
+    BLOG_CMS_CACHE_KEY,
+    JSON.stringify({ posts: normalizeCmsPosts(posts), savedAt: Date.now() })
+  );
 };
 
 export const upsertCachedCmsPost = (post: CmsBlogPostSummary) => {
-  const posts = loadCachedCmsPosts().filter((item) => item.slug !== post.slug);
-  posts.unshift(post);
-  saveCachedCmsPosts(
-    posts.sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime())
+  const posts = loadCachedCmsPosts().filter(
+    (item) => item.slug !== post.slug && item.id !== post.id
   );
+  posts.unshift(post);
+  saveCachedCmsPosts(posts);
 };
 
 export const removeCachedCmsPost = (slug: string) => {
