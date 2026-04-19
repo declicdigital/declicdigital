@@ -4,6 +4,7 @@ import Header from "./Header";
 import { useAuth } from "@/hooks/useAuth";
 import { CmsOverridesProvider } from "@/hooks/useCmsOverrides";
 import CmsPatcher from "./CmsPatcher";
+import { supabase } from "@/integrations/supabase/client";
 
 const EditableSection = lazy(() => import("./admin/EditableSection"));
 const Footer = lazy(() => import("./Footer"));
@@ -57,10 +58,90 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
 
   const flat = flattenChildren(children);
   const [order, setOrder] = useState<number[]>(() => flat.map((_, i) => i));
+  const [persistedOrderIds, setPersistedOrderIds] = useState<Record<number, string>>({});
 
   useEffect(() => {
     setOrder(flat.map((_, i) => i));
   }, [flat.length, pagePath]);
+
+  const loadPersistedOrder = useCallback(async () => {
+    const { data } = await supabase
+      .from("cms_page_blocks")
+      .select("id, page_path, sort_order")
+      .like("page_path", `${pagePath}::auto-%`)
+      .eq("block_type", "section_override")
+      .order("sort_order");
+
+    const persistedIds: Record<number, string> = {};
+    const persistedIndices: number[] = [];
+
+    (data || []).forEach((row) => {
+      const match = row.page_path.match(/::auto-(\d+)$/);
+      if (!match) return;
+      const index = Number(match[1]);
+      if (!Number.isInteger(index) || index < 0 || index >= flat.length) return;
+      persistedIds[index] = row.id;
+      if (!persistedIndices.includes(index)) persistedIndices.push(index);
+    });
+
+    setPersistedOrderIds(persistedIds);
+    const defaultOrder = flat.map((_, i) => i);
+    setOrder([...persistedIndices, ...defaultOrder.filter((index) => !persistedIndices.includes(index))]);
+  }, [flat, pagePath]);
+
+  useEffect(() => {
+    void loadPersistedOrder();
+
+    const channel = supabase
+      .channel(`cms-section-order:${pagePath}`)
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "cms_page_blocks" },
+        (payload) => {
+          const row = ((payload.new && Object.keys(payload.new).length > 0 ? payload.new : payload.old) || {}) as { page_path?: string; block_type?: string };
+          if (row.block_type === "section_override" && typeof row.page_path === "string" && row.page_path.startsWith(`${pagePath}::auto-`)) {
+            void loadPersistedOrder();
+          }
+        }
+      )
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [loadPersistedOrder, pagePath]);
+
+  const persistOrder = useCallback(async (nextOrder: number[]) => {
+    const now = new Date().toISOString();
+
+    await Promise.all(nextOrder.map(async (originalIdx, displayIdx) => {
+      const existingId = persistedOrderIds[originalIdx];
+      const payload = { sort_order: displayIdx * 10, updated_at: now };
+
+      if (existingId) {
+        await supabase.from("cms_page_blocks").update(payload).eq("id", existingId);
+        return;
+      }
+
+      const { data } = await supabase
+        .from("cms_page_blocks")
+        .insert({
+          page_path: `${pagePath}::auto-${originalIdx}`,
+          block_type: "section_override",
+          content: {},
+          sort_order: displayIdx * 10,
+          updated_at: now,
+        })
+        .select("id")
+        .single();
+
+      if (data?.id) {
+        setPersistedOrderIds((prev) => ({ ...prev, [originalIdx]: data.id }));
+      }
+    }));
+
+    await loadPersistedOrder();
+  }, [loadPersistedOrder, pagePath, persistedOrderIds]);
 
   const moveBlock = useCallback((fromIdx: number, direction: "up" | "down") => {
     setOrder(prev => {
@@ -68,9 +149,10 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
       const toIdx = direction === "up" ? fromIdx - 1 : fromIdx + 1;
       if (toIdx < 0 || toIdx >= newOrder.length) return prev;
       [newOrder[fromIdx], newOrder[toIdx]] = [newOrder[toIdx], newOrder[fromIdx]];
+      void persistOrder(newOrder);
       return newOrder;
     });
-  }, []);
+  }, [persistOrder]);
 
   const wrappedChildren = (() => {
     if (!isAdmin) {

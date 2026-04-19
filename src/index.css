@@ -138,6 +138,8 @@ h1, h2, h3 {
   h1 {
     font-family: 'DM Serif Display', Georgia, serif !important;
     font-weight: 700 !important;
+    font-size: clamp(2.5rem, 3vw + 1rem, 3rem) !important;
+    line-height: 1.08 !important;
     font-synthesis: weight;
     font-variation-settings: "wght" 700;
     -webkit-text-stroke: 0.6px hsl(var(--heading));
