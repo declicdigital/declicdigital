@@ -66,24 +66,53 @@ export const CmsOverridesProvider = ({ pagePath, children }: Props) => {
   const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
-    getSb().then(supabase =>
-      supabase
-        .from("cms_page_blocks")
-        .select("id, content, page_path")
-        .like("page_path", `${pagePath}::%`)
-        .eq("block_type", "section_override")
-        .then(({ data }) => {
-          const entries: [string, CmsOverride][] = [];
-          if (data) {
-            for (const row of data) {
-              entries.push([row.page_path, { id: row.id, content: row.content as any }]);
+    let active = true;
+    let channel: ReturnType<SupabaseClient["channel"]> | null = null;
+
+    getSb().then((supabase) => {
+      const load = async () => {
+        const { data } = await supabase
+          .from("cms_page_blocks")
+          .select("id, content, page_path")
+          .like("page_path", `${pagePath}::%`)
+          .eq("block_type", "section_override");
+
+        if (!active) return;
+
+        const entries: [string, CmsOverride][] = [];
+        if (data) {
+          for (const row of data) {
+            entries.push([row.page_path, { id: row.id, content: row.content as any }]);
+          }
+        }
+        try { localStorage.setItem(`dd_cms_${pagePath}`, JSON.stringify({ entries, ts: Date.now() })); } catch {}
+        setOverrides(new Map(entries));
+        setLoaded(true);
+      };
+
+      void load();
+
+      channel = supabase
+        .channel(`cms-overrides:${pagePath}`)
+        .on(
+          "postgres_changes",
+          { event: "*", schema: "public", table: "cms_page_blocks" },
+          (payload) => {
+            const row = ((payload.new && Object.keys(payload.new).length > 0 ? payload.new : payload.old) || {}) as { page_path?: string; block_type?: string };
+            if (row.block_type === "section_override" && typeof row.page_path === "string" && row.page_path.startsWith(`${pagePath}::`)) {
+              void load();
             }
           }
-          try { localStorage.setItem(`dd_cms_${pagePath}`, JSON.stringify({ entries, ts: Date.now() })); } catch {}
-          setOverrides(new Map(entries));
-          setLoaded(true);
-        })
-    );
+        )
+        .subscribe();
+    });
+
+    return () => {
+      active = false;
+      if (_sb && channel) {
+        _sb.removeChannel(channel);
+      }
+    };
   }, [pagePath, refreshKey]);
 
   const value = useMemo<CmsOverridesContextValue>(() => ({
