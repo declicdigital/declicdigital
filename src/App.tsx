@@ -40,17 +40,12 @@ const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentia
 const FormulaireBrief = lazy(() => import("./pages/FormulaireBrief"));
 const Geo = lazy(() => import("./pages/Geo"));
 const RendezVous = lazy(() => import("./pages/RendezVous"));
-const CmsBlogArticle = lazy(() => import("./pages/CmsBlogArticle"));
 const PremierContact = lazy(() => import("./pages/PremierContact"));
 
-// Admin pages (back-office only — never used by public site rendering)
-const AdminBlog = lazy(() => import("./pages/AdminBlog"));
-const AdminBlogEditor = lazy(() => import("./pages/AdminBlogEditor"));
+// Admin back-office (clients + soumissions uniquement, pas de CMS)
 const AdminClients = lazy(() => import("./pages/AdminClients"));
 const AdminClientDetail = lazy(() => import("./pages/AdminClientDetail"));
 const AdminSoumissions = lazy(() => import("./pages/AdminSoumissions"));
-const AdminMedia = lazy(() => import("./pages/AdminMedia"));
-const AdminPageEditor = lazy(() => import("./pages/AdminPageEditor"));
 
 const queryClient = new QueryClient();
 
@@ -96,17 +91,10 @@ const App = () => (
                   <Route path="/rendez-vous" element={<RendezVous />} />
                   <Route path="/premier-contact" element={<PremierContact />} />
                   <Route path="/geo" element={<GeoRedirect />} />
-                  <Route path="/blog/cms/:slug" element={<CmsBlogArticle />} />
-                  {/* Admin back-office routes (protégées par auth+role côté pages) */}
-                  <Route path="/admin/blog" element={<AdminBlog />} />
-                  <Route path="/admin/blog/new" element={<AdminBlogEditor />} />
-                  <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
+                  {/* Admin back-office (clients + soumissions uniquement) */}
                   <Route path="/admin/clients" element={<AdminClients />} />
                   <Route path="/admin/clients/:id" element={<AdminClientDetail />} />
                   <Route path="/admin/soumissions" element={<AdminSoumissions />} />
-                  <Route path="/admin/media" element={<AdminMedia />} />
-                  <Route path="/admin/page/new" element={<AdminPageEditor />} />
-                  <Route path="/admin/page/:id" element={<AdminPageEditor />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>
