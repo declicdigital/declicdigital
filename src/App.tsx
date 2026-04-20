@@ -34,6 +34,13 @@ const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentia
 const Geo = lazy(() => import("./pages/Geo"));
 const RendezVous = lazy(() => import("./pages/RendezVous"));
 
+// Admin back-office
+const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
+const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
+const AdminClients = lazy(() => import("./pages/admin/AdminClients"));
+const AdminClientDetail = lazy(() => import("./pages/admin/AdminClientDetail"));
+const AdminSoumissions = lazy(() => import("./pages/admin/AdminSoumissions"));
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -47,6 +54,7 @@ const App = () => (
             <ScrollToTop />
             <Suspense fallback={<div className="min-h-screen" />}>
               <Routes>
+                {/* Site public */}
                 <Route path="/" element={<Index />} />
                 <Route path="/audit-seo-gratuit" element={<AuditSeo />} />
                 <Route path="/creation-site-web" element={<CreationSite />} />
@@ -70,6 +78,15 @@ const App = () => (
                 <Route path="/visibilite-ia" element={<Geo />} />
                 <Route path="/rendez-vous" element={<RendezVous />} />
                 <Route path="/geo" element={<GeoRedirect />} />
+
+                {/* Admin back-office */}
+                <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
+                <Route path="/admin/login" element={<AdminLogin />} />
+                <Route path="/admin/dashboard" element={<AdminDashboard />} />
+                <Route path="/admin/clients" element={<AdminClients />} />
+                <Route path="/admin/clients/:id" element={<AdminClientDetail />} />
+                <Route path="/admin/soumissions" element={<AdminSoumissions />} />
+
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
