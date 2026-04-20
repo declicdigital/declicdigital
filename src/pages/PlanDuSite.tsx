@@ -5,7 +5,7 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { cities } from "@/data/cities";
-import { blogArticles } from "@/data/blogArticles";
+import { blogPosts } from "@/data/blogPosts";
 
 const links = [
   { label: "Accueil", to: "/" },
@@ -95,7 +95,7 @@ const PlanDuSite = () => (
 
         <h2 className="text-2xl font-bold mb-4 mt-10">Articles de blog</h2>
         <ul className="space-y-2 mb-10">
-          {blogArticles.map((article) => (
+          {blogPosts.map((article) => (
             <li key={article.slug}>
               <Link
                 to={`/blog/${article.slug}`}
