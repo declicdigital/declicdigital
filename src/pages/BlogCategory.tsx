@@ -1,59 +1,26 @@
 import { useParams, Link, Navigate } from "react-router-dom";
-import { useState, useEffect, useMemo } from "react";
 import { Helmet } from "react-helmet-async";
 import { motion } from "motion/react";
 import { Calendar, Clock, ArrowRight, Tag, ArrowLeft } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import { blogArticles, getCategorySlug } from "@/data/blogArticles";
-import { supabase } from "@/integrations/supabase/client";
-import { loadCachedCmsPosts, mergeBlogArticles, saveCachedCmsPosts, type CmsBlogPostSummary, type BlogFeedItem } from "@/lib/blog";
+import { blogPosts, blogCategories, getCategorySlug } from "@/data/blogPosts";
 
 const categoryColors: Record<string, string> = {
-  "Technique": "bg-amber-500/15 text-amber-700 dark:text-amber-400",
   "Création de site": "bg-violet-500/15 text-violet-700 dark:text-violet-400",
   "SEO & Performance": "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
   "Stratégie digitale": "bg-rose-500/15 text-rose-700 dark:text-rose-400",
-  "Tech & Gadgets": "bg-sky-500/15 text-sky-700 dark:text-sky-400",
+  "GEO, Visibilité IA": "bg-sky-500/15 text-sky-700 dark:text-sky-400",
+  "Business": "bg-amber-500/15 text-amber-700 dark:text-amber-400",
 };
 
 const BlogCategory = () => {
   const { categorySlug } = useParams<{ categorySlug: string }>();
-
-  const cachedPosts = loadCachedCmsPosts();
-  const [cmsPosts, setCmsPosts] = useState<CmsBlogPostSummary[]>(cachedPosts);
-
-  useEffect(() => {
-    supabase
-      .from("cms_blog_posts")
-      .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at, tags")
-      .eq("status", "published")
-      .order("created_at", { ascending: false })
-      .then(({ data }) => {
-        if (data) {
-          setCmsPosts(data);
-          saveCachedCmsPosts(data);
-        }
-      });
-  }, []);
-
-  const allArticles = mergeBlogArticles(blogArticles, cmsPosts);
-
-  // Derive all categories from merged articles
-  const allCategories = useMemo(() => {
-    const cats = new Set<string>();
-    allArticles.forEach((a) => { if (a.category) cats.add(a.category); });
-    return Array.from(cats);
-  }, [allArticles]);
-
-  // Find the category matching the slug
-  const category = useMemo(() => {
-    return allCategories.find((c) => getCategorySlug(c) === categorySlug);
-  }, [allCategories, categorySlug]);
+  const category = blogCategories.find((c) => getCategorySlug(c) === categorySlug);
 
   if (!category) return <Navigate to="/blog" replace />;
 
-  const articles = allArticles
+  const articles = blogPosts
     .filter((a) => a.category === category)
     .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
@@ -69,7 +36,7 @@ const BlogCategory = () => {
       <Helmet>
         <title>{category} - Blog | Déclic Digital</title>
         <meta name="description" content={`Tous nos articles dans la catégorie ${category}. Conseils et guides pratiques par Déclic Digital.`} />
-        <link rel="canonical" href={`https://declic-digital.fr/blog/categorie/${categorySlug}`} />
+        <link rel="canonical" href={`https://declicdigital.net/blog/categorie/${categorySlug}`} />
       </Helmet>
 
       <section className="container py-12 md:py-16">
@@ -79,9 +46,8 @@ const BlogCategory = () => {
         <h1 className="text-3xl font-extrabold md:text-4xl mb-4">{category}</h1>
         <p className="text-muted-foreground mb-8">{articles.length} article{articles.length > 1 ? "s" : ""} dans cette catégorie</p>
 
-        {/* Other categories */}
         <div className="flex flex-wrap gap-2 mb-10">
-          {allCategories.filter((c) => c !== category).map((c) => (
+          {blogCategories.filter((c) => c !== category).map((c) => (
             <Link
               key={c}
               to={`/blog/categorie/${getCategorySlug(c)}`}
@@ -103,7 +69,11 @@ const BlogCategory = () => {
                 className="overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-elevated transition-shadow"
               >
                 <div className="aspect-[16/9] overflow-hidden">
-                  <img src={article.image} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  {article.coverImageUrl ? (
+                    <img src={article.coverImageUrl} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+                  ) : (
+                    <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5" />
+                  )}
                 </div>
                 <div className="p-6 md:p-8">
                   <div className="flex items-center gap-3 mb-4">

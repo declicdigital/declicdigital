@@ -1,12 +1,9 @@
-import { useState, useEffect, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Calendar, Clock, ArrowRight, Tag, Sparkles } from "lucide-react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import { blogArticles, getCategorySlug } from "@/data/blogArticles";
-import { supabase } from "@/integrations/supabase/client";
-import { loadCachedCmsPosts, mergeBlogArticles, saveCachedCmsPosts, type CmsBlogPostSummary } from "@/lib/blog";
+import { blogPosts, blogCategories, getCategorySlug } from "@/data/blogPosts";
 
 const categoryColors: Record<string, string> = {
   "Création de site": "bg-violet-500/15 text-violet-700 dark:text-violet-400",
@@ -16,80 +13,24 @@ const categoryColors: Record<string, string> = {
   "Business": "bg-amber-500/15 text-amber-700 dark:text-amber-400",
 };
 
-const BlogPageSkeleton = () => (
-  <PageLayout hideBlogCarousel>
-    <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Blog" }]} />
-    <section className="relative overflow-hidden" style={{ background: "hsl(263, 36%, 18%)" }}>
-      <div className="container relative py-20 md:py-28">
-        <div className="max-w-2xl animate-pulse">
-          <div className="mb-4 h-8 w-24 rounded-full bg-white/15" />
-          <div className="h-14 w-full max-w-xl rounded-lg bg-white/10" />
-          <div className="mt-3 h-14 w-3/4 rounded-lg bg-white/10" />
-          <div className="mt-6 h-5 w-full max-w-lg rounded bg-white/10" />
-          <div className="mt-3 h-5 w-2/3 rounded bg-white/10" />
-        </div>
-      </div>
-    </section>
-
-    <section className="container -mt-12 relative z-10 mb-16">
-      <div className="grid overflow-hidden rounded-2xl bg-card shadow-elevated md:grid-cols-2 animate-pulse">
-        <div className="aspect-[16/10] bg-muted" />
-        <div className="p-8 md:p-12">
-          <div className="h-6 w-28 rounded-full bg-muted" />
-          <div className="mt-4 h-10 w-full rounded bg-muted" />
-          <div className="mt-3 h-10 w-5/6 rounded bg-muted" />
-          <div className="mt-4 h-5 w-full rounded bg-muted" />
-          <div className="mt-2 h-5 w-4/5 rounded bg-muted" />
-        </div>
-      </div>
-    </section>
-  </PageLayout>
-);
-
 const Blog = () => {
-  const cachedPosts = loadCachedCmsPosts();
-  const [cmsPosts, setCmsPosts] = useState<CmsBlogPostSummary[]>(cachedPosts);
-  const [cmsLoaded, setCmsLoaded] = useState(false);
-
-  useEffect(() => {
-    supabase
-      .from("cms_blog_posts")
-      .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at, tags")
-      .eq("status", "published")
-      .order("created_at", { ascending: false })
-      .then(({ data, error }) => {
-        if (data) {
-          setCmsPosts(data);
-          saveCachedCmsPosts(data);
-        } else if (cachedPosts.length > 0) {
-          setCmsPosts(cachedPosts);
-        }
-        if (error && cachedPosts.length === 0) {
-          setCmsPosts([]);
-        }
-        setCmsLoaded(true);
-      });
-  }, []);
-
-  const allArticles = mergeBlogArticles(blogArticles, cmsPosts);
-
-  // Derive categories from actual articles (CMS + static)
-  const derivedCategories = useMemo(() => {
-    const cats = new Set<string>();
-    allArticles.forEach((a) => { if (a.category) cats.add(a.category); });
-    return Array.from(cats);
-  }, [allArticles]);
-
-  if (!cmsLoaded) {
-    return <BlogPageSkeleton />;
-  }
+  const allArticles = [...blogPosts].sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
 
   const featured = allArticles[0];
   const rest = allArticles.slice(1);
   const newestDate = featured?.date;
 
   if (!featured) {
-    return <BlogPageSkeleton />;
+    return (
+      <PageLayout hideBlogCarousel>
+        <div className="container py-20 text-center">
+          <h1 className="text-3xl font-bold">Blog</h1>
+          <p className="mt-4 text-muted-foreground">Aucun article pour le moment.</p>
+        </div>
+      </PageLayout>
+    );
   }
 
   return (
@@ -137,8 +78,8 @@ const Blog = () => {
         <Link to={`/blog/${featured.slug}`} className="group block">
           <article className="grid overflow-hidden rounded-2xl bg-card shadow-elevated md:grid-cols-2">
             <div className="aspect-[16/10] md:aspect-auto overflow-hidden relative">
-              {featured.image ? (
-                <img src={featured.image} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" decoding="async" fetchPriority="high" width={1280} height={800} />
+              {featured.coverImageUrl ? (
+                <img src={featured.coverImageUrl} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" decoding="async" fetchPriority="high" width={1280} height={800} />
               ) : (
                 <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
                   <span className="text-4xl font-bold text-primary/30">{featured.title.charAt(0)}</span>
@@ -167,11 +108,11 @@ const Blog = () => {
       </section>
 
       {/* Categories */}
-      {derivedCategories.length > 0 && (
+      {blogCategories.length > 0 && (
         <section className="container mb-10">
           <h2 className="text-lg font-bold mb-4">Parcourir par catégorie</h2>
           <div className="flex flex-wrap gap-2">
-            {derivedCategories.map((cat) => (
+            {blogCategories.map((cat) => (
               <Link
                 key={cat}
                 to={`/blog/categorie/${getCategorySlug(cat)}`}
@@ -187,14 +128,14 @@ const Blog = () => {
       {/* Other articles */}
       <section className="container pb-20">
         <div className="grid gap-8 md:grid-cols-2">
-          {rest.map((article, i) => {
+          {rest.map((article) => {
             const isNew = article.date === newestDate;
             return (
               <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
                 <article className="overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-elevated transition-shadow">
                   <div className="aspect-[16/9] overflow-hidden relative">
-                    {article.image ? (
-                      <img src={article.image} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" width={960} height={540} />
+                    {article.coverImageUrl ? (
+                      <img src={article.coverImageUrl} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" width={960} height={540} />
                     ) : (
                       <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
                         <span className="text-3xl font-bold text-primary/30">{article.title.charAt(0)}</span>
