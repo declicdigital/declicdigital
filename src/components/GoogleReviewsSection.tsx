@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Star, ExternalLink } from "lucide-react";
 import SectionWrapper from "./SectionWrapper";
 
-const SUPABASE_URL = "https://iskxljribvfypkyappku.supabase.co";
+const SUPABASE_URL = import.meta.env.VITE_SUPABASE_URL;
 const REVIEWS_URL = "https://share.google/8Ifh8V9cpPGinQXkY";
 const WRITE_REVIEW_URL = "https://www.google.com/maps/place//data=!4m3!3m2!1s0x47e67127ac5d83b1:0xec97bfd6320fdcf3!12e1";
 
