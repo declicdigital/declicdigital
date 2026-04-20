@@ -12,7 +12,7 @@ import { Loader2, Lock, Mail } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital-new.webp";
 
 const Connexion = () => {
-  const { user, isAdmin, loading: authLoading } = useAuth();
+  const { user, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
