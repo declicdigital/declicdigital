@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Star, ExternalLink } from "lucide-react";
 import SectionWrapper from "./SectionWrapper";
 
-const PLACE_ID = "ChIJsYNdrCdx5kcR89wPMta_l-w";
+const SUPABASE_URL = "https://iskxljribvfypkyappku.supabase.co";
 const REVIEWS_URL = "https://share.google/8Ifh8V9cpPGinQXkY";
 const WRITE_REVIEW_URL = "https://www.google.com/maps/place//data=!4m3!3m2!1s0x47e67127ac5d83b1:0xec97bfd6320fdcf3!12e1";
 
@@ -45,17 +45,22 @@ const GoogleReviewsSection = ({
 
   useEffect(() => {
     async function fetchReviews() {
-      const apiKey = import.meta.env.VITE_GOOGLE_PLACES_API_KEY;
-      if (!apiKey) { setUseFallback(true); setLoading(false); return; }
       try {
-        const res = await fetch(
-          `https://maps.googleapis.com/maps/api/place/details/json?place_id=${PLACE_ID}&fields=reviews,rating,user_ratings_total&language=fr&key=${apiKey}`
-        );
+        const res = await fetch(`${SUPABASE_URL}/functions/v1/google-reviews`, {
+          headers: {
+            "apikey": import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+          },
+        });
         const data = await res.json();
+
         if (data.result?.reviews?.length > 0) {
           setRating(data.result.rating ?? 5);
           setTotalReviews(data.result.user_ratings_total ?? 0);
-          setReviews(data.result.reviews.sort((a: Review, b: Review) => b.rating - a.rating).slice(0, maxReviews));
+          setReviews(
+            data.result.reviews
+              .sort((a: Review, b: Review) => b.rating - a.rating)
+              .slice(0, maxReviews)
+          );
         } else {
           setUseFallback(true);
         }
@@ -112,16 +117,25 @@ const GoogleReviewsSection = ({
                 </div>
                 <img src="https://www.google.com/favicon.ico" alt="Google" className="h-4 w-4 opacity-60" />
               </div>
+
               <p className="text-sm text-muted-foreground leading-relaxed mb-2 flex-1">
-                "<span className="hidden md:inline">{review.text.length > DESKTOP_LIMIT ? review.text.slice(0, DESKTOP_LIMIT).trimEnd() + "…" : review.text}</span>
-                <span className="md:hidden">{review.text.length > MOBILE_LIMIT ? review.text.slice(0, MOBILE_LIMIT).trimEnd() + "…" : review.text}</span>"
+                "
+                <span className="hidden md:inline">
+                  {review.text.length > DESKTOP_LIMIT ? review.text.slice(0, DESKTOP_LIMIT).trimEnd() + "…" : review.text}
+                </span>
+                <span className="md:hidden">
+                  {review.text.length > MOBILE_LIMIT ? review.text.slice(0, MOBILE_LIMIT).trimEnd() + "…" : review.text}
+                </span>
+                "
               </p>
+
               {review.text.length > MOBILE_LIMIT && (
                 <a href={review.author_url || REVIEWS_URL} target="_blank" rel="noopener noreferrer"
                   className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline mb-3 w-fit">
                   Lire la suite <ExternalLink size={11} />
                 </a>
               )}
+
               <div className="flex items-center justify-between mt-auto pt-2 border-t border-border/50">
                 <div className="flex items-center gap-2">
                   {review.profile_photo_url ? (
