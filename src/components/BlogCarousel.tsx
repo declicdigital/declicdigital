@@ -1,32 +1,12 @@
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowRight, Calendar, Clock, Sparkles } from "lucide-react";
-import { blogArticles } from "@/data/blogArticles";
-import { supabase } from "@/integrations/supabase/client";
-import { loadCachedCmsPosts, mergeBlogArticles, saveCachedCmsPosts, type CmsBlogPostSummary } from "@/lib/blog";
+import { blogPosts } from "@/data/blogPosts";
 
 const BlogCarousel = () => {
-  const [cmsPosts, setCmsPosts] = useState<CmsBlogPostSummary[]>(() => loadCachedCmsPosts().slice(0, 4));
-
-  useEffect(() => {
-    supabase
-      .from("cms_blog_posts")
-      .select("id, title, slug, excerpt, cover_image_url, category, read_time, created_at")
-      .eq("status", "published")
-      .order("created_at", { ascending: false })
-      .limit(4)
-      .then(({ data }) => {
-        if (data) {
-          setCmsPosts(data);
-          saveCachedCmsPosts(data);
-        }
-      });
-  }, []);
-
-  const allArticles = mergeBlogArticles(blogArticles, cmsPosts);
-
-  const latest = allArticles.slice(0, 4);
+  const latest = [...blogPosts]
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    .slice(0, 4);
   const newestDate = latest[0]?.date;
 
   return (
@@ -60,9 +40,9 @@ const BlogCarousel = () => {
                   className="overflow-hidden rounded-xl bg-card shadow-card hover:shadow-elevated transition-all h-full flex flex-col"
                 >
                   <div className="aspect-[16/9] overflow-hidden relative">
-                    {article.image ? (
+                    {article.coverImageUrl ? (
                       <img
-                        src={article.image}
+                        src={article.coverImageUrl}
                         alt={article.title}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                         loading="lazy"
