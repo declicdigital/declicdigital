@@ -23,9 +23,6 @@ const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
 const Realisations = lazy(() => import("./pages/Realisations"));
 const PlanDuSite = lazy(() => import("./pages/PlanDuSite"));
 const FormulaireClient = lazy(() => import("./pages/FormulaireClient"));
-const AdminSoumissions = lazy(() => import("./pages/AdminSoumissions"));
-const AdminClients = lazy(() => import("./pages/AdminClients"));
-const AdminClientDetail = lazy(() => import("./pages/AdminClientDetail"));
 const Connexion = lazy(() => import("./pages/Connexion"));
 const EspaceClient = lazy(() => import("./pages/EspaceClient"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
@@ -43,12 +40,8 @@ const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentia
 const FormulaireBrief = lazy(() => import("./pages/FormulaireBrief"));
 const Geo = lazy(() => import("./pages/Geo"));
 const RendezVous = lazy(() => import("./pages/RendezVous"));
-const AdminBlog = lazy(() => import("./pages/AdminBlog"));
-const AdminBlogEditor = lazy(() => import("./pages/AdminBlogEditor"));
-const AdminPageEditor = lazy(() => import("./pages/AdminPageEditor"));
 const CmsBlogArticle = lazy(() => import("./pages/CmsBlogArticle"));
 const PremierContact = lazy(() => import("./pages/PremierContact"));
-const AdminMedia = lazy(() => import("./pages/AdminMedia"));
 
 const queryClient = new QueryClient();
 
@@ -87,9 +80,6 @@ const App = () => (
                   <Route path="/connexion" element={<Connexion />} />
                   <Route path="/espace-client" element={<EspaceClient />} />
                   <Route path="/reset-password" element={<ResetPassword />} />
-                  <Route path="/admin/clients" element={<AdminClients />} />
-                  <Route path="/admin/client/:clientId" element={<AdminClientDetail />} />
-                  <Route path="/admin/soumissions" element={<AdminSoumissions />} />
                   <Route path="/projet/:token" element={<SharedProject />} />
                   <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
                   <Route path="/brief" element={<FormulaireBrief />} />
@@ -97,11 +87,7 @@ const App = () => (
                   <Route path="/rendez-vous" element={<RendezVous />} />
                   <Route path="/premier-contact" element={<PremierContact />} />
                   <Route path="/geo" element={<GeoRedirect />} />
-                  <Route path="/admin/blog" element={<AdminBlog />} />
-                  <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
-                  <Route path="/admin/page/new" element={<AdminPageEditor />} />
                   <Route path="/blog/cms/:slug" element={<CmsBlogArticle />} />
-                  <Route path="/admin/media" element={<AdminMedia />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </Suspense>
