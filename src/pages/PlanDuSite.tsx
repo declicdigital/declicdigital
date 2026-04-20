@@ -21,7 +21,7 @@ const links = [
   { label: "Contact", to: "/contact" },
   { label: "FAQ", to: "/faq" },
   { label: "Blog", to: "/blog" },
-  { label: "Formulaire client", to: "/formulaire-client" },
+  
   { label: "Mentions légales", to: "/mentions-legales" },
   { label: "Politique de confidentialité", to: "/politique-de-confidentialite" },
   { label: "Plan du site", to: "/plan-du-site" },

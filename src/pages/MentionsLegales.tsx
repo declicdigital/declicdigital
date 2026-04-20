@@ -37,7 +37,7 @@ const MentionsLegales = () => (
         <section>
           <h2 className="mb-4 text-2xl font-extrabold text-foreground">Hébergement</h2>
           <p>
-            Ce site est hébergé par Lovable (Lovable Technologies Inc.). Pour toute question relative à l'hébergement, veuillez nous contacter à l'adresse email ci-dessus.
+            Ce site est hébergé par Vercel Inc. Pour toute question relative à l'hébergement, veuillez nous contacter à l'adresse email ci-dessus.
           </p>
         </section>
 
