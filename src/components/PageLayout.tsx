@@ -1,10 +1,12 @@
 import { lazy, ReactNode, Suspense, Children, useLayoutEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
+import { useAuth } from "@/hooks/useAuth";
 
 const Footer = lazy(() => import("./Footer"));
 const BlogCarousel = lazy(() => import("./BlogCarousel"));
 const AiChatWidget = lazy(() => import("./FaqAiChat").then(m => ({ default: m.AiChatWidget })));
+const AdminBar = lazy(() => import("./admin/AdminBar"));
 
 interface PageLayoutProps {
   children: ReactNode;
@@ -24,6 +26,7 @@ function flattenChildren(children: ReactNode): ReactNode[] {
 
 const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => {
   const location = useLocation();
+  const { isAdmin } = useAuth();
   const pagePath = location.pathname;
 
   const flat = flattenChildren(children);
@@ -66,7 +69,12 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header isAdmin={false} />
+      {isAdmin && (
+        <Suspense fallback={null}>
+          <AdminBar />
+        </Suspense>
+      )}
+      <Header isAdmin={isAdmin} />
       <main ref={mainRef} className="flex-1">{wrappedChildren}</main>
       <Suspense fallback={<div style={{ minHeight: 400 }} />}>
         {!hideBlogCarousel && <BlogCarousel />}

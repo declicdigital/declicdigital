@@ -12,7 +12,7 @@ import { Loader2, Lock, Mail } from "lucide-react";
 import logoImg from "@/assets/logo-declic-digital-new.webp";
 
 const Connexion = () => {
-  const { user, loading: authLoading } = useAuth();
+  const { user, isAdmin, loading: authLoading } = useAuth();
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -22,9 +22,9 @@ const Connexion = () => {
 
   useEffect(() => {
     if (!authLoading && user) {
-      navigate("/espace-client", { replace: true });
+      navigate(isAdmin ? "/" : "/espace-client", { replace: true });
     }
-  }, [user, authLoading, navigate]);
+  }, [user, isAdmin, authLoading, navigate]);
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();
