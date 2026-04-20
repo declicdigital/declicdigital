@@ -19,7 +19,6 @@ import logoChatgpt from "@/assets/logos/chatgpt.webp";
 
 const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
 const LocationSection = lazy(() => import("@/components/LocationSection"));
-const PageBlocksLazy = lazy(() => import("@/components/admin/BlockEditor").then(m => ({ default: m.PageBlocks })));
 
 const techLogos = [
   { name: "WordPress", src: logoWordpress },
@@ -398,10 +397,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Dynamic CMS blocks */}
-      <Suspense fallback={null}>
-        <PageBlocksLazy pagePath="/" />
-      </Suspense>
     </PageLayout>
   );
 };

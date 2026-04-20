@@ -8,7 +8,6 @@ import SectionWrapper from "@/components/SectionWrapper";
 
 const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
 const LocationSection = lazy(() => import("@/components/LocationSection"));
-const PageBlocksLazy = lazy(() => import("@/components/admin/BlockEditor").then(m => ({ default: m.PageBlocks })));
 
 import logoWordpress from "@/assets/logos/wordpress.webp";
 import logoShopify from "@/assets/logos/shopify.webp";
@@ -298,9 +297,6 @@ const IndexBelow = () => (
         </div>
       </div>
     </section>
-    <Suspense fallback={null}>
-      <PageBlocksLazy pagePath="/" />
-    </Suspense>
   </>
 );
 

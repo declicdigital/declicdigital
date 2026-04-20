@@ -30,7 +30,7 @@ const getStatusCfg = (projectName: string): Record<string, { label: string; icon
 });
 
 const EspaceClient = () => {
-  const { user, isAdmin, loading: authLoading, signOut } = useAuth();
+  const { user, loading: authLoading, signOut } = useAuth();
   const navigate = useNavigate();
   const [project, setProject] = useState<any>(null);
   const [tasks, setTasks] = useState<any[]>([]);
@@ -55,8 +55,7 @@ const EspaceClient = () => {
 
   useEffect(() => {
     if (!authLoading && !user) navigate("/connexion", { replace: true });
-    if (!authLoading && user && isAdmin) navigate("/admin/clients", { replace: true });
-  }, [user, isAdmin, authLoading, navigate]);
+  }, [user, authLoading, navigate]);
 
   useEffect(() => {
     if (user) loadData();
