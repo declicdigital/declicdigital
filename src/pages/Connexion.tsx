@@ -22,9 +22,9 @@ const Connexion = () => {
 
   useEffect(() => {
     if (!authLoading && user) {
-      navigate(isAdmin ? "/" : "/espace-client", { replace: true });
+      navigate("/espace-client", { replace: true });
     }
-  }, [user, isAdmin, authLoading, navigate]);
+  }, [user, authLoading, navigate]);
 
   const handleForgotPassword = async (e: React.FormEvent) => {
     e.preventDefault();

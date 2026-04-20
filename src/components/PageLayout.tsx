@@ -1,7 +1,6 @@
-import { lazy, ReactNode, Suspense, Children, isValidElement, useLayoutEffect, useRef } from "react";
+import { lazy, ReactNode, Suspense, Children, useLayoutEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
-import { useAuth } from "@/hooks/useAuth";
 
 const Footer = lazy(() => import("./Footer"));
 const BlogCarousel = lazy(() => import("./BlogCarousel"));
@@ -23,31 +22,7 @@ function flattenChildren(children: ReactNode): ReactNode[] {
   return flat;
 }
 
-/** Try to extract a human-readable label from a section element */
-function guessLabel(child: any, index: number): string {
-  if (!isValidElement(child)) return `Section ${index + 1}`;
-  const props = child.props as any;
-  const className = props?.className || "";
-  const id = props?.id || "";
-  if (id) return id;
-  if (className.includes("gradient-hero")) return "Hero";
-  if (className.includes("gradient-miami")) return "CTA Miami";
-  return `Section ${index + 1}`;
-}
-
-/** Check if an element is already wrapped in EditableSection */
-function isAlreadyEditable(child: any): boolean {
-  if (!isValidElement(child)) return false;
-  const type = (child as any).type;
-  const name = type?.displayName || type?.name || type?._payload?.value?.name || "";
-  if (name === "EditableSection") return true;
-  const props = child.props as any;
-  if (props?.blockId !== undefined && props?.pagePath !== undefined) return true;
-  return false;
-}
-
 const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => {
-  const { isAdmin } = useAuth();
   const location = useLocation();
   const pagePath = location.pathname;
 
