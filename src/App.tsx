@@ -33,6 +33,7 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite"));
 const Geo = lazy(() => import("./pages/Geo"));
 const RendezVous = lazy(() => import("./pages/RendezVous"));
+const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 
 // Admin back-office
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
@@ -77,6 +78,7 @@ const App = () => (
                 <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
                 <Route path="/visibilite-ia" element={<Geo />} />
                 <Route path="/rendez-vous" element={<RendezVous />} />
+                <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/geo" element={<GeoRedirect />} />
 
                 {/* Admin back-office */}
