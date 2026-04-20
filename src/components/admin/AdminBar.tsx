@@ -1,25 +1,12 @@
-import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/hooks/useAuth";
-import { LogOut, Settings, Users, Inbox, Plus, FileText, Layout, Rocket, Puzzle, ChevronDown, Image as ImageIcon } from "lucide-react";
+import { LogOut, Settings, Users, Inbox, FolderOpen } from "lucide-react";
 
 const ADMIN_BAR_HEIGHT = 40;
 
 const AdminBar = () => {
   const { isAdmin, signOut } = useAuth();
   const navigate = useNavigate();
-  const [contentOpen, setContentOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handler = (e: MouseEvent) => {
-      if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
-        setContentOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handler);
-    return () => document.removeEventListener("mousedown", handler);
-  }, []);
 
   if (!isAdmin) return null;
 
@@ -27,13 +14,6 @@ const AdminBar = () => {
     await signOut();
     navigate("/");
   };
-
-  const contentItems = [
-    { icon: FileText, label: "Article de blog", emoji: "📝", to: "/admin/blog/new" },
-    { icon: Layout, label: "Page édito", emoji: "📄", to: "/admin/page/new?type=edito" },
-    { icon: Rocket, label: "Landing Page", emoji: "🚀", to: "/admin/page/new?type=landing" },
-    { icon: Puzzle, label: "Bloc custom", emoji: "🧩", to: "/admin/blog" },
-  ];
 
   return (
     <div
@@ -45,38 +25,12 @@ const AdminBar = () => {
         Mode Admin 🛠️
       </Link>
       <div className="flex items-center gap-3">
-        {/* + Contenu dropdown */}
-        <div ref={menuRef} className="relative">
-          <button
-            onClick={() => setContentOpen(!contentOpen)}
-            className="flex items-center gap-1.5 rounded-md bg-emerald-500/80 px-3 py-1.5 text-xs font-medium transition hover:bg-emerald-500"
-          >
-            <Plus size={14} />
-            Contenu
-            <ChevronDown size={12} className={`transition-transform ${contentOpen ? "rotate-180" : ""}`} />
-          </button>
-          {contentOpen && (
-            <div className="absolute right-0 top-full mt-1 w-52 rounded-lg border border-white/10 bg-gray-900 p-1 shadow-xl animate-fade-in z-[10001]">
-              {contentItems.map((item) => (
-                <Link
-                  key={item.label}
-                  to={item.to}
-                  onClick={() => setContentOpen(false)}
-                  className="flex items-center gap-2.5 rounded-md px-3 py-2 text-sm text-white/90 transition hover:bg-white/10"
-                >
-                  <span>{item.emoji}</span>
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
         <Link
-          to="/admin/blog"
+          to="/espace-client"
           className="flex items-center gap-1.5 rounded-md bg-white/10 px-3 py-1.5 text-xs font-medium transition hover:bg-white/20"
         >
-          <FileText size={14} />
-          Blog
+          <FolderOpen size={14} />
+          Espace Client
         </Link>
         <Link
           to="/admin/clients"
@@ -92,13 +46,6 @@ const AdminBar = () => {
           <Inbox size={14} />
           Soumissions
         </Link>
-        <Link
-          to="/admin/media"
-          className="flex items-center gap-1.5 rounded-md bg-white/10 px-3 py-1.5 text-xs font-medium transition hover:bg-white/20"
-        >
-          <ImageIcon size={14} />
-          Média
-        </Link>
         <button
           onClick={handleLogout}
           className="flex items-center gap-1.5 rounded-md bg-red-500/80 px-3 py-1.5 text-xs font-medium transition hover:bg-red-500"
@@ -111,5 +58,5 @@ const AdminBar = () => {
   );
 };
 
-export const ADMIN_BAR_HEIGHT_PX = 40;
+export const ADMIN_BAR_HEIGHT_PX = ADMIN_BAR_HEIGHT;
 export default AdminBar;
