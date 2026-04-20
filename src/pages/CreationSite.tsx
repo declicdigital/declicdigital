@@ -10,7 +10,7 @@ import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import heroCreation from "@/assets/screenshot-declic-digital.webp";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
-import siteProImage from "@/assets/site-professionnel-entreprise-construction.webp";
+import siteProImage from "@/assets/site-professionnel-entreprise-construction.png";
 import { cities } from "@/data/cities";
 
 const CreationSite = () => (
