@@ -7,7 +7,6 @@ import { HelmetProvider } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AuthProvider } from "@/hooks/useAuth";
 import Index from "./pages/Index";
 import ScrollToTop from "./components/ScrollToTop";
 
@@ -22,30 +21,18 @@ const Tarifs = lazy(() => import("./pages/Tarifs"));
 const MentionsLegales = lazy(() => import("./pages/MentionsLegales"));
 const Realisations = lazy(() => import("./pages/Realisations"));
 const PlanDuSite = lazy(() => import("./pages/PlanDuSite"));
-const FormulaireClient = lazy(() => import("./pages/FormulaireClient"));
-const Connexion = lazy(() => import("./pages/Connexion"));
-const EspaceClient = lazy(() => import("./pages/EspaceClient"));
-const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const VilleCreationSite = lazy(() => import("./pages/VilleCreationSite"));
 const VilleReferencementSeo = lazy(() => import("./pages/VilleReferencementSeo"));
 const NosVilles = lazy(() => import("./pages/NosVilles"));
 const Blog = lazy(() => import("./pages/Blog"));
 const BlogArticle = lazy(() => import("./pages/BlogArticle"));
 const BlogCategory = lazy(() => import("./pages/BlogCategory"));
-const SharedProject = lazy(() => import("./pages/SharedProject"));
 const NosMetiers2 = lazy(() => import("./pages/NosMetiers2"));
 const MetierCreationSite = lazy(() => import("./pages/MetierCreationSite"));
 const NotFound = lazy(() => import("./pages/NotFound"));
 const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite"));
-const FormulaireBrief = lazy(() => import("./pages/FormulaireBrief"));
 const Geo = lazy(() => import("./pages/Geo"));
 const RendezVous = lazy(() => import("./pages/RendezVous"));
-const PremierContact = lazy(() => import("./pages/PremierContact"));
-
-// Admin back-office (clients + soumissions uniquement, pas de CMS)
-const AdminClients = lazy(() => import("./pages/AdminClients"));
-const AdminClientDetail = lazy(() => import("./pages/AdminClientDetail"));
-const AdminSoumissions = lazy(() => import("./pages/AdminSoumissions"));
 
 const queryClient = new QueryClient();
 
@@ -53,54 +40,41 @@ const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <AuthProvider>
-          <>
-            <Toaster />
-            <Sonner />
-            <BrowserRouter>
-              <ScrollToTop />
-              <Suspense fallback={<div className="min-h-screen" />}>
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/audit-seo-gratuit" element={<AuditSeo />} />
-                  <Route path="/creation-site-web" element={<CreationSite />} />
-                  <Route path="/creation-site-web/metier/:metier" element={<MetierCreationSite />} />
-                  <Route path="/creation-site-web/:ville" element={<VilleCreationSite />} />
-                  <Route path="/nos-metiers" element={<NosMetiers2 />} />
-                  <Route path="/referencement-seo" element={<ReferencementSeo />} />
-                  <Route path="/referencement-seo/:ville" element={<VilleReferencementSeo />} />
-                  <Route path="/nos-villes" element={<NosVilles />} />
-                  <Route path="/realisations" element={<Realisations />} />
-                  <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/faq" element={<Faq />} />
-                  <Route path="/tarifs" element={<Tarifs />} />
-                  <Route path="/mentions-legales" element={<MentionsLegales />} />
-                  <Route path="/plan-du-site" element={<PlanDuSite />} />
-                  <Route path="/formulaire-client" element={<FormulaireClient />} />
-                  <Route path="/blog" element={<Blog />} />
-                  <Route path="/blog/categorie/:categorySlug" element={<BlogCategory />} />
-                  <Route path="/blog/:slug" element={<BlogArticle />} />
-                  <Route path="/connexion" element={<Connexion />} />
-                  <Route path="/espace-client" element={<EspaceClient />} />
-                  <Route path="/reset-password" element={<ResetPassword />} />
-                  <Route path="/projet/:token" element={<SharedProject />} />
-                  <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
-                  <Route path="/brief" element={<FormulaireBrief />} />
-                  <Route path="/visibilite-ia" element={<Geo />} />
-                  <Route path="/rendez-vous" element={<RendezVous />} />
-                  <Route path="/premier-contact" element={<PremierContact />} />
-                  <Route path="/geo" element={<GeoRedirect />} />
-                  {/* Admin back-office (clients + soumissions uniquement) */}
-                  <Route path="/admin/clients" element={<AdminClients />} />
-                  <Route path="/admin/clients/:id" element={<AdminClientDetail />} />
-                  <Route path="/admin/soumissions" element={<AdminSoumissions />} />
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </Suspense>
-            </BrowserRouter>
-          </>
-        </AuthProvider>
+        <>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <ScrollToTop />
+            <Suspense fallback={<div className="min-h-screen" />}>
+              <Routes>
+                <Route path="/" element={<Index />} />
+                <Route path="/audit-seo-gratuit" element={<AuditSeo />} />
+                <Route path="/creation-site-web" element={<CreationSite />} />
+                <Route path="/creation-site-web/metier/:metier" element={<MetierCreationSite />} />
+                <Route path="/creation-site-web/:ville" element={<VilleCreationSite />} />
+                <Route path="/nos-metiers" element={<NosMetiers2 />} />
+                <Route path="/referencement-seo" element={<ReferencementSeo />} />
+                <Route path="/referencement-seo/:ville" element={<VilleReferencementSeo />} />
+                <Route path="/nos-villes" element={<NosVilles />} />
+                <Route path="/realisations" element={<Realisations />} />
+                <Route path="/qui-sommes-nous" element={<QuiSommesNous />} />
+                <Route path="/contact" element={<Contact />} />
+                <Route path="/faq" element={<Faq />} />
+                <Route path="/tarifs" element={<Tarifs />} />
+                <Route path="/mentions-legales" element={<MentionsLegales />} />
+                <Route path="/plan-du-site" element={<PlanDuSite />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/categorie/:categorySlug" element={<BlogCategory />} />
+                <Route path="/blog/:slug" element={<BlogArticle />} />
+                <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
+                <Route path="/visibilite-ia" element={<Geo />} />
+                <Route path="/rendez-vous" element={<RendezVous />} />
+                <Route path="/geo" element={<GeoRedirect />} />
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </Suspense>
+          </BrowserRouter>
+        </>
       </TooltipProvider>
     </QueryClientProvider>
   </HelmetProvider>

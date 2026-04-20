@@ -4,20 +4,17 @@ import MapEmbed from "@/components/MapEmbed";
 import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, CheckCircle, Loader2 } from "lucide-react";
+import { Mail, Phone, MapPin, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
+
+const CONTACT_EMAIL = "contact@declicdigital.net";
 
 const Contact = () => {
-  const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
-  const [sent, setSent] = useState(false);
   const [form, setForm] = useState({
     full_name: "",
     company: "",
@@ -31,21 +28,19 @@ const Contact = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.full_name || !form.email || !form.msg) return;
-    setLoading(true);
-    try {
-      const { error } = await supabase.functions.invoke("send-form", {
-        body: { ...form, form_type: "devis" },
-      });
-      if (error) throw error;
-      setSent(true);
-      toast({ title: "Demande envoyée !", description: "Nous vous répondons sous 24h." });
-    } catch {
-      toast({ title: "Erreur", description: "Une erreur est survenue, réessayez.", variant: "destructive" });
-    }
-    setLoading(false);
+    const subject = encodeURIComponent(`Demande de devis - ${form.full_name}${form.company ? ` (${form.company})` : ""}`);
+    const body = encodeURIComponent(
+      `Nom : ${form.full_name}\n` +
+      `Entreprise : ${form.company || "—"}\n` +
+      `Email : ${form.email}\n` +
+      `Téléphone : ${form.phone || "—"}\n` +
+      `Site actuel : ${form.current_url || "—"}\n\n` +
+      `Message :\n${form.msg}`
+    );
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -63,7 +58,7 @@ const Contact = () => {
           description: "Agence web et SEO pour TPE à Paris et Hauts-de-Seine",
           url: "https://declicdigital.net",
           telephone: "+33602228939",
-          email: "contact@declicdigital.net",
+          email: CONTACT_EMAIL,
           image: "https://declicdigital.net/og/contact.webp",
           priceRange: "€€",
           address: {
@@ -79,23 +74,10 @@ const Contact = () => {
             { "@type": "City", name: "Paris" },
             { "@type": "AdministrativeArea", name: "Hauts-de-Seine (92)" },
           ],
-          openingHoursSpecification: {
-            "@type": "OpeningHoursSpecification",
-            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-            opens: "09:00",
-            closes: "18:00",
-          },
-          contactPoint: {
-            "@type": "ContactPoint",
-            telephone: "+33602228939",
-            contactType: "customer service",
-            email: "contact@declicdigital.net",
-            availableLanguage: ["French"],
-          },
         })}</script>
       </Helmet>
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Contact" }]} />
-      {/* Hero + Formulaire */}
+
       <section className="gradient-hero py-16 md:py-24">
         <div className="container">
           <div className="grid items-start gap-10 lg:grid-cols-2">
@@ -108,8 +90,8 @@ const Contact = () => {
               </p>
               <div className="space-y-4">
                 {[
-                  { icon: Mail, label: "Email", value: "contact@declicdigital.net" },
-                  { icon: Phone, label: "Téléphone", value: "06.02.22.89.39" },
+                  { icon: Mail, label: "Email", value: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}` },
+                  { icon: Phone, label: "Téléphone", value: "06.02.22.89.39", href: "tel:0602228939" },
                   { icon: MapPin, label: "Localisation", value: "Paris et Hauts-de-Seine (92)" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4">
@@ -118,7 +100,11 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="text-sm text-muted-foreground">{item.label}</p>
-                      <p className="font-semibold">{item.value}</p>
+                      {item.href ? (
+                        <a href={item.href} className="font-semibold hover:text-primary transition-colors">{item.value}</a>
+                      ) : (
+                        <p className="font-semibold">{item.value}</p>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -127,37 +113,29 @@ const Contact = () => {
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
               <div className="rounded-2xl border border-border bg-card p-6 md:p-8 shadow-card">
                 <h2 className="mb-6 text-2xl font-extrabold">Demandez votre devis</h2>
-                {sent ? (
-                  <div className="text-center py-8 space-y-3">
-                    <CheckCircle className="h-12 w-12 text-emerald-500 mx-auto" />
-                    <p className="text-lg font-semibold">Demande envoyée !</p>
-                    <p className="text-muted-foreground text-sm">Nous vous répondons sous 24h.</p>
+                <form className="space-y-4" onSubmit={handleSubmit}>
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <Input name="full_name" placeholder="Votre nom" className="rounded-xl" required value={form.full_name} onChange={handleChange} />
+                    <Input name="company" placeholder="Nom de votre entreprise" className="rounded-xl" value={form.company} onChange={handleChange} />
                   </div>
-                ) : (
-                  <form className="space-y-4" onSubmit={handleSubmit}>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <Input name="full_name" placeholder="Votre nom" className="rounded-xl" required value={form.full_name} onChange={handleChange} />
-                      <Input name="company" placeholder="Nom de votre entreprise" className="rounded-xl" value={form.company} onChange={handleChange} />
-                    </div>
-                    <div className="grid gap-4 sm:grid-cols-2">
-                      <Input name="email" placeholder="Votre email" type="email" className="rounded-xl" required value={form.email} onChange={handleChange} />
-                      <Input name="phone" placeholder="Votre téléphone" type="tel" className="rounded-xl" value={form.phone} onChange={handleChange} />
-                    </div>
-                    <Input name="current_url" placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" value={form.current_url} onChange={handleChange} />
-                    <Textarea name="msg" placeholder="Décrivez votre projet : type de site souhaité, objectifs, fonctionnalités..." className="rounded-xl min-h-[120px]" required value={form.msg} onChange={handleChange} />
-                    <Button type="submit" variant="custom" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow" disabled={loading}>
-                      {loading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <CheckCircle size={18} className="mr-2" />}
-                      Envoyer ma demande
-                    </Button>
-                  </form>
-                )}
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <Input name="email" placeholder="Votre email" type="email" className="rounded-xl" required value={form.email} onChange={handleChange} />
+                    <Input name="phone" placeholder="Votre téléphone" type="tel" className="rounded-xl" value={form.phone} onChange={handleChange} />
+                  </div>
+                  <Input name="current_url" placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" value={form.current_url} onChange={handleChange} />
+                  <Textarea name="msg" placeholder="Décrivez votre projet : type de site souhaité, objectifs, fonctionnalités..." className="rounded-xl min-h-[120px]" required value={form.msg} onChange={handleChange} />
+                  <Button type="submit" variant="custom" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
+                    <CheckCircle size={18} className="mr-2" />
+                    Envoyer ma demande
+                  </Button>
+                  <p className="text-xs text-muted-foreground text-center">Le formulaire ouvre votre logiciel email pré-rempli.</p>
+                </form>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* Google Maps */}
       <SectionWrapper>
         <div className="text-center mb-8">
           <h2 className="text-3xl font-extrabold md:text-4xl">Retrouvez-nous</h2>
@@ -166,51 +144,19 @@ const Contact = () => {
         <MapEmbed />
       </SectionWrapper>
 
-      {/* Contenu SEO */}
       <SectionWrapper>
         <div className="mx-auto max-w-3xl space-y-6">
           <h2 className="text-3xl font-extrabold md:text-4xl text-center">Pourquoi faire appel à une agence web pour votre site ?</h2>
           <p className="text-muted-foreground leading-relaxed">
-            Créer un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web professionnel</Link> ne se résume pas à assembler quelques pages. Il faut penser à l'expérience utilisateur, au design, à la vitesse de chargement, à l'optimisation pour les moteurs de recherche et à la compatibilité mobile. Une agence web comme Déclic Digital prend en charge l'ensemble de ces aspects pour vous livrer un site qui travaille pour vous.
+            Créer un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web professionnel</Link> ne se résume pas à assembler quelques pages. Il faut penser à l'expérience utilisateur, au design, à la vitesse de chargement, à l'optimisation pour les moteurs de recherche et à la compatibilité mobile.
           </p>
           <p className="text-muted-foreground leading-relaxed">
-            Pour une TPE ou un indépendant, un site web bien conçu est un investissement rentable. Il vous permet d'être trouvé par vos clients potentiels sur Google, de présenter vos services de manière professionnelle et de générer des demandes de devis automatiquement. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            Chez Déclic Digital, nous comprenons les contraintes des petites entreprises. C'est pourquoi nous proposons des solutions accessibles, avec des explications simples et un accompagnement humain à chaque étape. Du premier échange à la mise en ligne, en passant par le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO et GEO</Link>, nous sommes à vos côtés pour faire de votre présence en ligne un véritable levier de croissance.
+            Pour une TPE ou un indépendant, un site web bien conçu est un investissement rentable. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
           </p>
         </div>
       </SectionWrapper>
 
-      {/* Avis clients */}
       <GoogleReviewsSection compact maxReviews={3} />
-
-      {/* Maillage */}
-      <SectionWrapper>
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl font-extrabold mb-4">Nos services</h2>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link to="/creation-site-web" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Création de site web
-            </Link>
-            <Link to="/referencement-seo" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Référencement SEO et GEO
-            </Link>
-            <Link to="/contact" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Audit SEO gratuit
-            </Link>
-            <Link to="/tarifs" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Nos tarifs
-            </Link>
-            <Link to="/nos-villes" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Nos villes
-            </Link>
-            <Link to="/faq" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Questions fréquentes
-            </Link>
-          </div>
-        </div>
-      </SectionWrapper>
     </PageLayout>
   );
 };
