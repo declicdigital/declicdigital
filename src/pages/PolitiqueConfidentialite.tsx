@@ -40,8 +40,7 @@ const PolitiqueConfidentialite = () => (
           <ul className="list-disc pl-6 space-y-2">
             <li><strong className="text-foreground">Données d'identification :</strong> nom, prénom, adresse email, numéro de téléphone, nom de l'entreprise.</li>
             <li><strong className="text-foreground">Données de connexion :</strong> adresse IP, données de navigation (cookies), type de navigateur, pages consultées.</li>
-            <li><strong className="text-foreground">Données de projet :</strong> informations fournies via le formulaire client (description du projet, fichiers joints, budget, préférences).</li>
-            <li><strong className="text-foreground">Données de compte :</strong> identifiants de connexion à l'espace client (email et mot de passe chiffré).</li>
+            <li><strong className="text-foreground">Données de projet :</strong> informations fournies via les formulaires de contact (description du projet, budget, préférences).</li>
           </ul>
         </section>
 
@@ -75,8 +74,7 @@ const PolitiqueConfidentialite = () => (
           <p className="mb-3">Vos données personnelles sont exclusivement destinées à Déclic Digital. Elles ne sont jamais vendues à des tiers.</p>
           <p className="mb-3">Elles peuvent être partagées avec les sous-traitants suivants, dans le cadre strict de la fourniture de nos services :</p>
           <ul className="list-disc pl-6 space-y-2">
-            <li><strong className="text-foreground">Hébergement :</strong> Lovable Technologies Inc. (hébergement du site)</li>
-            <li><strong className="text-foreground">Base de données :</strong> Supabase (stockage sécurisé des données)</li>
+            <li><strong className="text-foreground">Hébergement :</strong> Vercel Inc. (hébergement du site)</li>
             <li><strong className="text-foreground">Analytics :</strong> Google (mesure d'audience via Google Tag Manager)</li>
             <li><strong className="text-foreground">Email :</strong> Service d'envoi d'emails transactionnels</li>
           </ul>
