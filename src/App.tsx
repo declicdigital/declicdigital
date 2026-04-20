@@ -74,13 +74,6 @@ const App = () => (
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/geo" element={<GeoRedirect />} />
 
-                {/* Admin back-office */}
-                <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
-                <Route path="/admin/login" element={<AdminLogin />} />
-                <Route path="/admin/dashboard" element={<AdminDashboard />} />
-                <Route path="/admin/clients" element={<AdminClients />} />
-                <Route path="/admin/clients/:id" element={<AdminClientDetail />} />
-                <Route path="/admin/soumissions" element={<AdminSoumissions />} />
 
                 <Route path="*" element={<NotFound />} />
               </Routes>
