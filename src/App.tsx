@@ -35,13 +35,6 @@ const Geo = lazy(() => import("./pages/Geo"));
 const RendezVous = lazy(() => import("./pages/RendezVous"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 
-// Admin back-office
-const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
-const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
-const AdminClients = lazy(() => import("./pages/admin/AdminClients"));
-const AdminClientDetail = lazy(() => import("./pages/admin/AdminClientDetail"));
-const AdminSoumissions = lazy(() => import("./pages/admin/AdminSoumissions"));
-
 const queryClient = new QueryClient();
 
 const App = () => (
