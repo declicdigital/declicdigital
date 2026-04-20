@@ -40,31 +40,51 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
   // 3 défaut, 4 bleu, etc. Sections with a dedicated background simply keep theirs but
   // still consume their position slot, so the alternation stays figée par position.
   useLayoutEffect(() => {
+    const skipRe = /\bgradient-hero\b|\bgradient-miami\b|\bgradient-primary\b|\bbg-foreground\b|\bbg-primary\b|\bbg-card\b|\bbg-muted\b|\bbg-secondary\b|\bbg-miami\b|bg-\[hsl/;
+    let rafId = 0;
+    let scheduled = false;
+
     const apply = () => {
+      scheduled = false;
       const main = mainRef.current;
       if (!main) return;
-      const all = Array.from(main.querySelectorAll("section")) as HTMLElement[];
-      const candidates = all.filter((sec) => !sec.parentElement?.closest("section"));
-      // Patterns indicating the section already has its own background and must be skipped.
-      const skipRe = /\bgradient-hero\b|\bgradient-miami\b|\bgradient-primary\b|\bbg-foreground\b|\bbg-primary\b|\bbg-card\b|\bbg-muted\b|\bbg-secondary\b|\bbg-miami\b|bg-\[hsl/;
-      candidates.forEach((sec, i) => {
-        // Always strip our managed classes first (so re-renders can re-flip correctly).
-        sec.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+      // PHASE 1 — READ: gather all sections and their className strings (no writes here).
+      const all = main.querySelectorAll("section");
+      const plan: { el: HTMLElement; addBlue: boolean }[] = [];
+      let pos = 0;
+      for (let i = 0; i < all.length; i++) {
+        const sec = all[i] as HTMLElement;
+        // Skip nested sections
+        if (sec.parentElement?.closest("section")) continue;
         const cls = sec.className || "";
-        if (skipRe.test(cls)) return; // skip — this section keeps its own background
-        // Strict positional alternation: bloc 1 (i=0) défaut, bloc 2 (i=1) bleu, etc.
-        // Skipped sections still consume their slot so neutral sections keep their position.
-        if (i % 2 === 1) sec.classList.add("bg-section-blue");
-      });
+        const skipped = skipRe.test(cls);
+        plan.push({ el: sec, addBlue: !skipped && pos % 2 === 1 });
+        pos++;
+      }
+      // PHASE 2 — WRITE: mutate classList in a single batch, no further reads.
+      for (const { el, addBlue } of plan) {
+        el.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+        if (addBlue) el.classList.add("bg-section-blue");
+      }
     };
-    apply();
-    const t1 = window.setTimeout(apply, 100);
-    const t2 = window.setTimeout(apply, 600);
-    const t3 = window.setTimeout(apply, 1500);
-    // Re-apply when lazy components insert/remove sections later.
-    const obs = new MutationObserver(() => apply());
+
+    const schedule = () => {
+      if (scheduled) return;
+      scheduled = true;
+      rafId = requestAnimationFrame(apply);
+    };
+
+    schedule();
+    const t1 = window.setTimeout(schedule, 100);
+    const t2 = window.setTimeout(schedule, 600);
+    const t3 = window.setTimeout(schedule, 1500);
+    const obs = new MutationObserver(schedule);
     if (mainRef.current) obs.observe(mainRef.current, { childList: true, subtree: true });
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); obs.disconnect(); };
+    return () => {
+      clearTimeout(t1); clearTimeout(t2); clearTimeout(t3);
+      cancelAnimationFrame(rafId);
+      obs.disconnect();
+    };
   }, [pagePath, wrappedChildren]);
 
   return (
