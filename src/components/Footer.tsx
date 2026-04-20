@@ -65,16 +65,15 @@ const Footer = () => (
                 Audit SEO gratuit
               </Link>
               <Link
-                to="/formulaire-client"
+                to="/rendez-vous"
                 className="inline-block rounded-full gradient-primary btn-glow px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-all"
               >
-                Formulaire client
+                Prendre rendez-vous
               </Link>
             </div>
           </div>
         </div>
 
-        {/* Separator with gradient */}
         <div className="mt-10 mb-5 h-px" style={{ background: "linear-gradient(90deg, transparent, hsl(183, 70%, 63%, 0.3), hsl(284, 65%, 66%, 0.3), hsl(330, 100%, 70%, 0.3), transparent)" }} />
 
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/80">

@@ -1,10 +1,8 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown, User } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import logo from "@/assets/logo-declic-digital-new.webp";
-
-const ADMIN_BAR_HEIGHT = 40;
 
 const navLinks = [
   { label: "Création de site", to: "/creation-site-web" },
@@ -22,11 +20,7 @@ const moreLinks = [
   { label: "FAQ", to: "/faq" },
 ];
 
-interface HeaderProps {
-  isAdmin?: boolean;
-}
-
-const Header = ({ isAdmin = false }: HeaderProps) => {
+const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
@@ -51,16 +45,12 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
     }`;
 
   return (
-    <header
-      className="sticky z-50 border-b border-border bg-card/80 backdrop-blur-lg"
-      style={{ top: isAdmin ? ADMIN_BAR_HEIGHT : 0 }}
-    >
+    <header className="sticky top-0 z-50 border-b border-border bg-card/80 backdrop-blur-lg">
       <div className="container flex h-[4.5rem] items-center justify-between md:h-20">
         <Link to="/" className="flex shrink-0 items-center" onClick={() => { if (window.location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }}>
           <img src={logo} alt="Déclic Digital" className="h-14 md:h-16 w-auto object-contain" width={160} height={88} />
         </Link>
 
-        {/* Desktop nav */}
         <nav className="hidden items-center gap-0.5 lg:flex">
           {navLinks.map((l) => (
             <Link key={l.to} to={l.to} className={linkClass(l.to)}>
@@ -68,11 +58,10 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
             </Link>
           ))}
 
-          {/* More dropdown */}
           <div ref={moreRef} className="relative">
             <button
               onClick={() => setMoreOpen(!moreOpen)}
-              className={`flex items-center gap-1 rounded-lg px-2 xl:px-3 py-2 text-[13px] xl:text-[15px] font-medium whitespace-nowrap transition-colors hover:bg-secondary text-muted-foreground`}
+              className="flex items-center gap-1 rounded-lg px-2 xl:px-3 py-2 text-[13px] xl:text-[15px] font-medium whitespace-nowrap transition-colors hover:bg-secondary text-muted-foreground"
             >
               Plus <ChevronDown size={15} className={`transition-transform ${moreOpen ? "rotate-180" : ""}`} />
             </button>
@@ -96,11 +85,6 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
         </nav>
 
         <div className="hidden lg:flex items-center gap-1.5 shrink-0">
-          <Button asChild variant="ghost" size="sm" className="rounded-full px-3 text-[13px] xl:text-[15px] font-semibold text-muted-foreground hover:text-primary whitespace-nowrap">
-            <Link to="/connexion">
-              <User size={16} className="mr-1" /> Espace client
-            </Link>
-          </Button>
           <Button asChild variant="custom" size="sm" className="rounded-full px-4 xl:px-5 text-[13px] xl:text-[15px] font-bold gradient-primary btn-glow text-white shadow-glow whitespace-nowrap">
             <Link to="/rendez-vous">Prendre RDV</Link>
           </Button>
@@ -139,15 +123,6 @@ const Header = ({ isAdmin = false }: HeaderProps) => {
               className="rounded-lg px-4 py-2.5 text-sm font-bold text-primary transition-colors hover:bg-primary/10 border border-primary mt-1"
             >
               Prendre RDV
-            </Link>
-            <Link
-              to="/connexion"
-              onClick={() => setMobileOpen(false)}
-              className={`rounded-lg px-4 py-2.5 text-sm font-medium transition-colors hover:bg-secondary flex items-center gap-2 ${
-                isActive("/connexion") ? "text-primary bg-secondary" : "text-muted-foreground"
-              }`}
-            >
-              <User size={16} /> Espace client
             </Link>
             <Button asChild variant="custom" size="sm" className="gradient-primary btn-glow mt-2 rounded-full font-semibold text-white shadow-glow">
               <Link to="/contact" onClick={() => setMobileOpen(false)}>

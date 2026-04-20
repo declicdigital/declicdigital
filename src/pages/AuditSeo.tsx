@@ -2,7 +2,7 @@ import { useState } from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Search, FileText, Users, Lightbulb, CheckCircle, Loader2 } from "lucide-react";
+import { Search, FileText, Users, Lightbulb, CheckCircle } from "lucide-react";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -11,13 +11,10 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import heroAudit from "@/assets/audit-seo-gratuit-site-web.webp";
-import { supabase } from "@/integrations/supabase/client";
-import { useToast } from "@/hooks/use-toast";
+
+const CONTACT_EMAIL = "contact@declicdigital.net";
 
 const AuditSeo = () => {
-  const { toast } = useToast();
-  const [loading, setLoading] = useState(false);
-  const [sent, setSent] = useState(false);
   const [form, setForm] = useState({
     full_name: "",
     company: "",
@@ -31,21 +28,19 @@ const AuditSeo = () => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.full_name || !form.email || !form.current_url) return;
-    setLoading(true);
-    try {
-      const { error } = await supabase.functions.invoke("send-form", {
-        body: { ...form, form_type: "audit" },
-      });
-      if (error) throw error;
-      setSent(true);
-      toast({ title: "Demande envoyée !", description: "Vous recevrez votre audit sous 48h." });
-    } catch {
-      toast({ title: "Erreur", description: "Une erreur est survenue, réessayez.", variant: "destructive" });
-    }
-    setLoading(false);
+    const subject = encodeURIComponent(`Demande d'audit SEO gratuit - ${form.full_name}`);
+    const body = encodeURIComponent(
+      `Nom : ${form.full_name}\n` +
+      `Entreprise : ${form.company || "—"}\n` +
+      `URL du site : ${form.current_url}\n` +
+      `Email : ${form.email}\n` +
+      `Téléphone : ${form.phone || "—"}\n\n` +
+      `Message :\n${form.msg || "—"}`
+    );
+    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -58,7 +53,7 @@ const AuditSeo = () => {
         <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"Service",serviceType:"Audit SEO gratuit",provider:{"@type":"LocalBusiness",name:"Déclic Digital",url:"https://declicdigital.net"},areaServed:"Île-de-France"})}</script>
       </Helmet>
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Référencement SEO", href: "/referencement-seo" }, { label: "Audit SEO gratuit" }]} />
-      {/* Hero */}
+
       <section className="gradient-hero py-16 md:py-24">
         <div className="container">
           <div className="grid items-center gap-10 lg:grid-cols-2">
@@ -70,7 +65,7 @@ const AuditSeo = () => {
                 Audit SEO gratuit : analysez la visibilité Google de votre site en 48h
               </h1>
               <p className="mb-8 max-w-2xl text-lg text-muted-foreground leading-relaxed">
-                Découvrez pourquoi votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> n'apparaît pas sur Google et recevez des recommandations concrètes pour améliorer votre visibilité. Notre audit est complet et personnalisé. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link>.
+                Découvrez pourquoi votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link> n'apparaît pas sur Google et recevez des recommandations concrètes pour améliorer votre visibilité.
               </p>
               <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
                 <a href="#formulaire-audit">Demander mon audit SEO</a>
@@ -83,13 +78,12 @@ const AuditSeo = () => {
         </div>
       </section>
 
-      {/* Contenu audit */}
       <SectionWrapper>
         <div className="text-center mb-4">
           <h2 className="text-3xl font-extrabold md:text-4xl">Qu'est-ce qu'un audit SEO et à quoi ça sert ?</h2>
         </div>
         <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
-          Notre audit SEO est une analyse approfondie de votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link>. Il couvre tous les aspects qui influencent votre positionnement sur Google et vous donne une feuille de route claire. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
+          Notre audit SEO est une analyse approfondie de votre <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web</Link>. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
         </p>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
@@ -109,95 +103,27 @@ const AuditSeo = () => {
         </div>
       </SectionWrapper>
 
-      {/* Comment fonctionne un audit SEO */}
-      <SectionWrapper>
-        <div className="mx-auto max-w-3xl space-y-6">
-          <h2 className="text-3xl font-extrabold md:text-4xl text-center">Ce que comprend votre audit SEO gratuit</h2>
-          <p className="text-muted-foreground leading-relaxed">
-            Un audit SEO est une analyse complète de votre site web qui évalue sa capacité à être bien référencé sur Google. Il identifie les points forts, les faiblesses et les opportunités d'amélioration de votre présence en ligne. Notre audit <Link to="/visibilite-ia" className="text-primary font-semibold hover:underline">inclut un diagnostic de votre visibilité dans les IA</Link> (ChatGPT, Perplexity, Gemini).
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            Concrètement, nous analysons la structure technique de votre site (vitesse, mobile, sécurité), la qualité de votre contenu (mots clés, balises, textes), et votre positionnement par rapport à vos concurrents. À l'issue de l'audit, vous recevez un rapport détaillé avec des recommandations classées par priorité.
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            L'audit est la première étape indispensable pour toute stratégie de <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">notre offre de référencement SEO</Link> efficace. Sans diagnostic précis, il est impossible de savoir quelles actions vont réellement améliorer votre visibilité. C'est pourquoi nous proposons cet audit gratuitement : nous voulons que chaque TPE puisse comprendre sa situation et prendre les bonnes décisions.
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            Après avoir reçu votre audit, vous pouvez choisir de mettre en oeuvre les recommandations vous-même ou de nous confier l'optimisation de votre site. Nous proposons aussi la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web optimisé</Link> pour les TPE. Consultez <Link to="/tarifs" className="text-primary font-semibold hover:underline">nos tarifs</Link> pour découvrir nos offres. Dans tous les cas, l'audit vous appartient et vous n'avez aucune obligation.
-          </p>
-        </div>
-      </SectionWrapper>
-
-      {/* Pourquoi c'est gratuit */}
-      <SectionWrapper>
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-3xl font-extrabold md:text-4xl mb-6">En quoi votre site perd-il des clients chaque jour ?</h2>
-          <p className="text-muted-foreground leading-relaxed mb-4">
-            Nous croyons que chaque entreprise mérite de comprendre pourquoi son site ne génère pas de résultats. L'audit gratuit est notre façon de vous montrer <Link to="/qui-sommes-nous" className="text-primary font-semibold hover:underline">notre expertise</Link> et de vous aider à y voir plus clair, sans aucun engagement.
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            C'est aussi un premier pas vers une relation de confiance. Si nos recommandations vous convainquent, vous pouvez choisir de nous confier la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création ou l'optimisation de votre site</Link>.
-          </p>
-        </div>
-      </SectionWrapper>
-
-      {/* Maillage */}
-      <SectionWrapper>
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl font-extrabold mb-4">Comment fonctionne l'audit Déclic Digital ?</h2>
-          <div className="flex flex-wrap justify-center gap-3">
-            <Link to="/creation-site-web" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Création de site web
-            </Link>
-            <Link to="/referencement-seo" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Référencement SEO
-            </Link>
-            <Link to="/tarifs" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Nos tarifs
-            </Link>
-            <Link to="/realisations" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Nos réalisations
-            </Link>
-            <Link to="/faq" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Questions fréquentes
-            </Link>
-            <Link to="/nos-villes" className="rounded-full border bg-card px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-              Nos villes
-            </Link>
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* Avis clients */}
       <GoogleReviewsSection compact maxReviews={3} />
 
-      {/* Formulaire */}
       <SectionWrapper id="formulaire-audit">
         <div className="mx-auto max-w-xl">
           <h2 className="mb-4 text-center text-3xl font-extrabold">Demandez votre audit maintenant : réponse en 48h</h2>
           <p className="text-center text-muted-foreground mb-8">
             Remplissez le formulaire ci-dessous et recevez votre audit SEO personnalisé sous 48 heures.
           </p>
-          {sent ? (
-            <div className="text-center py-8 space-y-3">
-              <CheckCircle className="h-12 w-12 text-emerald-500 mx-auto" />
-              <p className="text-lg font-semibold">Demande envoyée !</p>
-              <p className="text-muted-foreground text-sm">Vous recevrez votre audit sous 48h.</p>
-            </div>
-          ) : (
-            <form className="space-y-4" onSubmit={handleSubmit}>
-              <Input name="full_name" placeholder="Votre nom" className="rounded-xl" required value={form.full_name} onChange={handleChange} />
-              <Input name="company" placeholder="Nom de votre entreprise" className="rounded-xl" value={form.company} onChange={handleChange} />
-              <Input name="current_url" placeholder="URL de votre site web" type="url" className="rounded-xl" required value={form.current_url} onChange={handleChange} />
-              <Input name="email" placeholder="Votre email" type="email" className="rounded-xl" required value={form.email} onChange={handleChange} />
-              <Input name="phone" placeholder="Votre téléphone (optionnel)" type="tel" className="rounded-xl" value={form.phone} onChange={handleChange} />
-              <Textarea name="msg" placeholder="Votre message (optionnel)" className="rounded-xl min-h-[100px]" value={form.msg} onChange={handleChange} />
-              <Button type="submit" variant="custom" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow" disabled={loading}>
-                {loading ? <Loader2 className="h-4 w-4 mr-2 animate-spin" /> : <CheckCircle size={18} className="mr-2" />}
-                Recevoir mon audit SEO gratuit
-              </Button>
-            </form>
-          )}
+          <form className="space-y-4" onSubmit={handleSubmit}>
+            <Input name="full_name" placeholder="Votre nom" className="rounded-xl" required value={form.full_name} onChange={handleChange} />
+            <Input name="company" placeholder="Nom de votre entreprise" className="rounded-xl" value={form.company} onChange={handleChange} />
+            <Input name="current_url" placeholder="URL de votre site web" type="url" className="rounded-xl" required value={form.current_url} onChange={handleChange} />
+            <Input name="email" placeholder="Votre email" type="email" className="rounded-xl" required value={form.email} onChange={handleChange} />
+            <Input name="phone" placeholder="Votre téléphone (optionnel)" type="tel" className="rounded-xl" value={form.phone} onChange={handleChange} />
+            <Textarea name="msg" placeholder="Votre message (optionnel)" className="rounded-xl min-h-[100px]" value={form.msg} onChange={handleChange} />
+            <Button type="submit" variant="custom" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
+              <CheckCircle size={18} className="mr-2" />
+              Recevoir mon audit SEO gratuit
+            </Button>
+            <p className="text-xs text-muted-foreground text-center">Le formulaire ouvre votre logiciel email pré-rempli.</p>
+          </form>
         </div>
       </SectionWrapper>
     </PageLayout>

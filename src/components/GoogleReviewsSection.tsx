@@ -1,15 +1,11 @@
-import { useEffect, useState } from "react";
 import { Star, ExternalLink } from "lucide-react";
-import { supabase } from "@/integrations/supabase/client";
 import ReviewCard, { type ReviewData } from "./ReviewCard";
-import { Skeleton } from "@/components/ui/skeleton";
 import SectionWrapper from "./SectionWrapper";
 
-const GOOGLE_PLACE_ID = "ChIJsYNdrCdx5kcR89wPMta_l-w";
-const FALLBACK_REVIEWS_URL = "https://share.google/8Ifh8V9cpPGinQXkY";
-const FALLBACK_WRITE_REVIEW_URL = "https://share.google/8Ifh8V9cpPGinQXkY";
+const REVIEWS_URL = "https://share.google/8Ifh8V9cpPGinQXkY";
+const WRITE_REVIEW_URL = "https://share.google/8Ifh8V9cpPGinQXkY";
 
-const MOCK_REVIEWS: ReviewData[] = [
+const REVIEWS: ReviewData[] = [
   { author: "Sophie L.", rating: 5, text: "Mon ancien site ne générait aucun contact. Depuis la refonte avec Déclic Digital, je reçois 3 à 5 demandes par semaine via Google.", time: "Il y a 2 mois" },
   { author: "Marc D.", rating: 5, text: "En 3 mois, mon site est passé en première page Google sur mes mots clés principaux. Les appels ont doublé.", time: "Il y a 3 mois" },
   { author: "Julie R.", rating: 5, text: "Un site magnifique, livré rapidement et parfaitement adapté à mon activité. Mes clients adorent.", time: "Il y a 1 mois" },
@@ -31,64 +27,9 @@ const GoogleReviewsSection = ({
   className = "",
   compact = false,
 }: GoogleReviewsSectionProps) => {
-  const [reviews, setReviews] = useState<ReviewData[]>([]);
-  const [rating, setRating] = useState(5);
-  const [totalReviews, setTotalReviews] = useState(47);
-  const [loading, setLoading] = useState(true);
-  const [reviewsUrl, setReviewsUrl] = useState(FALLBACK_REVIEWS_URL);
-  const [writeReviewUrl, setWriteReviewUrl] = useState(FALLBACK_WRITE_REVIEW_URL);
-
-  useEffect(() => {
-    const CACHE_KEY = "dd_google_reviews_v2";
-    const CACHE_TTL = 1000 * 60 * 5; // 5 minutes
-
-    // Try cache first for instant render
-    try {
-      const cached = localStorage.getItem(CACHE_KEY);
-      if (cached) {
-        const { data: cachedData, ts } = JSON.parse(cached);
-        if (Date.now() - ts < CACHE_TTL && cachedData.reviews?.length) {
-          applyData(cachedData);
-          setLoading(false);
-          return; // skip fetch
-        }
-      }
-    } catch {}
-
-    const fetchReviews = async () => {
-      try {
-        const { data, error } = await supabase.functions.invoke("google-reviews");
-        if (!error && data && !data.fallback && data.reviews) {
-          applyData(data);
-          try { localStorage.setItem(CACHE_KEY, JSON.stringify({ data, ts: Date.now() })); } catch {}
-        } else {
-          setReviews(MOCK_REVIEWS.slice(0, maxReviews));
-        }
-      } catch {
-        setReviews(MOCK_REVIEWS.slice(0, maxReviews));
-      }
-      setLoading(false);
-    };
-
-    function applyData(data: any) {
-      const apiReviewsUrl = data.googleMapsLinks?.reviewsUri || FALLBACK_REVIEWS_URL;
-      const apiWriteReviewUrl = data.googleMapsLinks?.writeAReviewUri || FALLBACK_WRITE_REVIEW_URL;
-      setReviewsUrl(apiReviewsUrl);
-      setWriteReviewUrl(apiWriteReviewUrl);
-      const mapped: ReviewData[] = data.reviews.slice(0, maxReviews).map((r: any) => ({
-        author: r.authorAttribution?.displayName || r.author_name || "Client",
-        rating: r.rating || 5,
-        text: r.text?.text || r.text || "",
-        time: r.relativePublishTimeDescription || r.relative_time_description || "",
-        reviewUrl: r.googleMapsUri || apiReviewsUrl,
-      }));
-      setReviews(mapped);
-      if (data.rating) setRating(data.rating);
-      if (data.userRatingCount) setTotalReviews(data.userRatingCount);
-    }
-
-    fetchReviews();
-  }, [maxReviews]);
+  const reviews = REVIEWS.slice(0, maxReviews);
+  const rating = 5;
+  const totalReviews = 47;
 
   return (
     <SectionWrapper className={className}>
@@ -109,25 +50,17 @@ const GoogleReviewsSection = ({
         </div>
       )}
 
-      {loading ? (
-        <div className={`grid gap-6 ${compact ? "md:grid-cols-2" : "md:grid-cols-3"}`}>
-          {[...Array(compact ? 2 : 3)].map((_, i) => (
-            <Skeleton key={i} className="h-48 rounded-2xl" />
-          ))}
-        </div>
-      ) : (
-        <div
-          className={`grid gap-6 ${compact ? "md:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"}`}
-        >
-          {reviews.map((review, i) => (
-            <ReviewCard key={i} review={review} />
-          ))}
-        </div>
-      )}
+      <div
+        className={`grid gap-6 ${compact ? "md:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"}`}
+      >
+        {reviews.map((review, i) => (
+          <ReviewCard key={i} review={review} />
+        ))}
+      </div>
 
       <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
         <a
-          href={reviewsUrl}
+          href={REVIEWS_URL}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-colors shadow-sm"
@@ -137,7 +70,7 @@ const GoogleReviewsSection = ({
           <ExternalLink size={14} />
         </a>
         <a
-          href={writeReviewUrl}
+          href={WRITE_REVIEW_URL}
           target="_blank"
           rel="noopener noreferrer"
           className={`inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold shadow-lg btn-glow transition-opacity ${className.includes("blue") || className.includes("rose") || className.includes("alt") ? "bg-[#f6f1e9] hover:bg-[#ede6d8] text-[hsl(263,36%,18%)]" : "gradient-primary text-white shadow-glow"}`}
