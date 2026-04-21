@@ -2,11 +2,45 @@ import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { ArrowRight, Calendar, Clock, Sparkles } from "lucide-react";
 import { blogPosts } from "@/data/blogPosts";
+import { supabase } from "@/integrations/supabase/client";
+import { useState, useEffect } from "react";
 
 const BlogCarousel = () => {
-  const latest = [...blogPosts]
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 4);
+  const [latest, setLatest] = useState<any[]>([]);
+
+  useEffect(() => {
+    async function fetchLatest() {
+      const { data } = await supabase
+        .from("cms_blog_posts")
+        .select("slug, title, excerpt, cover_image_url, read_time, created_at")
+        .eq("status", "published")
+        .order("created_at", { ascending: false })
+        .limit(4);
+
+      const supabaseSlugs = new Set((data ?? []).map((a: any) => a.slug));
+
+      const supabaseArticles = (data ?? []).map((a: any) => ({
+        slug: a.slug,
+        title: a.title,
+        excerpt: a.excerpt,
+        coverImageUrl: a.cover_image_url ?? null,
+        readTime: a.read_time,
+        date: a.created_at,
+      }));
+
+      const staticArticles = blogPosts
+        .filter((p) => !supabaseSlugs.has(p.slug))
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+
+      const all = [...supabaseArticles, ...staticArticles]
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .slice(0, 4);
+
+      setLatest(all);
+    }
+    fetchLatest();
+  }, []);
+
   const newestDate = latest[0]?.date;
 
   return (
@@ -19,10 +53,7 @@ const BlogCarousel = () => {
             </span>
             <h2 className="text-2xl font-extrabold md:text-3xl mt-2">Nos derniers articles</h2>
           </div>
-          <Link
-            to="/blog"
-            className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all"
-          >
+          <Link to="/blog" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all">
             Voir tous les articles <ArrowRight size={16} />
           </Link>
         </div>
@@ -33,23 +64,14 @@ const BlogCarousel = () => {
             return (
               <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
                 <motion.article
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="overflow-hidden rounded-xl bg-card shadow-card hover:shadow-elevated transition-all h-full flex flex-col"
-                >
+                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
+                  className="overflow-hidden rounded-xl bg-card shadow-card hover:shadow-elevated transition-all h-full flex flex-col">
                   <div className="aspect-[16/9] overflow-hidden relative">
                     {article.coverImageUrl ? (
-                      <img
-                        src={article.coverImageUrl}
-                        alt={article.title}
+                      <img src={article.coverImageUrl} alt={article.title}
                         className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                        loading="lazy"
-                        decoding="async"
-                        width={640}
-                        height={360}
-                      />
+                        loading="lazy" decoding="async" width={640} height={360} />
                     ) : (
                       <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
                         <span className="text-3xl font-bold text-primary/30">{article.title.charAt(0)}</span>
@@ -62,20 +84,14 @@ const BlogCarousel = () => {
                     )}
                   </div>
                   <div className="p-4 flex flex-col flex-1">
-                    <h3 className="text-sm font-bold leading-snug group-hover:text-primary transition-colors line-clamp-2">
-                      {article.title}
-                    </h3>
-                    <p className="mt-2 text-xs text-muted-foreground line-clamp-2 flex-1">
-                      {article.excerpt}
-                    </p>
+                    <h3 className="text-sm font-bold leading-snug group-hover:text-primary transition-colors line-clamp-2">{article.title}</h3>
+                    <p className="mt-2 text-xs text-muted-foreground line-clamp-2 flex-1">{article.excerpt}</p>
                     <div className="mt-3 flex items-center gap-3 text-[11px] text-muted-foreground">
                       <span className="flex items-center gap-1">
                         <Calendar size={11} />
                         {new Date(article.date).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}
                       </span>
-                      <span className="flex items-center gap-1">
-                        <Clock size={11} /> {article.readTime}
-                      </span>
+                      <span className="flex items-center gap-1"><Clock size={11} /> {article.readTime}</span>
                     </div>
                   </div>
                 </motion.article>
@@ -85,10 +101,7 @@ const BlogCarousel = () => {
         </div>
 
         <div className="mt-8 text-center md:hidden">
-          <Link
-            to="/blog"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
-          >
+          <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
             Voir tous les articles <ArrowRight size={16} />
           </Link>
         </div>
