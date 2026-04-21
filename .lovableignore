@@ -1,0 +1,15 @@
+src/pages/admin/
+src/components/admin/
+src/components/client/
+src/hooks/useAdminAuth.ts
+src/hooks/useClientAuth.ts
+src/pages/ResetPassword.tsx
+src/pages/ConnexionClient.tsx
+src/pages/EspaceClient.tsx
+src/pages/EspaceClientMessages.tsx
+src/pages/EspaceClientDocuments.tsx
+src/pages/EspaceClientFactures.tsx
+src/pages/EspaceClientDocumentsFactures.tsx
+src/pages/FormulaireClient.tsx
+src/components/GoogleReviewsSection.tsx
+src/App.tsx
