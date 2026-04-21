@@ -10,7 +10,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index";
 import ScrollToTop from "./components/ScrollToTop";
 
-// Lazy-loaded pages for code splitting
+// Pages publiques
 const AuditSeo = lazy(() => import("./pages/AuditSeo"));
 const CreationSite = lazy(() => import("./pages/CreationSite"));
 const ReferencementSeo = lazy(() => import("./pages/ReferencementSeo"));
@@ -41,6 +41,8 @@ const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminClients = lazy(() => import("./pages/admin/AdminClients"));
 const AdminClientDetail = lazy(() => import("./pages/admin/AdminClientDetail"));
 const AdminSoumissions = lazy(() => import("./pages/admin/AdminSoumissions"));
+const AdminBlog = lazy(() => import("./pages/admin/AdminBlog"));
+const AdminBlogEditor = lazy(() => import("./pages/admin/AdminBlogEditor"));
 
 const queryClient = new QueryClient();
 
@@ -88,6 +90,8 @@ const App = () => (
                 <Route path="/admin/clients" element={<AdminClients />} />
                 <Route path="/admin/clients/:id" element={<AdminClientDetail />} />
                 <Route path="/admin/soumissions" element={<AdminSoumissions />} />
+                <Route path="/admin/blog" element={<AdminBlog />} />
+                <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
 
                 <Route path="*" element={<NotFound />} />
               </Routes>
