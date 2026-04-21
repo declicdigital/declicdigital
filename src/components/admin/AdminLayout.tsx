@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Users, FileText, LogOut, Menu, X } from "lucide-react";
+import { LayoutDashboard, Users, FileText, LogOut, Menu, X, BookOpen } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/logo-declic-digital-new.webp";
 
@@ -8,6 +8,7 @@ const navItems = [
   { to: "/admin/dashboard", icon: LayoutDashboard, label: "Tableau de bord" },
   { to: "/admin/clients", icon: Users, label: "Clients" },
   { to: "/admin/soumissions", icon: FileText, label: "Soumissions" },
+  { to: "/admin/blog", icon: BookOpen, label: "Blog" },
 ];
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
@@ -27,7 +28,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
       {/* Sidebar desktop */}
       <aside className="hidden lg:flex flex-col w-64 fixed h-full border-r" style={{ background: "hsl(263, 36%, 13%)", borderColor: "rgba(255,255,255,0.07)" }}>
-        {/* Logo */}
         <div className="p-5 border-b" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
           <Link to="/" target="_blank" rel="noopener noreferrer">
             <img src={logo} alt="Déclic Digital" className="h-12 w-auto object-contain" />
@@ -37,7 +37,6 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           </p>
         </div>
 
-        {/* Nav */}
         <nav className="flex-1 p-4 space-y-1">
           {navItems.map((item) => (
             <Link
@@ -55,18 +54,15 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           ))}
         </nav>
 
-        {/* Footer sidebar */}
         <div className="p-4 border-t" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
           <a href="https://declicdigital.net" target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs transition-all mb-2"
             style={{ color: "rgba(255,255,255,0.30)" }}>
             ↗ Voir le site
           </a>
-          <button
-            onClick={handleLogout}
+          <button onClick={handleLogout}
             className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all w-full hover:bg-red-500/10"
-            style={{ color: "rgba(255,255,255,0.35)" }}
-          >
+            style={{ color: "rgba(255,255,255,0.35)" }}>
             <LogOut size={16} />
             Déconnexion
           </button>
@@ -101,11 +97,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                 {item.label}
               </Link>
             ))}
-            <button
-              onClick={handleLogout}
+            <button onClick={handleLogout}
               className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium w-full"
-              style={{ color: "rgba(255,255,255,0.35)" }}
-            >
+              style={{ color: "rgba(255,255,255,0.35)" }}>
               <LogOut size={16} />
               Déconnexion
             </button>
