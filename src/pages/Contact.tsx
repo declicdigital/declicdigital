@@ -4,7 +4,7 @@ import MapEmbed from "@/components/MapEmbed";
 import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Link } from "react-router-dom";
-import { Mail, Phone, MapPin, CheckCircle } from "lucide-react";
+import { Mail, Phone, MapPin, CheckCircle, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -12,35 +12,47 @@ import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 
+const SUPABASE_URL = "https://iskxljribvfypkyappku.supabase.co";
+const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza3hsanJpYnZmeXBreWFwcGt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2NjQ0MzMsImV4cCI6MjA5MjI0MDQzM30.OgWh7kKknHgdG4JMTFbNC_XdZhncnEqzJQA0GbRI_uY";
 const CONTACT_EMAIL = "contact@declicdigital.net";
 
 const Contact = () => {
   const [form, setForm] = useState({
-    full_name: "",
-    company: "",
-    email: "",
-    phone: "",
-    current_url: "",
-    msg: "",
+    full_name: "", company: "", email: "", phone: "", current_url: "", msg: "",
   });
+  const [sending, setSending] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.full_name || !form.email || !form.msg) return;
-    const subject = encodeURIComponent(`Demande de devis - ${form.full_name}${form.company ? ` (${form.company})` : ""}`);
-    const body = encodeURIComponent(
-      `Nom : ${form.full_name}\n` +
-      `Entreprise : ${form.company || "—"}\n` +
-      `Email : ${form.email}\n` +
-      `Téléphone : ${form.phone || "—"}\n` +
-      `Site actuel : ${form.current_url || "—"}\n\n` +
-      `Message :\n${form.msg}`
-    );
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    setSending(true);
+    setError("");
+
+    try {
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/send-contact`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": ANON_KEY,
+          "Authorization": `Bearer ${ANON_KEY}`,
+        },
+        body: JSON.stringify({ ...form, form_type: "contact" }),
+      });
+
+      if (!res.ok) throw new Error("Erreur envoi");
+      setSent(true);
+      setForm({ full_name: "", company: "", email: "", phone: "", current_url: "", msg: "" });
+    } catch {
+      setError("Une erreur est survenue. Réessayez ou contactez-nous directement.");
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -59,7 +71,6 @@ const Contact = () => {
           url: "https://declicdigital.net",
           telephone: "+33602228939",
           email: CONTACT_EMAIL,
-          image: "https://declicdigital.net/og/contact.webp",
           priceRange: "€€",
           address: {
             "@type": "PostalAddress",
@@ -110,26 +121,39 @@ const Contact = () => {
                 ))}
               </div>
             </motion.div>
+
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
               <div className="rounded-2xl border border-border bg-card p-6 md:p-8 shadow-card">
                 <h2 className="mb-6 text-2xl font-extrabold">Demandez votre devis</h2>
-                <form className="space-y-4" onSubmit={handleSubmit}>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <Input name="full_name" placeholder="Votre nom" className="rounded-xl" required value={form.full_name} onChange={handleChange} />
-                    <Input name="company" placeholder="Nom de votre entreprise" className="rounded-xl" value={form.company} onChange={handleChange} />
+
+                {sent ? (
+                  <div className="text-center py-8">
+                    <CheckCircle size={48} className="text-green-500 mx-auto mb-4" />
+                    <h3 className="text-xl font-bold mb-2">Message envoyé !</h3>
+                    <p className="text-muted-foreground">Nous vous répondrons dans les 24 heures ouvrées.</p>
                   </div>
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <Input name="email" placeholder="Votre email" type="email" className="rounded-xl" required value={form.email} onChange={handleChange} />
-                    <Input name="phone" placeholder="Votre téléphone" type="tel" className="rounded-xl" value={form.phone} onChange={handleChange} />
-                  </div>
-                  <Input name="current_url" placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" value={form.current_url} onChange={handleChange} />
-                  <Textarea name="msg" placeholder="Décrivez votre projet : type de site souhaité, objectifs, fonctionnalités..." className="rounded-xl min-h-[120px]" required value={form.msg} onChange={handleChange} />
-                  <Button type="submit" variant="custom" size="lg" className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
-                    <CheckCircle size={18} className="mr-2" />
-                    Envoyer ma demande
-                  </Button>
-                  <p className="text-xs text-muted-foreground text-center">Le formulaire ouvre votre logiciel email pré-rempli.</p>
-                </form>
+                ) : (
+                  <form className="space-y-4" onSubmit={handleSubmit}>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <Input name="full_name" placeholder="Votre nom" className="rounded-xl" required value={form.full_name} onChange={handleChange} />
+                      <Input name="company" placeholder="Nom de votre entreprise" className="rounded-xl" value={form.company} onChange={handleChange} />
+                    </div>
+                    <div className="grid gap-4 sm:grid-cols-2">
+                      <Input name="email" placeholder="Votre email" type="email" className="rounded-xl" required value={form.email} onChange={handleChange} />
+                      <Input name="phone" placeholder="Votre téléphone" type="tel" className="rounded-xl" value={form.phone} onChange={handleChange} />
+                    </div>
+                    <Input name="current_url" placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" value={form.current_url} onChange={handleChange} />
+                    <Textarea name="msg" placeholder="Décrivez votre projet..." className="rounded-xl min-h-[120px]" required value={form.msg} onChange={handleChange} />
+
+                    {error && <p className="text-red-500 text-sm">{error}</p>}
+
+                    <Button type="submit" variant="custom" size="lg" disabled={sending}
+                      className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
+                      {sending ? <Loader2 size={18} className="mr-2 animate-spin" /> : <CheckCircle size={18} className="mr-2" />}
+                      {sending ? "Envoi en cours..." : "Envoyer ma demande"}
+                    </Button>
+                  </form>
+                )}
               </div>
             </motion.div>
           </div>
@@ -142,18 +166,6 @@ const Contact = () => {
           <p className="mt-4 text-muted-foreground">Nous intervenons <Link to="/nos-villes" className="text-primary font-semibold hover:underline">à Paris et dans le 92</Link>, en présentiel ou à distance.</p>
         </div>
         <MapEmbed />
-      </SectionWrapper>
-
-      <SectionWrapper>
-        <div className="mx-auto max-w-3xl space-y-6">
-          <h2 className="text-3xl font-extrabold md:text-4xl text-center">Pourquoi faire appel à une agence web pour votre site ?</h2>
-          <p className="text-muted-foreground leading-relaxed">
-            Créer un <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">site web professionnel</Link> ne se résume pas à assembler quelques pages. Il faut penser à l'expérience utilisateur, au design, à la vitesse de chargement, à l'optimisation pour les moteurs de recherche et à la compatibilité mobile.
-          </p>
-          <p className="text-muted-foreground leading-relaxed">
-            Pour une TPE ou un indépendant, un site web bien conçu est un investissement rentable. Découvrez <Link to="/realisations" className="text-primary font-semibold hover:underline">nos réalisations</Link>.
-          </p>
-        </div>
       </SectionWrapper>
 
       <GoogleReviewsSection compact maxReviews={3} />
