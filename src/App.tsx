@@ -1,7 +1,6 @@
 import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-
 const GeoRedirect = () => <Navigate to="/visibilite-ia" replace />;
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -32,8 +31,8 @@ const NotFound = lazy(() => import("./pages/NotFound"));
 const PolitiqueConfidentialite = lazy(() => import("./pages/PolitiqueConfidentialite"));
 const Geo = lazy(() => import("./pages/Geo"));
 const RendezVous = lazy(() => import("./pages/RendezVous"));
-const FormulaireClient = lazy(() => import("./pages/FormulaireClient"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
+const FormulaireClient = lazy(() => import("./pages/FormulaireClient"));
 
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -42,6 +41,12 @@ const AdminClientDetail = lazy(() => import("./pages/admin/AdminClientDetail"));
 const AdminSoumissions = lazy(() => import("./pages/admin/AdminSoumissions"));
 const AdminBlog = lazy(() => import("./pages/admin/AdminBlog"));
 const AdminBlogEditor = lazy(() => import("./pages/admin/AdminBlogEditor"));
+
+const ConnexionClient = lazy(() => import("./pages/ConnexionClient"));
+const EspaceClient = lazy(() => import("./pages/EspaceClient"));
+const EspaceClientMessages = lazy(() => import("./pages/EspaceClientMessages"));
+const EspaceClientDocuments = lazy(() => import("./pages/EspaceClientDocuments"));
+const EspaceClientFactures = lazy(() => import("./pages/EspaceClientFactures"));
 
 const queryClient = new QueryClient();
 
@@ -78,9 +83,10 @@ const App = () => (
                 <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialite />} />
                 <Route path="/visibilite-ia" element={<Geo />} />
                 <Route path="/rendez-vous" element={<RendezVous />} />
-                <Route path="/brief" element={<FormulaireClient />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/geo" element={<GeoRedirect />} />
+                <Route path="/brief" element={<FormulaireClient />} />
+
                 <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
@@ -89,6 +95,13 @@ const App = () => (
                 <Route path="/admin/soumissions" element={<AdminSoumissions />} />
                 <Route path="/admin/blog" element={<AdminBlog />} />
                 <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
+
+                <Route path="/connexion" element={<ConnexionClient />} />
+                <Route path="/espace-client" element={<EspaceClient />} />
+                <Route path="/espace-client/messages" element={<EspaceClientMessages />} />
+                <Route path="/espace-client/documents" element={<EspaceClientDocuments />} />
+                <Route path="/espace-client/factures" element={<EspaceClientFactures />} />
+
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
