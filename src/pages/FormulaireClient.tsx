@@ -143,8 +143,8 @@ const FormulaireClient = () => {
         ? teamMembers.map(m => ({ name: m.name, role: m.role, bio: m.bio, photo_name: m.photo?.name || "" }))
         : [];
 
-      // Envoyer via Edge Function send-contact
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/send-contact`, {
+      // Créer le compte client + envoyer le brief
+      const res = await fetch(`${SUPABASE_URL}/functions/v1/create-client-account`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -163,7 +163,7 @@ const FormulaireClient = () => {
 
       if (!res.ok) throw new Error("Erreur envoi");
       setSent(true);
-      toast({ title: "Formulaire envoyé !", description: "Nous vous recontacterons sous 24h." });
+      toast({ title: "Compte créé !", description: "Votre espace client est prêt. Connectez-vous !" });
     } catch (err) {
       console.error(err);
       toast({ title: "Erreur", description: "Une erreur est survenue, veuillez réessayer.", variant: "destructive" });
@@ -181,13 +181,21 @@ const FormulaireClient = () => {
               <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full gradient-miami shadow-elevated">
                 <CheckCircle className="h-10 w-10 text-primary-foreground" />
               </div>
-              <h1 className="text-3xl font-extrabold mb-4">C'est envoyé !</h1>
-              <p className="text-muted-foreground text-lg mb-8">
-                Déclic Digital a bien reçu votre projet et reviendra vers vous avec une proposition personnalisée sous 24h.
+              <h1 className="text-3xl font-extrabold mb-4">Votre compte est créé ! 🎉</h1>
+              <p className="text-muted-foreground text-lg mb-4">
+                Votre brief a été reçu et votre espace client est prêt. Vous allez recevoir un email de confirmation.
               </p>
-              <Button onClick={() => window.location.href = "/"} variant="outline" className="rounded-full">
-                Retour à l'accueil
-              </Button>
+              <p className="text-foreground font-medium mb-8">
+                Connectez-vous pour suivre l'avancement de votre projet.
+              </p>
+              <div className="flex gap-3 justify-center flex-wrap">
+                <Button onClick={() => window.location.href = "/connexion"} className="rounded-full gradient-primary btn-glow text-white">
+                  Accéder à mon espace client →
+                </Button>
+                <Button onClick={() => window.location.href = "/"} variant="outline" className="rounded-full">
+                  Retour à l'accueil
+                </Button>
+              </div>
             </motion.div>
           </div>
         </section>
