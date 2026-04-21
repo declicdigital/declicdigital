@@ -10,7 +10,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index";
 import ScrollToTop from "./components/ScrollToTop";
 
-// Pages publiques
 const AuditSeo = lazy(() => import("./pages/AuditSeo"));
 const CreationSite = lazy(() => import("./pages/CreationSite"));
 const ReferencementSeo = lazy(() => import("./pages/ReferencementSeo"));
@@ -35,7 +34,6 @@ const Geo = lazy(() => import("./pages/Geo"));
 const RendezVous = lazy(() => import("./pages/RendezVous"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 
-// Admin back-office
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
 const AdminClients = lazy(() => import("./pages/admin/AdminClients"));
@@ -55,9 +53,8 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <ScrollToTop />
-            <Suspense fallback={<div className="min-h-screen" />}>
+            <Suspense fallback={<div className="min-h-screen bg-background" />}>
               <Routes>
-                {/* Site public */}
                 <Route path="/" element={<Index />} />
                 <Route path="/audit-seo-gratuit" element={<AuditSeo />} />
                 <Route path="/creation-site-web" element={<CreationSite />} />
@@ -82,8 +79,6 @@ const App = () => (
                 <Route path="/rendez-vous" element={<RendezVous />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/geo" element={<GeoRedirect />} />
-
-                {/* Admin back-office */}
                 <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
                 <Route path="/admin/dashboard" element={<AdminDashboard />} />
@@ -92,7 +87,6 @@ const App = () => (
                 <Route path="/admin/soumissions" element={<AdminSoumissions />} />
                 <Route path="/admin/blog" element={<AdminBlog />} />
                 <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
-
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </Suspense>
