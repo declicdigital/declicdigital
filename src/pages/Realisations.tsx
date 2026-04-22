@@ -11,8 +11,17 @@ import portfolioOffg from "@/assets/site-vitrine-artiste-musical.webp";
 import portfolioAploz from "@/assets/site-aploz-agence-video-publicitaire.webp";
 import portfolioNjPhoto from "@/assets/site-photographe-professionnelle.webp";
 import portfolioTracker from "@/assets/site-artisan-tracker-solaire.jpg";
+import portfolioLudovic from "@/assets/site-athlete-ludovic-delpuech.png";
 
 const projects = [
+  {
+    id: "ludovic-delpuech",
+    name: "Ludovic Delpuech",
+    description: "Site vitrine pour un athlète demi-fond et cross. Design dynamique et immersif avec palmarès, galerie photos, actualités et espace partenaires.",
+    url: "https://ludovicdelpuech.lovable.app",
+    image: portfolioLudovic,
+    tags: ["Site vitrine", "Sport", "Athlétisme"],
+  },
   {
     id: "un-artisan",
     name: "Un-Artisan.com",
@@ -56,6 +65,7 @@ const Realisations = () => (
       <link rel="canonical" href="https://declicdigital.net/realisations" />
     </Helmet>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Création de site web", href: "/creation-site-web" }, { label: "Réalisations" }]} />
+
     {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container text-center">
@@ -127,40 +137,22 @@ const Realisations = () => (
         <h2 className="text-2xl font-extrabold mb-4">Nos services</h2>
         <p className="text-muted-foreground mb-6">Vous aussi, vous voulez un site qui attire des clients ? Découvrez nos solutions.</p>
         <div className="flex flex-wrap justify-center gap-3">
-          <Link to="/creation-site-web" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-            Création de site web
-          </Link>
-          <Link to="/referencement-seo" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-            Référencement SEO
-          </Link>
-          <Link to="/contact" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-            Audit SEO gratuit
-          </Link>
-          <Link to="/tarifs" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-            Nos tarifs
-          </Link>
-          <Link to="/nos-villes" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-            Nos villes
-          </Link>
-          <Link to="/faq" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">
-            Questions fréquentes
-          </Link>
+          <Link to="/creation-site-web" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">Création de site web</Link>
+          <Link to="/referencement-seo" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">Référencement SEO</Link>
+          <Link to="/contact" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">Audit SEO gratuit</Link>
+          <Link to="/tarifs" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">Nos tarifs</Link>
+          <Link to="/nos-villes" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">Nos villes</Link>
+          <Link to="/faq" className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors">Questions fréquentes</Link>
         </div>
       </div>
     </SectionWrapper>
 
-    {/* Avis clients */}
     <GoogleReviewsSection compact maxReviews={3} />
 
-    {/* CTA */}
     <section className="gradient-miami py-16 text-center">
       <div className="container">
-        <h2 className="mb-4 text-3xl font-extrabold text-white">
-          Votre projet sera le prochain ?
-        </h2>
-        <p className="mx-auto mb-8 max-w-lg text-white/80">
-          Contactez-nous pour discuter de votre projet et obtenir un devis.
-        </p>
+        <h2 className="mb-4 text-3xl font-extrabold text-white">Votre projet sera le prochain ?</h2>
+        <p className="mx-auto mb-8 max-w-lg text-white/80">Contactez-nous pour discuter de votre projet et obtenir un devis.</p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
             <Link to="/rendez-vous">Prendre rendez-vous</Link>
