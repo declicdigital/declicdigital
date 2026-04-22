@@ -15,8 +15,7 @@ import logoLovable from "@/assets/logos/lovable.webp";
 import logoClaude from "@/assets/logos/claude.svg";
 import logoSemrush from "@/assets/logos/semrush.webp";
 import logoSearchConsole from "@/assets/logos/search-console.webp";
-import logoGemini from "@/assets/logos/gemini.png";
-import logoLinkedin from "@/assets/logos/linkedin.png";
+import logoChatgpt from "@/assets/logos/chatgpt.webp";
 
 const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
 const LocationSection = lazy(() => import("@/components/LocationSection"));
@@ -26,8 +25,7 @@ const techLogos = [
   { name: "Shopify", src: logoShopify },
   { name: "Lovable", src: logoLovable },
   { name: "Claude AI", src: logoClaude },
-  { name: "Gemini", src: logoGemini },
-  { name: "LinkedIn", src: logoLinkedin },
+  { name: "ChatGPT", src: logoChatgpt },
   { name: "Semrush", src: logoSemrush },
   { name: "Search Console", src: logoSearchConsole },
 ];
@@ -36,10 +34,10 @@ const Index = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>Création site internet & SEO à Paris (92) | Déclic Digital</title>
+        <title>Création site internet, SEO &amp; GEO | Paris et Hauts-de-Seine</title>
         <meta
           name="description"
-          content="Déclic Digital, agence web à Paris et dans les Hauts-de-Seine (92). Création de site internet professionnel et référencement SEO pour TPE et artisans. Audit gratuit, devis en 24h."
+          content="Agence web à Paris (92) — création de site internet, SEO et visibilité IA pour TPE et artisans. Audit SEO gratuit, devis en 24h. Expert Produit Google."
         />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://declicdigital.net" />
