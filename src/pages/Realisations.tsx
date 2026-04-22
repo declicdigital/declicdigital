@@ -9,9 +9,9 @@ import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import portfolioOffg from "@/assets/site-vitrine-artiste-musical.webp";
 import portfolioAploz from "@/assets/site-aploz-agence-video-publicitaire.webp";
-import portfolioNjPhoto from "@/assets/site-photographe-professionnelle.webp";
 import portfolioTracker from "@/assets/site-artisan-tracker-solaire.jpg";
 import portfolioLudovic from "@/assets/site-athlete-ludovic-delpuech.png";
+import portfolioConciergerie from "@/assets/site-conciergerie-5-etoiles.png";
 
 const projects = [
   {
@@ -23,20 +23,20 @@ const projects = [
     tags: ["Site vitrine", "Sport", "Athlétisme"],
   },
   {
-    id: "un-artisan",
-    name: "Un-Artisan.com",
-    description: "Site vitrine pour un artisan spécialisé dans les trackers solaires. Design moderne avec présentation des solutions et réalisations.",
-    url: "https://un-artisan-com.lovable.app",
-    image: portfolioTracker,
-    tags: ["Site vitrine", "Artisan", "Énergie solaire"],
-  },
-  {
     id: "aploz",
     name: "Aploz",
     description: "Site vitrine pour une agence vidéo publicitaire. Design sombre et immersif avec showreel intégré et études de cas clients.",
     url: "https://aploz.lovable.app/",
     image: portfolioAploz,
     tags: ["Site vitrine", "Vidéo", "Publicité"],
+  },
+  {
+    id: "conciergerie-5-etoiles",
+    name: "Conciergerie 5 Étoiles",
+    description: "Site vitrine pour une conciergerie Airbnb haut de gamme sur la Côte d'Azur. Design luxueux avec présentation des services de gestion locative.",
+    url: "https://conciergerie5etoiles.lovable.app",
+    image: portfolioConciergerie,
+    tags: ["Site vitrine", "Conciergerie", "Luxe"],
   },
   {
     id: "offg",
@@ -47,12 +47,12 @@ const projects = [
     tags: ["Site vitrine", "Musique"],
   },
   {
-    id: "njphoto",
-    name: "NJ Photography",
-    description: "Site vitrine pour une photographe professionnelle. Design élégant et immersif avec portfolio visuel.",
-    url: "https://njphotography.lovable.app/",
-    image: portfolioNjPhoto,
-    tags: ["Site vitrine", "Photographie"],
+    id: "un-artisan",
+    name: "Un-Artisan.com",
+    description: "Site vitrine pour un artisan spécialisé dans les trackers solaires. Design moderne avec présentation des solutions et réalisations.",
+    url: "https://un-artisan-com.lovable.app",
+    image: portfolioTracker,
+    tags: ["Site vitrine", "Artisan", "Énergie solaire"],
   },
 ];
 
@@ -66,13 +66,10 @@ const Realisations = () => (
     </Helmet>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Création de site web", href: "/creation-site-web" }, { label: "Réalisations" }]} />
 
-    {/* Hero */}
     <section className="gradient-hero py-16 md:py-24">
       <div className="container text-center">
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-          <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">
-            Portfolio
-          </span>
+          <span className="mb-4 inline-block rounded-full bg-primary/10 px-4 py-1.5 text-xs font-semibold text-primary">Portfolio</span>
           <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
             Nos réalisations : sites web professionnels créés pour des artisans et TPE en Île-de-France
           </h1>
@@ -88,41 +85,24 @@ const Realisations = () => (
       </div>
     </section>
 
-    {/* Projects grid */}
     <SectionWrapper>
       <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {projects.map((project) => (
-          <motion.a
-            key={project.id}
-            href={project.url}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={false}
-            className="group block overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-xl transition-all duration-300"
-          >
+          <motion.a key={project.id} href={project.url} target="_blank" rel="noopener noreferrer" initial={false}
+            className="group block overflow-hidden rounded-2xl border border-border bg-card shadow-sm hover:shadow-xl transition-all duration-300">
             <div className="relative overflow-hidden">
-              <img
-                src={project.image}
-                alt={`Réalisation site web ${project.name}`}
-                className="aspect-video w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
-              />
+              <img src={project.image} alt={`Réalisation site web ${project.name}`}
+                className="aspect-video w-full object-cover object-top transition-transform duration-500 group-hover:scale-105" loading="lazy" />
               <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/10 transition-colors duration-300 flex items-center justify-center">
                 <ExternalLink className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" size={32} />
               </div>
             </div>
             <div className="p-6">
-              <h2 className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                {project.name}
-              </h2>
-              <p className="mb-4 text-sm text-muted-foreground leading-relaxed">
-                {project.description}
-              </p>
+              <h2 className="mb-2 text-xl font-bold text-foreground group-hover:text-primary transition-colors">{project.name}</h2>
+              <p className="mb-4 text-sm text-muted-foreground leading-relaxed">{project.description}</p>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
-                  <span key={tag} className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
-                    {tag}
-                  </span>
+                  <span key={tag} className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">{tag}</span>
                 ))}
               </div>
             </div>
@@ -131,7 +111,6 @@ const Realisations = () => (
       </div>
     </SectionWrapper>
 
-    {/* Maillage */}
     <SectionWrapper>
       <div className="mx-auto max-w-3xl text-center">
         <h2 className="text-2xl font-extrabold mb-4">Nos services</h2>
