@@ -1,202 +1,35 @@
-import { Link } from "react-router-dom";
-import { Helmet } from "react-helmet-async";
-import { Calendar, Clock, ArrowRight, Tag, Sparkles } from "lucide-react";
-import PageLayout from "@/components/PageLayout";
-import PageBreadcrumb from "@/components/PageBreadcrumb";
-import { blogPosts, blogCategories, getCategorySlug } from "@/data/blogPosts";
+// AUTO-GENERATED - Images Unsplash libres de droits
+export interface BlogPost {
+  id: string; slug: string; title: string; excerpt: string; content: string;
+  coverImageUrl: string | null; category: string; tags: string[]; readTime: string;
+  metaTitle: string; metaDescription: string; relatedSlugs: string[]; date: string;
+}
 
-const categoryColors: Record<string, string> = {
-  "Création de site": "bg-violet-500/15 text-violet-700 dark:text-violet-400",
-  "SEO & Performance": "bg-emerald-500/15 text-emerald-700 dark:text-emerald-400",
-  "Stratégie digitale": "bg-rose-500/15 text-rose-700 dark:text-rose-400",
-  "GEO, Visibilité IA": "bg-sky-500/15 text-sky-700 dark:text-sky-400",
-  "Business": "bg-amber-500/15 text-amber-700 dark:text-amber-400",
-};
+export const blogPosts: BlogPost[] = [
+  { id: "939aedc2-34cd-4ff9-b660-5c52e7ed9461", slug: "core-web-vitals-google-experience-utilisateur", title: "Core Web Vitals : ce que Google mesure sur votre site (et comment améliorer votre score)", excerpt: "Les Core Web Vitals sont les critères techniques de Google pour évaluer l'expérience utilisateur.", content: "<h2>Les 3 métriques Core Web Vitals</h2><p>LCP (vitesse d'affichage, objectif &lt; 2,5s), INP (réactivité, objectif &lt; 200ms), CLS (stabilité visuelle, objectif &lt; 0,1).</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/audit-seo-gratuit\" data-label=\"Vérifier les performances techniques\"><span class=\"cta-editor-preview cta-editor-secondary\">Vérifier les performances techniques</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80", category: "SEO & Performance", tags: ["Core Web Vitals", "LCP", "CLS", "INP", "SEO technique"], readTime: "2 min", metaTitle: "Core Web Vitals : ce que Google mesure sur votre site", metaDescription: "Les Core Web Vitals sont les critères techniques de Google pour évaluer l'expérience utilisateur. Comprendre ces métriques pour améliorer votre classement.", relatedSlugs: [], date: "2026-04-19T06:00:00+00:00" },
+  { id: "7f012570-f3d7-4efa-80f7-92ac484796e8", slug: "google-ai-overviews-visibilite-locale-tpe", title: "Google AI Overviews : ce que ça change concrètement pour votre visibilité locale en 2026", excerpt: "Google AI Overviews modifie en profondeur les résultats de recherche.", content: "<h2>Quel impact réel ?</h2><p>Les requêtes transactionnelles locales conservent des résultats classiques. Concentrez-vous sur celles-là.</p><h2>Comment être cité ?</h2><p>Autorité du domaine, qualité du contenu, fraîcheur, bonne expérience utilisateur.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/audit-seo-gratuit\" data-label=\"Demander un audit SEO gratuit\"><span class=\"cta-editor-preview cta-editor-secondary\">Demander un audit SEO gratuit</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=800&q=80", category: "SEO & Performance", tags: ["Google AI Overviews", "référencement local IA", "visibilité Google 2026"], readTime: "2 min", metaTitle: "Google AI Overviews : ce que ça change pour votre visibilité locale", metaDescription: "Google AI Overviews modifie en profondeur les résultats de recherche. Ce que cela signifie pour les indépendants et TPE.", relatedSlugs: [], date: "2026-04-17T09:00:00+00:00" },
+  { id: "4d73df8c-c1e9-4202-80e1-5822b16e20cd", slug: "geo-generative-engine-optimization-chatgpt-perplexity", title: "GEO : le nouveau référencement qui vous fait apparaître dans les réponses de ChatGPT et Perplexity", excerpt: "Le GEO est la nouvelle frontière du référencement pour être cité par les IA génératives.", content: "<h2>Qu'est-ce que le GEO ?</h2><p>L'ensemble des techniques pour être cité dans les réponses de ChatGPT, Perplexity, Google AI Overviews ou Claude.</p><h2>4 actions prioritaires</h2><p>FAQ complète, cohérence de présence en ligne, contenus précis, mentions externes.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/contact\" data-label=\"Mon audit SEO gratuit\"><span class=\"cta-editor-preview cta-editor-secondary\">Mon audit SEO gratuit</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=80", category: "GEO, Visibilité IA", tags: ["GEO", "Generative Engine Optimization", "référencement IA"], readTime: "2 min", metaTitle: "GEO : comment apparaître dans les réponses de ChatGPT et Perplexity ?", metaDescription: "Le GEO est la nouvelle frontière du référencement. Découvrez comment être cité par les IA génératives.", relatedSlugs: [], date: "2026-04-15T09:00:00+00:00" },
+  { id: "1c704d75-044a-4e22-8176-3d1f7c834015", slug: "tunnel-conversion-visiteurs-clients-site-web", title: "Tunnel de conversion : pourquoi vos visiteurs ne deviennent pas des clients (et comment y remédier)", excerpt: "Votre site reçoit des visiteurs mais peu vous contactent ? Comprendre le tunnel de conversion.", content: "<h2>Les 4 étapes</h2><p>Découverte, intérêt, décision, action. À chaque étape des visiteurs abandonnent.</p><h2>Comment améliorer</h2><p>Numéro cliquable, appel à l'action clair, témoignages, formulaire à 3 champs maximum.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/contact\" data-label=\"Obtenir un Audit SEO gratuit\"><span class=\"cta-editor-preview cta-editor-secondary\">Obtenir un Audit SEO gratuit</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80", category: "Stratégie digitale", tags: ["tunnel de conversion", "taux de conversion site web"], readTime: "2 min", metaTitle: "Tunnel de conversion : comment transformer vos visiteurs en clients", metaDescription: "Votre site reçoit des visiteurs mais peu vous contactent ? Le tunnel de conversion vous permet de corriger les points de fuite.", relatedSlugs: [], date: "2026-04-13T09:00:00+00:00" },
+  { id: "7b7d08af-d1d7-4dfc-a1c8-daa4341c30b8", slug: "presence-en-ligne-artisan-leviers-clients", title: "Présence en ligne pour artisan : les 5 leviers qui génèrent vraiment des clients", excerpt: "Les 5 leviers concrets qui amènent de vrais clients, sans budget publicitaire.", content: "<h2>Levier 1 : Google Business Profile</h2><p>Gratuit et souvent plus efficace qu'un site mal référencé.</p><h2>Levier 2 : votre site web</h2><p>Clair, rapide, mobile.</p><h2>Levier 3 : les avis clients</h2><p>85% des consommateurs lisent des avis avant de choisir.</p><h2>Levier 4 : le SEO</h2><p>Trafic durable même sans investissement mensuel.</p><h2>Levier 5 : photos de réalisations</h2><p>Une photo vaut mille arguments.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/contact\" data-label=\"Demander un audit SEO gratuit\"><span class=\"cta-editor-preview cta-editor-secondary\">Demander un audit SEO gratuit</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=800&q=80", category: "Stratégie digitale", tags: ["présence en ligne artisan", "attirer clients artisan"], readTime: "2 min", metaTitle: "Présence en ligne pour artisan : les 5 leviers qui génèrent vraiment des clients", metaDescription: "Comment construire une présence en ligne efficace ? Les 5 leviers concrets qui amènent de vrais clients.", relatedSlugs: [], date: "2026-04-11T09:00:00+00:00" },
+  { id: "132426dd-32d0-41ab-b570-3a78b734ef35", slug: "refonte-site-web-signes-changer", title: "Refonte de site web : 7 signes qu'il est temps de passer à autre chose", excerpt: "Les 7 signes concrets qui indiquent qu'une refonte est nécessaire.", content: "<h2>Les 7 signes</h2><p>1. Affichage mobile cassé. 2. Site lent. 3. Taux de rebond élevé. 4. Invisible sur Google. 5. Design daté. 6. Contenus obsolètes. 7. Aucun contact généré.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/rendez-vous\" data-label=\"Prendre RDV avec un expert\"><span class=\"cta-editor-preview cta-editor-secondary\">Prendre RDV avec un expert</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800&q=80", category: "Création de site", tags: ["refonte site web", "site web obsolète"], readTime: "3 min", metaTitle: "Refonte de site web : 7 signes qu'il est temps de changer", metaDescription: "Votre site web date de plusieurs années ? Les 7 signes qui indiquent qu'une refonte est nécessaire.", relatedSlugs: [], date: "2026-04-09T09:00:00+00:00" },
+  { id: "fcfb07d7-76a0-4025-898d-8c98dc0ca84e", slug: "creer-site-web-independant-par-ou-commencer", title: "Créer son site web quand on est indépendant : le guide pour démarrer du bon pied", excerpt: "Les étapes essentielles pour réussir votre présence en ligne.", content: "<h2>Site vitrine, e-commerce ou portfolio ?</h2><p>Vitrine pour les services, e-commerce pour les produits, portfolio pour les créatifs.</p><h2>Les 5 pages indispensables</h2><p>Accueil, services, à propos, contact et blog.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/rendez-vous\" data-label=\"Prendre RDV avec un expert\"><span class=\"cta-editor-preview cta-editor-secondary\">Prendre RDV avec un expert</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&q=80", category: "Création de site", tags: ["créer site web indépendant", "site vitrine artisan"], readTime: "3 min", metaTitle: "Créer son site web quand on est indépendant : par où commencer ?", metaDescription: "Les étapes essentielles pour réussir votre présence en ligne sans vous perdre dans les détails.", relatedSlugs: [], date: "2026-04-07T09:00:00+00:00" },
+  { id: "7d682bad-08d0-4726-90e6-948291516fbe", slug: "audit-seo-gratuit-ce-quon-analyse", title: "Audit SEO gratuit : ce qu'on analyse et ce que ça révèle sur votre site", excerpt: "Que contient un audit SEO gratuit ? Découvrez les 8 points analysés par Déclic Digital.", content: "<h2>Les 8 points analysés</h2><p>Indexation Google, balises SEO, structure des titres, vitesse, compatibilité mobile, qualité du contenu, backlinks et fiche Google Business Profile.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/contact\" data-label=\"Demander un audit SEO\"><span class=\"cta-editor-preview cta-editor-secondary\">Demander un audit SEO</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?w=800&q=80", category: "SEO & Performance", tags: ["audit SEO", "SEO"], readTime: "2 min", metaTitle: "Audit SEO gratuit : ce qu'on analyse sur votre site", metaDescription: "Que contient un audit SEO gratuit ? Les 8 points analysés par Déclic Digital.", relatedSlugs: [], date: "2026-04-05T09:00:00+00:00" },
+  { id: "8149e774-fa51-463d-bbc0-254717aacb75", slug: "referencement-naturel-independant-2026", title: "Référencement naturel pour indépendant : par où commencer en 2026 ?", excerpt: "Le SEO expliqué simplement pour les indépendants.", content: "<h2>Le SEO sans jargon</h2><p>Apparaître en bonne position dans Google sans payer pour chaque clic.</p><h2>3 actions prioritaires</h2><p>Optimiser les balises title/meta, créer/optimiser la fiche GBP, écrire du contenu utile.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/rendez-vous\" data-label=\"Parlons de votre projet\"><span class=\"cta-editor-preview cta-editor-secondary\">Parlons de votre projet</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&q=80", category: "SEO & Performance", tags: ["SEO", "Référencement naturel", "Indépendants"], readTime: "2 min", metaTitle: "Référencement naturel pour indépendant : guide 2026", metaDescription: "Le SEO expliqué simplement. Par où commencer, quoi faire soi-même et quoi déléguer.", relatedSlugs: [], date: "2026-04-03T09:00:00+00:00" },
+  { id: "b6c5f94f-dc59-443e-86a9-48a4638893ed", slug: "seo-local-paris-artisan-google-maps", title: "SEO local à Paris : comment apparaître en premier sur Google Maps quand on est artisan ?", excerpt: "Le guide complet pour dominer Google Maps dans votre quartier.", content: "<h2>Le pack local Google</h2><p>Les 3 fiches avec carte captent plus de 50% des clics.</p><h2>5 facteurs de classement</h2><p>Proximité, pertinence fiche, avis, cohérence NAP, activité.</p><h2>Obtenir des avis 5 étoiles</h2><p>Envoyez un lien direct vers votre fiche Google à chaque client satisfait.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/rendez-vous\" data-label=\"Parlons de votre projet\"><span class=\"cta-editor-preview cta-editor-secondary\">Parlons de votre projet</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1508739773434-c26b3d09e071?w=800&q=80", category: "SEO & Performance", tags: ["SEO local", "Google Maps", "artisan Paris"], readTime: "3 min", metaTitle: "SEO local Paris artisan : apparaître sur Google Maps", metaDescription: "Comment apparaître en premier sur Google Maps ? Guide SEO local complet par Déclic Digital.", relatedSlugs: ["site-web-artisan-paris-pourquoi-il-ne-rapporte-pas", "combien-coute-creation-site-web-tpe-2026"], date: "2026-03-31T09:00:00+00:00" },
+  { id: "b2529e0c-5188-4c79-b51d-3ee9ec80904e", slug: "site-vitrine-ou-ecommerce-tpe-paris", title: "Site vitrine ou e-commerce : que choisir pour votre TPE parisienne ?", excerpt: "Comparatif complet entre site vitrine et e-commerce pour les TPE à Paris.", content: "<h2>Les différences</h2><p>Vitrine = présenter votre activité. E-commerce = vendre directement en ligne.</p><h2>Qui choisit quoi ?</h2><p>Artisans/libéraux : vitrine. Boutiques avec produits : e-commerce.</p><h2>Notre conseil</h2><p>Commencez par un vitrine SEO. Évoluez vers e-commerce si nécessaire.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/rendez-vous\" data-label=\"Prendre RDV\"><span class=\"cta-editor-preview cta-editor-secondary\">Prendre RDV</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&q=80", category: "Création de site", tags: ["site vitrine", "e-commerce", "TPE Paris"], readTime: "3 min", metaTitle: "Site vitrine ou e-commerce pour TPE Paris - Que choisir ?", metaDescription: "Site vitrine ou e-commerce : quelle solution pour votre TPE parisienne ?", relatedSlugs: ["combien-coute-creation-site-web-tpe-2026", "comment-generer-clients-site-web-independant"], date: "2026-03-28T09:00:00+00:00" },
+  { id: "972cb990-500f-46b3-a4df-b0ec2fd6cd3d", slug: "comment-generer-clients-site-web-independant", title: "Comment générer des clients avec son site web quand on est indépendant ?", excerpt: "6 éléments concrets pour transformer votre site vitrine en machine à leads.", content: "<h2>Les 6 éléments qui convertissent</h2><p>Proposition de valeur claire, preuves sociales, appel à l'action unique, formulaire simplifié, vitesse et confiance technique.</p><div class=\"cta-block\" data-cta-style=\"primary\" data-href=\"/audit-seo-gratuit\" data-label=\"Demander un audit SEO gratuit\"><span class=\"cta-editor-preview cta-editor-primary\">Demander un audit SEO gratuit</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&q=80", category: "Stratégie digitale", tags: ["génération de leads", "conversion", "SEO"], readTime: "3 min", metaTitle: "Générer des clients avec son site web — Guide indépendant", metaDescription: "Comment transformer votre site en machine à clients pour les indépendants et TPE.", relatedSlugs: ["site-web-artisan-paris-pourquoi-il-ne-rapporte-pas", "combien-coute-creation-site-web-tpe-2026"], date: "2026-03-25T09:00:00+00:00" },
+  { id: "20bf5fbe-0fb7-49ef-a5ba-48ff065d72e2", slug: "combien-coute-creation-site-web-tpe-2026", title: "Combien coûte vraiment la création d'un site web pour une TPE en 2026 ?", excerpt: "Tarifs réalistes, options et pièges à éviter pour votre site web.", content: "<h2>Les 3 types et leurs prix</h2><p>Vitrine simple : 800-2 500€. Vitrine + SEO : 2 000-5 000€. E-commerce : à partir de 4 000€.</p><h2>Les pièges à éviter</h2><p>Plateformes low-cost (SEO limité) et grandes agences qui surfacturent.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/rendez-vous\" data-label=\"Prendre RDV\"><span class=\"cta-editor-preview cta-editor-secondary\">Prendre RDV</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80", category: "Création de site", tags: ["prix site web", "TPE", "budget", "agence web Paris"], readTime: "3 min", metaTitle: "Prix création site web TPE en 2026 — Déclic Digital Paris", metaDescription: "Combien coûte vraiment un site web pour une TPE en 2026 ? Tarifs et pièges à éviter.", relatedSlugs: ["site-web-artisan-paris-pourquoi-il-ne-rapporte-pas", "vitesse-site-web-impact-chiffre-affaires"], date: "2026-03-22T09:00:00+00:00" },
+  { id: "0d8edd46-f1cc-40df-9b4e-fdcdf0e9d459", slug: "site-web-artisan-paris-pourquoi-il-ne-rapporte-pas", title: "Artisan à Paris : pourquoi votre site web ne vous rapporte aucun client (et comment y remédier)", excerpt: "Les 5 raisons et les solutions pour enfin attirer des clients à Paris.", content: "<h2>Les 5 raisons</h2><p>Site invisible, ne rassure pas, trop lent, pas d'appel à l'action, pas adapté mobile.</p><h2>Les éléments indispensables</h2><p>H1 clair, coordonnées visibles, galerie photos, avis clients, certifications.</p><h2>Exemple concret</h2><p>Électricien Paris 11e : de 3-4 appels/mois à 18-22 contacts/mois. ROI en 4 mois.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/rendez-vous\" data-label=\"Prendre RDV\"><span class=\"cta-editor-preview cta-editor-secondary\">Prendre RDV</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80", category: "Création de site", tags: ["artisan", "site web", "Paris", "SEO local", "conversion"], readTime: "3 min", metaTitle: "Site web artisan Paris : pourquoi il ne rapporte pas — Déclic Digital", metaDescription: "Votre site d'artisan ne génère aucun appel ? Les 5 raisons et les solutions.", relatedSlugs: ["vitesse-site-web-impact-chiffre-affaires", "tendances-web-design-2026"], date: "2026-03-19T09:00:00+00:00" },
+  { id: "b5d9de6d-5128-4418-b22d-138f098dfb71", slug: "vitesse-site-web-impact-chiffre-affaires", title: "Pourquoi un site lent vous fait perdre des clients (et du CA)", excerpt: "53% des visiteurs quittent un site qui met plus de 3 secondes à charger.", content: "<h2>Les chiffres</h2><p>53% des visiteurs mobiles abandonnent après 3 secondes. Chaque seconde réduit les conversions de 7%.</p><h2>Solutions concrètes</h2><p>Images WebP, lazy loading, minification CSS/JS, CDN, HTTP/2.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/rendez-vous\" data-label=\"Prendre RDV\"><span class=\"cta-editor-preview cta-editor-secondary\">Prendre RDV</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1537432376769-00f5c2f4c8d2?w=800&q=80", category: "SEO & Performance", tags: ["performance web", "vitesse", "SEO"], readTime: "2 min", metaTitle: "Vitesse de site web et chiffre d'affaires : le lien prouvé", metaDescription: "Un site lent fait fuir vos visiteurs. Les chiffres clés et les solutions concrètes.", relatedSlugs: ["comment-choisir-hebergement-web-2026"], date: "2026-03-16T09:00:00+00:00" },
+  { id: "dccd573a-7014-4986-b07e-ffd8d7acd367", slug: "tendances-web-design-2026", title: "Les 7 tendances web design qui dominent 2026", excerpt: "Minimalisme audacieux, animations fluides, typographies XXL : les codes visuels de 2026.", content: "<h2>Les 7 tendances</h2><p>Minimalisme audacieux, micro-interactions, typographie géante, mode sombre natif, dégradés 3D, grilles fluides, IA dans l'UX.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/audit-seo-gratuit\" data-label=\"Demander un audit SEO gratuit\"><span class=\"cta-editor-preview cta-editor-secondary\">Demander un audit SEO gratuit</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1545235617-9465d2a55698?w=800&q=80", category: "Création de site", tags: ["web design", "tendances", "UX", "UI"], readTime: "2 min", metaTitle: "Tendances web design 2026 : 7 styles incontournables", metaDescription: "Les 7 tendances web design de 2026 : minimalisme audacieux, micro-interactions, typographies XXL.", relatedSlugs: ["comment-choisir-hebergement-web-2026"], date: "2026-03-13T09:00:00+00:00" },
+  { id: "b2ec5009-a371-4a49-96c5-c153ef24caca", slug: "comment-choisir-hebergement-web-2026", title: "Comment choisir son hébergement web en 2026 ?", excerpt: "Vitesse, sécurité, support : les critères essentiels pour bien héberger votre site.", content: "<h2>Les types d'hébergement</h2><p>Mutualisé (3-15€/mois), VPS (15-60€/mois), cloud (le plus flexible).</p><h2>Critères de sélection</h2><p>TTFB &lt; 200ms, uptime 99,9%, SSL inclus, sauvegardes automatiques, support français.</p><h2>Notre recommandation</h2><p>Vercel, Netlify ou VPS OVH pour un site vitrine TPE.</p><div class=\"cta-block\" data-cta-style=\"secondary\" data-href=\"/rendez-vous\" data-label=\"Prendre RDV\"><span class=\"cta-editor-preview cta-editor-secondary\">Prendre RDV</span></div>", coverImageUrl: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80", category: "SEO & Performance", tags: ["hébergement web", "performance", "sécurité"], readTime: "2 min", metaTitle: "Comment choisir son hébergement web en 2026 | Guide complet", metaDescription: "Les critères essentiels pour choisir un hébergement web performant en 2026.", relatedSlugs: ["vitesse-site-web-impact-chiffre-affaires"], date: "2026-03-10T09:00:00+00:00" },
+];
 
-const Blog = () => {
-  const allArticles = [...blogPosts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
-
-  const featured = allArticles[0];
-  const rest = allArticles.slice(1);
-  const newestDate = featured?.date;
-
-  if (!featured) {
-    return (
-      <PageLayout hideBlogCarousel>
-        <div className="container py-20 text-center">
-          <h1 className="text-3xl font-bold">Blog</h1>
-          <p className="mt-4 text-muted-foreground">Aucun article pour le moment.</p>
-        </div>
-      </PageLayout>
-    );
-  }
-
-  return (
-    <PageLayout hideBlogCarousel>
-      <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Blog" }]} />
-      <Helmet>
-        <title>Blog création de site web, SEO et tech | Déclic Digital</title>
-        <meta name="description" content="Guides pratiques, tendances web design et conseils SEO pour les TPE et artisans. Apprenez à développer votre visibilité en ligne avec le blog Déclic Digital." />
-        <link rel="canonical" href="https://declicdigital.net/blog" />
-        <meta property="og:title" content="Blog web, SEO et tech pour TPE | Déclic Digital" />
-        <meta property="og:description" content="Guides pratiques, tendances web design et conseils SEO pour les TPE et artisans." />
-        <meta property="og:type" content="website" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Blog",
-            name: "Blog Déclic Digital",
-            description: "Guides pratiques, tendances web design et conseils SEO pour TPE",
-            url: "https://declicdigital.net/blog",
-            publisher: { "@type": "Organization", name: "Déclic Digital" },
-          })}
-        </script>
-      </Helmet>
-
-      {/* Hero */}
-      <section className="relative overflow-hidden" style={{ background: "hsl(263, 36%, 18%)" }}>
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-        }} />
-        <div className="container relative py-20 md:py-28">
-          <div className="max-w-2xl">
-            <span className="mb-4 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">Blog</span>
-            <h1 className="text-4xl font-extrabold leading-tight md:text-5xl lg:text-6xl text-white">
-              Veille web, SEO, GEO<br /><span className="text-gradient">& tech</span>
-            </h1>
-            <p className="mt-6 text-lg text-white/70 leading-relaxed max-w-lg">
-              Des articles pratiques pour comprendre le web, améliorer votre visibilité et faire les bons choix pour votre entreprise.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured article */}
-      <section className="container -mt-12 relative z-10 mb-16">
-        <Link to={`/blog/${featured.slug}`} className="group block">
-          <article className="grid overflow-hidden rounded-2xl bg-card shadow-elevated md:grid-cols-2">
-            <div className="aspect-[16/10] md:aspect-auto overflow-hidden relative">
-              {featured.coverImageUrl ? (
-                <img src={featured.coverImageUrl} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" decoding="async" fetchPriority="high" width={1280} height={800} />
-              ) : (
-                <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                  <span className="text-4xl font-bold text-primary/30">{featured.title.charAt(0)}</span>
-                </div>
-              )}
-              <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full gradient-primary px-4 py-1.5 text-xs font-bold text-white shadow-lg">
-                <Sparkles size={14} /> Nouvel article
-              </span>
-            </div>
-            <div className="flex flex-col justify-center p-8 md:p-12">
-              <span className={`mb-4 inline-block w-fit rounded-full px-3 py-1 text-xs font-semibold ${categoryColors[featured.category] || "bg-secondary text-secondary-foreground"}`}>
-                {featured.category}
-              </span>
-              <h2 className="text-2xl font-bold leading-snug md:text-3xl group-hover:text-primary transition-colors">{featured.title}</h2>
-              <p className="mt-4 text-muted-foreground leading-relaxed">{featured.excerpt}</p>
-              <div className="mt-6 flex items-center gap-4 text-sm text-muted-foreground">
-                <span className="flex items-center gap-1.5"><Calendar size={14} />{new Date(featured.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}</span>
-                <span className="flex items-center gap-1.5"><Clock size={14} />{featured.readTime}</span>
-              </div>
-              <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-primary group-hover:gap-3 transition-all">
-                Lire l'article <ArrowRight size={16} />
-              </span>
-            </div>
-          </article>
-        </Link>
-      </section>
-
-      {/* Categories */}
-      {blogCategories.length > 0 && (
-        <section className="container mb-10">
-          <h2 className="text-lg font-bold mb-4">Parcourir par catégorie</h2>
-          <div className="flex flex-wrap gap-2">
-            {blogCategories.map((cat) => (
-              <Link
-                key={cat}
-                to={`/blog/categorie/${getCategorySlug(cat)}`}
-                className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors hover:opacity-80 ${categoryColors[cat] || "bg-secondary text-secondary-foreground"}`}
-              >
-                {cat}
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Other articles */}
-      <section className="container pb-20">
-        <div className="grid gap-8 md:grid-cols-2">
-          {rest.map((article) => {
-            const isNew = article.date === newestDate;
-            return (
-              <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
-                <article className="overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-elevated transition-shadow">
-                  <div className="aspect-[16/9] overflow-hidden relative">
-                    {article.coverImageUrl ? (
-                      <img src={article.coverImageUrl} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" width={960} height={540} />
-                    ) : (
-                      <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
-                        <span className="text-3xl font-bold text-primary/30">{article.title.charAt(0)}</span>
-                      </div>
-                    )}
-                    {isNew && (
-                      <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full gradient-primary px-3 py-1 text-[11px] font-bold text-white shadow-md">
-                        <Sparkles size={12} /> Nouvel article
-                      </span>
-                    )}
-                  </div>
-                  <div className="p-6 md:p-8">
-                    <div className="flex items-center gap-3 mb-4">
-                      <span className={`rounded-full px-3 py-1 text-xs font-semibold ${categoryColors[article.category] || "bg-secondary text-secondary-foreground"}`}>
-                        {article.category}
-                      </span>
-                      <span className="flex items-center gap-1 text-xs text-muted-foreground"><Clock size={12} /> {article.readTime}</span>
-                    </div>
-                    <h2 className="text-xl font-bold leading-snug group-hover:text-primary transition-colors">{article.title}</h2>
-                    <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{article.excerpt}</p>
-                    <div className="mt-4 flex flex-wrap gap-2">
-                      {article.tags.slice(0, 3).map((tag) => (
-                        <span key={tag} className="flex items-center gap-1 rounded-md bg-secondary px-2 py-0.5 text-xs text-muted-foreground">
-                          <Tag size={10} /> {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="mt-5 flex items-center justify-between text-sm">
-                      <span className="flex items-center gap-1.5 text-muted-foreground">
-                        <Calendar size={14} />
-                        {new Date(article.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
-                      </span>
-                      <span className="inline-flex items-center gap-1 font-semibold text-primary group-hover:gap-2 transition-all">
-                        Lire <ArrowRight size={14} />
-                      </span>
-                    </div>
-                  </div>
-                </article>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="gradient-miami py-16">
-        <div className="container text-center">
-          <h2 className="text-3xl font-bold md:text-4xl text-white">Besoin d'un site performant et bien référencé ?</h2>
-          <p className="mt-4 text-lg text-white/80 max-w-xl mx-auto">
-            Nous créons des sites web rapides, optimisés SEO et conçus pour convertir vos visiteurs en clients.
-          </p>
-          <Link
-            to="/contact"
-            className="mt-8 inline-flex items-center gap-2 rounded-full gradient-primary btn-glow px-8 py-3 font-semibold text-white shadow-glow transition-opacity"
-          >
-            Demander un audit SEO gratuit <ArrowRight size={16} />
-          </Link>
-        </div>
-      </section>
-    </PageLayout>
-  );
-};
-
-export default Blog;
+export const getPostBySlug = (slug: string) => blogPosts.find(p => p.slug === slug);
+export const blogCategories = Array.from(new Set(blogPosts.map(p => p.category))).filter(Boolean);
+export const getCategorySlug = (category: string) =>
+  category.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+export const getCategoryFromSlug = (slug: string) =>
+  blogCategories.find((c) => getCategorySlug(c) === slug);
+export const getRelatedPosts = (post: BlogPost): BlogPost[] =>
+  post.relatedSlugs.map((s) => blogPosts.find((p) => p.slug === s)).filter((p): p is BlogPost => Boolean(p));
