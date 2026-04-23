@@ -56,7 +56,7 @@ const Blog = () => {
       </Helmet>
 
       {/* Hero */}
-      <section className="relative overflow-hidden" style={{ background: "hsl(263, 36%, 18%)" }}>
+      <section className="relative overflow-hidden bg-card" style={{ background: "hsl(263, 36%, 18%)" }}>
         <div className="absolute inset-0 opacity-[0.03]" style={{
           backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
         }} />
@@ -74,9 +74,9 @@ const Blog = () => {
       </section>
 
       {/* Featured article */}
-      <section className="container -mt-12 relative z-10 mb-16">
+      <section className="container -mt-12 relative z-10 mb-16 bg-background">
         <Link to={`/blog/${featured.slug}`} className="group block">
-          <article className="grid overflow-hidden rounded-2xl bg-card md:grid-cols-2" style={{border: "2px solid hsl(263,36%,25%)", boxShadow: "4px 4px 0px hsl(263,36%,25%)", transform: "translateY(0)", transition: "transform 0.15s, box-shadow 0.15s"}}>
+          <article className="grid overflow-hidden rounded-2xl bg-card md:grid-cols-2" style={{border: "2px solid rgba(0,0,0,0.15)", boxShadow: "4px 4px 0px rgba(0,0,0,0.25)", transform: "translateY(0)", transition: "transform 0.15s, box-shadow 0.15s"}}>
             <div className="aspect-[16/10] md:aspect-auto overflow-hidden relative">
               {featured.coverImageUrl ? (
                 <img src={featured.coverImageUrl} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" decoding="async" fetchPriority="high" width={1280} height={800} />
@@ -109,7 +109,7 @@ const Blog = () => {
 
       {/* Categories */}
       {blogCategories.length > 0 && (
-        <section className="container mb-10">
+        <section className="container mb-10 bg-background">
           <h2 className="text-lg font-bold mb-4">Parcourir par catégorie</h2>
           <div className="flex flex-wrap gap-2">
             {blogCategories.map((cat) => (
@@ -126,13 +126,13 @@ const Blog = () => {
       )}
 
       {/* Other articles */}
-      <section className="container pb-20">
+      <section className="container pb-20 bg-background">
         <div className="grid gap-8 md:grid-cols-2">
           {rest.map((article) => {
             const isNew = article.date === newestDate;
             return (
               <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
-                <article className="overflow-hidden rounded-2xl bg-card transition-all" style={{border: "2px solid hsl(263,36%,25%)", boxShadow: "4px 4px 0px hsl(263,36%,25%)"}}>
+                <article className="overflow-hidden rounded-2xl bg-card transition-all" style={{border: "2px solid rgba(0,0,0,0.15)", boxShadow: "4px 4px 0px rgba(0,0,0,0.25)"}}>
                   <div className="aspect-[16/9] overflow-hidden relative">
                     {article.coverImageUrl ? (
                       <img src={article.coverImageUrl} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" width={960} height={540} />
