@@ -51,7 +51,7 @@ const BlogCarousel = () => {
                         height={360}
                       />
                     ) : (
-                      <div className="h-full w-full bg-secondary flex items-center justify-center">
+                      <div className="h-full w-full bg-muted flex items-center justify-center">
                         <span className="text-3xl font-bold text-primary/30">{article.title.charAt(0)}</span>
                       </div>
                     )}
