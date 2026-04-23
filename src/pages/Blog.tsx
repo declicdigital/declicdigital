@@ -74,7 +74,7 @@ const Blog = () => {
       </section>
 
       {/* Featured article */}
-      <section className="container -mt-12 relative z-10 mb-16 bg-background">
+      <section className="container -mt-12 relative z-10 mb-16">
         <Link to={`/blog/${featured.slug}`} className="group block">
           <article className="grid overflow-hidden rounded-2xl bg-transparent md:grid-cols-2" style={{border: "2px solid rgba(0,0,0,0.15)", boxShadow: "4px 4px 0px rgba(0,0,0,0.25)", transform: "translateY(0)", transition: "transform 0.15s, box-shadow 0.15s"}}>
             <div className="aspect-[16/10] md:aspect-auto overflow-hidden relative">
