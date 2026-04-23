@@ -81,7 +81,7 @@ const Blog = () => {
               {featured.coverImageUrl ? (
                 <img src={featured.coverImageUrl} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" decoding="async" fetchPriority="high" width={1280} height={800} />
               ) : (
-                <div className="h-full w-full bg-secondary flex items-center justify-center">
+                <div className="h-full w-full bg-muted flex items-center justify-center">
                   <span className="text-4xl font-bold text-primary/30">{featured.title.charAt(0)}</span>
                 </div>
               )}
@@ -137,7 +137,7 @@ const Blog = () => {
                     {article.coverImageUrl ? (
                       <img src={article.coverImageUrl} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" width={960} height={540} />
                     ) : (
-                      <div className="h-full w-full bg-secondary flex items-center justify-center">
+                      <div className="h-full w-full bg-muted flex items-center justify-center">
                         <span className="text-3xl font-bold text-primary/30">{article.title.charAt(0)}</span>
                       </div>
                     )}
