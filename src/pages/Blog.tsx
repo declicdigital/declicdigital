@@ -1,9 +1,23 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { Calendar, Clock, ArrowRight, Tag, Sparkles } from "lucide-react";
+import { useState, useEffect } from "react";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import { blogPosts, blogCategories, getCategorySlug } from "@/data/blogPosts";
+import { blogPosts as staticPosts, blogCategories, getCategorySlug } from "@/data/blogPosts";
+import { supabase } from "@/integrations/supabase/client";
+
+interface Article {
+  slug: string;
+  title: string;
+  excerpt: string;
+  coverImageUrl: string | null;
+  category: string;
+  tags: string[];
+  readTime: string;
+  date: string;
+  isFromSupabase?: boolean;
+}
 
 const categoryColors: Record<string, string> = {
   "Création de site": "bg-violet-500/15 text-violet-700 dark:text-violet-400",
@@ -13,14 +27,72 @@ const categoryColors: Record<string, string> = {
   "Business": "bg-amber-500/15 text-amber-700 dark:text-amber-400",
 };
 
-const Blog = () => {
-  const allArticles = [...blogPosts].sort(
-    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+export default function Blog() {
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const featured = allArticles[0];
-  const rest = allArticles.slice(1);
+  useEffect(() => {
+    async function fetchAll() {
+      const { data: supabaseArticles } = await supabase
+        .from("cms_blog_posts")
+        .select("slug, title, excerpt, cover_image_url, category, tags, read_time, created_at")
+        .eq("status", "published")
+        .order("created_at", { ascending: false });
+
+      const supabaseSlugs = new Set((supabaseArticles ?? []).map((a: any) => a.slug));
+
+      const staticArticles: Article[] = staticPosts
+        .filter((p) => !supabaseSlugs.has(p.slug))
+        .map((p) => ({
+          slug: p.slug,
+          title: p.title,
+          excerpt: p.excerpt,
+          coverImageUrl: p.coverImageUrl ?? null,
+          category: p.category,
+          tags: p.tags,
+          readTime: p.readTime,
+          date: p.date,
+        }));
+
+      const remoteArticles: Article[] = (supabaseArticles ?? []).map((a: any) => ({
+        slug: a.slug,
+        title: a.title,
+        excerpt: a.excerpt,
+        coverImageUrl: a.cover_image_url ?? null,
+        category: a.category,
+        tags: a.tags ?? [],
+        readTime: a.read_time,
+        date: a.created_at,
+        isFromSupabase: true,
+      }));
+
+      const all = [...remoteArticles, ...staticArticles].sort(
+        (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+      );
+
+      setArticles(all);
+      setLoading(false);
+    }
+    fetchAll();
+  }, []);
+
+  const featured = articles[0];
+  const rest = articles.slice(1);
   const newestDate = featured?.date;
+
+  const allCategories = Array.from(new Set([...blogCategories, ...articles.map((a) => a.category)]));
+
+  if (loading) {
+    return (
+      <PageLayout hideBlogCarousel>
+        <div className="container py-20">
+          <div className="grid gap-8 md:grid-cols-2">
+            {[1, 2, 3, 4].map((i) => <div key={i} className="rounded-2xl bg-card h-64 animate-pulse" />)}
+          </div>
+        </div>
+      </PageLayout>
+    );
+  }
 
   if (!featured) {
     return (
@@ -40,26 +112,10 @@ const Blog = () => {
         <title>Blog création de site web, SEO et tech | Déclic Digital</title>
         <meta name="description" content="Guides pratiques, tendances web design et conseils SEO pour les TPE et artisans. Apprenez à développer votre visibilité en ligne avec le blog Déclic Digital." />
         <link rel="canonical" href="https://declicdigital.net/blog" />
-        <meta property="og:title" content="Blog web, SEO et tech pour TPE | Déclic Digital" />
-        <meta property="og:description" content="Guides pratiques, tendances web design et conseils SEO pour les TPE et artisans." />
-        <meta property="og:type" content="website" />
-        <script type="application/ld+json">
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Blog",
-            name: "Blog Déclic Digital",
-            description: "Guides pratiques, tendances web design et conseils SEO pour TPE",
-            url: "https://declicdigital.net/blog",
-            publisher: { "@type": "Organization", name: "Déclic Digital" },
-          })}
-        </script>
       </Helmet>
 
       {/* Hero */}
-      <section className="relative overflow-hidden bg-card" style={{ background: "hsl(263, 36%, 18%)" }}>
-        <div className="absolute inset-0 opacity-[0.03]" style={{
-          backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
-        }} />
+      <section className="relative overflow-hidden" style={{ background: "hsl(263, 36%, 18%)" }}>
         <div className="container relative py-20 md:py-28">
           <div className="max-w-2xl">
             <span className="mb-4 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">Blog</span>
@@ -73,16 +129,18 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Featured article */}
+      {/* Article à la une */}
       <section className="container -mt-12 relative z-10 mb-16">
         <Link to={`/blog/${featured.slug}`} className="group block">
-          <article className="grid overflow-hidden rounded-2xl bg-transparent md:grid-cols-2" style={{border: "2px solid rgba(0,0,0,0.15)", boxShadow: "4px 4px 0px rgba(0,0,0,0.25)", transform: "translateY(0)", transition: "transform 0.15s, box-shadow 0.15s"}}>
+          <article className="grid overflow-hidden rounded-2xl bg-transparent md:grid-cols-2" style={{border: "2px solid rgba(0,0,0,0.15)", boxShadow: "4px 4px 0px rgba(0,0,0,0.20)"}}>
             <div className="aspect-[16/10] md:aspect-auto overflow-hidden relative">
               {featured.coverImageUrl ? (
-                <img src={featured.coverImageUrl} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" decoding="async" fetchPriority="high" width={1280} height={800} />
+                <img src={featured.coverImageUrl} alt={featured.title}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="eager" width={1280} height={800} />
               ) : (
                 <div className="h-full w-full bg-muted flex items-center justify-center">
-                  <span className="text-4xl font-bold text-primary/30">{featured.title.charAt(0)}</span>
+                  <span className="text-4xl font-bold text-muted-foreground/30">{featured.title.charAt(0)}</span>
                 </div>
               )}
               <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full gradient-primary px-4 py-1.5 text-xs font-bold text-white shadow-lg">
@@ -107,17 +165,14 @@ const Blog = () => {
         </Link>
       </section>
 
-      {/* Categories */}
-      {blogCategories.length > 0 && (
-        <section className="container mb-10 bg-background">
+      {/* Catégories */}
+      {allCategories.length > 0 && (
+        <section className="container mb-10">
           <h2 className="text-lg font-bold mb-4">Parcourir par catégorie</h2>
           <div className="flex flex-wrap gap-2">
-            {blogCategories.map((cat) => (
-              <Link
-                key={cat}
-                to={`/blog/categorie/${getCategorySlug(cat)}`}
-                className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors hover:opacity-80 ${categoryColors[cat] || "bg-secondary text-secondary-foreground"}`}
-              >
+            {allCategories.map((cat) => (
+              <Link key={cat} to={`/blog/categorie/${getCategorySlug(cat)}`}
+                className={`rounded-full px-4 py-2 text-sm font-semibold transition-colors hover:opacity-80 ${categoryColors[cat] || "bg-secondary text-secondary-foreground"}`}>
                 {cat}
               </Link>
             ))}
@@ -125,20 +180,22 @@ const Blog = () => {
         </section>
       )}
 
-      {/* Other articles */}
-      <section className="container pb-20 bg-background">
+      {/* Autres articles */}
+      <section className="container pb-20">
         <div className="grid gap-8 md:grid-cols-2">
           {rest.map((article) => {
             const isNew = article.date === newestDate;
             return (
               <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
-                <article className="overflow-hidden rounded-2xl bg-transparent transition-all" style={{border: "2px solid rgba(0,0,0,0.15)", boxShadow: "4px 4px 0px rgba(0,0,0,0.25)"}}>
+                <article className="overflow-hidden rounded-2xl bg-transparent transition-all" style={{border: "2px solid rgba(0,0,0,0.15)", boxShadow: "4px 4px 0px rgba(0,0,0,0.20)"}}>
                   <div className="aspect-[16/9] overflow-hidden relative">
                     {article.coverImageUrl ? (
-                      <img src={article.coverImageUrl} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" width={960} height={540} />
+                      <img src={article.coverImageUrl} alt={article.title}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="lazy" width={960} height={540} />
                     ) : (
                       <div className="h-full w-full bg-muted flex items-center justify-center">
-                        <span className="text-3xl font-bold text-primary/30">{article.title.charAt(0)}</span>
+                        <span className="text-3xl font-bold text-muted-foreground/30">{article.title.charAt(0)}</span>
                       </div>
                     )}
                     {isNew && (
@@ -187,16 +244,12 @@ const Blog = () => {
           <p className="mt-4 text-lg text-white/80 max-w-xl mx-auto">
             Nous créons des sites web rapides, optimisés SEO et conçus pour convertir vos visiteurs en clients.
           </p>
-          <Link
-            to="/contact"
-            className="mt-8 inline-flex items-center gap-2 rounded-full gradient-primary btn-glow px-8 py-3 font-semibold text-white shadow-glow transition-opacity"
-          >
+          <Link to="/contact"
+            className="mt-8 inline-flex items-center gap-2 rounded-full gradient-primary btn-glow px-8 py-3 font-semibold text-white shadow-glow transition-opacity">
             Demander un audit SEO gratuit <ArrowRight size={16} />
           </Link>
         </div>
       </section>
     </PageLayout>
   );
-};
-
-export default Blog;
+}
