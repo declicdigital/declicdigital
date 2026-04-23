@@ -147,7 +147,7 @@ const GoogleReviewsSection = ({
                 </div>
                 <a href={review.author_url || REVIEWS_URL} target="_blank" rel="noopener noreferrer"
                   className="text-xs text-muted-foreground hover:text-primary transition-colors">
-                  <ExternalLink size={14} />
+                  <span className="sr-only">Voir l'avis</span><ExternalLink size={14} />
                 </a>
               </div>
             </div>
@@ -159,7 +159,7 @@ const GoogleReviewsSection = ({
         <a href={REVIEWS_URL} target="_blank" rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-colors shadow-sm">
           <img src="https://www.google.com/favicon.ico" alt="Google" className="h-4 w-4" loading="lazy" />
-          Voir tous les avis sur Google <ExternalLink size={14} />
+          Voir tous les avis sur Google <span className="sr-only">Voir l'avis</span><ExternalLink size={14} />
         </a>
         <a href={WRITE_REVIEW_URL} target="_blank" rel="noopener noreferrer"
           className="inline-flex items-center gap-2 rounded-full gradient-primary btn-glow px-6 py-3 text-sm font-semibold text-white shadow-glow transition-opacity hover:opacity-90">
