@@ -41,6 +41,8 @@ const AdminClientDetail = lazy(() => import("./pages/admin/AdminClientDetail"));
 const AdminSoumissions = lazy(() => import("./pages/admin/AdminSoumissions"));
 const AdminBlog = lazy(() => import("./pages/admin/AdminBlog"));
 const AdminBlogEditor = lazy(() => import("./pages/admin/AdminBlogEditor"));
+const AdminCms = lazy(() => import("./pages/admin/AdminCms"));
+const AdminCmsEditor = lazy(() => import("./pages/admin/AdminCmsEditor"));
 
 const ConnexionClient = lazy(() => import("./pages/ConnexionClient"));
 const EspaceClient = lazy(() => import("./pages/EspaceClient"));
@@ -95,6 +97,8 @@ const App = () => (
                 <Route path="/admin/soumissions" element={<AdminSoumissions />} />
                 <Route path="/admin/blog" element={<AdminBlog />} />
                 <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
+                <Route path="/admin/cms" element={<AdminCms />} />
+                <Route path="/admin/cms/:slug" element={<AdminCmsEditor />} />
 
                 <Route path="/connexion" element={<ConnexionClient />} />
                 <Route path="/espace-client" element={<EspaceClient />} />
