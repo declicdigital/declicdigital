@@ -37,7 +37,7 @@ const BlogCarousel = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: i * 0.1 }}
-                  className="overflow-hidden rounded-xl bg-card shadow-card hover:shadow-elevated transition-all h-full flex flex-col"
+                  className="overflow-hidden rounded-xl bg-card transition-all h-full flex flex-col" style={{border: "2px solid hsl(263,36%,25%)", boxShadow: "3px 3px 0px hsl(263,36%,25%)"}}
                 >
                   <div className="aspect-[16/9] overflow-hidden relative">
                     {article.coverImageUrl ? (
@@ -51,7 +51,7 @@ const BlogCarousel = () => {
                         height={360}
                       />
                     ) : (
-                      <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                      <div className="h-full w-full bg-muted flex items-center justify-center">
                         <span className="text-3xl font-bold text-primary/30">{article.title.charAt(0)}</span>
                       </div>
                     )}
