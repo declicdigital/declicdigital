@@ -1,15 +1,13 @@
 import { lazy, ReactNode, Suspense, Children, useLayoutEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
-
 const Footer = lazy(() => import("./Footer"));
 const BlogCarousel = lazy(() => import("./BlogCarousel"));
-
 interface PageLayoutProps {
   children: ReactNode;
   hideBlogCarousel?: boolean;
+  noAlternate?: boolean;
 }
-
 function flattenChildren(children: ReactNode): ReactNode[] {
   const flat: ReactNode[] = [];
   Children.forEach(children, (child) => {
@@ -19,21 +17,31 @@ function flattenChildren(children: ReactNode): ReactNode[] {
   });
   return flat;
 }
-
-const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => {
+const PageLayout = ({ children, hideBlogCarousel = false, noAlternate = false }: PageLayoutProps) => {
   const location = useLocation();
   const pagePath = location.pathname;
-
   const flat = flattenChildren(children);
   const wrappedChildren = flat;
-
   const mainRef = useRef<HTMLElement>(null);
 
+  // Pages où on désactive l'alternance de fond
+  const isBlogPage = pagePath.startsWith("/blog");
+
   useLayoutEffect(() => {
+    if (isBlogPage || noAlternate) {
+      // Retirer tous les bg-section-blue sur les pages blog
+      const main = mainRef.current;
+      if (!main) return;
+      const all = main.querySelectorAll("section");
+      all.forEach((sec) => {
+        sec.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
+      });
+      return;
+    }
+
     const skipRe = /\bgradient-hero\b|\bgradient-miami\b|\bgradient-primary\b|\bbg-foreground\b|\bbg-primary\b|\bbg-card\b|\bbg-muted\b|\bbg-secondary\b|\bbg-miami\b|bg-\[hsl/;
     let rafId = 0;
     let scheduled = false;
-
     const apply = () => {
       scheduled = false;
       const main = mainRef.current;
@@ -54,13 +62,11 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
         if (addBlue) el.classList.add("bg-section-blue");
       }
     };
-
     const schedule = () => {
       if (scheduled) return;
       scheduled = true;
       rafId = requestAnimationFrame(apply);
     };
-
     schedule();
     const t1 = window.setTimeout(schedule, 100);
     const t2 = window.setTimeout(schedule, 600);
@@ -72,7 +78,7 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
       cancelAnimationFrame(rafId);
       obs.disconnect();
     };
-  }, [pagePath, wrappedChildren]);
+  }, [pagePath, wrappedChildren, isBlogPage, noAlternate]);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -85,5 +91,4 @@ const PageLayout = ({ children, hideBlogCarousel = false }: PageLayoutProps) => 
     </div>
   );
 };
-
 export default PageLayout;
