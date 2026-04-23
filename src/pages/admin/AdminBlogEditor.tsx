@@ -16,6 +16,33 @@ function slugify(text: string) {
   return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").trim();
 }
 
+// ─── Conversion en WebP ───────────────────────────────────────────────────────
+async function convertToWebP(file: File, quality = 0.85): Promise<Blob> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    const url = URL.createObjectURL(file);
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.naturalWidth;
+      canvas.height = img.naturalHeight;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) { reject(new Error("Canvas non supporté")); return; }
+      ctx.drawImage(img, 0, 0);
+      canvas.toBlob(
+        (blob) => {
+          URL.revokeObjectURL(url);
+          if (blob) resolve(blob);
+          else reject(new Error("Conversion WebP échouée"));
+        },
+        "image/webp",
+        quality
+      );
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Chargement image échoué")); };
+    img.src = url;
+  });
+}
+
 // ─── Bouton barre d'outils ───────────────────────────────────────────────────
 function ToolbarButton({ onClick, title, active, children }: { onClick: () => void; title: string; active?: boolean; children: React.ReactNode }) {
   return (
@@ -40,14 +67,12 @@ function CtaModal({ onInsert, onClose }: { onInsert: (label: string, href: strin
           <h3 className="font-bold text-white">Insérer un CTA</h3>
           <button onClick={onClose} style={{ color: "rgba(255,255,255,0.4)" }}><X size={16} /></button>
         </div>
-
         <div>
           <label className="block text-xs font-medium mb-1.5" style={{ color: "rgba(255,255,255,0.45)" }}>Texte du bouton</label>
           <input value={label} onChange={(e) => setLabel(e.target.value)}
             className="w-full rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none"
             style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }} />
         </div>
-
         <div>
           <label className="block text-xs font-medium mb-1.5" style={{ color: "rgba(255,255,255,0.45)" }}>Lien (URL)</label>
           <input value={href} onChange={(e) => setHref(e.target.value)}
@@ -55,28 +80,20 @@ function CtaModal({ onInsert, onClose }: { onInsert: (label: string, href: strin
             className="w-full rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none"
             style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }} />
         </div>
-
         <div>
           <label className="block text-xs font-medium mb-2" style={{ color: "rgba(255,255,255,0.45)" }}>Style</label>
           <div className="flex gap-3">
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" checked={style === "primary"} onChange={() => setStyle("primary")} className="hidden" />
-              <div className="w-4 h-4 rounded-full border-2 flex items-center justify-center" style={{ borderColor: style === "primary" ? "hsl(183,70%,63%)" : "rgba(255,255,255,0.2)" }}>
-                {style === "primary" && <div className="w-2 h-2 rounded-full" style={{ background: "hsl(183,70%,63%)" }} />}
-              </div>
-              <span className="text-sm text-white">Gradient (principal)</span>
-            </label>
-            <label className="flex items-center gap-2 cursor-pointer">
-              <input type="radio" checked={style === "secondary"} onChange={() => setStyle("secondary")} className="hidden" />
-              <div className="w-4 h-4 rounded-full border-2 flex items-center justify-center" style={{ borderColor: style === "secondary" ? "hsl(183,70%,63%)" : "rgba(255,255,255,0.2)" }}>
-                {style === "secondary" && <div className="w-2 h-2 rounded-full" style={{ background: "hsl(183,70%,63%)" }} />}
-              </div>
-              <span className="text-sm text-white">Contour (secondaire)</span>
-            </label>
+            {["primary", "secondary"].map((s) => (
+              <label key={s} className="flex items-center gap-2 cursor-pointer">
+                <input type="radio" checked={style === s} onChange={() => setStyle(s)} className="hidden" />
+                <div className="w-4 h-4 rounded-full border-2 flex items-center justify-center" style={{ borderColor: style === s ? "hsl(183,70%,63%)" : "rgba(255,255,255,0.2)" }}>
+                  {style === s && <div className="w-2 h-2 rounded-full" style={{ background: "hsl(183,70%,63%)" }} />}
+                </div>
+                <span className="text-sm text-white">{s === "primary" ? "Gradient (principal)" : "Contour (secondaire)"}</span>
+              </label>
+            ))}
           </div>
         </div>
-
-        {/* Aperçu */}
         <div className="rounded-xl p-3 text-center" style={{ background: "rgba(255,255,255,0.04)" }}>
           <p className="text-xs mb-2" style={{ color: "rgba(255,255,255,0.30)" }}>Aperçu :</p>
           {style === "primary" ? (
@@ -91,17 +108,12 @@ function CtaModal({ onInsert, onClose }: { onInsert: (label: string, href: strin
             </span>
           )}
         </div>
-
         <div className="flex gap-2">
           <button onClick={onClose} className="flex-1 py-2.5 rounded-xl text-sm font-medium"
-            style={{ background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.55)" }}>
-            Annuler
-          </button>
+            style={{ background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.55)" }}>Annuler</button>
           <button onClick={() => { onInsert(label, href, style); onClose(); }}
             className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white btn-glow"
-            style={{ background: "linear-gradient(135deg, hsl(183,70%,63%), hsl(284,65%,66%))" }}>
-            Insérer
-          </button>
+            style={{ background: "linear-gradient(135deg, hsl(183,70%,63%), hsl(284,65%,66%))" }}>Insérer</button>
         </div>
       </div>
     </div>
@@ -115,7 +127,7 @@ function RenameImageModal({ currentAlt, onSave, onClose }: { currentAlt: string;
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4" style={{ background: "rgba(0,0,0,0.7)" }}>
       <div className="w-full max-w-sm rounded-2xl p-6 space-y-4" style={{ background: "hsl(263, 36%, 16%)", border: "1px solid rgba(255,255,255,0.1)" }}>
         <div className="flex items-center justify-between">
-          <h3 className="font-bold text-white">Modifier le nom de l'image</h3>
+          <h3 className="font-bold text-white">Modifier le texte alternatif</h3>
           <button onClick={onClose} style={{ color: "rgba(255,255,255,0.4)" }}><X size={16} /></button>
         </div>
         <div>
@@ -123,15 +135,11 @@ function RenameImageModal({ currentAlt, onSave, onClose }: { currentAlt: string;
           <input value={alt} onChange={(e) => setAlt(e.target.value)}
             className="w-full rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none"
             style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.1)" }} />
-          <p className="text-xs mt-1.5" style={{ color: "rgba(255,255,255,0.25)" }}>
-            Important pour le SEO et l'accessibilité
-          </p>
+          <p className="text-xs mt-1.5" style={{ color: "rgba(255,255,255,0.25)" }}>Important pour le SEO et l'accessibilité</p>
         </div>
         <div className="flex gap-2">
           <button onClick={onClose} className="flex-1 py-2.5 rounded-xl text-sm font-medium"
-            style={{ background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.55)" }}>
-            Annuler
-          </button>
+            style={{ background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.55)" }}>Annuler</button>
           <button onClick={() => { onSave(alt); onClose(); }}
             className="flex-1 py-2.5 rounded-xl text-sm font-semibold text-white btn-glow"
             style={{ background: "linear-gradient(135deg, hsl(183,70%,63%), hsl(284,65%,66%))" }}>
@@ -190,7 +198,6 @@ function WysiwygEditor({ value, onChange }: { value: string; onChange: (val: str
     if (url) exec("insertImage", url);
   };
 
-  // Clic sur image dans l'éditeur pour renommer
   const handleEditorClick = (e: React.MouseEvent) => {
     const target = e.target as HTMLElement;
     if (target.tagName === "IMG") {
@@ -202,9 +209,7 @@ function WysiwygEditor({ value, onChange }: { value: string; onChange: (val: str
   const saveImageAlt = (alt: string) => {
     if (!editorRef.current || !renameImageModal) return;
     const imgs = editorRef.current.querySelectorAll("img");
-    imgs.forEach((img) => {
-      if (img.src === renameImageModal.src) img.alt = alt;
-    });
+    imgs.forEach((img) => { if (img.src === renameImageModal.src) img.alt = alt; });
     onChange(editorRef.current.innerHTML);
   };
 
@@ -217,75 +222,46 @@ function WysiwygEditor({ value, onChange }: { value: string; onChange: (val: str
   return (
     <>
       {showCtaModal && <CtaModal onInsert={insertCta} onClose={() => setShowCtaModal(false)} />}
-      {renameImageModal && (
-        <RenameImageModal
-          currentAlt={renameImageModal.alt}
-          onSave={saveImageAlt}
-          onClose={() => setRenameImageModal(null)}
-        />
-      )}
+      {renameImageModal && <RenameImageModal currentAlt={renameImageModal.alt} onSave={saveImageAlt} onClose={() => setRenameImageModal(null)} />}
 
       <div ref={wrapperRef} className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
-        {/* Barre d'outils */}
         <div className="flex flex-wrap items-center gap-0.5 px-3 py-2"
-          style={{
-            background: "hsl(263, 36%, 15%)",
-            borderBottom: "1px solid rgba(255,255,255,0.07)",
-            position: toolbarSticky ? "sticky" : "relative",
-            top: toolbarSticky ? "56px" : "auto",
-            zIndex: 20,
-          }}>
+          style={{ background: "hsl(263, 36%, 15%)", borderBottom: "1px solid rgba(255,255,255,0.07)", position: toolbarSticky ? "sticky" : "relative", top: toolbarSticky ? "56px" : "auto", zIndex: 20 }}>
           <ToolbarButton onClick={() => exec("bold")} title="Gras"><Bold size={14} /></ToolbarButton>
           <ToolbarButton onClick={() => exec("italic")} title="Italique"><Italic size={14} /></ToolbarButton>
           <ToolbarButton onClick={() => exec("underline")} title="Souligné"><Underline size={14} /></ToolbarButton>
-
           <div className="w-px h-5 mx-1" style={{ background: "rgba(255,255,255,0.1)" }} />
-
           <ToolbarButton onClick={() => exec("formatBlock", "h2")} title="Titre H2"><Heading2 size={14} /></ToolbarButton>
           <ToolbarButton onClick={() => exec("formatBlock", "h3")} title="Titre H3"><Heading3 size={14} /></ToolbarButton>
           <ToolbarButton onClick={() => exec("formatBlock", "p")} title="Paragraphe"><AlignLeft size={14} /></ToolbarButton>
-
           <div className="w-px h-5 mx-1" style={{ background: "rgba(255,255,255,0.1)" }} />
-
           <ToolbarButton onClick={() => exec("insertUnorderedList")} title="Liste à puces"><List size={14} /></ToolbarButton>
           <ToolbarButton onClick={() => exec("insertOrderedList")} title="Liste numérotée"><ListOrdered size={14} /></ToolbarButton>
-
           <div className="w-px h-5 mx-1" style={{ background: "rgba(255,255,255,0.1)" }} />
-
           <ToolbarButton onClick={insertLink} title="Lien"><LinkIcon size={14} /></ToolbarButton>
           <ToolbarButton onClick={insertImage} title="Image (URL)"><ImageIcon size={14} /></ToolbarButton>
           <ToolbarButton onClick={() => exec("formatBlock", "blockquote")} title="Citation"><Quote size={14} /></ToolbarButton>
           <ToolbarButton onClick={() => exec("formatBlock", "pre")} title="Code"><Code size={14} /></ToolbarButton>
           <ToolbarButton onClick={() => exec("insertHorizontalRule")} title="Séparateur"><Minus size={14} /></ToolbarButton>
-
           <div className="w-px h-5 mx-1" style={{ background: "rgba(255,255,255,0.1)" }} />
-
-          {/* CTA */}
           <button type="button" onClick={() => setShowCtaModal(true)} title="Insérer un CTA"
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
             style={{ background: "linear-gradient(135deg, hsl(183,70%,63%,0.2), hsl(284,65%,66%,0.2))", color: "hsl(183,70%,63%)", border: "1px solid hsl(183,70%,63%,0.3)" }}>
             <Zap size={13} /> CTA
           </button>
-
-          {/* Renommer image */}
           <button type="button" onClick={() => {
-            const sel = window.getSelection();
-            const img = sel?.anchorNode?.parentElement?.querySelector("img") || editorRef.current?.querySelector("img");
+            const img = editorRef.current?.querySelector("img");
             if (img) setRenameImageModal({ src: img.src, alt: img.alt || "" });
-            else alert("Cliquez d'abord sur une image dans l'éditeur pour la sélectionner.");
+            else alert("Cliquez d'abord sur une image dans l'éditeur.");
           }} title="Renommer l'image sélectionnée"
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all"
             style={{ background: "rgba(255,255,255,0.06)", color: "rgba(255,255,255,0.50)" }}>
             <Pencil size={13} /> Alt image
           </button>
-
           <div className="w-px h-5 mx-1" style={{ background: "rgba(255,255,255,0.1)" }} />
-
           <ToolbarButton onClick={() => exec("undo")} title="Annuler"><RotateCcw size={14} /></ToolbarButton>
           <ToolbarButton onClick={() => exec("redo")} title="Refaire"><RotateCw size={14} /></ToolbarButton>
-
           <div className="flex-1" />
-
           <button type="button" onClick={toggleHtml}
             className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
             style={{ background: showHtml ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.05)", color: showHtml ? "hsl(183,70%,63%)" : "rgba(255,255,255,0.45)" }}>
@@ -293,7 +269,6 @@ function WysiwygEditor({ value, onChange }: { value: string; onChange: (val: str
           </button>
         </div>
 
-        {/* Zone d'édition */}
         {showHtml ? (
           <textarea value={htmlValue} onChange={(e) => { setHtmlValue(e.target.value); onChange(e.target.value); }}
             className="w-full px-5 py-4 text-sm font-mono focus:outline-none resize-y"
@@ -342,6 +317,7 @@ export default function AdminBlogEditor() {
 
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState("");
   const [saved, setSaved] = useState(false);
   const [tagInput, setTagInput] = useState("");
 
@@ -387,17 +363,42 @@ export default function AdminBlogEditor() {
     setTagInput("");
   }
 
+  // ─── Upload avec conversion WebP automatique ───────────────────────────────
   async function uploadCoverImage(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
     setUploading(true);
-    const filePath = `blog/${Date.now()}_${file.name}`;
-    const { error } = await supabase.storage.from("cms-images").upload(filePath, file, { upsert: true });
-    if (!error) {
-      const { data: { publicUrl } } = supabase.storage.from("cms-images").getPublicUrl(filePath);
-      update("cover_image_url", publicUrl);
+    setUploadProgress("Conversion en WebP...");
+
+    try {
+      // Convertir en WebP
+      const webpBlob = await convertToWebP(file, 0.85);
+
+      // Nom du fichier en WebP
+      const baseName = file.name.replace(/\.[^.]+$/, "");
+      const fileName = `${slugify(baseName)}-${Date.now()}.webp`;
+      const filePath = `blog/${fileName}`;
+
+      setUploadProgress("Upload en cours...");
+
+      const { error } = await supabase.storage
+        .from("cms-images")
+        .upload(filePath, webpBlob, { upsert: true, contentType: "image/webp" });
+
+      if (!error) {
+        const { data: { publicUrl } } = supabase.storage.from("cms-images").getPublicUrl(filePath);
+        update("cover_image_url", publicUrl);
+        setUploadProgress("");
+      } else {
+        alert("Erreur upload : " + error.message);
+      }
+    } catch (err: any) {
+      alert("Erreur conversion : " + err.message);
+    } finally {
+      setUploading(false);
+      setUploadProgress("");
+      if (imageInputRef.current) imageInputRef.current.value = "";
     }
-    setUploading(false);
   }
 
   async function handleSave(publishNow = false) {
@@ -549,6 +550,9 @@ export default function AdminBlogEditor() {
 
             <div className="rounded-2xl p-5 space-y-3" style={{ background: "hsl(263, 36%, 13%)", border: "1px solid rgba(255,255,255,0.07)" }}>
               <h3 className="text-sm font-bold text-white">Image de couverture</h3>
+              <p className="text-xs" style={{ color: "rgba(255,255,255,0.30)" }}>
+                ✨ Conversion WebP automatique — PNG, JPG, JPEG acceptés
+              </p>
               {form.cover_image_url && (
                 <div className="relative">
                   <img src={form.cover_image_url} alt="Cover" className="w-full h-32 object-cover rounded-xl" />
@@ -564,10 +568,10 @@ export default function AdminBlogEditor() {
                 className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl text-sm disabled:opacity-50"
                 style={{ background: "rgba(255,255,255,0.05)", border: "1px dashed rgba(255,255,255,0.15)", color: "rgba(255,255,255,0.45)" }}>
                 {uploading ? <Loader2 size={14} className="animate-spin" /> : <Upload size={14} />}
-                {uploading ? "Upload..." : "Uploader"}
+                {uploading ? uploadProgress || "Traitement..." : "Uploader une image"}
               </button>
               <input value={form.cover_image_url} onChange={(e) => update("cover_image_url", e.target.value)}
-                placeholder="Ou URL externe..."
+                placeholder="Ou coller une URL externe..."
                 className="w-full rounded-xl px-3 py-2 text-xs text-white focus:outline-none"
                 style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }} />
             </div>
