@@ -76,12 +76,12 @@ const Blog = () => {
       {/* Featured article */}
       <section className="container -mt-12 relative z-10 mb-16">
         <Link to={`/blog/${featured.slug}`} className="group block">
-          <article className="grid overflow-hidden rounded-2xl bg-card shadow-elevated md:grid-cols-2">
+          <article className="grid overflow-hidden rounded-2xl bg-card md:grid-cols-2" style={{border: "2px solid hsl(263,36%,25%)", boxShadow: "4px 4px 0px hsl(263,36%,25%)", transform: "translateY(0)", transition: "transform 0.15s, box-shadow 0.15s"}}>
             <div className="aspect-[16/10] md:aspect-auto overflow-hidden relative">
               {featured.coverImageUrl ? (
                 <img src={featured.coverImageUrl} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" decoding="async" fetchPriority="high" width={1280} height={800} />
               ) : (
-                <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                <div className="h-full w-full bg-muted flex items-center justify-center">
                   <span className="text-4xl font-bold text-primary/30">{featured.title.charAt(0)}</span>
                 </div>
               )}
@@ -132,12 +132,12 @@ const Blog = () => {
             const isNew = article.date === newestDate;
             return (
               <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
-                <article className="overflow-hidden rounded-2xl bg-card shadow-card hover:shadow-elevated transition-shadow">
+                <article className="overflow-hidden rounded-2xl bg-card transition-all" style={{border: "2px solid hsl(263,36%,25%)", boxShadow: "4px 4px 0px hsl(263,36%,25%)"}}>
                   <div className="aspect-[16/9] overflow-hidden relative">
                     {article.coverImageUrl ? (
                       <img src={article.coverImageUrl} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" decoding="async" width={960} height={540} />
                     ) : (
-                      <div className="h-full w-full bg-gradient-to-br from-primary/20 to-primary/5 flex items-center justify-center">
+                      <div className="h-full w-full bg-muted flex items-center justify-center">
                         <span className="text-3xl font-bold text-primary/30">{article.title.charAt(0)}</span>
                       </div>
                     )}
