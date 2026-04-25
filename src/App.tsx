@@ -43,6 +43,7 @@ const AdminBlog = lazy(() => import("./pages/admin/AdminBlog"));
 const AdminBlogEditor = lazy(() => import("./pages/admin/AdminBlogEditor"));
 const AdminCms = lazy(() => import("./pages/admin/AdminCms"));
 const AdminCmsEditor = lazy(() => import("./pages/admin/AdminCmsEditor"));
+const AdminTarifs = lazy(() => import("./pages/admin/AdminTarifs"));
 
 const ConnexionClient = lazy(() => import("./pages/ConnexionClient"));
 const EspaceClient = lazy(() => import("./pages/EspaceClient"));
@@ -99,6 +100,7 @@ const App = () => (
                 <Route path="/admin/blog/:id" element={<AdminBlogEditor />} />
                 <Route path="/admin/cms" element={<AdminCms />} />
                 <Route path="/admin/cms/:slug" element={<AdminCmsEditor />} />
+                <Route path="/admin/tarifs" element={<AdminTarifs />} />
 
                 <Route path="/connexion" element={<ConnexionClient />} />
                 <Route path="/espace-client" element={<EspaceClient />} />
