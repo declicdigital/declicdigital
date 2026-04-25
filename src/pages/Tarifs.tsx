@@ -8,19 +8,10 @@ import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
+import { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
 
 type PlanType = "creation" | "seo";
-
-const plans: {
-  name: string;
-  monthly: string;
-  setup: string;
-  unit: string;
-  description: string;
-  highlighted: boolean;
-  type: PlanType;
-  features: string[];
-}[] = [
   {
     name: "Site Vitrine",
     monthly: "50",
@@ -183,7 +174,19 @@ const renderPlanCard = (plan: (typeof plans)[number], index: number) => (
   </motion.div>
 );
 
-const Tarifs = () => (
+const Tarifs = () => {
+  const [plans, setPlans] = useState<any[]>([]);
+
+  useEffect(() => {
+    supabase
+      .from("cms_tarifs")
+      .select("*")
+      .eq("is_visible", true)
+      .order("sort_order")
+      .then(({ data }) => setPlans(data ?? []));
+  }, []);
+
+  return (
   <PageLayout>
     <Helmet>
       <title>Tarifs site web et SEO dès 50€/mois | Déclic Digital Paris</title>
@@ -351,5 +354,8 @@ const Tarifs = () => (
     </section>
   </PageLayout>
 );
+
+  );
+};
 
 export default Tarifs;
