@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Users, FileText, LogOut, Menu, X, BookOpen, Layout } from "lucide-react";
+import { LayoutDashboard, Users, FileText, LogOut, Menu, X, BookOpen, Layout, DollarSign } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/logo-declic-digital-new.webp";
 
@@ -10,6 +10,7 @@ const navItems = [
   { to: "/admin/soumissions", icon: FileText, label: "Soumissions" },
   { to: "/admin/blog", icon: BookOpen, label: "Blog" },
   { to: "/admin/cms", icon: Layout, label: "CMS Pages" },
+  { to: "/admin/tarifs", icon: DollarSign, label: "Tarifs" },
 ];
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
