@@ -10,6 +10,9 @@ import LocationSection from "@/components/LocationSection";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
+import imgEquipe from "@/assets/equipe-agence-web-paris-collaboration.webp";
+import imgFenetre from "@/assets/fenetre-haussmannienne-bureau-paris.webp";
+import imgConsultante from "@/assets/consultante-agence-digitale-paris-bureau.webp";
 
 const QuiSommesNous = () => (
   <PageLayout>
@@ -87,6 +90,21 @@ const QuiSommesNous = () => (
       </div>
     </SectionWrapper>
 
+    {/* Image équipe */}
+    <SectionWrapper>
+      <div className="grid lg:grid-cols-2 gap-12 items-center mx-auto max-w-5xl">
+        <div>
+          <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Une équipe à taille humaine, des résultats concrets</h2>
+          <p className="text-lg text-muted-foreground mb-4">Nous ne sommes pas une grande agence impersonnelle. Nous prenons le temps d'échanger avec chaque client, de comprendre son métier et de proposer des solutions sur mesure.</p>
+          <p className="text-muted-foreground">Chaque projet est suivi de A à Z avec le même interlocuteur. Pas de sous-traitance, pas de turnover, juste une équipe soudée et passionnée.</p>
+        </div>
+        <div className="relative overflow-hidden rounded-2xl shadow-card group">
+          <img src={imgEquipe} alt="Équipe Déclic Digital - agence web Paris" className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))"}} />
+        </div>
+      </div>
+    </SectionWrapper>
+
     {/* Mission */}
     <SectionWrapper>
       <div className="text-center mb-10">
@@ -114,7 +132,12 @@ const QuiSommesNous = () => (
 
     {/* Nos valeurs */}
     <SectionWrapper>
-      <div className="mx-auto max-w-3xl space-y-6">
+      <div className="grid lg:grid-cols-2 gap-12 items-center mx-auto max-w-5xl mb-10">
+        <div className="relative overflow-hidden rounded-2xl shadow-card group hidden lg:block" style={{aspectRatio: "2/3", maxHeight: "460px"}}>
+          <img src={imgConsultante} alt="Consultante bureau parisien - Déclic Digital" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))"}} />
+        </div>
+        <div className="mx-auto max-w-3xl space-y-6">
         <h2 className="text-3xl font-extrabold md:text-4xl text-center">Nos valeurs</h2>
         <p className="text-muted-foreground leading-relaxed">
           Chez <Link to="/faq" className="text-primary font-semibold">Déclic Digital</Link>, nous croyons en la transparence totale. Pas de contrat obscur, pas de termes compliqués, pas de promesses irréalistes. Nous vous expliquons clairement ce que nous faisons, pourquoi nous le faisons, et quels résultats vous pouvez attendre. Consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link>.
@@ -125,6 +148,7 @@ const QuiSommesNous = () => (
         <p className="text-muted-foreground leading-relaxed">
           Enfin, nous croyons en la relation de long terme. Nous ne disparaissons pas après la mise en ligne. Nous restons à vos côtés pour suivre les performances, ajuster la stratégie et vous accompagner dans la durée.
         </p>
+        </div>
       </div>
     </SectionWrapper>
 
