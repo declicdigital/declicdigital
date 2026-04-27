@@ -8,15 +8,11 @@ import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
-
-// Images
 import imgBureau from "@/assets/agence-web-paris-bureau-laptop.webp";
 import imgProbleme from "@/assets/independant-zero-contact-formulaire.webp";
-import imgConsultante from "@/assets/consultante-agence-digitale-paris-bureau.webp";
-import imgReunion from "@/assets/reunion-client-cafe-de-flore-paris.webp";
-import imgArtisan from "@/assets/artisan-nouveau-client-site-web.webp";
+import imgProcessus from "@/assets/consultante-agence-digitale-paris-bureau.webp";
 import imgParis from "@/assets/paris-vue-aerienne-hauts-de-seine.webp";
-import imgFenetre from "@/assets/fenetre-haussmannienne-bureau-paris.webp";
+import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
 
 import logoWordpress from "@/assets/logos/wordpress.webp";
 import logoShopify from "@/assets/logos/shopify.webp";
@@ -40,28 +36,6 @@ const techLogos = [
   { name: "LinkedIn", src: logoLinkedin },
   { name: "Search Console", src: logoSearchConsole },
 ];
-
-// Composant image portrait avec effet hover
-const HoverImage = ({ src, alt, className = "" }: { src: string; alt: string; className?: string }) => (
-  <div className={`relative overflow-hidden rounded-2xl shadow-card group ${className}`} style={{ aspectRatio: "2/3" }}>
-    <img src={src} alt={alt}
-      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-      loading="lazy" decoding="async" />
-    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-      style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.35), hsl(183,70%,63%,0.20))" }} />
-  </div>
-);
-
-// Composant image paysage avec effet hover
-const HoverImageLandscape = ({ src, alt, className = "" }: { src: string; alt: string; className?: string }) => (
-  <div className={`relative overflow-hidden rounded-2xl shadow-card group ${className}`}>
-    <img src={src} alt={alt}
-      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-      loading="lazy" decoding="async" />
-    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-      style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.35), hsl(183,70%,63%,0.20))" }} />
-  </div>
-);
 
 const Index = () => {
   return (
@@ -121,14 +95,19 @@ const Index = () => {
                 </Button>
               </div>
             </div>
-            {/* Image bureau Paris + carte Geoffrey */}
-            <div className="flex flex-col gap-4 items-center lg:items-end">
-              <HoverImageLandscape src={imgBureau} alt="Agence web Déclic Digital - bureau Paris avec analytics" className="w-full max-w-md h-64 lg:h-72" />
-              <div className="rounded-2xl bg-card p-6 shadow-card text-center max-w-xs w-full">
-                <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital - Expert Produit Google" className="mx-auto mb-3 h-20 w-20 rounded-full object-cover" width={80} height={80} fetchPriority="high" />
-                <p className="font-bold">Geoffrey</p>
-                <p className="text-sm text-muted-foreground">Expert Produit Google</p>
-                <p className="text-xs text-muted-foreground mt-1">Fondateur de Déclic Digital, j'accompagne les TPE et indépendants à Paris et dans le 92.</p>
+            {/* Droite : image bureau + carte Geoffrey */}
+            <div className="flex flex-col gap-4">
+              <div className="relative overflow-hidden rounded-2xl shadow-card group">
+                <img src={imgBureau} alt="Agence web Déclic Digital - bureau Paris avec analytics" className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" width={640} height={256} fetchPriority="high" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))" }} />
+              </div>
+              <div className="rounded-2xl bg-card p-5 shadow-card flex items-center gap-4">
+                <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital - Expert Produit Google" className="h-16 w-16 rounded-full object-cover shrink-0" width={64} height={64} fetchPriority="high" />
+                <div>
+                  <p className="font-bold">Geoffrey</p>
+                  <p className="text-sm text-muted-foreground">Expert Produit Google</p>
+                  <p className="text-xs text-muted-foreground mt-1">Fondateur de Déclic Digital, j'accompagne les TPE et indépendants à Paris et dans le 92.</p>
+                </div>
               </div>
             </div>
           </div>
@@ -138,8 +117,13 @@ const Index = () => {
       {/* ─── Problème ─────────────────────────────────────────────────────────── */}
       <SectionWrapper id="probleme">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Image portrait côté gauche */}
-          <HoverImage src={imgProbleme} alt="Indépendant frustré par son site sans clients - Déclic Digital" className="hidden lg:block max-h-[500px]" />
+          {/* Portrait seul, bien cadré */}
+          <div className="hidden lg:block">
+            <div className="relative overflow-hidden rounded-2xl shadow-card group" style={{ aspectRatio: "3/4", maxHeight: "480px" }}>
+              <img src={imgProbleme} alt="Indépendant frustré par son site sans clients" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))" }} />
+            </div>
+          </div>
           <div>
             <h2 className="mb-6 text-3xl font-extrabold md:text-4xl">Vous n'avez pas de site, ou il ne génère aucun client ?</h2>
             <p className="mb-8 text-lg text-muted-foreground">
@@ -164,7 +148,7 @@ const Index = () => {
               ))}
             </div>
             <div className="mt-8">
-              <Button asChild variant="custom" size="lg" className="rounded-full gradient-primary btn-glow px-8 font-semibold text-white shadow-glow">
+              <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-white shadow-glow">
                 <Link to="/contact">Demander un audit SEO gratuit</Link>
               </Button>
             </div>
@@ -173,31 +157,37 @@ const Index = () => {
       </SectionWrapper>
 
       {/* ─── Services ─────────────────────────────────────────────────────────── */}
+      {/* Fond texture subtil */}
       <SectionWrapper id="services">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl font-extrabold md:text-4xl">Création de site web professionnel pour indépendants</h2>
-          <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold">Déclic Digital</Link>, nous ne créons pas simplement des sites web. Nous concevons des outils de génération de clients, pensés pour les TPE et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> adaptés aux petits budgets.
-          </p>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {[
-            { icon: Monitor, title: "Création de site web", desc: "Nous concevons des sites modernes, rapides et responsive, optimisés pour la conversion et l'expérience utilisateur.", link: "/creation-site-web" },
-            { icon: TrendingUp, title: "Référencement SEO", desc: "Le SEO est le levier le plus rentable pour attirer des clients. Nous optimisons votre site pour apparaître en première page Google.", link: "/referencement-seo" },
-            { icon: Eye, title: "Visibilité IA (GEO)", desc: "Apparaissez dans les réponses de ChatGPT, Perplexity et Gemini. La nouvelle frontière de la visibilité digitale pour les TPE.", link: "/visibilite-ia" },
-            { icon: BarChart3, title: "Stratégie digitale", desc: "Analyse de marché, positionnement, contenu, suivi des performances : chaque action est mesurée et orientée résultats.", link: "/contact" },
-          ].map((s, i) => (
-            <div key={i} className="group rounded-2xl bg-card p-8 shadow-card transition-all hover:shadow-elevated hover:-translate-y-1">
-              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">
-                <s.icon size={26} />
-              </div>
-              <h3 className="mb-3 text-xl font-bold">{s.title}</h3>
-              <p className="text-muted-foreground text-base leading-relaxed">{s.desc}</p>
-              <Link to={s.link} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">
-                En savoir plus <ChevronRight size={16} />
-              </Link>
+        <div className="relative rounded-3xl overflow-hidden">
+          <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none select-none" />
+          <div className="relative z-10">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl font-extrabold md:text-4xl">Création de site web professionnel pour indépendants</h2>
+              <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+                Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold">Déclic Digital</Link>, nous ne créons pas simplement des sites web. Nous concevons des outils de génération de clients, pensés pour les TPE et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> adaptés aux petits budgets.
+              </p>
             </div>
-          ))}
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+              {[
+                { icon: Monitor, title: "Création de site web", desc: "Nous concevons des sites modernes, rapides et responsive, optimisés pour la conversion et l'expérience utilisateur.", link: "/creation-site-web" },
+                { icon: TrendingUp, title: "Référencement SEO", desc: "Le SEO est le levier le plus rentable pour attirer des clients. Nous optimisons votre site pour apparaître en première page Google.", link: "/referencement-seo" },
+                { icon: Eye, title: "Visibilité IA (GEO)", desc: "Apparaissez dans les réponses de ChatGPT, Perplexity et Gemini. La nouvelle frontière de la visibilité digitale pour les TPE.", link: "/visibilite-ia" },
+                { icon: BarChart3, title: "Stratégie digitale", desc: "Analyse de marché, positionnement, contenu, suivi des performances : chaque action est mesurée et orientée résultats.", link: "/contact" },
+              ].map((s, i) => (
+                <div key={i} className="group rounded-2xl bg-card p-8 shadow-card transition-all hover:shadow-elevated hover:-translate-y-1">
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">
+                    <s.icon size={26} />
+                  </div>
+                  <h3 className="mb-3 text-xl font-bold">{s.title}</h3>
+                  <p className="text-muted-foreground text-base leading-relaxed">{s.desc}</p>
+                  <Link to={s.link} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">
+                    En savoir plus <ChevronRight size={16} />
+                  </Link>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </SectionWrapper>
 
@@ -234,10 +224,12 @@ const Index = () => {
               </Button>
             </div>
           </div>
-          {/* Images portrait empilées côté droit */}
-          <div className="hidden lg:grid grid-cols-2 gap-4">
-            <HoverImage src={imgConsultante} alt="Consultante agence digitale Paris - Déclic Digital" className="mt-8" />
-            <HoverImage src={imgReunion} alt="Réunion client agence web Paris café" />
+          {/* Une seule image portrait à droite */}
+          <div className="hidden lg:block">
+            <div className="relative overflow-hidden rounded-2xl shadow-card group" style={{ aspectRatio: "3/4", maxHeight: "520px" }}>
+              <img src={imgProcessus} alt="Consultante agence digitale Paris - Déclic Digital" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))" }} />
+            </div>
           </div>
         </div>
       </SectionWrapper>
@@ -272,7 +264,7 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
-      {/* ─── Paris / Zone d'intervention ──────────────────────────────────────── */}
+      {/* ─── Paris vue aérienne ───────────────────────────────────────────────── */}
       <SectionWrapper id="zone-intervention">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           <div>
@@ -280,18 +272,19 @@ const Index = () => {
             <p className="text-lg text-muted-foreground mb-6">
               Basés à Paris 15e, nous accompagnons les TPE, artisans et indépendants de Paris intra-muros et de tout le département du 92 : Boulogne-Billancourt, Nanterre, Issy-les-Moulineaux, Levallois-Perret, Asnières-sur-Seine, Courbevoie, et toutes les villes des Hauts-de-Seine.
             </p>
-            <div className="flex flex-wrap gap-2">
+            <div className="flex flex-wrap gap-2 mb-6">
               {["Paris", "Boulogne-Billancourt", "Nanterre", "Issy-les-Moulineaux", "Levallois-Perret", "Asnières-sur-Seine", "Courbevoie", "Neuilly-sur-Seine"].map((ville) => (
                 <span key={ville} className="rounded-full bg-secondary px-3 py-1.5 text-sm font-medium">{ville}</span>
               ))}
             </div>
-            <div className="mt-6">
-              <Link to="/nos-villes" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">
-                Voir toutes nos villes <ChevronRight size={16} />
-              </Link>
-            </div>
+            <Link to="/nos-villes" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">
+              Voir toutes nos villes <ChevronRight size={16} />
+            </Link>
           </div>
-          <HoverImageLandscape src={imgParis} alt="Paris vue aérienne Hauts-de-Seine - zone d'intervention Déclic Digital" className="h-72 lg:h-80" />
+          <div className="relative overflow-hidden rounded-2xl shadow-card group">
+            <img src={imgParis} alt="Paris vue aérienne Hauts-de-Seine - zone d'intervention Déclic Digital" className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))" }} />
+          </div>
         </div>
       </SectionWrapper>
 
@@ -331,27 +324,21 @@ const Index = () => {
               <div className="rounded-2xl bg-card p-6 shadow-card">
                 <h3 className="text-lg font-bold mb-2">Un site pensé pour convertir</h3>
                 <p className="text-base text-muted-foreground leading-relaxed">
-                  Chaque élément de votre site est pensé pour guider le visiteur vers une action précise : demande de devis, appel téléphonique, prise de rendez-vous. Nous structurons vos pages selon les meilleures pratiques UX et les standards d'accessibilité pour maximiser votre taux de conversion.
+                  Chaque élément de votre site est pensé pour guider le visiteur vers une action précise : demande de devis, appel téléphonique, prise de rendez-vous. Nous structurons vos pages selon les meilleures pratiques UX et les standards d'accessibilité pour maximiser votre taux de conversion. Un site qui ne convertit pas est un site qui coûte de l'argent au lieu d'en rapporter.
                 </p>
               </div>
               <div className="rounded-2xl bg-card p-6 shadow-card">
                 <h3 className="text-lg font-bold mb-2">Le SEO au coeur de la conception</h3>
                 <p className="text-base text-muted-foreground leading-relaxed">
-                  Nous ne construisons pas un site web puis nous pensons au <Link to="/referencement-seo" className="text-primary font-semibold">référencement</Link> ensuite. Le SEO est intégré dès la phase de conception : architecture des pages, balisage sémantique, vitesse de chargement, maillage interne, contenu optimisé.
+                  Nous ne construisons pas un site web puis nous pensons au <Link to="/referencement-seo" className="text-primary font-semibold">référencement</Link> ensuite. Le SEO est intégré dès la phase de conception : architecture des pages, balisage sémantique, vitesse de chargement, maillage interne, contenu optimisé. Cette approche garantit que votre site est prêt à se positionner sur Google dès sa mise en ligne.
                 </p>
               </div>
             </div>
-
-            {/* Image paysage dans le corps du contenu */}
-            <div className="not-prose">
-              <HoverImageLandscape src={imgFenetre} alt="Bureau parisien fenêtre haussmannienne - Déclic Digital agence web Paris" className="h-56 md:h-72 w-full" />
-            </div>
-
             <p className="text-base md:text-lg">
               La majorité des TPE qui nous contactent partagent un constat commun : elles ont investi dans un site web il y a quelques années, mais celui-ci ne leur apporte aucun retour. Les raisons sont souvent les mêmes : un design daté, un temps de chargement excessif, une absence totale de stratégie de mots clés, et un contenu qui ne répond pas aux questions que se posent réellement leurs prospects.
             </p>
             <p className="text-base md:text-lg">
-              Notre approche est différente. Nous commençons par une analyse approfondie de votre secteur d'activité, de vos concurrents et des requêtes que tapent vos futurs clients sur Google. Demandez votre <Link to="/contact" className="text-primary font-semibold">audit SEO gratuit</Link> pour en savoir plus.
+              Notre approche est différente. Nous commençons par une analyse approfondie de votre secteur d'activité, de vos concurrents et des requêtes que tapent vos futurs clients sur Google. À partir de cette analyse, nous définissons une arborescence de site optimisée, nous rédigeons des contenus ciblés et nous mettons en place une architecture technique irréprochable. Le résultat : un site qui se positionne durablement sur les mots clés stratégiques de votre activité. Demandez votre <Link to="/contact" className="text-primary font-semibold">audit SEO gratuit</Link> pour en savoir plus.
             </p>
             <div className="rounded-2xl bg-card p-6 shadow-card not-prose">
               <h3 className="text-lg font-bold mb-3">Ce qui fait la différence avec Déclic Digital</h3>
@@ -371,6 +358,9 @@ const Index = () => {
                 ))}
               </ul>
             </div>
+            <p className="text-base md:text-lg">
+              Nous croyons que chaque entreprise, quelle que soit sa taille, mérite une présence en ligne professionnelle et performante. C'est pourquoi nous proposons des <Link to="/tarifs" className="text-primary font-semibold">formules accessibles</Link> sans sacrifier la qualité. De la <Link to="/creation-site-web" className="text-primary font-semibold">création de votre site vitrine</Link> à la mise en place d'une stratégie de <Link to="/referencement-seo" className="text-primary font-semibold">référencement naturel</Link> complète, nous vous accompagnons à chaque étape avec transparence et réactivité.
+            </p>
           </div>
           <div className="text-center mt-10">
             <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
@@ -430,16 +420,13 @@ const Index = () => {
         <LocationSection />
       </Suspense>
 
-      {/* ─── CTA final avec image de fond ─────────────────────────────────────── */}
-      <section className="relative overflow-hidden py-16 md:py-24">
-        {/* Image de fond */}
-        <img src={imgArtisan} alt="Artisan reçoit un nouveau client grâce à son site web" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.88), hsl(183,70%,40%,0.75))" }} />
-        <div className="container relative z-10">
-          <div className="flex flex-col items-center text-center text-white">
+      {/* ─── CTA final — gradient miami propre ────────────────────────────────── */}
+      <section className="gradient-miami py-16 md:py-24 text-white">
+        <div className="container">
+          <div className="flex flex-col items-center text-center">
             <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-white/30 shadow-lg mb-4" width={80} height={80} loading="lazy" />
-            <p className="text-sm font-semibold mb-1">Geoffrey, Expert Produit Google</p>
-            <h3 className="mb-4 text-3xl font-extrabold md:text-4xl">Et si votre site devenait votre meilleur commercial ?</h3>
+            <p className="text-sm font-semibold text-white mb-1">Geoffrey, Expert Produit Google</p>
+            <h3 className="mb-4 text-3xl font-extrabold text-white md:text-4xl">Et si votre site devenait votre meilleur commercial ?</h3>
             <p className="mb-8 text-lg text-white/80 max-w-2xl">
               Un site optimisé peut générer des prospects tous les jours. Ne laissez plus vos concurrents capter les clients qui vous cherchent sur Google.
             </p>
