@@ -255,10 +255,10 @@ const ReferencementSeo = () => {
           <h2 className="mb-4 text-2xl font-extrabold md:text-3xl">Prêt à attirer vos premiers clients via Google ?</h2>
           <p className="mb-6 text-muted-foreground max-w-xl mx-auto">Nos experts analysent votre site et identifient les quick wins SEO pour votre activité.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
+            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-[hsl(263,36%,18%)] shadow-glow">
               <Link to="/contact">Audit SEO gratuit</Link>
             </Button>
-            <Button asChild variant="custom" size="lg" className="rounded-full border-2 border-white/40 bg-transparent px-8 font-semibold text-white hover:bg-white/10 transition-colors">
+            <Button asChild variant="custom" size="lg" className="rounded-full border-2 border-white/40 bg-transparent px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-white/10 transition-colors">
               <Link to="/rendez-vous">Prendre rendez-vous</Link>
             </Button>
           </div>
@@ -293,7 +293,7 @@ const ReferencementSeo = () => {
           <div className="overflow-x-auto rounded-2xl border bg-background shadow-card">
             <table className="w-full">
               <thead>
-                <tr className="bg-[hsl(263,36%,18%)] text-white">
+                <tr className="bg-[hsl(263,36%,18%)] text-[hsl(263,36%,18%)]">
                   <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider">Critère</th>
                   <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider bg-primary/80">SEO (naturel)</th>
                   <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider">Google Ads</th>
@@ -328,7 +328,7 @@ const ReferencementSeo = () => {
           <div className="grid gap-6 md:grid-cols-3">
             {profiles.map((p, i) => (
               <div key={i} className="rounded-2xl bg-background p-6 shadow-card border-t-4 border-primary">
-                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[hsl(263,36%,18%)] text-white">
+                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[hsl(263,36%,18%)] text-[hsl(263,36%,18%)]">
                   <p.icon size={22} />
                 </div>
                 <h3 className="font-bold text-lg mb-1">{p.title}</h3>
@@ -379,7 +379,7 @@ const ReferencementSeo = () => {
         <div className="container relative z-10 text-center">
           <h2 className="mb-4 text-2xl font-extrabold md:text-3xl">Vous vous reconnaissez dans ces freins ?</h2>
           <p className="mb-6 text-muted-foreground max-w-xl mx-auto">On démystifie le SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
-          <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
+          <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-[hsl(263,36%,18%)] shadow-glow">
             <Link to="/contact">Demander un audit SEO gratuit</Link>
           </Button>
         </div>
@@ -450,7 +450,7 @@ const ReferencementSeo = () => {
           <h2 className="mb-4 text-2xl font-extrabold md:text-3xl">Votre SEO peut travailler pour vous dès aujourd'hui</h2>
           <p className="mb-6 text-muted-foreground max-w-xl mx-auto">Nos experts analysent votre site, identifient les quick wins SEO et construisent une stratégie adaptée à votre activité, votre zone et votre budget.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
+            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-[hsl(263,36%,18%)] shadow-glow">
               <Link to="/contact">Audit SEO gratuit</Link>
             </Button>
             <Link to="/tarifs" className="inline-flex items-center justify-center rounded-full border-2 border-[hsl(263,36%,18%)] bg-transparent px-8 py-3 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)/0.1] transition-colors">
@@ -525,7 +525,7 @@ const ReferencementSeo = () => {
           ))}
           <Link
             to="/nos-villes"
-            className="rounded-full gradient-primary btn-glow px-4 py-2 text-sm font-semibold text-white shadow-glow"
+            className="rounded-full gradient-primary btn-glow px-4 py-2 text-sm font-semibold text-[hsl(263,36%,18%)] shadow-glow"
           >
             Voir toutes les villes →
           </Link>
