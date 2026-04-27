@@ -11,6 +11,9 @@ import LocationSection from "@/components/LocationSection";
 import { ChevronDown, CheckCircle2, Building2, Hammer, Laptop } from "lucide-react";
 import { cities } from "@/data/cities";
 import heroSeo from "@/assets/seo-hero-businessman.webp";
+import imgSearchConsole from "@/assets/google-search-console-resultats-seo.webp";
+import imgGoogleMaps from "@/assets/seo-local-google-maps-boulogne-billancourt.webp";
+import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
 import seoDashboard from "@/assets/seo-dashboard-analytics.webp";
 
 const stats = [
@@ -267,7 +270,10 @@ const ReferencementSeo = () => {
         <div className="mx-auto max-w-5xl grid items-center gap-10 lg:grid-cols-2">
           <div className="relative">
             <div className="absolute -inset-3 rounded-3xl gradient-miami opacity-15 blur-2xl" />
-            <img src={seoDashboard} alt="Dashboard analytics SEO pour suivre les performances" className="relative w-full rounded-2xl shadow-2xl" width={512} height={341} loading="lazy" decoding="async" />
+            <div className="relative overflow-hidden rounded-2xl shadow-2xl group">
+              <img src={imgSearchConsole} alt="Google Search Console - résultats SEO en hausse" className="w-full object-cover transition-transform duration-500 group-hover:scale-105" width={512} height={341} loading="lazy" decoding="async" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))"}} />
+            </div>
           </div>
           <div className="space-y-5">
             <h2 className="text-3xl font-extrabold md:text-4xl">Suivez vos résultats en temps réel</h2>
@@ -403,6 +409,21 @@ const ReferencementSeo = () => {
           <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
             <p className="font-bold text-primary mb-2">📌 Conseil pratique</p>
             <p className="text-muted-foreground">Avant tout investissement SEO, vérifiez que votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link> se charge en moins de 3 secondes sur mobile et qu'il est responsive. Un site lent est pénalisé par Google et fait fuir vos visiteurs. Testez avec <strong>PageSpeed Insights</strong> de Google - c'est gratuit et prend 30 secondes. Consultez aussi notre article sur <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold">l'impact de la vitesse sur votre chiffre d'affaires</Link>.</p>
+          </div>
+        </div>
+      </SectionWrapper>
+
+      {/* Image Google Maps SEO local */}
+      <SectionWrapper>
+        <div className="grid lg:grid-cols-2 gap-12 items-center mx-auto max-w-5xl">
+          <div className="relative overflow-hidden rounded-2xl shadow-card group" style={{aspectRatio: "2/3", maxHeight: "480px"}}>
+            <img src={imgGoogleMaps} alt="SEO local Google Maps Boulogne-Billancourt - Déclic Digital" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))"}} />
+          </div>
+          <div className="space-y-4">
+            <h2 className="text-3xl font-extrabold md:text-4xl">Le SEO local : votre arme secrète dans le 92</h2>
+            <p className="text-muted-foreground leading-relaxed">Les recherches "près de moi" ont explosé de 500% en 5 ans. Quand un client cherche votre métier sur Google Maps, il veut trouver le professionnel le plus proche et le mieux noté. C'est là que vous devez être.</p>
+            <p className="text-muted-foreground leading-relaxed">Avec un site optimisé + une fiche Google Business complète + des avis clients, vous captez cette demande locale avant vos concurrents.</p>
           </div>
         </div>
       </SectionWrapper>
