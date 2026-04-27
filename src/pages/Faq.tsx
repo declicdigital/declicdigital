@@ -117,7 +117,7 @@ const Faq = () => (
         <h2 className="mb-4 text-3xl font-extrabold ">Prêt à lancer votre projet ?</h2>
         <p className="mb-8 text-muted-foreground max-w-xl mx-auto">Audit SEO gratuit, devis en 24h, aucun engagement. On répond à toutes vos questions.</p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
-          <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
+          <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-[hsl(263,36%,18%)] shadow-glow">
             <Link to="/contact">Demander un audit SEO gratuit</Link>
           </Button>
           <Link to="/tarifs" className="inline-flex items-center justify-center rounded-full border-2 border-[hsl(263,36%,18%)] bg-transparent px-8 py-3 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)/0.1] transition-colors">
