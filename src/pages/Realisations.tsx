@@ -181,8 +181,8 @@ const Realisations = () => (
 
     {/* CTA final avec texture */}
     <section className="relative overflow-hidden py-16">
-      <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-60" />
-      <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.82)" }} />
+      <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+      <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.72)" }} />
       <div className="container relative z-10 text-center">
         <h2 className="mb-4 text-3xl font-extrabold text-white">Votre projet sera le prochain ?</h2>
         <p className="mx-auto mb-8 max-w-lg text-white/80">Contactez-nous pour discuter de votre projet et obtenir un devis gratuit sous 24h.</p>
