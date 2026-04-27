@@ -13,6 +13,7 @@ import imgProbleme from "@/assets/independant-zero-contact-formulaire.webp";
 import imgProcessus from "@/assets/consultante-agence-digitale-paris-bureau.webp";
 import imgParis from "@/assets/paris-vue-aerienne-hauts-de-seine.webp";
 import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
+import imgArtisan from "@/assets/artisan-nouveau-client-site-web.webp";
 
 import logoWordpress from "@/assets/logos/wordpress.webp";
 import logoShopify from "@/assets/logos/shopify.webp";
@@ -84,7 +85,7 @@ const Index = () => {
                 On crée votre site web à Paris et dans le 92 pour briller sur Google et l'IA
               </h1>
               <p className="mb-8 max-w-lg text-lg md:text-xl text-muted-foreground leading-relaxed">
-                Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold">SEO et GEO</Link> pour que les TPE et indépendants de Paris et du 92 attirent enfin les bons clients, en toute simplicité et sans budget démesuré.
+                Votre entreprise mérite d'être trouvée sur Google. Geoffrey, Expert Produit Google, et son équipe créent des <Link to="/creation-site-web" className="text-primary font-semibold">sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold">SEO et GEO</Link> pour que les TPE et indépendants de Paris et du 92 attirent enfin les bons clients.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
                 <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
@@ -95,11 +96,10 @@ const Index = () => {
                 </Button>
               </div>
             </div>
-            {/* Droite : image bureau + carte Geoffrey */}
             <div className="flex flex-col gap-4">
               <div className="relative overflow-hidden rounded-2xl shadow-card group">
                 <img src={imgBureau} alt="Agence web Déclic Digital - bureau Paris avec analytics" className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" width={640} height={256} fetchPriority="high" />
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))" }} />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))" }} />
               </div>
               <div className="rounded-2xl bg-card p-5 shadow-card flex items-center gap-4">
                 <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital - Expert Produit Google" className="h-16 w-16 rounded-full object-cover shrink-0" width={64} height={64} fetchPriority="high" />
@@ -114,58 +114,59 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Problème ─────────────────────────────────────────────────────────── */}
-      <SectionWrapper id="probleme">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Portrait seul, bien cadré */}
-          <div className="hidden lg:block">
-            <div className="relative overflow-hidden rounded-2xl shadow-card group" style={{ aspectRatio: "3/4", maxHeight: "480px" }}>
-              <img src={imgProbleme} alt="Indépendant frustré par son site sans clients" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))" }} />
+      {/* ─── Problème : image en fond côté gauche + texte qui chevauche ──────── */}
+      <section className="py-12 md:py-16 overflow-hidden">
+        <div className="container">
+          <div className="relative">
+            {/* Image en fond côté gauche */}
+            <div className="hidden lg:block absolute left-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
+              <img src={imgProbleme} alt="Indépendant frustré par son site sans clients" className="w-full h-full object-cover" loading="lazy" />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to left, hsl(var(--background)) 0%, hsl(var(--background)/0.4) 30%, transparent 65%)" }} />
             </div>
-          </div>
-          <div>
-            <h2 className="mb-6 text-3xl font-extrabold md:text-4xl">Vous n'avez pas de site, ou il ne génère aucun client ?</h2>
-            <p className="mb-8 text-lg text-muted-foreground">
-              De nombreuses TPE investissent dans un site web, mais celui-ci reste invisible sur Google. Sans stratégie de <Link to="/referencement-seo" className="text-primary font-semibold">référencement</Link>, sans optimisation technique et sans contenu adapté, votre site ne peut pas attirer de visiteurs qualifiés. Résultat : zéro contact, zéro prospect, zéro retour sur investissement.
-            </p>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                { icon: Eye, text: "Site invisible sur Google", detail: "93% des expériences en ligne commencent par un moteur de recherche. Si votre site n'apparaît pas, vos clients vont chez vos concurrents." },
-                { icon: Users, text: "Mauvaise expérience utilisateur", detail: "Un site lent, non adapté mobile ou difficile à naviguer fait fuir les visiteurs en quelques secondes." },
-                { icon: Search, text: "Absence de stratégie SEO", detail: "Sans optimisation des mots clés, des balises et du contenu, Google ne peut pas comprendre ni classer votre site." },
-                { icon: Gauge, text: "Site trop lent", detail: "Un temps de chargement supérieur à 3 secondes augmente le taux de rebond de plus de 50%." },
-              ].map((item, i) => (
-                <div key={i} className="flex items-start gap-4 rounded-xl bg-secondary p-5 text-left shadow-card">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
-                    <item.icon size={22} />
+            {/* Texte qui chevauche depuis la droite */}
+            <div className="relative z-10 ml-auto max-w-2xl">
+              <h2 className="mb-6 text-3xl font-extrabold md:text-4xl">Vous n'avez pas de site, ou il ne génère aucun client ?</h2>
+              <p className="mb-8 text-lg text-muted-foreground">
+                De nombreuses TPE investissent dans un site web, mais celui-ci reste invisible sur Google. Sans stratégie de <Link to="/referencement-seo" className="text-primary font-semibold">référencement</Link>, sans optimisation technique et sans contenu adapté, votre site ne peut pas attirer de visiteurs qualifiés. Résultat : zéro contact, zéro prospect, zéro retour sur investissement.
+              </p>
+              <div className="grid gap-4 sm:grid-cols-2">
+                {[
+                  { icon: Eye, text: "Site invisible sur Google", detail: "93% des expériences en ligne commencent par un moteur de recherche. Si votre site n'apparaît pas, vos clients vont chez vos concurrents." },
+                  { icon: Users, text: "Mauvaise expérience utilisateur", detail: "Un site lent, non adapté mobile ou difficile à naviguer fait fuir les visiteurs en quelques secondes." },
+                  { icon: Search, text: "Absence de stratégie SEO", detail: "Sans optimisation des mots clés, des balises et du contenu, Google ne peut pas comprendre ni classer votre site." },
+                  { icon: Gauge, text: "Site trop lent", detail: "Un temps de chargement supérieur à 3 secondes augmente le taux de rebond de plus de 50%." },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-4 rounded-xl bg-secondary p-5 text-left shadow-card">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
+                      <item.icon size={22} />
+                    </div>
+                    <div>
+                      <span className="font-semibold block">{item.text}</span>
+                      <p className="text-sm text-muted-foreground mt-1">{item.detail}</p>
+                    </div>
                   </div>
-                  <div>
-                    <span className="font-semibold block">{item.text}</span>
-                    <p className="text-sm text-muted-foreground mt-1">{item.detail}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-            <div className="mt-8">
-              <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-white shadow-glow">
-                <Link to="/contact">Demander un audit SEO gratuit</Link>
-              </Button>
+                ))}
+              </div>
+              <div className="mt-8">
+                <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-white shadow-glow">
+                  <Link to="/contact">Demander un audit SEO gratuit</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* ─── Services ─────────────────────────────────────────────────────────── */}
-      {/* Fond texture subtil */}
+      {/* ─── Services avec texture en fond ────────────────────────────────────── */}
       <SectionWrapper id="services">
         <div className="relative rounded-3xl overflow-hidden">
-          <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none select-none" />
-          <div className="relative z-10">
+          <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" />
+          <div className="absolute inset-0" style={{ background: "hsl(var(--background)/0.88)" }} />
+          <div className="relative z-10 py-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl font-extrabold md:text-4xl">Création de site web professionnel pour indépendants</h2>
               <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-                Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold">Déclic Digital</Link>, nous ne créons pas simplement des sites web. Nous concevons des outils de génération de clients, pensés pour les TPE et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> adaptés aux petits budgets.
+                Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold">Déclic Digital</Link>, nous concevons des outils de génération de clients, pensés pour les TPE et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> adaptés aux petits budgets.
               </p>
             </div>
             <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -191,48 +192,49 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
-      {/* ─── Processus ────────────────────────────────────────────────────────── */}
-      <SectionWrapper id="processus">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Référencement naturel Google : soyez visible localement</h2>
-            <p className="text-lg text-muted-foreground mb-10">
-              Un processus simple et transparent pour vous accompagner de A à Z. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold">notre équipe</Link> et <Link to="/realisations" className="text-primary font-semibold">nos réalisations</Link>.
-            </p>
-            <div className="space-y-6">
-              {[
-                { step: "1", icon: MessageSquare, title: "Formulaire", desc: "Remplissez notre formulaire de contact pour nous décrire votre projet et vos objectifs." },
-                { step: "2", icon: PhoneIcon, title: "Rendez-vous", desc: "Nous échangeons par téléphone pour comprendre vos besoins, votre marché et vos attentes." },
-                { step: "3", icon: FileText, title: "Proposition", desc: "Nous vous présentons une solution adaptée à votre activité, vos objectifs et votre budget." },
-                { step: "4", icon: Rocket, title: "Création", desc: "Nous concevons et mettons en ligne votre site optimisé SEO, prêt à attirer des clients." },
-                { step: "5", icon: BarChart3, title: "Suivi", desc: "Nous suivons les performances et optimisons en continu pour maximiser vos résultats." },
-              ].map((p, i) => (
-                <div key={i} className="flex items-start gap-4">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full gradient-primary text-white text-sm font-bold">
-                    {p.step}
-                  </div>
-                  <div>
-                    <h3 className="font-bold">{p.title}</h3>
-                    <p className="text-sm text-muted-foreground">{p.desc}</p>
-                  </div>
-                </div>
-              ))}
+      {/* ─── Processus : image overlap côté droit ─────────────────────────────── */}
+      <section className="py-12 md:py-16 overflow-hidden">
+        <div className="container">
+          <div className="relative">
+            {/* Image en fond côté droit */}
+            <div className="hidden lg:block absolute right-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
+              <img src={imgProcessus} alt="Consultante agence digitale Paris - Déclic Digital" className="w-full h-full object-cover" loading="lazy" />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to right, hsl(var(--background)) 0%, hsl(var(--background)/0.4) 30%, transparent 65%)" }} />
             </div>
-            <div className="mt-8">
-              <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
-                <Link to="/rendez-vous">Prendre rendez-vous</Link>
-              </Button>
-            </div>
-          </div>
-          {/* Une seule image portrait à droite */}
-          <div className="hidden lg:block">
-            <div className="relative overflow-hidden rounded-2xl shadow-card group" style={{ aspectRatio: "3/4", maxHeight: "520px" }}>
-              <img src={imgProcessus} alt="Consultante agence digitale Paris - Déclic Digital" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))" }} />
+            {/* Texte côté gauche qui chevauche */}
+            <div className="relative z-10 max-w-2xl">
+              <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Référencement naturel Google : soyez visible localement</h2>
+              <p className="text-lg text-muted-foreground mb-10">
+                Un processus simple et transparent pour vous accompagner de A à Z. Découvrez <Link to="/qui-sommes-nous" className="text-primary font-semibold">notre équipe</Link> et <Link to="/realisations" className="text-primary font-semibold">nos réalisations</Link>.
+              </p>
+              <div className="space-y-6">
+                {[
+                  { step: "1", icon: MessageSquare, title: "Formulaire", desc: "Remplissez notre formulaire de contact pour nous décrire votre projet et vos objectifs." },
+                  { step: "2", icon: PhoneIcon, title: "Rendez-vous", desc: "Nous échangeons par téléphone pour comprendre vos besoins, votre marché et vos attentes." },
+                  { step: "3", icon: FileText, title: "Proposition", desc: "Nous vous présentons une solution adaptée à votre activité, vos objectifs et votre budget." },
+                  { step: "4", icon: Rocket, title: "Création", desc: "Nous concevons et mettons en ligne votre site optimisé SEO, prêt à attirer des clients." },
+                  { step: "5", icon: BarChart3, title: "Suivi", desc: "Nous suivons les performances et optimisons en continu pour maximiser vos résultats." },
+                ].map((p, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full gradient-primary text-white text-sm font-bold">
+                      {p.step}
+                    </div>
+                    <div>
+                      <h3 className="font-bold">{p.title}</h3>
+                      <p className="text-sm text-muted-foreground">{p.desc}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-8">
+                <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-white shadow-glow">
+                  <Link to="/rendez-vous">Prendre rendez-vous</Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
       {/* ─── Avis Google ──────────────────────────────────────────────────────── */}
       <Suspense fallback={<div style={{ minHeight: 400 }} />}>
@@ -264,29 +266,36 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
-      {/* ─── Paris vue aérienne ───────────────────────────────────────────────── */}
-      <SectionWrapper id="zone-intervention">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Paris et Hauts-de-Seine : notre terrain de jeu</h2>
-            <p className="text-lg text-muted-foreground mb-6">
-              Basés à Paris 15e, nous accompagnons les TPE, artisans et indépendants de Paris intra-muros et de tout le département du 92 : Boulogne-Billancourt, Nanterre, Issy-les-Moulineaux, Levallois-Perret, Asnières-sur-Seine, Courbevoie, et toutes les villes des Hauts-de-Seine.
-            </p>
-            <div className="flex flex-wrap gap-2 mb-6">
-              {["Paris", "Boulogne-Billancourt", "Nanterre", "Issy-les-Moulineaux", "Levallois-Perret", "Asnières-sur-Seine", "Courbevoie", "Neuilly-sur-Seine"].map((ville) => (
-                <span key={ville} className="rounded-full bg-secondary px-3 py-1.5 text-sm font-medium">{ville}</span>
-              ))}
+      {/* ─── Paris : image en fond avec citation overlay ───────────────────────── */}
+      <section className="py-12 md:py-16">
+        <div className="container">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Paris et Hauts-de-Seine : notre terrain de jeu</h2>
+              <p className="text-lg text-muted-foreground mb-6">
+                Basés à Paris 15e, nous accompagnons les TPE, artisans et indépendants de Paris intra-muros et de tout le département du 92 : Boulogne-Billancourt, Nanterre, Issy-les-Moulineaux, Levallois-Perret, Asnières-sur-Seine, Courbevoie, et toutes les villes des Hauts-de-Seine.
+              </p>
+              <div className="flex flex-wrap gap-2 mb-6">
+                {["Paris", "Boulogne-Billancourt", "Nanterre", "Issy-les-Moulineaux", "Levallois-Perret", "Asnières-sur-Seine", "Courbevoie", "Neuilly-sur-Seine"].map((ville) => (
+                  <span key={ville} className="rounded-full bg-secondary px-3 py-1.5 text-sm font-medium">{ville}</span>
+                ))}
+              </div>
+              <Link to="/nos-villes" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">
+                Voir toutes nos villes <ChevronRight size={16} />
+              </Link>
             </div>
-            <Link to="/nos-villes" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">
-              Voir toutes nos villes <ChevronRight size={16} />
-            </Link>
-          </div>
-          <div className="relative overflow-hidden rounded-2xl shadow-card group">
-            <img src={imgParis} alt="Paris vue aérienne Hauts-de-Seine - zone d'intervention Déclic Digital" className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))" }} />
+            {/* Image Paris avec citation en overlay */}
+            <div className="relative overflow-hidden rounded-2xl shadow-card group">
+              <img src={imgParis} alt="Paris vue aérienne Hauts-de-Seine - zone d'intervention Déclic Digital" className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, hsl(263,36%,18%,0.85) 0%, transparent 55%)" }} />
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <p className="text-white font-bold text-lg">Paris · Hauts-de-Seine · 92</p>
+                <p className="text-white/70 text-sm">Boulogne · Neuilly · Levallois · Issy · Nanterre</p>
+              </div>
+            </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
       {/* ─── Logos tech ───────────────────────────────────────────────────────── */}
       <SectionWrapper id="realisations">
@@ -318,27 +327,24 @@ const Index = () => {
           </div>
           <div className="prose prose-lg max-w-none text-muted-foreground space-y-6">
             <p className="text-base md:text-lg">
-              Créer un <Link to="/creation-site-web" className="text-primary font-semibold">site internet</Link> ne se résume pas à assembler quelques pages et publier du contenu. Dans un environnement numérique de plus en plus concurrentiel, la réussite d'un projet web repose sur une combinaison d'expertise technique, de vision stratégique et de compréhension fine de votre marché. Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold">Déclic Digital</Link>, nous accompagnons les TPE, artisans, professions libérales et indépendants de <Link to="/nos-villes" className="text-primary font-semibold">Paris et des Hauts-de-Seine</Link> dans la conception de sites web qui génèrent réellement des contacts qualifiés.
+              Créer un <Link to="/creation-site-web" className="text-primary font-semibold">site internet</Link> ne se résume pas à assembler quelques pages et publier du contenu. Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold">Déclic Digital</Link>, nous accompagnons les TPE, artisans et indépendants de <Link to="/nos-villes" className="text-primary font-semibold">Paris et des Hauts-de-Seine</Link> dans la conception de sites web qui génèrent réellement des contacts qualifiés.
             </p>
             <div className="grid gap-6 md:grid-cols-2 not-prose">
               <div className="rounded-2xl bg-card p-6 shadow-card">
                 <h3 className="text-lg font-bold mb-2">Un site pensé pour convertir</h3>
                 <p className="text-base text-muted-foreground leading-relaxed">
-                  Chaque élément de votre site est pensé pour guider le visiteur vers une action précise : demande de devis, appel téléphonique, prise de rendez-vous. Nous structurons vos pages selon les meilleures pratiques UX et les standards d'accessibilité pour maximiser votre taux de conversion. Un site qui ne convertit pas est un site qui coûte de l'argent au lieu d'en rapporter.
+                  Chaque élément de votre site est pensé pour guider le visiteur vers une action précise : demande de devis, appel téléphonique, prise de rendez-vous. Nous structurons vos pages selon les meilleures pratiques UX pour maximiser votre taux de conversion.
                 </p>
               </div>
               <div className="rounded-2xl bg-card p-6 shadow-card">
-                <h3 className="text-lg font-bold mb-2">Le SEO au coeur de la conception</h3>
+                <h3 className="text-lg font-bold mb-2">Le SEO au cœur de la conception</h3>
                 <p className="text-base text-muted-foreground leading-relaxed">
-                  Nous ne construisons pas un site web puis nous pensons au <Link to="/referencement-seo" className="text-primary font-semibold">référencement</Link> ensuite. Le SEO est intégré dès la phase de conception : architecture des pages, balisage sémantique, vitesse de chargement, maillage interne, contenu optimisé. Cette approche garantit que votre site est prêt à se positionner sur Google dès sa mise en ligne.
+                  Nous ne construisons pas un site web puis nous pensons au <Link to="/referencement-seo" className="text-primary font-semibold">référencement</Link> ensuite. Le SEO est intégré dès la phase de conception : architecture des pages, balisage sémantique, vitesse de chargement, maillage interne, contenu optimisé.
                 </p>
               </div>
             </div>
             <p className="text-base md:text-lg">
-              La majorité des TPE qui nous contactent partagent un constat commun : elles ont investi dans un site web il y a quelques années, mais celui-ci ne leur apporte aucun retour. Les raisons sont souvent les mêmes : un design daté, un temps de chargement excessif, une absence totale de stratégie de mots clés, et un contenu qui ne répond pas aux questions que se posent réellement leurs prospects.
-            </p>
-            <p className="text-base md:text-lg">
-              Notre approche est différente. Nous commençons par une analyse approfondie de votre secteur d'activité, de vos concurrents et des requêtes que tapent vos futurs clients sur Google. À partir de cette analyse, nous définissons une arborescence de site optimisée, nous rédigeons des contenus ciblés et nous mettons en place une architecture technique irréprochable. Le résultat : un site qui se positionne durablement sur les mots clés stratégiques de votre activité. Demandez votre <Link to="/contact" className="text-primary font-semibold">audit SEO gratuit</Link> pour en savoir plus.
+              La majorité des TPE qui nous contactent partagent un constat commun : elles ont investi dans un site web il y a quelques années, mais celui-ci ne leur apporte aucun retour. Demandez votre <Link to="/contact" className="text-primary font-semibold">audit SEO gratuit</Link> pour identifier vos axes d'amélioration.
             </p>
             <div className="rounded-2xl bg-card p-6 shadow-card not-prose">
               <h3 className="text-lg font-bold mb-3">Ce qui fait la différence avec Déclic Digital</h3>
@@ -358,9 +364,6 @@ const Index = () => {
                 ))}
               </ul>
             </div>
-            <p className="text-base md:text-lg">
-              Nous croyons que chaque entreprise, quelle que soit sa taille, mérite une présence en ligne professionnelle et performante. C'est pourquoi nous proposons des <Link to="/tarifs" className="text-primary font-semibold">formules accessibles</Link> sans sacrifier la qualité. De la <Link to="/creation-site-web" className="text-primary font-semibold">création de votre site vitrine</Link> à la mise en place d'une stratégie de <Link to="/referencement-seo" className="text-primary font-semibold">référencement naturel</Link> complète, nous vous accompagnons à chaque étape avec transparence et réactivité.
-            </p>
           </div>
           <div className="text-center mt-10">
             <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
@@ -420,13 +423,16 @@ const Index = () => {
         <LocationSection />
       </Suspense>
 
-      {/* ─── CTA final — gradient miami propre ────────────────────────────────── */}
-      <section className="gradient-miami py-16 md:py-24 text-white">
-        <div className="container">
-          <div className="flex flex-col items-center text-center">
+      {/* ─── CTA final avec texture + image artisan en fond ───────────────────── */}
+      <section className="relative overflow-hidden py-16 md:py-24">
+        <img src={imgArtisan} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover mix-blend-multiply" loading="lazy" />
+        <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.80)" }} />
+        <div className="container relative z-10">
+          <div className="flex flex-col items-center text-center text-white">
             <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-white/30 shadow-lg mb-4" width={80} height={80} loading="lazy" />
-            <p className="text-sm font-semibold text-white mb-1">Geoffrey, Expert Produit Google</p>
-            <h3 className="mb-4 text-3xl font-extrabold text-white md:text-4xl">Et si votre site devenait votre meilleur commercial ?</h3>
+            <p className="text-sm font-semibold mb-1">Geoffrey, Expert Produit Google</p>
+            <h3 className="mb-4 text-3xl font-extrabold md:text-4xl">Et si votre site devenait votre meilleur commercial ?</h3>
             <p className="mb-8 text-lg text-white/80 max-w-2xl">
               Un site optimisé peut générer des prospects tous les jours. Ne laissez plus vos concurrents capter les clients qui vous cherchent sur Google.
             </p>
