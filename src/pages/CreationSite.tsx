@@ -41,7 +41,7 @@ const CreationSite = () => (
             <p className="mb-8 text-lg text-muted-foreground leading-relaxed">
               Nous concevons des sites modernes, rapides et optimisés <Link to="/referencement-seo" className="text-primary font-semibold">SEO</Link> pour les TPE et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> ou demandez un <Link to="/contact" className="text-primary font-semibold">audit SEO gratuit</Link>.
             </p>
-            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-[hsl(263,36%,18%)] font-semibold shadow-glow">
               <Link to="/rendez-vous">Prendre rendez-vous</Link>
             </Button>
           </motion.div>
@@ -67,7 +67,7 @@ const CreationSite = () => (
               { icon: Zap, title: "Vitesse optimale", desc: "Un site rapide convertit mieux. Nous optimisons chaque élément pour un temps de chargement minimal et une expérience fluide." },
             ].map((item, i) => (
               <div key={i} className="rounded-2xl bg-background p-6 shadow-card text-center">
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">
+                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-[hsl(263,36%,18%)]">
                   <item.icon size={26} />
                 </div>
                 <h3 className="mb-2 font-bold">{item.title}</h3>
@@ -93,7 +93,7 @@ const CreationSite = () => (
           { icon: CheckCircle, title: "4. Mise en ligne et suivi", desc: "Après vos retours et validations, nous mettons votre site en ligne. Nous assurons ensuite un suivi pour garantir ses performances." },
         ].map((item, i) => (
           <div key={i} className="rounded-2xl bg-card p-6 shadow-card">
-            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-miami text-white">
+            <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-miami text-[hsl(263,36%,18%)]">
               <item.icon size={22} />
             </div>
             <h3 className="mb-2 font-bold">{item.title}</h3>
@@ -117,7 +117,7 @@ const CreationSite = () => (
           { icon: ShoppingCart, title: "E-commerce", desc: "Vendez vos produits en ligne avec un site sécurisé, rapide et pensé pour la conversion." },
         ].map((item, i) => (
           <div key={i} className="flex items-start gap-4 rounded-xl bg-background p-5 shadow-card">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-miami text-white">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-miami text-[hsl(263,36%,18%)]">
               <item.icon size={22} />
             </div>
             <div>
@@ -211,12 +211,12 @@ const CreationSite = () => (
     <section className="relative overflow-hidden py-16">
       <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
       <div className="container relative z-10 flex flex-col items-center text-center">
-        <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-16 h-16 rounded-full object-cover border-2 border-white/30 shadow-lg mb-3" loading="lazy" />
-        <p className="text-sm font-semibold text-white mb-2">Geoffrey, Expert Produit Google</p>
+        <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-16 h-16 rounded-full object-cover border-2 border-[hsl(263,36%,18%)]/30 shadow-lg mb-3" loading="lazy" />
+        <p className="text-sm font-semibold text-[hsl(263,36%,18%)] mb-2">Geoffrey, Expert Produit Google</p>
         <h2 className="mb-4 text-3xl font-extrabold ">Prêt à lancer votre site web ?</h2>
         <p className="mb-8 text-white/80 max-w-xl">Demandez un devis gratuit pour la création de votre site web professionnel. Réponse sous 24h.</p>
         <div className="flex flex-col sm:flex-row gap-4">
-          <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
+          <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-[hsl(263,36%,18%)] shadow-glow">
             <Link to="/rendez-vous">Prendre rendez-vous</Link>
           </Button>
           <Link to="/faq" className="inline-flex items-center justify-center rounded-full border-2 border-[hsl(263,36%,18%)] bg-transparent px-8 py-3 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)/0.1] transition-colors">
