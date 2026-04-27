@@ -175,8 +175,8 @@ const QuiSommesNous = () => (
     {/* CTA */}
     <section className="relative overflow-hidden py-16">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
-      <div className="container text-center">
-        <h2 className="mb-4 text-3xl font-extrabold ">Parlons de votre projet</h2>
+      <div className="container relative z-10 text-center">
+        <h2 className="mb-4 text-3xl font-extrabold text-[hsl(263,36%,18%)]">Parlons de votre projet</h2>
         <p className="mb-8 text-muted-foreground">Nous serions ravis d'échanger sur vos besoins et de vous accompagner dans votre transformation digitale.</p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-[hsl(263,36%,18%)] shadow-glow">
