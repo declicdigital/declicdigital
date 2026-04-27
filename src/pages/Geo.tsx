@@ -280,10 +280,9 @@ const Geo = () => {
       {/* CTA 1 avec texture */}
       <section className="relative overflow-hidden py-14">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.72)" }} />
         <div className="container relative z-10 text-center">
-          <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Vous voulez être cité par les IA ?</h2>
-          <p className="mx-auto mb-6 max-w-xl text-white/80">Nos experts analysent votre visibilité dans ChatGPT, Gemini et Perplexity et vous donnent un plan d'action concret.</p>
+          <h2 className="mb-4 text-2xl font-extrabold md:text-3xl">Vous voulez être cité par les IA ?</h2>
+          <p className="mx-auto mb-6 max-w-xl text-muted-foreground">Nos experts analysent votre visibilité dans ChatGPT, Gemini et Perplexity et vous donnent un plan d'action concret.</p>
           <div className="flex flex-col justify-center gap-4 sm:flex-row">
             <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
               <Link to="/contact">Audit SEO gratuit</Link>
@@ -362,10 +361,9 @@ const Geo = () => {
       {/* CTA checklist avec texture */}
       <section className="relative overflow-hidden py-14">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.72)" }} />
         <div className="container relative z-10 text-center">
-          <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Besoin d'aide pour cocher toutes ces cases ?</h2>
-          <p className="mb-6 text-white/80 max-w-xl mx-auto">On s'occupe de tout. De l'audit à la mise en place, notre équipe vous accompagne sur le SEO et le GEO.</p>
+          <h2 className="mb-4 text-2xl font-extrabold md:text-3xl">Besoin d'aide pour cocher toutes ces cases ?</h2>
+          <p className="mb-6 text-muted-foreground max-w-xl mx-auto">On s'occupe de tout. De l'audit à la mise en place, notre équipe vous accompagne sur le SEO et le GEO.</p>
           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
             <Link to="/rendez-vous">Prendre rendez-vous</Link>
           </Button>
@@ -394,15 +392,14 @@ const Geo = () => {
       {/* CTA final avec texture */}
       <section className="relative overflow-hidden py-16">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.72)" }} />
         <div className="container relative z-10 text-center">
-          <h2 className="mb-4 text-3xl font-extrabold text-white">Passez à l'action sur votre visibilité IA</h2>
-          <p className="mb-8 text-white/80 max-w-xl mx-auto">Votre entreprise mérite d'être citée par les intelligences artificielles. Nos experts vous accompagnent pour construire une stratégie GEO sur mesure.</p>
+          <h2 className="mb-4 text-3xl font-extrabold ">Passez à l'action sur votre visibilité IA</h2>
+          <p className="mb-8 text-muted-foreground max-w-xl mx-auto">Votre entreprise mérite d'être citée par les intelligences artificielles. Nos experts vous accompagnent pour construire une stratégie GEO sur mesure.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
               <Link to="/contact">Demander un audit SEO gratuit</Link>
             </Button>
-            <Link to="/rendez-vous" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
+            <Link to="/rendez-vous" className="inline-flex items-center justify-center rounded-full border-2 border-[hsl(263,36%,18%)] bg-transparent px-8 py-3 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)/0.1] transition-colors">
               Prendre rendez-vous
             </Link>
           </div>
