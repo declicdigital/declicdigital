@@ -46,8 +46,17 @@ const QuiSommesNous = () => (
       </div>
     </section>
 
-    {/* Storytelling */}
-    <SectionWrapper>
+    {/* Storytelling avec image overlap */}
+    <section className="py-12 md:py-16">
+      <div className="container">
+        <div className="relative">
+          {/* Image de fond côté droit avec overlap */}
+          <div className="hidden lg:block absolute right-0 top-0 bottom-0 w-2/5 overflow-hidden rounded-2xl">
+            <img src={imgFenetre} alt="Bureau parisien - Déclic Digital" className="w-full h-full object-cover" loading="lazy" />
+            <div className="absolute inset-0" style={{background: "linear-gradient(to right, hsl(var(--background)) 0%, transparent 40%)"}} />
+          </div>
+          {/* Texte qui chevauche l'image */}
+          <div className="relative z-10 max-w-2xl space-y-6 text-lg leading-relaxed text-muted-foreground">
       <div className="mx-auto max-w-3xl space-y-6 text-lg leading-relaxed text-muted-foreground">
         <div className="flex flex-col items-center mb-8">
           <img
@@ -87,8 +96,10 @@ const QuiSommesNous = () => (
         <p>
           Notre force, c'est la proximité. Nous ne sommes pas une grande agence impersonnelle. Nous prenons le temps d'échanger avec chaque client, de comprendre son métier et de proposer des solutions sur mesure. Découvrez <Link to="/realisations" className="text-primary font-semibold">nos réalisations</Link>.
         </p>
+          </div>
+        </div>
       </div>
-    </SectionWrapper>
+    </section>
 
     {/* Image équipe */}
     <SectionWrapper>
