@@ -84,11 +84,7 @@ const Faq = () => (
             <img src={imgAvis} alt="Avis Google 5 étoiles - Déclic Digital" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
             <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))" }} />
           </div>
-          <div className="rounded-2xl bg-card p-5 shadow-card text-center">
-            <p className="text-2xl font-extrabold text-primary mb-1">4.9 ⭐</p>
-            <p className="text-sm text-muted-foreground">Note moyenne sur Google</p>
-            <Link to="/realisations" className="mt-3 inline-block text-sm font-semibold text-primary hover:underline">Voir nos réalisations →</Link>
-          </div>
+
         </div>
       </div>
     </SectionWrapper>
@@ -116,8 +112,8 @@ const Faq = () => (
 
     {/* CTA final avec texture */}
     <section className="relative overflow-hidden py-16">
-      <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-60" />
-      <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.82)" }} />
+      <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+      <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.72)" }} />
       <div className="container relative z-10 text-center">
         <h2 className="mb-4 text-3xl font-extrabold text-white">Prêt à lancer votre projet ?</h2>
         <p className="mb-8 text-white/80 max-w-xl mx-auto">Audit SEO gratuit, devis en 24h, aucun engagement. On répond à toutes vos questions.</p>
