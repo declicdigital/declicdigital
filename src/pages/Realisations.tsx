@@ -182,15 +182,14 @@ const Realisations = () => (
     {/* CTA final avec texture */}
     <section className="relative overflow-hidden py-16">
       <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
-      <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.72)" }} />
       <div className="container relative z-10 text-center">
-        <h2 className="mb-4 text-3xl font-extrabold text-white">Votre projet sera le prochain ?</h2>
-        <p className="mx-auto mb-8 max-w-lg text-white/80">Contactez-nous pour discuter de votre projet et obtenir un devis gratuit sous 24h.</p>
+        <h2 className="mb-4 text-3xl font-extrabold ">Votre projet sera le prochain ?</h2>
+        <p className="mx-auto mb-8 max-w-lg text-muted-foreground">Contactez-nous pour discuter de votre projet et obtenir un devis gratuit sous 24h.</p>
         <div className="flex flex-col sm:flex-row justify-center gap-4">
           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
             <Link to="/rendez-vous">Prendre rendez-vous</Link>
           </Button>
-          <Link to="/qui-sommes-nous" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
+          <Link to="/qui-sommes-nous" className="inline-flex items-center justify-center rounded-full border-2 border-[hsl(263,36%,18%)] bg-transparent px-8 py-3 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)/0.1] transition-colors">
             Qui sommes-nous
           </Link>
         </div>
