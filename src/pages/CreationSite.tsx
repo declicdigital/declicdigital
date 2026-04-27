@@ -12,6 +12,9 @@ import heroCreation from "@/assets/screenshot-declic-digital.webp";
 import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 import siteProImage from "@/assets/vitesse-site-web-performance.jpg";
 import { cities } from "@/data/cities";
+import imgRefonte from "@/assets/refonte-site-web-avant-apres.webp";
+import imgResponsive from "@/assets/site-web-responsive-mobile-artisan.webp";
+import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
 
 const CreationSite = () => (
   <PageLayout>
@@ -42,7 +45,10 @@ const CreationSite = () => (
             </Button>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-            <img src={heroCreation} alt="Création de site internet professionnel pour TPE" className="w-full max-w-lg drop-shadow-2xl" width={512} height={512} loading="lazy" decoding="async" />
+            <div className="relative overflow-hidden rounded-2xl shadow-2xl group w-full max-w-lg">
+              <img src={imgRefonte} alt="Refonte site web avant après - Déclic Digital" className="w-full object-cover transition-transform duration-500 group-hover:scale-105" width={512} height={341} loading="lazy" decoding="async" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))"}} />
+            </div>
           </motion.div>
         </div>
       </div>
@@ -50,6 +56,9 @@ const CreationSite = () => (
 
     {/* Avantages */}
     <SectionWrapper>
+      <div className="relative rounded-3xl overflow-hidden -mx-4 px-4 py-2">
+        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none select-none" />
+        <div className="relative z-10">
       <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-4">Pourquoi votre activité a besoin d'un site web professionnel</h2>
       <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">
         Un site web professionnel ne se limite pas à une simple vitrine en ligne. C'est un outil stratégique qui renforce votre crédibilité, attire de nouveaux clients grâce au <Link to="/referencement-seo" className="text-primary font-semibold">référencement naturel</Link> et vous différencie de vos concurrents.
@@ -69,6 +78,8 @@ const CreationSite = () => (
             <p className="text-sm text-muted-foreground">{item.desc}</p>
           </div>
         ))}
+      </div>
+        </div>
       </div>
     </SectionWrapper>
 
@@ -128,7 +139,10 @@ const CreationSite = () => (
         <h2 className="text-3xl font-extrabold md:text-4xl text-center mb-10">Site web rapide, mobile et optimisé pour Google</h2>
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <div className="flex justify-center order-2 lg:order-1">
-            <img src={siteProImage} alt="Site web rapide, mobile et optimisé pour Google" className="w-full max-w-md rounded-2xl shadow-card" loading="lazy" />
+            <div className="relative overflow-hidden rounded-2xl shadow-card group w-full max-w-md">
+              <img src={imgResponsive} alt="Site web responsive mobile artisan - Déclic Digital" className="w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))"}} />
+            </div>
           </div>
           <div className="space-y-6 order-1 lg:order-2">
             <p className="text-muted-foreground leading-relaxed">
