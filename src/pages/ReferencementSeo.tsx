@@ -251,10 +251,9 @@ const ReferencementSeo = () => {
       {/* CTA 1 */}
       <section className="relative overflow-hidden py-14">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.82)" }} />
         <div className="container relative z-10 text-center">
-          <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Prêt à attirer vos premiers clients via Google ?</h2>
-          <p className="mb-6 text-white/80 max-w-xl mx-auto">Nos experts analysent votre site et identifient les quick wins SEO pour votre activité.</p>
+          <h2 className="mb-4 text-2xl font-extrabold md:text-3xl">Prêt à attirer vos premiers clients via Google ?</h2>
+          <p className="mb-6 text-muted-foreground max-w-xl mx-auto">Nos experts analysent votre site et identifient les quick wins SEO pour votre activité.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
               <Link to="/contact">Audit SEO gratuit</Link>
@@ -377,10 +376,9 @@ const ReferencementSeo = () => {
       {/* CTA 2 */}
       <section className="relative overflow-hidden py-14">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.82)" }} />
         <div className="container relative z-10 text-center">
-          <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Vous vous reconnaissez dans ces freins ?</h2>
-          <p className="mb-6 text-white/80 max-w-xl mx-auto">On démystifie le SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
+          <h2 className="mb-4 text-2xl font-extrabold md:text-3xl">Vous vous reconnaissez dans ces freins ?</h2>
+          <p className="mb-6 text-muted-foreground max-w-xl mx-auto">On démystifie le SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
           <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
             <Link to="/contact">Demander un audit SEO gratuit</Link>
           </Button>
@@ -448,15 +446,14 @@ const ReferencementSeo = () => {
       {/* CTA 3 */}
       <section className="relative overflow-hidden py-14">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.82)" }} />
         <div className="container relative z-10 text-center">
-          <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Votre SEO peut travailler pour vous dès aujourd'hui</h2>
-          <p className="mb-6 text-white/80 max-w-xl mx-auto">Nos experts analysent votre site, identifient les quick wins SEO et construisent une stratégie adaptée à votre activité, votre zone et votre budget.</p>
+          <h2 className="mb-4 text-2xl font-extrabold md:text-3xl">Votre SEO peut travailler pour vous dès aujourd'hui</h2>
+          <p className="mb-6 text-muted-foreground max-w-xl mx-auto">Nos experts analysent votre site, identifient les quick wins SEO et construisent une stratégie adaptée à votre activité, votre zone et votre budget.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
               <Link to="/contact">Audit SEO gratuit</Link>
             </Button>
-            <Link to="/tarifs" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
+            <Link to="/tarifs" className="inline-flex items-center justify-center rounded-full border-2 border-[hsl(263,36%,18%)] bg-transparent px-8 py-3 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)/0.1] transition-colors">
               Voir nos tarifs
             </Link>
           </div>
