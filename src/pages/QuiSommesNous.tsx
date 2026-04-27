@@ -4,6 +4,7 @@ import { motion } from "motion/react";
 import { Heart, Target, Rocket, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
+import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
 import SectionWrapper from "@/components/SectionWrapper";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import LocationSection from "@/components/LocationSection";
@@ -172,7 +173,9 @@ const QuiSommesNous = () => (
     </SectionWrapper>
 
     {/* CTA */}
-    <section className="gradient-miami py-16">
+    <section className="relative overflow-hidden py-16">
+        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.82)" }} />
       <div className="container text-center">
         <h2 className="mb-4 text-3xl font-extrabold text-white">Parlons de votre projet</h2>
         <p className="mb-8 text-white/80">Nous serions ravis d'échanger sur vos besoins et de vous accompagner dans votre transformation digitale.</p>
