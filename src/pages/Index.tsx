@@ -136,7 +136,7 @@ const Index = () => {
                   { icon: Gauge, text: "Site trop lent", detail: "Un temps de chargement supérieur à 3 secondes augmente le taux de rebond de plus de 50%." },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4 rounded-xl bg-secondary p-5 text-left shadow-card">
-                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
+                    <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-primary text-[hsl(263,36%,18%)]">
                       <item.icon size={22} />
                     </div>
                     <div>
@@ -147,7 +147,7 @@ const Index = () => {
                 ))}
               </div>
               <div className="mt-8">
-                <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-white shadow-glow">
+                <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-[hsl(263,36%,18%)] shadow-glow">
                   <Link to="/contact">Demander un audit SEO gratuit</Link>
                 </Button>
               </div>
@@ -176,7 +176,7 @@ const Index = () => {
                 { icon: BarChart3, title: "Stratégie digitale", desc: "Analyse de marché, positionnement, contenu, suivi des performances : chaque action est mesurée et orientée résultats.", link: "/contact" },
               ].map((s, i) => (
                 <div key={i} className="group rounded-2xl bg-card p-8 shadow-card transition-all hover:shadow-elevated hover:-translate-y-1">
-                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-white">
+                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary text-[hsl(263,36%,18%)]">
                     <s.icon size={26} />
                   </div>
                   <h3 className="mb-3 text-xl font-bold">{s.title}</h3>
@@ -427,14 +427,14 @@ const Index = () => {
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="container relative z-10">
           <div className="flex flex-col items-center text-center ">
-            <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-white/30 shadow-lg mb-4" width={80} height={80} loading="lazy" />
+            <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-[hsl(263,36%,18%)]/30 shadow-lg mb-4" width={80} height={80} loading="lazy" />
             <p className="text-sm font-semibold text-[hsl(263,36%,18%)] mb-1">Geoffrey, Expert Produit Google</p>
             <h3 className="mb-4 text-3xl font-extrabold md:text-4xl text-[hsl(263,36%,18%)]">Et si votre site devenait votre meilleur commercial ?</h3>
             <p className="mb-8 text-lg text-muted-foreground max-w-2xl">
               Un site optimisé peut générer des prospects tous les jours. Ne laissez plus vos concurrents capter les clients qui vous cherchent sur Google.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
+              <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-[hsl(263,36%,18%)] shadow-glow">
                 <Link to="/contact">Demander un audit SEO gratuit</Link>
               </Button>
               <Button asChild variant="custom" size="lg" className="rounded-full border-2 border-[hsl(263,36%,18%)] bg-transparent px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)/0.1] transition-colors">
