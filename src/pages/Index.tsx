@@ -13,7 +13,6 @@ import imgProbleme from "@/assets/independant-zero-contact-formulaire.webp";
 import imgProcessus from "@/assets/consultante-agence-digitale-paris-bureau.webp";
 import imgParis from "@/assets/paris-vue-aerienne-hauts-de-seine.webp";
 import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
-import imgArtisan from "@/assets/artisan-nouveau-client-site-web.webp";
 
 import logoWordpress from "@/assets/logos/wordpress.webp";
 import logoShopify from "@/assets/logos/shopify.webp";
@@ -423,24 +422,22 @@ const Index = () => {
         <LocationSection />
       </Suspense>
 
-      {/* ─── CTA final avec texture + image artisan en fond ───────────────────── */}
+      {/* ─── CTA final avec texture ─────────────────────────────────────────── */}
       <section className="relative overflow-hidden py-16 md:py-24">
-        <img src={imgArtisan} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover mix-blend-multiply" loading="lazy" />
-        <div className="absolute inset-0" style={{ background: "hsl(263,36%,18%,0.80)" }} />
+        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="container relative z-10">
-          <div className="flex flex-col items-center text-center text-white">
+          <div className="flex flex-col items-center text-center ">
             <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-white/30 shadow-lg mb-4" width={80} height={80} loading="lazy" />
-            <p className="text-sm font-semibold mb-1">Geoffrey, Expert Produit Google</p>
-            <h3 className="mb-4 text-3xl font-extrabold md:text-4xl">Et si votre site devenait votre meilleur commercial ?</h3>
-            <p className="mb-8 text-lg text-white/80 max-w-2xl">
+            <p className="text-sm font-semibold text-[hsl(263,36%,18%)] mb-1">Geoffrey, Expert Produit Google</p>
+            <h3 className="mb-4 text-3xl font-extrabold md:text-4xl text-[hsl(263,36%,18%)]">Et si votre site devenait votre meilleur commercial ?</h3>
+            <p className="mb-8 text-lg text-muted-foreground max-w-2xl">
               Un site optimisé peut générer des prospects tous les jours. Ne laissez plus vos concurrents capter les clients qui vous cherchent sur Google.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <Button asChild variant="custom" size="lg" className="rounded-full bg-[#f6f1e9] hover:bg-[#ede6d8] px-8 font-semibold text-[hsl(263,36%,18%)] shadow-lg btn-glow">
                 <Link to="/contact">Demander un audit SEO gratuit</Link>
               </Button>
-              <Button asChild variant="custom" size="lg" className="rounded-full border-2 border-white bg-transparent px-8 font-semibold text-white hover:bg-white/10 transition-colors">
+              <Button asChild variant="custom" size="lg" className="rounded-full border-2 border-[hsl(263,36%,18%)] bg-transparent px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)/0.1] transition-colors">
                 <Link to="/tarifs">Voir nos tarifs</Link>
               </Button>
             </div>
