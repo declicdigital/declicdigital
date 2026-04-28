@@ -10,8 +10,10 @@ import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import LocationSection from "@/components/LocationSection";
 import { ChevronDown, CheckCircle2, Building2, Hammer, Laptop } from "lucide-react";
 import { cities } from "@/data/cities";
+import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
 import heroSeo from "@/assets/seo-hero-businessman.webp";
-import seoDashboard from "@/assets/seo-dashboard-analytics.webp";
+import imgSearchConsole from "@/assets/google-search-console-resultats-seo.webp";
+import imgGoogleMaps from "@/assets/seo-local-google-maps-boulogne-billancourt.webp";
 
 const stats = [
   { num: "93%", label: "des expériences en ligne commencent par un moteur de recherche" },
@@ -241,8 +243,9 @@ const ReferencementSeo = () => {
       </SectionWrapper>
 
       {/* CTA 1 */}
-      <section className="bg-[hsl(263,36%,18%)] py-14">
-        <div className="container text-center">
+      <section className="relative overflow-hidden py-14">
+        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="container relative z-10 text-center">
           <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Prêt à attirer vos premiers clients via Google ?</h2>
           <p className="mb-6 text-white/80 max-w-xl mx-auto">Nos experts analysent votre site et identifient les quick wins SEO pour votre activité.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
@@ -256,21 +259,23 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* Image + texte */}
+      {/* Image SearchConsole + texte — effet overlap fondu */}
       <SectionWrapper>
-        <div className="mx-auto max-w-5xl grid items-center gap-10 lg:grid-cols-2">
-          <div className="relative">
-            <div className="absolute -inset-3 rounded-3xl gradient-miami opacity-15 blur-2xl" />
-            <img src={seoDashboard} alt="Dashboard analytics SEO pour suivre les performances" className="relative w-full rounded-2xl shadow-2xl" width={512} height={341} loading="lazy" decoding="async" />
-          </div>
-          <div className="space-y-5">
-            <h2 className="text-3xl font-extrabold md:text-4xl">Suivez vos résultats en temps réel</h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Le SEO n'est pas une boîte noire. Grâce aux outils d'analyse, vous suivez chaque progression : mots-clés qui montent, trafic organique, demandes de devis générées par votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link>.
-            </p>
-            <p className="text-muted-foreground leading-relaxed">
-              C'est cette transparence qui fait du SEO un investissement mesurable, contrairement à bien d'autres canaux marketing.
-            </p>
+        <div className="mx-auto max-w-5xl">
+          <div className="relative min-h-[320px] flex items-center">
+            <div className="hidden lg:block absolute left-0 top-0 h-full w-1/2 rounded-2xl overflow-hidden">
+              <img src={imgSearchConsole} alt="Google Search Console résultats SEO en hausse" className="w-full h-full object-cover" loading="lazy" />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to left, hsl(var(--background)) 0%, hsl(var(--background)/0.3) 40%, transparent 70%)" }} />
+            </div>
+            <div className="relative z-10 ml-auto max-w-xl space-y-5 py-10">
+              <h2 className="text-3xl font-extrabold md:text-4xl">Suivez vos résultats en temps réel</h2>
+              <p className="text-muted-foreground leading-relaxed">
+                Le SEO n'est pas une boîte noire. Grâce aux outils d'analyse, vous suivez chaque progression : mots-clés qui montent, trafic organique, demandes de devis générées par votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link>.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                C'est cette transparence qui fait du SEO un investissement mesurable, contrairement à bien d'autres canaux marketing.
+              </p>
+            </div>
           </div>
         </div>
       </SectionWrapper>
@@ -365,8 +370,9 @@ const ReferencementSeo = () => {
       </SectionWrapper>
 
       {/* CTA 2 */}
-      <section className="bg-[hsl(263,36%,18%)] py-14">
-        <div className="container text-center">
+      <section className="relative overflow-hidden py-14">
+        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="container relative z-10 text-center">
           <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Vous vous reconnaissez dans ces freins ?</h2>
           <p className="mb-6 text-white/80 max-w-xl mx-auto">On démystifie le SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
           <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
@@ -401,6 +407,23 @@ const ReferencementSeo = () => {
         </div>
       </SectionWrapper>
 
+      {/* Image GoogleMaps + texte — effet overlap fondu */}
+      <SectionWrapper>
+        <div className="mx-auto max-w-5xl">
+          <div className="relative min-h-[360px] flex items-center">
+            <div className="hidden lg:block absolute right-0 top-0 h-full w-1/2 rounded-2xl overflow-hidden">
+              <img src={imgGoogleMaps} alt="SEO local Google Maps Boulogne-Billancourt" className="w-full h-full object-cover" loading="lazy" />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to right, hsl(var(--background)) 0%, hsl(var(--background)/0.3) 40%, transparent 70%)" }} />
+            </div>
+            <div className="relative z-10 max-w-xl space-y-5 py-10">
+              <h2 className="text-3xl font-extrabold md:text-4xl">Le SEO local : votre arme secrète dans le 92</h2>
+              <p className="text-muted-foreground leading-relaxed">Les recherches "près de moi" ont explosé de 500% en 5 ans. Quand un client cherche votre métier sur Google Maps, il veut trouver le professionnel le plus proche et le mieux noté.</p>
+              <p className="text-muted-foreground leading-relaxed">Avec un site optimisé + une fiche Google Business complète + des avis clients, vous captez cette demande locale avant vos concurrents.</p>
+            </div>
+          </div>
+        </div>
+      </SectionWrapper>
+
       {/* 07 - Checklist */}
       <SectionWrapper id="checklist">
         <div className="mx-auto max-w-3xl space-y-8">
@@ -419,8 +442,9 @@ const ReferencementSeo = () => {
       </SectionWrapper>
 
       {/* CTA 3 */}
-      <section className="bg-[hsl(263,36%,18%)] py-14">
-        <div className="container text-center">
+      <section className="relative overflow-hidden py-14">
+        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="container relative z-10 text-center">
           <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Votre SEO peut travailler pour vous dès aujourd'hui</h2>
           <p className="mb-6 text-white/80 max-w-xl mx-auto">Nos experts analysent votre site, identifient les quick wins SEO et construisent une stratégie adaptée à votre activité, votre zone et votre budget.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
