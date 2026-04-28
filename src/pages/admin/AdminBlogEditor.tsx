@@ -43,6 +43,155 @@ async function convertToWebP(file: File, quality = 0.85): Promise<Blob> {
   });
 }
 
+
+// ─── Détection et rendu intelligent Markdown + HTML mixte ────────────────────
+
+function smartRender(input: string): string {
+  if (!input || !input.trim()) return input;
+
+  // Déjà du HTML pur → retourner tel quel
+  const hasHtmlTags = /<(h[1-6]|p|ul|ol|li|strong|em|a|blockquote|pre|code|div|span|br|hr|img)/i.test(input);
+  const hasMarkdown = /^#{1,6}\s|^\*\*|^\*[^*]|^-\s|^\d+\.\s|^>\s|`[^`]|\[.+\]\(.+\)/m.test(input);
+
+  if (hasHtmlTags && !hasMarkdown) return input; // HTML pur
+  if (!hasHtmlTags && !hasMarkdown) return `<p>${input.replace(/\n\n/g, '</p><p>').replace(/\n/g, '<br>')}</p>`; // Texte brut
+
+  // Markdown pur ou mixte → convertir ligne par ligne intelligemment
+  const lines = input.split('\n');
+  const result: string[] = [];
+  let inUl = false;
+  let inOl = false;
+  let inPre = false;
+  let preBuffer: string[] = [];
+
+  const closeList = () => {
+    if (inUl) { result.push('</ul>'); inUl = false; }
+    if (inOl) { result.push('</ol>'); inOl = false; }
+  };
+
+  const inlineMarkdown = (text: string): string => {
+    // Ne pas modifier si déjà du HTML
+    if (/<[a-z]/i.test(text)) return text;
+    return text
+      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\*(.+?)\*/g, '<em>$1</em>')
+      .replace(/`([^`]+)`/g, '<code>$1</code>')
+      .replace(/\[(.+?)\]\((.+?)\)/g, '<a href="$2">$1</a>');
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    // Bloc pre/code
+    if (line.startsWith('```')) {
+      if (inPre) {
+        result.push('<pre><code>' + preBuffer.join('\n') + '</code></pre>');
+        preBuffer = [];
+        inPre = false;
+      } else {
+        closeList();
+        inPre = true;
+      }
+      continue;
+    }
+    if (inPre) { preBuffer.push(line); continue; }
+
+    // Ligne vide
+    if (!line.trim()) {
+      closeList();
+      result.push('');
+      continue;
+    }
+
+    // Si la ligne est déjà du HTML → passer directement
+    if (/^<[a-z]/i.test(line.trim())) {
+      closeList();
+      result.push(line);
+      continue;
+    }
+
+    // Titres markdown
+    const hMatch = line.match(/^(#{1,6})\s+(.+)$/);
+    if (hMatch) {
+      closeList();
+      const level = hMatch[1].length;
+      result.push(`<h${level}>${inlineMarkdown(hMatch[2])}</h${level}>`);
+      continue;
+    }
+
+    // Blockquote
+    if (line.startsWith('> ')) {
+      closeList();
+      result.push(`<blockquote>${inlineMarkdown(line.slice(2))}</blockquote>`);
+      continue;
+    }
+
+    // Liste non ordonnée
+    if (/^[-*+]\s/.test(line)) {
+      if (inOl) { result.push('</ol>'); inOl = false; }
+      if (!inUl) { result.push('<ul>'); inUl = true; }
+      result.push(`<li>${inlineMarkdown(line.replace(/^[-*+]\s/, ''))}</li>`);
+      continue;
+    }
+
+    // Liste ordonnée
+    if (/^\d+\.\s/.test(line)) {
+      if (inUl) { result.push('</ul>'); inUl = false; }
+      if (!inOl) { result.push('<ol>'); inOl = true; }
+      result.push(`<li>${inlineMarkdown(line.replace(/^\d+\.\s/, ''))}</li>`);
+      continue;
+    }
+
+    // Séparateur
+    if (/^[-*_]{3,}$/.test(line.trim())) {
+      closeList();
+      result.push('<hr>');
+      continue;
+    }
+
+    // Paragraphe normal
+    closeList();
+    result.push(`<p>${inlineMarkdown(line)}</p>`);
+  }
+
+  closeList();
+  if (inPre) result.push('<pre><code>' + preBuffer.join('\n') + '</code></pre>');
+
+  // Nettoyer les <p></p> vides
+  return result.join('\n').replace(/<p><\/p>/g, '').replace(/<p>\s*<\/p>/g, '');
+}
+
+function markdownToHtml(md: string): string {
+  return smartRender(md);
+}
+
+function htmlToMarkdown(html: string): string {
+  return html
+    .replace(/<h1[^>]*>(.*?)<\/h1>/gi, '# $1\n')
+    .replace(/<h2[^>]*>(.*?)<\/h2>/gi, '## $1\n')
+    .replace(/<h3[^>]*>(.*?)<\/h3>/gi, '### $1\n')
+    .replace(/<blockquote[^>]*>(.*?)<\/blockquote>/gi, '> $1\n')
+    .replace(/<pre[^>]*>(.*?)<\/pre>/gis, '```\n$1\n```\n')
+    .replace(/<code[^>]*>(.*?)<\/code>/gi, '`$1`')
+    .replace(/<strong[^>]*>(.*?)<\/strong>/gi, '**$1**')
+    .replace(/<b[^>]*>(.*?)<\/b>/gi, '**$1**')
+    .replace(/<em[^>]*>(.*?)<\/em>/gi, '*$1*')
+    .replace(/<i[^>]*>(.*?)<\/i>/gi, '*$1*')
+    .replace(/<a[^>]*href="([^"]*)"[^>]*>(.*?)<\/a>/gi, '[$2]($1)')
+    .replace(/<ul[^>]*>(.*?)<\/ul>/gis, '$1')
+    .replace(/<ol[^>]*>(.*?)<\/ol>/gis, '$1')
+    .replace(/<li[^>]*>(.*?)<\/li>/gi, '- $1\n')
+    .replace(/<p[^>]*>(.*?)<\/p>/gi, '$1\n\n')
+    .replace(/<br\s*\/?>/gi, '\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 // ─── Bouton barre d'outils ───────────────────────────────────────────────────
 function ToolbarButton({ onClick, title, active, children }: { onClick: () => void; title: string; active?: boolean; children: React.ReactNode }) {
   return (
@@ -154,8 +303,10 @@ function RenameImageModal({ currentAlt, onSave, onClose }: { currentAlt: string;
 // ─── Éditeur WYSIWYG ─────────────────────────────────────────────────────────
 function WysiwygEditor({ value, onChange }: { value: string; onChange: (val: string) => void }) {
   const editorRef = useRef<HTMLDivElement>(null);
-  const [showHtml, setShowHtml] = useState(false);
+  const [editorMode, setEditorMode] = useState<"visual" | "html" | "markdown">("visual");
   const [htmlValue, setHtmlValue] = useState(value);
+  const [markdownValue, setMarkdownValue] = useState(() => htmlToMarkdown(value));
+  const showHtml = editorMode === "html";
   const [showCtaModal, setShowCtaModal] = useState(false);
   const [renameImageModal, setRenameImageModal] = useState<{ src: string; alt: string } | null>(null);
   const [toolbarSticky, setToolbarSticky] = useState(false);
@@ -170,8 +321,8 @@ function WysiwygEditor({ value, onChange }: { value: string; onChange: (val: str
   }, []);
 
   useEffect(() => {
-    if (editorRef.current && !showHtml) editorRef.current.innerHTML = value;
-  }, [showHtml]);
+    if (editorRef.current && editorMode === 'visual') editorRef.current.innerHTML = smartRender(value);
+  }, [editorMode]);
 
   const exec = useCallback((command: string, val?: string) => {
     document.execCommand(command, false, val);
@@ -213,11 +364,26 @@ function WysiwygEditor({ value, onChange }: { value: string; onChange: (val: str
     onChange(editorRef.current.innerHTML);
   };
 
-  const toggleHtml = () => {
-    if (!showHtml && editorRef.current) setHtmlValue(editorRef.current.innerHTML);
-    if (showHtml && editorRef.current) { editorRef.current.innerHTML = htmlValue; onChange(htmlValue); }
-    setShowHtml(!showHtml);
+  const switchMode = (newMode: "visual" | "html" | "markdown") => {
+    // Sauvegarder le contenu du mode actuel
+    if (editorMode === "visual" && editorRef.current) {
+      const html = editorRef.current.innerHTML;
+      setHtmlValue(html);
+      setMarkdownValue(htmlToMarkdown(html));
+    } else if (editorMode === "html") {
+      setMarkdownValue(htmlToMarkdown(htmlValue));
+      if (editorRef.current) editorRef.current.innerHTML = htmlValue;
+    } else if (editorMode === "markdown") {
+      const html = markdownToHtml(markdownValue);
+      setHtmlValue(html);
+      if (editorRef.current) editorRef.current.innerHTML = html;
+      onChange(html);
+    }
+    setEditorMode(newMode);
   };
+
+  // Garder toggleHtml pour compatibilité
+  const toggleHtml = () => switchMode(editorMode === "html" ? "visual" : "html");
 
   return (
     <>
@@ -262,19 +428,40 @@ function WysiwygEditor({ value, onChange }: { value: string; onChange: (val: str
           <ToolbarButton onClick={() => exec("undo")} title="Annuler"><RotateCcw size={14} /></ToolbarButton>
           <ToolbarButton onClick={() => exec("redo")} title="Refaire"><RotateCw size={14} /></ToolbarButton>
           <div className="flex-1" />
-          <button type="button" onClick={toggleHtml}
-            className="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all"
-            style={{ background: showHtml ? "rgba(255,255,255,0.12)" : "rgba(255,255,255,0.05)", color: showHtml ? "hsl(183,70%,63%)" : "rgba(255,255,255,0.45)" }}>
-            {showHtml ? "← Visuel" : "HTML </>"}
-          </button>
+          <div className="flex rounded-lg overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.1)" }}>
+            {(["visual", "html", "markdown"] as const).map((mode) => (
+              <button key={mode} type="button" onClick={() => switchMode(mode)}
+                className="px-3 py-1.5 text-xs font-semibold transition-all"
+                style={{
+                  background: editorMode === mode ? "rgba(255,255,255,0.15)" : "transparent",
+                  color: editorMode === mode ? "hsl(183,70%,63%)" : "rgba(255,255,255,0.45)",
+                  borderRight: mode !== "markdown" ? "1px solid rgba(255,255,255,0.1)" : "none"
+                }}>
+                {mode === "visual" ? "Visuel" : mode === "html" ? "HTML" : "Markdown"}
+              </button>
+            ))}
+          </div>
         </div>
 
-        {showHtml ? (
+        {editorMode === "html" && (
           <textarea value={htmlValue} onChange={(e) => { setHtmlValue(e.target.value); onChange(e.target.value); }}
             className="w-full px-5 py-4 text-sm font-mono focus:outline-none resize-y"
             style={{ background: "hsl(263, 36%, 11%)", color: "rgba(255,255,255,0.75)", minHeight: "400px" }}
             placeholder="<h2>Contenu HTML...</h2>" />
-        ) : (
+        )}
+        {editorMode === "markdown" && (
+          <div className="relative">
+            <textarea value={markdownValue}
+              onChange={(e) => { setMarkdownValue(e.target.value); onChange(smartRender(e.target.value)); }}
+              className="w-full px-5 py-4 text-sm font-mono focus:outline-none resize-y"
+              style={{ background: "hsl(263, 36%, 11%)", color: "rgba(255,255,255,0.75)", minHeight: "400px" }}
+              placeholder="## Titre&#10;&#10;Écrivez en **Markdown**, en HTML, ou les deux mélangés..." />
+            <div className="px-5 py-2 text-xs" style={{ background: "hsl(263, 36%, 13%)", color: "rgba(255,255,255,0.30)", borderTop: "1px solid rgba(255,255,255,0.06)" }}>
+              ✨ Détection automatique — Markdown, HTML ou mixte supportés · **gras** · *italique* · ## Titre · - liste · [lien](url) · `code`
+            </div>
+          </div>
+        )}
+        {editorMode === "visual" && (
           <div ref={editorRef} contentEditable suppressContentEditableWarning
             onInput={handleInput} onClick={handleEditorClick}
             className="wysiwyg-editor px-5 py-4 focus:outline-none"
