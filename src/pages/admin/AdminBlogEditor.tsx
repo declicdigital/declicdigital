@@ -489,8 +489,10 @@ export default function AdminBlogEditor() {
       scheduledIso = new Date(`${form.scheduled_at}T${time}:00`).toISOString();
       if (!publishNow && form.status !== "published" && new Date(scheduledIso) <= new Date()) autoPublish = true;
     }
+    // scheduled_time est local uniquement — ne pas envoyer à Supabase
+    const { scheduled_time, ...formData } = form;
     const payload = {
-      ...form,
+      ...formData,
       status: autoPublish ? "published" : form.status,
       scheduled_at: scheduledIso,
       updated_at: new Date().toISOString(),
