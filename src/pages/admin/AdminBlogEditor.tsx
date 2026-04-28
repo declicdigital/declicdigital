@@ -312,26 +312,48 @@ function WysiwygEditor({ value, onChange }: { value: string; onChange: (val: str
   const [toolbarSticky, setToolbarSticky] = useState(false);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (wrapperRef.current) setToolbarSticky(wrapperRef.current.getBoundingClientRect().top < 60);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // Toolbar toujours sticky — pas besoin de listener scroll
+  useEffect(() => { setToolbarSticky(true); }, []);
 
-  // Charger le contenu dans l'éditeur visuel quand value ou mode change
+  // Ref pour éviter de réinitialiser l'éditeur à chaque frappe
+  const initializedRef = useRef(false);
+  const prevValueRef = useRef(value);
+
+  // Charger le contenu UNIQUEMENT au premier chargement depuis Supabase
+  // (quand value passe de "" à une vraie valeur) — pas à chaque frappe
   useEffect(() => {
-    if (editorMode === 'visual' && editorRef.current) {
-      editorRef.current.innerHTML = smartRender(value);
-    }
-    if (editorMode === 'html') {
+    const isInitialLoad = !initializedRef.current && value && value !== prevValueRef.current;
+    const isModeSwitch = initializedRef.current && editorMode !== undefined;
+
+    if (isInitialLoad) {
+      initializedRef.current = true;
+      prevValueRef.current = value;
+      if (editorMode === 'visual' && editorRef.current) {
+        editorRef.current.innerHTML = smartRender(value);
+      }
       setHtmlValue(value);
-    }
-    if (editorMode === 'markdown') {
       setMarkdownValue(htmlToMarkdown(value));
+      return;
+    }
+
+    // Changement de mode uniquement — sync entre les modes
+    if (isModeSwitch && !isInitialLoad) {
+      if (editorMode === 'html') setHtmlValue(prevValueRef.current);
+      if (editorMode === 'markdown') setMarkdownValue(htmlToMarkdown(prevValueRef.current));
+      if (editorMode === 'visual' && editorRef.current) {
+        editorRef.current.innerHTML = smartRender(prevValueRef.current);
+      }
     }
   }, [value, editorMode]);
+
+  // Mettre à jour prevValueRef quand onChange est appelé (frappe utilisateur)
+  const handleInput = () => {
+    if (editorRef.current) {
+      const html = editorRef.current.innerHTML;
+      prevValueRef.current = html;
+      onChange(html);
+    }
+  };
 
   const exec = useCallback((command: string, val?: string) => {
     document.execCommand(command, false, val);
@@ -339,9 +361,7 @@ function WysiwygEditor({ value, onChange }: { value: string; onChange: (val: str
     if (editorRef.current) onChange(editorRef.current.innerHTML);
   }, [onChange]);
 
-  const handleInput = () => {
-    if (editorRef.current) onChange(editorRef.current.innerHTML);
-  };
+
 
   const insertCta = (label: string, href: string, style: string) => {
     const html = `<div class="cta-block" data-cta-style="${style}" data-href="${href}" data-label="${label}"><span class="cta-editor-preview cta-editor-${style}">${label} →</span></div><p><br></p>`;
@@ -401,7 +421,7 @@ function WysiwygEditor({ value, onChange }: { value: string; onChange: (val: str
 
       <div ref={wrapperRef} className="rounded-2xl overflow-hidden" style={{ border: "1px solid rgba(255,255,255,0.07)" }}>
         <div className="flex flex-wrap items-center gap-0.5 px-3 py-2"
-          style={{ background: "hsl(263, 36%, 15%)", borderBottom: "1px solid rgba(255,255,255,0.07)", position: toolbarSticky ? "sticky" : "relative", top: toolbarSticky ? "56px" : "auto", zIndex: 20 }}>
+          style={{ background: "hsl(263, 36%, 15%)", borderBottom: "1px solid rgba(255,255,255,0.07)", position: "sticky", top: "56px", zIndex: 20 }}>
           <ToolbarButton onClick={() => exec("bold")} title="Gras"><Bold size={14} /></ToolbarButton>
           <ToolbarButton onClick={() => exec("italic")} title="Italique"><Italic size={14} /></ToolbarButton>
           <ToolbarButton onClick={() => exec("underline")} title="Souligné"><Underline size={14} /></ToolbarButton>
