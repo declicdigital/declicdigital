@@ -305,7 +305,7 @@ function WysiwygEditor({ value, onChange }: { value: string; onChange: (val: str
   const editorRef = useRef<HTMLDivElement>(null);
   const [editorMode, setEditorMode] = useState<"visual" | "html" | "markdown">("visual");
   const [htmlValue, setHtmlValue] = useState(value);
-  const [markdownValue, setMarkdownValue] = useState(() => htmlToMarkdown(value));
+  const [markdownValue, setMarkdownValue] = useState(htmlToMarkdown(value));
   const showHtml = editorMode === "html";
   const [showCtaModal, setShowCtaModal] = useState(false);
   const [renameImageModal, setRenameImageModal] = useState<{ src: string; alt: string } | null>(null);
@@ -320,9 +320,18 @@ function WysiwygEditor({ value, onChange }: { value: string; onChange: (val: str
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // Charger le contenu dans l'éditeur visuel quand value ou mode change
   useEffect(() => {
-    if (editorRef.current && editorMode === 'visual') editorRef.current.innerHTML = smartRender(value);
-  }, [editorMode]);
+    if (editorMode === 'visual' && editorRef.current) {
+      editorRef.current.innerHTML = smartRender(value);
+    }
+    if (editorMode === 'html') {
+      setHtmlValue(value);
+    }
+    if (editorMode === 'markdown') {
+      setMarkdownValue(htmlToMarkdown(value));
+    }
+  }, [value, editorMode]);
 
   const exec = useCallback((command: string, val?: string) => {
     document.execCommand(command, false, val);
