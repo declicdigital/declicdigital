@@ -130,12 +130,12 @@ const ReferencementSeo = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>SEO pour TPE, artisans et indépendants : pourquoi c'est votre meilleur investissement | Déclic Digital</title>
-        <meta name="description" content="Le SEO (référencement naturel) est l'outil le plus puissant pour qu'un artisan, un indépendant ou une TPE attire des clients sans payer de publicité. Découvrez pourquoi et comment en 2026." />
+        <title>SEO pour artisans et TPE : attirer des clients sans pub</title>
+        <meta name="description" content="Référencement naturel pour artisans, indépendants et TPE. Apparaissez en 1ère page Google sans budget pub. Audit SEO gratuit en 48h." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://declicdigital.net/referencement-seo/" />
-        <meta property="og:title" content="SEO pour TPE et artisans : pourquoi c'est votre meilleur investissement digital" />
-        <meta property="og:description" content="Tout ce qu'un artisan, un indépendant ou une TPE doit savoir sur le SEO pour attirer des clients en ligne sans budget publicitaire." />
+        <meta property="og:title" content="SEO pour artisans et TPE : attirer des clients sans pub" />
+        <meta property="og:description" content="Référencement naturel pour artisans, indépendants et TPE. Apparaissez en 1ère page Google sans budget pub. Audit SEO gratuit en 48h." />
         <meta property="og:type" content="article" />
         <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
