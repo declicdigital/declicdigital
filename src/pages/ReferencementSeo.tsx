@@ -11,9 +11,7 @@ import LocationSection from "@/components/LocationSection";
 import { ChevronDown, CheckCircle2, Building2, Hammer, Laptop } from "lucide-react";
 import { cities } from "@/data/cities";
 import heroSeo from "@/assets/seo-hero-businessman.webp";
-import imgSearchConsole from "@/assets/google-search-console-resultats-seo.webp";
-import imgGoogleMaps from "@/assets/seo-local-google-maps-boulogne-billancourt.webp";
-import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
+import seoDashboard from "@/assets/seo-dashboard-analytics.webp";
 
 const stats = [
   { num: "93%", label: "des expériences en ligne commencent par un moteur de recherche" },
@@ -146,29 +144,23 @@ const ReferencementSeo = () => {
         { label: "Référencement SEO" },
       ]} />
 
-      {/* Hero */}
-      <section className="gradient-hero py-16 md:py-24 overflow-hidden">
-        <div className="container">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
-              <p className="text-xs font-bold uppercase tracking-widest text-primary mb-4">Référencement naturel</p>
-              <h1 className="mb-6 text-4xl font-extrabold md:text-5xl gradient-text">
-                Le SEO : le meilleur allié de l'entrepreneur solo
-              </h1>
-              <p className="mb-8 text-lg text-muted-foreground leading-relaxed italic">
-                Vous n'avez pas le budget d'une multinationale. Vous n'avez pas une équipe marketing. Mais vous avez quelque chose qu'aucune grande entreprise ne peut acheter : une vraie expertise, un vrai territoire, une vraie relation client. Le SEO est l'outil qui transforme ça en visibilité.
-              </p>
-              <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
-                <Link to="/contact">Demander un audit SEO gratuit</Link>
-              </Button>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-              <div className="relative">
-                <div className="absolute -inset-4 rounded-3xl gradient-miami opacity-20 blur-2xl" />
-                <img src={heroSeo} alt="Dashboard analytics SEO pour TPE et artisans" className="relative w-full max-w-lg rounded-2xl shadow-2xl" width={512} height={341} loading="lazy" decoding="async" />
-              </div>
-            </motion.div>
-          </div>
+      {/* Hero : image en fond plein + dégradé noirci */}
+      <section className="relative overflow-hidden py-16 md:py-24 min-h-[500px] flex items-center">
+        <img src={heroSeo} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover object-center" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.93) 0%, hsl(263,36%,18%,0.78) 55%, hsl(183,70%,40%,0.55) 100%)" }} />
+        <div className="container relative z-10">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-2xl">
+            <span className="mb-4 inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold text-white/80 border border-white/20">Référencement naturel · SEO</span>
+            <h1 className="mb-6 text-4xl font-extrabold md:text-5xl text-white leading-tight">
+              Le SEO : le meilleur allié de l'entrepreneur solo
+            </h1>
+            <p className="mb-8 text-lg text-white/75 leading-relaxed italic">
+              Vous n'avez pas le budget d'une multinationale. Vous n'avez pas une équipe marketing. Mais vous avez quelque chose qu'aucune grande entreprise ne peut acheter : une vraie expertise, un vrai territoire, une vraie relation client. Le SEO est l'outil qui transforme ça en visibilité.
+            </p>
+            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+              <Link to="/contact">Demander un audit SEO gratuit</Link>
+            </Button>
+          </motion.div>
         </div>
       </section>
 
@@ -249,16 +241,15 @@ const ReferencementSeo = () => {
       </SectionWrapper>
 
       {/* CTA 1 */}
-      <section className="relative overflow-hidden py-14">
-        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="container relative z-10 text-center">
-          <h2 className="mb-4 text-2xl font-extrabold md:text-3xl">Prêt à attirer vos premiers clients via Google ?</h2>
-          <p className="mb-6 text-muted-foreground max-w-xl mx-auto">Nos experts analysent votre site et identifient les quick wins SEO pour votre activité.</p>
+      <section className="bg-[hsl(263,36%,18%)] py-14">
+        <div className="container text-center">
+          <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Prêt à attirer vos premiers clients via Google ?</h2>
+          <p className="mb-6 text-white/80 max-w-xl mx-auto">Nos experts analysent votre site et identifient les quick wins SEO pour votre activité.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-[hsl(263,36%,18%)] shadow-glow">
+             <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-white shadow-glow">
               <Link to="/contact">Audit SEO gratuit</Link>
             </Button>
-            <Button asChild variant="custom" size="lg" className="rounded-full border-2 border-white/40 bg-transparent px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-white/10 transition-colors">
+            <Button asChild variant="custom" size="lg" className="rounded-full border-2 border-white/40 bg-transparent px-8 font-semibold text-white hover:bg-white/10 transition-colors">
               <Link to="/rendez-vous">Prendre rendez-vous</Link>
             </Button>
           </div>
@@ -270,7 +261,7 @@ const ReferencementSeo = () => {
         <div className="mx-auto max-w-5xl grid items-center gap-10 lg:grid-cols-2">
           <div className="relative">
             <div className="absolute -inset-3 rounded-3xl gradient-miami opacity-15 blur-2xl" />
-            <img src={imgSearchConsole} alt="Google Search Console résultats SEO en hausse" className="relative w-full rounded-2xl shadow-2xl" width={512} height={341} loading="lazy" decoding="async" />
+            <img src={seoDashboard} alt="Dashboard analytics SEO pour suivre les performances" className="relative w-full rounded-2xl shadow-2xl" width={512} height={341} loading="lazy" decoding="async" />
           </div>
           <div className="space-y-5">
             <h2 className="text-3xl font-extrabold md:text-4xl">Suivez vos résultats en temps réel</h2>
@@ -293,7 +284,7 @@ const ReferencementSeo = () => {
           <div className="overflow-x-auto rounded-2xl border bg-background shadow-card">
             <table className="w-full">
               <thead>
-                <tr className="bg-[hsl(263,36%,18%)] text-[hsl(263,36%,18%)]">
+                <tr className="bg-[hsl(263,36%,18%)] text-white">
                   <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider">Critère</th>
                   <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider bg-primary/80">SEO (naturel)</th>
                   <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider">Google Ads</th>
@@ -328,7 +319,7 @@ const ReferencementSeo = () => {
           <div className="grid gap-6 md:grid-cols-3">
             {profiles.map((p, i) => (
               <div key={i} className="rounded-2xl bg-background p-6 shadow-card border-t-4 border-primary">
-                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[hsl(263,36%,18%)] text-[hsl(263,36%,18%)]">
+                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[hsl(263,36%,18%)] text-white">
                   <p.icon size={22} />
                 </div>
                 <h3 className="font-bold text-lg mb-1">{p.title}</h3>
@@ -374,12 +365,11 @@ const ReferencementSeo = () => {
       </SectionWrapper>
 
       {/* CTA 2 */}
-      <section className="relative overflow-hidden py-14">
-        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="container relative z-10 text-center">
-          <h2 className="mb-4 text-2xl font-extrabold md:text-3xl">Vous vous reconnaissez dans ces freins ?</h2>
-          <p className="mb-6 text-muted-foreground max-w-xl mx-auto">On démystifie le SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
-          <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-[hsl(263,36%,18%)] shadow-glow">
+      <section className="bg-[hsl(263,36%,18%)] py-14">
+        <div className="container text-center">
+          <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Vous vous reconnaissez dans ces freins ?</h2>
+          <p className="mb-6 text-white/80 max-w-xl mx-auto">On démystifie le SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
+          <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
             <Link to="/contact">Demander un audit SEO gratuit</Link>
           </Button>
         </div>
@@ -411,21 +401,6 @@ const ReferencementSeo = () => {
         </div>
       </SectionWrapper>
 
-      {/* Image Google Maps SEO local */}
-      <SectionWrapper>
-        <div className="grid lg:grid-cols-2 gap-12 items-center mx-auto max-w-5xl">
-          <div className="relative overflow-hidden rounded-2xl shadow-card group" style={{aspectRatio: "2/3", maxHeight: "480px"}}>
-            <img src={imgGoogleMaps} alt="SEO local Google Maps Boulogne-Billancourt" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))"}} />
-          </div>
-          <div className="space-y-4">
-            <h2 className="text-3xl font-extrabold md:text-4xl">Le SEO local : votre arme secrète dans le 92</h2>
-            <p className="text-muted-foreground leading-relaxed">Les recherches "près de moi" ont explosé de 500% en 5 ans. Quand un client cherche votre métier sur Google Maps, il veut trouver le professionnel le plus proche et le mieux noté.</p>
-            <p className="text-muted-foreground leading-relaxed">Avec un site optimisé + une fiche Google Business complète + des avis clients, vous captez cette demande locale avant vos concurrents.</p>
-          </div>
-        </div>
-      </SectionWrapper>
-
       {/* 07 - Checklist */}
       <SectionWrapper id="checklist">
         <div className="mx-auto max-w-3xl space-y-8">
@@ -444,16 +419,15 @@ const ReferencementSeo = () => {
       </SectionWrapper>
 
       {/* CTA 3 */}
-      <section className="relative overflow-hidden py-14">
-        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="container relative z-10 text-center">
-          <h2 className="mb-4 text-2xl font-extrabold md:text-3xl">Votre SEO peut travailler pour vous dès aujourd'hui</h2>
-          <p className="mb-6 text-muted-foreground max-w-xl mx-auto">Nos experts analysent votre site, identifient les quick wins SEO et construisent une stratégie adaptée à votre activité, votre zone et votre budget.</p>
+      <section className="bg-[hsl(263,36%,18%)] py-14">
+        <div className="container text-center">
+          <h2 className="mb-4 text-2xl font-extrabold text-white md:text-3xl">Votre SEO peut travailler pour vous dès aujourd'hui</h2>
+          <p className="mb-6 text-white/80 max-w-xl mx-auto">Nos experts analysent votre site, identifient les quick wins SEO et construisent une stratégie adaptée à votre activité, votre zone et votre budget.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-[hsl(263,36%,18%)] shadow-glow">
+            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-white shadow-glow">
               <Link to="/contact">Audit SEO gratuit</Link>
             </Button>
-            <Link to="/tarifs" className="inline-flex items-center justify-center rounded-full border-2 border-[hsl(263,36%,18%)] bg-transparent px-8 py-3 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)/0.1] transition-colors">
+            <Link to="/tarifs" className="inline-flex items-center justify-center rounded-full border-2 border-white/40 bg-transparent px-8 py-3 font-semibold text-white hover:bg-white/10 transition-colors">
               Voir nos tarifs
             </Link>
           </div>
@@ -525,7 +499,7 @@ const ReferencementSeo = () => {
           ))}
           <Link
             to="/nos-villes"
-            className="rounded-full gradient-primary btn-glow px-4 py-2 text-sm font-semibold text-[hsl(263,36%,18%)] shadow-glow"
+            className="rounded-full gradient-primary btn-glow px-4 py-2 text-sm font-semibold text-white shadow-glow"
           >
             Voir toutes les villes →
           </Link>
