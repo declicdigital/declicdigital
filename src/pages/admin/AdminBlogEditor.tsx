@@ -327,6 +327,7 @@ export default function AdminBlogEditor() {
     tags: [] as string[], read_time: "3 min", related_slugs: [] as string[],
     meta_title: "", meta_description: "",
     created_at: new Date().toISOString().split("T")[0],
+    scheduled_at: "",
   });
 
   useEffect(() => {
@@ -344,6 +345,7 @@ export default function AdminBlogEditor() {
         related_slugs: data.related_slugs ?? [], meta_title: data.meta_title ?? "",
         meta_description: data.meta_description ?? "",
         created_at: data.created_at ? data.created_at.split("T")[0] : new Date().toISOString().split("T")[0],
+        scheduled_at: data.scheduled_at ? data.scheduled_at.split("T")[0] : "",
       });
     });
   }, [isAdmin, id, isNew]);
@@ -404,9 +406,21 @@ export default function AdminBlogEditor() {
   async function handleSave(publishNow = false) {
     if (!form.title || !form.slug) { alert("Le titre et le slug sont obligatoires."); return; }
     setSaving(true);
+
+    // Auto-publier si la date programmée est aujourd'hui ou passée
+    let autoPublish = publishNow;
+    if (!publishNow && form.scheduled_at && form.status !== "published") {
+      const scheduled = new Date(form.scheduled_at);
+      scheduled.setHours(0, 0, 0, 0);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      if (scheduled <= today) autoPublish = true;
+    }
+
     const payload = {
       ...form,
-      status: publishNow ? "published" : form.status,
+      status: autoPublish ? "published" : form.status,
+      scheduled_at: form.scheduled_at ? new Date(form.scheduled_at).toISOString() : null,
       updated_at: new Date().toISOString(),
       created_at: new Date(form.created_at).toISOString(),
     };
@@ -538,6 +552,27 @@ export default function AdminBlogEditor() {
                 <input type="date" value={form.created_at} onChange={(e) => update("created_at", e.target.value)}
                   className="w-full rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none"
                   style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }} />
+              </div>
+              <div>
+                <label className="block text-xs font-medium mb-1.5" style={{ color: "rgba(255,255,255,0.45)" }}>
+                  <Calendar size={11} className="inline mr-1" />Programmer la publication
+                </label>
+                <input type="date" value={form.scheduled_at} onChange={(e) => update("scheduled_at", e.target.value)}
+                  min={new Date().toISOString().split("T")[0]}
+                  className="w-full rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none"
+                  style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }} />
+                {form.scheduled_at && form.status !== "published" && (
+                  <p className="text-xs mt-1" style={{ color: "hsl(183,70%,63%)" }}>
+                    ⏰ Sera publié le {new Date(form.scheduled_at).toLocaleDateString("fr-FR")}
+                  </p>
+                )}
+                {form.scheduled_at && (
+                  <button type="button" onClick={() => update("scheduled_at", "")}
+                    className="text-xs mt-1 hover:text-red-400 transition-colors"
+                    style={{ color: "rgba(255,255,255,0.30)" }}>
+                    × Annuler la programmation
+                  </button>
+                )}
               </div>
               <div>
                 <label className="block text-xs font-medium mb-1.5" style={{ color: "rgba(255,255,255,0.45)" }}>Temps de lecture</label>
