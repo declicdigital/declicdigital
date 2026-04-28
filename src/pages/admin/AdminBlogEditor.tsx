@@ -114,6 +114,102 @@ function htmlToMarkdown(html: string): string {
     .replace(/\n{3,}/g, '\n\n').trim();
 }
 
+
+// ─── Sélecteur de point focal ────────────────────────────────────────────────
+function FocalPointPicker({ imageUrl, value, onChange }: {
+  imageUrl: string;
+  value: string;
+  onChange: (val: string) => void;
+}) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+
+  const parse = (v: string) => {
+    const parts = v.split(" ");
+    return { x: parseFloat(parts[0]) || 50, y: parseFloat(parts[1]) || 50 };
+  };
+  const pos = parse(value);
+
+  const updateFromEvent = (e: MouseEvent | React.MouseEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = Math.round(Math.max(0, Math.min(100, ((e.clientX - rect.left) / rect.width) * 100)));
+    const y = Math.round(Math.max(0, Math.min(100, ((e.clientY - rect.top) / rect.height) * 100)));
+    onChange(`${x}% ${y}%`);
+  };
+
+  useEffect(() => {
+    const onMove = (e: MouseEvent) => { if (isDragging.current) updateFromEvent(e as any); };
+    const onUp = () => { isDragging.current = false; };
+    window.addEventListener("mousemove", onMove);
+    window.addEventListener("mouseup", onUp);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      window.removeEventListener("mouseup", onUp);
+    };
+  }, []);
+
+  return (
+    <div className="space-y-2">
+      <div className="flex items-center justify-between">
+        <p className="text-xs font-medium" style={{ color: "rgba(255,255,255,0.45)" }}>Point focal</p>
+        <span className="text-xs font-mono" style={{ color: "rgba(255,255,255,0.25)" }}>{value}</span>
+      </div>
+      <div
+        ref={containerRef}
+        className="relative rounded-xl overflow-hidden select-none"
+        style={{ height: "140px", cursor: "crosshair" }}
+        onMouseDown={(e) => { isDragging.current = true; updateFromEvent(e); }}
+        onClick={(e) => updateFromEvent(e)}
+      >
+        <img
+          src={imageUrl}
+          alt="Aperçu focal"
+          className="w-full h-full object-cover pointer-events-none"
+          style={{ objectPosition: value }}
+          draggable={false}
+        />
+        <div className="absolute inset-0 pointer-events-none" style={{ background: "rgba(0,0,0,0.2)" }} />
+        {/* Point focal */}
+        <div
+          className="absolute pointer-events-none"
+          style={{
+            left: `${pos.x}%`,
+            top: `${pos.y}%`,
+            transform: "translate(-50%, -50%)",
+            width: 28,
+            height: 28,
+          }}
+        >
+          <div style={{
+            position: "absolute", inset: 0, borderRadius: "50%",
+            border: "2px solid white",
+            boxShadow: "0 0 0 1px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.5)"
+          }} />
+          <div style={{
+            position: "absolute", top: "50%", left: 0, right: 0,
+            height: 1, background: "rgba(255,255,255,0.8)",
+            transform: "translateY(-50%)"
+          }} />
+          <div style={{
+            position: "absolute", left: "50%", top: 0, bottom: 0,
+            width: 1, background: "rgba(255,255,255,0.8)",
+            transform: "translateX(-50%)"
+          }} />
+          <div style={{
+            position: "absolute", top: "50%", left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: 6, height: 6, borderRadius: "50%",
+            background: "white",
+            boxShadow: "0 0 0 1px rgba(0,0,0,0.5)"
+          }} />
+        </div>
+      </div>
+      <p className="text-xs" style={{ color: "rgba(255,255,255,0.20)" }}>Cliquez ou glissez pour repositionner</p>
+    </div>
+  );
+}
+
 function ToolbarButton({ onClick, title, active, children }: { onClick: () => void; title: string; active?: boolean; children: React.ReactNode }) {
   return (
     <button type="button" onClick={onClick} title={title}
@@ -418,7 +514,7 @@ export default function AdminBlogEditor() {
 
   const [form, setForm] = useState({
     title: "", slug: "", content: "", excerpt: "",
-    cover_image_url: "", status: "draft", category: CATEGORIES[0],
+    cover_image_url: "", cover_image_position: "50% 50%", status: "draft", category: CATEGORIES[0],
     tags: [] as string[], read_time: "3 min", related_slugs: [] as string[],
     meta_title: "", meta_description: "",
     created_at: new Date().toISOString().split("T")[0],
@@ -433,7 +529,7 @@ export default function AdminBlogEditor() {
     supabase.from("cms_blog_posts").select("*").eq("id", id).single().then(({ data }) => {
       if (data) setForm({
         title: data.title ?? "", slug: data.slug ?? "", content: data.content ?? "",
-        excerpt: data.excerpt ?? "", cover_image_url: data.cover_image_url ?? "",
+        excerpt: data.excerpt ?? "", cover_image_url: data.cover_image_url ?? "", cover_image_position: data.cover_image_position ?? "50% 50%",
         status: data.status ?? "draft", category: data.category ?? CATEGORIES[0],
         tags: data.tags ?? [], read_time: data.read_time ?? "3 min",
         related_slugs: data.related_slugs ?? [], meta_title: data.meta_title ?? "",
@@ -647,11 +743,19 @@ export default function AdminBlogEditor() {
               <h3 className="text-sm font-bold text-white">Image de couverture</h3>
               <p className="text-xs" style={{ color: "rgba(255,255,255,0.30)" }}>✨ Conversion WebP automatique</p>
               {form.cover_image_url && (
-                <div className="relative">
-                  <img src={form.cover_image_url} alt="Cover" className="w-full h-32 object-cover rounded-xl" />
-                  <button onClick={() => update("cover_image_url", "")} className="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center" style={{ background: "rgba(0,0,0,0.7)" }}>
-                    <X size={12} className="text-white" />
-                  </button>
+                <div className="space-y-3">
+                  <div className="relative">
+                    <img src={form.cover_image_url} alt="Cover" className="w-full h-32 object-cover rounded-xl"
+                      style={{ objectPosition: form.cover_image_position }} />
+                    <button onClick={() => update("cover_image_url", "")} className="absolute top-2 right-2 w-6 h-6 rounded-full flex items-center justify-center" style={{ background: "rgba(0,0,0,0.7)" }}>
+                      <X size={12} className="text-white" />
+                    </button>
+                  </div>
+                  <FocalPointPicker
+                    imageUrl={form.cover_image_url}
+                    value={form.cover_image_position}
+                    onChange={(val) => update("cover_image_position", val)}
+                  />
                 </div>
               )}
               <input ref={imageInputRef} type="file" accept="image/*" onChange={uploadCoverImage} className="hidden" />
