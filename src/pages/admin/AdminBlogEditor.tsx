@@ -328,6 +328,7 @@ export default function AdminBlogEditor() {
     meta_title: "", meta_description: "",
     created_at: new Date().toISOString().split("T")[0],
     scheduled_at: "",
+    scheduled_time: "09:00",
   });
 
   useEffect(() => {
@@ -346,6 +347,7 @@ export default function AdminBlogEditor() {
         meta_description: data.meta_description ?? "",
         created_at: data.created_at ? data.created_at.split("T")[0] : new Date().toISOString().split("T")[0],
         scheduled_at: data.scheduled_at ? data.scheduled_at.split("T")[0] : "",
+        scheduled_time: data.scheduled_at ? data.scheduled_at.split("T")[1]?.slice(0, 5) : "09:00",
       });
     });
   }, [isAdmin, id, isNew]);
@@ -407,20 +409,21 @@ export default function AdminBlogEditor() {
     if (!form.title || !form.slug) { alert("Le titre et le slug sont obligatoires."); return; }
     setSaving(true);
 
-    // Auto-publier si la date programmée est aujourd'hui ou passée
+    // Auto-publier si la date+heure programmée est passée
     let autoPublish = publishNow;
-    if (!publishNow && form.scheduled_at && form.status !== "published") {
-      const scheduled = new Date(form.scheduled_at);
-      scheduled.setHours(0, 0, 0, 0);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      if (scheduled <= today) autoPublish = true;
+    let scheduledIso: string | null = null;
+    if (form.scheduled_at) {
+      const time = (form as any).scheduled_time || "09:00";
+      scheduledIso = new Date(`${form.scheduled_at}T${time}:00`).toISOString();
+      if (!publishNow && form.status !== "published") {
+        if (new Date(scheduledIso) <= new Date()) autoPublish = true;
+      }
     }
 
     const payload = {
       ...form,
       status: autoPublish ? "published" : form.status,
-      scheduled_at: form.scheduled_at ? new Date(form.scheduled_at).toISOString() : null,
+      scheduled_at: scheduledIso,
       updated_at: new Date().toISOString(),
       created_at: new Date(form.created_at).toISOString(),
     };
@@ -561,9 +564,15 @@ export default function AdminBlogEditor() {
                   min={new Date().toISOString().split("T")[0]}
                   className="w-full rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none"
                   style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }} />
+                {form.scheduled_at && (
+                  <input type="time" value={(form as any).scheduled_time || "09:00"}
+                    onChange={(e) => update("scheduled_time", e.target.value)}
+                    className="w-full rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none mt-2"
+                    style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.08)" }} />
+                )}
                 {form.scheduled_at && form.status !== "published" && (
                   <p className="text-xs mt-1" style={{ color: "hsl(183,70%,63%)" }}>
-                    ⏰ Sera publié le {new Date(form.scheduled_at).toLocaleDateString("fr-FR")}
+                    ⏰ Sera publié le {new Date(form.scheduled_at).toLocaleDateString("fr-FR")} à {(form as any).scheduled_time || "09:00"}
                   </p>
                 )}
                 {form.scheduled_at && (
