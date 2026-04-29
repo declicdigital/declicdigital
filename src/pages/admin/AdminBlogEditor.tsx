@@ -16,22 +16,44 @@ function slugify(text: string) {
   return text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9\s-]/g, "").replace(/\s+/g, "-").replace(/-+/g, "-").trim();
 }
 
-async function convertToWebP(file: File, quality = 0.85): Promise<Blob> {
+const MAX_WIDTH = 1200;  // px max
+const MAX_SIZE_KB = 200; // poids cible en Ko
+
+async function convertToWebP(file: File, quality = 0.78): Promise<Blob> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const url = URL.createObjectURL(file);
     img.onload = () => {
+      // Redimensionner si > MAX_WIDTH
+      let w = img.naturalWidth;
+      let h = img.naturalHeight;
+      if (w > MAX_WIDTH) {
+        h = Math.round((h * MAX_WIDTH) / w);
+        w = MAX_WIDTH;
+      }
+
       const canvas = document.createElement("canvas");
-      canvas.width = img.naturalWidth;
-      canvas.height = img.naturalHeight;
+      canvas.width = w;
+      canvas.height = h;
       const ctx = canvas.getContext("2d");
       if (!ctx) { reject(new Error("Canvas non supporté")); return; }
-      ctx.drawImage(img, 0, 0);
-      canvas.toBlob((blob) => {
-        URL.revokeObjectURL(url);
-        if (blob) resolve(blob);
-        else reject(new Error("Conversion WebP échouée"));
-      }, "image/webp", quality);
+      ctx.drawImage(img, 0, 0, w, h);
+      URL.revokeObjectURL(url);
+
+      // Compression adaptative : si trop lourd, baisser la qualité
+      const tryCompress = (q: number) => {
+        canvas.toBlob((blob) => {
+          if (!blob) { reject(new Error("Conversion WebP échouée")); return; }
+          const sizeKb = blob.size / 1024;
+          if (sizeKb > MAX_SIZE_KB && q > 0.40) {
+            // Encore trop lourd → réessayer avec qualité réduite
+            tryCompress(Math.round((q - 0.08) * 100) / 100);
+          } else {
+            resolve(blob);
+          }
+        }, "image/webp", q);
+      };
+      tryCompress(quality);
     };
     img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("Chargement image échoué")); };
     img.src = url;
@@ -559,7 +581,7 @@ export default function AdminBlogEditor() {
   async function uploadCoverImage(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
-    setUploading(true); setUploadProgress("Conversion en WebP...");
+    setUploading(true); setUploadProgress("Optimisation et conversion WebP...");
     try {
       const webpBlob = await convertToWebP(file, 0.85);
       const baseName = file.name.replace(/\.[^.]+$/, "");
@@ -570,6 +592,9 @@ export default function AdminBlogEditor() {
       if (!error) {
         const { data: { publicUrl } } = supabase.storage.from("cms-images").getPublicUrl(filePath);
         update("cover_image_url", publicUrl);
+        const sizeKb = Math.round(webpBlob.size / 1024);
+        setUploadProgress(`✓ ${sizeKb} Ko — optimisé`);
+        setTimeout(() => setUploadProgress(""), 3000);
       } else alert("Erreur upload : " + error.message);
     } catch (err: any) { alert("Erreur conversion : " + err.message); }
     finally { setUploading(false); setUploadProgress(""); if (imageInputRef.current) imageInputRef.current.value = ""; }
