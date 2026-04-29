@@ -17,9 +17,9 @@ function slugify(text: string) {
 }
 
 const MAX_WIDTH = 1200;  // px max
-const MAX_SIZE_KB = 200; // poids cible en Ko
+const MAX_SIZE_KB = 70;  // poids cible en Ko
 
-async function convertToWebP(file: File, quality = 0.78): Promise<Blob> {
+async function convertToWebP(file: File, quality = 0.72): Promise<Blob> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const url = URL.createObjectURL(file);
