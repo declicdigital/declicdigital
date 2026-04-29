@@ -97,7 +97,14 @@ const Index = () => {
             </div>
             <div className="flex flex-col gap-4">
               <div className="relative overflow-hidden rounded-2xl shadow-card group">
-                <img src={imgBureau} alt="Agence web Déclic Digital - bureau Paris avec analytics" className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" width={640} height={256} fetchPriority="high" />
+                <img
+                  src={imgBureau}
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 460px"
+                  alt="Agence web Déclic Digital - bureau Paris avec analytics"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={640} height={256}
+                  fetchPriority="high"
+                />
                 <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.3), hsl(183,70%,63%,0.15))" }} />
               </div>
               <div className="rounded-2xl bg-card p-5 shadow-card flex items-center gap-4">
@@ -117,12 +124,17 @@ const Index = () => {
       <section className="py-12 md:py-16 overflow-hidden">
         <div className="container">
           <div className="relative">
-            {/* Image en fond côté gauche */}
             <div className="hidden lg:block absolute left-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
-              <img src={imgProbleme} alt="Indépendant frustré par son site sans clients" className="w-full h-full object-cover" loading="lazy" />
+              <img
+                src={imgProbleme}
+                sizes="(max-width: 1024px) 0vw, 42vw"
+                alt="Indépendant frustré par son site sans clients"
+                className="w-full h-full object-cover"
+                width={560} height={560}
+                loading="lazy"
+              />
               <div className="absolute inset-0" style={{ background: "linear-gradient(to left, hsl(var(--background)) 0%, hsl(var(--background)/0.4) 30%, transparent 65%)" }} />
             </div>
-            {/* Texte qui chevauche depuis la droite */}
             <div className="relative z-10 ml-auto max-w-2xl">
               <h2 className="mb-6 text-3xl font-extrabold md:text-4xl">Vous n'avez pas de site, ou il ne génère aucun client ?</h2>
               <p className="mb-8 text-lg text-muted-foreground">
@@ -195,12 +207,17 @@ const Index = () => {
       <section className="py-12 md:py-16 overflow-hidden">
         <div className="container">
           <div className="relative">
-            {/* Image en fond côté droit */}
             <div className="hidden lg:block absolute right-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
-              <img src={imgProcessus} alt="Consultante agence digitale Paris - Déclic Digital" className="w-full h-full object-cover" loading="lazy" />
+              <img
+                src={imgProcessus}
+                sizes="(max-width: 1024px) 0vw, 42vw"
+                alt="Consultante agence digitale Paris - Déclic Digital"
+                className="w-full h-full object-cover"
+                width={560} height={560}
+                loading="lazy"
+              />
               <div className="absolute inset-0" style={{ background: "linear-gradient(to right, hsl(var(--background)) 0%, hsl(var(--background)/0.4) 30%, transparent 65%)" }} />
             </div>
-            {/* Texte côté gauche qui chevauche */}
             <div className="relative z-10 max-w-2xl">
               <h2 className="text-3xl font-extrabold md:text-4xl mb-4">Référencement naturel Google : soyez visible localement</h2>
               <p className="text-lg text-muted-foreground mb-10">
@@ -283,9 +300,15 @@ const Index = () => {
                 Voir toutes nos villes <ChevronRight size={16} />
               </Link>
             </div>
-            {/* Image Paris avec citation en overlay */}
             <div className="relative overflow-hidden rounded-2xl shadow-card group">
-              <img src={imgParis} alt="Paris vue aérienne Hauts-de-Seine - zone d'intervention Déclic Digital" className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
+              <img
+                src={imgParis}
+                sizes="(max-width: 768px) 100vw, 50vw"
+                alt="Paris vue aérienne Hauts-de-Seine - zone d'intervention Déclic Digital"
+                className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                width={640} height={320}
+                loading="lazy"
+              />
               <div className="absolute inset-0" style={{ background: "linear-gradient(to top, hsl(263,36%,18%,0.85) 0%, transparent 55%)" }} />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <p className="text-white font-bold text-lg">Paris · Hauts-de-Seine · 92</p>
@@ -426,7 +449,7 @@ const Index = () => {
       <section className="relative overflow-hidden py-16 md:py-24">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="container relative z-10">
-          <div className="flex flex-col items-center text-center ">
+          <div className="flex flex-col items-center text-center">
             <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 border-[hsl(263,36%,18%)]/30 shadow-lg mb-4" width={80} height={80} loading="lazy" />
             <p className="text-sm font-semibold text-[hsl(263,36%,18%)] mb-1">Geoffrey, Expert Produit Google</p>
             <h3 className="mb-4 text-3xl font-extrabold md:text-4xl text-[hsl(263,36%,18%)]">Et si votre site devenait votre meilleur commercial ?</h3>
