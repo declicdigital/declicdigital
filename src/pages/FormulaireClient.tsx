@@ -9,9 +9,6 @@ import PageLayout from "@/components/PageLayout";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 
-const SUPABASE_URL = "https://iskxljribvfypkyappku.supabase.co";
-const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza3hsanJpYnZmeXBreWFwcGt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2NjQ0MzMsImV4cCI6MjA5MjI0MDQzM30.OgWh7kKknHgdG4JMTFbNC_XdZhncnEqzJQA0GbRI_uY";
-
 interface TeamMember { name: string; role: string; bio: string; photo: File | null; }
 
 interface FormData {
@@ -143,27 +140,54 @@ const FormulaireClient = () => {
         ? teamMembers.map(m => ({ name: m.name, role: m.role, bio: m.bio, photo_name: m.photo?.name || "" }))
         : [];
 
-      // Créer le compte client + envoyer le brief
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/create-client-account`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": ANON_KEY,
-          "Authorization": `Bearer ${ANON_KEY}`,
-        },
-        body: JSON.stringify({
-          ...f,
-          form_type: "formulaire",
-          team: teamData,
-          file_paths: filePaths,
-          submission_id: submissionId,
-          msg: f.msg || f.desc,
-        }),
+      // INSERT direct dans Supabase — sans Edge Function
+      const { error } = await supabase.from("brief_submissions").insert({
+        full_name: f.full_name,
+        company: f.company,
+        email: f.email,
+        phone: f.phone,
+        sector: f.sector,
+        size: f.size,
+        current_url: f.current_url,
+        source: f.source,
+        project_types: f.pt,
+        description: f.desc,
+        inspiration: f.inspo,
+        keywords: f.kw,
+        goal: f.goal,
+        acquisition_sources: f.csrc,
+        budget: f.budget,
+        recurrence: f.recur,
+        urgency: f.urgency,
+        brand: f.brand,
+        content_available: f.cont,
+        pages_count: f.pages,
+        features: f.feat,
+        features_other: f.feat_autre_detail,
+        vibe: f.vibe,
+        team_enabled: f.team_enabled,
+        team_data: teamData,
+        deadline: f.dl,
+        key_date: f.kdate,
+        autonomy: f.auto,
+        web_level: f.wlevel,
+        past_experience: f.past,
+        past_issue: f.pastissue,
+        message: f.msg || f.desc,
+        contact_pref: f.cp,
+        time_slot: f.slot,
+        file_types: f.ftype,
+        file_link: f.file_link,
+        file_notes: f.file_notes,
+        file_paths: filePaths,
+        submission_id: submissionId,
+        status: "new",
       });
 
-      if (!res.ok) throw new Error("Erreur envoi");
+      if (error) throw error;
+
       setSent(true);
-      toast({ title: "Compte créé !", description: "Votre espace client est prêt. Connectez-vous !" });
+      toast({ title: "Brief envoyé !", description: "Nous reviendrons vers vous sous 24-48h." });
     } catch (err) {
       console.error(err);
       toast({ title: "Erreur", description: "Une erreur est survenue, veuillez réessayer.", variant: "destructive" });
@@ -181,19 +205,16 @@ const FormulaireClient = () => {
               <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full gradient-miami shadow-elevated">
                 <CheckCircle className="h-10 w-10 text-primary-foreground" />
               </div>
-              <h1 className="text-3xl font-extrabold mb-4">Votre compte est créé ! 🎉</h1>
+              <h1 className="text-3xl font-extrabold mb-4">Brief reçu ! 🎉</h1>
               <p className="text-muted-foreground text-lg mb-4">
-                Votre brief a été reçu et votre espace client est prêt. Vous allez recevoir un email de confirmation.
+                Nous avons bien reçu votre brief et vous répondrons sous 24 à 48h avec une proposition personnalisée.
               </p>
               <p className="text-foreground font-medium mb-8">
-                Connectez-vous pour suivre l'avancement de votre projet.
+                Un email de confirmation vous sera envoyé à <strong>{f.email}</strong>.
               </p>
               <div className="flex gap-3 justify-center flex-wrap">
-                <Button onClick={() => window.location.href = "/connexion"} className="rounded-full gradient-primary btn-glow text-white">
-                  Accéder à mon espace client →
-                </Button>
-                <Button onClick={() => window.location.href = "/"} variant="outline" className="rounded-full">
-                  Retour à l'accueil
+                <Button onClick={() => window.location.href = "/"} className="rounded-full gradient-primary btn-glow text-white">
+                  Retour à l'accueil →
                 </Button>
               </div>
             </motion.div>
