@@ -94,9 +94,9 @@ const Index = () => {
                 <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
                   <Link to="/contact">Demander un audit SEO gratuit</Link>
                 </Button>
-                <Link to="/rendez-vous" className="inline-flex items-center justify-center h-11 rounded-full border-2 px-8 font-bold transition-colors hover:opacity-80" style={{ borderColor: INK, color: INK, background: "transparent" }}>
-                  Prendre rendez-vous
-                </Link>
+                <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-bold shadow-glow">
+                  <Link to="/rendez-vous">Prendre rendez-vous</Link>
+                </Button>
               </div>
             </div>
             <div className="flex flex-col gap-4">
