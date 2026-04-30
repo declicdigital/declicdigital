@@ -9,7 +9,6 @@ interface Props {
 
 const SectionWrapper = ({ children, className = "", id }: Props) => {
   const ref = useReveal<HTMLElement>();
-
   return (
     <section
       ref={ref}
