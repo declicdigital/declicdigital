@@ -118,7 +118,7 @@ const Index = () => {
       </section>
 
       {/* ─── Problème — alt-even (1er bloc) ──────────────────────────────────── */}
-      <section className="alt-even py-12 md:py-16 overflow-hidden">
+      <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="relative">
             <div className="hidden lg:block absolute left-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
@@ -160,7 +160,7 @@ const Index = () => {
       </section>
 
       {/* ─── Services — alt-odd (2e bloc) ─────────────────────────────────────── */}
-      <section className="alt-odd py-12 md:py-16">
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="relative rounded-3xl overflow-hidden">
             <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" />
@@ -197,7 +197,7 @@ const Index = () => {
       </section>
 
       {/* ─── Processus — alt-even (3e bloc) ───────────────────────────────────── */}
-      <section className="alt-even py-12 md:py-16 overflow-hidden">
+      <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="relative">
             <div className="hidden lg:block absolute right-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
@@ -244,7 +244,7 @@ const Index = () => {
       </Suspense>
 
       {/* ─── Pourquoi nous — alt-even (5e bloc) ──────────────────────────────── */}
-      <section className="alt-even py-12 md:py-16">
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="mx-auto max-w-5xl">
             <div className="text-center mb-10">
@@ -271,7 +271,7 @@ const Index = () => {
       </section>
 
       {/* ─── Paris — alt-odd (6e bloc) ────────────────────────────────────────── */}
-      <section className="alt-odd py-12 md:py-16">
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -301,7 +301,7 @@ const Index = () => {
       </section>
 
       {/* ─── Logos tech — alt-even (7e bloc) ─────────────────────────────────── */}
-      <section className="alt-even py-12 md:py-16">
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="text-center mb-10">
             <h2 className="mb-4">Nos réalisations pour des TPE et artisans parisiens</h2>
@@ -325,7 +325,7 @@ const Index = () => {
       </section>
 
       {/* ─── Audit SEO — alt-odd (8e bloc) ───────────────────────────────────── */}
-      <section className="alt-odd py-12 md:py-16">
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="mx-auto max-w-4xl">
             <div className="text-center mb-10">
@@ -378,7 +378,7 @@ const Index = () => {
       </section>
 
       {/* ─── Liens services — alt-even (9e bloc) ─────────────────────────────── */}
-      <section className="alt-even py-12 md:py-16">
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
             <h3 className="mb-4">Explorez nos services</h3>
@@ -404,7 +404,7 @@ const Index = () => {
       </section>
 
       {/* ─── Formulaire — alt-odd (10e bloc) ─────────────────────────────────── */}
-      <section className="alt-odd py-12 md:py-16">
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="mx-auto max-w-2xl">
             <div className="text-center mb-10">
