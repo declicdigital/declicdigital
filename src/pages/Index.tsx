@@ -75,7 +75,7 @@ const Index = () => {
       </Helmet>
 
       {/* ─── Hero ─────────────────────────────────────────────────────────────── */}
-      <section className="gradient-hero relative overflow-hidden">
+      <section className="gradient-hero relative overflow-hidden" data-alternate="skip">
         <div className="container pt-6 pb-16 md:pt-8 md:pb-24 lg:pt-10 lg:pb-32">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
@@ -91,10 +91,10 @@ const Index = () => {
                 <Link to="/referencement-seo" className="text-primary font-semibold">SEO et GEO</Link> pour que les TPE et indépendants de Paris et du 92 attirent enfin les bons clients.
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow" style={{ color: CREAM }}>
+                <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
                   <Link to="/contact">Demander un audit SEO gratuit</Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="rounded-full border-2 px-8 font-bold transition-colors" style={{ borderColor: INK, color: INK, background: "transparent" }}>
+                <Button asChild size="lg" variant="outline" className="rounded-full border-2 px-8 font-bold transition-colors hover:bg-[#2B1E3F] hover:text-[#F6F1E9]" style={{ borderColor: INK, color: INK, background: "transparent" }}>
                   <Link to="/rendez-vous">Prendre rendez-vous</Link>
                 </Button>
               </div>
@@ -150,7 +150,7 @@ const Index = () => {
                 ))}
               </div>
               <div className="mt-8">
-                <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow" style={{ color: CREAM }}>
+                <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
                   <Link to="/contact">Demander un audit SEO gratuit</Link>
                 </Button>
               </div>
@@ -227,7 +227,7 @@ const Index = () => {
                 ))}
               </div>
               <div className="mt-8">
-                <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow" style={{ color: CREAM }}>
+                <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
                   <Link to="/rendez-vous">Prendre rendez-vous</Link>
                 </Button>
               </div>
@@ -365,7 +365,7 @@ const Index = () => {
             </div>
           </div>
           <div className="text-center mt-10">
-            <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow" style={{ color: CREAM }}>
+            <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
               <Link to="/rendez-vous">Prendre rendez-vous</Link>
             </Button>
           </div>
@@ -429,7 +429,7 @@ const Index = () => {
       </Suspense>
 
       {/* ─── CTA final avec texture ───────────────────────────────────────────── */}
-      <section className="relative overflow-hidden py-16 md:py-24">
+      <section className="relative overflow-hidden py-16 md:py-24" data-alternate="skip">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="container relative z-10">
           <div className="flex flex-col items-center text-center">
