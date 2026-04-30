@@ -109,7 +109,7 @@
   }
 
   body {
-    @apply bg-background text-foreground antialiased;
+    @apply text-foreground antialiased;
     font-family: 'Clash Display', 'Clash Display Fallback', system-ui, sans-serif;
     font-weight: 400;
     color: #2B1E3F;
@@ -562,10 +562,10 @@
    ═══════════════════════════════════════════════════════════ */
 
 .alt-even {
-  background-color: #F6F1E9;
+  background-color: #F6F1E9 !important;
 }
 .alt-odd {
-  background-color: #E9F2F4;
+  background-color: #E9F2F4 !important;
 }
 
 /* Les sections skip n'ont pas de fond forcé */
