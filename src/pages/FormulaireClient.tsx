@@ -127,7 +127,7 @@ const FormulaireClient = () => {
     }
     setSending(true);
     try {
-      // Upload fichiers dans Supabase Storage
+      // 1. Upload fichiers dans Supabase Storage
       const filePaths: string[] = [];
       const submissionId = crypto.randomUUID();
       for (const file of files) {
@@ -140,51 +140,50 @@ const FormulaireClient = () => {
         ? teamMembers.map(m => ({ name: m.name, role: m.role, bio: m.bio, photo_name: m.photo?.name || "" }))
         : [];
 
-      // INSERT direct dans Supabase — sans Edge Function
-      const { error } = await supabase.from("brief_submissions").insert({
-        full_name: f.full_name,
-        company: f.company,
-        email: f.email,
-        phone: f.phone,
-        sector: f.sector,
-        size: f.size,
-        current_url: f.current_url,
-        source: f.source,
-        project_types: f.pt,
-        description: f.desc,
-        inspiration: f.inspo,
-        keywords: f.kw,
-        goal: f.goal,
-        acquisition_sources: f.csrc,
-        budget: f.budget,
-        recurrence: f.recur,
-        urgency: f.urgency,
-        brand: f.brand,
-        content_available: f.cont,
-        pages_count: f.pages,
-        features: f.feat,
-        features_other: f.feat_autre_detail,
-        vibe: f.vibe,
-        team_enabled: f.team_enabled,
-        team_data: teamData,
-        deadline: f.dl,
-        key_date: f.kdate,
-        autonomy: f.auto,
-        web_level: f.wlevel,
-        past_experience: f.past,
-        past_issue: f.pastissue,
-        message: f.msg || f.desc,
-        contact_pref: f.cp,
-        time_slot: f.slot,
-        file_types: f.ftype,
-        file_link: f.file_link,
-        file_notes: f.file_notes,
-        file_paths: filePaths,
-        submission_id: submissionId,
-        status: "new",
+      // 2. INSERT direct dans brief_submissions
+      await supabase.from("brief_submissions").insert({
+        full_name: f.full_name, company: f.company, email: f.email, phone: f.phone,
+        sector: f.sector, size: f.size, current_url: f.current_url, source: f.source,
+        project_types: f.pt, description: f.desc, inspiration: f.inspo, keywords: f.kw,
+        goal: f.goal, acquisition_sources: f.csrc, budget: f.budget, recurrence: f.recur,
+        urgency: f.urgency, brand: f.brand, content_available: f.cont, pages_count: f.pages,
+        features: f.feat, features_other: f.feat_autre_detail, vibe: f.vibe,
+        team_enabled: f.team_enabled, team_data: teamData, deadline: f.dl, key_date: f.kdate,
+        autonomy: f.auto, web_level: f.wlevel, past_experience: f.past, past_issue: f.pastissue,
+        message: f.msg || f.desc, contact_pref: f.cp, time_slot: f.slot, file_types: f.ftype,
+        file_link: f.file_link, file_notes: f.file_notes, file_paths: filePaths,
+        submission_id: submissionId, status: "new",
       });
 
-      if (error) throw error;
+      // 3. Appel Edge Function pour email Brevo
+      const { data: { session } } = await supabase.auth.getSession();
+      const token = session?.access_token ?? import.meta.env.VITE_SUPABASE_ANON_KEY;
+      await fetch("https://iskxljribvfypkyappku.supabase.co/functions/v1/create-client-account", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "apikey": import.meta.env.VITE_SUPABASE_ANON_KEY,
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          full_name: f.full_name,
+          email: f.email,
+          phone: f.phone,
+          company: f.company,
+          current_url: f.current_url,
+          msg: f.msg || f.desc,
+          form_type: "formulaire",
+          team: teamData,
+          file_paths: filePaths,
+          submission_id: submissionId,
+          // Tous les champs du brief pour l'email
+          sector: f.sector, size: f.size, pt: f.pt, inspo: f.inspo, kw: f.kw,
+          goal: f.goal, csrc: f.csrc, budget: f.budget, recur: f.recur, urgency: f.urgency,
+          brand: f.brand, cont: f.cont, pages: f.pages, feat: f.feat, vibe: f.vibe,
+          dl: f.dl, kdate: f.kdate, auto: f.auto, wlevel: f.wlevel, past: f.past,
+          cp: f.cp, slot: f.slot, ftype: f.ftype, file_link: f.file_link,
+        }),
+      });
 
       setSent(true);
       toast({ title: "Brief envoyé !", description: "Nous reviendrons vers vous sous 24-48h." });
