@@ -94,7 +94,7 @@ const Index = () => {
                 <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow" style={{ color: CREAM }}>
                   <Link to="/contact">Demander un audit SEO gratuit</Link>
                 </Button>
-                <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-bold shadow-glow">
+                <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-bold shadow-glow" style={{ color: CREAM }}>
                   <Link to="/rendez-vous">Prendre rendez-vous</Link>
                 </Button>
               </div>
@@ -118,7 +118,7 @@ const Index = () => {
       </section>
 
       {/* Problème */}
-      <section className="py-12 md:py-16 overflow-hidden bg-section-blue">
+      <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="relative">
             <div className="hidden lg:block absolute left-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
@@ -195,7 +195,7 @@ const Index = () => {
       </SectionWrapper>
 
       {/* Processus */}
-      <section className="py-12 md:py-16 overflow-hidden bg-section-blue">
+      <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="relative">
             <div className="hidden lg:block absolute right-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
