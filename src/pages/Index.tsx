@@ -440,10 +440,10 @@ const Index = () => {
               Un site optimisé peut générer des prospects tous les jours. Ne laissez plus vos concurrents capter les clients qui vous cherchent sur Google.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Button asChild variant="custom" size="lg" className="rounded-full px-8 font-bold shadow-lg btn-glow" style={{ background: CREAM, color: INK }}>
+              <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
                 <Link to="/contact">Demander un audit SEO gratuit</Link>
               </Button>
-              <Button asChild variant="custom" size="lg" className="rounded-full border-2 bg-transparent px-8 font-bold transition-colors" style={{ borderColor: INK, color: INK }}>
+              <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-bold shadow-glow">
                 <Link to="/tarifs">Voir nos tarifs</Link>
               </Button>
             </div>
