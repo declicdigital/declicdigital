@@ -153,7 +153,7 @@ serve(async (req) => {
         "api-key": BREVO_API_KEY,
       },
       body: JSON.stringify({
-        sender: { name: "Déclic Digital Brief", email: "no-reply@declicdigital.net" },
+        sender: { name: "Déclic Digital Brief", email: "contact@declicdigital.net" },
         to: [{ email: NOTIFY_EMAIL, name: "Geoffrey" }],
         subject: `🎯 Nouveau brief — ${body.full_name} (${body.company}) | ${body.budget || "budget ?"}`,
         htmlContent: emailHtml,
