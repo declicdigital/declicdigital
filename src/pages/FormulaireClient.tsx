@@ -103,6 +103,17 @@ const FieldGroup = ({ children, cols = 1 }: { children: React.ReactNode; cols?: 
   <div className={cols === 2 ? "grid gap-5 sm:grid-cols-2" : "space-y-0"}>{children}</div>
 );
 
+// Helper email
+const row = (label: string, val: string | string[] | boolean | undefined): string => {
+  if (!val || (Array.isArray(val) && val.length === 0) || val === false) return "";
+  const display = Array.isArray(val) ? val.join(", ") : val === true ? "Oui" : String(val);
+  if (!display.trim()) return "";
+  return `<tr><td style="padding:5px 12px 5px 0;color:#888;white-space:nowrap;vertical-align:top;font-size:13px;min-width:140px;">${label}</td><td style="padding:5px 0;font-size:13px;color:#222;line-height:1.5;">${display}</td></tr>`;
+};
+const section = (title: string, rows: string): string => rows.trim()
+  ? `<div style="margin-bottom:20px;"><h3 style="margin:0 0 10px;padding:8px 14px;background:#f0f9ff;border-left:3px solid #4fc3c3;border-radius:0 8px 8px 0;font-size:13px;color:#333;font-weight:bold;">${title}</h3><table style="width:100%;border-collapse:collapse;">${rows}</table></div>`
+  : "";
+
 const FormulaireClient = () => {
   const [f, setF] = useState<FormData>(initial);
   const [files, setFiles] = useState<File[]>([]);
@@ -123,7 +134,6 @@ const FormulaireClient = () => {
     setFiles(prev => [...prev, ...valid]);
   };
   const removeFile = (idx: number) => setFiles(prev => prev.filter((_, i) => i !== idx));
-
   const addTeamMember = () => setTeamMembers(prev => [...prev, { name: "", role: "", bio: "", photo: null }]);
   const removeTeamMember = (idx: number) => setTeamMembers(prev => prev.filter((_, i) => i !== idx));
   const updateTeamMember = (idx: number, field: keyof TeamMember, value: string | File | null) => {
@@ -142,7 +152,6 @@ const FormulaireClient = () => {
     }
     setSending(true);
     try {
-      // 1. Upload fichiers dans Supabase Storage
       const filePaths: string[] = [];
       const submissionId = crypto.randomUUID();
       for (const file of files) {
@@ -155,7 +164,7 @@ const FormulaireClient = () => {
         ? teamMembers.map(m => ({ name: m.name, role: m.role, bio: m.bio, photo_name: m.photo?.name || "" }))
         : [];
 
-      // 2. INSERT dans brief_submissions
+      // INSERT dans Supabase
       await supabase.from("brief_submissions").insert({
         full_name: f.full_name, company: f.company, email: f.email, phone: f.phone,
         sector: f.sector, size: f.size, current_url: f.current_url, source: f.source,
@@ -170,54 +179,87 @@ const FormulaireClient = () => {
         submission_id: submissionId, status: "new",
       });
 
-      // 3. Email de confirmation au prospect
+      // Email de confirmation au prospect
       await sendBrevoEmail(
         { email: f.email, name: f.full_name },
         "Brief reçu — Déclic Digital vous répond sous 24-48h",
-        `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="background: linear-gradient(135deg, #4fc3c3, #9b59b6); padding: 24px; border-radius: 12px; margin-bottom: 24px; text-align: center;">
-            <h1 style="color: white; margin: 0; font-size: 22px;">Brief bien reçu ! 🎉</h1>
+        `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;">
+          <div style="background:linear-gradient(135deg,#3d1a6e,#4fc3c3);padding:24px;border-radius:12px;margin-bottom:24px;text-align:center;">
+            <h1 style="color:white;margin:0;font-size:22px;">Brief bien reçu ! 🎉</h1>
           </div>
-          <p style="color: #333; font-size: 16px;">Bonjour <strong>${f.full_name}</strong>,</p>
-          <p style="color: #555; line-height: 1.6;">Merci pour votre brief. Nous l'avons bien reçu et nous vous répondrons sous 24 à 48h avec une proposition personnalisée.</p>
-          <p style="color: #999; font-size: 13px; text-align: center; margin-top: 32px;">Déclic Digital — declicdigital.net</p>
-        </div>
-        `
+          <p style="color:#333;font-size:16px;">Bonjour <strong>${f.full_name}</strong>,</p>
+          <p style="color:#555;line-height:1.6;">Merci pour votre brief. Nous l'avons bien reçu et nous vous répondrons sous 24 à 48h avec une proposition personnalisée.</p>
+          <p style="color:#999;font-size:13px;text-align:center;margin-top:32px;">Déclic Digital — declicdigital.net</p>
+        </div>`
       );
 
-      // 4. Notification à Geoffrey
+      // Email de notification complet à Geoffrey
       await sendBrevoEmail(
         { email: "contact@declicdigital.net", name: "Geoffrey" },
-        `🆕 Nouveau brief — ${f.full_name} (${f.company || f.email})`,
-        `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="background: linear-gradient(135deg, #4fc3c3, #9b59b6); padding: 20px; border-radius: 12px; margin-bottom: 24px;">
-            <h1 style="color: white; margin: 0; font-size: 20px;">🆕 Nouveau brief client</h1>
+        `🆕 Nouveau brief — ${f.full_name} · ${f.company || f.email} · ${f.budget || "budget ?"}`,
+        `<div style="font-family:Arial,sans-serif;max-width:680px;margin:0 auto;background:#f5f5f5;padding:20px;">
+          <div style="background:linear-gradient(135deg,#3d1a6e,#4fc3c3);padding:24px 28px;border-radius:12px;margin-bottom:20px;">
+            <h1 style="color:white;margin:0;font-size:22px;">🆕 Nouveau brief client</h1>
+            <p style="color:rgba(255,255,255,0.8);margin:6px 0 0;font-size:13px;">${new Date().toLocaleDateString("fr-FR", {weekday:"long",day:"numeric",month:"long",year:"numeric"})}</p>
           </div>
-          <div style="background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 16px;">
-            <table style="width: 100%; border-collapse: collapse;">
-              <tr><td style="padding: 6px 0; color: #666; width: 140px;">Nom</td><td style="font-weight: bold;">${f.full_name}</td></tr>
-              <tr><td style="padding: 6px 0; color: #666;">Email</td><td><a href="mailto:${f.email}" style="color: #4fc3c3;">${f.email}</a></td></tr>
-              <tr><td style="padding: 6px 0; color: #666;">Téléphone</td><td>${f.phone || "—"}</td></tr>
-              <tr><td style="padding: 6px 0; color: #666;">Entreprise</td><td>${f.company || "—"}</td></tr>
-              <tr><td style="padding: 6px 0; color: #666;">Secteur</td><td>${f.sector || "—"}</td></tr>
-              <tr><td style="padding: 6px 0; color: #666;">Budget</td><td>${f.budget || "—"}</td></tr>
-              <tr><td style="padding: 6px 0; color: #666;">Type de site</td><td>${f.pt.join(", ") || "—"}</td></tr>
-              ${f.current_url ? `<tr><td style="padding: 6px 0; color: #666;">Site actuel</td><td><a href="${f.current_url}" style="color: #4fc3c3;">${f.current_url}</a></td></tr>` : ""}
-            </table>
+          <div style="background:white;border-radius:12px;padding:24px;">
+            ${section("👤 Profil", [
+              row("Nom", f.full_name),
+              row("Email", f.email),
+              row("Téléphone", f.phone),
+              row("Entreprise", f.company),
+              row("Secteur", f.sector),
+              row("Taille", f.size),
+              row("Site actuel", f.current_url),
+              row("Source", f.source),
+            ].join(""))}
+            ${section("📋 Projet", [
+              row("Type de site", f.pt),
+              row("Description", f.desc),
+              row("Inspiration", f.inspo),
+              row("Mots-clés SEO", f.kw),
+            ].join(""))}
+            ${section("🎯 Objectifs & Budget", [
+              row("Objectif", f.goal),
+              row("Acquisition", f.csrc),
+              row("Budget", f.budget),
+              row("Récurrence", f.recur),
+              row("Urgence", f.urgency ? f.urgency + "/5" : ""),
+            ].join(""))}
+            ${section("🎨 Contenu & Design", [
+              row("Charte graphique", f.brand),
+              row("Contenu dispo", f.cont),
+              row("Nb de pages", f.pages),
+              row("Fonctionnalités", f.feat),
+              row("Fonct. autre", f.feat_autre_detail),
+              row("Ambiance", f.vibe),
+            ].join(""))}
+            ${f.team_enabled ? section("👥 Équipe", teamMembers.map((m, i) =>
+              row(`Membre ${i+1}`, `${m.name} — ${m.role}${m.bio ? " — " + m.bio : ""}`)
+            ).join("")) : ""}
+            ${section("⏱ Délais & Contexte", [
+              row("Délai souhaité", f.dl),
+              row("Date clé", f.kdate),
+              row("Autonomie", f.auto),
+              row("Niveau web", f.wlevel ? f.wlevel + "/5" : ""),
+              row("Expérience agence", f.past),
+              row("Ce qui s'est passé", f.pastissue),
+            ].join(""))}
+            ${section("💬 Message & Contact", [
+              row("Message", f.msg),
+              row("Contact préféré", f.cp),
+              row("Créneau", f.slot),
+            ].join(""))}
+            ${section("📎 Fichiers", [
+              row("Types de fichiers", f.ftype),
+              row("Lien de partage", f.file_link),
+              row("Notes fichiers", f.file_notes),
+            ].join(""))}
           </div>
-          <div style="background: #f8f9fa; border-radius: 12px; padding: 20px;">
-            <h3 style="margin: 0 0 8px; color: #333; font-size: 15px;">Description du projet</h3>
-            <p style="color: #444; line-height: 1.6; white-space: pre-wrap;">${f.desc || f.msg || "—"}</p>
+          <div style="text-align:center;padding:20px;">
+            <a href="https://supabase.com/dashboard/project/iskxljribvfypkyappku/editor" style="display:inline-block;background:linear-gradient(135deg,#3d1a6e,#4fc3c3);color:white;padding:12px 28px;border-radius:999px;text-decoration:none;font-weight:bold;font-size:14px;">Voir dans Supabase →</a>
           </div>
-          ${f.msg ? `
-          <div style="background: #f8f9fa; border-radius: 12px; padding: 20px; margin-top: 16px;">
-            <h3 style="margin: 0 0 8px; color: #333; font-size: 15px;">Message libre</h3>
-            <p style="color: #444; line-height: 1.6; white-space: pre-wrap;">${f.msg}</p>
-          </div>` : ""}
-        </div>
-        `
+        </div>`
       );
 
       setSent(true);
