@@ -155,30 +155,26 @@ const FormulaireClient = () => {
         submission_id: submissionId, status: "new",
       });
 
-      // 3. Appel Edge Function pour email Brevo (sans auth — unauthenticated activé)
-      await fetch("https://iskxljribvfypkyappku.supabase.co/functions/v1/create-client-account", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
+      // 3. Appel Edge Function pour email Brevo
+      await supabase.functions.invoke("create-client-account", {
+        body: {
           full_name: f.full_name,
           email: f.email,
           phone: f.phone,
           company: f.company,
           current_url: f.current_url,
           msg: f.msg || f.desc,
+          desc: f.desc,
           form_type: "formulaire",
           team: teamData,
           file_paths: filePaths,
           submission_id: submissionId,
-          // Tous les champs du brief pour l'email
           sector: f.sector, size: f.size, pt: f.pt, inspo: f.inspo, kw: f.kw,
           goal: f.goal, csrc: f.csrc, budget: f.budget, recur: f.recur, urgency: f.urgency,
           brand: f.brand, cont: f.cont, pages: f.pages, feat: f.feat, vibe: f.vibe,
           dl: f.dl, kdate: f.kdate, auto: f.auto, wlevel: f.wlevel, past: f.past,
           cp: f.cp, slot: f.slot, ftype: f.ftype, file_link: f.file_link,
-        }),
+        },
       });
 
       setSent(true);
