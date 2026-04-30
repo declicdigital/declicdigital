@@ -1,4 +1,4 @@
-/* DM Serif Display - auto-hébergé pour éviter les requêtes Google Fonts */
+/* DM Serif Display - auto-hébergé */
 @font-face {
   font-family: 'DM Serif Display';
   font-style: italic;
@@ -24,14 +24,6 @@
   font-display: swap;
 }
 
-/* ── Global font-weight reset ── */
-body, p, span, a, li, button, label, input, textarea {
-  font-weight: 400;
-}
-h1, h2, h3 {
-  font-weight: 700;
-}
-
 @font-face {
   font-family: 'Clash Display Fallback';
   src: local('Arial');
@@ -47,6 +39,10 @@ h1, h2, h3 {
 
 @layer base {
   :root {
+    /* ── Backgrounds alternants ── */
+    --bg-paper: #F6F1E9;
+    --bg-blue:  #E9F2F4;
+
     --background: 38 33% 94%;
     --foreground: 263 36% 18%;
     --heading: 263 36% 18%;
@@ -78,24 +74,22 @@ h1, h2, h3 {
 
     --radius: 0.75rem;
 
-    /* Brand colors from logo */
+    /* Brand colors */
     --brand-blue: 183 70% 63%;
     --brand-violet: 284 65% 66%;
     --brand-pink: 330 100% 70%;
     --brand-violet-light: 284 72% 81%;
 
-    /* Custom tokens */
-    --gradient-primary: linear-gradient(135deg, #5ce1e6, #cb6ce6, #ff66c4);
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #5ce1e6, #cb6ce6);
     --gradient-hero: linear-gradient(135deg, #f6f1e9, #f0ebe2);
     --gradient-miami: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(284, 65%, 66%), hsl(330, 100%, 70%));
 
-    /* Alternating section backgrounds */
-    --bg-paper: #f6f1e9;
-    --bg-rose: #f3e8ef;
-    --bg-blue: #e9f2f4;
+    /* Shadows */
     --shadow-card: 0 4px 24px -4px hsl(230 25% 14% / 0.08);
     --shadow-elevated: 0 12px 40px -8px hsl(230 25% 14% / 0.12);
     --shadow-glow: 0 4px 20px -4px hsl(284 65% 66% / 0.3);
+
     --footer-bg: 263 36% 18%;
 
     --sidebar-background: 43 30% 95%;
@@ -115,13 +109,15 @@ h1, h2, h3 {
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Clash Display', system-ui, sans-serif;
-    position: relative;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Clash Display', 'Clash Display Fallback', system-ui, sans-serif;
+    font-weight: 400;
+    color: #2B1E3F;
     background-color: var(--bg-paper);
+    position: relative;
   }
 
-  /* ── Grain texture overlay — single lightweight layer ── */
+  /* ── Grain overlay ── */
   body::before {
     content: "";
     position: fixed;
@@ -134,18 +130,17 @@ h1, h2, h3 {
     will-change: auto;
   }
 
-  /* ── Headings ── */
+  /* ── Typographie ── */
+
+  /* H1 : DM Serif Display Bold */
   h1 {
     font-family: 'DM Serif Display', Georgia, serif !important;
     font-weight: 700 !important;
-    font-size: clamp(2.5rem, 3vw + 1rem, 3rem) !important;
+    font-size: clamp(2.5rem, 5vw, 3.75rem) !important;
     line-height: 1.08 !important;
-    font-synthesis: weight;
-    font-variation-settings: "wght" 700;
-    -webkit-text-stroke: 0.6px hsl(var(--heading));
-    @apply tracking-tight;
-    color: hsl(var(--heading));
-    position: relative;
+    letter-spacing: -0.025em;
+    color: #2B1E3F;
+    -webkit-text-stroke: 0.6px #2B1E3F;
     paint-order: stroke fill;
     text-shadow:
       0px 1px 0px hsl(263 36% 16%),
@@ -156,10 +151,29 @@ h1, h2, h3 {
       0px 6px 3px hsl(263 36% 6% / 0.28);
   }
 
-  h2, h3 {
+  /* H2 : Clash Display Semibold */
+  h2 {
     font-family: 'Clash Display', system-ui, sans-serif;
-    @apply font-semibold tracking-tight;
-    color: hsl(var(--heading));
+    font-weight: 600 !important;
+    font-size: clamp(1.75rem, 3vw, 2.25rem) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.02em;
+    color: #2B1E3F;
+    text-shadow:
+      0 2px 4px hsl(284 65% 66% / 0.12),
+      0 4px 12px hsl(230 25% 14% / 0.10),
+      0 1px 0px hsl(40 30% 80% / 0.5);
+    -webkit-text-stroke: 0.2px hsl(230 25% 14% / 0.04);
+  }
+
+  /* H3 : Clash Display Semibold */
+  h3 {
+    font-family: 'Clash Display', system-ui, sans-serif;
+    font-weight: 600 !important;
+    font-size: 1.25rem !important;
+    line-height: 1.3 !important;
+    letter-spacing: -0.015em;
+    color: #2B1E3F;
     text-shadow:
       0 2px 4px hsl(284 65% 66% / 0.12),
       0 4px 12px hsl(230 25% 14% / 0.10),
@@ -169,17 +183,16 @@ h1, h2, h3 {
 
   h4, h5, h6 {
     font-family: 'Clash Display', system-ui, sans-serif;
-    @apply font-bold tracking-tight;
-    color: hsl(var(--heading));
-    text-shadow:
-      0 2px 4px hsl(284 65% 66% / 0.12),
-      0 4px 12px hsl(230 25% 14% / 0.10),
-      0 1px 0px hsl(40 30% 80% / 0.5);
-    -webkit-text-stroke: 0.2px hsl(230 25% 14% / 0.04);
+    font-weight: 700 !important;
+    letter-spacing: -0.01em;
+    color: #2B1E3F;
   }
 
-  /* ── ALL body text: subtle depth shadow like printed ink ── */
-  p, a, span, li, label, td, th, blockquote, figcaption {
+  /* Body : Clash Display Regular */
+  p, li, td, th, blockquote, figcaption, label, span {
+    font-family: 'Clash Display', system-ui, sans-serif;
+    font-weight: 400;
+    color: #2B1E3F;
     text-shadow:
       0 1px 2px hsl(230 25% 14% / 0.06),
       0 0.5px 0px hsl(40 30% 80% / 0.3);
@@ -190,7 +203,7 @@ h1, h2, h3 {
     text-justify: inter-word;
   }
 
-  /* Remove justify inside cards, grids, and centered blocks */
+  /* Pas de justify dans cards/grids/centré */
   .bg-card p,
   .shadow-card p,
   .card-rough p,
@@ -199,18 +212,30 @@ h1, h2, h3 {
     text-align: inherit;
   }
 
-  /* Inline links: violet only, no underline */
+  /* Liens inline */
+  a {
+    color: #2B1E3F;
+  }
   a.text-primary {
     text-decoration: none !important;
   }
 
-  /* ── Stronger shadow on bold / semibold text ── */
+  /* Texte bold/semibold */
   strong, b, .font-bold, .font-extrabold, .font-semibold {
+    font-weight: 700;
     text-shadow:
       0 1px 3px hsl(284 65% 66% / 0.08),
       0 2px 6px hsl(230 25% 14% / 0.07),
       0 0.5px 0px hsl(40 30% 80% / 0.4);
   }
+
+  /* Texte sur fond sombre (sections CTA texture / hero sombre) */
+  .text-white, .text-white * {
+    color: #F6F1E9 !important;
+  }
+  .text-white\/80 { color: rgba(246, 241, 233, 0.8) !important; }
+  .text-white\/70 { color: rgba(246, 241, 233, 0.7) !important; }
+  .text-white\/60 { color: rgba(246, 241, 233, 0.6) !important; }
 }
 
 @layer utilities {
@@ -237,6 +262,14 @@ h1, h2, h3 {
   }
 
   /* ── Gradient text ── */
+  .gradient-text {
+    background: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(284, 65%, 66%), hsl(330, 100%, 70%));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 2px 4px hsl(284 65% 66% / 0.18));
+  }
+  /* alias */
   .text-gradient {
     background: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(284, 65%, 66%), hsl(330, 100%, 70%));
     -webkit-background-clip: text;
@@ -245,18 +278,20 @@ h1, h2, h3 {
     filter: drop-shadow(0 2px 4px hsl(284 65% 66% / 0.18));
   }
 
-  /* ── Section alternate backgrounds (vintage warm tones) ── */
-  .bg-section-alt {
-    background: var(--bg-rose);
-  }
+  /* ── Alternance de fonds ── */
+  /* Pair → #F6F1E9 (bg-paper, défaut body) */
+  /* Impair → #E9F2F4 */
   .bg-section-blue {
-    background: var(--bg-blue);
+    background-color: #E9F2F4;
+  }
+  .bg-section-alt {
+    background-color: #E9F2F4;
   }
   .bg-section-rose {
-    background: var(--bg-rose);
+    background-color: #F6F1E9;
   }
 
-  /* ── Torn paper / faded ink CTA button ── */
+  /* ── CTA button : btn-glow (effet papier déchiré) ── */
   .btn-glow {
     position: relative;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -271,7 +306,6 @@ h1, h2, h3 {
     box-shadow:
       0 4px 16px -4px hsl(284 65% 66% / 0.2),
       0 1px 3px hsl(230 25% 14% / 0.08);
-    text-shadow: 0 1px 2px hsl(230 25% 14% / 0.25);
     letter-spacing: 0.03em;
     padding-left: 2rem;
     padding-right: 2rem;
@@ -285,8 +319,9 @@ h1, h2, h3 {
     border-radius: inherit;
     opacity: 0.12;
     pointer-events: none;
-    background: radial-gradient(ellipse at 30% 20%, hsl(45 50% 90% / 0.6), transparent 60%),
-                radial-gradient(ellipse at 80% 70%, hsl(330 40% 70% / 0.15), transparent 50%);
+    background:
+      radial-gradient(ellipse at 30% 20%, hsl(45 50% 90% / 0.6), transparent 60%),
+      radial-gradient(ellipse at 80% 70%, hsl(330 40% 70% / 0.15), transparent 50%);
   }
   .btn-glow::after {
     content: "";
@@ -309,11 +344,52 @@ h1, h2, h3 {
   .btn-glow:active {
     filter: saturate(0.45) brightness(1.02) contrast(0.88);
     transform: translateY(0px) scale(0.97) rotate(0.3deg);
-    box-shadow:
-      0 2px 8px -2px hsl(284 65% 66% / 0.2);
+    box-shadow: 0 2px 8px -2px hsl(284 65% 66% / 0.2);
   }
 
-  /* ── Text relief / depth ── */
+  /* ── Boutons standards ── */
+
+  /* CTA principal sur fond clair : gradient-miami + texte #F6F1E9 */
+  .btn-primary-light {
+    background: var(--gradient-miami);
+    color: #F6F1E9 !important;
+    font-weight: 700;
+  }
+
+  /* CTA principal sur fond sombre/texturé : bg #F6F1E9 + texte #2B1E3F */
+  .btn-primary-dark {
+    background-color: #F6F1E9;
+    color: #2B1E3F !important;
+    font-weight: 700;
+  }
+  .btn-primary-dark:hover {
+    background-color: #ede6d8;
+  }
+
+  /* CTA secondaire sur fond clair : border #2B1E3F + texte #2B1E3F */
+  .btn-secondary-light {
+    background: transparent;
+    border: 2px solid #2B1E3F;
+    color: #2B1E3F !important;
+    font-weight: 700;
+  }
+  .btn-secondary-light:hover {
+    background-color: #2B1E3F;
+    color: #F6F1E9 !important;
+  }
+
+  /* CTA secondaire sur fond sombre/texturé : border #F6F1E9 + texte #F6F1E9 */
+  .btn-secondary-dark {
+    background: transparent;
+    border: 2px solid rgba(246, 241, 233, 0.5);
+    color: #F6F1E9 !important;
+    font-weight: 700;
+  }
+  .btn-secondary-dark:hover {
+    background-color: rgba(246, 241, 233, 0.1);
+  }
+
+  /* ── Text relief ── */
   .text-relief {
     text-shadow:
       0 2px 6px hsl(284 65% 66% / 0.12),
@@ -321,81 +397,79 @@ h1, h2, h3 {
       0 1px 0px hsl(45 40% 85% / 0.4);
   }
 
-  /* ── Spark / pixel micro detail ── */
-  .spark-dot {
-    position: relative;
-  }
-  .spark-dot::after {
-    content: "⚡";
-    position: absolute;
-    top: -4px;
-    right: -10px;
-    font-size: 10px;
-    opacity: 0.6;
-    filter: drop-shadow(0 0 2px hsl(183, 70%, 63%));
-  }
-
-  /* ── Rough card edges ── */
+  /* ── Rough card ── */
   .card-rough {
     box-shadow: var(--shadow-card);
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='r'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23r)' opacity='0.03'/%3E%3C/svg%3E");
   }
 
-  /* ── Slight tilt for emphasis ── */
-  .tilt-left {
-    display: inline-block;
-    transform: rotate(-1.5deg);
-  }
-  .tilt-right {
-    display: inline-block;
-    transform: rotate(1.5deg);
-  }
+  /* ── Tilts ── */
+  .tilt-left  { display: inline-block; transform: rotate(-1.5deg); }
+  .tilt-right { display: inline-block; transform: rotate(1.5deg); }
 
+  /* ── Animations ── */
   @keyframes fade-in-right {
     from { opacity: 0; transform: translateX(40px); }
-    to { opacity: 1; transform: translateX(0); }
+    to   { opacity: 1; transform: translateX(0); }
   }
   @keyframes fade-in-up {
     from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    to   { opacity: 1; transform: translateY(0); }
   }
-  .animate-fade-in-right {
-    animation: fade-in-right 0.7s ease-out 0.2s both;
-  }
-  .animate-fade-in-up {
-    animation: fade-in-up 0.6s ease-out both;
-  }
+  .animate-fade-in-right { animation: fade-in-right 0.7s ease-out 0.2s both; }
+  .animate-fade-in-up    { animation: fade-in-up 0.6s ease-out both; }
 }
 
-/* CMS Article Content Typography - matches static article styling */
+/* ── Scroll-triggered reveal ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ── CMS Article Content ── */
 .cms-article-content h2 {
+  font-family: 'Clash Display', system-ui, sans-serif;
   font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-top: 2rem;
   margin-bottom: 1rem;
   line-height: 1.3;
-  color: hsl(var(--foreground));
+  color: #2B1E3F;
 }
 .cms-article-content h3 {
+  font-family: 'Clash Display', system-ui, sans-serif;
   font-size: 1.25rem;
-  font-weight: 700;
+  font-weight: 600;
   margin-top: 1.5rem;
   margin-bottom: 0.75rem;
   line-height: 1.4;
-  color: hsl(var(--foreground));
+  color: #2B1E3F;
 }
 .cms-article-content h4 {
+  font-family: 'Clash Display', system-ui, sans-serif;
   font-size: 1.125rem;
   font-weight: 700;
   margin-top: 1.25rem;
   margin-bottom: 0.5rem;
   line-height: 1.4;
-  color: hsl(var(--foreground));
+  color: #2B1E3F;
 }
 .cms-article-content p {
+  font-family: 'Clash Display', system-ui, sans-serif;
+  font-weight: 400;
   line-height: 1.75;
   margin-bottom: 1rem;
-  color: hsl(var(--muted-foreground));
+  color: #2B1E3F;
 }
 .cms-article-content img {
   width: 100%;
@@ -407,36 +481,28 @@ h1, h2, h3 {
 .cms-article-content ol {
   margin: 1rem 0;
   padding-left: 1.5rem;
-  color: hsl(var(--muted-foreground));
+  color: #2B1E3F;
   line-height: 1.75;
 }
-.cms-article-content ul li {
-  list-style-type: disc;
-  margin-bottom: 0.5rem;
-}
-.cms-article-content ol li {
-  list-style-type: decimal;
-  margin-bottom: 0.5rem;
-}
+.cms-article-content ul li { list-style-type: disc; margin-bottom: 0.5rem; }
+.cms-article-content ol li { list-style-type: decimal; margin-bottom: 0.5rem; }
 .cms-article-content a {
   color: hsl(var(--primary));
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
-.cms-article-content a:hover {
-  opacity: 0.8;
-}
+.cms-article-content a:hover { opacity: 0.8; }
 .cms-article-content blockquote {
   border-left: 4px solid hsl(var(--primary));
   padding-left: 1rem;
   margin: 1.5rem 0;
   font-style: italic;
-  color: hsl(var(--muted-foreground));
+  color: #2B1E3F;
 }
 .cms-article-content strong {
-  font-weight: 600;
-  color: hsl(var(--foreground));
+  font-weight: 700;
+  color: #2B1E3F;
 }
 .cms-article-content .cta-wrapper {
   text-align: center;
@@ -452,22 +518,19 @@ h1, h2, h3 {
   font-size: 1.125rem;
   transition: opacity 0.2s;
   text-decoration: none;
+  font-family: 'Clash Display', system-ui, sans-serif;
 }
-.cms-article-content .cta-button:hover {
-  opacity: 0.9;
-}
+.cms-article-content .cta-button:hover { opacity: 0.9; }
 .cms-article-content .cta-primary {
-  background: hsl(var(--primary));
-  color: white;
-  box-shadow: 0 4px 20px hsl(var(--primary) / 0.3);
+  background: var(--gradient-miami);
+  color: #F6F1E9;
 }
 .cms-article-content .cta-secondary {
-  background: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(330, 100%, 70%));
-  color: white;
-  box-shadow: 0 4px 20px hsl(183 70% 63% / 0.3);
+  background: var(--gradient-miami);
+  color: #F6F1E9;
 }
 
-/* ── CTA preview in TipTap editor ── */
+/* ── CTA preview TipTap ── */
 .cta-block-wrapper {
   text-align: center;
   margin: 1.5rem 0;
@@ -483,26 +546,13 @@ h1, h2, h3 {
   font-weight: 700;
   font-size: 0.95rem;
   pointer-events: none;
+  font-family: 'Clash Display', system-ui, sans-serif;
 }
 .cta-editor-primary {
-  background: hsl(270, 60%, 52%);
-  color: white;
+  background: var(--gradient-miami);
+  color: #F6F1E9;
 }
 .cta-editor-secondary {
-  background: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(330, 100%, 70%));
-  color: white;
+  background: var(--gradient-miami);
+  color: #F6F1E9;
 }
-
-/* ── Scroll-triggered reveal animations ── */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-}
-.reveal.revealed {
-  opacity: 1;
-  transform: translateY(0);
-}
-.reveal-delay-1 { transition-delay: 0.1s; }
-.reveal-delay-2 { transition-delay: 0.2s; }
-.reveal-delay-3 { transition-delay: 0.3s; }
