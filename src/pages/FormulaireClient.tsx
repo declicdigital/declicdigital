@@ -155,15 +155,11 @@ const FormulaireClient = () => {
         submission_id: submissionId, status: "new",
       });
 
-      // 3. Appel Edge Function pour email Brevo
-      const { data: { session } } = await supabase.auth.getSession();
-      const token = session?.access_token ?? import.meta.env.VITE_SUPABASE_ANON_KEY;
+      // 3. Appel Edge Function pour email Brevo (sans auth — unauthenticated activé)
       await fetch("https://iskxljribvfypkyappku.supabase.co/functions/v1/create-client-account", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "apikey": import.meta.env.VITE_SUPABASE_ANON_KEY,
-          "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
           full_name: f.full_name,
