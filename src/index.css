@@ -140,11 +140,15 @@
     line-height: 1.08 !important;
     letter-spacing: -0.025em;
     color: #2B1E3F;
-    -webkit-text-stroke: 0px #2B1E3F;
+    -webkit-text-stroke: 0.6px #2B1E3F;
     paint-order: stroke fill;
     text-shadow:
-  0px 1px 0px hsl(263 36% 16%),
-  0px 2px 2px hsl(263 36% 10% / 0.18);
+      0px 1px 0px hsl(263 36% 16%),
+      0px 2px 0px hsl(263 36% 14%),
+      0px 3px 0px hsl(263 36% 12%),
+      0px 4px 0px hsl(263 36% 10%),
+      0px 5px 0px hsl(263 36% 8%),
+      0px 6px 3px hsl(263 36% 6% / 0.28);
   }
 
   /* H2 : Clash Display Semibold */
@@ -238,6 +242,7 @@
   /* ── Gradients ── */
   .gradient-primary {
     background: var(--gradient-primary);
+    color: #F6F1E9 !important;
   }
   .gradient-hero {
     background: var(--gradient-hero);
