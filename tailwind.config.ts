@@ -23,7 +23,6 @@ export default {
         display: ['"DM Serif Display"', 'Georgia', 'serif'],
       },
       fontSize: {
-        /* H1 géré en CSS avec clamp — on laisse le clamp CSS primer */
         'h2': ['clamp(1.75rem, 3vw, 2.25rem)', { lineHeight: '1.2', fontWeight: '600' }],
         'h3': ['1.25rem',  { lineHeight: '1.3', fontWeight: '600' }],
         'body': ['1rem',   { lineHeight: '1.75', fontWeight: '400' }],
@@ -71,12 +70,14 @@ export default {
           pink:         "hsl(330, 100%, 70%)",
           "violet-light": "hsl(284, 72%, 81%)",
         },
-        /* Couleurs texte charte */
         ink:   "#2B1E3F",
         cream: "#F6F1E9",
-        /* Fonds alternants */
         "bg-paper": "#F6F1E9",
         "bg-blue":  "#E9F2F4",
+        /* Fonds alternants — déclarés ici pour ne pas être purgés */
+        "section-blue": "#E9F2F4",
+        "section-alt":  "#E9F2F4",
+        "section-rose": "#F6F1E9",
         "footer-bg": "hsl(var(--footer-bg))",
         sidebar: {
           DEFAULT:              "hsl(var(--sidebar-background))",
@@ -88,6 +89,11 @@ export default {
           border:               "hsl(var(--sidebar-border))",
           ring:                 "hsl(var(--sidebar-ring))",
         },
+      },
+      backgroundColor: {
+        "section-blue": "#E9F2F4",
+        "section-alt":  "#E9F2F4",
+        "section-rose": "#F6F1E9",
       },
       borderRadius: {
         lg: "var(--radius)",
