@@ -24,20 +24,25 @@ const PageBreadcrumb = ({ items }: { items: BreadcrumbItem[] }) => {
       <Helmet>
         <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
       </Helmet>
-      <nav
-        aria-label="Fil d'Ariane"
-        className="container pt-1 pb-2"
-      >
-        <ol className="flex flex-wrap items-center gap-1 text-sm text-muted-foreground">
+      <nav aria-label="Fil d'Ariane" className="container pt-2 pb-3">
+        <ol className="flex flex-wrap items-center gap-1 text-sm" style={{ color: "#2B1E3F" }}>
           {items.map((item, i) => (
             <li key={i} className="flex items-center gap-1">
-              {i > 0 && <ChevronRight size={12} className="text-border mx-0.5" />}
+              {i > 0 && (
+                <ChevronRight size={12} className="mx-0.5" style={{ color: "#2B1E3F", opacity: 0.4 }} />
+              )}
               {item.href ? (
-                <Link to={item.href} className="hover:text-primary transition-colors">
+                <Link
+                  to={item.href}
+                  className="transition-opacity hover:opacity-70 font-normal"
+                  style={{ color: "#2B1E3F" }}
+                >
                   {item.label}
                 </Link>
               ) : (
-                <span className="text-foreground font-medium">{item.label}</span>
+                <span className="font-semibold" style={{ color: "#2B1E3F" }}>
+                  {item.label}
+                </span>
               )}
             </li>
           ))}
