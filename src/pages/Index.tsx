@@ -15,7 +15,6 @@ import logoLovable from "@/assets/logos/lovable.webp";
 import logoClaude from "@/assets/logos/claude.svg";
 import logoSemrush from "@/assets/logos/semrush.webp";
 import logoSearchConsole from "@/assets/logos/search-console.webp";
-import logoChatgpt from "@/assets/logos/chatgpt.webp";
 
 const GoogleReviewsSection = lazy(() => import("@/components/GoogleReviewsSection"));
 const LocationSection = lazy(() => import("@/components/LocationSection"));
@@ -25,7 +24,6 @@ const techLogos = [
   { name: "Shopify", src: logoShopify },
   { name: "Lovable", src: logoLovable },
   { name: "Claude AI", src: logoClaude },
-  { name: "ChatGPT", src: logoChatgpt },
   { name: "Semrush", src: logoSemrush },
   { name: "Search Console", src: logoSearchConsole },
 ];
