@@ -74,7 +74,7 @@ const Index = () => {
         </script>
       </Helmet>
 
-      {/* ─── Hero ─────────────────────────────────────────────────────────────── */}
+      {/* ─── Hero — skip alternance ────────────────────────────────────────────── */}
       <section className="gradient-hero relative overflow-hidden" data-alternate="skip">
         <div className="container pt-6 pb-16 md:pt-8 md:pb-24 lg:pt-10 lg:pb-32">
           <div className="grid items-center gap-10 lg:grid-cols-2">
@@ -117,8 +117,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Problème ────────────────────────────────────────────────────────── */}
-      <section className="py-12 md:py-16 overflow-hidden">
+      {/* ─── Problème — alt-even (1er bloc) ──────────────────────────────────── */}
+      <section className="alt-even py-12 md:py-16 overflow-hidden">
         <div className="container">
           <div className="relative">
             <div className="hidden lg:block absolute left-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
@@ -138,7 +138,7 @@ const Index = () => {
                   { icon: Search, text: "Absence de stratégie SEO", detail: "Sans optimisation des mots clés, des balises et du contenu, Google ne peut pas comprendre ni classer votre site." },
                   { icon: Gauge, text: "Site trop lent", detail: "Un temps de chargement supérieur à 3 secondes augmente le taux de rebond de plus de 50%." },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 rounded-xl bg-secondary p-5 text-left shadow-card">
+                  <div key={i} className="flex items-start gap-4 rounded-xl bg-card p-5 text-left shadow-card">
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-primary" style={{ color: INK }}>
                       <item.icon size={22} />
                     </div>
@@ -159,43 +159,45 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Services avec texture en fond ────────────────────────────────────── */}
-      <SectionWrapper id="services">
-        <div className="relative rounded-3xl overflow-hidden">
-          <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" />
-          <div className="absolute inset-0" style={{ background: "hsl(var(--background)/0.88)" }} />
-          <div className="relative z-10 py-8">
-            <div className="text-center mb-12">
-              <h2>Création de site web professionnel pour indépendants</h2>
-              <p className="mt-4 text-lg max-w-2xl mx-auto" style={{ color: INK, opacity: 0.7 }}>
-                Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold">Déclic Digital</Link>, nous concevons des outils de génération de clients, pensés pour les TPE et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> adaptés aux petits budgets.
-              </p>
-            </div>
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-              {[
-                { icon: Monitor, title: "Création de site web", desc: "Nous concevons des sites modernes, rapides et responsive, optimisés pour la conversion et l'expérience utilisateur.", link: "/creation-site-web" },
-                { icon: TrendingUp, title: "Référencement SEO", desc: "Le SEO est le levier le plus rentable pour attirer des clients. Nous optimisons votre site pour apparaître en première page Google.", link: "/referencement-seo" },
-                { icon: Eye, title: "Visibilité IA (GEO)", desc: "Apparaissez dans les réponses de ChatGPT, Perplexity et Gemini. La nouvelle frontière de la visibilité digitale pour les TPE.", link: "/visibilite-ia" },
-                { icon: BarChart3, title: "Stratégie digitale", desc: "Analyse de marché, positionnement, contenu, suivi des performances : chaque action est mesurée et orientée résultats.", link: "/contact" },
-              ].map((s, i) => (
-                <div key={i} className="group rounded-2xl bg-card p-8 shadow-card transition-all hover:shadow-elevated hover:-translate-y-1">
-                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary" style={{ color: INK }}>
-                    <s.icon size={26} />
+      {/* ─── Services — alt-odd (2e bloc) ─────────────────────────────────────── */}
+      <section className="alt-odd py-12 md:py-16">
+        <div className="container">
+          <div className="relative rounded-3xl overflow-hidden">
+            <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" />
+            <div className="absolute inset-0" style={{ background: "hsl(var(--background)/0.88)" }} />
+            <div className="relative z-10 py-8">
+              <div className="text-center mb-12">
+                <h2>Création de site web professionnel pour indépendants</h2>
+                <p className="mt-4 text-lg max-w-2xl mx-auto" style={{ color: INK, opacity: 0.7 }}>
+                  Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold">Déclic Digital</Link>, nous concevons des outils de génération de clients, pensés pour les TPE et optimisés pour Google. Consultez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link> adaptés aux petits budgets.
+                </p>
+              </div>
+              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { icon: Monitor, title: "Création de site web", desc: "Nous concevons des sites modernes, rapides et responsive, optimisés pour la conversion et l'expérience utilisateur.", link: "/creation-site-web" },
+                  { icon: TrendingUp, title: "Référencement SEO", desc: "Le SEO est le levier le plus rentable pour attirer des clients. Nous optimisons votre site pour apparaître en première page Google.", link: "/referencement-seo" },
+                  { icon: Eye, title: "Visibilité IA (GEO)", desc: "Apparaissez dans les réponses de ChatGPT, Perplexity et Gemini. La nouvelle frontière de la visibilité digitale pour les TPE.", link: "/visibilite-ia" },
+                  { icon: BarChart3, title: "Stratégie digitale", desc: "Analyse de marché, positionnement, contenu, suivi des performances : chaque action est mesurée et orientée résultats.", link: "/contact" },
+                ].map((s, i) => (
+                  <div key={i} className="group rounded-2xl bg-card p-8 shadow-card transition-all hover:shadow-elevated hover:-translate-y-1">
+                    <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary" style={{ color: INK }}>
+                      <s.icon size={26} />
+                    </div>
+                    <h3 className="mb-3">{s.title}</h3>
+                    <p className="text-base leading-relaxed" style={{ color: INK, opacity: 0.65 }}>{s.desc}</p>
+                    <Link to={s.link} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">
+                      En savoir plus <ChevronRight size={16} />
+                    </Link>
                   </div>
-                  <h3 className="mb-3">{s.title}</h3>
-                  <p className="text-base leading-relaxed" style={{ color: INK, opacity: 0.65 }}>{s.desc}</p>
-                  <Link to={s.link} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">
-                    En savoir plus <ChevronRight size={16} />
-                  </Link>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* ─── Processus ────────────────────────────────────────────────────────── */}
-      <section className="py-12 md:py-16 overflow-hidden">
+      {/* ─── Processus — alt-even (3e bloc) ───────────────────────────────────── */}
+      <section className="alt-even py-12 md:py-16 overflow-hidden">
         <div className="container">
           <div className="relative">
             <div className="hidden lg:block absolute right-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
@@ -236,38 +238,40 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Avis Google ──────────────────────────────────────────────────────── */}
+      {/* ─── Avis Google — alt-odd (4e bloc) ─────────────────────────────────── */}
       <Suspense fallback={<div style={{ minHeight: 400 }} />}>
         <GoogleReviewsSection />
       </Suspense>
 
-      {/* ─── Pourquoi nous ────────────────────────────────────────────────────── */}
-      <SectionWrapper id="pourquoi">
-        <div className="mx-auto max-w-5xl">
-          <div className="text-center mb-10">
-            <h2>Pourquoi choisir Déclic Digital pour votre projet web ?</h2>
-          </div>
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { icon: Clock, title: "Disponible 24h/24", desc: "Contrairement à un commerce physique, votre site travaille pour vous en permanence. Vos prospects peuvent vous découvrir et vous contacter à tout moment." },
-              { icon: Target, title: "Attirez des clients ciblés", desc: "Un site bien référencé attire des visiteurs qui recherchent activement vos services. Ce sont des prospects qualifiés prêts à passer à l'action." },
-              { icon: Shield, title: "Renforcez votre crédibilité", desc: "En 2026, ne pas avoir de site web professionnel peut nuire à votre image. Un site soigné rassure vos prospects." },
-              { icon: TrendingUp, title: "Rentabilité sur le long terme", desc: "Contrairement à la publicité payante, le référencement naturel génère du trafic durable sans coût par clic." },
-            ].map((item, i) => (
-              <div key={i} className="rounded-2xl bg-card p-6 shadow-card">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-primary" style={{ color: INK }}>
-                  <item.icon size={22} />
+      {/* ─── Pourquoi nous — alt-even (5e bloc) ──────────────────────────────── */}
+      <section className="alt-even py-12 md:py-16">
+        <div className="container">
+          <div className="mx-auto max-w-5xl">
+            <div className="text-center mb-10">
+              <h2>Pourquoi choisir Déclic Digital pour votre projet web ?</h2>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+              {[
+                { icon: Clock, title: "Disponible 24h/24", desc: "Contrairement à un commerce physique, votre site travaille pour vous en permanence. Vos prospects peuvent vous découvrir et vous contacter à tout moment." },
+                { icon: Target, title: "Attirez des clients ciblés", desc: "Un site bien référencé attire des visiteurs qui recherchent activement vos services. Ce sont des prospects qualifiés prêts à passer à l'action." },
+                { icon: Shield, title: "Renforcez votre crédibilité", desc: "En 2026, ne pas avoir de site web professionnel peut nuire à votre image. Un site soigné rassure vos prospects." },
+                { icon: TrendingUp, title: "Rentabilité sur le long terme", desc: "Contrairement à la publicité payante, le référencement naturel génère du trafic durable sans coût par clic." },
+              ].map((item, i) => (
+                <div key={i} className="rounded-2xl bg-card p-6 shadow-card">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg gradient-primary" style={{ color: INK }}>
+                    <item.icon size={22} />
+                  </div>
+                  <h3 className="mb-2">{item.title}</h3>
+                  <p className="text-sm md:text-base leading-relaxed" style={{ color: INK, opacity: 0.65 }}>{item.desc}</p>
                 </div>
-                <h3 className="mb-2">{item.title}</h3>
-                <p className="text-sm md:text-base leading-relaxed" style={{ color: INK, opacity: 0.65 }}>{item.desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* ─── Paris ────────────────────────────────────────────────────────────── */}
-      <section className="py-12 md:py-16">
+      {/* ─── Paris — alt-odd (6e bloc) ────────────────────────────────────────── */}
+      <section className="alt-odd py-12 md:py-16">
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
@@ -277,7 +281,7 @@ const Index = () => {
               </p>
               <div className="flex flex-wrap gap-2 mb-6">
                 {["Paris","Boulogne-Billancourt","Nanterre","Issy-les-Moulineaux","Levallois-Perret","Asnières-sur-Seine","Courbevoie","Neuilly-sur-Seine"].map((ville) => (
-                  <span key={ville} className="rounded-full bg-secondary px-3 py-1.5 text-sm font-medium" style={{ color: INK }}>{ville}</span>
+                  <span key={ville} className="rounded-full bg-card px-3 py-1.5 text-sm font-medium shadow-card" style={{ color: INK }}>{ville}</span>
                 ))}
               </div>
               <Link to="/nos-villes" className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:gap-2 transition-all">
@@ -296,139 +300,144 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Logos tech ───────────────────────────────────────────────────────── */}
-      <SectionWrapper id="realisations">
-        <div className="text-center mb-10">
-          <h2 className="mb-4">Nos réalisations pour des TPE et artisans parisiens</h2>
-          <p className="max-w-2xl mx-auto" style={{ color: INK, opacity: 0.7 }}>
-            Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="text-primary font-semibold">créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold">SEO et GEO</Link>.
-          </p>
-        </div>
-        <div className="overflow-hidden">
-          <div className="flex animate-scroll-left gap-10 md:gap-14 w-max">
-            {[...techLogos, ...techLogos].map((t, i) => (
-              <div key={`${t.name}-${i}`} className="flex flex-col items-center gap-3 shrink-0">
-                <div className="rounded-2xl bg-secondary p-5 shadow-card">
-                  <img src={t.src} alt={t.name} className="h-16 w-16 md:h-20 md:w-20 object-contain" loading="lazy" decoding="async" width={80} height={80} />
+      {/* ─── Logos tech — alt-even (7e bloc) ─────────────────────────────────── */}
+      <section className="alt-even py-12 md:py-16">
+        <div className="container">
+          <div className="text-center mb-10">
+            <h2 className="mb-4">Nos réalisations pour des TPE et artisans parisiens</h2>
+            <p className="max-w-2xl mx-auto" style={{ color: INK, opacity: 0.7 }}>
+              Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="text-primary font-semibold">créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="text-primary font-semibold">SEO et GEO</Link>.
+            </p>
+          </div>
+          <div className="overflow-hidden">
+            <div className="flex animate-scroll-left gap-10 md:gap-14 w-max">
+              {[...techLogos, ...techLogos].map((t, i) => (
+                <div key={`${t.name}-${i}`} className="flex flex-col items-center gap-3 shrink-0">
+                  <div className="rounded-2xl bg-card p-5 shadow-card">
+                    <img src={t.src} alt={t.name} className="h-16 w-16 md:h-20 md:w-20 object-contain" loading="lazy" decoding="async" width={80} height={80} />
+                  </div>
+                  <span className="text-sm font-medium" style={{ color: INK, opacity: 0.65 }}>{t.name}</span>
                 </div>
-                <span className="text-sm font-medium" style={{ color: INK, opacity: 0.65 }}>{t.name}</span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* ─── Audit SEO ────────────────────────────────────────────────────────── */}
-      <SectionWrapper id="audit-seo">
-        <div className="mx-auto max-w-4xl">
-          <div className="text-center mb-10">
-            <h2>Demandez votre audit SEO gratuit dès aujourd'hui</h2>
-          </div>
-          <div className="space-y-6">
-            <p className="text-base md:text-lg" style={{ color: INK, opacity: 0.7 }}>
-              Créer un <Link to="/creation-site-web" className="text-primary font-semibold">site internet</Link> ne se résume pas à assembler quelques pages et publier du contenu. Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold">Déclic Digital</Link>, nous accompagnons les TPE, artisans et indépendants de <Link to="/nos-villes" className="text-primary font-semibold">Paris et des Hauts-de-Seine</Link> dans la conception de sites web qui génèrent réellement des contacts qualifiés.
-            </p>
-            <div className="grid gap-6 md:grid-cols-2">
+      {/* ─── Audit SEO — alt-odd (8e bloc) ───────────────────────────────────── */}
+      <section className="alt-odd py-12 md:py-16">
+        <div className="container">
+          <div className="mx-auto max-w-4xl">
+            <div className="text-center mb-10">
+              <h2>Demandez votre audit SEO gratuit dès aujourd'hui</h2>
+            </div>
+            <div className="space-y-6">
+              <p className="text-base md:text-lg" style={{ color: INK, opacity: 0.7 }}>
+                Créer un <Link to="/creation-site-web" className="text-primary font-semibold">site internet</Link> ne se résume pas à assembler quelques pages et publier du contenu. Chez <Link to="/qui-sommes-nous" className="text-primary font-semibold">Déclic Digital</Link>, nous accompagnons les TPE, artisans et indépendants de <Link to="/nos-villes" className="text-primary font-semibold">Paris et des Hauts-de-Seine</Link> dans la conception de sites web qui génèrent réellement des contacts qualifiés.
+              </p>
+              <div className="grid gap-6 md:grid-cols-2">
+                <div className="rounded-2xl bg-card p-6 shadow-card">
+                  <h3 className="mb-2">Un site pensé pour convertir</h3>
+                  <p className="text-base leading-relaxed" style={{ color: INK, opacity: 0.65 }}>
+                    Chaque élément de votre site est pensé pour guider le visiteur vers une action précise : demande de devis, appel téléphonique, prise de rendez-vous.
+                  </p>
+                </div>
+                <div className="rounded-2xl bg-card p-6 shadow-card">
+                  <h3 className="mb-2">Le SEO au cœur de la conception</h3>
+                  <p className="text-base leading-relaxed" style={{ color: INK, opacity: 0.65 }}>
+                    Le <Link to="/referencement-seo" className="text-primary font-semibold">référencement</Link> est intégré dès la phase de conception : architecture, balisage sémantique, vitesse, maillage interne, contenu optimisé.
+                  </p>
+                </div>
+              </div>
               <div className="rounded-2xl bg-card p-6 shadow-card">
-                <h3 className="mb-2">Un site pensé pour convertir</h3>
-                <p className="text-base leading-relaxed" style={{ color: INK, opacity: 0.65 }}>
-                  Chaque élément de votre site est pensé pour guider le visiteur vers une action précise : demande de devis, appel téléphonique, prise de rendez-vous. Nous structurons vos pages selon les meilleures pratiques UX pour maximiser votre taux de conversion.
-                </p>
+                <h3 className="mb-3">Ce qui fait la différence avec Déclic Digital</h3>
+                <ul className="grid gap-2 sm:grid-cols-2">
+                  {[
+                    "Audit SEO complet offert avant chaque projet",
+                    "Suivi personnalisé via votre espace client dédié",
+                    "Expertise Google certifiée (Expert Produit Google)",
+                    "Sites rapides : score PageSpeed supérieur à 90",
+                    "Accompagnement sur-mesure, pas de template générique",
+                    "Tarifs adaptés aux budgets des TPE et indépendants",
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-2 text-base">
+                      <CheckCircle size={16} className="text-brand-violet mt-0.5 shrink-0" />
+                      <span style={{ color: INK, opacity: 0.7 }}>{item}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="rounded-2xl bg-card p-6 shadow-card">
-                <h3 className="mb-2">Le SEO au cœur de la conception</h3>
-                <p className="text-base leading-relaxed" style={{ color: INK, opacity: 0.65 }}>
-                  Nous ne construisons pas un site web puis nous pensons au <Link to="/referencement-seo" className="text-primary font-semibold">référencement</Link> ensuite. Le SEO est intégré dès la phase de conception : architecture des pages, balisage sémantique, vitesse de chargement, maillage interne, contenu optimisé.
-                </p>
+            </div>
+            <div className="text-center mt-10">
+              <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
+                <Link to="/rendez-vous">Prendre rendez-vous</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Liens services — alt-even (9e bloc) ─────────────────────────────── */}
+      <section className="alt-even py-12 md:py-16">
+        <div className="container">
+          <div className="mx-auto max-w-3xl text-center">
+            <h3 className="mb-4">Explorez nos services</h3>
+            <p className="text-lg mb-6" style={{ color: INK, opacity: 0.7 }}>Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.</p>
+            <div className="flex flex-wrap justify-center gap-3">
+              {[
+                { to: "/creation-site-web", label: "Création de site web" },
+                { to: "/referencement-seo", label: "Référencement SEO et GEO" },
+                { to: "/contact", label: "Audit SEO gratuit" },
+                { to: "/tarifs", label: "Nos tarifs" },
+                { to: "/realisations", label: "Nos réalisations" },
+                { to: "/qui-sommes-nous", label: "Qui sommes-nous" },
+                { to: "/nos-villes", label: "Nos villes" },
+                { to: "/faq", label: "Questions fréquentes" },
+              ].map((l) => (
+                <Link key={l.to} to={l.to} className="rounded-full border px-4 py-2 text-sm font-medium hover:bg-card transition-colors" style={{ color: INK, borderColor: "rgba(43,30,63,0.25)" }}>
+                  {l.label}
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Formulaire — alt-odd (10e bloc) ─────────────────────────────────── */}
+      <section className="alt-odd py-12 md:py-16">
+        <div className="container">
+          <div className="mx-auto max-w-2xl">
+            <div className="text-center mb-10">
+              <h3>Parlez-nous de votre projet</h3>
+              <p className="mt-4 text-lg" style={{ color: INK, opacity: 0.7 }}>
+                Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold">création de votre site web</Link>.
+              </p>
+            </div>
+            <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Input placeholder="Votre nom" className="rounded-xl" required />
+                <Input placeholder="Nom de votre entreprise" className="rounded-xl" required />
               </div>
-            </div>
-            <p className="text-base md:text-lg" style={{ color: INK, opacity: 0.7 }}>
-              La majorité des TPE qui nous contactent partagent un constat commun : elles ont investi dans un site web il y a quelques années, mais celui-ci ne leur apporte aucun retour. Demandez votre <Link to="/contact" className="text-primary font-semibold">audit SEO gratuit</Link> pour identifier vos axes d'amélioration.
-            </p>
-            <div className="rounded-2xl bg-card p-6 shadow-card">
-              <h3 className="mb-3">Ce qui fait la différence avec Déclic Digital</h3>
-              <ul className="grid gap-2 sm:grid-cols-2">
-                {[
-                  "Audit SEO complet offert avant chaque projet",
-                  "Suivi personnalisé via votre espace client dédié",
-                  "Expertise Google certifiée (Expert Produit Google)",
-                  "Sites rapides : score PageSpeed supérieur à 90",
-                  "Accompagnement sur-mesure, pas de template générique",
-                  "Tarifs adaptés aux budgets des TPE et indépendants",
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2 text-base">
-                    <CheckCircle size={16} className="text-brand-violet mt-0.5 shrink-0" />
-                    <span style={{ color: INK, opacity: 0.7 }}>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <div className="text-center mt-10">
-            <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
-              <Link to="/rendez-vous">Prendre rendez-vous</Link>
-            </Button>
+              <div className="grid gap-4 sm:grid-cols-2">
+                <Input placeholder="Votre email" type="email" className="rounded-xl" required />
+                <Input placeholder="Votre téléphone" type="tel" className="rounded-xl" />
+              </div>
+              <Input placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" />
+              <Textarea placeholder="Décrivez votre projet..." className="rounded-xl min-h-[120px]" required />
+              <Button type="submit" variant="custom" size="lg" className="w-full gradient-miami btn-glow rounded-full font-bold shadow-glow">
+                <CheckCircle size={18} className="mr-2" /> Envoyer ma demande
+              </Button>
+            </form>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* ─── Liens services ───────────────────────────────────────────────────── */}
-      <SectionWrapper id="liens-services">
-        <div className="mx-auto max-w-3xl text-center">
-          <h3 className="mb-4">Explorez nos services</h3>
-          <p className="text-lg mb-6" style={{ color: INK, opacity: 0.7 }}>Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {[
-              { to: "/creation-site-web", label: "Création de site web" },
-              { to: "/referencement-seo", label: "Référencement SEO et GEO" },
-              { to: "/contact", label: "Audit SEO gratuit" },
-              { to: "/tarifs", label: "Nos tarifs" },
-              { to: "/realisations", label: "Nos réalisations" },
-              { to: "/qui-sommes-nous", label: "Qui sommes-nous" },
-              { to: "/nos-villes", label: "Nos villes" },
-              { to: "/faq", label: "Questions fréquentes" },
-            ].map((l) => (
-              <Link key={l.to} to={l.to} className="rounded-full border px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors" style={{ color: INK, borderColor: "rgba(43,30,63,0.3)", background: "transparent" }}>
-                {l.label}
-              </Link>
-            ))}
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* ─── Formulaire ───────────────────────────────────────────────────────── */}
-      <SectionWrapper id="formulaire-contact">
-        <div className="mx-auto max-w-2xl">
-          <div className="text-center mb-10">
-            <h3>Parlez-nous de votre projet</h3>
-            <p className="mt-4 text-lg" style={{ color: INK, opacity: 0.7 }}>
-              Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold">création de votre site web</Link>.
-            </p>
-          </div>
-          <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Input placeholder="Votre nom" className="rounded-xl" required />
-              <Input placeholder="Nom de votre entreprise" className="rounded-xl" required />
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              <Input placeholder="Votre email" type="email" className="rounded-xl" required />
-              <Input placeholder="Votre téléphone" type="tel" className="rounded-xl" />
-            </div>
-            <Input placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" />
-            <Textarea placeholder="Décrivez votre projet..." className="rounded-xl min-h-[120px]" required />
-            <Button type="submit" variant="custom" size="lg" className="w-full gradient-miami btn-glow rounded-full font-bold shadow-glow" style={{ color: CREAM }}>
-              <CheckCircle size={18} className="mr-2" /> Envoyer ma demande
-            </Button>
-          </form>
-        </div>
-      </SectionWrapper>
-
-      {/* ─── Localisation ─────────────────────────────────────────────────────── */}
+      {/* ─── Localisation — alt-even (11e bloc) ──────────────────────────────── */}
       <Suspense fallback={<div style={{ minHeight: 300 }} />}>
         <LocationSection />
       </Suspense>
 
-      {/* ─── CTA final avec texture ───────────────────────────────────────────── */}
+      {/* ─── CTA final texture — skip alternance ─────────────────────────────── */}
       <section className="relative overflow-hidden py-16 md:py-24" data-alternate="skip">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="container relative z-10">
