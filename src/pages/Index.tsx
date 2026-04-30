@@ -74,7 +74,7 @@ const Index = () => {
         </script>
       </Helmet>
 
-      {/* Hero */}
+      {/* ─── Hero ─────────────────────────────────────────────────────────────── */}
       <section className="gradient-hero relative overflow-hidden">
         <div className="container pt-6 pb-16 md:pt-8 md:pb-24 lg:pt-10 lg:pb-32">
           <div className="grid items-center gap-10 lg:grid-cols-2">
@@ -82,7 +82,7 @@ const Index = () => {
               <span className="mb-4 inline-block rounded-full bg-brand-violet/10 px-4 py-1.5 text-xs font-semibold text-primary">
                 Expert Produit Google · Agence digitale
               </span>
-              <h1 className="mb-6 text-4xl font-semibold leading-tight md:text-5xl lg:text-6xl">
+              <h1 className="mb-6 leading-tight">
                 On crée votre site web à Paris et dans le 92 pour briller sur Google et l'IA
               </h1>
               <p className="mb-8 max-w-lg text-lg md:text-xl leading-relaxed" style={{ color: INK, opacity: 0.75 }}>
@@ -94,7 +94,7 @@ const Index = () => {
                 <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow" style={{ color: CREAM }}>
                   <Link to="/contact">Demander un audit SEO gratuit</Link>
                 </Button>
-                <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-bold shadow-glow" style={{ color: CREAM }}>
+                <Button asChild size="lg" variant="outline" className="rounded-full border-2 px-8 font-bold transition-colors" style={{ borderColor: INK, color: INK, background: "transparent" }}>
                   <Link to="/rendez-vous">Prendre rendez-vous</Link>
                 </Button>
               </div>
@@ -117,8 +117,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Problème */}
-      <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#E9F2F4" }}>
+      {/* ─── Problème ────────────────────────────────────────────────────────── */}
+      <section className="py-12 md:py-16 overflow-hidden">
         <div className="container">
           <div className="relative">
             <div className="hidden lg:block absolute left-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
@@ -159,7 +159,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Services avec texture */}
+      {/* ─── Services avec texture en fond ────────────────────────────────────── */}
       <SectionWrapper id="services">
         <div className="relative rounded-3xl overflow-hidden">
           <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" />
@@ -194,8 +194,8 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
-      {/* Processus */}
-      <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#E9F2F4" }}>
+      {/* ─── Processus ────────────────────────────────────────────────────────── */}
+      <section className="py-12 md:py-16 overflow-hidden">
         <div className="container">
           <div className="relative">
             <div className="hidden lg:block absolute right-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
@@ -236,10 +236,12 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ─── Avis Google ──────────────────────────────────────────────────────── */}
       <Suspense fallback={<div style={{ minHeight: 400 }} />}>
         <GoogleReviewsSection />
       </Suspense>
 
+      {/* ─── Pourquoi nous ────────────────────────────────────────────────────── */}
       <SectionWrapper id="pourquoi">
         <div className="mx-auto max-w-5xl">
           <div className="text-center mb-10">
@@ -264,6 +266,7 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
+      {/* ─── Paris ────────────────────────────────────────────────────────────── */}
       <section className="py-12 md:py-16">
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -293,6 +296,7 @@ const Index = () => {
         </div>
       </section>
 
+      {/* ─── Logos tech ───────────────────────────────────────────────────────── */}
       <SectionWrapper id="realisations">
         <div className="text-center mb-10">
           <h2 className="mb-4">Nos réalisations pour des TPE et artisans parisiens</h2>
@@ -314,6 +318,7 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
+      {/* ─── Audit SEO ────────────────────────────────────────────────────────── */}
       <SectionWrapper id="audit-seo">
         <div className="mx-auto max-w-4xl">
           <div className="text-center mb-10">
@@ -367,6 +372,7 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
+      {/* ─── Liens services ───────────────────────────────────────────────────── */}
       <SectionWrapper id="liens-services">
         <div className="mx-auto max-w-3xl text-center">
           <h3 className="mb-4">Explorez nos services</h3>
@@ -390,6 +396,7 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
+      {/* ─── Formulaire ───────────────────────────────────────────────────────── */}
       <SectionWrapper id="formulaire-contact">
         <div className="mx-auto max-w-2xl">
           <div className="text-center mb-10">
@@ -416,11 +423,12 @@ const Index = () => {
         </div>
       </SectionWrapper>
 
+      {/* ─── Localisation ─────────────────────────────────────────────────────── */}
       <Suspense fallback={<div style={{ minHeight: 300 }} />}>
         <LocationSection />
       </Suspense>
 
-      {/* CTA final avec texture */}
+      {/* ─── CTA final avec texture ───────────────────────────────────────────── */}
       <section className="relative overflow-hidden py-16 md:py-24">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="container relative z-10">
@@ -435,7 +443,7 @@ const Index = () => {
               <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
                 <Link to="/contact">Demander un audit SEO gratuit</Link>
               </Button>
-              <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-bold shadow-glow" style={{ color: CREAM }}>
+              <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-bold shadow-glow">
                 <Link to="/tarifs">Voir nos tarifs</Link>
               </Button>
             </div>
