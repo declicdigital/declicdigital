@@ -36,6 +36,21 @@ const initial: FormData = {
 const HERO_STEP_LABELS = ["Votre profil", "Votre projet", "Objectifs & budget", "Contenu & design", "L'équipe", "Délais", "Message", "Fichiers"];
 const STEP_LABELS_COMPACT = ["Profil", "Projet", "Objectifs", "Design", "Équipe", "Délais", "Message", "Fichiers"];
 
+const BREVO_API_KEY = "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";
+
+const sendBrevoEmail = async (to: { email: string; name: string }, subject: string, htmlContent: string) => {
+  await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+    headers: { "api-key": BREVO_API_KEY, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      sender: { name: "Déclic Digital", email: "contact@declicdigital.net" },
+      to: [to],
+      subject,
+      htmlContent,
+    }),
+  });
+};
+
 const SectionCard = ({ num, title, sub, accent = "primary", children }: {
   num: string; title: string; sub: string; accent?: "primary" | "accent" | "gradient"; children: React.ReactNode;
 }) => (
@@ -140,7 +155,7 @@ const FormulaireClient = () => {
         ? teamMembers.map(m => ({ name: m.name, role: m.role, bio: m.bio, photo_name: m.photo?.name || "" }))
         : [];
 
-      // 2. INSERT direct dans brief_submissions
+      // 2. INSERT dans brief_submissions
       await supabase.from("brief_submissions").insert({
         full_name: f.full_name, company: f.company, email: f.email, phone: f.phone,
         sector: f.sector, size: f.size, current_url: f.current_url, source: f.source,
@@ -155,27 +170,55 @@ const FormulaireClient = () => {
         submission_id: submissionId, status: "new",
       });
 
-      // 3. Appel Edge Function pour email Brevo
-      await supabase.functions.invoke("create-client-account", {
-        body: {
-          full_name: f.full_name,
-          email: f.email,
-          phone: f.phone,
-          company: f.company,
-          current_url: f.current_url,
-          msg: f.msg || f.desc,
-          desc: f.desc,
-          form_type: "formulaire",
-          team: teamData,
-          file_paths: filePaths,
-          submission_id: submissionId,
-          sector: f.sector, size: f.size, pt: f.pt, inspo: f.inspo, kw: f.kw,
-          goal: f.goal, csrc: f.csrc, budget: f.budget, recur: f.recur, urgency: f.urgency,
-          brand: f.brand, cont: f.cont, pages: f.pages, feat: f.feat, vibe: f.vibe,
-          dl: f.dl, kdate: f.kdate, auto: f.auto, wlevel: f.wlevel, past: f.past,
-          cp: f.cp, slot: f.slot, ftype: f.ftype, file_link: f.file_link,
-        },
-      });
+      // 3. Email de confirmation au prospect
+      await sendBrevoEmail(
+        { email: f.email, name: f.full_name },
+        "Brief reçu — Déclic Digital vous répond sous 24-48h",
+        `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <div style="background: linear-gradient(135deg, #4fc3c3, #9b59b6); padding: 24px; border-radius: 12px; margin-bottom: 24px; text-align: center;">
+            <h1 style="color: white; margin: 0; font-size: 22px;">Brief bien reçu ! 🎉</h1>
+          </div>
+          <p style="color: #333; font-size: 16px;">Bonjour <strong>${f.full_name}</strong>,</p>
+          <p style="color: #555; line-height: 1.6;">Merci pour votre brief. Nous l'avons bien reçu et nous vous répondrons sous 24 à 48h avec une proposition personnalisée.</p>
+          <p style="color: #999; font-size: 13px; text-align: center; margin-top: 32px;">Déclic Digital — declicdigital.net</p>
+        </div>
+        `
+      );
+
+      // 4. Notification à Geoffrey
+      await sendBrevoEmail(
+        { email: "contact@declicdigital.net", name: "Geoffrey" },
+        `🆕 Nouveau brief — ${f.full_name} (${f.company || f.email})`,
+        `
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <div style="background: linear-gradient(135deg, #4fc3c3, #9b59b6); padding: 20px; border-radius: 12px; margin-bottom: 24px;">
+            <h1 style="color: white; margin: 0; font-size: 20px;">🆕 Nouveau brief client</h1>
+          </div>
+          <div style="background: #f8f9fa; border-radius: 12px; padding: 20px; margin-bottom: 16px;">
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr><td style="padding: 6px 0; color: #666; width: 140px;">Nom</td><td style="font-weight: bold;">${f.full_name}</td></tr>
+              <tr><td style="padding: 6px 0; color: #666;">Email</td><td><a href="mailto:${f.email}" style="color: #4fc3c3;">${f.email}</a></td></tr>
+              <tr><td style="padding: 6px 0; color: #666;">Téléphone</td><td>${f.phone || "—"}</td></tr>
+              <tr><td style="padding: 6px 0; color: #666;">Entreprise</td><td>${f.company || "—"}</td></tr>
+              <tr><td style="padding: 6px 0; color: #666;">Secteur</td><td>${f.sector || "—"}</td></tr>
+              <tr><td style="padding: 6px 0; color: #666;">Budget</td><td>${f.budget || "—"}</td></tr>
+              <tr><td style="padding: 6px 0; color: #666;">Type de site</td><td>${f.pt.join(", ") || "—"}</td></tr>
+              ${f.current_url ? `<tr><td style="padding: 6px 0; color: #666;">Site actuel</td><td><a href="${f.current_url}" style="color: #4fc3c3;">${f.current_url}</a></td></tr>` : ""}
+            </table>
+          </div>
+          <div style="background: #f8f9fa; border-radius: 12px; padding: 20px;">
+            <h3 style="margin: 0 0 8px; color: #333; font-size: 15px;">Description du projet</h3>
+            <p style="color: #444; line-height: 1.6; white-space: pre-wrap;">${f.desc || f.msg || "—"}</p>
+          </div>
+          ${f.msg ? `
+          <div style="background: #f8f9fa; border-radius: 12px; padding: 20px; margin-top: 16px;">
+            <h3 style="margin: 0 0 8px; color: #333; font-size: 15px;">Message libre</h3>
+            <p style="color: #444; line-height: 1.6; white-space: pre-wrap;">${f.msg}</p>
+          </div>` : ""}
+        </div>
+        `
+      );
 
       setSent(true);
       toast({ title: "Brief envoyé !", description: "Nous reviendrons vers vous sous 24-48h." });
@@ -217,13 +260,11 @@ const FormulaireClient = () => {
 
   return (
     <PageLayout>
-      {/* Bulle progression */}
       <div className="fixed bottom-8 right-8 z-50 hidden h-16 w-16 flex-col items-center justify-center rounded-full gradient-miami shadow-elevated cursor-default md:flex">
         <span className="text-lg font-black text-primary-foreground leading-none">{pct}%</span>
         <span className="text-[8px] font-bold text-primary-foreground/80 uppercase tracking-wider">complet</span>
       </div>
 
-      {/* Hero */}
       <section className="gradient-hero py-16 md:py-24">
         <div className="container text-center">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
@@ -248,7 +289,6 @@ const FormulaireClient = () => {
         </div>
       </section>
 
-      {/* Barre de progression sticky */}
       <div className="sticky top-[80px] z-40 bg-background/95 backdrop-blur border-b border-border py-3">
         <div className="container">
           <div className="mb-2 flex items-center justify-between">
@@ -265,12 +305,10 @@ const FormulaireClient = () => {
         </div>
       </div>
 
-      {/* Formulaire */}
       <section className="py-16 md:py-24">
         <div className="container">
           <form onSubmit={handleSubmit} className="mx-auto max-w-3xl space-y-6">
 
-            {/* 1. PROFIL */}
             <SectionCard num="01" title="Votre profil" sub="Pour mieux vous connaître avant de travailler ensemble">
               <div className="space-y-5">
                 <FieldGroup cols={2}>
@@ -325,7 +363,6 @@ const FormulaireClient = () => {
               </div>
             </SectionCard>
 
-            {/* 2. PROJET */}
             <SectionCard num="02" title="Votre projet" sub="Décrivez ce que vous souhaitez créer ou améliorer" accent="accent">
               <div className="space-y-5">
                 <div>
@@ -351,7 +388,6 @@ const FormulaireClient = () => {
               </div>
             </SectionCard>
 
-            {/* 3. OBJECTIFS & BUDGET */}
             <SectionCard num="03" title="Objectifs & budget" sub="Pour calibrer la solution la plus adaptée">
               <div className="space-y-5">
                 <div>
@@ -393,7 +429,6 @@ const FormulaireClient = () => {
               </div>
             </SectionCard>
 
-            {/* 4. CONTENU & DESIGN */}
             <SectionCard num="04" title="Contenu & design" sub="Ce que vous avez déjà, ce que vous souhaitez">
               <div className="space-y-5">
                 <div>
@@ -440,7 +475,6 @@ const FormulaireClient = () => {
               </div>
             </SectionCard>
 
-            {/* 5. ÉQUIPE */}
             <SectionCard num="05" title="L'équipe" sub="Présentez les personnes à mettre en avant (optionnel)" accent="accent">
               <div className="space-y-5">
                 <ChoiceItem checked={f.team_enabled} onChange={() => set("team_enabled", !f.team_enabled)} label="Je veux présenter mon équipe sur le site" />
@@ -478,7 +512,6 @@ const FormulaireClient = () => {
               </div>
             </SectionCard>
 
-            {/* 6. DÉLAIS */}
             <SectionCard num="06" title="Délais & contexte" sub="Pour planifier au mieux votre projet">
               <div className="space-y-5">
                 <div>
@@ -522,7 +555,6 @@ const FormulaireClient = () => {
               </div>
             </SectionCard>
 
-            {/* 7. MESSAGE */}
             <SectionCard num="07" title="Message libre" sub="Tout ce que vous n'avez pas pu dire ailleurs" accent="gradient">
               <div className="space-y-5">
                 <div>
@@ -550,7 +582,6 @@ const FormulaireClient = () => {
               </div>
             </SectionCard>
 
-            {/* 8. FICHIERS */}
             <SectionCard num="08" title="Fichiers & visuels" sub="Partagez vos ressources existantes" accent="accent">
               <div className="space-y-5">
                 <div>
@@ -598,7 +629,6 @@ const FormulaireClient = () => {
               </div>
             </SectionCard>
 
-            {/* SUBMIT */}
             <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
               className="relative overflow-hidden rounded-2xl border border-border bg-card p-5 text-center shadow-card sm:p-8 md:p-14">
               <div className="absolute inset-0 bg-gradient-to-b from-primary/5 to-transparent pointer-events-none" />
