@@ -551,3 +551,24 @@
   background: var(--gradient-miami);
   color: #F6F1E9;
 }
+
+/* ═══════════════════════════════════════════════════════════
+   ALTERNANCE DE FONDS — sections de la page
+   Les sections [data-alternate="skip"] sont transparentes
+   (heroes sombres, CTA texture, stats strip).
+   Les autres alternent #F6F1E9 / #E9F2F4.
+   On utilise une classe .alt-even / .alt-odd appliquée
+   directement sur chaque section dans le JSX.
+   ═══════════════════════════════════════════════════════════ */
+
+.alt-even {
+  background-color: #F6F1E9;
+}
+.alt-odd {
+  background-color: #E9F2F4;
+}
+
+/* Les sections skip n'ont pas de fond forcé */
+[data-alternate="skip"] {
+  /* background géré par leur propre style */
+}
