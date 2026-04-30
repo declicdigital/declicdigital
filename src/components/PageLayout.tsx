@@ -21,15 +21,6 @@ function flattenChildren(children: ReactNode): ReactNode[] {
   return flat;
 }
 
-/**
- * Sections qui ne comptent PAS dans l'alternance pair/impair :
- * - Heroes (gradient-hero, image sombre en fond)
- * - Sections CTA (texture violet-turquoise)
- * - Sections avec image en fond (relative overflow-hidden + img absolute)
- * - Stats strips (bg-[hsl(263...)])
- */
-const SKIP_RE = /\bgradient-hero\b|\brelative\b.*\boverflow-hidden\b|bg-\[hsl\(263/;
-
 const PageLayout = ({
   children,
   hideBlogCarousel = false,
@@ -39,7 +30,6 @@ const PageLayout = ({
   const pagePath = location.pathname;
   const flat = flattenChildren(children);
   const mainRef = useRef<HTMLElement>(null);
-
   const isBlogPage = pagePath.startsWith("/blog");
 
   useLayoutEffect(() => {
@@ -47,7 +37,6 @@ const PageLayout = ({
       const main = mainRef.current;
       if (!main) return;
       main.querySelectorAll("section").forEach((sec) => {
-        sec.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
         (sec as HTMLElement).style.removeProperty("background-color");
       });
       return;
@@ -62,38 +51,28 @@ const PageLayout = ({
       if (!main) return;
 
       const all = Array.from(main.querySelectorAll("section")) as HTMLElement[];
-
-      // On ne traite que les sections de premier niveau (pas imbriquées)
       const topLevel = all.filter(
         (sec) => !sec.parentElement?.closest("section")
       );
 
-      let pos = 0; // compteur des sections qui entrent dans l'alternance
+      let pos = 0;
 
       for (const sec of topLevel) {
         const cls = sec.className || "";
 
-        // Sections exclues de l'alternance
-        const isHero    = cls.includes("gradient-hero");
-        const isCta     = cls.includes("relative") && cls.includes("overflow-hidden");
-        const isStats   = cls.includes("bg-[hsl(263");
-        const skip      = isHero || isCta || isStats;
+        // Sections exclues de l'alternance :
+        // 1. Hero gradient-hero
+        // 2. Stats strip bg-[hsl(263
+        // 3. Sections marquées data-alternate="skip" (CTA texture, heroes sombres)
+        const isHero  = cls.includes("gradient-hero");
+        const isStats = cls.includes("bg-[hsl(263");
+        const isSkip  = sec.dataset.alternate === "skip";
+        const skip    = isHero || isStats || isSkip;
 
-        // Nettoyer les classes précédentes
-        sec.classList.remove("bg-section-blue", "bg-section-rose", "bg-section-alt");
         sec.style.removeProperty("background-color");
+        if (skip) continue;
 
-        if (skip) {
-          // Ne pas toucher au fond de ces sections
-          continue;
-        }
-
-        // Alternance : pair → #F6F1E9, impair → #E9F2F4
-        if (pos % 2 === 0) {
-          sec.style.backgroundColor = "#F6F1E9";
-        } else {
-          sec.style.backgroundColor = "#E9F2F4";
-        }
+        sec.style.backgroundColor = pos % 2 === 0 ? "#F6F1E9" : "#E9F2F4";
         pos++;
       }
     };
