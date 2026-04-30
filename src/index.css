@@ -248,6 +248,7 @@
   }
   .gradient-miami {
     background: var(--gradient-miami);
+    color: #F6F1E9 !important;
   }
 
   /* ── Shadows ── */
