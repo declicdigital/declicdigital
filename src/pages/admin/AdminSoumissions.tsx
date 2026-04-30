@@ -101,6 +101,17 @@ export default function AdminSoumissions() {
     setSubmissions((prev) => prev.map((s) => s.id === id ? { ...s, status } : s));
   }
 
+  async function deleteSubmission(id: string) {
+    if (!confirm("Supprimer cette soumission ? Cette action est irréversible.")) return;
+    const { error } = await supabase.from("brief_submissions").delete().eq("id", id);
+    if (!error) {
+      setSubmissions((prev) => prev.filter((s) => s.id !== id));
+      if (expanded === id) setExpanded(null);
+    } else {
+      alert("Erreur lors de la suppression");
+    }
+  }
+
   async function downloadFile(path: string) {
     const { data, error } = await supabase.storage.from("form-files").download(path);
     if (error || !data) { alert("Erreur téléchargement"); return; }
@@ -189,6 +200,12 @@ export default function AdminSoumissions() {
                       </span>
                       <span className={`text-xs font-medium px-2.5 py-1 rounded-full ${sl.color}`}>{sl.label}</span>
                       {isExpanded ? <ChevronUp size={14} className="text-white/30" /> : <ChevronDown size={14} className="text-white/30" />}
+                      <button
+                        onClick={(e) => { e.stopPropagation(); deleteSubmission(sub.id); }}
+                        className="p-1.5 rounded-lg text-red-400/50 hover:text-red-400 hover:bg-red-400/10 transition-colors"
+                        title="Supprimer">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                      </button>
                     </div>
                   </div>
 
@@ -357,21 +374,28 @@ export default function AdminSoumissions() {
                         </div>
                       )}
 
-                      {/* Statut */}
-                      <div>
-                        <p className="text-white/20 text-xs font-bold uppercase tracking-widest mb-3">Changer le statut</p>
-                        <div className="flex flex-wrap gap-2">
-                          {STATUS_OPTIONS.map((s) => (
-                            <button key={s} onClick={() => updateStatus(sub.id, s)}
-                              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all border ${
-                                sub.status === s
-                                  ? "bg-white text-[#0f0f13] border-white"
-                                  : "bg-transparent border-white/10 text-white/50 hover:text-white hover:border-white/30"
-                              }`}>
-                              {STATUS_LABELS[s]?.label ?? s}
-                            </button>
-                          ))}
+                      {/* Statut + Suppression */}
+                      <div className="flex items-center justify-between flex-wrap gap-4 pt-2 border-t border-white/10">
+                        <div>
+                          <p className="text-white/20 text-xs font-bold uppercase tracking-widest mb-3">Statut</p>
+                          <div className="flex flex-wrap gap-2">
+                            {STATUS_OPTIONS.map((s) => (
+                              <button key={s} onClick={() => updateStatus(sub.id, s)}
+                                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all border ${
+                                  sub.status === s
+                                    ? "bg-white text-[#0f0f13] border-white"
+                                    : "bg-transparent border-white/10 text-white/50 hover:text-white hover:border-white/30"
+                                }`}>
+                                {STATUS_LABELS[s]?.label ?? s}
+                              </button>
+                            ))}
+                          </div>
                         </div>
+                        <button onClick={() => deleteSubmission(sub.id)}
+                          className="flex items-center gap-2 px-3 py-2 rounded-xl bg-red-500/10 text-red-400 text-xs font-medium hover:bg-red-500/20 transition-colors">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>
+                          Supprimer cette soumission
+                        </button>
                       </div>
 
                     </div>
