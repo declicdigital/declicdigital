@@ -29,8 +29,8 @@ const urgencyCards = [
 ];
 
 const audiences = [
-  { icon: Building2, title: "TPE & Petites entreprises", desc: "Les IA favorisent les contenus spécialisés et précis — terrain de jeu idéal pour les petites structures expertes.", items: ["Être cité pour votre spécialité de niche", "Concurrencer des marques plus grandes", "Réduire les coûts d'acquisition client", "Générer des leads qualifiés en continu", "Renforcer votre autorité sectorielle"] },
-  { icon: Hammer, title: "Artisans & Commerçants", desc: "La recherche locale est l'un des cas d'usage phares des IA génératives. \"Quel électricien à Bordeaux ?\" — soyez la réponse.", items: ["Dominer les recommandations locales IA", "Être cité comme référence de votre métier", "Valoriser votre savoir-faire unique", "Attirer des clients de meilleure qualité", "Réduire la dépendance aux plateformes"] },
+  { icon: Building2, title: "TPE & Petites entreprises", desc: "Les IA favorisent les contenus spécialisés et précis - terrain de jeu idéal pour les petites structures expertes.", items: ["Être cité pour votre spécialité de niche", "Concurrencer des marques plus grandes", "Réduire les coûts d'acquisition client", "Générer des leads qualifiés en continu", "Renforcer votre autorité sectorielle"] },
+  { icon: Hammer, title: "Artisans & Commerçants", desc: "La recherche locale est l'un des cas d'usage phares des IA génératives. \"Quel électricien à Bordeaux ?\" - soyez la réponse.", items: ["Dominer les recommandations locales IA", "Être cité comme référence de votre métier", "Valoriser votre savoir-faire unique", "Attirer des clients de meilleure qualité", "Réduire la dépendance aux plateformes"] },
   { icon: Laptop, title: "Indépendants & Freelances", desc: "Un freelance bien positionné en GEO peut multiplier ses opportunités sans multiplier son budget marketing.", items: ["Être recommandé pour votre expertise", "Construire une autorité digitale forte", "Attirer des missions sans prospection", "Valoriser votre personal branding", "Générer une notoriété passive"] },
 ];
 
@@ -56,11 +56,11 @@ const actionTable = [
 ];
 
 const checklist = [
-  "Votre site répond à des questions précises — pas seulement à des mots-clés, mais à de vraies formulations naturelles de vos clients.",
+  "Votre site répond à des questions précises, pas seulement à des mots-clés, mais à de vraies formulations naturelles de vos clients.",
   "Vous avez une page FAQ structurée avec le balisage Schema FAQPage pour que les IA puissent lire et citer vos réponses.",
   "Votre fiche Google Business est complète : horaires, description, catégories, photos, réponses aux avis, et publications régulières.",
   "Votre page \"À propos\" raconte votre expertise réelle avec des faits concrets, une expérience vérifiable et ce qui vous différencie.",
-  "Vous avez des témoignages clients détaillés sur votre site et sur Google — les avis sont une source de confiance majeure pour les IA.",
+  "Vous avez des témoignages clients détaillés sur votre site et sur Google, les avis sont une source de confiance majeure pour les IA.",
   "Vous publiez régulièrement du contenu expert sur votre métier, votre zone d'intervention, vos projets réalisés.",
   "Votre nom, adresse et téléphone sont identiques sur tous les annuaires, réseaux sociaux et votre site (cohérence NAP).",
   "Vous êtes cité sur au moins 5 plateformes tierces : annuaires professionnels, associations, partenaires, presse locale.",
@@ -71,7 +71,7 @@ const checklist = [
 const faqItems = [
   { q: "Qu'est-ce que le GEO exactement ?", a: "Le GEO, ou Generative Engine Optimization, est l'ensemble des stratégies visant à optimiser la présence d'une entreprise ou d'un site web dans les réponses générées par les intelligences artificielles comme ChatGPT, Google Gemini, Perplexity AI ou Claude. Contrairement au SEO qui cible les classements dans les moteurs de recherche traditionnels, le GEO vise à être cité, mentionné ou recommandé directement dans les réponses conversationnelles des IA." },
   { q: "Quelle est la différence entre SEO et GEO ?", a: "Le SEO optimise un site pour apparaître dans une liste de résultats Google. Le GEO optimise le contenu pour être sélectionné et cité dans une réponse directe générée par une IA. Le SEO mesure le classement et le trafic ; le GEO mesure les mentions et citations. Les deux sont complémentaires et partagent de nombreuses bonnes pratiques, mais le GEO nécessite des ajustements spécifiques liés aux particularités des modèles de langage." },
-  { q: "Le GEO est-il utile pour une petite entreprise ou un artisan ?", a: "Oui, et c'est même l'une des meilleures opportunités actuelles pour les petites structures. Les IA génératives valorisent l'expertise précise, l'authenticité et les réponses détaillées — des atouts naturels des artisans et indépendants. De plus, la recherche locale est un cas d'usage majeur pour les IA." },
+  { q: "Le GEO est-il utile pour une petite entreprise ou un artisan ?", a: "Oui, et c'est même l'une des meilleures opportunités actuelles pour les petites structures. Les IA génératives valorisent l'expertise précise, l'authenticité et les réponses détaillées, des atouts naturels des artisans et indépendants. De plus, la recherche locale est un cas d'usage majeur pour les IA." },
   { q: "Combien de temps faut-il pour voir des résultats en GEO ?", a: "Les premiers effets peuvent être visibles en 4 à 8 semaines pour les actions les plus directes comme la FAQ structurée ou la mise à jour de votre fiche Google Business. La construction d'une autorité thématique et d'une présence solide sur plusieurs plateformes demande 3 à 6 mois." },
   { q: "Est-ce que le GEO remplace le SEO ?", a: "Non. Le GEO ne remplace pas le SEO, il le complète. Google reste le moteur de recherche dominant et continuer à optimiser votre site pour les moteurs traditionnels est toujours nécessaire. Une stratégie digitale complète en 2026 combine SEO, GEO et présence sur les réseaux sociaux." },
   { q: "Comment une IA choisit-elle de citer une entreprise ou un site ?", a: "Les IA génératives sélectionnent leurs sources selon plusieurs critères : la pertinence et la précision du contenu par rapport à la question posée, l'autorité de la source, la structure et la lisibilité du contenu, la présence de données structurées (Schema.org), et la fréquence des citations de cette source par d'autres sites fiables." },
@@ -115,7 +115,7 @@ const Geo = () => {
                 Le GEO : quand l'IA devient votre meilleur commercial
               </h1>
               <p className="mb-8 text-lg leading-relaxed" style={{ color: "rgba(246,241,233,0.75)" }}>
-                Generative Engine Optimization — la stratégie qui permet à votre entreprise d'être citée par ChatGPT, Gemini et Perplexity. Indispensable pour les TPE, artisans et indépendants.
+                Generative Engine Optimization, la stratégie qui permet à votre entreprise d'être citée par ChatGPT, Gemini et Perplexity. Indispensable pour les TPE, artisans et indépendants.
               </p>
               <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
                 <Link to="/contact">Demander un audit SEO gratuit</Link>
@@ -231,7 +231,7 @@ const Geo = () => {
                 <div className="p-8 max-w-lg">
                   <span className="text-6xl font-extrabold text-primary/30 leading-none select-none">"</span>
                   <p className="text-lg italic leading-relaxed -mt-4" style={{ color: "rgba(246,241,233,0.9)" }}>Dans cinq ans, les entreprises qui auront investi dans le GEO aujourd'hui domineront leur secteur.</p>
-                  <p className="text-sm mt-2" style={{ color: "rgba(246,241,233,0.4)" }}>Analyse tendance — Marketing digital, 2026</p>
+                  <p className="text-sm mt-2" style={{ color: "rgba(246,241,233,0.4)" }}>Analyse tendance, Marketing digital, 2026</p>
                 </div>
               </div>
             </div>
@@ -278,7 +278,7 @@ const Geo = () => {
               <div className="relative z-10 max-w-2xl space-y-5 py-8">
                 <h2 style={{ color: "#2B1E3F" }}>Pourquoi le GEO est un avantage concurrentiel pour les TPE</h2>
                 <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>Les grandes entreprises investissent des millions dans le SEO classique. Mais le GEO change la donne : les IA génératives ne cherchent pas la plus grosse marque, elles cherchent la <strong style={{ color: "#2B1E3F" }}>réponse la plus pertinente</strong>.</p>
-                <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>Un artisan qui documente ses techniques, un consultant qui partage son expertise, une TPE qui répond avec précision aux questions de ses clients — c'est exactement ce que ChatGPT, Gemini et Perplexity mettent en avant.</p>
+                <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>Un artisan qui documente ses techniques, un consultant qui partage son expertise, une TPE qui répond avec précision aux questions de ses clients, c'est exactement ce que ChatGPT, Gemini et Perplexity mettent en avant.</p>
                 <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-bold shadow-glow">
                   <Link to="/rendez-vous">Prendre rendez-vous</Link>
                 </Button>
