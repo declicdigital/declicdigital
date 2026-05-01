@@ -202,8 +202,8 @@ const CreationSite = () => (
       </div>
     </section>
 
-    {/* ─── Composants externes — skip alternance ───────────────────────────── */}
-    <GoogleReviewsSection compact maxReviews={3} />
+    {/* ─── GoogleReviews — bloc 8 → #E9F2F4 ───────────────────────────────── */}
+    <GoogleReviewsSection compact maxReviews={3} backgroundColor="#E9F2F4" />
     <LocationSection />
 
     {/* ─── CTA texture — skip alternance ───────────────────────────────────── */}
