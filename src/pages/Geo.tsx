@@ -429,8 +429,8 @@ const Geo = () => {
         </div>
       </section>
 
-      {/* ─── LocationSection — skip alternance ───────────────────────────────── */}
-      <LocationSection />
+      {/* ─── LocationSection — bloc 12 → #E9F2F4 ─────────────────────────────── */}
+      <LocationSection backgroundColor="#E9F2F4" />
     </PageLayout>
   );
 };
