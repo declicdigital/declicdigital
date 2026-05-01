@@ -168,7 +168,7 @@ const CreationSite = () => (
           </p>
           <h3 style={{ color: "#2B1E3F" }}>Un site vitrine qui inspire confiance et génère des contacts</h3>
           <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-            Votre site web est votre vitrine 24h/24. Il doit présenter clairement vos services, afficher vos réalisations, et faciliter la prise de contact. Nous concevons chaque site avec un objectif commercial précis : transformer les visiteurs en prospects qualifiés. Formulaire de contact, bouton d'appel, témoignages clients — chaque élément est pensé pour la conversion.
+            Votre site web est votre vitrine 24h/24. Il doit présenter clairement vos services, afficher vos réalisations, et faciliter la prise de contact. Nous concevons chaque site avec un objectif commercial précis : transformer les visiteurs en prospects qualifiés. Formulaire de contact, bouton d'appel, témoignages clients - chaque élément est pensé pour la conversion.
           </p>
           <h3 style={{ color: "#2B1E3F" }}>Technologies modernes pour des performances optimales</h3>
           <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
