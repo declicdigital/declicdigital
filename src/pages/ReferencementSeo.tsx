@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet-async";
 import { motion } from "motion/react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
-import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import LocationSection from "@/components/LocationSection";
@@ -100,10 +99,6 @@ const faqItems = [
   { q: "Faut-il tenir un blog pour faire du SEO ?", a: "Un blog est un excellent outil SEO mais n'est pas obligatoire pour commencer. Vous pouvez déjà obtenir de bons résultats avec des pages de services bien optimisées, une fiche Google Business complète et une présence sur les annuaires. Si vous avez du temps pour rédiger, un article de fond par mois peut considérablement renforcer votre autorité thématique." },
 ];
 
-const kwPrimary = ["SEO artisan", "référencement naturel TPE", "SEO indépendant", "SEO pour petite entreprise", "référencement local artisan"];
-const kwSecondary = ["optimisation Google artisan", "visibilité web TPE", "premier page Google artisan", "SEO local freelance", "comment attirer clients internet artisan", "référencement site web indépendant", "Google Business artisan", "avis Google TPE", "SEO sans agence", "mots-clés locaux petite entreprise"];
-const kwQuestions = ["est-ce que le SEO est utile pour un artisan", "combien coûte le SEO pour une TPE", "comment se référencer sur Google artisan", "SEO ou Google Ads pour petite entreprise", "pourquoi faire du SEO quand on est indépendant"];
-
 const ReferencementSeo = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
@@ -146,390 +141,415 @@ const ReferencementSeo = () => {
         { label: "Référencement SEO" },
       ]} />
 
-      {/* Hero : image en fond plein + dégradé noirci */}
+      {/* ─── Hero sombre — fond image, skip alternance ────────────────────────── */}
       <section className="relative overflow-hidden py-16 md:py-24 min-h-[500px] flex items-center">
         <img src={heroSeo} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover object-center" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.93) 0%, hsl(263,36%,18%,0.78) 55%, hsl(183,70%,40%,0.55) 100%)" }} />
         <div className="container relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-2xl">
-            <span className="mb-4 inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold text-white/80 border border-white/20">Référencement naturel · SEO</span>
-            <h1 className="mb-6 text-4xl font-extrabold md:text-5xl text-white leading-tight">
+            <span className="mb-4 inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold border border-white/20" style={{ color: "rgba(246,241,233,0.8)" }}>Référencement naturel · SEO</span>
+            <h1 className="mb-6 leading-tight" style={{ color: "#F6F1E9" }}>
               Le SEO : le meilleur allié de l'entrepreneur solo
             </h1>
-            <p className="mb-8 text-lg text-white/75 leading-relaxed italic">
+            <p className="mb-8 text-lg leading-relaxed italic" style={{ color: "rgba(246,241,233,0.75)" }}>
               Vous n'avez pas le budget d'une multinationale. Vous n'avez pas une équipe marketing. Mais vous avez quelque chose qu'aucune grande entreprise ne peut acheter : une vraie expertise, un vrai territoire, une vraie relation client. Le SEO est l'outil qui transforme ça en visibilité.
             </p>
-            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-white font-semibold shadow-glow">
+            <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
               <Link to="/contact">Demander un audit SEO gratuit</Link>
             </Button>
           </motion.div>
         </div>
       </section>
 
-      {/* Stats strip */}
-      <section className="bg-[hsl(263,36%,18%)] py-10">
+      {/* ─── Stats strip — skip alternance ───────────────────────────────────── */}
+      <section className="py-10" style={{ backgroundColor: "hsl(263,36%,18%)" }}>
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {stats.map((s, i) => (
               <div key={i}>
                 <span className="block text-3xl md:text-4xl font-extrabold bg-gradient-to-r from-brand-blue via-brand-violet to-brand-pink bg-clip-text text-transparent">{s.num}</span>
-                <p className="mt-2 text-xs md:text-sm text-white/60">{s.label}</p>
+                <p className="mt-2 text-xs md:text-sm" style={{ color: "rgba(246,241,233,0.6)" }}>{s.label}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* 01 - Définition */}
-      <SectionWrapper id="definition">
-        <div className="mx-auto max-w-3xl space-y-6">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">01 - Comprendre les bases</p>
-          <h2 className="text-3xl font-extrabold md:text-4xl">Qu'est-ce que le SEO, concrètement ?</h2>
-          <div className="rounded-2xl border-l-4 border-primary bg-background p-6 shadow-card">
-            <p className="text-lg leading-relaxed italic">
-              Le <strong className="text-primary">SEO (Search Engine Optimization)</strong> - ou référencement naturel en français - désigne l'ensemble des techniques qui permettent à votre site d'apparaître en tête des résultats Google lorsqu'un client potentiel tape une recherche liée à votre activité. Sans payer de publicité.
+      {/* ─── 01 Définition — bloc 1 → #F6F1E9 ───────────────────────────────── */}
+      <section id="definition" className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
+        <div className="container">
+          <div className="mx-auto max-w-3xl space-y-6">
+            <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "#2B1E3F", opacity: 0.5 }}>01 - Comprendre les bases</p>
+            <h2 style={{ color: "#2B1E3F" }}>Qu'est-ce que le SEO, concrètement ?</h2>
+            <div className="rounded-2xl border-l-4 border-primary p-6 shadow-card" style={{ backgroundColor: "#E9F2F4" }}>
+              <p className="text-lg leading-relaxed italic" style={{ color: "#2B1E3F" }}>
+                Le <strong className="text-primary">SEO (Search Engine Optimization)</strong> - ou référencement naturel en français - désigne l'ensemble des techniques qui permettent à votre site d'apparaître en tête des résultats Google lorsqu'un client potentiel tape une recherche liée à votre activité. Sans payer de publicité.
+              </p>
+            </div>
+            <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+              Imaginez un plombier à Strasbourg. Quand quelqu'un tape « plombier urgence Strasbourg » sur Google à 22h, il y a deux façons d'apparaître dans les résultats : payer Google Ads pour chaque clic - ou être là naturellement, grâce au SEO. Le premier coûte à chaque fois. Le second, une fois en place, travaille pour vous 24h/24.
             </p>
-          </div>
-          <p className="text-muted-foreground leading-relaxed">
-            Imaginez un plombier à Strasbourg. Quand quelqu'un tape « plombier urgence Strasbourg » sur Google à 22h, il y a deux façons d'apparaître dans les résultats : payer Google Ads pour chaque clic - ou être là naturellement, grâce au SEO. Le premier coûte à chaque fois. Le second, une fois en place, travaille pour vous 24h/24.
-          </p>
-          <p className="text-muted-foreground leading-relaxed">Le SEO repose sur trois piliers fondamentaux que Google évalue en permanence :</p>
-          <div className="space-y-0">
-            {pillars.map((p, i) => (
-              <div key={i} className="flex border-b border-border last:border-0">
-                <div className="flex h-auto w-16 shrink-0 items-center justify-center bg-[hsl(263,36%,18%)] text-white font-extrabold text-lg">
-                  {p.num}
+            <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>Le SEO repose sur trois piliers fondamentaux que Google évalue en permanence :</p>
+            <div className="space-y-0 rounded-2xl overflow-hidden shadow-card">
+              {pillars.map((p, i) => (
+                <div key={i} className="flex border-b last:border-0" style={{ borderColor: "rgba(43,30,63,0.1)" }}>
+                  <div className="flex h-auto w-16 shrink-0 items-center justify-center font-extrabold text-lg" style={{ backgroundColor: "hsl(263,36%,18%)", color: "#F6F1E9" }}>
+                    {p.num}
+                  </div>
+                  <div className="p-5" style={{ backgroundColor: "#fff" }}>
+                    <h3 className="font-bold text-lg mb-1" style={{ color: "#2B1E3F" }}>{p.title}</h3>
+                    <p style={{ color: "#2B1E3F", opacity: 0.7 }}>{p.desc}</p>
+                  </div>
                 </div>
-                <div className="p-5">
-                  <h3 className="font-bold text-lg mb-1">{p.title}</h3>
-                  <p className="text-muted-foreground">{p.desc}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* 02 - Pourquoi */}
-      <SectionWrapper id="pourquoi">
-        <div className="mx-auto max-w-3xl space-y-6">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground">02 - Le cœur du sujet</p>
-          <h2 className="text-3xl font-extrabold md:text-4xl">Pourquoi le SEO est particulièrement adapté aux TPE, artisans et indépendants</h2>
-          <p className="text-muted-foreground leading-relaxed">Les grandes entreprises ont des budgets publicitaires que vous ne pourrez jamais égaler. Mais en SEO, la taille ne fait pas la loi - la pertinence, si. Et sur ce terrain, vous avez des atouts considérables.</p>
-
-          <div className="relative rounded-2xl border-l-4 border-primary pl-6 py-2">
-            <p className="text-xl font-extrabold leading-snug">Un artisan qui maîtrise son SEO local peut surclasser une enseigne nationale sur ses propres mots-clés. Google préfère le résultat le plus pertinent, pas le plus riche.</p>
-          </div>
-
-          <div className="space-y-0">
-            {benefits.map((b, i) => (
-              <div key={i} className="flex border-b border-border last:border-0">
-                <div className="flex h-auto w-16 shrink-0 items-center justify-center bg-[hsl(263,36%,18%)] text-white font-extrabold text-sm">
-                  {b.num}
+      {/* ─── 02 Pourquoi — bloc 2 → #E9F2F4 ─────────────────────────────────── */}
+      <section id="pourquoi" className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
+        <div className="container">
+          <div className="mx-auto max-w-3xl space-y-6">
+            <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "#2B1E3F", opacity: 0.5 }}>02 - Le cœur du sujet</p>
+            <h2 style={{ color: "#2B1E3F" }}>Pourquoi le SEO est particulièrement adapté aux TPE, artisans et indépendants</h2>
+            <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>Les grandes entreprises ont des budgets publicitaires que vous ne pourrez jamais égaler. Mais en SEO, la taille ne fait pas la loi - la pertinence, si. Et sur ce terrain, vous avez des atouts considérables.</p>
+            <div className="rounded-2xl border-l-4 border-primary pl-6 py-2">
+              <p className="text-xl font-extrabold leading-snug" style={{ color: "#2B1E3F" }}>Un artisan qui maîtrise son SEO local peut surclasser une enseigne nationale sur ses propres mots-clés. Google préfère le résultat le plus pertinent, pas le plus riche.</p>
+            </div>
+            <div className="space-y-0 rounded-2xl overflow-hidden shadow-card">
+              {benefits.map((b, i) => (
+                <div key={i} className="flex border-b last:border-0" style={{ borderColor: "rgba(43,30,63,0.1)" }}>
+                  <div className="flex h-auto w-16 shrink-0 items-center justify-center font-extrabold text-sm" style={{ backgroundColor: "hsl(263,36%,18%)", color: "#F6F1E9" }}>
+                    {b.num}
+                  </div>
+                  <div className="p-5" style={{ backgroundColor: "#F6F1E9" }}>
+                    <h3 className="font-bold text-lg mb-1" style={{ color: "#2B1E3F" }}>{b.title}</h3>
+                    <p style={{ color: "#2B1E3F", opacity: 0.7 }}>{b.desc}</p>
+                  </div>
                 </div>
-                <div className="p-5">
-                  <h3 className="font-bold text-lg mb-1">{b.title}</h3>
-                  <p className="text-muted-foreground">{b.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="rounded-2xl border border-green-300/30 bg-green-50/50 p-5">
-            <p className="font-bold text-green-700 mb-2">💡 Le chiffre qui convainc</p>
-            <p className="text-muted-foreground">Les leads issus du SEO ont un taux de conversion moyen de <strong>14,6 %</strong> contre 1,7 % pour les leads issus de la publicité outbound classique (flyers, cold call, affichage). Source : Search Engine Journal. Autrement dit : les gens qui vous trouvent via Google sont bien plus enclins à devenir clients.</p>
+              ))}
+            </div>
+            <div className="rounded-2xl border border-green-300/30 bg-green-50/50 p-5">
+              <p className="font-bold text-green-700 mb-2">💡 Le chiffre qui convainc</p>
+              <p style={{ color: "#2B1E3F", opacity: 0.7 }}>Les leads issus du SEO ont un taux de conversion moyen de <strong>14,6 %</strong> contre 1,7 % pour les leads issus de la publicité outbound classique (flyers, cold call, affichage). Source : Search Engine Journal. Autrement dit : les gens qui vous trouvent via Google sont bien plus enclins à devenir clients.</p>
+            </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* CTA 1 */}
-      <section className="relative overflow-hidden py-14">
+      {/* ─── CTA texture 1 — skip alternance ─────────────────────────────────── */}
+      <section className="relative overflow-hidden py-14" data-alternate="skip">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
         <div className="container relative z-10 text-center">
-          <h2 className="mb-4 text-2xl font-extrabold text-[hsl(263,36%,18%)] md:text-3xl">Prêt à attirer vos premiers clients via Google ?</h2>
-          <p className="mb-6 text-[hsl(263,36%,18%)]/80 max-w-xl mx-auto">Nos experts analysent votre site et identifient les quick wins SEO pour votre activité.</p>
+          <h2 className="mb-4" style={{ color: "#2B1E3F" }}>Prêt à attirer vos premiers clients via Google ?</h2>
+          <p className="mb-6 max-w-xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>Nos experts analysent votre site et identifient les quick wins SEO pour votre activité.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-             <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-[hsl(263,36%,18%)] shadow-glow">
+            <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
               <Link to="/contact">Audit SEO gratuit</Link>
             </Button>
-            <Button asChild variant="custom" size="lg" className="rounded-full border-2 border-[hsl(263,36%,18%)] bg-transparent px-8 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)]/10 transition-colors">
+            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-bold shadow-glow">
               <Link to="/rendez-vous">Prendre rendez-vous</Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Image SearchConsole + texte — effet overlap fondu */}
-      <SectionWrapper>
-        <div className="mx-auto max-w-5xl">
-          <div className="relative min-h-[320px] flex items-center">
-            <div className="hidden lg:block absolute left-0 top-0 h-full w-1/2 rounded-2xl overflow-hidden">
-              <img src={imgSearchConsole} alt="Google Search Console résultats SEO en hausse" className="w-full h-full object-cover" loading="lazy" />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(to left, hsl(var(--background)) 0%, hsl(var(--background)/0.3) 40%, transparent 70%)" }} />
-            </div>
-            <div className="relative z-10 ml-auto max-w-xl space-y-5 py-10">
-              <h2 className="text-3xl font-extrabold md:text-4xl">Suivez vos résultats en temps réel</h2>
-              <p className="text-muted-foreground leading-relaxed">
-                Le SEO n'est pas une boîte noire. Grâce aux outils d'analyse, vous suivez chaque progression : mots-clés qui montent, trafic organique, demandes de devis générées par votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link>.
-              </p>
-              <p className="text-muted-foreground leading-relaxed">
-                C'est cette transparence qui fait du SEO un investissement mesurable, contrairement à bien d'autres canaux marketing.
-              </p>
-            </div>
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* 03 - Comparaison */}
-      <SectionWrapper id="comparaison">
-        <div className="mx-auto max-w-4xl space-y-6">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">03 - Mise en perspective</p>
-          <h2 className="text-3xl font-extrabold md:text-4xl text-center">SEO contre les autres canaux : ce que les chiffres disent</h2>
-          <p className="text-center text-muted-foreground max-w-2xl mx-auto">Pour un artisan ou un indépendant avec un budget limité, chaque euro investi en marketing doit travailler. Voici une comparaison honnête des principaux canaux d'acquisition.</p>
-          <div className="overflow-x-auto rounded-2xl border bg-background shadow-card">
-            <table className="w-full">
-              <thead>
-                <tr className="bg-[hsl(263,36%,18%)] text-[hsl(263,36%,18%)]">
-                  <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider">Critère</th>
-                  <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider bg-primary/80">SEO (naturel)</th>
-                  <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider">Google Ads</th>
-                  <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider">Réseaux sociaux</th>
-                </tr>
-              </thead>
-              <tbody>
-                {compareRows.map((row, i) => (
-                  <tr key={i} className="border-b border-border last:border-0 hover:bg-muted/30 transition-colors">
-                    <td className="px-5 py-3 font-bold text-sm">{row.criteria}</td>
-                    <td className={`px-5 py-3 text-sm ${row.seoWin ? "text-green-700 italic font-medium" : "text-muted-foreground"}`}>{row.seoWin ? "✓ " : ""}{row.seo}</td>
-                    <td className="px-5 py-3 text-sm text-muted-foreground">{row.ads}</td>
-                    <td className="px-5 py-3 text-sm text-muted-foreground">{row.social}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="rounded-2xl border border-amber-300/30 bg-amber-50/50 p-5">
-            <p className="font-bold text-amber-700 mb-2">⚠️ Google Ads n'est pas votre ennemi</p>
-            <p className="text-muted-foreground">Google Ads reste un outil utile, notamment pour lancer une activité ou capter de la demande en urgence. Mais il ne construit rien de durable. Le combo idéal pour une TPE : <strong>SEO pour le long terme + Google Ads en appoint ponctuel</strong> pendant la montée en puissance du référencement naturel. Découvrez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link>.</p>
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* 04 - Profils */}
-      <SectionWrapper id="profils">
-        <div className="mx-auto max-w-4xl space-y-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">04 - Cas concrets</p>
-          <h2 className="text-3xl font-extrabold md:text-4xl text-center">Ce que le SEO change concrètement selon votre profil</h2>
-          <p className="text-center text-muted-foreground max-w-2xl mx-auto">Le SEO ne se déploie pas de la même façon selon que vous êtes artisan, freelance ou dirigeant de TPE. Voici les opportunités spécifiques à chaque profil.</p>
-          <div className="grid gap-6 md:grid-cols-3">
-            {profiles.map((p, i) => (
-              <div key={i} className="rounded-2xl bg-background p-6 shadow-card border-t-4 border-primary">
-                <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[hsl(263,36%,18%)] text-[hsl(263,36%,18%)]">
-                  <p.icon size={22} />
-                </div>
-                <h3 className="font-bold text-lg mb-1">{p.title}</h3>
-                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-4">{p.sub}</p>
-                <ul className="space-y-2">
-                  {p.items.map((item, j) => (
-                    <li key={j} className="flex gap-2 text-muted-foreground">
-                      <CheckCircle2 size={14} className="text-primary shrink-0 mt-1" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+      {/* ─── SearchConsole overlap — bloc 3 → #F6F1E9 ───────────────────────── */}
+      <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#F6F1E9" }}>
+        <div className="container">
+          <div className="mx-auto max-w-5xl">
+            <div className="relative min-h-[320px] flex items-center">
+              <div className="hidden lg:block absolute left-0 top-0 h-full w-1/2 rounded-2xl overflow-hidden">
+                <img src={imgSearchConsole} alt="Google Search Console résultats SEO en hausse" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to left, #F6F1E9 0%, rgba(246,241,233,0.3) 40%, transparent 70%)" }} />
               </div>
-            ))}
+              <div className="relative z-10 ml-auto max-w-xl space-y-5 py-10">
+                <h2 style={{ color: "#2B1E3F" }}>Suivez vos résultats en temps réel</h2>
+                <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                  Le SEO n'est pas une boîte noire. Grâce aux outils d'analyse, vous suivez chaque progression : mots-clés qui montent, trafic organique, demandes de devis générées par votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link>.
+                </p>
+                <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                  C'est cette transparence qui fait du SEO un investissement mesurable, contrairement à bien d'autres canaux marketing.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
+      {/* ─── 03 Comparaison — bloc 4 → #E9F2F4 ──────────────────────────────── */}
+      <section id="comparaison" className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
+        <div className="container">
+          <div className="mx-auto max-w-4xl space-y-6">
+            <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>03 - Mise en perspective</p>
+            <h2 className="text-center" style={{ color: "#2B1E3F" }}>SEO contre les autres canaux : ce que les chiffres disent</h2>
+            <p className="text-center max-w-2xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>Pour un artisan ou un indépendant avec un budget limité, chaque euro investi en marketing doit travailler. Voici une comparaison honnête des principaux canaux d'acquisition.</p>
+            <div className="overflow-x-auto rounded-2xl border shadow-card" style={{ backgroundColor: "#F6F1E9" }}>
+              <table className="w-full">
+                <thead>
+                  <tr style={{ backgroundColor: "hsl(263,36%,18%)" }}>
+                    <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider" style={{ color: "#F6F1E9" }}>Critère</th>
+                    <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider" style={{ color: "#F6F1E9", backgroundColor: "rgba(67,97,238,0.6)" }}>SEO (naturel)</th>
+                    <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider" style={{ color: "#F6F1E9" }}>Google Ads</th>
+                    <th className="px-5 py-3 text-left font-bold text-xs uppercase tracking-wider" style={{ color: "#F6F1E9" }}>Réseaux sociaux</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {compareRows.map((row, i) => (
+                    <tr key={i} className="border-b last:border-0 transition-colors hover:bg-white/50" style={{ borderColor: "rgba(43,30,63,0.1)" }}>
+                      <td className="px-5 py-3 font-bold text-sm" style={{ color: "#2B1E3F" }}>{row.criteria}</td>
+                      <td className="px-5 py-3 text-sm" style={{ color: row.seoWin ? "#15803d" : "#2B1E3F", opacity: row.seoWin ? 1 : 0.6, fontStyle: row.seoWin ? "italic" : "normal", fontWeight: row.seoWin ? 500 : 400 }}>{row.seoWin ? "✓ " : ""}{row.seo}</td>
+                      <td className="px-5 py-3 text-sm" style={{ color: "#2B1E3F", opacity: 0.6 }}>{row.ads}</td>
+                      <td className="px-5 py-3 text-sm" style={{ color: "#2B1E3F", opacity: 0.6 }}>{row.social}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="rounded-2xl border border-amber-300/30 bg-amber-50/50 p-5">
+              <p className="font-bold text-amber-700 mb-2">⚠️ Google Ads n'est pas votre ennemi</p>
+              <p style={{ color: "#2B1E3F", opacity: 0.7 }}>Google Ads reste un outil utile, notamment pour lancer une activité ou capter de la demande en urgence. Mais il ne construit rien de durable. Le combo idéal pour une TPE : <strong>SEO pour le long terme + Google Ads en appoint ponctuel</strong> pendant la montée en puissance du référencement naturel. Découvrez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link>.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 04 Profils — bloc 5 → #F6F1E9 ──────────────────────────────────── */}
+      <section id="profils" className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
+        <div className="container">
+          <div className="mx-auto max-w-4xl space-y-8">
+            <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>04 - Cas concrets</p>
+            <h2 className="text-center" style={{ color: "#2B1E3F" }}>Ce que le SEO change concrètement selon votre profil</h2>
+            <p className="text-center max-w-2xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>Le SEO ne se déploie pas de la même façon selon que vous êtes artisan, freelance ou dirigeant de TPE. Voici les opportunités spécifiques à chaque profil.</p>
+            <div className="grid gap-6 md:grid-cols-3">
+              {profiles.map((p, i) => (
+                <div key={i} className="rounded-2xl p-6 shadow-card border-t-4 border-primary" style={{ backgroundColor: "#E9F2F4" }}>
+                  <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl gradient-primary" style={{ color: "#2B1E3F" }}>
+                    <p.icon size={22} />
+                  </div>
+                  <h3 className="font-bold text-lg mb-1" style={{ color: "#2B1E3F" }}>{p.title}</h3>
+                  <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "#2B1E3F", opacity: 0.5 }}>{p.sub}</p>
+                  <ul className="space-y-2">
+                    {p.items.map((item, j) => (
+                      <li key={j} className="flex gap-2">
+                        <CheckCircle2 size={14} className="text-primary shrink-0 mt-1" />
+                        <span style={{ color: "#2B1E3F", opacity: 0.7 }}>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── GoogleReviews — skip alternance ──────────────────────────────────── */}
       <GoogleReviewsSection compact maxReviews={3} />
 
-      {/* 05 - Mythes */}
-      <SectionWrapper id="idees-recues">
-        <div className="mx-auto max-w-3xl space-y-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">05 - Idées reçues</p>
-          <h2 className="text-3xl font-extrabold md:text-4xl text-center">Les 4 fausses croyances qui freinent les artisans et indépendants</h2>
-          <div className="space-y-5">
-            {myths.map((m, i) => (
-              <div key={i} className="grid md:grid-cols-2 gap-0 rounded-2xl border bg-background shadow-card overflow-hidden">
-                <div className="p-6 bg-red-50/50 border-b md:border-b-0 md:border-r border-border">
-                  <span className="inline-block rounded bg-red-100 px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-red-700 mb-3">Mythe</span>
-                  <h4 className="font-bold mb-2">{m.myth}</h4>
-                  <p className="text-muted-foreground">{m.mythDesc}</p>
+      {/* ─── 05 Mythes — bloc 6 → #E9F2F4 ───────────────────────────────────── */}
+      <section id="idees-recues" className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
+        <div className="container">
+          <div className="mx-auto max-w-3xl space-y-8">
+            <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>05 - Idées reçues</p>
+            <h2 className="text-center" style={{ color: "#2B1E3F" }}>Les 4 fausses croyances qui freinent les artisans et indépendants</h2>
+            <div className="space-y-5">
+              {myths.map((m, i) => (
+                <div key={i} className="grid md:grid-cols-2 gap-0 rounded-2xl border shadow-card overflow-hidden" style={{ borderColor: "rgba(43,30,63,0.1)" }}>
+                  <div className="p-6 bg-red-50/50 border-b md:border-b-0 md:border-r" style={{ borderColor: "rgba(43,30,63,0.1)" }}>
+                    <span className="inline-block rounded bg-red-100 px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-red-700 mb-3">Mythe</span>
+                    <h4 className="font-bold mb-2" style={{ color: "#2B1E3F" }}>{m.myth}</h4>
+                    <p style={{ color: "#2B1E3F", opacity: 0.7 }}>{m.mythDesc}</p>
+                  </div>
+                  <div className="p-6" style={{ backgroundColor: "#F6F1E9" }}>
+                    <span className="inline-block rounded bg-green-100 px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-green-700 mb-3">Réalité</span>
+                    <h4 className="font-bold mb-2" style={{ color: "#2B1E3F" }}>{m.reality}</h4>
+                    <p style={{ color: "#2B1E3F", opacity: 0.7 }}>{m.realityDesc}</p>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <span className="inline-block rounded bg-green-100 px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-green-700 mb-3">Réalité</span>
-                  <h4 className="font-bold mb-2">{m.reality}</h4>
-                  <p className="text-muted-foreground">{m.realityDesc}</p>
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* CTA 2 */}
-      <section className="relative overflow-hidden py-14">
+      {/* ─── CTA texture 2 — skip alternance ─────────────────────────────────── */}
+      <section className="relative overflow-hidden py-14" data-alternate="skip">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
         <div className="container relative z-10 text-center">
-          <h2 className="mb-4 text-2xl font-extrabold text-[hsl(263,36%,18%)] md:text-3xl">Vous vous reconnaissez dans ces freins ?</h2>
-          <p className="mb-6 text-[hsl(263,36%,18%)]/80 max-w-xl mx-auto">On démystifie le SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
-          <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 text-[hsl(263,36%,18%)] font-semibold shadow-glow">
+          <h2 className="mb-4" style={{ color: "#2B1E3F" }}>Vous vous reconnaissez dans ces freins ?</h2>
+          <p className="mb-6 max-w-xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>On démystifie le SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
+          <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
             <Link to="/contact">Demander un audit SEO gratuit</Link>
           </Button>
         </div>
       </section>
 
-      {/* 06 - Comment démarrer */}
-      <SectionWrapper id="demarrer">
-        <div className="mx-auto max-w-3xl space-y-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">06 - Passer à l'action</p>
-          <h2 className="text-3xl font-extrabold md:text-4xl text-center">Par où commencer quand on est artisan ou indépendant ?</h2>
-          <p className="text-center text-muted-foreground max-w-2xl mx-auto">La bonne nouvelle : les premières actions SEO ne coûtent que du temps. Voici la progression logique pour démarrer efficacement.</p>
-          <div className="space-y-0">
-            {steps.map((s, i) => (
-              <div key={i} className="flex gap-5 py-7 border-b border-border last:border-0">
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary font-extrabold text-lg">
-                  {i + 1}
+      {/* ─── 06 Comment démarrer — bloc 7 → #F6F1E9 ─────────────────────────── */}
+      <section id="demarrer" className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
+        <div className="container">
+          <div className="mx-auto max-w-3xl space-y-8">
+            <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>06 - Passer à l'action</p>
+            <h2 className="text-center" style={{ color: "#2B1E3F" }}>Par où commencer quand on est artisan ou indépendant ?</h2>
+            <p className="text-center max-w-2xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>La bonne nouvelle : les premières actions SEO ne coûtent que du temps. Voici la progression logique pour démarrer efficacement.</p>
+            <div className="space-y-0">
+              {steps.map((s, i) => (
+                <div key={i} className="flex gap-5 py-7 border-b last:border-0" style={{ borderColor: "rgba(43,30,63,0.1)" }}>
+                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary font-extrabold text-lg">
+                    {i + 1}
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-lg mb-2" style={{ color: "#2B1E3F" }}>{s.title}</h3>
+                    <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>{s.desc}</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="font-bold text-lg mb-2">{s.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{s.desc}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
-            <p className="font-bold text-primary mb-2">📌 Conseil pratique</p>
-            <p className="text-muted-foreground">Avant tout investissement SEO, vérifiez que votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link> se charge en moins de 3 secondes sur mobile et qu'il est responsive. Un site lent est pénalisé par Google et fait fuir vos visiteurs. Testez avec <strong>PageSpeed Insights</strong> de Google - c'est gratuit et prend 30 secondes. Consultez aussi notre article sur <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold">l'impact de la vitesse sur votre chiffre d'affaires</Link>.</p>
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* Image GoogleMaps + texte — effet overlap fondu */}
-      <SectionWrapper>
-        <div className="mx-auto max-w-5xl">
-          <div className="relative min-h-[360px] flex items-center">
-            <div className="hidden lg:block absolute right-0 top-0 h-full w-1/2 rounded-2xl overflow-hidden">
-              <img src={imgGoogleMaps} alt="SEO local Google Maps Boulogne-Billancourt" className="w-full h-full object-cover" loading="lazy" />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(to right, hsl(var(--background)) 0%, hsl(var(--background)/0.3) 40%, transparent 70%)" }} />
+              ))}
             </div>
-            <div className="relative z-10 max-w-xl space-y-5 py-10">
-              <h2 className="text-3xl font-extrabold md:text-4xl">Le SEO local : votre arme secrète dans le 92</h2>
-              <p className="text-muted-foreground leading-relaxed">Les recherches "près de moi" ont explosé de 500% en 5 ans. Quand un client cherche votre métier sur Google Maps, il veut trouver le professionnel le plus proche et le mieux noté.</p>
-              <p className="text-muted-foreground leading-relaxed">Avec un site optimisé + une fiche Google Business complète + des avis clients, vous captez cette demande locale avant vos concurrents.</p>
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
+              <p className="font-bold text-primary mb-2">📌 Conseil pratique</p>
+              <p style={{ color: "#2B1E3F", opacity: 0.7 }}>Avant tout investissement SEO, vérifiez que votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link> se charge en moins de 3 secondes sur mobile et qu'il est responsive. Un site lent est pénalisé par Google et fait fuir vos visiteurs. Testez avec <strong>PageSpeed Insights</strong> de Google - c'est gratuit et prend 30 secondes. Consultez aussi notre article sur <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold">l'impact de la vitesse sur votre chiffre d'affaires</Link>.</p>
             </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* 07 - Checklist */}
-      <SectionWrapper id="checklist">
-        <div className="mx-auto max-w-3xl space-y-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">07 - Auto-évaluation</p>
-          <h2 className="text-3xl font-extrabold md:text-4xl text-center">Votre checklist SEO de départ</h2>
-          <p className="text-center text-muted-foreground">Chaque point non coché est une opportunité d'amélioration concrète.</p>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {checklist.map((item, i) => (
-              <div key={i} className="flex gap-3 rounded-2xl border bg-background p-4 shadow-card">
-                <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-green-100 text-green-700 text-xs font-bold mt-0.5">✓</div>
-                <p className="text-muted-foreground">{item}</p>
+      {/* ─── GoogleMaps overlap — bloc 8 → #E9F2F4 ──────────────────────────── */}
+      <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#E9F2F4" }}>
+        <div className="container">
+          <div className="mx-auto max-w-5xl">
+            <div className="relative min-h-[360px] flex items-center">
+              <div className="hidden lg:block absolute right-0 top-0 h-full w-1/2 rounded-2xl overflow-hidden">
+                <img src={imgGoogleMaps} alt="SEO local Google Maps Boulogne-Billancourt" className="w-full h-full object-cover" loading="lazy" />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to right, #E9F2F4 0%, rgba(233,242,244,0.3) 40%, transparent 70%)" }} />
               </div>
-            ))}
+              <div className="relative z-10 max-w-xl space-y-5 py-10">
+                <h2 style={{ color: "#2B1E3F" }}>Le SEO local : votre arme secrète dans le 92</h2>
+                <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>Les recherches "près de moi" ont explosé de 500% en 5 ans. Quand un client cherche votre métier sur Google Maps, il veut trouver le professionnel le plus proche et le mieux noté.</p>
+                <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>Avec un site optimisé + une fiche Google Business complète + des avis clients, vous captez cette demande locale avant vos concurrents.</p>
+              </div>
+            </div>
           </div>
         </div>
-      </SectionWrapper>
+      </section>
 
-      {/* CTA 3 */}
-      <section className="relative overflow-hidden py-14">
+      {/* ─── 07 Checklist — bloc 9 → #F6F1E9 ────────────────────────────────── */}
+      <section id="checklist" className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
+        <div className="container">
+          <div className="mx-auto max-w-3xl space-y-8">
+            <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>07 - Auto-évaluation</p>
+            <h2 className="text-center" style={{ color: "#2B1E3F" }}>Votre checklist SEO de départ</h2>
+            <p className="text-center" style={{ color: "#2B1E3F", opacity: 0.7 }}>Chaque point non coché est une opportunité d'amélioration concrète.</p>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {checklist.map((item, i) => (
+                <div key={i} className="flex gap-3 rounded-2xl border p-4 shadow-card" style={{ backgroundColor: "#E9F2F4", borderColor: "rgba(43,30,63,0.1)" }}>
+                  <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-green-100 text-green-700 text-xs font-bold mt-0.5">✓</div>
+                  <p style={{ color: "#2B1E3F", opacity: 0.7 }}>{item}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── CTA texture 3 — skip alternance ─────────────────────────────────── */}
+      <section className="relative overflow-hidden py-14" data-alternate="skip">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
         <div className="container relative z-10 text-center">
-          <h2 className="mb-4 text-2xl font-extrabold text-[hsl(263,36%,18%)] md:text-3xl">Votre SEO peut travailler pour vous dès aujourd'hui</h2>
-          <p className="mb-6 text-[hsl(263,36%,18%)]/80 max-w-xl mx-auto">Nos experts analysent votre site, identifient les quick wins SEO et construisent une stratégie adaptée à votre activité, votre zone et votre budget.</p>
+          <h2 className="mb-4" style={{ color: "#2B1E3F" }}>Votre SEO peut travailler pour vous dès aujourd'hui</h2>
+          <p className="mb-6 max-w-xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>Nos experts analysent votre site, identifient les quick wins SEO et construisent une stratégie adaptée à votre activité, votre zone et votre budget.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-semibold text-[hsl(263,36%,18%)] shadow-glow">
+            <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
               <Link to="/contact">Audit SEO gratuit</Link>
             </Button>
-            <Link to="/tarifs" className="inline-flex items-center justify-center rounded-full border-2 border-[hsl(263,36%,18%)] bg-transparent px-8 py-3 font-semibold text-[hsl(263,36%,18%)] hover:bg-[hsl(263,36%,18%)]/10 transition-colors">
-              Voir nos tarifs
+            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-bold shadow-glow">
+              <Link to="/tarifs">Voir nos tarifs</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 08 FAQ — bloc 10 → #E9F2F4 ─────────────────────────────────────── */}
+      <section id="faq" className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
+        <div className="container">
+          <div className="mx-auto max-w-3xl space-y-8">
+            <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>08 - Questions fréquentes</p>
+            <h2 className="text-center" style={{ color: "#2B1E3F" }}>Vos questions sur le SEO, nos réponses honnêtes</h2>
+            <div className="space-y-0">
+              {faqItems.map((f, i) => (
+                <div key={i} className="border-b first:border-t" style={{ borderColor: "rgba(43,30,63,0.1)" }}>
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="flex w-full items-center justify-between gap-4 py-5 text-left"
+                  >
+                    <h3 className="font-bold" style={{ color: "#2B1E3F" }}>{f.q}</h3>
+                    <ChevronDown size={18} className={`shrink-0 transition-transform ${openFaq === i ? "rotate-180" : ""}`} style={{ color: "#2B1E3F", opacity: 0.5 }} />
+                  </button>
+                  {openFaq === i && (
+                    <p className="pb-5 leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>{f.a}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── GEO encart — bloc 11 → #F6F1E9 ─────────────────────────────────── */}
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
+        <div className="container">
+          <div className="mx-auto max-w-3xl">
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8">
+              <h2 style={{ color: "#2B1E3F" }}>Au-delà du SEO : la visibilité dans les moteurs IA</h2>
+              <p className="leading-relaxed mt-3" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                Au-delà du SEO traditionnel, nous vous aidons aussi à apparaître dans les réponses des intelligences artificielles. ChatGPT, Perplexity, Gemini : ces moteurs génératifs deviennent un canal d'acquisition incontournable. Découvrez notre stratégie d'<Link to="/visibilite-ia" className="text-primary font-semibold">optimisation pour les moteurs IA (GEO)</Link>.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Zones d'intervention — bloc 12 → #E9F2F4 ───────────────────────── */}
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
+        <div className="container">
+          <h2 className="text-center mb-6" style={{ color: "#2B1E3F" }}>Nos zones d'intervention SEO</h2>
+          <p className="text-center mb-8" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+            Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold">référencement SEO local</Link> à Paris et dans les Hauts-de-Seine.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {[
+              { slug: "paris-1er", label: "SEO Paris 1er" },
+              { slug: "boulogne-billancourt", label: "SEO Boulogne-Billancourt" },
+              { slug: "neuilly-sur-seine", label: "SEO Neuilly-sur-Seine" },
+              { slug: "levallois-perret", label: "SEO Levallois-Perret" },
+              { slug: "issy-les-moulineaux", label: "SEO Issy-les-Moulineaux" },
+              { slug: "courbevoie", label: "SEO Courbevoie" },
+              { slug: "nanterre", label: "SEO Nanterre" },
+              { slug: "rueil-malmaison", label: "SEO Rueil-Malmaison" },
+              { slug: "montrouge", label: "SEO Montrouge" },
+              { slug: "asnieres-sur-seine", label: "SEO Asnières-sur-Seine" },
+            ].map((c) => (
+              <Link
+                key={c.slug}
+                to={`/referencement-seo/${c.slug}`}
+                className="rounded-full border px-4 py-2 text-sm font-medium transition-colors"
+                style={{ backgroundColor: "#F6F1E9", color: "#2B1E3F", borderColor: "rgba(43,30,63,0.2)" }}
+              >
+                {c.label}
+              </Link>
+            ))}
+            <Link
+              to="/nos-villes"
+              className="rounded-full btn-glow px-4 py-2 text-sm font-semibold gradient-primary"
+              style={{ color: "#2B1E3F" }}
+            >
+              Voir toutes les villes →
             </Link>
           </div>
         </div>
       </section>
 
-      {/* 08 - FAQ */}
-      <SectionWrapper id="faq">
-        <div className="mx-auto max-w-3xl space-y-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground text-center">08 - Questions fréquentes</p>
-          <h2 className="text-3xl font-extrabold md:text-4xl text-center">Vos questions sur le SEO, nos réponses honnêtes</h2>
-          <div className="space-y-0">
-            {faqItems.map((f, i) => (
-              <div key={i} className="border-b border-border first:border-t">
-                <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="flex w-full items-center justify-between gap-4 py-5 text-left"
-                >
-                  <h3 className="font-bold">{f.q}</h3>
-                  <ChevronDown size={18} className={`shrink-0 text-muted-foreground transition-transform ${openFaq === i ? "rotate-180" : ""}`} />
-                </button>
-                {openFaq === i && (
-                  <p className="pb-5 text-muted-foreground leading-relaxed">{f.a}</p>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* GEO encart */}
-      <SectionWrapper>
-        <div className="mx-auto max-w-3xl">
-          <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8">
-            <h2 className="text-2xl font-extrabold mb-3">Au-delà du SEO : la visibilité dans les moteurs IA</h2>
-            <p className="text-muted-foreground leading-relaxed mb-4">
-              Au-delà du SEO traditionnel, nous vous aidons aussi à apparaître dans les réponses des intelligences artificielles. ChatGPT, Perplexity, Gemini : ces moteurs génératifs deviennent un canal d'acquisition incontournable. Découvrez notre stratégie d'<Link to="/visibilite-ia" className="text-primary font-semibold">optimisation pour les moteurs IA (GEO)</Link>.
-            </p>
-          </div>
-        </div>
-      </SectionWrapper>
-
-      {/* Zones d'intervention SEO */}
-      <SectionWrapper>
-        <h2 className="text-center text-3xl font-extrabold md:text-4xl mb-6">Nos zones d'intervention SEO</h2>
-        <p className="text-center text-muted-foreground mb-8">
-          Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold">référencement SEO local</Link> à Paris et dans les Hauts-de-Seine.
-        </p>
-        <div className="flex flex-wrap justify-center gap-3">
-          {[
-            { slug: "paris-1er", label: "SEO Paris 1er" },
-            { slug: "boulogne-billancourt", label: "SEO Boulogne-Billancourt" },
-            { slug: "neuilly-sur-seine", label: "SEO Neuilly-sur-Seine" },
-            { slug: "levallois-perret", label: "SEO Levallois-Perret" },
-            { slug: "issy-les-moulineaux", label: "SEO Issy-les-Moulineaux" },
-            { slug: "courbevoie", label: "SEO Courbevoie" },
-            { slug: "nanterre", label: "SEO Nanterre" },
-            { slug: "rueil-malmaison", label: "SEO Rueil-Malmaison" },
-            { slug: "montrouge", label: "SEO Montrouge" },
-            { slug: "asnieres-sur-seine", label: "SEO Asnières-sur-Seine" },
-          ].map((c) => (
-            <Link
-              key={c.slug}
-              to={`/referencement-seo/${c.slug}`}
-              className="rounded-full border bg-background px-4 py-2 text-sm font-medium hover:bg-secondary transition-colors"
-            >
-              {c.label}
-            </Link>
-          ))}
-          <Link
-            to="/nos-villes"
-            className="rounded-full gradient-primary btn-glow px-4 py-2 text-sm font-semibold text-[hsl(263,36%,18%)] shadow-glow"
-          >
-            Voir toutes les villes →
-          </Link>
-        </div>
-      </SectionWrapper>
-
+      {/* ─── LocationSection — skip alternance ───────────────────────────────── */}
       <LocationSection />
     </PageLayout>
   );
