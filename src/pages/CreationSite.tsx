@@ -203,8 +203,11 @@ const CreationSite = () => (
     </section>
 
     {/* ─── GoogleReviews — bloc 8 → #E9F2F4 ───────────────────────────────── */}
+    {/* ─── GoogleReviews — bloc 8 → #E9F2F4 ───────────────────────────────── */}
     <GoogleReviewsSection compact maxReviews={3} backgroundColor="#E9F2F4" />
-    <LocationSection />
+
+    {/* ─── LocationSection — bloc 9 → #F6F1E9 ─────────────────────────────── */}
+    <LocationSection backgroundColor="#F6F1E9" />
 
     {/* ─── CTA texture — skip alternance ───────────────────────────────────── */}
     <section className="relative overflow-hidden py-16" data-alternate="skip">
