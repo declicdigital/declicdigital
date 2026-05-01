@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { Star, ExternalLink } from "lucide-react";
-import SectionWrapper from "./SectionWrapper";
 
 const PLACE_ID = "ChIJsYNdrCdx5kcR89wPMta_l-w";
 const REVIEWS_URL = "https://search.google.com/local/reviews?placeid=ChIJsYNdrCdx5kcR89wPMta_l-w";
@@ -20,6 +19,7 @@ interface GoogleReviewsSectionProps {
   showTitle?: boolean;
   className?: string;
   compact?: boolean;
+  backgroundColor?: string;
 }
 
 const FALLBACK_REVIEWS: Review[] = [
@@ -36,6 +36,7 @@ const GoogleReviewsSection = ({
   showTitle = true,
   className = "",
   compact = false,
+  backgroundColor,
 }: GoogleReviewsSectionProps) => {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [rating, setRating] = useState<number>(5);
@@ -81,92 +82,102 @@ const GoogleReviewsSection = ({
   const DESKTOP_LIMIT = 200;
   const MOBILE_LIMIT = 160;
 
+  // Couleur de fond des cards : contraste avec le fond de section
+  const cardBg = backgroundColor === "#E9F2F4" ? "#F6F1E9" : "#E9F2F4";
+
   return (
-    <SectionWrapper className={className}>
-      {showTitle && (
-        <div className="text-center mb-10">
-          <h2 className="text-3xl font-extrabold md:text-4xl">Avis clients</h2>
-          <div className="flex items-center justify-center gap-3 mt-4">
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} size={20} className="text-amber-400 fill-amber-400" />
-              ))}
-            </div>
-            <span className="text-lg font-bold text-foreground">{displayRating}/5</span>
-            {displayTotal > 0 && (
-              <span className="text-muted-foreground">basé sur {displayTotal} avis Google</span>
-            )}
-          </div>
-        </div>
-      )}
-
-      {loading ? (
-        <div className={`grid gap-6 ${compact ? "md:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
-          {[...Array(3)].map((_, i) => (
-            <div key={i} className="rounded-2xl bg-card border border-border h-48 animate-pulse" />
-          ))}
-        </div>
-      ) : (
-        <div className={`grid gap-6 ${compact ? "md:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
-          {displayReviews.map((review, i) => (
-            <div key={i} className="rounded-2xl bg-card p-5 shadow-card border border-border flex flex-col h-full min-h-[180px]">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-1">
-                  {[...Array(5)].map((_, j) => (
-                    <Star key={j} size={14} className={j < review.rating ? "text-amber-400 fill-amber-400" : "text-muted"} />
-                  ))}
-                  <span className="text-xs font-semibold text-foreground ml-1">{review.rating}/5</span>
-                </div>
-                <img src="https://www.google.com/favicon.ico" alt="Google" className="h-4 w-4 opacity-60" />
+    <section
+      className={`py-12 md:py-16 ${className}`}
+      style={backgroundColor ? { backgroundColor } : undefined}
+    >
+      <div className="container">
+        {showTitle && (
+          <div className="text-center mb-10">
+            <h2 className="text-3xl font-extrabold md:text-4xl" style={{ color: "#2B1E3F" }}>Avis clients</h2>
+            <div className="flex items-center justify-center gap-3 mt-4">
+              <div className="flex items-center gap-1">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={20} className="text-amber-400 fill-amber-400" />
+                ))}
               </div>
-              <p className="text-sm text-muted-foreground leading-relaxed mb-2 flex-1">
-                "<span className="hidden md:inline">{review.text.length > DESKTOP_LIMIT ? review.text.slice(0, DESKTOP_LIMIT).trimEnd() + "…" : review.text}</span>
-                <span className="md:hidden">{review.text.length > MOBILE_LIMIT ? review.text.slice(0, MOBILE_LIMIT).trimEnd() + "…" : review.text}</span>"
-              </p>
-              {review.text.length > MOBILE_LIMIT && (
-                <a href={review.author_url || REVIEWS_URL} target="_blank" rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline mb-3 w-fit">
-                  Lire la suite <ExternalLink size={11} />
-                </a>
+              <span className="text-lg font-bold" style={{ color: "#2B1E3F" }}>{displayRating}/5</span>
+              {displayTotal > 0 && (
+                <span style={{ color: "#2B1E3F", opacity: 0.6 }}>basé sur {displayTotal} avis Google</span>
               )}
-              <div className="flex items-center justify-between mt-auto pt-2 border-t border-border/50">
-                <div className="flex items-center gap-2">
-                  {review.profile_photo_url ? (
-                    <img src={review.profile_photo_url} alt={review.author_name} className="w-6 h-6 rounded-full" referrerPolicy="no-referrer" />
-                  ) : (
-                    <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-[10px] font-bold text-primary">
-                      {review.author_name.charAt(0)}
-                    </div>
-                  )}
-                  <div>
-                    <p className="font-semibold text-sm text-foreground">{review.author_name}</p>
-                    {review.relative_time_description && (
-                      <p className="text-xs text-muted-foreground">{review.relative_time_description}</p>
-                    )}
-                  </div>
-                </div>
-                <a href={review.author_url || REVIEWS_URL} target="_blank" rel="noopener noreferrer"
-                  className="text-xs text-muted-foreground hover:text-primary transition-colors">
-                  <span className="sr-only">Voir l'avis</span><ExternalLink size={14} />
-                </a>
-              </div>
             </div>
-          ))}
-        </div>
-      )}
+          </div>
+        )}
 
-      <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
-        <a href={REVIEWS_URL} target="_blank" rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-6 py-3 text-sm font-semibold text-foreground hover:bg-secondary transition-colors shadow-sm">
-          <img src="https://www.google.com/favicon.ico" alt="Google" className="h-4 w-4" loading="lazy" />
-          Voir tous les avis sur Google <span className="sr-only">Voir l'avis</span><ExternalLink size={14} />
-        </a>
-        <a href={WRITE_REVIEW_URL} target="_blank" rel="noopener noreferrer"
-          className="inline-flex items-center gap-2 rounded-full gradient-primary btn-glow px-6 py-3 text-sm font-semibold text-white shadow-glow transition-opacity hover:opacity-90">
-          <Star size={14} /> Laisser un avis
-        </a>
+        {loading ? (
+          <div className={`grid gap-6 ${compact ? "md:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
+            {[...Array(3)].map((_, i) => (
+              <div key={i} className="rounded-2xl border h-48 animate-pulse" style={{ backgroundColor: cardBg, borderColor: "rgba(43,30,63,0.1)" }} />
+            ))}
+          </div>
+        ) : (
+          <div className={`grid gap-6 ${compact ? "md:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
+            {displayReviews.map((review, i) => (
+              <div key={i} className="rounded-2xl p-5 shadow-card border flex flex-col h-full min-h-[180px]" style={{ backgroundColor: cardBg, borderColor: "rgba(43,30,63,0.1)" }}>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="flex items-center gap-1">
+                    {[...Array(5)].map((_, j) => (
+                      <Star key={j} size={14} className={j < review.rating ? "text-amber-400 fill-amber-400" : "text-muted"} />
+                    ))}
+                    <span className="text-xs font-semibold ml-1" style={{ color: "#2B1E3F" }}>{review.rating}/5</span>
+                  </div>
+                  <img src="https://www.google.com/favicon.ico" alt="Google" className="h-4 w-4 opacity-60" />
+                </div>
+                <p className="text-sm leading-relaxed mb-2 flex-1" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                  "<span className="hidden md:inline">{review.text.length > DESKTOP_LIMIT ? review.text.slice(0, DESKTOP_LIMIT).trimEnd() + "…" : review.text}</span>
+                  <span className="md:hidden">{review.text.length > MOBILE_LIMIT ? review.text.slice(0, MOBILE_LIMIT).trimEnd() + "…" : review.text}</span>"
+                </p>
+                {review.text.length > MOBILE_LIMIT && (
+                  <a href={review.author_url || REVIEWS_URL} target="_blank" rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline mb-3 w-fit">
+                    Lire la suite <ExternalLink size={11} />
+                  </a>
+                )}
+                <div className="flex items-center justify-between mt-auto pt-2 border-t" style={{ borderColor: "rgba(43,30,63,0.1)" }}>
+                  <div className="flex items-center gap-2">
+                    {review.profile_photo_url ? (
+                      <img src={review.profile_photo_url} alt={review.author_name} className="w-6 h-6 rounded-full" referrerPolicy="no-referrer" />
+                    ) : (
+                      <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center text-[10px] font-bold text-primary">
+                        {review.author_name.charAt(0)}
+                      </div>
+                    )}
+                    <div>
+                      <p className="font-semibold text-sm" style={{ color: "#2B1E3F" }}>{review.author_name}</p>
+                      {review.relative_time_description && (
+                        <p className="text-xs" style={{ color: "#2B1E3F", opacity: 0.5 }}>{review.relative_time_description}</p>
+                      )}
+                    </div>
+                  </div>
+                  <a href={review.author_url || REVIEWS_URL} target="_blank" rel="noopener noreferrer"
+                    className="text-xs hover:text-primary transition-colors" style={{ color: "#2B1E3F", opacity: 0.5 }}>
+                    <span className="sr-only">Voir l'avis</span><ExternalLink size={14} />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mt-8">
+          <a href={REVIEWS_URL} target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full border px-6 py-3 text-sm font-semibold transition-colors shadow-sm"
+            style={{ backgroundColor: cardBg, color: "#2B1E3F", borderColor: "rgba(43,30,63,0.2)" }}>
+            <img src="https://www.google.com/favicon.ico" alt="Google" className="h-4 w-4" loading="lazy" />
+            Voir tous les avis sur Google <ExternalLink size={14} />
+          </a>
+          <a href={WRITE_REVIEW_URL} target="_blank" rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 rounded-full gradient-primary btn-glow px-6 py-3 text-sm font-bold shadow-glow transition-opacity hover:opacity-90"
+            style={{ color: "#2B1E3F" }}>
+            <Star size={14} /> Laisser un avis
+          </a>
+        </div>
       </div>
-    </SectionWrapper>
+    </section>
   );
 };
 
