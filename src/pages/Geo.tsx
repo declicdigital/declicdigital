@@ -306,7 +306,7 @@ const Geo = () => {
       </section>
 
       {/* ─── GoogleReviews — bloc 7 → #F6F1E9 ────────────────────────────────── */}
-      <GoogleReviewsSection compact maxReviews={3} />
+      <GoogleReviewsSection compact maxReviews={3} backgroundColor="#F6F1E9" />
 
       {/* ─── 05 Méthode — bloc 8 → #E9F2F4 ──────────────────────────────────── */}
       <section id="section-5" className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
