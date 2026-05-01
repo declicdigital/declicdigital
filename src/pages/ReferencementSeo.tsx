@@ -345,11 +345,11 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── GoogleReviews — skip alternance ──────────────────────────────────── */}
+      {/* ─── GoogleReviews — bloc 6 → #E9F2F4 ────────────────────────────────── */}
       <GoogleReviewsSection compact maxReviews={3} />
 
-      {/* ─── 05 Mythes — bloc 6 → #E9F2F4 ───────────────────────────────────── */}
-      <section id="idees-recues" className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
+      {/* ─── 05 Mythes — bloc 7 → #F6F1E9 ───────────────────────────────────── */}
+      <section id="idees-recues" className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl space-y-8">
             <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>05 - Idées reçues</p>
@@ -362,7 +362,7 @@ const ReferencementSeo = () => {
                     <h4 className="font-bold mb-2" style={{ color: "#2B1E3F" }}>{m.myth}</h4>
                     <p style={{ color: "#2B1E3F", opacity: 0.7 }}>{m.mythDesc}</p>
                   </div>
-                  <div className="p-6" style={{ backgroundColor: "#F6F1E9" }}>
+                  <div className="p-6" style={{ backgroundColor: "#E9F2F4" }}>
                     <span className="inline-block rounded bg-green-100 px-2 py-0.5 text-xs font-bold uppercase tracking-wider text-green-700 mb-3">Réalité</span>
                     <h4 className="font-bold mb-2" style={{ color: "#2B1E3F" }}>{m.reality}</h4>
                     <p style={{ color: "#2B1E3F", opacity: 0.7 }}>{m.realityDesc}</p>
@@ -386,8 +386,8 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── 06 Comment démarrer — bloc 7 → #F6F1E9 ─────────────────────────── */}
-      <section id="demarrer" className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
+      {/* ─── 06 Comment démarrer — bloc 8 → #E9F2F4 ─────────────────────────── */}
+      <section id="demarrer" className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl space-y-8">
             <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>06 - Passer à l'action</p>
@@ -414,14 +414,14 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── GoogleMaps overlap — bloc 8 → #E9F2F4 ──────────────────────────── */}
-      <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#E9F2F4" }}>
+      {/* ─── GoogleMaps overlap — bloc 9 → #F6F1E9 ──────────────────────────── */}
+      <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="mx-auto max-w-5xl">
             <div className="relative min-h-[360px] flex items-center">
               <div className="hidden lg:block absolute right-0 top-0 h-full w-1/2 rounded-2xl overflow-hidden">
                 <img src={imgGoogleMaps} alt="SEO local Google Maps Boulogne-Billancourt" className="w-full h-full object-cover" loading="lazy" />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to right, #E9F2F4 0%, rgba(233,242,244,0.3) 40%, transparent 70%)" }} />
+                <div className="absolute inset-0" style={{ background: "linear-gradient(to right, #F6F1E9 0%, rgba(246,241,233,0.3) 40%, transparent 70%)" }} />
               </div>
               <div className="relative z-10 max-w-xl space-y-5 py-10">
                 <h2 style={{ color: "#2B1E3F" }}>Le SEO local : votre arme secrète dans le 92</h2>
@@ -433,8 +433,8 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── 07 Checklist — bloc 9 → #F6F1E9 ────────────────────────────────── */}
-      <section id="checklist" className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
+      {/* ─── 07 Checklist — bloc 10 → #E9F2F4 ────────────────────────────────── */}
+      <section id="checklist" className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl space-y-8">
             <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>07 - Auto-évaluation</p>
@@ -442,7 +442,7 @@ const ReferencementSeo = () => {
             <p className="text-center" style={{ color: "#2B1E3F", opacity: 0.7 }}>Chaque point non coché est une opportunité d'amélioration concrète.</p>
             <div className="grid gap-3 sm:grid-cols-2">
               {checklist.map((item, i) => (
-                <div key={i} className="flex gap-3 rounded-2xl border p-4 shadow-card" style={{ backgroundColor: "#E9F2F4", borderColor: "rgba(43,30,63,0.1)" }}>
+                <div key={i} className="flex gap-3 rounded-2xl border p-4 shadow-card" style={{ backgroundColor: "#F6F1E9", borderColor: "rgba(43,30,63,0.1)" }}>
                   <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded bg-green-100 text-green-700 text-xs font-bold mt-0.5">✓</div>
                   <p style={{ color: "#2B1E3F", opacity: 0.7 }}>{item}</p>
                 </div>
@@ -469,8 +469,8 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── 08 FAQ — bloc 10 → #E9F2F4 ─────────────────────────────────────── */}
-      <section id="faq" className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
+      {/* ─── 08 FAQ — bloc 11 → #F6F1E9 ─────────────────────────────────────── */}
+      <section id="faq" className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl space-y-8">
             <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>08 - Questions fréquentes</p>
@@ -495,8 +495,8 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── GEO encart — bloc 11 → #F6F1E9 ─────────────────────────────────── */}
-      <section className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
+      {/* ─── GEO encart — bloc 12 → #E9F2F4 ─────────────────────────────────── */}
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl">
             <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8">
@@ -509,8 +509,8 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── Zones d'intervention — bloc 12 → #E9F2F4 ───────────────────────── */}
-      <section className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
+      {/* ─── Zones d'intervention — bloc 13 → #F6F1E9 ───────────────────────── */}
+      <section className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <h2 className="text-center mb-6" style={{ color: "#2B1E3F" }}>Nos zones d'intervention SEO</h2>
           <p className="text-center mb-8" style={{ color: "#2B1E3F", opacity: 0.7 }}>
@@ -533,7 +533,7 @@ const ReferencementSeo = () => {
                 key={c.slug}
                 to={`/referencement-seo/${c.slug}`}
                 className="rounded-full border px-4 py-2 text-sm font-medium transition-colors"
-                style={{ backgroundColor: "#F6F1E9", color: "#2B1E3F", borderColor: "rgba(43,30,63,0.2)" }}
+                style={{ backgroundColor: "#E9F2F4", color: "#2B1E3F", borderColor: "rgba(43,30,63,0.2)" }}
               >
                 {c.label}
               </Link>
