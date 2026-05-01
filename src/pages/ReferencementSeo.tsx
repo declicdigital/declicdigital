@@ -346,7 +346,7 @@ const ReferencementSeo = () => {
       </section>
 
       {/* ─── GoogleReviews — bloc 6 → #E9F2F4 ────────────────────────────────── */}
-      <GoogleReviewsSection compact maxReviews={3} />
+      <GoogleReviewsSection compact maxReviews={3} backgroundColor="#E9F2F4" />
 
       {/* ─── 05 Mythes — bloc 7 → #F6F1E9 ───────────────────────────────────── */}
       <section id="idees-recues" className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
