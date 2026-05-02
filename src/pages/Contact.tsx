@@ -11,10 +11,23 @@ import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
 import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
+import { supabase } from "@/integrations/supabase/client";
 
-const SUPABASE_URL = "https://iskxljribvfypkyappku.supabase.co";
-const ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza3hsanJpYnZmeXBreWFwcGt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2NjQ0MzMsImV4cCI6MjA5MjI0MDQzM30.OgWh7kKknHgdG4JMTFbNC_XdZhncnEqzJQA0GbRI_uY";
 const CONTACT_EMAIL = "contact@declicdigital.net";
+const BREVO_API_KEY = "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";
+
+const sendBrevoEmail = async (to: { email: string; name: string }, subject: string, htmlContent: string) => {
+  await fetch("https://api.brevo.com/v3/smtp/email", {
+    method: "POST",
+    headers: { "api-key": BREVO_API_KEY, "Content-Type": "application/json" },
+    body: JSON.stringify({
+      sender: { name: "Déclic Digital", email: CONTACT_EMAIL },
+      to: [to],
+      subject,
+      htmlContent,
+    }),
+  });
+};
 
 const Contact = () => {
   const [form, setForm] = useState({
@@ -35,20 +48,63 @@ const Contact = () => {
     setError("");
 
     try {
-      const res = await fetch(`${SUPABASE_URL}/functions/v1/send-contact`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "apikey": ANON_KEY,
-          "Authorization": `Bearer ${ANON_KEY}`,
-        },
-        body: JSON.stringify({ ...form, form_type: "contact" }),
+      // 1. INSERT dans Supabase
+      await supabase.from("contact_submissions").insert({
+        full_name: form.full_name,
+        company: form.company,
+        email: form.email,
+        phone: form.phone,
+        current_url: form.current_url,
+        message: form.msg,
+        status: "new",
       });
 
-      if (!res.ok) throw new Error("Erreur envoi");
+      // 2. Email de confirmation au prospect
+      await sendBrevoEmail(
+        { email: form.email, name: form.full_name },
+        "Votre message a bien été reçu — Déclic Digital",
+        `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;">
+          <div style="background:linear-gradient(135deg,#3d1a6e,#4fc3c3);padding:24px;border-radius:12px;margin-bottom:24px;text-align:center;">
+            <h1 style="color:white;margin:0;font-size:22px;">Message reçu ! ✅</h1>
+          </div>
+          <p style="color:#333;font-size:16px;">Bonjour <strong>${form.full_name}</strong>,</p>
+          <p style="color:#555;line-height:1.6;">Merci pour votre message. Nous l'avons bien reçu et vous répondrons sous 24 à 48h ouvrées.</p>
+          <div style="background:#f8f9fa;border-radius:12px;padding:16px;margin:20px 0;">
+            <p style="margin:0;color:#666;font-size:13px;">Votre message :</p>
+            <p style="margin:8px 0 0;color:#333;white-space:pre-wrap;">${form.msg}</p>
+          </div>
+          <p style="color:#999;font-size:13px;text-align:center;margin-top:32px;">Déclic Digital — declicdigital.net</p>
+        </div>`
+      );
+
+      // 3. Notification à Geoffrey
+      await sendBrevoEmail(
+        { email: CONTACT_EMAIL, name: "Geoffrey" },
+        `📬 Nouveau contact — ${form.full_name}${form.company ? ` (${form.company})` : ""}`,
+        `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#f5f5f5;padding:20px;">
+          <div style="background:linear-gradient(135deg,#3d1a6e,#4fc3c3);padding:20px 24px;border-radius:12px;margin-bottom:20px;">
+            <h1 style="color:white;margin:0;font-size:20px;">📬 Nouveau message de contact</h1>
+          </div>
+          <div style="background:white;border-radius:12px;padding:24px;">
+            <table style="width:100%;border-collapse:collapse;">
+              <tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;width:120px;">Nom</td><td style="font-weight:bold;font-size:13px;">${form.full_name}</td></tr>
+              <tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;">Email</td><td style="font-size:13px;"><a href="mailto:${form.email}" style="color:#4fc3c3;">${form.email}</a></td></tr>
+              ${form.phone ? `<tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;">Téléphone</td><td style="font-size:13px;"><a href="tel:${form.phone}">${form.phone}</a></td></tr>` : ""}
+              ${form.company ? `<tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;">Entreprise</td><td style="font-size:13px;">${form.company}</td></tr>` : ""}
+              ${form.current_url ? `<tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;">Site actuel</td><td style="font-size:13px;"><a href="${form.current_url}" style="color:#4fc3c3;">${form.current_url}</a></td></tr>` : ""}
+            </table>
+            <div style="margin-top:16px;padding:16px;background:#f8f9fa;border-radius:8px;border-left:3px solid #4fc3c3;">
+              <p style="margin:0 0 6px;color:#888;font-size:12px;">Message :</p>
+              <p style="margin:0;color:#333;white-space:pre-wrap;font-size:13px;">${form.msg}</p>
+            </div>
+          </div>
+        </div>`
+      );
+
       setSent(true);
       setForm({ full_name: "", company: "", email: "", phone: "", current_url: "", msg: "" });
-    } catch {
+    } catch (err) {
+      console.error(err);
       setError("Une erreur est survenue. Réessayez ou contactez-nous directement.");
     } finally {
       setSending(false);
@@ -93,7 +149,7 @@ const Contact = () => {
         <div className="container">
           <div className="grid items-start gap-10 lg:grid-cols-2">
             <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} className="flex flex-col justify-center lg:sticky lg:top-32">
-              <h1 className="mb-4 text-4xl font-extrabold md:text-5xl">
+              <h1 className="mb-4">
                 Parlons de votre projet : devis gratuit sous 24h
               </h1>
               <p className="text-lg text-muted-foreground mb-6">
@@ -124,8 +180,7 @@ const Contact = () => {
 
             <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
               <div className="rounded-2xl border border-border bg-card p-6 md:p-8 shadow-card">
-                <h2 className="mb-6 text-2xl font-extrabold">Demandez votre devis</h2>
-
+                <h2 className="mb-6">Demandez votre devis</h2>
                 {sent ? (
                   <div className="text-center py-8">
                     <CheckCircle size={48} className="text-green-500 mx-auto mb-4" />
@@ -144,11 +199,9 @@ const Contact = () => {
                     </div>
                     <Input name="current_url" placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" value={form.current_url} onChange={handleChange} />
                     <Textarea name="msg" placeholder="Décrivez votre projet..." className="rounded-xl min-h-[120px]" required value={form.msg} onChange={handleChange} />
-
                     {error && <p className="text-red-500 text-sm">{error}</p>}
-
                     <Button type="submit" variant="custom" size="lg" disabled={sending}
-                      className="w-full gradient-primary btn-glow rounded-full text-white font-semibold shadow-glow">
+                      className="w-full gradient-miami btn-glow rounded-full font-bold shadow-glow">
                       {sending ? <Loader2 size={18} className="mr-2 animate-spin" /> : <CheckCircle size={18} className="mr-2" />}
                       {sending ? "Envoi en cours..." : "Envoyer ma demande"}
                     </Button>
