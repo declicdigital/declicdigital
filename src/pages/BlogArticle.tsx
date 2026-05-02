@@ -44,13 +44,28 @@ const ShareBar = ({ post, formattedDate }: { post: BlogPost; formattedDate: stri
     setTimeout(() => setCopied(false), 2000);
   };
   return (
-    <div className="mb-10 flex flex-wrap items-center gap-4 border-b border-border pb-6">
-      <span className="flex items-center gap-1.5 text-sm text-muted-foreground"><Calendar size={14} /> {formattedDate}</span>
-      <span className="flex items-center gap-1.5 text-sm text-muted-foreground"><Clock size={14} /> {post.read_time} de lecture</span>
-      <span className="rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">{post.category}</span>
-      <button onClick={handleCopy}
-        className="ml-auto flex items-center gap-1.5 rounded-full bg-secondary px-3 py-1.5 text-xs font-medium text-muted-foreground hover:bg-secondary/80 transition-colors"
-        title="Copier le lien">
+    <div
+      className="mb-10 flex flex-wrap items-center gap-4 pb-6"
+      style={{ borderBottom: "1px solid rgba(43,30,63,0.12)" }}
+    >
+      <span className="flex items-center gap-1.5 text-sm" style={{ color: "#2B1E3F", opacity: 0.5 }}>
+        <Calendar size={14} /> {formattedDate}
+      </span>
+      <span className="flex items-center gap-1.5 text-sm" style={{ color: "#2B1E3F", opacity: 0.5 }}>
+        <Clock size={14} /> {post.read_time} de lecture
+      </span>
+      <span
+        className="rounded-full px-3 py-1 text-xs font-semibold"
+        style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}
+      >
+        {post.category}
+      </span>
+      <button
+        onClick={handleCopy}
+        className="ml-auto flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium transition-colors"
+        style={{ backgroundColor: "#E9F2F4", color: "#2B1E3F" }}
+        title="Copier le lien"
+      >
         {copied ? <Check size={14} className="text-emerald-500" /> : <Share2 size={14} />}
         {copied ? "Lien copié !" : "Partager"}
       </button>
@@ -80,7 +95,6 @@ export default function BlogArticle() {
     async function fetchPost() {
       if (!cleanSlug) { setNotFound(true); setLoading(false); return; }
 
-      // 1. Chercher dans Supabase d'abord
       const { data } = await supabase
         .from("cms_blog_posts")
         .select("*")
@@ -94,7 +108,6 @@ export default function BlogArticle() {
         return;
       }
 
-      // 2. Fallback sur les articles en dur
       const staticPost = getPostBySlug(cleanSlug);
       if (staticPost) {
         setPost({
@@ -166,29 +179,56 @@ export default function BlogArticle() {
         })}</script>
       </Helmet>
 
+      {/* Cover image hero */}
       <div className="relative h-[40vh] md:h-[50vh] overflow-hidden">
-        {post.cover_image_url && <img src={post.cover_image_url} alt={post.title} className="h-full w-full object-cover" />}
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/30 to-transparent" />
+        {post.cover_image_url && (
+          <img src={post.cover_image_url} alt={post.title} className="h-full w-full object-cover" />
+        )}
+        <div
+          className="absolute inset-0"
+          style={{ background: "linear-gradient(to top, rgba(15,10,46,0.80) 0%, rgba(15,10,46,0.30) 50%, transparent 100%)" }}
+        />
         <div className="absolute bottom-0 left-0 right-0 container pb-10">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <Link to="/blog" className="mb-4 inline-flex items-center gap-1.5 text-sm text-white/70 hover:text-white transition-colors">
+            <Link
+              to="/blog"
+              className="mb-4 inline-flex items-center gap-1.5 text-sm transition-colors"
+              style={{ color: "rgba(246,241,233,0.7)" }}
+            >
               <ArrowLeft size={14} /> Retour au blog
             </Link>
-            <h1 className="text-3xl font-extrabold text-white md:text-4xl lg:text-5xl leading-tight max-w-3xl">{post.title}</h1>
+            <h1
+              className="text-3xl font-extrabold md:text-4xl lg:text-5xl leading-tight max-w-3xl"
+              style={{ color: "#F6F1E9" }}
+            >
+              {post.title}
+            </h1>
           </motion.div>
         </div>
       </div>
 
-      <article className="container py-12 md:py-16">
+      {/* Contenu article */}
+      <article className="container py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="mx-auto max-w-3xl">
           <ShareBar post={post} formattedDate={formattedDate} />
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5, delay: 0.3 }}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
             className="cms-article-content"
-            dangerouslySetInnerHTML={{ __html: processContent(post.content) }} />
+            dangerouslySetInnerHTML={{ __html: processContent(post.content) }}
+          />
           {post.tags && post.tags.length > 0 && (
-            <div className="mt-12 flex flex-wrap gap-2 border-t border-border pt-6">
+            <div
+              className="mt-12 flex flex-wrap gap-2 pt-6"
+              style={{ borderTop: "1px solid rgba(43,30,63,0.12)" }}
+            >
               {post.tags.map((tag) => (
-                <span key={tag} className="flex items-center gap-1 rounded-full bg-secondary px-3 py-1.5 text-xs font-medium text-muted-foreground">
+                <span
+                  key={tag}
+                  className="flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium"
+                  style={{ backgroundColor: "#E9F2F4", color: "#2B1E3F" }}
+                >
                   <Tag size={12} /> {tag}
                 </span>
               ))}
