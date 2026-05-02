@@ -123,44 +123,29 @@ const CreationSite = () => {
 
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Création de site web" }]} />
 
-      {/* ─── Hero — image fond, texte centré, skip alternance ────────────────── */}
-      <section className="relative overflow-hidden py-16 md:py-24 min-h-[500px] flex items-center">
-        <img
-          src={imgRefonte}
-          alt="Refonte site web avant après - Déclic Digital"
-          className="absolute inset-0 w-full h-full object-cover object-center"
-          loading="eager"
-          fetchPriority="high"
-        />
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.93) 0%, hsl(263,36%,18%,0.78) 55%, hsl(183,70%,40%,0.55) 100%)" }}
-        />
-        <div className="container relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7 }}
-            className="mx-auto max-w-3xl text-center"
-          >
-            <span
-              className="mb-4 inline-block rounded-full px-4 py-1.5 text-xs font-semibold border"
-              style={{ backgroundColor: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.2)", color: "rgba(246,241,233,0.8)" }}
-            >
-              Création de site web
-            </span>
-            <h1 className="mb-6 leading-tight" style={{ color: "#F6F1E9" }}>
-              Création de site internet sur-mesure pour les artisans, TPE et indépendants à Paris
-            </h1>
-            <p className="mb-8 text-lg leading-relaxed" style={{ color: "rgba(246,241,233,0.75)" }}>
-              Nous concevons des sites modernes, rapides et optimisés{" "}
-              <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: "#F6F1E9" }}>SEO</Link>{" "}
-              pour les TPE et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects.
-            </p>
-            <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
-              <Link to="/rendez-vous">Prendre rendez-vous</Link>
-            </Button>
-          </motion.div>
+      {/* ─── Hero — bloc 1 → #F6F1E9, texte gauche, image droite overlap ──────── */}
+      <section className="py-16 md:py-24 overflow-hidden" style={{ backgroundColor: "#F6F1E9" }}>
+        <div className="container">
+          <div className="relative">
+            <div className="hidden lg:block absolute right-0 top-0 h-full w-1/2 rounded-2xl overflow-hidden">
+              <img src={imgRefonte} alt="Refonte site web avant après - Déclic Digital" className="w-full h-full object-cover" loading="eager" fetchPriority="high" />
+              <div className="absolute inset-0" style={{ background: "linear-gradient(to right, #F6F1E9 0%, rgba(246,241,233,0.5) 25%, transparent 60%)" }} />
+            </div>
+            <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} className="relative z-10 max-w-2xl">
+              <h1 className="mb-6" style={{ color: "#2B1E3F" }}>Création de site internet sur-mesure pour les artisans, TPE et indépendants à Paris</h1>
+              <p className="mb-8 text-lg leading-relaxed" style={{ color: "#2B1E3F" }}>
+                Nous concevons des sites modernes, rapides et optimisés{" "}
+                <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>SEO</Link>{" "}
+                pour les TPE et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez{" "}
+                <Link to="/tarifs" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>nos tarifs</Link>{" "}
+                ou demandez un{" "}
+                <Link to="/contact" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>audit SEO gratuit</Link>.
+              </p>
+              <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
+                <Link to="/rendez-vous">Prendre rendez-vous</Link>
+              </Button>
+            </motion.div>
+          </div>
         </div>
       </section>
 
