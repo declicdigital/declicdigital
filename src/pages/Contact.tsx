@@ -9,7 +9,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import PageLayout from "@/components/PageLayout";
-import SectionWrapper from "@/components/SectionWrapper";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { supabase } from "@/integrations/supabase/client";
 
@@ -48,7 +47,6 @@ const Contact = () => {
     setError("");
 
     try {
-      // 1. INSERT dans Supabase
       await supabase.from("contact_submissions").insert({
         full_name: form.full_name,
         company: form.company,
@@ -59,10 +57,9 @@ const Contact = () => {
         status: "new",
       });
 
-      // 2. Email de confirmation au prospect
       await sendBrevoEmail(
         { email: form.email, name: form.full_name },
-        "Votre message a bien été reçu — Déclic Digital",
+        "Votre message a bien été reçu - Déclic Digital",
         `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;padding:20px;">
           <div style="background:linear-gradient(135deg,#3d1a6e,#4fc3c3);padding:24px;border-radius:12px;margin-bottom:24px;text-align:center;">
             <h1 style="color:white;margin:0;font-size:22px;">Message reçu ! ✅</h1>
@@ -73,14 +70,13 @@ const Contact = () => {
             <p style="margin:0;color:#666;font-size:13px;">Votre message :</p>
             <p style="margin:8px 0 0;color:#333;white-space:pre-wrap;">${form.msg}</p>
           </div>
-          <p style="color:#999;font-size:13px;text-align:center;margin-top:32px;">Déclic Digital — declicdigital.net</p>
+          <p style="color:#999;font-size:13px;text-align:center;margin-top:32px;">Déclic Digital - declicdigital.net</p>
         </div>`
       );
 
-      // 3. Notification à Geoffrey
       await sendBrevoEmail(
         { email: CONTACT_EMAIL, name: "Geoffrey" },
-        `📬 Nouveau contact — ${form.full_name}${form.company ? ` (${form.company})` : ""}`,
+        `📬 Nouveau contact - ${form.full_name}${form.company ? ` (${form.company})` : ""}`,
         `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#f5f5f5;padding:20px;">
           <div style="background:linear-gradient(135deg,#3d1a6e,#4fc3c3);padding:20px 24px;border-radius:12px;margin-bottom:20px;">
             <h1 style="color:white;margin:0;font-size:20px;">📬 Nouveau message de contact</h1>
@@ -145,15 +141,29 @@ const Contact = () => {
       </Helmet>
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Contact" }]} />
 
-      <section className="gradient-hero py-16 md:py-24">
+      {/* Section 1 — Hero clair #F6F1E9 */}
+      <section style={{ backgroundColor: "#F6F1E9" }} className="py-16 md:py-24">
         <div className="container">
           <div className="grid items-start gap-10 lg:grid-cols-2">
-            <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} className="flex flex-col justify-center lg:sticky lg:top-32">
-              <h1 className="mb-4">
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7 }}
+              className="flex flex-col justify-center lg:sticky lg:top-32"
+            >
+              <h1 className="mb-4" style={{ color: "#2B1E3F" }}>
                 Parlons de votre projet : devis gratuit sous 24h
               </h1>
-              <p className="text-lg text-muted-foreground mb-6">
-                Remplissez le formulaire ci-contre pour recevoir un devis gratuit et personnalisé pour la <Link to="/creation-site-web" className="text-primary font-semibold hover:underline">création de site web</Link> ou le <Link to="/referencement-seo" className="text-primary font-semibold hover:underline">référencement SEO et GEO</Link>. Nous répondons sous 24 à 48 heures ouvrées.
+              <p className="text-lg mb-6" style={{ color: "#2B1E3F" }}>
+                Remplissez le formulaire ci-contre pour recevoir un devis gratuit et personnalisé pour la{" "}
+                <Link to="/creation-site-web" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>
+                  création de site web
+                </Link>{" "}
+                ou le{" "}
+                <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>
+                  référencement SEO et GEO
+                </Link>
+                . Nous répondons sous 24 à 48 heures ouvrées.
               </p>
               <div className="space-y-4">
                 {[
@@ -162,15 +172,24 @@ const Contact = () => {
                   { icon: MapPin, label: "Localisation", value: "Paris et Hauts-de-Seine (92)" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-start gap-4">
-                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary text-white">
+                    <div
+                      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg gradient-primary"
+                      style={{ color: "#2B1E3F" }}
+                    >
                       <item.icon size={18} />
                     </div>
                     <div>
-                      <p className="text-sm text-muted-foreground">{item.label}</p>
+                      <p className="text-sm" style={{ color: "#2B1E3F", opacity: 0.6 }}>{item.label}</p>
                       {item.href ? (
-                        <a href={item.href} className="font-semibold hover:text-primary transition-colors">{item.value}</a>
+                        <a
+                          href={item.href}
+                          className="font-semibold hover:underline transition-colors"
+                          style={{ color: "#2B1E3F" }}
+                        >
+                          {item.value}
+                        </a>
                       ) : (
-                        <p className="font-semibold">{item.value}</p>
+                        <p className="font-semibold" style={{ color: "#2B1E3F" }}>{item.value}</p>
                       )}
                     </div>
                   </div>
@@ -178,17 +197,28 @@ const Contact = () => {
               </div>
             </motion.div>
 
-            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }}>
-              <div className="rounded-2xl border border-border bg-card p-6 md:p-8 shadow-card">
-                <h2 className="mb-6">Demandez votre devis</h2>
+            <motion.div
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+            >
+              <div
+                className="rounded-2xl p-6 md:p-8"
+                style={{
+                  backgroundColor: "#ffffff",
+                  border: "1px solid rgba(43,30,63,0.12)",
+                  boxShadow: "0 4px 24px rgba(43,30,63,0.08)",
+                }}
+              >
+                <h2 className="mb-6" style={{ color: "#2B1E3F" }}>Demandez votre devis</h2>
                 {sent ? (
                   <div className="text-center py-8">
                     <CheckCircle size={48} className="text-green-500 mx-auto mb-4" />
-                    <h3 className="text-xl font-bold mb-2">Message envoyé !</h3>
-                    <p className="text-muted-foreground">Nous vous répondrons dans les 24 heures ouvrées.</p>
+                    <h3 className="text-xl font-bold mb-2" style={{ color: "#2B1E3F" }}>Message envoyé !</h3>
+                    <p style={{ color: "#2B1E3F", opacity: 0.6 }}>Nous vous répondrons dans les 24 heures ouvrées.</p>
                   </div>
                 ) : (
-                  <form className="space-y-4" onSubmit={handleSubmit}>
+                  <div className="space-y-4">
                     <div className="grid gap-4 sm:grid-cols-2">
                       <Input name="full_name" placeholder="Votre nom" className="rounded-xl" required value={form.full_name} onChange={handleChange} />
                       <Input name="company" placeholder="Nom de votre entreprise" className="rounded-xl" value={form.company} onChange={handleChange} />
@@ -200,12 +230,18 @@ const Contact = () => {
                     <Input name="current_url" placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" value={form.current_url} onChange={handleChange} />
                     <Textarea name="msg" placeholder="Décrivez votre projet..." className="rounded-xl min-h-[120px]" required value={form.msg} onChange={handleChange} />
                     {error && <p className="text-red-500 text-sm">{error}</p>}
-                    <Button type="submit" variant="custom" size="lg" disabled={sending}
-                      className="w-full gradient-miami btn-glow rounded-full font-bold shadow-glow">
+                    <Button
+                      type="button"
+                      variant="custom"
+                      size="lg"
+                      disabled={sending}
+                      onClick={handleSubmit}
+                      className="w-full gradient-miami btn-glow rounded-full font-bold shadow-glow"
+                    >
                       {sending ? <Loader2 size={18} className="mr-2 animate-spin" /> : <CheckCircle size={18} className="mr-2" />}
                       {sending ? "Envoi en cours..." : "Envoyer ma demande"}
                     </Button>
-                  </form>
+                  </div>
                 )}
               </div>
             </motion.div>
@@ -213,15 +249,25 @@ const Contact = () => {
         </div>
       </section>
 
-      <SectionWrapper>
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-extrabold md:text-4xl">Retrouvez-nous</h2>
-          <p className="mt-4 text-muted-foreground">Nous intervenons <Link to="/nos-villes" className="text-primary font-semibold hover:underline">à Paris et dans le 92</Link>, en présentiel ou à distance.</p>
+      {/* Section 2 — #E9F2F4 */}
+      <section style={{ backgroundColor: "#E9F2F4" }} className="py-16 md:py-20">
+        <div className="container">
+          <div className="text-center mb-8">
+            <h2 style={{ color: "#2B1E3F" }}>Retrouvez-nous</h2>
+            <p className="mt-4" style={{ color: "#2B1E3F" }}>
+              Nous intervenons{" "}
+              <Link to="/nos-villes" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>
+                à Paris et dans le 92
+              </Link>
+              , en présentiel ou à distance.
+            </p>
+          </div>
+          <MapEmbed />
         </div>
-        <MapEmbed />
-      </SectionWrapper>
+      </section>
 
-      <GoogleReviewsSection compact maxReviews={3} />
+      {/* Section 3 — GoogleReviews #F6F1E9 */}
+      <GoogleReviewsSection compact maxReviews={3} backgroundColor="#F6F1E9" />
     </PageLayout>
   );
 };
