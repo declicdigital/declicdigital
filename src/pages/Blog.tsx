@@ -117,17 +117,17 @@ export default function Blog() {
         <link rel="canonical" href="https://declicdigital.net/blog" />
       </Helmet>
 
-      {/* ─── Hero — image Miami plein fond + overlay beige, skip alternance ──── */}
+      {/* ─── Hero — image Miami plein fond + overlay sombre, skip alternance ─── */}
       <section className="relative overflow-hidden py-20 md:py-28 min-h-[500px] flex items-center">
         <img src={imgMiami} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="eager" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(246,241,233,0.96) 0%, rgba(246,241,233,0.82) 50%, rgba(246,241,233,0.45) 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.88) 0%, hsl(263,36%,18%,0.65) 55%, hsl(183,70%,40%,0.35) 100%)" }} />
         <div className="container relative z-10">
           <div className="max-w-2xl">
-            <span className="mb-4 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider" style={{ color: "#2B1E3F" }}>Blog</span>
-            <h1 className="leading-tight" style={{ color: "#2B1E3F" }}>
+            <span className="mb-4 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider" style={{ color: "#F6F1E9" }}>Blog</span>
+            <h1 className="leading-tight" style={{ color: "#F6F1E9" }}>
               Veille web, SEO, GEO & tech
             </h1>
-            <p className="mt-6 text-lg leading-relaxed max-w-lg" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+            <p className="mt-6 text-lg leading-relaxed max-w-lg" style={{ color: "rgba(246,241,233,0.75)" }}>
               Des articles pratiques pour comprendre le web, améliorer votre visibilité et faire les bons choix pour votre entreprise.
             </p>
           </div>
