@@ -5,5 +5,11 @@
       "destination": "https://iskxljribvfypkyappku.supabase.co/functions/v1/generate-sitemap"
     },
     { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "crons": [
+    {
+      "path": "/api/publish-scheduled",
+      "schedule": "0 * * * *"
+    }
   ]
 }
