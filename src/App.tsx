@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 const GeoRedirect = () => <Navigate to="/visibilite-ia" replace />;
+const AuditSeoRedirect = () => <Navigate to="/contact" replace />;
 import { HelmetProvider } from "react-helmet-async";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { Toaster } from "@/components/ui/toaster";
@@ -9,7 +10,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Index from "./pages/Index";
 import ScrollToTop from "./components/ScrollToTop";
 
-const AuditSeo = lazy(() => import("./pages/AuditSeo"));
 const CreationSite = lazy(() => import("./pages/CreationSite"));
 const ReferencementSeo = lazy(() => import("./pages/ReferencementSeo"));
 const QuiSommesNous = lazy(() => import("./pages/QuiSommesNous"));
@@ -65,7 +65,7 @@ const App = () => (
             <Suspense fallback={<div className="min-h-screen bg-background" />}>
               <Routes>
                 <Route path="/" element={<Index />} />
-                <Route path="/audit-seo-gratuit" element={<AuditSeo />} />
+                <Route path="/audit-seo-gratuit" element={<AuditSeoRedirect />} />
                 <Route path="/creation-site-web" element={<CreationSite />} />
                 <Route path="/creation-site-web/metier/:metier" element={<MetierCreationSite />} />
                 <Route path="/creation-site-web/:ville" element={<VilleCreationSite />} />
