@@ -132,7 +132,6 @@
 
   /* ── Typographie ── */
 
-  /* H1 : DM Serif Display Bold */
   h1 {
     font-family: 'DM Serif Display', Georgia, serif !important;
     font-weight: 700 !important;
@@ -144,7 +143,6 @@
     -webkit-text-stroke: 0;
   }
 
-  /* H2 : Clash Display Semibold */
   h2 {
     font-family: 'Clash Display', system-ui, sans-serif;
     font-weight: 600 !important;
@@ -159,7 +157,6 @@
     -webkit-text-stroke: 0.2px hsl(230 25% 14% / 0.04);
   }
 
-  /* H3 : Clash Display Semibold */
   h3 {
     font-family: 'Clash Display', system-ui, sans-serif;
     font-weight: 600 !important;
@@ -181,7 +178,6 @@
     color: #2B1E3F;
   }
 
-  /* Body : Clash Display Regular */
   p, li, td, th, blockquote, figcaption, label, span {
     font-family: 'Clash Display', system-ui, sans-serif;
     font-weight: 400;
@@ -205,7 +201,6 @@
     text-align: inherit;
   }
 
-  /* Liens inline */
   a {
     color: #2B1E3F;
   }
@@ -213,7 +208,6 @@
     text-decoration: none !important;
   }
 
-  /* Texte bold/semibold */
   strong, b, .font-bold, .font-extrabold, .font-semibold {
     font-weight: 700;
     text-shadow:
@@ -222,7 +216,6 @@
       0 0.5px 0px hsl(40 30% 80% / 0.4);
   }
 
-  /* Texte sur fond sombre (sections CTA texture / hero sombre) */
   .text-white, .text-white * {
     color: #F6F1E9 !important;
   }
@@ -264,7 +257,6 @@
     background-clip: text;
     filter: drop-shadow(0 2px 4px hsl(284 65% 66% / 0.18));
   }
-  /* alias */
   .text-gradient {
     background: linear-gradient(135deg, hsl(183, 70%, 63%), hsl(284, 65%, 66%), hsl(330, 100%, 70%));
     -webkit-background-clip: text;
@@ -274,15 +266,9 @@
   }
 
   /* ── Alternance de fonds ── */
-  .bg-section-blue {
-    background-color: #E9F2F4;
-  }
-  .bg-section-alt {
-    background-color: #E9F2F4;
-  }
-  .bg-section-rose {
-    background-color: #F6F1E9;
-  }
+  .bg-section-blue  { background-color: #E9F2F4; }
+  .bg-section-alt   { background-color: #E9F2F4; }
+  .bg-section-rose  { background-color: #F6F1E9; }
 
   /* ── CTA button : btn-glow (effet papier déchiré) ── */
   .btn-glow {
@@ -351,9 +337,8 @@
     color: #2B1E3F !important;
     font-weight: 700;
   }
-  .btn-primary-dark:hover {
-    background-color: #ede6d8;
-  }
+  .btn-primary-dark:hover { background-color: #ede6d8; }
+
   .btn-secondary-light {
     background: transparent;
     border: 2px solid #2B1E3F;
@@ -370,9 +355,7 @@
     color: #F6F1E9 !important;
     font-weight: 700;
   }
-  .btn-secondary-dark:hover {
-    background-color: rgba(246, 241, 233, 0.1);
-  }
+  .btn-secondary-dark:hover { background-color: rgba(246, 241, 233, 0.1); }
 
   /* ── Text relief ── */
   .text-relief {
@@ -421,7 +404,9 @@
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
 
-/* ── CMS Article Content ── */
+/* ════════════════════════════════════════════════════
+   CMS Article Content
+   ════════════════════════════════════════════════════ */
 .cms-article-content h2 {
   font-family: 'Clash Display', system-ui, sans-serif;
   font-size: 1.5rem;
@@ -490,6 +475,44 @@
   color: #2B1E3F;
 }
 
+/* ── Tableaux dans les articles ── */
+.cms-article-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 4px 24px -4px rgba(43, 30, 63, 0.08);
+}
+.cms-article-content thead tr {
+  background-color: hsl(263, 36%, 18%);
+}
+.cms-article-content thead th {
+  padding: 0.75rem 1.25rem;
+  text-align: left;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: #F6F1E9 !important;
+  text-shadow: none !important;
+}
+.cms-article-content tbody tr {
+  border-bottom: 1px solid rgba(43, 30, 63, 0.1);
+}
+.cms-article-content tbody tr:last-child {
+  border-bottom: none;
+}
+.cms-article-content tbody td {
+  padding: 0.75rem 1.25rem;
+  font-size: 0.9rem;
+  color: #2B1E3F;
+  vertical-align: top;
+  background-color: #F6F1E9;
+}
+.cms-article-content tbody tr:nth-child(even) td {
+  background-color: #E9F2F4;
+}
+
 /* ── CTA dans les articles (HTML injecté via dangerouslySetInnerHTML) ── */
 .cms-article-content .cta-wrapper {
   text-align: center;
@@ -509,7 +532,6 @@
   border: none;
   position: relative;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  /* Même rendu désaturé que .btn-glow */
   filter: saturate(0.55) brightness(1.08) contrast(0.92);
   clip-path: polygon(
     2% 8%, 5% 2%, 9% 6%, 14% 1%, 19% 5%, 24% 0%, 30% 4%, 35% 1%, 40% 6%, 46% 2%, 52% 5%, 57% 0%, 63% 4%, 68% 1%, 74% 6%, 79% 2%, 85% 5%, 90% 1%, 95% 7%, 98% 3%, 100% 10%,
@@ -543,7 +565,7 @@
   color: #F6F1E9;
 }
 
-/* ── CTA preview TipTap ── */
+/* ── CTA preview TipTap (éditeur admin) ── */
 .cta-block-wrapper {
   text-align: center;
   margin: 1.5rem 0;
@@ -578,7 +600,7 @@
 }
 
 /* ═══════════════════════════════════════════════════════════
-   ALTERNANCE DE FONDS — sections de la page
+   ALTERNANCE DE FONDS
    ═══════════════════════════════════════════════════════════ */
 .alt-even {
   background-color: #F6F1E9 !important;
