@@ -560,9 +560,9 @@ const Index = () => {
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="container relative z-10">
           <div className="flex flex-col items-center text-center">
-            <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-20 h-20 rounded-full object-cover border-2 shadow-lg mb-4" style={{ borderColor: "rgba(43,30,63,0.3)" }} width={80} height={80} loading="lazy" />
+            <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-32 h-32 rounded-full object-cover border-2 shadow-lg mb-4" style={{ borderColor: "rgba(43,30,63,0.3)" }} width={128} height={128} loading="lazy" />
             <p className="text-sm font-semibold mb-1" style={{ color: INK }}>Geoffrey, Expert Produit Google</p>
-            <h3 className="mb-4" style={{ color: INK }}>Et si votre site devenait votre meilleur commercial ?</h3>
+            <h2 className="mb-4" style={{ color: INK }}>Et si votre site devenait votre meilleur commercial ?</h2>
             <p className="mb-8 text-lg max-w-2xl" style={{ color: INK, opacity: 0.7 }}>
               Un site optimisé peut générer des prospects tous les jours. Ne laissez plus vos concurrents capter les clients qui vous cherchent sur Google.
             </p>
