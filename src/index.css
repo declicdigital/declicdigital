@@ -274,8 +274,6 @@
   }
 
   /* ── Alternance de fonds ── */
-  /* Pair → #F6F1E9 (bg-paper, défaut body) */
-  /* Impair → #E9F2F4 */
   .bg-section-blue {
     background-color: #E9F2F4;
   }
@@ -343,15 +341,11 @@
   }
 
   /* ── Boutons standards ── */
-
-  /* CTA principal sur fond clair : gradient-miami + texte #F6F1E9 */
   .btn-primary-light {
     background: var(--gradient-miami);
     color: #F6F1E9 !important;
     font-weight: 700;
   }
-
-  /* CTA principal sur fond sombre/texturé : bg #F6F1E9 + texte #2B1E3F */
   .btn-primary-dark {
     background-color: #F6F1E9;
     color: #2B1E3F !important;
@@ -360,8 +354,6 @@
   .btn-primary-dark:hover {
     background-color: #ede6d8;
   }
-
-  /* CTA secondaire sur fond clair : border #2B1E3F + texte #2B1E3F */
   .btn-secondary-light {
     background: transparent;
     border: 2px solid #2B1E3F;
@@ -372,8 +364,6 @@
     background-color: #2B1E3F;
     color: #F6F1E9 !important;
   }
-
-  /* CTA secondaire sur fond sombre/texturé : border #F6F1E9 + texte #F6F1E9 */
   .btn-secondary-dark {
     background: transparent;
     border: 2px solid rgba(246, 241, 233, 0.5);
@@ -499,6 +489,8 @@
   font-weight: 700;
   color: #2B1E3F;
 }
+
+/* ── CTA dans les articles (HTML injecté via dangerouslySetInnerHTML) ── */
 .cms-article-content .cta-wrapper {
   text-align: center;
   margin: 2.5rem 0;
@@ -508,20 +500,46 @@
   align-items: center;
   gap: 0.5rem;
   border-radius: 9999px;
-  padding: 0.75rem 2rem;
+  padding: 0.85rem 2rem;
   font-weight: 700;
   font-size: 1.125rem;
-  transition: opacity 0.2s;
   text-decoration: none;
   font-family: 'Clash Display', system-ui, sans-serif;
+  letter-spacing: 0.03em;
+  border: none;
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Même rendu désaturé que .btn-glow */
+  filter: saturate(0.55) brightness(1.08) contrast(0.92);
+  clip-path: polygon(
+    2% 8%, 5% 2%, 9% 6%, 14% 1%, 19% 5%, 24% 0%, 30% 4%, 35% 1%, 40% 6%, 46% 2%, 52% 5%, 57% 0%, 63% 4%, 68% 1%, 74% 6%, 79% 2%, 85% 5%, 90% 1%, 95% 7%, 98% 3%, 100% 10%,
+    99% 18%, 100% 28%, 98% 38%, 100% 48%, 99% 58%, 100% 68%, 98% 78%, 100% 88%, 99% 95%,
+    96% 98%, 92% 94%, 87% 99%, 82% 95%, 76% 100%, 70% 96%, 64% 99%, 58% 95%, 52% 100%, 46% 96%, 40% 99%, 34% 95%, 28% 100%, 22% 96%, 16% 99%, 10% 95%, 5% 100%, 2% 96%, 0% 92%,
+    1% 82%, 0% 72%, 2% 62%, 0% 52%, 1% 42%, 0% 32%, 2% 22%, 0% 12%
+  );
+  box-shadow:
+    0 4px 16px -4px hsl(284 65% 66% / 0.2),
+    0 1px 3px hsl(230 25% 14% / 0.08);
 }
-.cms-article-content .cta-button:hover { opacity: 0.9; }
+.cms-article-content .cta-button:hover {
+  filter: saturate(0.7) brightness(1.05) contrast(0.95);
+  transform: translateY(-2px) rotate(-0.8deg);
+  box-shadow:
+    0 8px 28px -5px hsl(284 65% 66% / 0.3),
+    0 2px 8px hsl(330 100% 70% / 0.15);
+  opacity: 1;
+}
+.cms-article-content .cta-button:active {
+  filter: saturate(0.45) brightness(1.02) contrast(0.88);
+  transform: translateY(0px) scale(0.97) rotate(0.3deg);
+  box-shadow: 0 2px 8px -2px hsl(284 65% 66% / 0.2);
+}
 .cms-article-content .cta-primary {
   background: var(--gradient-miami);
   color: #F6F1E9;
 }
 .cms-article-content .cta-secondary {
-  background: var(--gradient-miami);
+  background: var(--gradient-primary);
   color: #F6F1E9;
 }
 
@@ -542,25 +560,26 @@
   font-size: 0.95rem;
   pointer-events: none;
   font-family: 'Clash Display', system-ui, sans-serif;
+  filter: saturate(0.55) brightness(1.08) contrast(0.92);
+  clip-path: polygon(
+    2% 8%, 5% 2%, 9% 6%, 14% 1%, 19% 5%, 24% 0%, 30% 4%, 35% 1%, 40% 6%, 46% 2%, 52% 5%, 57% 0%, 63% 4%, 68% 1%, 74% 6%, 79% 2%, 85% 5%, 90% 1%, 95% 7%, 98% 3%, 100% 10%,
+    99% 18%, 100% 28%, 98% 38%, 100% 48%, 99% 58%, 100% 68%, 98% 78%, 100% 88%, 99% 95%,
+    96% 98%, 92% 94%, 87% 99%, 82% 95%, 76% 100%, 70% 96%, 64% 99%, 58% 95%, 52% 100%, 46% 96%, 40% 99%, 34% 95%, 28% 100%, 22% 96%, 16% 99%, 10% 95%, 5% 100%, 2% 96%, 0% 92%,
+    1% 82%, 0% 72%, 2% 62%, 0% 52%, 1% 42%, 0% 32%, 2% 22%, 0% 12%
+  );
 }
 .cta-editor-primary {
   background: var(--gradient-miami);
   color: #F6F1E9;
 }
 .cta-editor-secondary {
-  background: var(--gradient-miami);
+  background: var(--gradient-primary);
   color: #F6F1E9;
 }
 
 /* ═══════════════════════════════════════════════════════════
    ALTERNANCE DE FONDS — sections de la page
-   Les sections [data-alternate="skip"] sont transparentes
-   (heroes sombres, CTA texture, stats strip).
-   Les autres alternent #F6F1E9 / #E9F2F4.
-   On utilise une classe .alt-even / .alt-odd appliquée
-   directement sur chaque section dans le JSX.
    ═══════════════════════════════════════════════════════════ */
-
 .alt-even {
   background-color: #F6F1E9 !important;
 }
@@ -568,7 +587,6 @@
   background-color: #E9F2F4 !important;
 }
 
-/* Les sections skip n'ont pas de fond forcé */
 [data-alternate="skip"] {
   /* background géré par leur propre style */
 }
