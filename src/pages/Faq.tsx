@@ -7,7 +7,7 @@ import LocationSection from "@/components/LocationSection";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
-import imgSeo from "@/assets/seo-analytics-paris-bureau.webp";
+import imgSeo from "@/assets/faq-questions-frequentes-declic-digital.webp";
 import imgAvis from "@/assets/avis-google-5-etoiles-client-paris.webp";
 import imgSatisfaction from "@/assets/artisan-client-satisfaction-cafe-paris.webp";
 import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
