@@ -3,18 +3,16 @@ import { motion } from "motion/react";
 import { ArrowRight, Calendar, Clock, Sparkles } from "lucide-react";
 import { blogPosts } from "@/data/blogPosts";
 import { supabase } from "@/integrations/supabase/client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
-// Skeleton card pendant le chargement
 const SkeletonCard = () => (
-  <div className="overflow-hidden rounded-xl bg-card animate-pulse"
-    style={{ border: "2px solid rgba(0,0,0,0.10)", boxShadow: "3px 3px 0px rgba(0,0,0,0.10)" }}>
-    <div className="aspect-[16/9] bg-muted" />
+  <div className="overflow-hidden rounded-xl animate-pulse"
+    style={{ backgroundColor: "#F6F1E9", border: "2px solid rgba(43,30,63,0.12)", boxShadow: "3px 3px 0px rgba(43,30,63,0.12)" }}>
+    <div className="aspect-[16/9]" style={{ backgroundColor: "#E9F2F4" }} />
     <div className="p-4 space-y-2">
-      <div className="h-3 bg-muted rounded w-3/4" />
-      <div className="h-3 bg-muted rounded w-1/2" />
-      <div className="h-2 bg-muted rounded w-full mt-3" />
-      <div className="h-2 bg-muted rounded w-4/5" />
+      <div className="h-3 rounded w-3/4" style={{ backgroundColor: "#E9F2F4" }} />
+      <div className="h-3 rounded w-1/2" style={{ backgroundColor: "#E9F2F4" }} />
+      <div className="h-2 rounded w-full mt-3" style={{ backgroundColor: "#E9F2F4" }} />
     </div>
   </div>
 );
@@ -22,8 +20,13 @@ const SkeletonCard = () => (
 const BlogCarousel = () => {
   const [latest, setLatest] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const fetchedRef = useRef(false);
 
   useEffect(() => {
+    // Éviter le double-fetch qui cause les sauts visuels
+    if (fetchedRef.current) return;
+    fetchedRef.current = true;
+
     async function fetchLatest() {
       const { data } = await supabase
         .from("cms_blog_posts")
@@ -35,12 +38,9 @@ const BlogCarousel = () => {
       const supabaseSlugs = new Set((data ?? []).map((a: any) => a.slug));
 
       const supabaseArticles = (data ?? []).map((a: any) => ({
-        slug: a.slug,
-        title: a.title,
-        excerpt: a.excerpt,
+        slug: a.slug, title: a.title, excerpt: a.excerpt,
         coverImageUrl: a.cover_image_url ?? null,
-        readTime: a.read_time,
-        date: a.created_at,
+        readTime: a.read_time, date: a.created_at,
       }));
 
       const staticArticles = blogPosts
@@ -60,21 +60,21 @@ const BlogCarousel = () => {
   const newestDate = latest[0]?.date;
 
   return (
-    <section className="py-16 bg-muted/30 border-t border-border">
+    <section className="py-16 border-t border-border" style={{ backgroundColor: "#E9F2F4" }}>
       <div className="container">
         <div className="flex items-center justify-between mb-10">
           <div>
-            <span className="mb-2 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-white">
+            <span className="mb-2 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider" style={{ color: "#F6F1E9" }}>
               Le Blog
             </span>
-            <h2 className="text-2xl font-extrabold md:text-3xl mt-2">Nos derniers articles</h2>
+            <h2 className="text-2xl font-extrabold md:text-3xl mt-2" style={{ color: "#2B1E3F" }}>Nos derniers articles</h2>
           </div>
           <Link to="/blog" className="hidden md:inline-flex items-center gap-2 text-sm font-semibold text-primary hover:gap-3 transition-all">
             Voir tous les articles <ArrowRight size={16} />
           </Link>
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {loading
             ? Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)
             : latest.map((article, i) => {
@@ -82,30 +82,41 @@ const BlogCarousel = () => {
                 return (
                   <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
                     <motion.article
-                      initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.1 }}
-                      className="overflow-hidden rounded-xl bg-card transition-all h-full flex flex-col"
-                      style={{ border: "2px solid rgba(0,0,0,0.15)", boxShadow: "3px 3px 0px rgba(0,0,0,0.20)" }}>
+                      initial={{ opacity: 0, y: 16 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.35, delay: i * 0.08 }}
+                      className="overflow-hidden rounded-xl flex flex-col h-full transition-all group-hover:-translate-y-1"
+                      style={{
+                        backgroundColor: "#F6F1E9",
+                        border: "2px solid rgba(43,30,63,0.15)",
+                        boxShadow: "3px 3px 0px rgba(43,30,63,0.15), 6px 6px 0px rgba(43,30,63,0.06)",
+                      }}
+                    >
                       <div className="aspect-[16/9] overflow-hidden relative">
                         {article.coverImageUrl ? (
                           <img src={article.coverImageUrl} alt={article.title}
                             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                             loading="lazy" decoding="async" width={640} height={360} />
                         ) : (
-                          <div className="h-full w-full bg-muted flex items-center justify-center">
-                            <span className="text-3xl font-bold text-muted-foreground/30">{article.title.charAt(0)}</span>
+                          <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}>
+                            <span className="text-3xl font-bold" style={{ color: "#2B1E3F", opacity: 0.15 }}>{article.title.charAt(0)}</span>
                           </div>
                         )}
                         {isNewest && (
-                          <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full bg-primary px-3 py-1 text-[11px] font-bold text-primary-foreground shadow-md">
+                          <span className="absolute top-3 left-3 inline-flex items-center gap-1 rounded-full gradient-miami px-3 py-1 text-[11px] font-bold shadow-md" style={{ color: "#F6F1E9" }}>
                             <Sparkles size={12} /> Nouvel article
                           </span>
                         )}
                       </div>
                       <div className="p-4 flex flex-col flex-1">
-                        <h3 className="text-sm font-bold leading-snug group-hover:text-primary transition-colors line-clamp-2">{article.title}</h3>
-                        <p className="mt-2 text-xs text-muted-foreground line-clamp-2 flex-1">{article.excerpt}</p>
-                        <div className="mt-3 flex items-center gap-3 text-[11px] text-muted-foreground">
+                        <h3 className="text-sm font-bold leading-snug group-hover:text-primary transition-colors line-clamp-2" style={{ color: "#2B1E3F" }}>
+                          {article.title}
+                        </h3>
+                        <p className="mt-2 text-xs leading-relaxed line-clamp-2 flex-1" style={{ color: "#2B1E3F", opacity: 0.6 }}>
+                          {article.excerpt}
+                        </p>
+                        <div className="mt-3 flex items-center gap-3 text-[11px]" style={{ color: "#2B1E3F", opacity: 0.45 }}>
                           <span className="flex items-center gap-1">
                             <Calendar size={11} />
                             {new Date(article.date).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}
