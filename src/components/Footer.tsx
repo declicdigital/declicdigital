@@ -79,8 +79,8 @@ const Footer = () => (
 
         <div className="mt-10 mb-5 h-px" style={{ background: "linear-gradient(90deg, transparent, hsl(183, 70%, 63%, 0.3), hsl(284, 65%, 66%, 0.3), hsl(330, 100%, 70%, 0.3), transparent)" }} />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs" style={{ color: "rgba(246,241,233,0.7)" }}>
-          <span>© {new Date().getFullYear()} Déclic Digital. SIRET 102 436 664 00019. Tous droits réservés.</span>
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+          <span style={{ color: "rgba(246,241,233,0.9)" }}>© {new Date().getFullYear()} Déclic Digital. SIRET 102 436 664 00019. Tous droits réservés.</span>
           <div className="flex items-center gap-4">
             <Link to="/mentions-legales" className="transition-opacity hover:opacity-100" style={{ color: "rgba(246,241,233,0.9)" }}>Mentions légales</Link>
             <Link to="/politique-de-confidentialite" className="transition-opacity hover:opacity-100" style={{ color: "rgba(246,241,233,0.9)" }}>Politique de confidentialité</Link>
