@@ -68,7 +68,7 @@ const Header = () => {
             <Link
               key={l.to}
               to={l.to}
-              className="rounded-lg px-2 xl:px-3 py-2 text-[13px] xl:text-[15px] font-medium whitespace-nowrap transition-colors hover:opacity-80"
+              className="rounded-lg px-2 xl:px-3 py-2 text-[14px] xl:text-[16px] font-medium whitespace-nowrap transition-colors hover:opacity-80"
               style={{ color: isActive(l.to) ? "#4361EE" : "#2B1E3F" }}
             >
               {l.label}
@@ -78,7 +78,7 @@ const Header = () => {
           <div ref={moreRef} className="relative">
             <button
               onClick={() => setMoreOpen(!moreOpen)}
-              className="flex items-center gap-1 rounded-lg px-2 xl:px-3 py-2 text-[13px] xl:text-[15px] font-medium whitespace-nowrap transition-colors hover:opacity-80"
+              className="flex items-center gap-1 rounded-lg px-2 xl:px-3 py-2 text-[14px] xl:text-[16px] font-medium whitespace-nowrap transition-colors hover:opacity-80"
               style={{ color: "#2B1E3F" }}
             >
               Plus <ChevronDown size={15} className={`transition-transform ${moreOpen ? "rotate-180" : ""}`} />
@@ -97,7 +97,7 @@ const Header = () => {
                     key={l.to}
                     to={l.to}
                     onClick={() => setMoreOpen(false)}
-                    className="block rounded-md px-3 py-2 text-[15px] font-medium transition-colors hover:opacity-80"
+                    className="block rounded-md px-3 py-2 text-[15px] xl:text-[16px] font-medium transition-colors hover:opacity-80"
                     style={{ color: isActive(l.to) ? "#4361EE" : "#2B1E3F" }}
                   >
                     {l.label}
@@ -109,10 +109,10 @@ const Header = () => {
         </nav>
 
         <div className="hidden lg:flex items-center gap-1.5 shrink-0">
-          <Button asChild variant="custom" size="sm" className="rounded-full px-4 xl:px-5 text-[13px] xl:text-[15px] font-bold gradient-miami btn-glow shadow-glow whitespace-nowrap">
+          <Button asChild variant="custom" size="sm" className="rounded-full px-4 xl:px-5 text-[14px] xl:text-[16px] font-bold gradient-miami btn-glow shadow-glow whitespace-nowrap">
             <Link to="/rendez-vous">Prendre RDV</Link>
           </Button>
-          <Button asChild variant="custom" size="sm" className="hidden xl:inline-flex gradient-primary btn-glow rounded-full px-4 xl:px-6 text-[13px] xl:text-[15px] font-bold shadow-glow whitespace-nowrap">
+          <Button asChild variant="custom" size="sm" className="hidden xl:inline-flex gradient-primary btn-glow rounded-full px-4 xl:px-6 text-[14px] xl:text-[16px] font-bold shadow-glow whitespace-nowrap">
             <Link to="/contact">Audit SEO gratuit</Link>
           </Button>
         </div>
