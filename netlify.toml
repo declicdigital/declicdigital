@@ -1,10 +1,4 @@
 [[redirects]]
-  from = "/:path+/"
-  to = "/:path+"
-  status = 301
-  force = true
-
-[[redirects]]
   from = "/sitemap.xml"
   to = "https://iskxljribvfypkyappku.supabase.co/functions/v1/generate-sitemap"
   status = 200
