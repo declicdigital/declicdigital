@@ -1,13 +1,12 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Calendar, Clock, ArrowRight, Tag, Sparkles } from "lucide-react";
+import { Calendar, Clock, ArrowRight, Tag, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { blogPosts as staticPosts, blogCategories, getCategorySlug } from "@/data/blogPosts";
 import { supabase } from "@/integrations/supabase/client";
-import imgMiami from "@/assets/blog-seo-digital-miami-declic-digital.webp";
 import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
 
 interface Article {
@@ -22,117 +21,76 @@ interface Article {
   isFromSupabase?: boolean;
 }
 
-// Couleurs hex littérales — lisibles sur toutes les images et fonds
-const categoryStyle: Record<string, { bg: string; color: string }> = {
-  "Création de site":   { bg: "rgba(109,40,217,0.13)", color: "#5B21B6" },
-  "SEO & Performance":  { bg: "rgba(5,150,105,0.13)",  color: "#065F46" },
-  "Stratégie digitale": { bg: "rgba(225,29,72,0.13)",  color: "#9F1239" },
-  "GEO, Visibilité IA": { bg: "rgba(2,132,199,0.13)",  color: "#0C4A6E" },
-  "Business":           { bg: "rgba(217,119,6,0.13)",  color: "#78350F" },
+// ── Badges opaques par catégorie ──
+const categoryBadge: Record<string, { bg: string; color: string }> = {
+  "Création de site":   { bg: "#6D28D9", color: "#FFFFFF" },
+  "SEO & Performance":  { bg: "#059669", color: "#FFFFFF" },
+  "Stratégie digitale": { bg: "#E11D48", color: "#FFFFFF" },
+  "GEO, Visibilité IA": { bg: "#0284C7", color: "#FFFFFF" },
+  "Business":           { bg: "#D97706", color: "#FFFFFF" },
 };
+const getBadge = (cat: string) => categoryBadge[cat] ?? { bg: "#2B1E3F", color: "#F6F1E9" };
 
-const getCategoryStyle = (cat: string) =>
-  categoryStyle[cat] ?? { bg: "rgba(43,30,63,0.10)", color: "#2B1E3F" };
-
-// Badge catégorie visible sur fond image (overlay sombre)
-const CategoryBadgeOnImage = ({ cat }: { cat: string }) => (
-  <span
-    className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold shadow-md"
-    style={{ backgroundColor: "rgba(246,241,233,0.92)", color: "#2B1E3F" }}
-  >
-    {cat}
-  </span>
-);
-
-// Badge catégorie sur fond clair (liens catégories)
-const CategoryBadgeLink = ({ cat }: { cat: string }) => {
-  const s = getCategoryStyle(cat);
+const Badge = ({ cat }: { cat: string }) => {
+  const s = getBadge(cat);
   return (
-    <Link
-      to={`/blog/categorie/${getCategorySlug(cat)}`}
-      className="rounded-full px-4 py-2 text-sm font-semibold transition-all hover:opacity-80 hover:-translate-y-0.5"
-      style={{
-        backgroundColor: s.bg,
-        color: s.color,
-        border: "1.5px solid rgba(43,30,63,0.12)",
-        boxShadow: "2px 2px 0px rgba(43,30,63,0.10)",
-      }}
-    >
+    <span className="inline-block rounded-full px-3 py-1 text-xs font-bold"
+      style={{ backgroundColor: s.bg, color: s.color }}>
       {cat}
-    </Link>
+    </span>
   );
 };
 
-const VintageCard = ({ article, featured = false }: { article: Article; featured?: boolean }) => (
-  <article
-    className="overflow-hidden rounded-2xl transition-all hover:-translate-y-1 group"
-    style={{
-      backgroundColor: "#F6F1E9",
-      border: "2px solid rgba(43,30,63,0.18)",
-      boxShadow: "4px 4px 0px rgba(43,30,63,0.18), 8px 8px 0px rgba(43,30,63,0.08)",
-    }}
-  >
-    <div className="overflow-hidden relative aspect-[16/9]">
-      {article.coverImageUrl ? (
-        <img
-          src={article.coverImageUrl}
-          alt={article.title}
-          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-          loading="lazy"
-          width={featured ? 1280 : 640}
-          height={featured ? 720 : 360}
-        />
-      ) : (
-        <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}>
-          <span className="text-4xl font-bold" style={{ color: "#2B1E3F", opacity: 0.15 }}>{article.title.charAt(0)}</span>
-        </div>
-      )}
-      <CategoryBadgeOnImage cat={article.category} />
-    </div>
-    <div className="p-5 md:p-6">
-      <h2
-        className={`font-bold leading-snug ${featured ? "text-xl md:text-2xl" : "text-base md:text-lg"}`}
-        style={{ color: "#2B1E3F" }}
-      >
-        {article.title}
-      </h2>
-      <p className="mt-2 text-sm leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.65 }}>{article.excerpt}</p>
-      <div className="mt-4 flex flex-wrap gap-1.5">
-        {article.tags.slice(0, 3).map((tag) => (
-          <span
-            key={tag}
-            className="flex items-center gap-1 rounded-md px-2 py-0.5 text-xs font-medium"
-            style={{ backgroundColor: "#E9F2F4", color: "#2B1E3F" }}
-          >
-            <Tag size={9} /> {tag}
+// ── Card verticale pour le carousel ──
+const CarouselCard = ({ article }: { article: Article }) => (
+  <Link to={`/blog/${article.slug}`} className="block group flex-shrink-0" style={{ width: "calc(25% - 12px)" }}>
+    <article
+      className="h-full overflow-hidden rounded-2xl transition-all hover:-translate-y-1"
+      style={{
+        backgroundColor: "#F6F1E9",
+        border: "2px solid rgba(43,30,63,0.15)",
+        boxShadow: "3px 3px 0px rgba(43,30,63,0.12)",
+      }}
+    >
+      <div className="overflow-hidden relative" style={{ aspectRatio: "16/9" }}>
+        {article.coverImageUrl ? (
+          <img src={article.coverImageUrl} alt={article.title}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            loading="lazy" width={400} height={225} />
+        ) : (
+          <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}>
+            <span className="text-3xl font-bold" style={{ color: "#2B1E3F", opacity: 0.12 }}>{article.title.charAt(0)}</span>
+          </div>
+        )}
+      </div>
+      <div className="p-4">
+        <Badge cat={article.category} />
+        <h3 className="mt-2 text-sm font-bold leading-snug line-clamp-2" style={{ color: "#2B1E3F" }}>
+          {article.title}
+        </h3>
+        <div className="mt-3 flex items-center justify-between text-xs" style={{ color: "#2B1E3F", opacity: 0.45 }}>
+          <span className="flex items-center gap-1"><Calendar size={10} />
+            {new Date(article.date).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}
           </span>
-        ))}
-      </div>
-      <div className="mt-4 flex items-center justify-between text-xs" style={{ color: "#2B1E3F", opacity: 0.5 }}>
-        <span className="flex items-center gap-1.5">
-          <Calendar size={12} />
-          {new Date(article.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
+          <span className="flex items-center gap-1"><Clock size={10} />{article.readTime}</span>
+        </div>
+        <span className="mt-2 inline-flex items-center gap-1 text-xs font-semibold" style={{ color: "#4361EE" }}>
+          Lire <ArrowRight size={11} />
         </span>
-        <span className="flex items-center gap-1.5"><Clock size={12} />{article.readTime}</span>
       </div>
-      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold group-hover:gap-2.5 transition-all" style={{ color: "#4361EE" }}>
-        Lire l'article <ArrowRight size={14} />
-      </span>
-    </div>
-  </article>
+    </article>
+  </Link>
 );
 
-// Skeleton d'une card
-const CardSkeleton = () => (
-  <div
-    className="rounded-2xl overflow-hidden animate-pulse"
-    style={{ border: "2px solid rgba(43,30,63,0.12)", boxShadow: "4px 4px 0px rgba(43,30,63,0.10)" }}
-  >
-    <div className="aspect-[16/9]" style={{ backgroundColor: "#E9F2F4" }} />
-    <div className="p-5 space-y-3">
-      <div className="h-4 rounded" style={{ backgroundColor: "#E9F2F4", width: "80%" }} />
-      <div className="h-3 rounded" style={{ backgroundColor: "#E9F2F4", width: "60%" }} />
-      <div className="h-3 rounded" style={{ backgroundColor: "#E9F2F4", width: "90%" }} />
+// ── Skeleton card ──
+const CardSkeleton = ({ w }: { w?: string }) => (
+  <div className="flex-shrink-0 rounded-2xl overflow-hidden animate-pulse"
+    style={{ width: w ?? "calc(25% - 12px)", border: "2px solid rgba(43,30,63,0.10)", boxShadow: "3px 3px 0px rgba(43,30,63,0.08)" }}>
+    <div style={{ aspectRatio: "16/9", backgroundColor: "#E9F2F4" }} />
+    <div className="p-4 space-y-2">
+      <div className="h-3 rounded" style={{ backgroundColor: "#E9F2F4", width: "50%" }} />
+      <div className="h-3 rounded" style={{ backgroundColor: "#E9F2F4", width: "85%" }} />
+      <div className="h-3 rounded" style={{ backgroundColor: "#E9F2F4", width: "65%" }} />
     </div>
   </div>
 );
@@ -140,6 +98,8 @@ const CardSkeleton = () => (
 export default function Blog() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
+  const [carouselIndex, setCarouselIndex] = useState(0);
+  const [animDir, setAnimDir] = useState<"left" | "right" | null>(null);
   const fetchedRef = useRef(false);
 
   useEffect(() => {
@@ -180,10 +140,21 @@ export default function Blog() {
   }, []);
 
   const featured = articles[0];
-  const rest = articles.slice(1);
+  const carouselArticles = articles.slice(1);
+  const VISIBLE = 4;
+  const maxIndex = Math.max(0, carouselArticles.length - VISIBLE);
   const allCategories = Array.from(new Set([...blogCategories, ...articles.map((a) => a.category)]));
 
-  // ── Helmet et breadcrumb toujours rendus (pas dans le skeleton) ──
+  const slide = (dir: "left" | "right") => {
+    setAnimDir(dir);
+    setTimeout(() => {
+      setCarouselIndex((prev) =>
+        dir === "right" ? Math.min(prev + 1, maxIndex) : Math.max(prev - 1, 0)
+      );
+      setAnimDir(null);
+    }, 180);
+  };
+
   return (
     <PageLayout hideBlogCarousel>
       <Helmet>
@@ -194,78 +165,178 @@ export default function Blog() {
 
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Blog" }]} />
 
-      {/* Hero */}
-      <section className="relative overflow-hidden py-20 md:py-28 min-h-[500px] flex items-center">
-        <img src={imgMiami} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="eager" fetchPriority="high" />
-        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.88) 0%, hsl(263,36%,18%,0.65) 55%, hsl(183,70%,40%,0.35) 100%)" }} />
-        <div className="container relative z-10">
-          <div className="max-w-2xl">
-            <span className="mb-4 inline-block rounded-full gradient-miami px-4 py-1.5 text-xs font-bold uppercase tracking-wider" style={{ color: "#F6F1E9" }}>Blog</span>
-            <h1 className="leading-tight" style={{ color: "#F6F1E9" }}>Veille web, SEO, GEO & tech</h1>
-            <p className="mt-6 text-lg leading-relaxed max-w-lg" style={{ color: "rgba(246,241,233,0.75)" }}>
-              Des articles pratiques pour comprendre le web, améliorer votre visibilité et faire les bons choix pour votre entreprise.
+      {/* ── Section 1 — Titre + Featured ── */}
+      <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
+        <div className="container">
+          {/* Titre */}
+          <div className="mb-10">
+            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "#2B1E3F", opacity: 0.4 }}>
+              Déclic Digital
+            </span>
+            <h1 className="mt-1" style={{ color: "#2B1E3F" }}>Blog</h1>
+            <p className="mt-2 text-lg max-w-xl" style={{ color: "#2B1E3F", opacity: 0.65 }}>
+              Veille web, SEO, GEO & tech - des articles pour développer votre visibilité en ligne.
             </p>
           </div>
+
+          {/* Featured */}
+          {loading ? (
+            <div className="rounded-2xl overflow-hidden animate-pulse"
+              style={{ border: "2px solid rgba(43,30,63,0.15)", boxShadow: "4px 4px 0px rgba(43,30,63,0.12)" }}>
+              <div style={{ aspectRatio: "21/9", backgroundColor: "#E9F2F4" }} />
+              <div className="p-8 space-y-3">
+                <div className="h-5 rounded" style={{ backgroundColor: "#E9F2F4", width: "60%" }} />
+                <div className="h-4 rounded" style={{ backgroundColor: "#E9F2F4", width: "85%" }} />
+              </div>
+            </div>
+          ) : featured ? (
+            <Link to={`/blog/${featured.slug}`} className="block group">
+              <article
+                className="overflow-hidden rounded-2xl grid md:grid-cols-2 transition-all hover:-translate-y-1"
+                style={{
+                  backgroundColor: "#FFFFFF",
+                  border: "2px solid rgba(43,30,63,0.15)",
+                  boxShadow: "4px 4px 0px rgba(43,30,63,0.12), 8px 8px 0px rgba(43,30,63,0.06)",
+                }}
+              >
+                {/* Image */}
+                <div className="overflow-hidden relative" style={{ minHeight: "280px" }}>
+                  {featured.coverImageUrl ? (
+                    <img src={featured.coverImageUrl} alt={featured.title}
+                      className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                      loading="eager" fetchPriority="high" width={800} height={500} />
+                  ) : (
+                    <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}>
+                      <span className="text-5xl font-bold" style={{ color: "#2B1E3F", opacity: 0.1 }}>{featured.title.charAt(0)}</span>
+                    </div>
+                  )}
+                  {/* Badge "À la une" */}
+                  <span className="absolute top-4 left-4 inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-bold"
+                    style={{ backgroundColor: "#2B1E3F", color: "#F6F1E9" }}>
+                    ✦ À la une
+                  </span>
+                </div>
+                {/* Texte */}
+                <div className="flex flex-col justify-center p-8 md:p-10">
+                  <Badge cat={featured.category} />
+                  <h2 className="mt-4 text-2xl md:text-3xl font-bold leading-snug" style={{ color: "#2B1E3F" }}>
+                    {featured.title}
+                  </h2>
+                  <p className="mt-3 leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.65 }}>{featured.excerpt}</p>
+                  <div className="mt-5 flex items-center gap-4 text-sm" style={{ color: "#2B1E3F", opacity: 0.45 }}>
+                    <span className="flex items-center gap-1.5">
+                      <Calendar size={14} />
+                      {new Date(featured.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}
+                    </span>
+                    <span className="flex items-center gap-1.5"><Clock size={14} />{featured.readTime}</span>
+                  </div>
+                  <span className="mt-5 inline-flex items-center gap-2 text-sm font-bold group-hover:gap-3 transition-all" style={{ color: "#4361EE" }}>
+                    Lire l'article <ArrowRight size={15} />
+                  </span>
+                </div>
+              </article>
+            </Link>
+          ) : null}
         </div>
       </section>
 
-      {/* Loading skeleton */}
-      {loading && (
-        <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
+      {/* ── Section 2 — Carousel ── */}
+      <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
+        <div className="container">
+          <div className="flex items-center justify-between mb-8">
+            <h2 style={{ color: "#2B1E3F" }}>Tous les articles</h2>
+            {/* Navigation */}
+            {!loading && carouselArticles.length > VISIBLE && (
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => slide("left")}
+                  disabled={carouselIndex === 0}
+                  className="flex h-9 w-9 items-center justify-center rounded-full transition-all disabled:opacity-30"
+                  style={{ backgroundColor: "#F6F1E9", border: "1.5px solid rgba(43,30,63,0.2)", color: "#2B1E3F" }}
+                >
+                  <ChevronLeft size={18} />
+                </button>
+                <button
+                  onClick={() => slide("right")}
+                  disabled={carouselIndex >= maxIndex}
+                  className="flex h-9 w-9 items-center justify-center rounded-full transition-all disabled:opacity-30"
+                  style={{ backgroundColor: "#F6F1E9", border: "1.5px solid rgba(43,30,63,0.2)", color: "#2B1E3F" }}
+                >
+                  <ChevronRight size={18} />
+                </button>
+                <span className="text-sm ml-1" style={{ color: "#2B1E3F", opacity: 0.4 }}>
+                  {carouselIndex + 1} / {maxIndex + 1}
+                </span>
+              </div>
+            )}
+          </div>
+
+          {/* Carousel track */}
+          <div className="overflow-hidden">
+            {loading ? (
+              <div className="flex gap-4">
+                {[1, 2, 3, 4].map((i) => <CardSkeleton key={i} />)}
+              </div>
+            ) : (
+              <div
+                className="flex gap-4"
+                style={{
+                  transform: `translateX(calc(-${carouselIndex * (100 / VISIBLE)}% - ${carouselIndex * 4}px))`,
+                  transition: animDir ? "transform 0.22s cubic-bezier(0.4,0,0.2,1)" : "transform 0.22s cubic-bezier(0.4,0,0.2,1)",
+                  opacity: animDir ? 0.85 : 1,
+                }}
+              >
+                {carouselArticles.map((article) => (
+                  <CarouselCard key={article.slug} article={article} />
+                ))}
+              </div>
+            )}
+          </div>
+
+          {/* Dots */}
+          {!loading && carouselArticles.length > VISIBLE && (
+            <div className="flex justify-center gap-1.5 mt-6">
+              {Array.from({ length: maxIndex + 1 }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => { setAnimDir("right"); setTimeout(() => { setCarouselIndex(i); setAnimDir(null); }, 180); }}
+                  className="rounded-full transition-all"
+                  style={{
+                    width: i === carouselIndex ? "20px" : "8px",
+                    height: "8px",
+                    backgroundColor: i === carouselIndex ? "#2B1E3F" : "rgba(43,30,63,0.25)",
+                  }}
+                />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ── Section 3 — Catégories ── */}
+      {!loading && allCategories.length > 0 && (
+        <section style={{ backgroundColor: "#F6F1E9" }} className="py-8 md:py-10">
           <div className="container">
-            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              {[1, 2, 3, 4, 5, 6].map((i) => <CardSkeleton key={i} />)}
+            <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: "#2B1E3F", opacity: 0.4 }}>
+              Parcourir par catégorie
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {allCategories.map((cat) => {
+                const s = getBadge(cat);
+                return (
+                  <Link key={cat} to={`/blog/categorie/${getCategorySlug(cat)}`}
+                    className="rounded-full px-4 py-2 text-sm font-bold transition-all hover:opacity-85 hover:-translate-y-0.5"
+                    style={{ backgroundColor: s.bg, color: s.color, boxShadow: "2px 2px 0px rgba(43,30,63,0.15)" }}>
+                    {cat}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
       )}
 
-      {/* Contenu chargé */}
-      {!loading && featured && (
-        <>
-          {/* Article à la une */}
-          <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
-            <div className="container">
-              <div className="flex items-center gap-3 mb-8">
-                <span className="inline-flex items-center gap-1.5 rounded-full gradient-miami px-4 py-1.5 text-xs font-bold" style={{ color: "#F6F1E9" }}>
-                  <Sparkles size={12} /> À la une
-                </span>
-              </div>
-              <Link to={`/blog/${featured.slug}`} className="block">
-                <VintageCard article={featured} featured />
-              </Link>
-            </div>
-          </section>
-
-          {/* Catégories */}
-          {allCategories.length > 0 && (
-            <section style={{ backgroundColor: "#E9F2F4" }} className="py-8">
-              <div className="container">
-                <p className="text-sm font-bold mb-3" style={{ color: "#2B1E3F", opacity: 0.5 }}>PARCOURIR PAR CATÉGORIE</p>
-                <div className="flex flex-wrap gap-2">
-                  {allCategories.map((cat) => <CategoryBadgeLink key={cat} cat={cat} />)}
-                </div>
-              </div>
-            </section>
-          )}
-
-          {/* Grille articles */}
-          <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
-            <div className="container">
-              <h2 className="text-2xl font-bold mb-8" style={{ color: "#2B1E3F" }}>Tous les articles</h2>
-              <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {rest.map((article) => (
-                  <Link key={article.slug} to={`/blog/${article.slug}`} className="block">
-                    <VintageCard article={article} />
-                  </Link>
-                ))}
-              </div>
-            </div>
-          </section>
-        </>
-      )}
-
-      {/* CTA texture */}
+      {/* ── CTA texture ── */}
       <section data-alternate="skip" className="relative overflow-hidden py-16">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
         <div className="container relative z-10 text-center">
