@@ -30,18 +30,23 @@ const categoryBadge: Record<string, { bg: string; color: string }> = {
 };
 const getBadge = (cat: string) => categoryBadge[cat] ?? { bg: "#2B1E3F", color: "#F6F1E9" };
 
-// Badge compact pour les cards
 const Badge = ({ cat, small = false }: { cat: string; small?: boolean }) => {
   const s = getBadge(cat);
   return (
     <span
-      className="inline-block rounded-full font-bold"
       style={{
+        display: "inline-flex",
+        alignItems: "center",
         backgroundColor: s.bg,
         color: s.color,
         fontSize: small ? "10px" : "11px",
         padding: small ? "2px 8px" : "3px 10px",
+        borderRadius: "999px",
+        fontWeight: 700,
         letterSpacing: "0.02em",
+        width: "fit-content",
+        maxWidth: "fit-content",
+        whiteSpace: "nowrap",
       }}
     >
       {cat}
@@ -49,7 +54,6 @@ const Badge = ({ cat, small = false }: { cat: string; small?: boolean }) => {
   );
 };
 
-// ── Carousel card — 3 slots : petit | GRAND | petit ──
 const CarouselCard = ({ article, size }: { article: Article; size: "sm" | "lg" }) => {
   const isLg = size === "lg";
   return (
@@ -184,13 +188,11 @@ export default function Blog() {
   const maxIndex = Math.max(0, carouselArticles.length - 1);
   const allCategories = Array.from(new Set([...blogCategories, ...articles.map((a) => a.category)]));
 
-  // 3 articles visibles : prev | center (featured) | next
-  const getVisible = () => {
-    const prev = carouselArticles[carouselIndex - 1] ?? null;
-    const center = carouselArticles[carouselIndex] ?? null;
-    const next = carouselArticles[carouselIndex + 1] ?? null;
-    return { prev, center, next };
-  };
+  const getVisible = () => ({
+    prev: carouselArticles[carouselIndex - 1] ?? null,
+    center: carouselArticles[carouselIndex] ?? null,
+    next: carouselArticles[carouselIndex + 1] ?? null,
+  });
   const { prev, center, next } = getVisible();
 
   const slide = (dir: "left" | "right") => {
@@ -209,13 +211,15 @@ export default function Blog() {
 
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Blog" }]} />
 
-      {/* Section 1 — Titre + Catégories + Featured ── #F6F1E9 */}
+      {/* Section 1 — Titre + Catégories + Featured — #F6F1E9 */}
       <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
         <div className="container">
 
           {/* Titre */}
-          <div className="mb-8">
-            <span className="text-xs font-bold uppercase tracking-widest" style={{ color: "#2B1E3F", opacity: 0.35 }}>
+          <div className="mb-6">
+            <span
+              style={{ color: "#2B1E3F", opacity: 0.35, fontSize: "11px", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase" }}
+            >
               Déclic Digital
             </span>
             <h1 className="mt-1" style={{ color: "#2B1E3F" }}>Blog</h1>
@@ -224,7 +228,7 @@ export default function Blog() {
             </p>
           </div>
 
-          {/* Catégories — directement sous le titre, sans alternance */}
+          {/* Catégories — même section, pas d'alternance */}
           {allCategories.length > 0 && (
             <div className="mb-10 flex flex-wrap gap-2">
               {allCategories.map((cat) => {
@@ -233,12 +237,17 @@ export default function Blog() {
                   <Link
                     key={cat}
                     to={`/blog/categorie/${getCategorySlug(cat)}`}
-                    className="rounded-full font-bold transition-all hover:opacity-80 hover:-translate-y-0.5"
+                    className="transition-all hover:opacity-80 hover:-translate-y-0.5"
                     style={{
+                      display: "inline-flex",
+                      alignItems: "center",
                       backgroundColor: s.bg,
                       color: s.color,
                       fontSize: "12px",
                       padding: "5px 14px",
+                      borderRadius: "999px",
+                      fontWeight: 700,
+                      whiteSpace: "nowrap",
                       boxShadow: "2px 2px 0px rgba(43,30,63,0.12)",
                     }}
                   >
@@ -275,10 +284,22 @@ export default function Blog() {
                       <span className="text-5xl font-bold" style={{ color: "#2B1E3F", opacity: 0.1 }}>{featured.title.charAt(0)}</span>
                     </div>
                   )}
-                  {/* Badge "À la une" — petit et discret */}
                   <span
-                    className="absolute top-3 left-3 rounded-full font-bold"
-                    style={{ backgroundColor: "#2B1E3F", color: "#F6F1E9", fontSize: "10px", padding: "3px 10px", letterSpacing: "0.05em" }}
+                    style={{
+                      position: "absolute",
+                      top: "12px",
+                      left: "12px",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      backgroundColor: "#2B1E3F",
+                      color: "#F6F1E9",
+                      fontSize: "10px",
+                      padding: "3px 10px",
+                      borderRadius: "999px",
+                      fontWeight: 700,
+                      letterSpacing: "0.05em",
+                      whiteSpace: "nowrap",
+                    }}
                   >
                     À la une
                   </span>
@@ -296,7 +317,10 @@ export default function Blog() {
                     </span>
                     <span className="flex items-center gap-1.5"><Clock size={12} />{featured.readTime}</span>
                   </div>
-                  <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold group-hover:gap-3 transition-all" style={{ color: "#4361EE" }}>
+                  <span
+                    className="mt-4 inline-flex items-center gap-2 text-sm font-bold group-hover:gap-3 transition-all"
+                    style={{ color: "#4361EE" }}
+                  >
                     Lire l'article <ArrowRight size={14} />
                   </span>
                 </div>
@@ -336,7 +360,6 @@ export default function Blog() {
             )}
           </div>
 
-          {/* Track — 3 articles : sm | LG | sm */}
           {enriching && carouselArticles.length === 0 ? (
             <div className="flex gap-4 items-center justify-center">
               <CardSkeleton size="sm" />
@@ -345,24 +368,12 @@ export default function Blog() {
             </div>
           ) : (
             <div className="flex gap-4 items-center justify-center overflow-hidden">
-              {/* Gauche */}
-              {prev ? (
-                <CarouselCard article={prev} size="sm" />
-              ) : (
-                <div style={{ width: "26%" }} />
-              )}
-              {/* Centre */}
+              {prev ? <CarouselCard article={prev} size="sm" /> : <div style={{ width: "26%" }} />}
               {center && <CarouselCard article={center} size="lg" />}
-              {/* Droite */}
-              {next ? (
-                <CarouselCard article={next} size="sm" />
-              ) : (
-                <div style={{ width: "26%" }} />
-              )}
+              {next ? <CarouselCard article={next} size="sm" /> : <div style={{ width: "26%" }} />}
             </div>
           )}
 
-          {/* Dots */}
           {carouselArticles.length > 1 && (
             <div className="flex justify-center gap-1.5 mt-8">
               {carouselArticles.map((_, i) => (
