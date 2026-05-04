@@ -1,6 +1,6 @@
 [[redirects]]
-  from = "/:path*/"
-  to = "/:path*"
+  from = "/:path+/"
+  to = "/:path+"
   status = 301
   force = true
 
