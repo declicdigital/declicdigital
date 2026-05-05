@@ -73,15 +73,9 @@ const Index = () => {
     setError("");
     try {
       await supabase.from("contact_submissions").insert({
-        full_name: form.full_name,
-        company: form.company,
-        email: form.email,
-        phone: form.phone,
-        current_url: form.current_url,
-        message: form.msg,
-        status: "new",
+        full_name: form.full_name, company: form.company, email: form.email,
+        phone: form.phone, current_url: form.current_url, message: form.msg, status: "new",
       });
-
       await sendBrevoEmail(
         { email: form.email, name: form.full_name },
         "Votre message a bien été reçu - Déclic Digital",
@@ -91,14 +85,9 @@ const Index = () => {
           </div>
           <p style="color:#333;font-size:16px;">Bonjour <strong>${form.full_name}</strong>,</p>
           <p style="color:#555;line-height:1.6;">Merci pour votre message. Nous l'avons bien reçu et vous répondrons sous 24 à 48h ouvrées.</p>
-          <div style="background:#f8f9fa;border-radius:12px;padding:16px;margin:20px 0;">
-            <p style="margin:0;color:#666;font-size:13px;">Votre message :</p>
-            <p style="margin:8px 0 0;color:#333;white-space:pre-wrap;">${form.msg}</p>
-          </div>
           <p style="color:#999;font-size:13px;text-align:center;margin-top:32px;">Déclic Digital - declicdigital.net</p>
         </div>`
       );
-
       await sendBrevoEmail(
         { email: CONTACT_EMAIL, name: "Geoffrey" },
         `📬 Nouveau contact - ${form.full_name}${form.company ? ` (${form.company})` : ""}`,
@@ -109,19 +98,16 @@ const Index = () => {
           <div style="background:white;border-radius:12px;padding:24px;">
             <table style="width:100%;border-collapse:collapse;">
               <tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;width:120px;">Nom</td><td style="font-weight:bold;font-size:13px;">${form.full_name}</td></tr>
-              <tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;">Email</td><td style="font-size:13px;"><a href="mailto:${form.email}" style="color:#4fc3c3;">${form.email}</a></td></tr>
-              ${form.phone ? `<tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;">Téléphone</td><td style="font-size:13px;"><a href="tel:${form.phone}">${form.phone}</a></td></tr>` : ""}
+              <tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;">Email</td><td style="font-size:13px;">${form.email}</td></tr>
+              ${form.phone ? `<tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;">Tél</td><td style="font-size:13px;">${form.phone}</td></tr>` : ""}
               ${form.company ? `<tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;">Entreprise</td><td style="font-size:13px;">${form.company}</td></tr>` : ""}
-              ${form.current_url ? `<tr><td style="padding:6px 12px 6px 0;color:#888;font-size:13px;">Site actuel</td><td style="font-size:13px;"><a href="${form.current_url}" style="color:#4fc3c3;">${form.current_url}</a></td></tr>` : ""}
             </table>
             <div style="margin-top:16px;padding:16px;background:#f8f9fa;border-radius:8px;border-left:3px solid #4fc3c3;">
-              <p style="margin:0 0 6px;color:#888;font-size:12px;">Message :</p>
               <p style="margin:0;color:#333;white-space:pre-wrap;font-size:13px;">${form.msg}</p>
             </div>
           </div>
         </div>`
       );
-
       setSent(true);
       setForm({ full_name: "", company: "", email: "", phone: "", current_url: "", msg: "" });
     } catch (err) {
@@ -149,15 +135,12 @@ const Index = () => {
             url: "https://declicdigital.net",
             telephone: "+33602228939",
             email: "contact@declicdigital.net",
-            image: "https://declicdigital.net/og/default.webp",
             priceRange: "€€",
-            currenciesAccepted: "EUR",
-            paymentAccepted: "Virement bancaire, Carte bancaire",
             address: { "@type": "PostalAddress", streetAddress: "57 rue d'Alleray", addressLocality: "Paris", postalCode: "75015", addressRegion: "Île-de-France", addressCountry: "FR" },
             geo: { "@type": "GeoCoordinates", latitude: 48.8396, longitude: 2.3004 },
             areaServed: [
-              { "@type": "City", name: "Paris", sameAs: "https://fr.wikipedia.org/wiki/Paris" },
-              { "@type": "AdministrativeArea", name: "Hauts-de-Seine (92)", sameAs: "https://fr.wikipedia.org/wiki/Hauts-de-Seine" },
+              { "@type": "City", name: "Paris" },
+              { "@type": "AdministrativeArea", name: "Hauts-de-Seine (92)" },
             ],
             openingHoursSpecification: { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday","Tuesday","Wednesday","Thursday","Friday"], opens: "09:00", closes: "18:00" },
             founder: { "@type": "Person", name: "Geoffrey", jobTitle: "Expert Produit Google" },
@@ -166,15 +149,13 @@ const Index = () => {
         </script>
       </Helmet>
 
-      {/* ─── Hero — skip alternance ─────────────────────────────────────────── */}
+      {/* ─── Hero ─── */}
       <section className="gradient-hero relative overflow-hidden" data-alternate="skip">
         <div className="container pt-6 pb-16 md:pt-8 md:pb-24 lg:pt-10 lg:pb-32">
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
-              <span
-                className="mb-4 inline-block rounded-full px-4 py-1.5 text-xs font-semibold"
-                style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}
-              >
+              <span className="mb-4 inline-block rounded-full px-4 py-1.5 text-xs font-semibold"
+                style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}>
                 Expert Produit Google · Agence digitale
               </span>
               <h1 className="mb-6 leading-tight">
@@ -197,16 +178,24 @@ const Index = () => {
               </div>
             </div>
             <div className="flex flex-col gap-4">
-              <div className="relative overflow-hidden rounded-2xl group" style={{ boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
-                <img src={imgBureau} sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 460px" alt="Agence web Déclic Digital - bureau Paris avec analytics" className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105" width={640} height={256} fetchPriority="high" />
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "linear-gradient(135deg, rgba(15,10,46,0.3), rgba(79,195,195,0.15))" }} />
+              {/* Image hero — dimensions fixes pour éviter le CLS */}
+              <div className="relative overflow-hidden rounded-2xl group" style={{ height: "256px", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
+                <img src={imgBureau} alt="Agence web Déclic Digital - bureau Paris avec analytics"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  width={640} height={256} fetchPriority="high" decoding="async" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: "linear-gradient(135deg, rgba(15,10,46,0.3), rgba(79,195,195,0.15))" }} />
               </div>
-              <div className="rounded-2xl p-5 flex items-center gap-4" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
-                <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital - Expert Produit Google" className="h-16 w-16 rounded-full object-cover shrink-0" width={64} height={64} fetchPriority="high" />
+              <div className="rounded-2xl p-5 flex items-center gap-4" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)", minHeight: "96px" }}>
+                <img src={geoffreyPhoto} alt="Geoffrey, fondateur Déclic Digital - Expert Produit Google"
+                  className="h-16 w-16 rounded-full object-cover shrink-0"
+                  width={64} height={64} fetchPriority="high" decoding="async" />
                 <div>
                   <p className="font-bold" style={{ color: INK }}>Geoffrey</p>
                   <p className="text-sm" style={{ color: INK, opacity: 0.65 }}>Expert Produit Google</p>
-                  <p className="text-xs mt-1" style={{ color: INK, opacity: 0.55 }}>Fondateur de Déclic Digital, j'accompagne les TPE et indépendants à Paris et dans le 92.</p>
+                  <p className="text-xs mt-1" style={{ color: INK, opacity: 0.55 }}>
+                    Fondateur de Déclic Digital, j'accompagne les TPE et indépendants à Paris et dans le 92.
+                  </p>
                 </div>
               </div>
             </div>
@@ -214,12 +203,13 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Problème — #E9F2F4 ─────────────────────────────────────────────── */}
+      {/* ─── Problème #E9F2F4 ─── */}
       <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="relative">
             <div className="hidden lg:block absolute left-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
-              <img src={imgProbleme} sizes="(max-width: 1024px) 0vw, 42vw" alt="Indépendant frustré par son site sans clients" className="w-full h-full object-cover" width={560} height={560} loading="lazy" />
+              <img src={imgProbleme} alt="Indépendant frustré par son site sans clients"
+                className="w-full h-full object-cover" width={560} height={560} loading="lazy" decoding="async" />
               <div className="absolute inset-0" style={{ background: "linear-gradient(to left, #E9F2F4 0%, rgba(233,242,244,0.4) 30%, transparent 65%)" }} />
             </div>
             <div className="relative z-10 ml-auto max-w-2xl">
@@ -227,7 +217,7 @@ const Index = () => {
               <p className="mb-8 text-lg leading-relaxed" style={{ color: INK, opacity: 0.7 }}>
                 De nombreuses TPE investissent dans un site web, mais celui-ci reste invisible sur Google. Sans stratégie de{" "}
                 <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>référencement</Link>,
-                sans optimisation technique et sans contenu adapté, votre site ne peut pas attirer de visiteurs qualifiés. Résultat : zéro contact, zéro prospect, zéro retour sur investissement.
+                sans optimisation technique et sans contenu adapté, votre site ne peut pas attirer de visiteurs qualifiés.
               </p>
               <div className="grid gap-4 sm:grid-cols-2">
                 {[
@@ -236,7 +226,8 @@ const Index = () => {
                   { icon: Search, text: "Absence de stratégie SEO", detail: "Sans optimisation des mots clés, des balises et du contenu, Google ne peut pas comprendre ni classer votre site." },
                   { icon: Gauge, text: "Site trop lent", detail: "Un temps de chargement supérieur à 3 secondes augmente le taux de rebond de plus de 50%." },
                 ].map((item, i) => (
-                  <div key={i} className="flex items-start gap-4 rounded-xl p-5 text-left" style={{ backgroundColor: "#F6F1E9", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
+                  <div key={i} className="flex items-start gap-4 rounded-xl p-5 text-left"
+                    style={{ backgroundColor: "#F6F1E9", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
                     <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg gradient-primary" style={{ color: INK }}>
                       <item.icon size={22} />
                     </div>
@@ -257,11 +248,12 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Services — #F6F1E9 ─────────────────────────────────────────────── */}
+      {/* ─── Services #F6F1E9 ─── */}
       <section className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="relative rounded-3xl overflow-hidden">
-            <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" />
+            <img src={imgTexture} alt="" aria-hidden="true"
+              className="absolute inset-0 w-full h-full object-cover pointer-events-none select-none" loading="lazy" />
             <div className="absolute inset-0" style={{ background: "rgba(246,241,233,0.88)" }} />
             <div className="relative z-10 py-8">
               <div className="text-center mb-12">
@@ -277,13 +269,15 @@ const Index = () => {
                   { icon: Eye, title: "Visibilité IA (GEO)", desc: "Apparaissez dans les réponses de ChatGPT, Perplexity et Gemini. La nouvelle frontière de la visibilité digitale pour les TPE.", link: "/visibilite-ia" },
                   { icon: BarChart3, title: "Stratégie digitale", desc: "Analyse de marché, positionnement, contenu, suivi des performances : chaque action est mesurée et orientée résultats.", link: "/contact" },
                 ].map((s, i) => (
-                  <div key={i} className="group rounded-2xl p-8 transition-all hover:-translate-y-1" style={{ backgroundColor: "#ffffff", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
+                  <div key={i} className="group rounded-2xl p-8 transition-all hover:-translate-y-1"
+                    style={{ backgroundColor: "#ffffff", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
                     <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary" style={{ color: INK }}>
                       <s.icon size={26} />
                     </div>
                     <h3 className="mb-3">{s.title}</h3>
                     <p className="text-base leading-relaxed" style={{ color: INK, opacity: 0.65 }}>{s.desc}</p>
-                    <Link to={s.link} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold hover:gap-2 transition-all" style={{ color: "#4361EE" }}>
+                    <Link to={s.link} className="mt-4 inline-flex items-center gap-1 text-sm font-semibold hover:gap-2 transition-all"
+                      style={{ color: "#4361EE" }}>
                       En savoir plus <ChevronRight size={16} />
                     </Link>
                   </div>
@@ -294,12 +288,13 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Processus — #E9F2F4 ────────────────────────────────────────────── */}
+      {/* ─── Processus #E9F2F4 ─── */}
       <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="relative">
             <div className="hidden lg:block absolute right-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
-              <img src={imgProcessus} sizes="(max-width: 1024px) 0vw, 42vw" alt="Consultante agence digitale Paris - Déclic Digital" className="w-full h-full object-cover" width={560} height={560} loading="lazy" />
+              <img src={imgProcessus} alt="Consultante agence digitale Paris - Déclic Digital"
+                className="w-full h-full object-cover" width={560} height={560} loading="lazy" decoding="async" />
               <div className="absolute inset-0" style={{ background: "linear-gradient(to right, #E9F2F4 0%, rgba(233,242,244,0.4) 30%, transparent 65%)" }} />
             </div>
             <div className="relative z-10 max-w-2xl">
@@ -336,12 +331,12 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Avis Google — #F6F1E9 ──────────────────────────────────────────── */}
-      <Suspense fallback={<div style={{ minHeight: 400 }} />}>
+      {/* ─── Avis Google #F6F1E9 ─── */}
+      <Suspense fallback={<div style={{ minHeight: "400px", backgroundColor: "#F6F1E9" }} />}>
         <GoogleReviewsSection backgroundColor="#F6F1E9" />
       </Suspense>
 
-      {/* ─── Pourquoi nous — #E9F2F4 ────────────────────────────────────────── */}
+      {/* ─── Pourquoi nous #E9F2F4 ─── */}
       <section className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="mx-auto max-w-5xl">
@@ -350,9 +345,9 @@ const Index = () => {
             </div>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                { icon: Clock, title: "Disponible 24h/24", desc: "Contrairement à un commerce physique, votre site travaille pour vous en permanence. Vos prospects peuvent vous découvrir et vous contacter à tout moment." },
-                { icon: Target, title: "Attirez des clients ciblés", desc: "Un site bien référencé attire des visiteurs qui recherchent activement vos services. Ce sont des prospects qualifiés prêts à passer à l'action." },
-                { icon: Shield, title: "Renforcez votre crédibilité", desc: "En 2026, ne pas avoir de site web professionnel peut nuire à votre image. Un site soigné rassure vos prospects." },
+                { icon: Clock, title: "Disponible 24h/24", desc: "Contrairement à un commerce physique, votre site travaille pour vous en permanence." },
+                { icon: Target, title: "Attirez des clients ciblés", desc: "Un site bien référencé attire des visiteurs qui recherchent activement vos services." },
+                { icon: Shield, title: "Renforcez votre crédibilité", desc: "En 2026, ne pas avoir de site web professionnel peut nuire à votre image." },
                 { icon: TrendingUp, title: "Rentabilité sur le long terme", desc: "Contrairement à la publicité payante, le référencement naturel génère du trafic durable sans coût par clic." },
               ].map((item, i) => (
                 <div key={i} className="rounded-2xl p-6" style={{ backgroundColor: "#F6F1E9", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
@@ -368,7 +363,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Paris — #F6F1E9 ────────────────────────────────────────────────── */}
+      {/* ─── Paris #F6F1E9 ─── */}
       <section className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -379,15 +374,20 @@ const Index = () => {
               </p>
               <div className="flex flex-wrap gap-2 mb-6">
                 {["Paris","Boulogne-Billancourt","Nanterre","Issy-les-Moulineaux","Levallois-Perret","Asnières-sur-Seine","Courbevoie","Neuilly-sur-Seine"].map((ville) => (
-                  <span key={ville} className="rounded-full px-3 py-1.5 text-sm font-medium" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)", color: INK }}>{ville}</span>
+                  <span key={ville} className="rounded-full px-3 py-1.5 text-sm font-medium"
+                    style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)", color: INK }}>
+                    {ville}
+                  </span>
                 ))}
               </div>
               <Link to="/nos-villes" className="inline-flex items-center gap-1 text-sm font-semibold hover:gap-2 transition-all" style={{ color: "#4361EE" }}>
                 Voir toutes nos villes <ChevronRight size={16} />
               </Link>
             </div>
-            <div className="relative overflow-hidden rounded-2xl group" style={{ boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
-              <img src={imgParis} sizes="(max-width: 768px) 100vw, 50vw" alt="Paris vue aérienne Hauts-de-Seine - zone d'intervention Déclic Digital" className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105" width={640} height={320} loading="lazy" />
+            <div className="relative overflow-hidden rounded-2xl group" style={{ height: "320px", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
+              <img src={imgParis} alt="Paris vue aérienne Hauts-de-Seine - zone d'intervention Déclic Digital"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                width={640} height={320} loading="lazy" decoding="async" />
               <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(15,10,46,0.85) 0%, transparent 55%)" }} />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <p className="font-bold text-lg" style={{ color: CREAM }}>Paris · Hauts-de-Seine · 92</p>
@@ -398,7 +398,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Logos tech — #E9F2F4 ───────────────────────────────────────────── */}
+      {/* ─── Logos tech #E9F2F4 — carousel GPU ─── */}
       <section className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="text-center mb-10">
@@ -407,12 +407,22 @@ const Index = () => {
               Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>SEO et GEO</Link>.
             </p>
           </div>
-          <div className="overflow-hidden">
-            <div className="flex animate-scroll-left gap-10 md:gap-14 w-max">
-              {[...techLogos, ...techLogos].map((t, i) => (
+          {/* Conteneur avec overflow hidden — pas de JS, animation CSS pure sur GPU */}
+          <div className="overflow-hidden" style={{ WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)" }}>
+            <div
+              className="flex gap-10 md:gap-14"
+              style={{
+                width: "max-content",
+                animation: "scroll-logos 28s linear infinite",
+                willChange: "transform",
+                transform: "translateZ(0)",
+              }}
+            >
+              {[...techLogos, ...techLogos, ...techLogos].map((t, i) => (
                 <div key={`${t.name}-${i}`} className="flex flex-col items-center gap-3 shrink-0">
                   <div className="rounded-2xl p-5" style={{ backgroundColor: "#F6F1E9", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
-                    <img src={t.src} alt={t.name} className="h-16 w-16 md:h-20 md:w-20 object-contain" loading="lazy" decoding="async" width={80} height={80} />
+                    <img src={t.src} alt={t.name} className="h-16 w-16 md:h-20 md:w-20 object-contain"
+                      loading="lazy" decoding="async" width={80} height={80} />
                   </div>
                   <span className="text-sm font-medium" style={{ color: INK, opacity: 0.65 }}>{t.name}</span>
                 </div>
@@ -422,7 +432,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Audit SEO — #F6F1E9 ────────────────────────────────────────────── */}
+      {/* ─── Audit SEO #F6F1E9 ─── */}
       <section className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="mx-auto max-w-4xl">
@@ -431,7 +441,7 @@ const Index = () => {
             </div>
             <div className="space-y-6">
               <p className="text-base md:text-lg" style={{ color: INK, opacity: 0.7 }}>
-                Créer un <Link to="/creation-site-web" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>site internet</Link> ne se résume pas à assembler quelques pages et publier du contenu. Chez <Link to="/qui-sommes-nous" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>Déclic Digital</Link>, nous accompagnons les TPE, artisans et indépendants de <Link to="/nos-villes" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>Paris et des Hauts-de-Seine</Link> dans la conception de sites web qui génèrent réellement des contacts qualifiés.
+                Créer un <Link to="/creation-site-web" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>site internet</Link> ne se résume pas à assembler quelques pages. Chez <Link to="/qui-sommes-nous" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>Déclic Digital</Link>, nous accompagnons les TPE, artisans et indépendants de <Link to="/nos-villes" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>Paris et des Hauts-de-Seine</Link> dans la conception de sites web qui génèrent réellement des contacts qualifiés.
               </p>
               <div className="grid gap-6 md:grid-cols-2">
                 <div className="rounded-2xl p-6" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
@@ -459,7 +469,7 @@ const Index = () => {
                     "Tarifs adaptés aux budgets des TPE et indépendants",
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-2 text-base">
-                      <CheckCircle size={16} className="text-brand-violet mt-0.5 shrink-0" />
+                      <CheckCircle size={16} className="mt-0.5 shrink-0" style={{ color: "#4361EE" }} />
                       <span style={{ color: INK, opacity: 0.7 }}>{item}</span>
                     </li>
                   ))}
@@ -475,13 +485,14 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Liens services — #E9F2F4 ───────────────────────────────────────── */}
+      {/* ─── Liens services #E9F2F4 ─── */}
       <section className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl text-center">
-            {/* h3 → h2 conformément à la règle titres de section */}
             <h2 className="mb-4">Explorez nos services</h2>
-            <p className="text-lg mb-6" style={{ color: INK, opacity: 0.7 }}>Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.</p>
+            <p className="text-lg mb-6" style={{ color: INK, opacity: 0.7 }}>
+              Découvrez l'ensemble de nos prestations pour développer votre présence en ligne.
+            </p>
             <div className="flex flex-wrap justify-center gap-3">
               {[
                 { to: "/creation-site-web", label: "Création de site web" },
@@ -493,7 +504,8 @@ const Index = () => {
                 { to: "/nos-villes", label: "Nos villes" },
                 { to: "/faq", label: "Questions fréquentes" },
               ].map((l) => (
-                <Link key={l.to} to={l.to} className="rounded-full border px-4 py-2 text-sm font-medium hover:opacity-80 transition-opacity" style={{ color: INK, borderColor: "rgba(43,30,63,0.25)", backgroundColor: "#F6F1E9" }}>
+                <Link key={l.to} to={l.to} className="rounded-full border px-4 py-2 text-sm font-medium hover:opacity-80 transition-opacity"
+                  style={{ color: INK, borderColor: "rgba(43,30,63,0.25)", backgroundColor: "#F6F1E9" }}>
                   {l.label}
                 </Link>
               ))}
@@ -502,12 +514,11 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Formulaire — #F6F1E9 ───────────────────────────────────────────── */}
+      {/* ─── Formulaire #F6F1E9 ─── */}
       <section className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="mx-auto max-w-2xl">
             <div className="text-center mb-10">
-              {/* h3 → h2 conformément à la règle titres de section */}
               <h2>Parlez-nous de votre projet</h2>
               <p className="mt-4 text-lg" style={{ color: INK, opacity: 0.7 }}>
                 Remplissez le formulaire ci-dessous pour recevoir un devis gratuit et personnalisé pour la{" "}
@@ -533,14 +544,8 @@ const Index = () => {
                 <Input name="current_url" placeholder="URL de votre site web (si existant)" type="url" className="rounded-xl" value={form.current_url} onChange={handleChange} />
                 <Textarea name="msg" placeholder="Décrivez votre projet..." className="rounded-xl min-h-[120px]" required value={form.msg} onChange={handleChange} />
                 {error && <p className="text-red-500 text-sm">{error}</p>}
-                <Button
-                  type="button"
-                  variant="custom"
-                  size="lg"
-                  disabled={sending}
-                  onClick={handleSubmit}
-                  className="w-full gradient-miami btn-glow rounded-full font-bold shadow-glow"
-                >
+                <Button type="button" variant="custom" size="lg" disabled={sending} onClick={handleSubmit}
+                  className="w-full gradient-miami btn-glow rounded-full font-bold shadow-glow">
                   {sending ? <Loader2 size={18} className="mr-2 animate-spin" /> : <CheckCircle size={18} className="mr-2" />}
                   {sending ? "Envoi en cours..." : "Envoyer ma demande"}
                 </Button>
@@ -550,17 +555,19 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Localisation — #E9F2F4 ─────────────────────────────────────────── */}
-      <Suspense fallback={<div style={{ minHeight: 300 }} />}>
+      {/* ─── Localisation #E9F2F4 ─── */}
+      <Suspense fallback={<div style={{ minHeight: "300px", backgroundColor: "#E9F2F4" }} />}>
         <LocationSection backgroundColor="#E9F2F4" />
       </Suspense>
 
-      {/* ─── CTA final texture — skip alternance ────────────────────────────── */}
+      {/* ─── CTA final texture ─── */}
       <section className="relative overflow-hidden py-16 md:py-24" data-alternate="skip">
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="container relative z-10">
           <div className="flex flex-col items-center text-center">
-            <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google" className="w-32 h-32 rounded-full object-cover border-2 shadow-lg mb-4" style={{ borderColor: "rgba(43,30,63,0.3)" }} width={128} height={128} loading="lazy" />
+            <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google"
+              className="w-32 h-32 rounded-full object-cover border-2 shadow-lg mb-4"
+              style={{ borderColor: "rgba(43,30,63,0.3)" }} width={128} height={128} loading="lazy" />
             <p className="text-sm font-semibold mb-1" style={{ color: INK }}>Geoffrey, Expert Produit Google</p>
             <h2 className="mb-4" style={{ color: INK }}>Et si votre site devenait votre meilleur commercial ?</h2>
             <p className="mb-8 text-lg max-w-2xl" style={{ color: INK, opacity: 0.7 }}>
@@ -578,6 +585,16 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Animation CSS keyframes pour le carousel logos */}
+      <style>{`
+        @keyframes scroll-logos {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(calc(-100% / 3)); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .flex[style*="scroll-logos"] { animation: none; }
+        }
+      `}</style>
     </PageLayout>
   );
 };
