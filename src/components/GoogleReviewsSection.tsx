@@ -3,7 +3,7 @@ import { Star, ExternalLink } from "lucide-react";
 
 const PLACE_ID = "ChIJsYNdrCdx5kcR89wPMta_l-w";
 const REVIEWS_URL = "https://search.google.com/local/reviews?placeid=ChIJsYNdrCdx5kcR89wPMta_l-w";
-const WRITE_REVIEW_URL = "https://share.google/8Ifh8V9cpPGinQXkY";
+const WRITE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJsYNdrCdx5kcR89wPMta_l-w";
 
 // URL et clé du projet Supabase qui héberge la Edge Function google-reviews
 const SUPABASE_URL = "https://iskxljribvfypkyappku.supabase.co";
