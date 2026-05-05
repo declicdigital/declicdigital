@@ -178,7 +178,6 @@ const Index = () => {
               </div>
             </div>
             <div className="flex flex-col gap-4">
-              {/* Image hero — dimensions fixes pour éviter le CLS */}
               <div className="relative overflow-hidden rounded-2xl group" style={{ height: "256px", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
                 <img src={imgBureau} alt="Agence web Déclic Digital - bureau Paris avec analytics"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -331,8 +330,8 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ─── Avis Google #F6F1E9 ─── */}
-      <Suspense fallback={<div style={{ minHeight: "400px", backgroundColor: "#F6F1E9" }} />}>
+      {/* ─── Avis Google #F6F1E9 — hauteur réservée pour éviter CLS ─── */}
+      <Suspense fallback={<div className="reviews-placeholder" />}>
         <GoogleReviewsSection backgroundColor="#F6F1E9" />
       </Suspense>
 
@@ -407,7 +406,6 @@ const Index = () => {
               Nous utilisons des outils professionnels reconnus pour <Link to="/creation-site-web" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>créer des sites performants</Link> et optimisés <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>SEO et GEO</Link>.
             </p>
           </div>
-          {/* Conteneur avec overflow hidden — pas de JS, animation CSS pure sur GPU */}
           <div className="overflow-hidden" style={{ WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)" }}>
             <div
               className="flex gap-10 md:gap-14"
@@ -451,7 +449,7 @@ const Index = () => {
                   </p>
                 </div>
                 <div className="rounded-2xl p-6" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
-                  <h3 className="mb-2">Le SEO au cœur de la conception</h3>
+                  <h3 className="mb-2">Le SEO au coeur de la conception</h3>
                   <p className="text-base leading-relaxed" style={{ color: INK, opacity: 0.65 }}>
                     Le <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>référencement</Link> est intégré dès la phase de conception : architecture, balisage sémantique, vitesse, maillage interne, contenu optimisé.
                   </p>
@@ -585,14 +583,14 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Animation CSS keyframes pour le carousel logos */}
+      {/* Keyframes carousel logos — CSS pur sur GPU */}
       <style>{`
         @keyframes scroll-logos {
           0% { transform: translateX(0); }
           100% { transform: translateX(calc(-100% / 3)); }
         }
         @media (prefers-reduced-motion: reduce) {
-          .flex[style*="scroll-logos"] { animation: none; }
+          [style*="scroll-logos"] { animation: none !important; }
         }
       `}</style>
     </PageLayout>
