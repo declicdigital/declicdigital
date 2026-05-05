@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Users, FileText, LogOut, Menu, X, BookOpen, Layout, DollarSign } from "lucide-react";
+import { LayoutDashboard, Users, FileText, LogOut, Menu, X, BookOpen, Layout, DollarSign, ImagePlay } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/logo-declic-digital-new.webp";
 
@@ -9,6 +9,7 @@ const navItems = [
   { to: "/admin/clients", icon: Users, label: "Clients" },
   { to: "/admin/soumissions", icon: FileText, label: "Soumissions" },
   { to: "/admin/blog", icon: BookOpen, label: "Blog" },
+  { to: "/admin/realisations", icon: ImagePlay, label: "Réalisations" },
   { to: "/admin/cms", icon: Layout, label: "CMS Pages" },
   { to: "/admin/tarifs", icon: DollarSign, label: "Tarifs" },
 ];
@@ -29,12 +30,14 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     <div className="min-h-screen flex" style={{ background: "hsl(263, 36%, 10%)" }}>
 
       {/* Sidebar desktop */}
-      <aside className="hidden lg:flex flex-col w-64 fixed h-full border-r" style={{ background: "hsl(263, 36%, 13%)", borderColor: "rgba(255,255,255,0.07)" }}>
+      <aside className="hidden lg:flex flex-col w-64 fixed h-full border-r"
+        style={{ background: "hsl(263, 36%, 13%)", borderColor: "rgba(255,255,255,0.07)" }}>
         <div className="p-5 border-b" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
           <Link to="/" target="_blank" rel="noopener noreferrer">
             <img src={logo} alt="Déclic Digital" className="h-12 w-auto object-contain" />
           </Link>
-          <p className="text-xs font-semibold uppercase tracking-widest mt-3" style={{ color: "rgba(255,255,255,0.25)" }}>
+          <p className="text-xs font-semibold uppercase tracking-widest mt-3"
+            style={{ color: "rgba(255,255,255,0.25)" }}>
             Back-office admin
           </p>
         </div>
