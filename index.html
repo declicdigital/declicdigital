@@ -2,7 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="UTF-8" />
-    <!-- GTM + gtag: load after page is fully rendered + 2s delay -->
+    <!-- GTM + gtag: load after interaction or 3.5s delay -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
@@ -33,6 +33,7 @@
     <link rel="preload" href="/fonts/ClashDisplay-Variable.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/fonts/DMSerifDisplay-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/src/assets/geoffrey-fondateur-declic-digital.webp" as="image" type="image/webp">
+    <link rel="preload" href="/src/assets/agence-web-paris-bureau-laptop.webp" as="image" type="image/webp">
     <link rel="dns-prefetch" href="https://iskxljribvfypkyappku.supabase.co">
     <link rel="preconnect" href="https://iskxljribvfypkyappku.supabase.co">
     <link rel="preconnect" href="https://lh3.googleusercontent.com">
@@ -49,7 +50,10 @@
       h1{font-family:'DM Serif Display',Georgia,serif!important;color:hsl(263 36% 18%);letter-spacing:-.025em}
       h2,h3{font-family:'Clash Display',system-ui,sans-serif;color:hsl(263 36% 18%);letter-spacing:-.025em}
       #root{display:flex;flex-direction:column;min-height:100vh}
-      header{position:sticky;top:0;z-index:50;border-bottom:1px solid hsl(42 25% 82%);background:hsl(43 35% 96%/.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);height:4.5rem}@media(min-width:768px){header{height:5rem}}
+      header{position:sticky;top:0;z-index:50;border-bottom:1px solid hsl(42 25% 82%);background:hsl(43 35% 96%/.8);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);height:4.5rem}
+      @media(min-width:768px){header{height:5rem}}
+      /* Réserve l'espace pour la section avis Google — évite le CLS */
+      .reviews-placeholder{min-height:520px;background-color:#F6F1E9}
     </style>
     <title>Création site internet, SEO &amp; GEO | Paris et Hauts-de-Seine</title>
     <meta name="description" content="Agence web à Paris (92) — création de site internet, SEO et visibilité IA pour TPE et artisans. Audit SEO gratuit, devis en 24h. Expert Produit Google." />
