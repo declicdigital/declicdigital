@@ -21,34 +21,28 @@ interface Article {
   isFromSupabase?: boolean;
 }
 
+// Badges dans la palette de la marque — tons désaturés sur fond semi-transparent
 const categoryBadge: Record<string, { bg: string; color: string }> = {
-  "Création de site":   { bg: "#6D28D9", color: "#FFFFFF" },
-  "SEO & Performance":  { bg: "#059669", color: "#FFFFFF" },
-  "Stratégie digitale": { bg: "#E11D48", color: "#FFFFFF" },
-  "GEO, Visibilité IA": { bg: "#0284C7", color: "#FFFFFF" },
-  "Business":           { bg: "#D97706", color: "#FFFFFF" },
+  "Création de site":   { bg: "rgba(43,30,63,0.12)", color: "#2B1E3F" },
+  "SEO & Performance":  { bg: "rgba(92,225,230,0.18)", color: "#0C7B80" },
+  "Stratégie digitale": { bg: "rgba(203,108,230,0.15)", color: "#7B2D9E" },
+  "GEO, Visibilité IA": { bg: "rgba(255,102,196,0.14)", color: "#A0205E" },
+  "Business":           { bg: "rgba(67,97,238,0.13)", color: "#2B4AAB" },
 };
-const getBadge = (cat: string) => categoryBadge[cat] ?? { bg: "#2B1E3F", color: "#F6F1E9" };
+const getBadge = (cat: string) => categoryBadge[cat] ?? { bg: "rgba(43,30,63,0.10)", color: "#2B1E3F" };
 
 const Badge = ({ cat, small = false }: { cat: string; small?: boolean }) => {
   const s = getBadge(cat);
   return (
-    <span
-      style={{
-        display: "inline-flex",
-        alignItems: "center",
-        backgroundColor: s.bg,
-        color: s.color,
-        fontSize: small ? "10px" : "11px",
-        padding: small ? "2px 8px" : "3px 10px",
-        borderRadius: "999px",
-        fontWeight: 700,
-        letterSpacing: "0.02em",
-        width: "fit-content",
-        maxWidth: "fit-content",
-        whiteSpace: "nowrap",
-      }}
-    >
+    <span style={{
+      display: "inline-flex", alignItems: "center",
+      backgroundColor: s.bg, color: s.color,
+      fontSize: small ? "10px" : "11px",
+      padding: small ? "2px 8px" : "3px 10px",
+      borderRadius: "999px", fontWeight: 700,
+      letterSpacing: "0.02em", width: "fit-content",
+      maxWidth: "fit-content", whiteSpace: "nowrap",
+    }}>
       {cat}
     </span>
   );
@@ -57,35 +51,19 @@ const Badge = ({ cat, small = false }: { cat: string; small?: boolean }) => {
 const CarouselCard = ({ article, size }: { article: Article; size: "sm" | "lg" }) => {
   const isLg = size === "lg";
   return (
-    <Link
-      to={`/blog/${article.slug}`}
-      className="block group flex-shrink-0 transition-all duration-300"
-      style={{
-        width: isLg ? "42%" : "26%",
-        opacity: isLg ? 1 : 0.72,
-        transform: isLg ? "scale(1)" : "scale(0.94)",
-      }}
-    >
-      <article
-        className="h-full overflow-hidden rounded-2xl"
+    <Link to={`/blog/${article.slug}`} className="block group flex-shrink-0 transition-all duration-300"
+      style={{ width: isLg ? "42%" : "26%", opacity: isLg ? 1 : 0.75, transform: isLg ? "scale(1)" : "scale(0.93)" }}>
+      <article className="h-full overflow-hidden rounded-2xl"
         style={{
           backgroundColor: "#F6F1E9",
-          border: isLg ? "2px solid rgba(43,30,63,0.2)" : "1.5px solid rgba(43,30,63,0.12)",
-          boxShadow: isLg
-            ? "4px 4px 0px rgba(43,30,63,0.15), 8px 8px 0px rgba(43,30,63,0.06)"
-            : "2px 2px 0px rgba(43,30,63,0.08)",
-        }}
-      >
+          border: isLg ? "2px solid rgba(43,30,63,0.18)" : "1.5px solid rgba(43,30,63,0.10)",
+          boxShadow: isLg ? "4px 4px 0px rgba(43,30,63,0.12), 8px 8px 0px rgba(43,30,63,0.05)" : "2px 2px 0px rgba(43,30,63,0.07)",
+        }}>
         <div className="overflow-hidden relative" style={{ aspectRatio: "16/9" }}>
           {article.coverImageUrl ? (
-            <img
-              src={article.coverImageUrl}
-              alt={article.title}
+            <img src={article.coverImageUrl} alt={article.title}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="lazy"
-              width={isLg ? 600 : 380}
-              height={isLg ? 338 : 214}
-            />
+              loading="lazy" width={isLg ? 600 : 380} height={isLg ? 338 : 214} />
           ) : (
             <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}>
               <span style={{ color: "#2B1E3F", opacity: 0.1, fontSize: isLg ? "3rem" : "2rem", fontWeight: 700 }}>
@@ -96,10 +74,8 @@ const CarouselCard = ({ article, size }: { article: Article; size: "sm" | "lg" }
         </div>
         <div style={{ padding: isLg ? "16px 20px" : "12px 14px" }}>
           <Badge cat={article.category} small={!isLg} />
-          <h3
-            className="mt-2 font-bold leading-snug line-clamp-2"
-            style={{ color: "#2B1E3F", fontSize: isLg ? "15px" : "12px" }}
-          >
+          <h3 className="mt-2 font-bold leading-snug line-clamp-2"
+            style={{ color: "#2B1E3F", fontSize: isLg ? "15px" : "12px" }}>
             {article.title}
           </h3>
           {isLg && (
@@ -114,10 +90,8 @@ const CarouselCard = ({ article, size }: { article: Article; size: "sm" | "lg" }
             </span>
             <span className="flex items-center gap-1"><Clock size={10} />{article.readTime}</span>
           </div>
-          <span
-            className="mt-2 inline-flex items-center gap-1 font-semibold group-hover:gap-2 transition-all"
-            style={{ fontSize: "11px", color: "#4361EE" }}
-          >
+          <span className="mt-2 inline-flex items-center gap-1 font-semibold group-hover:gap-2 transition-all"
+            style={{ fontSize: "11px", color: "#4361EE" }}>
             Lire <ArrowRight size={10} />
           </span>
         </div>
@@ -127,14 +101,8 @@ const CarouselCard = ({ article, size }: { article: Article; size: "sm" | "lg" }
 };
 
 const CardSkeleton = ({ size }: { size: "sm" | "lg" }) => (
-  <div
-    className="flex-shrink-0 rounded-2xl overflow-hidden animate-pulse"
-    style={{
-      width: size === "lg" ? "42%" : "26%",
-      border: "1.5px solid rgba(43,30,63,0.10)",
-      opacity: size === "lg" ? 1 : 0.7,
-    }}
-  >
+  <div className="flex-shrink-0 rounded-2xl overflow-hidden animate-pulse"
+    style={{ width: size === "lg" ? "42%" : "26%", border: "1.5px solid rgba(43,30,63,0.08)", opacity: size === "lg" ? 1 : 0.7 }}>
     <div style={{ aspectRatio: "16/9", backgroundColor: "#E9F2F4" }} />
     <div className="p-4 space-y-2">
       <div className="h-3 rounded" style={{ backgroundColor: "#E9F2F4", width: "45%" }} />
@@ -184,20 +152,26 @@ export default function Blog() {
   }, []);
 
   const featured = articles[0];
+  // Le carousel commence à l'article 1 (après le featured)
   const carouselArticles = articles.slice(1);
-  const maxIndex = Math.max(0, carouselArticles.length - 1);
+  const len = carouselArticles.length;
+  const maxIndex = Math.max(0, len - 1);
   const allCategories = Array.from(new Set([...blogCategories, ...articles.map((a) => a.category)]));
 
-  const getVisible = () => ({
-    prev: carouselArticles[carouselIndex - 1] ?? null,
-    center: carouselArticles[carouselIndex] ?? null,
-    next: carouselArticles[carouselIndex + 1] ?? null,
-  });
+  // Toujours 3 articles visibles — boucle si nécessaire
+  const getVisible = () => {
+    if (len === 0) return { prev: null, center: null, next: null };
+    return {
+      prev: len > 1 ? carouselArticles[(carouselIndex - 1 + len) % len] : carouselArticles[0],
+      center: carouselArticles[carouselIndex % len],
+      next: len > 1 ? carouselArticles[(carouselIndex + 1) % len] : carouselArticles[0],
+    };
+  };
   const { prev, center, next } = getVisible();
 
   const slide = (dir: "left" | "right") => {
     setCarouselIndex((i) =>
-      dir === "right" ? Math.min(i + 1, maxIndex) : Math.max(i - 1, 0)
+      dir === "right" ? (i + 1) % len : (i - 1 + len) % len
     );
   };
 
@@ -214,12 +188,8 @@ export default function Blog() {
       {/* Section 1 — Titre + Catégories + Featured — #F6F1E9 */}
       <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
         <div className="container">
-
-          {/* Titre */}
           <div className="mb-6">
-            <span
-              style={{ color: "#2B1E3F", opacity: 0.35, fontSize: "11px", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase" }}
-            >
+            <span style={{ color: "#2B1E3F", opacity: 0.35, fontSize: "11px", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase" }}>
               Déclic Digital
             </span>
             <h1 className="mt-1" style={{ color: "#2B1E3F" }}>Blog</h1>
@@ -228,29 +198,23 @@ export default function Blog() {
             </p>
           </div>
 
-          {/* Catégories — même section, pas d'alternance */}
+          {/* Catégories */}
           {allCategories.length > 0 && (
             <div className="mb-10 flex flex-wrap gap-2">
               {allCategories.map((cat) => {
                 const s = getBadge(cat);
                 return (
-                  <Link
-                    key={cat}
-                    to={`/blog/categorie/${getCategorySlug(cat)}`}
+                  <Link key={cat} to={`/blog/categorie/${getCategorySlug(cat)}`}
                     className="transition-all hover:opacity-80 hover:-translate-y-0.5"
                     style={{
-                      display: "inline-flex",
-                      alignItems: "center",
-                      backgroundColor: s.bg,
-                      color: s.color,
-                      fontSize: "12px",
-                      padding: "5px 14px",
-                      borderRadius: "999px",
-                      fontWeight: 700,
+                      display: "inline-flex", alignItems: "center",
+                      backgroundColor: s.bg, color: s.color,
+                      fontSize: "12px", padding: "5px 14px",
+                      borderRadius: "999px", fontWeight: 700,
                       whiteSpace: "nowrap",
-                      boxShadow: "2px 2px 0px rgba(43,30,63,0.12)",
-                    }}
-                  >
+                      border: `1px solid ${s.color}30`,
+                      boxShadow: "1px 1px 0px rgba(43,30,63,0.08)",
+                    }}>
                     {cat}
                   </Link>
                 );
@@ -258,49 +222,33 @@ export default function Blog() {
             </div>
           )}
 
-          {/* Article à la une */}
+          {/* Featured */}
           {featured && (
             <Link to={`/blog/${featured.slug}`} className="block group">
-              <article
-                className="overflow-hidden rounded-2xl grid md:grid-cols-2 transition-all hover:-translate-y-1"
+              <article className="overflow-hidden rounded-2xl grid md:grid-cols-2 transition-all hover:-translate-y-1"
                 style={{
                   backgroundColor: "#FFFFFF",
-                  border: "2px solid rgba(43,30,63,0.15)",
-                  boxShadow: "4px 4px 0px rgba(43,30,63,0.12), 8px 8px 0px rgba(43,30,63,0.06)",
-                }}
-              >
+                  border: "2px solid rgba(43,30,63,0.12)",
+                  boxShadow: "4px 4px 0px rgba(43,30,63,0.10), 8px 8px 0px rgba(43,30,63,0.05)",
+                }}>
                 <div className="overflow-hidden relative" style={{ minHeight: "280px" }}>
                   {featured.coverImageUrl ? (
-                    <img
-                      src={featured.coverImageUrl}
-                      alt={featured.title}
+                    <img src={featured.coverImageUrl} alt={featured.title}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                      loading="eager"
-                      width={800}
-                      height={500}
-                    />
+                      loading="eager" width={800} height={500} />
                   ) : (
                     <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}>
                       <span className="text-5xl font-bold" style={{ color: "#2B1E3F", opacity: 0.1 }}>{featured.title.charAt(0)}</span>
                     </div>
                   )}
-                  <span
-                    style={{
-                      position: "absolute",
-                      top: "12px",
-                      left: "12px",
-                      display: "inline-flex",
-                      alignItems: "center",
-                      backgroundColor: "#2B1E3F",
-                      color: "#F6F1E9",
-                      fontSize: "10px",
-                      padding: "3px 10px",
-                      borderRadius: "999px",
-                      fontWeight: 700,
-                      letterSpacing: "0.05em",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
+                  <span style={{
+                    position: "absolute", top: "12px", left: "12px",
+                    display: "inline-flex", alignItems: "center",
+                    backgroundColor: "#2B1E3F", color: "#F6F1E9",
+                    fontSize: "10px", padding: "3px 10px",
+                    borderRadius: "999px", fontWeight: 700,
+                    letterSpacing: "0.05em", whiteSpace: "nowrap",
+                  }}>
                     À la une
                   </span>
                 </div>
@@ -317,10 +265,7 @@ export default function Blog() {
                     </span>
                     <span className="flex items-center gap-1.5"><Clock size={12} />{featured.readTime}</span>
                   </div>
-                  <span
-                    className="mt-4 inline-flex items-center gap-2 text-sm font-bold group-hover:gap-3 transition-all"
-                    style={{ color: "#4361EE" }}
-                  >
+                  <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold group-hover:gap-3 transition-all" style={{ color: "#4361EE" }}>
                     Lire l'article <ArrowRight size={14} />
                   </span>
                 </div>
@@ -330,36 +275,31 @@ export default function Blog() {
         </div>
       </section>
 
-      {/* Section 2 — Carousel 3 articles #E9F2F4 */}
+      {/* Section 2 — Carousel 3 articles — #E9F2F4 */}
       <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
             <h2 style={{ color: "#2B1E3F" }}>Tous les articles</h2>
-            {carouselArticles.length > 1 && (
+            {len > 1 && (
               <div className="flex items-center gap-2">
-                <button
-                  onClick={() => slide("left")}
-                  disabled={carouselIndex === 0}
-                  className="flex h-9 w-9 items-center justify-center rounded-full transition-all disabled:opacity-25"
-                  style={{ backgroundColor: "#F6F1E9", border: "1.5px solid rgba(43,30,63,0.18)", color: "#2B1E3F" }}
-                >
+                <button onClick={() => slide("left")}
+                  className="flex h-9 w-9 items-center justify-center rounded-full transition-all"
+                  style={{ backgroundColor: "#F6F1E9", border: "1.5px solid rgba(43,30,63,0.18)", color: "#2B1E3F" }}>
                   <ChevronLeft size={18} />
                 </button>
-                <button
-                  onClick={() => slide("right")}
-                  disabled={carouselIndex >= maxIndex}
-                  className="flex h-9 w-9 items-center justify-center rounded-full transition-all disabled:opacity-25"
-                  style={{ backgroundColor: "#F6F1E9", border: "1.5px solid rgba(43,30,63,0.18)", color: "#2B1E3F" }}
-                >
+                <button onClick={() => slide("right")}
+                  className="flex h-9 w-9 items-center justify-center rounded-full transition-all"
+                  style={{ backgroundColor: "#F6F1E9", border: "1.5px solid rgba(43,30,63,0.18)", color: "#2B1E3F" }}>
                   <ChevronRight size={18} />
                 </button>
                 <span className="text-xs ml-1" style={{ color: "#2B1E3F", opacity: 0.35 }}>
-                  {carouselIndex + 1} / {maxIndex + 1}
+                  {carouselIndex + 1} / {len}
                 </span>
               </div>
             )}
           </div>
 
+          {/* Track — toujours 3 slots */}
           {enriching && carouselArticles.length === 0 ? (
             <div className="flex gap-4 items-center justify-center">
               <CardSkeleton size="sm" />
@@ -374,19 +314,15 @@ export default function Blog() {
             </div>
           )}
 
-          {carouselArticles.length > 1 && (
+          {/* Dots */}
+          {len > 1 && (
             <div className="flex justify-center gap-1.5 mt-8">
               {carouselArticles.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCarouselIndex(i)}
-                  className="rounded-full transition-all"
+                <button key={i} onClick={() => setCarouselIndex(i)} className="rounded-full transition-all"
                   style={{
-                    width: i === carouselIndex ? "20px" : "7px",
-                    height: "7px",
+                    width: i === carouselIndex ? "20px" : "7px", height: "7px",
                     backgroundColor: i === carouselIndex ? "#2B1E3F" : "rgba(43,30,63,0.22)",
-                  }}
-                />
+                  }} />
               ))}
             </div>
           )}
