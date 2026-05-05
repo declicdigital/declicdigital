@@ -1,19 +1,13 @@
 import { useEffect, useState } from "react";
-import { motion } from "motion/react";
 import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import { Link } from "react-router-dom";
-import { ExternalLink, ArrowRight } from "lucide-react";
+import { ExternalLink, ArrowRight, ArrowUpRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import { supabase } from "@/integrations/supabase/client";
 
-import portfolioOffg from "@/assets/site-vitrine-artiste-musical.webp";
-import portfolioAploz from "@/assets/site-aploz-agence-video-publicitaire.webp";
-import portfolioTracker from "@/assets/site-artisan-tracker-solaire.jpg";
-import portfolioLudovic from "@/assets/site-athlete-ludovic-delpuech.png";
-import portfolioConciergerie from "@/assets/site-conciergerie-5-etoiles.png";
 import imgDev from "@/assets/creation-site-web-developpement-code.webp";
 import imgConsult from "@/assets/consultation-client-agence-web-paris.webp";
 import imgBoulevard from "@/assets/boulevard-hauts-de-seine-commerces-locaux.webp";
@@ -21,6 +15,13 @@ import imgCoiffeur from "@/assets/coiffeur-salon-beaute-paris.webp";
 import imgMenuisier from "@/assets/menuisier-atelier-boulogne-billancourt.webp";
 import imgChef from "@/assets/chef-cuisinier-restaurant-paris.webp";
 import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
+
+// Images statiques fallback
+import portfolioOffg from "@/assets/site-vitrine-artiste-musical.webp";
+import portfolioAploz from "@/assets/site-aploz-agence-video-publicitaire.webp";
+import portfolioTracker from "@/assets/site-artisan-tracker-solaire.jpg";
+import portfolioLudovic from "@/assets/site-athlete-ludovic-delpuech.png";
+import portfolioConciergerie from "@/assets/site-conciergerie-5-etoiles.png";
 
 interface Realisation {
   id: string;
@@ -33,7 +34,6 @@ interface Realisation {
   visible: boolean;
 }
 
-// Projets statiques en fallback
 const STATIC_PROJECTS: Realisation[] = [
   { id: "ludovic-delpuech", name: "Ludovic Delpuech", description: "Site vitrine pour un athlète demi-fond et cross. Design dynamique et immersif avec palmarès, galerie photos, actualités et espace partenaires.", url: "https://ludovicdelpuech.lovable.app", image_url: portfolioLudovic, tags: ["Site vitrine", "Sport", "Athlétisme"], ordre: 0, visible: true },
   { id: "aploz", name: "Aploz", description: "Site vitrine pour une agence vidéo publicitaire. Design sombre et immersif avec showreel intégré et études de cas clients.", url: "https://aploz.lovable.app/", image_url: portfolioAploz, tags: ["Site vitrine", "Vidéo", "Publicité"], ordre: 1, visible: true },
@@ -48,48 +48,93 @@ const secteurs = [
   { img: imgChef, label: "Restauration", desc: "Restaurants, traiteurs, food trucks, cafés" },
 ];
 
-const ProjectCard = ({ project }: { project: Realisation }) => (
-  <motion.a
+const ProjectCard = ({ project, index }: { project: Realisation; index: number }) => (
+  <a
     href={project.url}
     target="_blank"
     rel="noopener noreferrer"
-    initial={false}
-    className="group block overflow-hidden rounded-2xl border shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
-    style={{ backgroundColor: "#E9F2F4", borderColor: "rgba(43,30,63,0.1)" }}
+    className="group block"
+    style={{ animation: `fadeInUp 0.4s ease ${index * 0.07}s both` }}
   >
-    <div className="relative overflow-hidden">
-      <img
-        src={project.image_url}
-        alt={`Réalisation site web ${project.name}`}
-        className="aspect-video w-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-        loading="lazy"
-      />
-      <div
-        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center"
-        style={{ background: "rgba(43,30,63,0.5)" }}
-      >
-        <div className="flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 text-sm font-semibold" style={{ color: "hsl(263,36%,18%)" }}>
-          <ExternalLink size={16} /> Voir le site
+    <article
+      className="overflow-hidden rounded-2xl transition-all duration-300 group-hover:-translate-y-2"
+      style={{
+        backgroundColor: "#FFFFFF",
+        border: "2px solid rgba(43,30,63,0.10)",
+        boxShadow: "4px 4px 0px rgba(43,30,63,0.08), 8px 8px 0px rgba(43,30,63,0.04)",
+      }}
+    >
+      {/* Image avec overlay hover */}
+      <div className="relative overflow-hidden" style={{ aspectRatio: "16/9" }}>
+        <img
+          src={project.image_url}
+          alt={`Réalisation site web ${project.name}`}
+          className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+          loading="lazy"
+          decoding="async"
+        />
+        {/* Overlay au hover */}
+        <div
+          className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300"
+          style={{ background: "rgba(43,30,63,0.65)", backdropFilter: "blur(2px)" }}
+        >
+          <div
+            className="flex items-center gap-2 rounded-full px-5 py-2.5 font-bold text-sm"
+            style={{ backgroundColor: "#F6F1E9", color: "#2B1E3F" }}
+          >
+            <ExternalLink size={15} /> Voir le site
+          </div>
+        </div>
+        {/* Lien externe coin */}
+        <div
+          className="absolute top-3 right-3 flex h-8 w-8 items-center justify-center rounded-full opacity-0 group-hover:opacity-100 transition-all duration-300 translate-x-1 group-hover:translate-x-0"
+          style={{ backgroundColor: "rgba(246,241,233,0.95)", color: "#2B1E3F" }}
+        >
+          <ArrowUpRight size={15} />
         </div>
       </div>
-    </div>
-    <div className="p-6">
-      <h2 className="mb-2 text-xl font-bold group-hover:text-primary transition-colors" style={{ color: "#2B1E3F" }}>
-        {project.name}
-      </h2>
-      <p className="mb-4 text-sm leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-        {project.description}
-      </p>
-      <div className="flex flex-wrap gap-2">
-        {project.tags?.map((tag) => (
-          <span key={tag} className="rounded-full px-3 py-1 text-xs font-medium"
-            style={{ backgroundColor: "#F6F1E9", color: "#2B1E3F" }}>
-            {tag}
-          </span>
-        ))}
+
+      {/* Contenu */}
+      <div className="p-5">
+        {/* Tags */}
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {project.tags?.map((tag) => (
+            <span
+              key={tag}
+              className="rounded-full px-2.5 py-1 text-[11px] font-semibold"
+              style={{ backgroundColor: "rgba(43,30,63,0.07)", color: "#2B1E3F" }}
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
+
+        {/* Nom */}
+        <h2
+          className="text-lg font-bold leading-snug mb-2 transition-colors group-hover:text-primary"
+          style={{ color: "#2B1E3F" }}
+        >
+          {project.name}
+        </h2>
+
+        {/* Description */}
+        <p
+          className="text-sm leading-relaxed line-clamp-2"
+          style={{ color: "#2B1E3F", opacity: 0.65 }}
+        >
+          {project.description}
+        </p>
+
+        {/* Lien */}
+        <div
+          className="mt-4 flex items-center gap-1.5 text-xs font-bold group-hover:gap-2.5 transition-all"
+          style={{ color: "#4361EE" }}
+        >
+          Voir le projet <ArrowRight size={13} />
+        </div>
       </div>
-    </div>
-  </motion.a>
+    </article>
+  </a>
 );
 
 const Realisations = () => {
@@ -102,10 +147,7 @@ const Realisations = () => {
         .select("*")
         .eq("visible", true)
         .order("ordre", { ascending: true });
-
-      if (data && data.length > 0) {
-        setProjects(data);
-      }
+      if (data && data.length > 0) setProjects(data);
     }
     fetchRealisations();
   }, []);
@@ -130,7 +172,7 @@ const Realisations = () => {
         <img src={imgDev} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="eager" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, rgba(246,241,233,0.97) 0%, rgba(246,241,233,0.85) 50%, rgba(246,241,233,0.55) 100%)" }} />
         <div className="container relative z-10">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-2xl">
+          <div className="max-w-2xl">
             <span className="mb-4 inline-block rounded-full px-4 py-1.5 text-xs font-semibold"
               style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}>
               Portfolio
@@ -140,23 +182,21 @@ const Realisations = () => {
             </h1>
             <p className="mb-8 text-lg" style={{ color: "#2B1E3F", opacity: 0.7 }}>
               Chaque projet est unique, conçu pour répondre aux besoins spécifiques de chaque entreprise et optimisé pour le{" "}
-              <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>
-                référencement SEO
-              </Link>.
+              <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>référencement SEO</Link>.
             </p>
             <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
               <Link to="/rendez-vous">Prendre rendez-vous</Link>
             </Button>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Portfolio grid */}
+      {/* Grille projets */}
       <section className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {projects.map((project, index) => (
+              <ProjectCard key={project.id} project={project} index={index} />
             ))}
           </div>
         </div>
@@ -185,8 +225,7 @@ const Realisations = () => {
             ))}
           </div>
           <div className="mt-8 text-center">
-            <Link to="/nos-metiers" className="inline-flex items-center gap-2 font-semibold hover:gap-3 transition-all"
-              style={{ color: "#4361EE" }}>
+            <Link to="/nos-metiers" className="inline-flex items-center gap-2 font-semibold hover:gap-3 transition-all" style={{ color: "#4361EE" }}>
               Voir tous nos métiers <ArrowRight size={16} />
             </Link>
           </div>
@@ -195,10 +234,8 @@ const Realisations = () => {
 
       {/* Boulevard */}
       <section className="relative overflow-hidden py-16" data-alternate="skip">
-        <img src={imgBoulevard} alt="Boulevard Hauts-de-Seine commerces locaux"
-          className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
-        <div className="absolute inset-0"
-          style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.88) 0%, hsl(263,36%,18%,0.65) 60%, hsl(183,70%,40%,0.5) 100%)" }} />
+        <img src={imgBoulevard} alt="Boulevard Hauts-de-Seine commerces locaux" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.88) 0%, hsl(263,36%,18%,0.65) 60%, hsl(183,70%,40%,0.5) 100%)" }} />
         <div className="container relative z-10">
           <div className="max-w-2xl">
             <h2 className="mb-4" style={{ color: "#F6F1E9" }}>Paris et Hauts-de-Seine : nos clients locaux</h2>
@@ -232,8 +269,7 @@ const Realisations = () => {
               <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
                 Le SEO est intégré dès la conception, pas ajouté après. Résultat : des sites qui se trouvent sur Google dès leur mise en ligne.
               </p>
-              <Link to="/qui-sommes-nous" className="inline-flex items-center gap-2 font-semibold hover:gap-3 transition-all"
-                style={{ color: "#4361EE" }}>
+              <Link to="/qui-sommes-nous" className="inline-flex items-center gap-2 font-semibold hover:gap-3 transition-all" style={{ color: "#4361EE" }}>
                 Découvrir notre équipe <ArrowRight size={16} />
               </Link>
             </div>
@@ -287,6 +323,13 @@ const Realisations = () => {
           </div>
         </div>
       </section>
+
+      <style>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+      `}</style>
     </PageLayout>
   );
 };
