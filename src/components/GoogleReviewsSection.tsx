@@ -24,8 +24,10 @@ interface GoogleReviewsSectionProps {
   backgroundColor?: string;
 }
 
-// Réduit l'URL photo Google à 48px — évite de télécharger 128px pour afficher 24px
 const getSmallPhotoUrl = (url: string) => url.replace(/=s\d+/, "=s48");
+
+// Hauteur fixe identique pour skeleton ET vraies cards — zéro CLS
+const CARD_HEIGHT = "240px";
 
 const GoogleReviewsSection = ({
   maxReviews = 6,
@@ -69,9 +71,6 @@ const GoogleReviewsSection = ({
   const DESKTOP_LIMIT = 200;
   const MOBILE_LIMIT = 160;
 
-  // Hauteur fixe pour éviter le CLS — skeleton et vraies cards ont la même hauteur
-  const CARD_MIN_HEIGHT = "220px";
-
   return (
     <section
       className={`py-12 md:py-16 ${className}`}
@@ -79,7 +78,7 @@ const GoogleReviewsSection = ({
     >
       <div className="container">
         {showTitle && (
-          <div className="text-center mb-10">
+          <div className="text-center mb-10" style={{ minHeight: "80px" }}>
             <h2 className="text-3xl font-extrabold md:text-4xl" style={{ color: "#2B1E3F" }}>
               Avis clients
             </h2>
@@ -101,6 +100,7 @@ const GoogleReviewsSection = ({
           </div>
         )}
 
+        {/* Grille — hauteur fixe sur toutes les cards pour zéro CLS */}
         <div className={`grid gap-6 ${compact ? "md:grid-cols-2" : "sm:grid-cols-2 lg:grid-cols-3"}`}>
           {loading
             ? [...Array(compact ? 2 : 3)].map((_, i) => (
@@ -110,7 +110,7 @@ const GoogleReviewsSection = ({
                   style={{
                     backgroundColor: cardBg,
                     borderColor: "rgba(43,30,63,0.1)",
-                    minHeight: CARD_MIN_HEIGHT,
+                    height: CARD_HEIGHT,
                   }}
                 />
               ))
@@ -122,7 +122,10 @@ const GoogleReviewsSection = ({
                     backgroundColor: cardBg,
                     borderColor: "rgba(43,30,63,0.1)",
                     boxShadow: "0 4px 24px rgba(43,30,63,0.06)",
-                    minHeight: CARD_MIN_HEIGHT,
+                    height: CARD_HEIGHT,
+                    overflow: "hidden",
+                    // Animation CSS pure — pas de Motion, pas de reflow
+                    animation: `fadeIn 0.3s ease ${i * 0.05}s both`,
                   }}
                 >
                   <div className="flex items-center justify-between mb-2">
@@ -137,7 +140,7 @@ const GoogleReviewsSection = ({
                     <img src="https://www.google.com/favicon.ico" alt="Google" className="h-4 w-4 opacity-60" />
                   </div>
 
-                  <p className="text-sm leading-relaxed mb-2 flex-1" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                  <p className="text-sm leading-relaxed mb-2 flex-1 overflow-hidden" style={{ color: "#2B1E3F", opacity: 0.7 }}>
                     "<span className="hidden md:inline">
                       {review.text.length > DESKTOP_LIMIT ? review.text.slice(0, DESKTOP_LIMIT).trimEnd() + "..." : review.text}
                     </span>
@@ -146,20 +149,8 @@ const GoogleReviewsSection = ({
                     </span>"
                   </p>
 
-                  {review.text.length > MOBILE_LIMIT && (
-                    <a
-                      href={review.author_url || REVIEWS_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs font-medium hover:underline mb-3 w-fit"
-                      style={{ color: "#4361EE" }}
-                    >
-                      Lire la suite <ExternalLink size={11} />
-                    </a>
-                  )}
-
                   <div
-                    className="flex items-center justify-between mt-auto pt-2 border-t"
+                    className="flex items-center justify-between mt-auto pt-2 border-t shrink-0"
                     style={{ borderColor: "rgba(43,30,63,0.1)" }}
                   >
                     <div className="flex items-center gap-2">
@@ -167,7 +158,7 @@ const GoogleReviewsSection = ({
                         <img
                           src={getSmallPhotoUrl(review.profile_photo_url)}
                           alt={review.author_name}
-                          className="w-6 h-6 rounded-full"
+                          className="w-6 h-6 rounded-full shrink-0"
                           width={24}
                           height={24}
                           referrerPolicy="no-referrer"
@@ -175,14 +166,14 @@ const GoogleReviewsSection = ({
                         />
                       ) : (
                         <div
-                          className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold"
+                          className="w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold shrink-0"
                           style={{ backgroundColor: "rgba(67,97,238,0.15)", color: "#4361EE" }}
                         >
                           {review.author_name.charAt(0)}
                         </div>
                       )}
-                      <div>
-                        <p className="font-semibold text-sm" style={{ color: "#2B1E3F" }}>
+                      <div className="min-w-0">
+                        <p className="font-semibold text-sm truncate" style={{ color: "#2B1E3F" }}>
                           {review.author_name}
                         </p>
                         {review.relative_time_description && (
@@ -196,6 +187,7 @@ const GoogleReviewsSection = ({
                       href={review.author_url || REVIEWS_URL}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="shrink-0 ml-2"
                       style={{ color: "#2B1E3F", opacity: 0.4 }}
                     >
                       <ExternalLink size={14} />
@@ -227,6 +219,14 @@ const GoogleReviewsSection = ({
           </a>
         </div>
       </div>
+
+      {/* Keyframe CSS pure — pas de Motion */}
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+      `}</style>
     </section>
   );
 };
