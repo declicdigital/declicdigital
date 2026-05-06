@@ -21,7 +21,6 @@ interface Article {
   isFromSupabase?: boolean;
 }
 
-// Badges dans la palette de la marque — tons désaturés sur fond semi-transparent
 const categoryBadge: Record<string, { bg: string; color: string }> = {
   "Création de site":   { bg: "rgba(43,30,63,0.12)", color: "#2B1E3F" },
   "SEO & Performance":  { bg: "rgba(92,225,230,0.18)", color: "#0C7B80" },
@@ -63,7 +62,9 @@ const CarouselCard = ({ article, size }: { article: Article; size: "sm" | "lg" }
           {article.coverImageUrl ? (
             <img src={article.coverImageUrl} alt={article.title}
               className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="lazy" width={isLg ? 600 : 380} height={isLg ? 338 : 214} />
+              loading="eager"
+              decoding="async"
+              width={isLg ? 600 : 380} height={isLg ? 338 : 214} />
           ) : (
             <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}>
               <span style={{ color: "#2B1E3F", opacity: 0.1, fontSize: isLg ? "3rem" : "2rem", fontWeight: 700 }}>
@@ -152,13 +153,25 @@ export default function Blog() {
   }, []);
 
   const featured = articles[0];
-  // Le carousel commence à l'article 1 (après le featured)
   const carouselArticles = articles.slice(1);
   const len = carouselArticles.length;
-  const maxIndex = Math.max(0, len - 1);
   const allCategories = Array.from(new Set([...blogCategories, ...articles.map((a) => a.category)]));
 
-  // Toujours 3 articles visibles — boucle si nécessaire
+  // Précharge les images adjacentes dès que l'index change — zéro latence au clic
+  useEffect(() => {
+    if (len === 0) return;
+    const preload = (src: string | null) => {
+      if (!src) return;
+      const img = new window.Image();
+      img.src = src;
+    };
+    // Précharge les 2 articles de chaque côté
+    preload(carouselArticles[(carouselIndex + 1) % len]?.coverImageUrl ?? null);
+    preload(carouselArticles[(carouselIndex + 2) % len]?.coverImageUrl ?? null);
+    preload(carouselArticles[(carouselIndex - 1 + len) % len]?.coverImageUrl ?? null);
+    preload(carouselArticles[(carouselIndex - 2 + len) % len]?.coverImageUrl ?? null);
+  }, [carouselIndex, carouselArticles, len]);
+
   const getVisible = () => {
     if (len === 0) return { prev: null, center: null, next: null };
     return {
@@ -299,7 +312,6 @@ export default function Blog() {
             )}
           </div>
 
-          {/* Track — toujours 3 slots */}
           {enriching && carouselArticles.length === 0 ? (
             <div className="flex gap-4 items-center justify-center">
               <CardSkeleton size="sm" />
@@ -314,7 +326,6 @@ export default function Blog() {
             </div>
           )}
 
-          {/* Dots */}
           {len > 1 && (
             <div className="flex justify-center gap-1.5 mt-8">
               {carouselArticles.map((_, i) => (
