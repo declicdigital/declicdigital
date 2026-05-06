@@ -47,77 +47,17 @@ const Badge = ({ cat, small = false }: { cat: string; small?: boolean }) => {
   );
 };
 
-const CarouselCard = ({ article, size }: { article: Article; size: "sm" | "lg" }) => {
-  const isLg = size === "lg";
-  return (
-    <Link to={`/blog/${article.slug}`} className="block group flex-shrink-0 transition-all duration-300"
-      style={{ width: isLg ? "42%" : "26%", opacity: isLg ? 1 : 0.75, transform: isLg ? "scale(1)" : "scale(0.93)" }}>
-      <article className="h-full overflow-hidden rounded-2xl"
-        style={{
-          backgroundColor: "#F6F1E9",
-          border: isLg ? "2px solid rgba(43,30,63,0.18)" : "1.5px solid rgba(43,30,63,0.10)",
-          boxShadow: isLg ? "4px 4px 0px rgba(43,30,63,0.12), 8px 8px 0px rgba(43,30,63,0.05)" : "2px 2px 0px rgba(43,30,63,0.07)",
-        }}>
-        <div className="overflow-hidden relative" style={{ aspectRatio: "16/9" }}>
-          {article.coverImageUrl ? (
-            <img src={article.coverImageUrl} alt={article.title}
-              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-              loading="eager"
-              decoding="async"
-              width={isLg ? 600 : 380} height={isLg ? 338 : 214} />
-          ) : (
-            <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}>
-              <span style={{ color: "#2B1E3F", opacity: 0.1, fontSize: isLg ? "3rem" : "2rem", fontWeight: 700 }}>
-                {article.title.charAt(0)}
-              </span>
-            </div>
-          )}
-        </div>
-        <div style={{ padding: isLg ? "16px 20px" : "12px 14px" }}>
-          <Badge cat={article.category} small={!isLg} />
-          <h3 className="mt-2 font-bold leading-snug line-clamp-2"
-            style={{ color: "#2B1E3F", fontSize: isLg ? "15px" : "12px" }}>
-            {article.title}
-          </h3>
-          {isLg && (
-            <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.6 }}>
-              {article.excerpt}
-            </p>
-          )}
-          <div className="mt-3 flex items-center justify-between" style={{ fontSize: "11px", color: "#2B1E3F", opacity: 0.4 }}>
-            <span className="flex items-center gap-1">
-              <Calendar size={10} />
-              {new Date(article.date).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}
-            </span>
-            <span className="flex items-center gap-1"><Clock size={10} />{article.readTime}</span>
-          </div>
-          <span className="mt-2 inline-flex items-center gap-1 font-semibold group-hover:gap-2 transition-all"
-            style={{ fontSize: "11px", color: "#4361EE" }}>
-            Lire <ArrowRight size={10} />
-          </span>
-        </div>
-      </article>
-    </Link>
-  );
-};
-
-const CardSkeleton = ({ size }: { size: "sm" | "lg" }) => (
-  <div className="flex-shrink-0 rounded-2xl overflow-hidden animate-pulse"
-    style={{ width: size === "lg" ? "42%" : "26%", border: "1.5px solid rgba(43,30,63,0.08)", opacity: size === "lg" ? 1 : 0.7 }}>
-    <div style={{ aspectRatio: "16/9", backgroundColor: "#E9F2F4" }} />
-    <div className="p-4 space-y-2">
-      <div className="h-3 rounded" style={{ backgroundColor: "#E9F2F4", width: "45%" }} />
-      <div className="h-3 rounded" style={{ backgroundColor: "#E9F2F4", width: "80%" }} />
-    </div>
-  </div>
-);
-
 const toArticles = (posts: typeof staticPosts): Article[] =>
   posts.map((p) => ({
     slug: p.slug, title: p.title, excerpt: p.excerpt,
     coverImageUrl: p.coverImageUrl ?? null, category: p.category,
     tags: p.tags, readTime: p.readTime, date: p.date,
   }));
+
+// Largeur d'une card en % du container (3 visibles : sm | lg | sm)
+const CARD_LG = 42;
+const CARD_SM = 26;
+const GAP = 1.5; // gap en % approximatif
 
 export default function Blog() {
   const [articles, setArticles] = useState<Article[]>(() => toArticles(staticPosts));
@@ -157,36 +97,18 @@ export default function Blog() {
   const len = carouselArticles.length;
   const allCategories = Array.from(new Set([...blogCategories, ...articles.map((a) => a.category)]));
 
-  // Précharge les images adjacentes dès que l'index change — zéro latence au clic
-  useEffect(() => {
-    if (len === 0) return;
-    const preload = (src: string | null) => {
-      if (!src) return;
-      const img = new window.Image();
-      img.src = src;
-    };
-    // Précharge les 2 articles de chaque côté
-    preload(carouselArticles[(carouselIndex + 1) % len]?.coverImageUrl ?? null);
-    preload(carouselArticles[(carouselIndex + 2) % len]?.coverImageUrl ?? null);
-    preload(carouselArticles[(carouselIndex - 1 + len) % len]?.coverImageUrl ?? null);
-    preload(carouselArticles[(carouselIndex - 2 + len) % len]?.coverImageUrl ?? null);
-  }, [carouselIndex, carouselArticles, len]);
-
-  const getVisible = () => {
-    if (len === 0) return { prev: null, center: null, next: null };
-    return {
-      prev: len > 1 ? carouselArticles[(carouselIndex - 1 + len) % len] : carouselArticles[0],
-      center: carouselArticles[carouselIndex % len],
-      next: len > 1 ? carouselArticles[(carouselIndex + 1) % len] : carouselArticles[0],
-    };
-  };
-  const { prev, center, next } = getVisible();
-
   const slide = (dir: "left" | "right") => {
     setCarouselIndex((i) =>
       dir === "right" ? (i + 1) % len : (i - 1 + len) % len
     );
   };
+
+  // Offset de translation : on centre l'article courant
+  // Chaque card fait ~28% (sm) ou ~44% (lg) du container avec gap
+  // On veut que carouselIndex soit au centre
+  // translateX = -index * (CARD_SM + GAP) %
+  const cardWidth = CARD_SM + GAP; // ~27.5%
+  const translateX = carouselIndex * cardWidth;
 
   return (
     <PageLayout hideBlogCarousel>
@@ -198,7 +120,7 @@ export default function Blog() {
 
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Blog" }]} />
 
-      {/* Section 1 — Titre + Catégories + Featured — #F6F1E9 */}
+      {/* Section 1 — Titre + Catégories + Featured */}
       <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
         <div className="container">
           <div className="mb-6">
@@ -211,7 +133,6 @@ export default function Blog() {
             </p>
           </div>
 
-          {/* Catégories */}
           {allCategories.length > 0 && (
             <div className="mb-10 flex flex-wrap gap-2">
               {allCategories.map((cat) => {
@@ -223,8 +144,7 @@ export default function Blog() {
                       display: "inline-flex", alignItems: "center",
                       backgroundColor: s.bg, color: s.color,
                       fontSize: "12px", padding: "5px 14px",
-                      borderRadius: "999px", fontWeight: 700,
-                      whiteSpace: "nowrap",
+                      borderRadius: "999px", fontWeight: 700, whiteSpace: "nowrap",
                       border: `1px solid ${s.color}30`,
                       boxShadow: "1px 1px 0px rgba(43,30,63,0.08)",
                     }}>
@@ -235,7 +155,6 @@ export default function Blog() {
             </div>
           )}
 
-          {/* Featured */}
           {featured && (
             <Link to={`/blog/${featured.slug}`} className="block group">
               <article className="overflow-hidden rounded-2xl grid md:grid-cols-2 transition-all hover:-translate-y-1"
@@ -288,7 +207,7 @@ export default function Blog() {
         </div>
       </section>
 
-      {/* Section 2 — Carousel 3 articles — #E9F2F4 */}
+      {/* Section 2 — Carousel CSS pur */}
       <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
@@ -312,20 +231,115 @@ export default function Blog() {
             )}
           </div>
 
-          {enriching && carouselArticles.length === 0 ? (
-            <div className="flex gap-4 items-center justify-center">
-              <CardSkeleton size="sm" />
-              <CardSkeleton size="lg" />
-              <CardSkeleton size="sm" />
-            </div>
-          ) : (
-            <div className="flex gap-4 items-center justify-center overflow-hidden">
-              {prev ? <CarouselCard article={prev} size="sm" /> : <div style={{ width: "26%" }} />}
-              {center && <CarouselCard article={center} size="lg" />}
-              {next ? <CarouselCard article={next} size="sm" /> : <div style={{ width: "26%" }} />}
-            </div>
-          )}
+          {/* Container overflow hidden — masque ce qui dépasse */}
+          <div style={{ overflow: "hidden", position: "relative" }}>
+            {enriching && carouselArticles.length === 0 ? (
+              /* Skeletons */
+              <div className="flex gap-4 items-stretch">
+                {[26, 42, 26].map((w, i) => (
+                  <div key={i} className="flex-shrink-0 rounded-2xl overflow-hidden animate-pulse"
+                    style={{ width: `${w}%`, border: "1.5px solid rgba(43,30,63,0.08)" }}>
+                    <div style={{ aspectRatio: "16/9", backgroundColor: "#E9F2F4" }} />
+                    <div className="p-4 space-y-2">
+                      <div className="h-3 rounded" style={{ backgroundColor: "#E9F2F4", width: "45%" }} />
+                      <div className="h-3 rounded" style={{ backgroundColor: "#E9F2F4", width: "80%" }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              /* Track CSS — toutes les cards dans le DOM, translation CSS */
+              <div
+                style={{
+                  display: "flex",
+                  gap: "16px",
+                  // translateX pour centrer l'article courant
+                  // On démarre avec index 0 centré : offset initial = CARD_SM% + gap
+                  transform: `translateX(calc(-${carouselIndex * (CARD_SM + 1.1)}% - ${carouselIndex * 16}px + ${CARD_SM}% + 16px))`,
+                  transition: "transform 0.35s cubic-bezier(0.4, 0, 0.2, 1)",
+                  willChange: "transform",
+                }}
+              >
+                {carouselArticles.map((article, i) => {
+                  const isCenter = i === carouselIndex;
+                  const isAdjacent = Math.abs(i - carouselIndex) === 1 ||
+                    (carouselIndex === 0 && i === len - 1) ||
+                    (carouselIndex === len - 1 && i === 0);
 
+                  return (
+                    <Link
+                      key={article.slug}
+                      to={`/blog/${article.slug}`}
+                      className="block group flex-shrink-0"
+                      style={{
+                        width: isCenter ? `${CARD_LG}%` : `${CARD_SM}%`,
+                        opacity: isCenter ? 1 : isAdjacent ? 0.72 : 0,
+                        transform: isCenter ? "scale(1)" : "scale(0.93)",
+                        transition: "width 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.35s ease, transform 0.35s ease",
+                        pointerEvents: isCenter || isAdjacent ? "auto" : "none",
+                      }}
+                    >
+                      <article
+                        className="h-full overflow-hidden rounded-2xl"
+                        style={{
+                          backgroundColor: "#F6F1E9",
+                          border: isCenter ? "2px solid rgba(43,30,63,0.18)" : "1.5px solid rgba(43,30,63,0.10)",
+                          boxShadow: isCenter
+                            ? "4px 4px 0px rgba(43,30,63,0.12), 8px 8px 0px rgba(43,30,63,0.05)"
+                            : "2px 2px 0px rgba(43,30,63,0.07)",
+                        }}
+                      >
+                        <div className="overflow-hidden relative" style={{ aspectRatio: "16/9" }}>
+                          {article.coverImageUrl ? (
+                            <img
+                              src={article.coverImageUrl}
+                              alt={article.title}
+                              className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                              loading={Math.abs(i - carouselIndex) <= 2 ? "eager" : "lazy"}
+                              decoding="async"
+                              width={isCenter ? 600 : 380}
+                              height={isCenter ? 338 : 214}
+                            />
+                          ) : (
+                            <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}>
+                              <span style={{ color: "#2B1E3F", opacity: 0.1, fontSize: isCenter ? "3rem" : "2rem", fontWeight: 700 }}>
+                                {article.title.charAt(0)}
+                              </span>
+                            </div>
+                          )}
+                        </div>
+                        <div style={{ padding: isCenter ? "16px 20px" : "12px 14px" }}>
+                          <Badge cat={article.category} small={!isCenter} />
+                          <h3 className="mt-2 font-bold leading-snug line-clamp-2"
+                            style={{ color: "#2B1E3F", fontSize: isCenter ? "15px" : "12px" }}>
+                            {article.title}
+                          </h3>
+                          {isCenter && (
+                            <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.6 }}>
+                              {article.excerpt}
+                            </p>
+                          )}
+                          <div className="mt-3 flex items-center justify-between" style={{ fontSize: "11px", color: "#2B1E3F", opacity: 0.4 }}>
+                            <span className="flex items-center gap-1">
+                              <Calendar size={10} />
+                              {new Date(article.date).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}
+                            </span>
+                            <span className="flex items-center gap-1"><Clock size={10} />{article.readTime}</span>
+                          </div>
+                          <span className="mt-2 inline-flex items-center gap-1 font-semibold group-hover:gap-2 transition-all"
+                            style={{ fontSize: "11px", color: "#4361EE" }}>
+                            Lire <ArrowRight size={10} />
+                          </span>
+                        </div>
+                      </article>
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+
+          {/* Dots */}
           {len > 1 && (
             <div className="flex justify-center gap-1.5 mt-8">
               {carouselArticles.map((_, i) => (
