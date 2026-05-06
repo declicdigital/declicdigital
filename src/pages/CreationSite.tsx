@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import LocationSection from "@/components/LocationSection";
-import { motion } from "motion/react";
 import { Monitor, Smartphone, TrendingUp, Zap, Building2, User, Wrench, ShoppingCart, CheckCircle, Search, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,6 +32,11 @@ const sendBrevoEmail = async (to: { email: string; name: string }, subject: stri
     }),
   });
 };
+
+const BEIGE = "#F6F1E9";
+const BLEU  = "#E9F2F4";
+const INK   = "#2B1E3F";
+const LINK  = "#4361EE";
 
 const CreationSite = () => {
   const [form, setForm] = useState({
@@ -64,7 +68,7 @@ const CreationSite = () => {
           </div>
           <p style="color:#333;font-size:16px;">Bonjour <strong>${form.full_name}</strong>,</p>
           <p style="color:#555;line-height:1.6;">Merci pour votre message. Nous l'avons bien reçu et vous répondrons sous 24 à 48h ouvrées.</p>
-          <p style="color:#999;font-size:13px;text-align:center;margin-top:32px;">Déclic Digital — declicdigital.net</p>
+          <p style="color:#999;font-size:13px;text-align:center;margin-top:32px;">Déclic Digital - declicdigital.net</p>
         </div>`
       );
       await sendBrevoEmail(
@@ -72,7 +76,7 @@ const CreationSite = () => {
         `📬 Nouveau contact - ${form.full_name}${form.company ? ` (${form.company})` : ""}`,
         `<div style="font-family:Arial,sans-serif;max-width:600px;margin:0 auto;background:#f5f5f5;padding:20px;">
           <div style="background:linear-gradient(135deg,#3d1a6e,#4fc3c3);padding:20px 24px;border-radius:12px;margin-bottom:20px;">
-            <h1 style="color:white;margin:0;font-size:20px;">📬 Nouveau contact — CreationSite</h1>
+            <h1 style="color:white;margin:0;font-size:20px;">📬 Nouveau contact - CreationSite</h1>
           </div>
           <div style="background:white;border-radius:12px;padding:24px;">
             <table style="width:100%;border-collapse:collapse;">
@@ -97,11 +101,6 @@ const CreationSite = () => {
     }
   };
 
-  const BEIGE = "#F6F1E9";
-  const BLEU  = "#E9F2F4";
-  const INK   = "#2B1E3F";
-  const LINK  = "#4361EE";
-
   return (
     <PageLayout>
       <Helmet>
@@ -109,7 +108,13 @@ const CreationSite = () => {
         <meta name="description" content="Site vitrine, e-commerce ou landing page pour TPE et artisans. Design responsive, optimisé SEO, livré en 2 semaines. Devis gratuit en 24h." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://declicdigital.net/creation-site-web" />
-        <script type="application/ld+json">{JSON.stringify({"@context":"https://schema.org","@type":"Service",serviceType:"Création de site internet",provider:{"@type":"LocalBusiness",name:"Déclic Digital",url:"https://declicdigital.net"},areaServed:"Île-de-France"})}</script>
+        <script type="application/ld+json">{JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Service",
+          serviceType: "Création de site internet",
+          provider: { "@type": "LocalBusiness", name: "Déclic Digital", url: "https://declicdigital.net" },
+          areaServed: "Île-de-France",
+        })}</script>
       </Helmet>
 
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Création de site web" }]} />
@@ -118,12 +123,25 @@ const CreationSite = () => {
       <section className="py-16 md:py-24 overflow-hidden" style={{ backgroundColor: BEIGE }}>
         <div className="container">
           <div className="relative">
+            {/* Image hero — dimensions fixes pour CLS, eager + high priority pour LCP */}
             <div className="hidden lg:block absolute right-0 top-0 h-full w-1/2 rounded-2xl overflow-hidden">
-              <img src={imgRefonte} alt="Refonte site web avant après - Déclic Digital" className="w-full h-full object-cover" loading="eager" fetchPriority="high" />
+              <img
+                src={imgRefonte}
+                alt="Refonte site web avant après - Déclic Digital"
+                className="w-full h-full object-cover"
+                loading="eager"
+                fetchPriority="high"
+                decoding="sync"
+                width={640}
+                height={600}
+              />
               <div className="absolute inset-0" style={{ background: `linear-gradient(to right, ${BEIGE} 0%, rgba(246,241,233,0.5) 25%, transparent 60%)` }} />
             </div>
-            <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} className="relative z-10 max-w-2xl">
-              <h1 className="mb-6" style={{ color: INK }}>Création de site internet sur-mesure pour les artisans, TPE et indépendants à Paris</h1>
+            {/* Contenu hero — pas de motion.div, visible immédiatement */}
+            <div className="relative z-10 max-w-2xl">
+              <h1 className="mb-6" style={{ color: INK }}>
+                Création de site internet sur-mesure pour les artisans, TPE et indépendants à Paris
+              </h1>
               <p className="mb-8 text-lg leading-relaxed" style={{ color: INK }}>
                 Nous concevons des sites modernes, rapides et optimisés{" "}
                 <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: LINK }}>SEO</Link>{" "}
@@ -135,7 +153,7 @@ const CreationSite = () => {
               <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
                 <Link to="/rendez-vous">Prendre rendez-vous</Link>
               </Button>
-            </motion.div>
+            </div>
           </div>
         </div>
       </section>
@@ -228,7 +246,8 @@ const CreationSite = () => {
         <div className="container">
           <div className="relative">
             <div className="hidden lg:block absolute left-0 top-0 h-full w-5/12 rounded-2xl overflow-hidden">
-              <img src={imgDev} alt="Développeur web code site artisan - Déclic Digital" className="w-full h-full object-cover" loading="lazy" />
+              <img src={imgDev} alt="Développeur web code site artisan - Déclic Digital"
+                className="w-full h-full object-cover" loading="lazy" decoding="async" />
               <div className="absolute inset-0" style={{ background: `linear-gradient(to left, ${BEIGE} 0%, rgba(246,241,233,0.4) 30%, transparent 65%)` }} />
             </div>
             <div className="relative z-10 ml-auto max-w-2xl space-y-6 py-8">
@@ -249,8 +268,11 @@ const CreationSite = () => {
                 pour en savoir plus.
               </p>
               <div className="relative overflow-hidden rounded-2xl group" style={{ boxShadow: "0 4px 24px -4px rgba(43,30,63,0.08)" }}>
-                <img src={imgResponsive} alt="Site web responsive mobile artisan - Déclic Digital" className="w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" />
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500" style={{ background: "linear-gradient(135deg, rgba(43,30,63,0.3), rgba(99,215,180,0.15))" }} />
+                <img src={imgResponsive} alt="Site web responsive mobile artisan - Déclic Digital"
+                  className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy" decoding="async" />
+                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: "linear-gradient(135deg, rgba(43,30,63,0.3), rgba(99,215,180,0.15))" }} />
                 <div className="absolute inset-0 flex items-end opacity-0 group-hover:opacity-100 transition-opacity duration-500 p-6">
                   <p className="font-semibold text-sm" style={{ color: "#F6F1E9" }}>+70% des recherches locales se font sur mobile</p>
                 </div>
@@ -298,7 +320,9 @@ const CreationSite = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {cities.slice(0, 12).map((c) => (
-              <Link key={c.slug} to={`/creation-site-web/${c.slug}`} className="rounded-full border px-4 py-2 text-sm font-medium transition-colors" style={{ backgroundColor: BLEU, color: INK, borderColor: "rgba(43,30,63,0.25)" }}>
+              <Link key={c.slug} to={`/creation-site-web/${c.slug}`}
+                className="rounded-full border px-4 py-2 text-sm font-medium transition-colors"
+                style={{ backgroundColor: BLEU, color: INK, borderColor: "rgba(43,30,63,0.25)" }}>
                 Site web {c.nameShort}
               </Link>
             ))}
@@ -356,16 +380,18 @@ const CreationSite = () => {
         </div>
       </section>
 
-      {/* ─── CTA texture — skip alternance ─── */}
+      {/* ─── CTA texture ─── */}
       <section className="relative overflow-hidden py-16">
-        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="container relative z-10 flex flex-col items-center text-center">
           <img src={geoffreyPhoto} alt="Geoffrey, fondateur de Déclic Digital et Expert Produit Google"
             className="w-32 h-32 rounded-full object-cover border-2 shadow-lg mb-4"
-            style={{ borderColor: "rgba(43,30,63,0.3)" }} loading="lazy" />
+            style={{ borderColor: "rgba(43,30,63,0.3)" }} loading="lazy" width={128} height={128} />
           <p className="text-sm font-semibold mb-2" style={{ color: INK }}>Geoffrey, Expert Produit Google</p>
           <h2 className="mb-4" style={{ color: INK }}>Prêt à lancer votre site web ?</h2>
-          <p className="mb-8 max-w-xl" style={{ color: INK, opacity: 0.7 }}>Demandez un devis gratuit pour la création de votre site web professionnel. Réponse sous 24h.</p>
+          <p className="mb-8 max-w-xl" style={{ color: INK, opacity: 0.7 }}>
+            Demandez un devis gratuit pour la création de votre site web professionnel. Réponse sous 24h.
+          </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
               <Link to="/rendez-vous">Prendre rendez-vous</Link>
