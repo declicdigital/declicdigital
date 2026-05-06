@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { Calendar, Clock, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
@@ -51,14 +51,26 @@ const toArticles = (posts: typeof staticPosts): Article[] =>
     tags: p.tags, readTime: p.readTime, date: p.date,
   }));
 
-const BATCH = 6;
+// Optimise l'URL image pour servir une version redimensionnée
+const optimizeImageUrl = (url: string | null, width = 600): string | null => {
+  if (!url) return null;
+  // Supabase Storage — utilise le transform API
+  if (url.includes("supabase.co/storage")) {
+    return `${url}?width=${width}&quality=75`;
+  }
+  // Unsplash — déjà optimisé avec paramètres
+  if (url.includes("unsplash.com")) {
+    return url.replace(/w=\d+/, `w=${width}`).replace(/q=\d+/, "q=70");
+  }
+  return url;
+};
+
+const PER_PAGE = 6;
 
 export default function Blog() {
   const [allArticles, setAllArticles] = useState<Article[]>(() => toArticles(staticPosts));
-  const [visible, setVisible] = useState(BATCH);
-  const [enriching, setEnriching] = useState(true);
+  const [page, setPage] = useState(1);
   const fetchedRef = useRef(false);
-  const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (fetchedRef.current) return;
@@ -82,32 +94,34 @@ export default function Blog() {
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
         setAllArticles(all);
-      } catch { /* fallback */ } finally { setEnriching(false); }
+      } catch { /* fallback statique */ }
     }
     enrichWithSupabase();
   }, []);
 
-  // IntersectionObserver — charge le batch suivant quand le sentinel est visible
-  const loadMore = useCallback(() => {
-    setVisible((v) => Math.min(v + BATCH, allArticles.length));
-  }, [allArticles.length]);
-
-  useEffect(() => {
-    const el = sentinelRef.current;
-    if (!el) return;
-    const observer = new IntersectionObserver(
-      (entries) => { if (entries[0].isIntersecting) loadMore(); },
-      { rootMargin: "200px" }
-    );
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [loadMore]);
-
   const featured = allArticles[0];
   const rest = allArticles.slice(1);
-  const shownArticles = rest.slice(0, visible);
-  const hasMore = visible < rest.length;
+  const totalPages = Math.max(1, Math.ceil(rest.length / PER_PAGE));
+  const pageArticles = rest.slice((page - 1) * PER_PAGE, page * PER_PAGE);
   const allCategories = Array.from(new Set([...blogCategories, ...allArticles.map((a) => a.category)]));
+
+  const goToPage = (p: number) => {
+    setPage(p);
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  // Génère les numéros de page à afficher
+  const pageNumbers = () => {
+    const pages: (number | "...")[] = [];
+    for (let i = 1; i <= totalPages; i++) {
+      if (i === 1 || i === totalPages || Math.abs(i - page) <= 1) {
+        pages.push(i);
+      } else if (pages[pages.length - 1] !== "...") {
+        pages.push("...");
+      }
+    }
+    return pages;
+  };
 
   return (
     <PageLayout hideBlogCarousel>
@@ -130,7 +144,6 @@ export default function Blog() {
             </p>
           </div>
 
-          {/* Catégories */}
           {allCategories.length > 0 && (
             <div className="mb-10 flex flex-wrap gap-2">
               {allCategories.map((cat) => {
@@ -146,14 +159,18 @@ export default function Blog() {
             </div>
           )}
 
-          {/* Article à la une */}
           {featured && (
             <Link to={`/blog/${featured.slug}`} className="block group">
               <article className="overflow-hidden rounded-2xl grid md:grid-cols-2 transition-all hover:-translate-y-1"
                 style={{ backgroundColor: "#FFFFFF", border: "2px solid rgba(43,30,63,0.12)", boxShadow: "4px 4px 0px rgba(43,30,63,0.10), 8px 8px 0px rgba(43,30,63,0.05)" }}>
                 <div className="overflow-hidden relative" style={{ minHeight: "280px" }}>
                   {featured.coverImageUrl
-                    ? <img src={featured.coverImageUrl} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" width={800} height={500} />
+                    ? <img
+                        src={optimizeImageUrl(featured.coverImageUrl, 900) ?? ""}
+                        alt={featured.title}
+                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        loading="eager" width={800} height={500}
+                      />
                     : <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}><span className="text-5xl font-bold" style={{ color: "#2B1E3F", opacity: 0.1 }}>{featured.title.charAt(0)}</span></div>
                   }
                   <span style={{ position: "absolute", top: "12px", left: "12px", display: "inline-flex", alignItems: "center", backgroundColor: "#2B1E3F", color: "#F6F1E9", fontSize: "10px", padding: "3px 10px", borderRadius: "999px", fontWeight: 700, letterSpacing: "0.05em", whiteSpace: "nowrap" }}>À la une</span>
@@ -174,7 +191,7 @@ export default function Blog() {
         </div>
       </section>
 
-      {/* Section 2 — Grille infinie */}
+      {/* Section 2 — Grille paginée */}
       <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
@@ -184,67 +201,85 @@ export default function Blog() {
             </span>
           </div>
 
-          {enriching && shownArticles.length === 0 ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {[...Array(6)].map((_, i) => (
-                <div key={i} className="rounded-2xl overflow-hidden animate-pulse" style={{ border: "1.5px solid rgba(43,30,63,0.08)" }}>
-                  <div style={{ aspectRatio: "16/9", backgroundColor: "#F6F1E9" }} />
-                  <div className="p-5 space-y-3">
-                    <div className="h-3 rounded" style={{ backgroundColor: "#F6F1E9", width: "40%" }} />
-                    <div className="h-4 rounded" style={{ backgroundColor: "#F6F1E9", width: "85%" }} />
-                    <div className="h-3 rounded" style={{ backgroundColor: "#F6F1E9", width: "65%" }} />
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {pageArticles.map((article, i) => (
+              <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
+                <article
+                  className="overflow-hidden rounded-2xl h-full transition-all duration-300 hover:-translate-y-1"
+                  style={{
+                    backgroundColor: "#F6F1E9",
+                    border: "2px solid rgba(43,30,63,0.10)",
+                    boxShadow: "3px 3px 0px rgba(43,30,63,0.08), 6px 6px 0px rgba(43,30,63,0.04)",
+                  }}
+                >
+                  <div className="overflow-hidden" style={{ aspectRatio: "16/9" }}>
+                    {article.coverImageUrl
+                      ? <img
+                          src={optimizeImageUrl(article.coverImageUrl, 600) ?? ""}
+                          alt={article.title}
+                          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                          loading={i < 3 ? "eager" : "lazy"}
+                          decoding="async"
+                          width={600} height={338}
+                        />
+                      : <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}><span style={{ color: "#2B1E3F", opacity: 0.1, fontSize: "3rem", fontWeight: 700 }}>{article.title.charAt(0)}</span></div>
+                    }
                   </div>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {shownArticles.map((article, i) => (
-                <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
-                  <article
-                    className="overflow-hidden rounded-2xl h-full transition-all duration-300 hover:-translate-y-1"
+                  <div className="p-5 flex flex-col">
+                    <Badge cat={article.category} />
+                    <h3 className="mt-3 font-bold leading-snug line-clamp-2 text-base" style={{ color: "#2B1E3F" }}>{article.title}</h3>
+                    <p className="mt-2 text-sm leading-relaxed line-clamp-2" style={{ color: "#2B1E3F", opacity: 0.6 }}>{article.excerpt}</p>
+                    <div className="mt-4 flex items-center justify-between text-xs" style={{ color: "#2B1E3F", opacity: 0.4 }}>
+                      <span className="flex items-center gap-1.5"><Calendar size={11} />{new Date(article.date).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}</span>
+                      <span className="flex items-center gap-1.5"><Clock size={11} />{article.readTime}</span>
+                    </div>
+                    <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold group-hover:gap-2.5 transition-all" style={{ color: "#4361EE" }}>Lire l'article <ArrowRight size={13} /></span>
+                  </div>
+                </article>
+              </Link>
+            ))}
+          </div>
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-2 mt-12">
+              <button
+                onClick={() => goToPage(page - 1)}
+                disabled={page === 1}
+                className="flex h-9 w-9 items-center justify-center rounded-full transition-all disabled:opacity-25"
+                style={{ backgroundColor: "#F6F1E9", border: "1.5px solid rgba(43,30,63,0.18)", color: "#2B1E3F" }}
+              >
+                <ChevronLeft size={16} />
+              </button>
+
+              {pageNumbers().map((p, i) =>
+                p === "..." ? (
+                  <span key={`dots-${i}`} className="text-sm" style={{ color: "#2B1E3F", opacity: 0.3 }}>…</span>
+                ) : (
+                  <button
+                    key={p}
+                    onClick={() => goToPage(p as number)}
+                    className="flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold transition-all"
                     style={{
-                      backgroundColor: "#F6F1E9",
-                      border: "2px solid rgba(43,30,63,0.10)",
-                      boxShadow: "3px 3px 0px rgba(43,30,63,0.08), 6px 6px 0px rgba(43,30,63,0.04)",
+                      backgroundColor: p === page ? "#2B1E3F" : "#F6F1E9",
+                      color: p === page ? "#F6F1E9" : "#2B1E3F",
+                      border: p === page ? "none" : "1.5px solid rgba(43,30,63,0.18)",
                     }}
                   >
-                    <div className="overflow-hidden" style={{ aspectRatio: "16/9" }}>
-                      {article.coverImageUrl
-                        ? <img src={article.coverImageUrl} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading={i < 6 ? "eager" : "lazy"} decoding="async" width={600} height={338} />
-                        : <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}><span style={{ color: "#2B1E3F", opacity: 0.1, fontSize: "3rem", fontWeight: 700 }}>{article.title.charAt(0)}</span></div>
-                      }
-                    </div>
-                    <div className="p-5 flex flex-col">
-                      <Badge cat={article.category} />
-                      <h3 className="mt-3 font-bold leading-snug line-clamp-2 text-base" style={{ color: "#2B1E3F" }}>{article.title}</h3>
-                      <p className="mt-2 text-sm leading-relaxed line-clamp-2" style={{ color: "#2B1E3F", opacity: 0.6 }}>{article.excerpt}</p>
-                      <div className="mt-4 flex items-center justify-between text-xs" style={{ color: "#2B1E3F", opacity: 0.4 }}>
-                        <span className="flex items-center gap-1.5"><Calendar size={11} />{new Date(article.date).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}</span>
-                        <span className="flex items-center gap-1.5"><Clock size={11} />{article.readTime}</span>
-                      </div>
-                      <span className="mt-3 inline-flex items-center gap-1.5 text-sm font-bold group-hover:gap-2.5 transition-all" style={{ color: "#4361EE" }}>Lire l'article <ArrowRight size={13} /></span>
-                    </div>
-                  </article>
-                </Link>
-              ))}
-            </div>
-          )}
+                    {p}
+                  </button>
+                )
+              )}
 
-          {/* Sentinel IntersectionObserver */}
-          {hasMore && (
-            <div ref={sentinelRef} className="mt-10 flex justify-center">
-              <div className="flex items-center gap-2" style={{ color: "#2B1E3F", opacity: 0.35, fontSize: "13px" }}>
-                <div className="w-4 h-4 rounded-full border-2 border-current border-t-transparent animate-spin" />
-                Chargement...
-              </div>
+              <button
+                onClick={() => goToPage(page + 1)}
+                disabled={page === totalPages}
+                className="flex h-9 w-9 items-center justify-center rounded-full transition-all disabled:opacity-25"
+                style={{ backgroundColor: "#F6F1E9", border: "1.5px solid rgba(43,30,63,0.18)", color: "#2B1E3F" }}
+              >
+                <ChevronRight size={16} />
+              </button>
             </div>
-          )}
-
-          {!hasMore && rest.length > 0 && (
-            <p className="mt-10 text-center text-sm" style={{ color: "#2B1E3F", opacity: 0.35 }}>
-              Tous les articles sont affichés
-            </p>
           )}
         </div>
       </section>
