@@ -1,8 +1,9 @@
+import { useEffect, useRef, useState } from "react";
 import { MapPin, ExternalLink, Star, Clock, Phone } from "lucide-react";
 
 const GOOGLE_MAPS_CID = "17048305841118108915";
 const GOOGLE_BUSINESS_LINK = `https://www.google.com/maps?cid=${GOOGLE_MAPS_CID}`;
-const GOOGLE_WRITE_REVIEW_URL = "https://www.google.com/maps/place//data=!4m3!3m2!1s0x47e67127ac5d83b1:0xec97bfd6320fdcf3!12e1";
+const GOOGLE_WRITE_REVIEW_URL = "https://search.google.com/local/writereview?placeid=ChIJsYNdrCdx5kcR89wPMta_l-w";
 const MAPS_EMBED_URL = `https://www.google.com/maps?cid=${GOOGLE_MAPS_CID}&output=embed`;
 
 interface LocationSectionProps {
@@ -10,10 +11,31 @@ interface LocationSectionProps {
 }
 
 const LocationSection = ({ backgroundColor }: LocationSectionProps) => {
+  const [mapVisible, setMapVisible] = useState(false);
+  const sectionRef = useRef<HTMLElement>(null);
   const cardBg = backgroundColor === "#E9F2F4" ? "#F6F1E9" : "#E9F2F4";
+
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setMapVisible(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "200px" } // commence à charger 200px avant que la section soit visible
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section
+      ref={sectionRef}
       className="py-12 md:py-16"
       style={backgroundColor ? { backgroundColor } : undefined}
     >
@@ -26,19 +48,37 @@ const LocationSection = ({ backgroundColor }: LocationSectionProps) => {
         </div>
 
         <div className="grid gap-8 lg:grid-cols-2 max-w-5xl mx-auto">
-          <div className="rounded-2xl overflow-hidden shadow-card border" style={{ borderColor: "rgba(43,30,63,0.1)" }}>
-            <iframe
-              width="100%"
-              height="400"
-              style={{ border: 0 }}
-              loading="lazy"
-              allowFullScreen
-              referrerPolicy="no-referrer-when-downgrade"
-              src={MAPS_EMBED_URL}
-              title="Déclic Digital - 57 Rue d'Alleray, Paris 15e"
-            />
+
+          {/* Carte — chargée uniquement quand dans le viewport */}
+          <div
+            className="rounded-2xl overflow-hidden border"
+            style={{ borderColor: "rgba(43,30,63,0.1)", height: "400px" }}
+          >
+            {mapVisible ? (
+              <iframe
+                width="100%"
+                height="400"
+                style={{ border: 0 }}
+                allowFullScreen
+                referrerPolicy="no-referrer-when-downgrade"
+                src={MAPS_EMBED_URL}
+                title="Déclic Digital - 57 Rue d'Alleray, Paris 15e"
+              />
+            ) : (
+              /* Placeholder pendant que l'observer attend */
+              <div
+                className="w-full h-full flex items-center justify-center"
+                style={{ backgroundColor: "#E8E4DC" }}
+              >
+                <div className="flex flex-col items-center gap-2" style={{ color: "#2B1E3F", opacity: 0.3 }}>
+                  <MapPin size={28} />
+                  <span className="text-sm font-medium">Chargement de la carte...</span>
+                </div>
+              </div>
+            )}
           </div>
 
+          {/* Infos */}
           <div className="flex flex-col justify-center space-y-6">
             <div>
               <h3 className="text-xl font-bold mb-1" style={{ color: "#2B1E3F" }}>Déclic Digital</h3>
