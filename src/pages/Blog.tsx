@@ -1,7 +1,7 @@
-import { Link, useSearchParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { Calendar, Clock, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect, useRef } from "react";
+import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
@@ -37,8 +37,7 @@ const Badge = ({ cat }: { cat: string }) => {
       backgroundColor: s.bg, color: s.color,
       fontSize: "11px", padding: "3px 10px",
       borderRadius: "999px", fontWeight: 700,
-      letterSpacing: "0.02em", width: "fit-content",
-      whiteSpace: "nowrap",
+      letterSpacing: "0.02em", width: "fit-content", whiteSpace: "nowrap",
     }}>
       {cat}
     </span>
@@ -52,15 +51,14 @@ const toArticles = (posts: typeof staticPosts): Article[] =>
     tags: p.tags, readTime: p.readTime, date: p.date,
   }));
 
-const PER_PAGE = 6;
+const BATCH = 6;
 
 export default function Blog() {
-  const [articles, setArticles] = useState<Article[]>(() => toArticles(staticPosts));
+  const [allArticles, setAllArticles] = useState<Article[]>(() => toArticles(staticPosts));
+  const [visible, setVisible] = useState(BATCH);
   const [enriching, setEnriching] = useState(true);
-  const [searchParams, setSearchParams] = useSearchParams();
   const fetchedRef = useRef(false);
-
-  const currentPage = Math.max(1, parseInt(searchParams.get("page") ?? "1", 10));
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (fetchedRef.current) return;
@@ -83,117 +81,110 @@ export default function Blog() {
         const all = [...remoteArticles, ...staticFiltered].sort(
           (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
         );
-        setArticles(all);
+        setAllArticles(all);
       } catch { /* fallback */ } finally { setEnriching(false); }
     }
     enrichWithSupabase();
   }, []);
 
-  const featured = articles[0];
-  const rest = articles.slice(1);
-  const totalPages = Math.ceil(rest.length / PER_PAGE);
-  const pageArticles = rest.slice((currentPage - 1) * PER_PAGE, currentPage * PER_PAGE);
-  const allCategories = Array.from(new Set([...blogCategories, ...articles.map((a) => a.category)]));
+  // IntersectionObserver — charge le batch suivant quand le sentinel est visible
+  const loadMore = useCallback(() => {
+    setVisible((v) => Math.min(v + BATCH, allArticles.length));
+  }, [allArticles.length]);
 
-  const goToPage = (p: number) => {
-    setSearchParams(p === 1 ? {} : { page: String(p) });
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+  useEffect(() => {
+    const el = sentinelRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      (entries) => { if (entries[0].isIntersecting) loadMore(); },
+      { rootMargin: "200px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [loadMore]);
+
+  const featured = allArticles[0];
+  const rest = allArticles.slice(1);
+  const shownArticles = rest.slice(0, visible);
+  const hasMore = visible < rest.length;
+  const allCategories = Array.from(new Set([...blogCategories, ...allArticles.map((a) => a.category)]));
 
   return (
     <PageLayout hideBlogCarousel>
       <Helmet>
-        <title>{currentPage > 1 ? `Blog — Page ${currentPage} | Déclic Digital` : "Blog création de site web, SEO et tech | Déclic Digital"}</title>
+        <title>Blog création de site web, SEO et tech | Déclic Digital</title>
         <meta name="description" content="Guides pratiques, tendances web design et conseils SEO pour les TPE et artisans. Apprenez à développer votre visibilité en ligne avec le blog Déclic Digital." />
-        <link rel="canonical" href={`https://declicdigital.net/blog${currentPage > 1 ? `?page=${currentPage}` : ""}`} />
-        {currentPage > 1 && <link rel="prev" href={`https://declicdigital.net/blog${currentPage > 2 ? `?page=${currentPage - 1}` : ""}`} />}
-        {currentPage < totalPages && <link rel="next" href={`https://declicdigital.net/blog?page=${currentPage + 1}`} />}
+        <link rel="canonical" href="https://declicdigital.net/blog" />
       </Helmet>
 
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Blog" }]} />
 
-      {/* Section 1 — Header + Catégories + Featured (page 1 uniquement) */}
+      {/* Section 1 — Header + Catégories + Featured */}
       <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
         <div className="container">
-          {currentPage === 1 && (
-            <>
-              <div className="mb-6">
-                <span style={{ color: "#2B1E3F", opacity: 0.35, fontSize: "11px", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase" }}>Déclic Digital</span>
-                <h1 className="mt-1" style={{ color: "#2B1E3F" }}>Blog</h1>
-                <p className="mt-2 text-lg max-w-xl" style={{ color: "#2B1E3F", opacity: 0.6 }}>
-                  Veille web, SEO, GEO & tech - des articles pour développer votre visibilité en ligne.
-                </p>
-              </div>
+          <div className="mb-6">
+            <span style={{ color: "#2B1E3F", opacity: 0.35, fontSize: "11px", fontWeight: 700, letterSpacing: "0.15em", textTransform: "uppercase" }}>Déclic Digital</span>
+            <h1 className="mt-1" style={{ color: "#2B1E3F" }}>Blog</h1>
+            <p className="mt-2 text-lg max-w-xl" style={{ color: "#2B1E3F", opacity: 0.6 }}>
+              Veille web, SEO, GEO & tech - des articles pour développer votre visibilité en ligne.
+            </p>
+          </div>
 
-              {/* Catégories */}
-              {allCategories.length > 0 && (
-                <div className="mb-10 flex flex-wrap gap-2">
-                  {allCategories.map((cat) => {
-                    const s = getBadge(cat);
-                    return (
-                      <Link key={cat} to={`/blog/categorie/${getCategorySlug(cat)}`}
-                        className="transition-all hover:opacity-80 hover:-translate-y-0.5"
-                        style={{ display: "inline-flex", alignItems: "center", backgroundColor: s.bg, color: s.color, fontSize: "12px", padding: "5px 14px", borderRadius: "999px", fontWeight: 700, whiteSpace: "nowrap", border: `1px solid ${s.color}30`, boxShadow: "1px 1px 0px rgba(43,30,63,0.08)" }}>
-                        {cat}
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-
-              {/* Article à la une */}
-              {featured && (
-                <Link to={`/blog/${featured.slug}`} className="block group mb-0">
-                  <article className="overflow-hidden rounded-2xl grid md:grid-cols-2 transition-all hover:-translate-y-1"
-                    style={{ backgroundColor: "#FFFFFF", border: "2px solid rgba(43,30,63,0.12)", boxShadow: "4px 4px 0px rgba(43,30,63,0.10), 8px 8px 0px rgba(43,30,63,0.05)" }}>
-                    <div className="overflow-hidden relative" style={{ minHeight: "280px" }}>
-                      {featured.coverImageUrl
-                        ? <img src={featured.coverImageUrl} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" width={800} height={500} />
-                        : <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}><span className="text-5xl font-bold" style={{ color: "#2B1E3F", opacity: 0.1 }}>{featured.title.charAt(0)}</span></div>
-                      }
-                      <span style={{ position: "absolute", top: "12px", left: "12px", display: "inline-flex", alignItems: "center", backgroundColor: "#2B1E3F", color: "#F6F1E9", fontSize: "10px", padding: "3px 10px", borderRadius: "999px", fontWeight: 700, letterSpacing: "0.05em", whiteSpace: "nowrap" }}>À la une</span>
-                    </div>
-                    <div className="flex flex-col justify-center p-8 md:p-10">
-                      <Badge cat={featured.category} />
-                      <h2 className="mt-3 text-2xl md:text-3xl font-bold leading-snug" style={{ color: "#2B1E3F" }}>{featured.title}</h2>
-                      <p className="mt-3 leading-relaxed text-sm" style={{ color: "#2B1E3F", opacity: 0.65 }}>{featured.excerpt}</p>
-                      <div className="mt-4 flex items-center gap-4 text-xs" style={{ color: "#2B1E3F", opacity: 0.4 }}>
-                        <span className="flex items-center gap-1.5"><Calendar size={12} />{new Date(featured.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}</span>
-                        <span className="flex items-center gap-1.5"><Clock size={12} />{featured.readTime}</span>
-                      </div>
-                      <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold group-hover:gap-3 transition-all" style={{ color: "#4361EE" }}>Lire l'article <ArrowRight size={14} /></span>
-                    </div>
-                  </article>
-                </Link>
-              )}
-            </>
+          {/* Catégories */}
+          {allCategories.length > 0 && (
+            <div className="mb-10 flex flex-wrap gap-2">
+              {allCategories.map((cat) => {
+                const s = getBadge(cat);
+                return (
+                  <Link key={cat} to={`/blog/categorie/${getCategorySlug(cat)}`}
+                    className="transition-all hover:opacity-80 hover:-translate-y-0.5"
+                    style={{ display: "inline-flex", alignItems: "center", backgroundColor: s.bg, color: s.color, fontSize: "12px", padding: "5px 14px", borderRadius: "999px", fontWeight: 700, whiteSpace: "nowrap", border: `1px solid ${s.color}30`, boxShadow: "1px 1px 0px rgba(43,30,63,0.08)" }}>
+                    {cat}
+                  </Link>
+                );
+              })}
+            </div>
           )}
 
-          {currentPage > 1 && (
-            <div className="mb-8">
-              <h1 className="text-2xl font-bold" style={{ color: "#2B1E3F" }}>Blog — Page {currentPage}</h1>
-              <button onClick={() => goToPage(1)} className="mt-2 inline-flex items-center gap-1.5 text-sm font-medium hover:opacity-70 transition-opacity" style={{ color: "#4361EE" }}>
-                <ChevronLeft size={14} /> Retour à la page 1
-              </button>
-            </div>
+          {/* Article à la une */}
+          {featured && (
+            <Link to={`/blog/${featured.slug}`} className="block group">
+              <article className="overflow-hidden rounded-2xl grid md:grid-cols-2 transition-all hover:-translate-y-1"
+                style={{ backgroundColor: "#FFFFFF", border: "2px solid rgba(43,30,63,0.12)", boxShadow: "4px 4px 0px rgba(43,30,63,0.10), 8px 8px 0px rgba(43,30,63,0.05)" }}>
+                <div className="overflow-hidden relative" style={{ minHeight: "280px" }}>
+                  {featured.coverImageUrl
+                    ? <img src={featured.coverImageUrl} alt={featured.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading="eager" width={800} height={500} />
+                    : <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}><span className="text-5xl font-bold" style={{ color: "#2B1E3F", opacity: 0.1 }}>{featured.title.charAt(0)}</span></div>
+                  }
+                  <span style={{ position: "absolute", top: "12px", left: "12px", display: "inline-flex", alignItems: "center", backgroundColor: "#2B1E3F", color: "#F6F1E9", fontSize: "10px", padding: "3px 10px", borderRadius: "999px", fontWeight: 700, letterSpacing: "0.05em", whiteSpace: "nowrap" }}>À la une</span>
+                </div>
+                <div className="flex flex-col justify-center p-8 md:p-10">
+                  <Badge cat={featured.category} />
+                  <h2 className="mt-3 text-2xl md:text-3xl font-bold leading-snug" style={{ color: "#2B1E3F" }}>{featured.title}</h2>
+                  <p className="mt-3 leading-relaxed text-sm" style={{ color: "#2B1E3F", opacity: 0.65 }}>{featured.excerpt}</p>
+                  <div className="mt-4 flex items-center gap-4 text-xs" style={{ color: "#2B1E3F", opacity: 0.4 }}>
+                    <span className="flex items-center gap-1.5"><Calendar size={12} />{new Date(featured.date).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" })}</span>
+                    <span className="flex items-center gap-1.5"><Clock size={12} />{featured.readTime}</span>
+                  </div>
+                  <span className="mt-4 inline-flex items-center gap-2 text-sm font-bold group-hover:gap-3 transition-all" style={{ color: "#4361EE" }}>Lire l'article <ArrowRight size={14} /></span>
+                </div>
+              </article>
+            </Link>
           )}
         </div>
       </section>
 
-      {/* Section 2 — Grille articles */}
+      {/* Section 2 — Grille infinie */}
       <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
         <div className="container">
           <div className="flex items-center justify-between mb-8">
-            <h2 style={{ color: "#2B1E3F" }}>
-              {currentPage === 1 ? "Tous les articles" : `Page ${currentPage}`}
-            </h2>
+            <h2 style={{ color: "#2B1E3F" }}>Tous les articles</h2>
             <span className="text-sm" style={{ color: "#2B1E3F", opacity: 0.45 }}>
               {rest.length} article{rest.length > 1 ? "s" : ""}
             </span>
           </div>
 
-          {/* Grille 3 colonnes */}
-          {enriching && pageArticles.length === 0 ? (
+          {enriching && shownArticles.length === 0 ? (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[...Array(6)].map((_, i) => (
                 <div key={i} className="rounded-2xl overflow-hidden animate-pulse" style={{ border: "1.5px solid rgba(43,30,63,0.08)" }}>
@@ -208,7 +199,7 @@ export default function Blog() {
             </div>
           ) : (
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {pageArticles.map((article, i) => (
+              {shownArticles.map((article, i) => (
                 <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
                   <article
                     className="overflow-hidden rounded-2xl h-full transition-all duration-300 hover:-translate-y-1"
@@ -218,9 +209,9 @@ export default function Blog() {
                       boxShadow: "3px 3px 0px rgba(43,30,63,0.08), 6px 6px 0px rgba(43,30,63,0.04)",
                     }}
                   >
-                    <div className="overflow-hidden relative" style={{ aspectRatio: "16/9" }}>
+                    <div className="overflow-hidden" style={{ aspectRatio: "16/9" }}>
                       {article.coverImageUrl
-                        ? <img src={article.coverImageUrl} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading={i < 3 ? "eager" : "lazy"} decoding="async" width={600} height={338} />
+                        ? <img src={article.coverImageUrl} alt={article.title} className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105" loading={i < 6 ? "eager" : "lazy"} decoding="async" width={600} height={338} />
                         : <div className="h-full w-full flex items-center justify-center" style={{ backgroundColor: "#E9F2F4" }}><span style={{ color: "#2B1E3F", opacity: 0.1, fontSize: "3rem", fontWeight: 700 }}>{article.title.charAt(0)}</span></div>
                       }
                     </div>
@@ -240,50 +231,20 @@ export default function Blog() {
             </div>
           )}
 
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 mt-12">
-              <button
-                onClick={() => goToPage(currentPage - 1)}
-                disabled={currentPage === 1}
-                className="flex h-9 w-9 items-center justify-center rounded-full transition-all disabled:opacity-25"
-                style={{ backgroundColor: "#F6F1E9", border: "1.5px solid rgba(43,30,63,0.18)", color: "#2B1E3F" }}
-              >
-                <ChevronLeft size={16} />
-              </button>
-
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map((p) => {
-                const isActive = p === currentPage;
-                const isNear = Math.abs(p - currentPage) <= 1 || p === 1 || p === totalPages;
-                if (!isNear && Math.abs(p - currentPage) === 2) {
-                  return <span key={p} style={{ color: "#2B1E3F", opacity: 0.3 }}>…</span>;
-                }
-                if (!isNear) return null;
-                return (
-                  <button
-                    key={p}
-                    onClick={() => goToPage(p)}
-                    className="flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold transition-all"
-                    style={{
-                      backgroundColor: isActive ? "#2B1E3F" : "#F6F1E9",
-                      color: isActive ? "#F6F1E9" : "#2B1E3F",
-                      border: isActive ? "none" : "1.5px solid rgba(43,30,63,0.18)",
-                    }}
-                  >
-                    {p}
-                  </button>
-                );
-              })}
-
-              <button
-                onClick={() => goToPage(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                className="flex h-9 w-9 items-center justify-center rounded-full transition-all disabled:opacity-25"
-                style={{ backgroundColor: "#F6F1E9", border: "1.5px solid rgba(43,30,63,0.18)", color: "#2B1E3F" }}
-              >
-                <ChevronRight size={16} />
-              </button>
+          {/* Sentinel IntersectionObserver */}
+          {hasMore && (
+            <div ref={sentinelRef} className="mt-10 flex justify-center">
+              <div className="flex items-center gap-2" style={{ color: "#2B1E3F", opacity: 0.35, fontSize: "13px" }}>
+                <div className="w-4 h-4 rounded-full border-2 border-current border-t-transparent animate-spin" />
+                Chargement...
+              </div>
             </div>
+          )}
+
+          {!hasMore && rest.length > 0 && (
+            <p className="mt-10 text-center text-sm" style={{ color: "#2B1E3F", opacity: 0.35 }}>
+              Tous les articles sont affichés
+            </p>
           )}
         </div>
       </section>
