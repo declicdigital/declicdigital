@@ -1,8 +1,14 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Calendar, Clock, Sparkles } from "lucide-react";
 import { blogPosts } from "@/data/blogPosts";
-import { supabase } from "@/integrations/supabase/client";
+import { createClient } from "@supabase/supabase-js";
 import { useState, useEffect, useRef } from "react";
+
+// Client dédié pointant vers le projet qui contient cms_blog_posts
+const supabaseBlog = createClient(
+  "https://iskxljribvfypkyappku.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza3hsanJpYnZmeXBreWFwcGt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2NjQ0MzMsImV4cCI6MjA5MjI0MDQzM30.OgWh7kKknHgdG4JMTFbNC_XdZhncnEqzJQA0GbRI_uY"
+);
 
 const SkeletonCard = () => (
   <div
@@ -33,7 +39,7 @@ const BlogCarousel = () => {
     fetchedRef.current = true;
 
     async function fetchLatest() {
-      const { data } = await supabase
+      const { data } = await supabaseBlog
         .from("cms_blog_posts")
         .select("slug, title, excerpt, cover_image_url, read_time, created_at")
         .eq("status", "published")
@@ -94,7 +100,6 @@ const BlogCarousel = () => {
                 const isNewest = article.date === newestDate;
                 return (
                   <Link key={article.slug} to={`/blog/${article.slug}`} className="group block">
-                    {/* Animation CSS pure — pas de Motion, pas de offsetWidth, pas de CLS */}
                     <article
                       className="overflow-hidden rounded-xl flex flex-col h-full transition-all group-hover:-translate-y-1"
                       style={{
@@ -120,10 +125,7 @@ const BlogCarousel = () => {
                             className="h-full w-full flex items-center justify-center"
                             style={{ backgroundColor: "#E9F2F4" }}
                           >
-                            <span
-                              className="text-3xl font-bold"
-                              style={{ color: "#2B1E3F", opacity: 0.15 }}
-                            >
+                            <span className="text-3xl font-bold" style={{ color: "#2B1E3F", opacity: 0.15 }}>
                               {article.title.charAt(0)}
                             </span>
                           </div>
@@ -156,10 +158,7 @@ const BlogCarousel = () => {
                         >
                           <span className="flex items-center gap-1">
                             <Calendar size={11} />
-                            {new Date(article.date).toLocaleDateString("fr-FR", {
-                              day: "numeric",
-                              month: "short",
-                            })}
+                            {new Date(article.date).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}
                           </span>
                           <span className="flex items-center gap-1">
                             <Clock size={11} /> {article.readTime}
@@ -173,10 +172,7 @@ const BlogCarousel = () => {
         </div>
 
         <div className="mt-8 text-center md:hidden">
-          <Link
-            to="/blog"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
-          >
+          <Link to="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-primary">
             Voir tous les articles <ArrowRight size={16} />
           </Link>
         </div>
