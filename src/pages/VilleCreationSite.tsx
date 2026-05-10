@@ -9,6 +9,7 @@ import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 import { getCityBySlug, cities } from "@/data/cities";
 import { cityContent } from "@/data/cityContent";
 import { getCityGuide } from "@/data/cityGuideContent";
+import { getSeoMeta } from "@/data/seoMeta";
 import { Helmet } from "react-helmet-async";
 import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
 
@@ -40,24 +41,14 @@ const VilleCreationSite = () => {
     .filter((c) => c.region === city.region && c.slug !== city.slug)
     .slice(0, 6);
   const faqs = creationFaqsByRegion[city.region] || creationFaqsByRegion.paris;
+  const seo = getSeoMeta("creation", city.slug, city.nameShort);
 
   return (
     <PageLayout>
       <Helmet>
-        <title>{
-          city.slug === "paris-1er" ? "Création site internet Paris 1er | TPE & artisans" :
-          city.slug === "paris-3eme" ? "Création site internet Paris 3ème | artisans & TPE" :
-          city.slug === "boulogne-billancourt" ? "Création site internet Boulogne-Billancourt | TPE" :
-          `Création site internet ${city.nameShort} | artisans & TPE`
-        }</title>
-        <meta name="description" content={
-          city.slug === "paris-1er" ? "Créez votre site web professionnel dans le 1er arrondissement de Paris. Déclic Digital accompagne les indépendants et TPE. Devis gratuit." :
-          city.slug === "paris-3eme" ? "Votre site web professionnel dans le Marais. Déclic Digital accompagne les artisans et TPE du 3ème arrondissement de Paris. Devis gratuit." :
-          city.slug === "boulogne-billancourt" ? "Agence web à Boulogne-Billancourt pour TPE et artisans. Déclic Digital crée votre site professionnel et améliore votre visibilité Google." :
-          `Agence web pour les TPE et artisans de ${city.nameShort}. Déclic Digital crée votre site professionnel et améliore votre référencement Google local.`
-        } />
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
         <meta name="robots" content="index, follow" />
-        {/* Canonical sans trailing slash */}
         <link rel="canonical" href={`https://declicdigital.net/creation-site-web/${city.slug}`} />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -85,7 +76,7 @@ const VilleCreationSite = () => {
                 Agence web {city.description}
               </span>
               <h1 className="mb-6" style={{ color: "#2B1E3F" }}>
-                {`Création de site internet pour les artisans et TPE de ${city.nameShort}`}
+                {seo.h1}
               </h1>
               <p className="mb-8 text-lg leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.75 }}>
                 {content?.creationIntro || `Vous êtes une TPE ou un indépendant ${city.description} ? Déclic Digital crée votre site internet professionnel, responsive et optimisé pour Google. Attirez enfin les bons clients grâce à un site qui travaille pour vous.`}
@@ -267,7 +258,7 @@ const VilleCreationSite = () => {
             ))}
           </div>
           <p className="text-center mt-6">
-            <Link to="/faq" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>Voir toutes les questions fréquentes →</Link>
+            <Link to="/faq" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>Voir toutes les questions fréquentes -&gt;</Link>
           </p>
         </div>
       </section>
