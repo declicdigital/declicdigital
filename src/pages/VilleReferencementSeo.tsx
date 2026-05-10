@@ -9,6 +9,7 @@ import geoffreyPhoto from "@/assets/geoffrey-fondateur-declic-digital.webp";
 import { getCityBySlug, cities } from "@/data/cities";
 import { cityContent } from "@/data/cityContent";
 import { getCityGuide } from "@/data/cityGuideContent";
+import { getSeoMeta } from "@/data/seoMeta";
 import { Helmet } from "react-helmet-async";
 import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
 
@@ -47,22 +48,14 @@ const VilleReferencementSeo = () => {
     .filter((c) => c.region === city.region && c.slug !== city.slug)
     .slice(0, 6);
   const faqs = seoFaqsByCity[city.slug] || seoFaqsByRegion[city.region] || seoFaqsByRegion.paris;
+  const seo = getSeoMeta("seo", city.slug, city.nameShort);
 
   return (
     <PageLayout>
       <Helmet>
-        <title>{
-          city.slug === "boulogne-billancourt" ? "SEO local Boulogne-Billancourt | TPE & artisans" :
-          city.slug === "asnieres-sur-seine" ? "Agence SEO Asnières-sur-Seine | Déclic Digital" :
-          `Référencement SEO et GEO ${city.nameShort} | TPE & artisans`
-        }</title>
-        <meta name="description" content={
-          city.slug === "boulogne-billancourt" ? "Référencement Google local pour les TPE et artisans de Boulogne-Billancourt. Déclic Digital booste votre visibilité à Paris et dans le 92. Audit gratuit." :
-          city.slug === "asnieres-sur-seine" ? "Référencement naturel, GEO et netlinking à Asnières-sur-Seine. Audit SEO offert, résultats mesurables en 3 à 6 mois. Devis gratuit." :
-          `Boostez votre visibilité Google à ${city.nameShort}. Déclic Digital, agence SEO locale pour TPE, artisans et indépendants à Paris et dans les Hauts-de-Seine (92). Audit gratuit.`
-        } />
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
         <meta name="robots" content="index, follow" />
-        {/* Canonical sans trailing slash */}
         <link rel="canonical" href={`https://declicdigital.net/referencement-seo/${city.slug}`} />
         <script type="application/ld+json">{JSON.stringify({
           "@context": "https://schema.org",
@@ -90,9 +83,7 @@ const VilleReferencementSeo = () => {
                 Agence SEO {city.description}
               </span>
               <h1 className="mb-6" style={{ color: "#2B1E3F" }}>
-                {city.slug === "asnieres-sur-seine"
-                  ? "Agence SEO à Asnières-sur-Seine - Référencement naturel & Netlinking"
-                  : `Référencement SEO et GEO local pour les artisans et TPE de ${city.nameShort}`}
+                {seo.h1}
               </h1>
               <p className="mb-8 text-lg leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.75 }}>
                 {content?.seoIntro || `Votre entreprise ${city.description} mérite d'être visible sur Google. Notre agence SEO optimise votre site pour attirer des clients qualifiés et développer votre activité grâce au référencement naturel.`}
@@ -258,9 +249,7 @@ const VilleReferencementSeo = () => {
       <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
         <div className="container">
           <h2 className="text-center mb-10" style={{ color: "#2B1E3F" }}>
-            {city.slug === "asnieres-sur-seine"
-              ? "Questions fréquentes des entreprises à Asnières-sur-Seine"
-              : `Questions fréquentes sur le SEO à ${city.nameShort}`}
+            Questions fréquentes sur le SEO à {city.nameShort}
           </h2>
           <div className="mx-auto max-w-3xl space-y-4">
             {faqs.map((faq, i) => (
@@ -274,7 +263,7 @@ const VilleReferencementSeo = () => {
             ))}
           </div>
           <p className="text-center mt-6">
-            <Link to="/faq" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>Voir toutes les questions fréquentes →</Link>
+            <Link to="/faq" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>Voir toutes les questions fréquentes -&gt;</Link>
           </p>
         </div>
       </section>
@@ -340,14 +329,10 @@ const VilleReferencementSeo = () => {
         <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
         <div className="container relative z-10 text-center">
           <h2 className="mb-4" style={{ color: "#2B1E3F" }}>
-            {city.slug === "asnieres-sur-seine"
-              ? "Prêt à booster votre visibilité à Asnières-sur-Seine ?"
-              : "Demandez votre audit SEO gratuit : réponse en 48h"}
+            Demandez votre audit SEO gratuit : réponse en 48h
           </h2>
           <p className="mb-8" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-            {city.slug === "asnieres-sur-seine"
-              ? "Chaque mois sans stratégie SEO, ce sont des prospects qui cliquent sur vos concurrents. Contactez Déclic Digital pour un audit SEO offert et sans engagement."
-              : `Découvrez comment attirer plus de clients à ${city.nameShort} grâce au référencement Google.`}
+            Découvrez comment attirer plus de clients à {city.nameShort} grâce au référencement Google.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
