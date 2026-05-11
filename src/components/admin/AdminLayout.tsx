@@ -1,6 +1,6 @@
 import { ReactNode, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Users, FileText, LogOut, Menu, X, BookOpen, Layout, DollarSign, ImagePlay } from "lucide-react";
+import { LayoutDashboard, Users, FileText, LogOut, Menu, X, BookOpen, Layout, DollarSign, ImagePlay, Globe } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/logo-declic-digital-new.webp";
 
@@ -11,6 +11,7 @@ const navItems = [
   { to: "/admin/blog", icon: BookOpen, label: "Blog" },
   { to: "/admin/realisations", icon: ImagePlay, label: "Réalisations" },
   { to: "/admin/cms", icon: Layout, label: "CMS Pages" },
+  { to: "/admin/pages", icon: Globe, label: "Pages du site" },
   { to: "/admin/tarifs", icon: DollarSign, label: "Tarifs" },
 ];
 
