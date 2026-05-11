@@ -1,7 +1,7 @@
 import { lazy, ReactNode, Suspense, Children } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
-
+import AdminEditBar from "./AdminEditBar";
 const Footer = lazy(() => import("./Footer"));
 const BlogCarousel = lazy(() => import("./BlogCarousel"));
 
@@ -39,6 +39,7 @@ const PageLayout = ({
         {!hideBlogCarousel && <BlogCarousel />}
         <Footer />
       </Suspense>
+      <AdminEditBar />
     </div>
   );
 };
