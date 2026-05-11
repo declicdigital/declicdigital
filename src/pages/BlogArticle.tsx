@@ -1,21 +1,25 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
-import { motion } from "motion/react";
-import { Calendar, Clock, ArrowLeft, ArrowRight, Tag, Share2, Check } from "lucide-react";
+import { Calendar, Clock, ArrowLeft, Tag, Share2, Check } from "lucide-react";
 import DOMPurify from "dompurify";
+import { createClient } from "@supabase/supabase-js";
 
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
 import ArticleEndBlocks from "@/components/ArticleEndBlocks";
-import { supabase } from "@/integrations/supabase/client";
 import {
   blogPosts,
   getPostBySlug,
   getRelatedPosts,
   getCategorySlug,
-  type BlogPost as StaticBlogPost,
 } from "@/data/blogPosts";
+
+// Client dédié pointant vers le projet qui contient cms_blog_posts
+const supabaseBlog = createClient(
+  "https://iskxljribvfypkyappku.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imlza3hsanJpYnZmeXBreWFwcGt1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzY2NjQ0MzMsImV4cCI6MjA5MjI0MDQzM30.OgWh7kKknHgdG4JMTFbNC_XdZhncnEqzJQA0GbRI_uY"
+);
 
 interface BlogPost {
   id: string;
@@ -44,20 +48,14 @@ const ShareBar = ({ post, formattedDate }: { post: BlogPost; formattedDate: stri
     setTimeout(() => setCopied(false), 2000);
   };
   return (
-    <div
-      className="mb-10 flex flex-wrap items-center gap-4 pb-6"
-      style={{ borderBottom: "1px solid rgba(43,30,63,0.12)" }}
-    >
+    <div className="mb-10 flex flex-wrap items-center gap-4 pb-6" style={{ borderBottom: "1px solid rgba(43,30,63,0.12)" }}>
       <span className="flex items-center gap-1.5 text-sm" style={{ color: "#2B1E3F", opacity: 0.5 }}>
         <Calendar size={14} /> {formattedDate}
       </span>
       <span className="flex items-center gap-1.5 text-sm" style={{ color: "#2B1E3F", opacity: 0.5 }}>
         <Clock size={14} /> {post.read_time} de lecture
       </span>
-      <span
-        className="rounded-full px-3 py-1 text-xs font-semibold"
-        style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}
-      >
+      <span className="rounded-full px-3 py-1 text-xs font-semibold" style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}>
         {post.category}
       </span>
       <button
@@ -90,12 +88,13 @@ export default function BlogArticle() {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
+  const [latestFromSupabase, setLatestFromSupabase] = useState<{ slug: string; title: string; image: string; category: string }[]>([]);
 
   useEffect(() => {
     async function fetchPost() {
       if (!cleanSlug) { setNotFound(true); setLoading(false); return; }
 
-      const { data } = await supabase
+      const { data } = await supabaseBlog
         .from("cms_blog_posts")
         .select("*")
         .eq("slug", cleanSlug)
@@ -137,21 +136,45 @@ export default function BlogArticle() {
     fetchPost();
   }, [cleanSlug]);
 
-  if (loading) return <PageLayout hideBlogCarousel><div className="min-h-screen" /></PageLayout>;
+  // Charge les derniers articles depuis Supabase pour ArticleEndBlocks
+  useEffect(() => {
+    async function fetchLatest() {
+      const { data } = await supabaseBlog
+        .from("cms_blog_posts")
+        .select("slug, title, cover_image_url, category")
+        .eq("status", "published")
+        .order("created_at", { ascending: false })
+        .limit(6);
+      if (data && data.length > 0) {
+        setLatestFromSupabase(data.map((a: any) => ({
+          slug: a.slug,
+          title: a.title,
+          image: a.cover_image_url ?? "",
+          category: a.category,
+        })));
+      }
+    }
+    fetchLatest();
+  }, []);
+
+  if (loading) return <PageLayout><div className="min-h-screen" /></PageLayout>;
   if (notFound || !post) return <Navigate to="/blog" replace />;
 
   const related = getRelatedPosts({ slug: post.slug, category: post.category, relatedSlugs: post.related_slugs } as any).slice(0, 2);
   const formattedDate = new Date(post.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "long", year: "numeric" });
-
   const relatedSlugs = new Set(related.map((r) => r.slug));
-  const latest = blogPosts
-    .filter((a) => a.slug !== post.slug && !relatedSlugs.has(a.slug))
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 3)
-    .map((item) => ({ slug: item.slug, title: item.title, image: item.coverImageUrl || "", category: item.category }));
+
+  // Derniers articles : priorité Supabase, fallback statique
+  const latest = latestFromSupabase.length > 0
+    ? latestFromSupabase.filter((a) => a.slug !== post.slug && !relatedSlugs.has(a.slug)).slice(0, 3)
+    : blogPosts
+        .filter((a) => a.slug !== post.slug && !relatedSlugs.has(a.slug))
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+        .slice(0, 3)
+        .map((item) => ({ slug: item.slug, title: item.title, image: item.coverImageUrl || "", category: item.category }));
 
   return (
-    <PageLayout hideBlogCarousel>
+    <PageLayout>
       <PageBreadcrumb items={[
         { label: "Accueil", href: "/" },
         { label: "Blog", href: "/blog" },
@@ -182,28 +205,22 @@ export default function BlogArticle() {
       {/* Cover image hero */}
       <div className="relative h-[40vh] md:h-[50vh] overflow-hidden">
         {post.cover_image_url && (
-          <img src={post.cover_image_url} alt={post.title} className="h-full w-full object-cover" />
+          <img
+            src={post.cover_image_url}
+            alt={post.title}
+            className="h-full w-full object-cover"
+            loading="eager"
+            fetchPriority="high"
+          />
         )}
-        <div
-          className="absolute inset-0"
-          style={{ background: "linear-gradient(to top, rgba(15,10,46,0.80) 0%, rgba(15,10,46,0.30) 50%, transparent 100%)" }}
-        />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(15,10,46,0.80) 0%, rgba(15,10,46,0.30) 50%, transparent 100%)" }} />
         <div className="absolute bottom-0 left-0 right-0 container pb-10">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
-            <Link
-              to="/blog"
-              className="mb-4 inline-flex items-center gap-1.5 text-sm transition-colors"
-              style={{ color: "rgba(246,241,233,0.7)" }}
-            >
-              <ArrowLeft size={14} /> Retour au blog
-            </Link>
-            <h1
-              className="text-3xl font-extrabold md:text-4xl lg:text-5xl leading-tight max-w-3xl"
-              style={{ color: "#F6F1E9" }}
-            >
-              {post.title}
-            </h1>
-          </motion.div>
+          <Link to="/blog" className="mb-4 inline-flex items-center gap-1.5 text-sm transition-colors" style={{ color: "rgba(246,241,233,0.7)" }}>
+            <ArrowLeft size={14} /> Retour au blog
+          </Link>
+          <h1 className="text-3xl font-extrabold md:text-4xl lg:text-5xl leading-tight max-w-3xl" style={{ color: "#F6F1E9" }}>
+            {post.title}
+          </h1>
         </div>
       </div>
 
@@ -211,24 +228,14 @@ export default function BlogArticle() {
       <article className="container py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="mx-auto max-w-3xl">
           <ShareBar post={post} formattedDate={formattedDate} />
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+          <div
             className="cms-article-content"
             dangerouslySetInnerHTML={{ __html: processContent(post.content) }}
           />
           {post.tags && post.tags.length > 0 && (
-            <div
-              className="mt-12 flex flex-wrap gap-2 pt-6"
-              style={{ borderTop: "1px solid rgba(43,30,63,0.12)" }}
-            >
+            <div className="mt-12 flex flex-wrap gap-2 pt-6" style={{ borderTop: "1px solid rgba(43,30,63,0.12)" }}>
               {post.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium"
-                  style={{ backgroundColor: "#E9F2F4", color: "#2B1E3F" }}
-                >
+                <span key={tag} className="flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium" style={{ backgroundColor: "#E9F2F4", color: "#2B1E3F" }}>
                   <Tag size={12} /> {tag}
                 </span>
               ))}
