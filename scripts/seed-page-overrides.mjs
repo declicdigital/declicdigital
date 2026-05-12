@@ -1,13 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
-import * as dotenv from "dotenv";
-dotenv.config({ path: ".env.local" });
-dotenv.config({ path: ".env" });
 
-const SUPABASE_URL = process.env.VITE_SUPABASE_URL;
-const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY;
+const SUPABASE_URL = "https://iskxljribvfypkyappku.supabase.co";
+const SERVICE_KEY = "REMPLACE_PAR_TA_SERVICE_ROLE_KEY";
 
 if (!SUPABASE_URL || !SERVICE_KEY) {
-  console.error("❌ VITE_SUPABASE_URL ou SUPABASE_SERVICE_ROLE_KEY manquant");
+  console.error("❌ Remplace REMPLACE_PAR_TA_SERVICE_ROLE_KEY par ta vraie clé");
   process.exit(1);
 }
 
