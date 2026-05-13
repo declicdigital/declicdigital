@@ -26,7 +26,7 @@ const PageLayout = ({
   children,
   hideBlogCarousel = false,
   noAlternate = false,
-  blogCarouselBg,
+  blogCarouselBg = "#E9F2F4",
 }: PageLayoutProps) => {
   const location = useLocation();
   const flat = flattenChildren(children);
