@@ -29,7 +29,7 @@ const SkeletonCard = () => (
   </div>
 );
 
-const BlogCarousel = () => {
+const BlogCarousel = ({ backgroundColor = "#E9F2F4" }: { backgroundColor?: string }) => {
   const [latest, setLatest] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const fetchedRef = useRef(false);
@@ -71,7 +71,7 @@ const BlogCarousel = () => {
   const newestDate = latest[0]?.date;
 
   return (
-    <section className="py-16 border-t border-border" style={{ backgroundColor: "#E9F2F4" }}>
+    <section className="py-16 border-t border-border" style={{ backgroundColor }}>
       <div className="container">
         <div className="flex items-center justify-between mb-10">
           <div>
