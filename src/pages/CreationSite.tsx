@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import LocationSection from "@/components/LocationSection";
-import { Monitor, Smartphone, TrendingUp, Zap, Building2, User, Wrench, ShoppingCart, CheckCircle, Search, Loader2 } from "lucide-react";
+import { Monitor, Smartphone, TrendingUp, Zap, Building2, User, Wrench, ShoppingCart, CheckCircle, Search, Loader2, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -38,6 +38,33 @@ const BLEU  = "#E9F2F4";
 const INK   = "#2B1E3F";
 const LINK  = "#4361EE";
 
+const faqItems = [
+  {
+    q: "Combien coute la création d'un site web pour une TPE ou un artisan ?",
+    a: "Chez Déclic Digital, une landing page démarre à 200 euros de mise en service + 50 euros par mois. Un site vitrine complet est disponible à partir de 590 euros + 50 euros par mois. Ces forfaits incluent le design, le développement, l'hébergement, la maintenance et l'optimisation SEO de base. Pour une estimation précise selon votre projet, consultez notre page tarifs ou demandez un devis gratuit.",
+  },
+  {
+    q: "Quel est le délai de livraison d'un site web ?",
+    a: "Pour un site vitrine standard, comptez 2 à 3 semaines entre le premier échange et la mise en ligne. Ce délai peut varier selon la complexité du projet, le nombre de pages et la rapidité de vos retours. Nous travaillons en mode itératif : vous validez chaque étape avant que nous passions à la suivante.",
+  },
+  {
+    q: "Quelle est la différence entre un site vitrine et un site e-commerce ?",
+    a: "Un site vitrine présente votre activité, vos services et vos coordonnées. Son objectif est de générer des prises de contact : appels, emails, formulaires. Un site e-commerce permet la vente en ligne avec panier, paiement sécurisé et gestion des stocks. Pour la plupart des artisans et indépendants, un site vitrine bien référencé est largement suffisant pour développer leur clientèle.",
+  },
+  {
+    q: "Vous créez des sites pour quels métiers d'artisans ?",
+    a: "Nous créons des sites web pour tous types d'artisans et de professionnels indépendants : plombiers, électriciens, peintres en bâtiment, maçons, couvreurs, menuisiers, carreleurs, jardiniers-paysagistes, fleuristes, coiffeurs, ostéopathes, coaches sportifs et bien d'autres. Chaque site est adapté au métier, à la zone géographique et aux mots clés recherchés par vos clients potentiels.",
+  },
+  {
+    q: "Est-ce que vous vous occupez du référencement SEO du site ?",
+    a: "Oui, le SEO de base est intégré dans tous nos projets : structure des pages, balises title et meta description, optimisation des images, vitesse de chargement et compatibilité mobile. Pour un référencement plus poussé avec une stratégie de contenu et un suivi mensuel, nous proposons des accompagnements SEO dédiés.",
+  },
+  {
+    q: "Vous intervenez dans quelles villes ?",
+    a: "Nous créons des sites web pour des professionnels basés à Paris et dans les Hauts-de-Seine (92) : Asnières-sur-Seine, Boulogne-Billancourt, Neuilly-sur-Seine, Levallois-Perret, Clichy, Nanterre, Courbevoie, Issy-les-Moulineaux, Suresnes et toutes les communes du 92. Nous travaillons aussi à distance pour toute la France.",
+  },
+];
+
 const CreationSite = () => {
   const [form, setForm] = useState({
     full_name: "", company: "", email: "", phone: "", current_url: "", msg: "",
@@ -45,6 +72,7 @@ const CreationSite = () => {
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [error, setError] = useState("");
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -101,20 +129,79 @@ const CreationSite = () => {
     }
   };
 
+  const serviceSchema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: "Création de site web",
+    description: "Création de sites vitrines, e-commerce et landing pages pour TPE, artisans et indépendants à Paris et dans les Hauts-de-Seine (92).",
+    provider: {
+      "@type": "LocalBusiness",
+      name: "Déclic Digital",
+      url: "https://declicdigital.net",
+      telephone: "+33602228939",
+      email: "contact@declicdigital.net",
+      address: {
+        "@type": "PostalAddress",
+        streetAddress: "57 rue d'Alleray",
+        addressLocality: "Paris",
+        postalCode: "75015",
+        addressRegion: "Île-de-France",
+        addressCountry: "FR",
+      },
+      priceRange: "€€",
+    },
+    areaServed: [
+      { "@type": "City", name: "Paris" },
+      { "@type": "AdministrativeArea", name: "Hauts-de-Seine (92)" },
+      { "@type": "City", name: "Asnières-sur-Seine" },
+      { "@type": "City", name: "Boulogne-Billancourt" },
+      { "@type": "City", name: "Neuilly-sur-Seine" },
+      { "@type": "City", name: "Levallois-Perret" },
+      { "@type": "City", name: "Nanterre" },
+      { "@type": "City", name: "Clichy" },
+    ],
+    serviceType: ["Site vitrine", "Site e-commerce", "Landing page", "Refonte de site web"],
+    offers: {
+      "@type": "AggregateOffer",
+      lowPrice: "200",
+      highPrice: "5000",
+      priceCurrency: "EUR",
+      offerCount: "3",
+    },
+  };
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((f) => ({
+      "@type": "Question",
+      name: f.q,
+      acceptedAnswer: { "@type": "Answer", text: f.a },
+    })),
+  };
+
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Accueil", item: "https://declicdigital.net" },
+      { "@type": "ListItem", position: 2, name: "Création de site web", item: "https://declicdigital.net/creation-site-web" },
+    ],
+  };
+
   return (
     <PageLayout>
       <Helmet>
-        <title>Création de site internet sur-mesure pour TPE | Déclic Digital Paris</title>
-        <meta name="description" content="Site vitrine, e-commerce ou landing page pour TPE et artisans. Design responsive, optimisé SEO, livré en 2 semaines. Devis gratuit en 24h." />
+        <title>Création site web Paris et 92 : artisans, TPE et indépendants</title>
+        <meta name="description" content="Création de site web à Paris et dans le 92 pour artisans, TPE et indépendants. Site vitrine responsive, optimisé SEO, livré en 2 semaines. Devis gratuit 24h." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://declicdigital.net/creation-site-web" />
-        <script type="application/ld+json">{JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Service",
-          serviceType: "Création de site internet",
-          provider: { "@type": "LocalBusiness", name: "Déclic Digital", url: "https://declicdigital.net" },
-          areaServed: "Île-de-France",
-        })}</script>
+        <meta property="og:title" content="Création site web Paris et 92 : artisans, TPE et indépendants" />
+        <meta property="og:description" content="Création de site web à Paris et dans le 92 pour artisans, TPE et indépendants. Site vitrine responsive, optimisé SEO, livré en 2 semaines. Devis gratuit 24h." />
+        <meta property="og:type" content="website" />
+        <script type="application/ld+json">{JSON.stringify(serviceSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema)}</script>
       </Helmet>
 
       <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Création de site web" }]} />
@@ -123,7 +210,6 @@ const CreationSite = () => {
       <section className="py-16 md:py-24 overflow-hidden" style={{ backgroundColor: BEIGE }}>
         <div className="container">
           <div className="relative">
-            {/* Image hero — dimensions fixes pour CLS, eager + high priority pour LCP */}
             <div className="hidden lg:block absolute right-0 top-0 h-full w-1/2 rounded-2xl overflow-hidden">
               <img
                 src={imgRefonte}
@@ -137,18 +223,17 @@ const CreationSite = () => {
               />
               <div className="absolute inset-0" style={{ background: `linear-gradient(to right, ${BEIGE} 0%, rgba(246,241,233,0.5) 25%, transparent 60%)` }} />
             </div>
-            {/* Contenu hero — pas de motion.div, visible immédiatement */}
             <div className="relative z-10 max-w-2xl">
               <h1 className="mb-6" style={{ color: INK }}>
-                Création de site internet sur-mesure pour les artisans, TPE et indépendants à Paris
+                Création de site web à Paris et dans le 92 : artisans, TPE et indépendants
               </h1>
               <p className="mb-8 text-lg leading-relaxed" style={{ color: INK }}>
                 Nous concevons des sites modernes, rapides et optimisés{" "}
                 <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: LINK }}>SEO</Link>{" "}
-                pour les TPE et indépendants. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez{" "}
+                pour les TPE, artisans et indépendants à Paris et dans les Hauts-de-Seine. Un site bien conçu est votre meilleur outil pour générer des prospects. Découvrez{" "}
                 <Link to="/tarifs" className="font-semibold hover:underline" style={{ color: LINK }}>nos tarifs</Link>{" "}
                 ou demandez un{" "}
-                <Link to="/contact" className="font-semibold hover:underline" style={{ color: LINK }}>audit SEO gratuit</Link>.
+                <Link to="/contact" className="font-semibold hover:underline" style={{ color: LINK }}>devis gratuit</Link>.
               </p>
               <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
                 <Link to="/rendez-vous">Prendre rendez-vous</Link>
@@ -165,7 +250,7 @@ const CreationSite = () => {
           <p className="text-center max-w-2xl mx-auto mb-10" style={{ color: INK, opacity: 0.7 }}>
             Un site web professionnel ne se limite pas à une simple vitrine en ligne. C'est un outil stratégique qui renforce votre crédibilité, attire de nouveaux clients grâce au{" "}
             <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: LINK }}>référencement naturel</Link>{" "}
-            et vous différencie de vos concurrents.
+            et vous différencie de vos concurrents à Asnières-sur-Seine, Boulogne-Billancourt et dans tout le 92.
           </p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -191,7 +276,7 @@ const CreationSite = () => {
         <div className="container">
           <h2 className="text-center mb-4" style={{ color: INK }}>Un site vitrine ou e-commerce adapté à votre métier</h2>
           <p className="text-center max-w-2xl mx-auto mb-10" style={{ color: INK, opacity: 0.7 }}>
-            Nous avons développé un processus clair et structuré pour vous accompagner du premier échange à la mise en ligne de votre site.
+            Nous avons développé un processus clair et structuré pour vous accompagner du premier échange à la mise en ligne de votre site. Livraison en 2 à 3 semaines pour un site vitrine standard.
           </p>
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -258,7 +343,11 @@ const CreationSite = () => {
               <p className="leading-relaxed" style={{ color: INK, opacity: 0.7 }}>
                 Chaque page doit être pensée pour répondre à une intention de recherche précise. C'est le rôle du{" "}
                 <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: LINK }}>référencement naturel</Link>,
-                et c'est ce que nous intégrons dès la conception de chaque projet.
+                et c'est ce que nous intégrons dès la conception de chaque projet. Nos articles sur la{" "}
+                <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="font-semibold hover:underline" style={{ color: LINK }}>vitesse de site</Link>{" "}
+                et les{" "}
+                <Link to="/blog/core-web-vitals-google-experience-utilisateur" className="font-semibold hover:underline" style={{ color: LINK }}>Core Web Vitals</Link>{" "}
+                détaillent ces enjeux.
               </p>
               <p className="leading-relaxed" style={{ color: INK, opacity: 0.7 }}>
                 Nos sites incluent systématiquement : un design professionnel sur mesure, une{" "}
@@ -286,44 +375,132 @@ const CreationSite = () => {
       <section className="py-12 md:py-16" style={{ backgroundColor: BLEU }}>
         <div className="container">
           <div className="mx-auto max-w-3xl space-y-6">
-            <h2 className="text-center" style={{ color: INK }}>Création de site web pour artisan à Paris : pourquoi c'est indispensable</h2>
+            <h2 className="text-center" style={{ color: INK }}>Création de site web pour artisan à Paris et dans le 92 : pourquoi c'est indispensable</h2>
             <p className="leading-relaxed" style={{ color: INK, opacity: 0.7 }}>
-              En tant qu'artisan ou indépendant à Paris, votre visibilité en ligne détermine directement votre volume de clients. 97% des consommateurs recherchent un professionnel local sur internet avant de le contacter. Sans site web, vous êtes invisible pour cette audience. Avec un site bien conçu et optimisé pour le{" "}
+              En tant qu'artisan ou indépendant à Paris ou dans les Hauts-de-Seine, votre visibilité en ligne détermine directement votre volume de clients. 97% des consommateurs recherchent un professionnel local sur internet avant de le contacter. Sans site web, vous êtes invisible pour cette audience. Avec un site bien conçu et optimisé pour le{" "}
               <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: LINK }}>référencement local</Link>,
               vous captez des demandes de devis chaque semaine.
             </p>
+
             <h3 style={{ color: INK }}>Un site vitrine qui inspire confiance et génère des contacts</h3>
             <p className="leading-relaxed" style={{ color: INK, opacity: 0.7 }}>
-              Votre site web est votre vitrine 24h/24. Il doit présenter clairement vos services, afficher vos réalisations, et faciliter la prise de contact. Nous concevons chaque site avec un objectif commercial précis : transformer les visiteurs en prospects qualifiés.
+              Votre site web est votre vitrine 24h/24. Il doit présenter clairement vos services, afficher vos réalisations, et faciliter la prise de contact. Nous concevons chaque site avec un objectif commercial précis : transformer les visiteurs en prospects qualifiés. Pour en savoir plus, consultez notre article sur la{" "}
+              <Link to="/blog/presence-en-ligne-artisan-leviers-clients" className="font-semibold hover:underline" style={{ color: LINK }}>présence en ligne pour artisans</Link>.
             </p>
+
+            <h3 style={{ color: INK }}>Des sites adaptés à chaque métier</h3>
+            <p className="leading-relaxed" style={{ color: INK, opacity: 0.7 }}>
+              Nous créons des sites pour tous les corps de métier : <Link to="/creation-site-web/metier/plombier" className="font-semibold hover:underline" style={{ color: LINK }}>plombiers</Link>,{" "}
+              <Link to="/creation-site-web/metier/electricien" className="font-semibold hover:underline" style={{ color: LINK }}>électriciens</Link>,{" "}
+              <Link to="/creation-site-web/metier/peintre-en-batiment" className="font-semibold hover:underline" style={{ color: LINK }}>peintres en bâtiment</Link>,{" "}
+              <Link to="/creation-site-web/metier/maconnerie" className="font-semibold hover:underline" style={{ color: LINK }}>maçons</Link>,{" "}
+              <Link to="/creation-site-web/metier/couvreur" className="font-semibold hover:underline" style={{ color: LINK }}>couvreurs</Link>,{" "}
+              <Link to="/creation-site-web/metier/jardinier-paysagiste" className="font-semibold hover:underline" style={{ color: LINK }}>jardiniers-paysagistes</Link>,{" "}
+              <Link to="/creation-site-web/metier/fleuriste" className="font-semibold hover:underline" style={{ color: LINK }}>fleuristes</Link>,{" "}
+              <Link to="/creation-site-web/metier/coach-sportif" className="font-semibold hover:underline" style={{ color: LINK }}>coachs sportifs</Link>{" "}
+              et bien d'autres. Chaque site est pensé pour les mots clés de votre activité et de votre zone géographique. Consultez{" "}
+              <Link to="/nos-metiers" className="font-semibold hover:underline" style={{ color: LINK }}>tous nos métiers</Link>.
+            </p>
+
             <h3 style={{ color: INK }}>Technologies modernes pour des performances optimales</h3>
             <p className="leading-relaxed" style={{ color: INK, opacity: 0.7 }}>
-              Nous utilisons les technologies les plus adaptées selon votre projet : WordPress pour les sites éditoriaux, Shopify pour le e-commerce, ou des solutions sur-mesure pour les besoins spécifiques. Quel que soit l'outil, nous garantissons un site rapide (score PageSpeed supérieur à 90), sécurisé (HTTPS), et conforme aux standards d'accessibilité.
+              Nous utilisons les technologies les plus adaptées selon votre projet : WordPress pour les sites éditoriaux, Shopify pour le e-commerce, ou des solutions sur-mesure pour les besoins spécifiques. Quel que soit l'outil, nous garantissons un site rapide (score PageSpeed supérieur à 90), sécurisé (HTTPS), et conforme aux standards d'accessibilité. Pour choisir la bonne option, lisez notre article{" "}
+              <Link to="/blog/site-vitrine-ou-ecommerce-tpe-paris" className="font-semibold hover:underline" style={{ color: LINK }}>site vitrine ou e-commerce pour les TPE</Link>.
             </p>
-            <h3 style={{ color: INK }}>Combien coûte la création d'un site internet pour une TPE ?</h3>
+
+            <h3 style={{ color: INK }}>Combien coute la création d'un site internet pour une TPE ?</h3>
             <p className="leading-relaxed" style={{ color: INK, opacity: 0.7 }}>
               Chez Déclic Digital, nous proposons des{" "}
               <Link to="/tarifs" className="font-semibold hover:underline" style={{ color: LINK }}>tarifs adaptés aux budgets des TPE</Link> :
-              une landing page dès 200€ de mise en service + 50€/mois, un site vitrine complet dès 590€ + 50€/mois. Ces forfaits incluent le design, le développement, l'hébergement, la maintenance et l'optimisation SEO de base.
+              une landing page dès 200 euros de mise en service + 50 euros par mois, un site vitrine complet dès 590 euros + 50 euros par mois. Ces forfaits incluent le design, le développement, l'hébergement, la maintenance et l'optimisation SEO de base. Notre article sur le{" "}
+              <Link to="/blog/combien-coute-creation-site-web-tpe-2026" className="font-semibold hover:underline" style={{ color: LINK }}>coût de création d'un site web pour TPE</Link>{" "}
+              détaille toutes les options du marché.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ─── Villes — bloc 7 → BEIGE ─── */}
+      {/* ─── Métiers artisans encart — bloc 7 → BEIGE ─── */}
       <section className="py-12 md:py-16" style={{ backgroundColor: BEIGE }}>
+        <div className="container">
+          <div className="mx-auto max-w-3xl">
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8">
+              <h2 className="mb-4" style={{ color: INK }}>Votre métier mérite un site taillé sur mesure</h2>
+              <p className="leading-relaxed mb-6" style={{ color: INK, opacity: 0.7 }}>
+                Un <Link to="/creation-site-web/metier/plombier" className="font-semibold" style={{ color: LINK }}>site pour plombier</Link> ne ressemble pas à un{" "}
+                <Link to="/creation-site-web/metier/coach-sportif" className="font-semibold" style={{ color: LINK }}>site pour coach sportif</Link>.
+                Les mots clés, la structure, les pages de service, les photos et les appels à l'action sont différents selon votre activité. Nous créons des sites adaptés à chaque métier, optimisés pour les recherches locales de vos clients dans le 92 et à Paris. Découvrez aussi comment{" "}
+                <Link to="/blog/creer-site-web-independant-par-ou-commencer" className="font-semibold" style={{ color: LINK }}>créer un site web en tant qu'indépendant</Link>.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {[
+                  { slug: "plombier", label: "Plombier" },
+                  { slug: "electricien", label: "Électricien" },
+                  { slug: "peintre-en-batiment", label: "Peintre" },
+                  { slug: "maconnerie", label: "Maçon" },
+                  { slug: "couvreur", label: "Couvreur" },
+                  { slug: "jardinier-paysagiste", label: "Paysagiste" },
+                  { slug: "fleuriste", label: "Fleuriste" },
+                  { slug: "coach-sportif", label: "Coach sportif" },
+                  { slug: "osteopathe", label: "Ostéopathe" },
+                  { slug: "coiffeur", label: "Coiffeur" },
+                  { slug: "photographe", label: "Photographe" },
+                  { slug: "restaurateur", label: "Restaurateur" },
+                ].map((m) => (
+                  <Link
+                    key={m.slug}
+                    to={`/creation-site-web/metier/${m.slug}`}
+                    className="rounded-full border px-3 py-1.5 text-sm font-medium transition-colors hover:bg-primary/10"
+                    style={{ backgroundColor: BLEU, color: INK, borderColor: "rgba(43,30,63,0.2)" }}
+                  >
+                    {m.label}
+                  </Link>
+                ))}
+                <Link
+                  to="/nos-metiers"
+                  className="rounded-full px-3 py-1.5 text-sm font-semibold gradient-primary btn-glow"
+                  style={{ color: INK }}
+                >
+                  Tous les métiers →
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── Villes — bloc 8 → BLEU ─── */}
+      <section className="py-12 md:py-16" style={{ backgroundColor: BLEU }}>
         <div className="container">
           <h2 className="text-center mb-6" style={{ color: INK }}>Création de site internet à Paris et dans les Hauts-de-Seine</h2>
           <p className="text-center mb-8" style={{ color: INK, opacity: 0.7 }}>
             Nous intervenons à Paris et dans les Hauts-de-Seine pour la{" "}
             <Link to="/nos-villes" className="font-semibold hover:underline" style={{ color: LINK }}>création de sites web professionnels</Link>.
+            De{" "}
+            <Link to="/creation-site-web/asnieres-sur-seine" className="font-semibold hover:underline" style={{ color: LINK }}>Asnières-sur-Seine</Link>{" "}
+            à{" "}
+            <Link to="/creation-site-web/boulogne-billancourt" className="font-semibold hover:underline" style={{ color: LINK }}>Boulogne-Billancourt</Link>,
+            nous connaissons le tissu économique local du 92.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            {cities.slice(0, 12).map((c) => (
+            {[
+              { slug: "asnieres-sur-seine", label: "Site web Asnières-sur-Seine" },
+              { slug: "boulogne-billancourt", label: "Site web Boulogne-Billancourt" },
+              { slug: "neuilly-sur-seine", label: "Site web Neuilly-sur-Seine" },
+              { slug: "levallois-perret", label: "Site web Levallois-Perret" },
+              { slug: "clichy", label: "Site web Clichy" },
+              { slug: "nanterre", label: "Site web Nanterre" },
+              { slug: "issy-les-moulineaux", label: "Site web Issy-les-Moulineaux" },
+              { slug: "courbevoie", label: "Site web Courbevoie" },
+              { slug: "suresnes", label: "Site web Suresnes" },
+              { slug: "la-garenne-colombes", label: "Site web La Garenne-Colombes" },
+              { slug: "rueil-malmaison", label: "Site web Rueil-Malmaison" },
+              { slug: "montrouge", label: "Site web Montrouge" },
+            ].map((c) => (
               <Link key={c.slug} to={`/creation-site-web/${c.slug}`}
                 className="rounded-full border px-4 py-2 text-sm font-medium transition-colors"
-                style={{ backgroundColor: BLEU, color: INK, borderColor: "rgba(43,30,63,0.25)" }}>
-                Site web {c.nameShort}
+                style={{ backgroundColor: BEIGE, color: INK, borderColor: "rgba(43,30,63,0.25)" }}>
+                {c.label}
               </Link>
             ))}
             <Link to="/nos-villes" className="rounded-full px-4 py-2 text-sm font-semibold btn-glow gradient-primary" style={{ color: INK }}>
@@ -333,13 +510,39 @@ const CreationSite = () => {
         </div>
       </section>
 
-      {/* ─── GoogleReviews — bloc 8 → BLEU ─── */}
-      <GoogleReviewsSection compact maxReviews={3} backgroundColor={BLEU} />
+      {/* ─── GoogleReviews — bloc 9 → BEIGE ─── */}
+      <GoogleReviewsSection compact maxReviews={3} backgroundColor={BEIGE} />
 
-      {/* ─── LocationSection — bloc 9 → BEIGE ─── */}
+      {/* ─── FAQ — bloc 10 → BLEU ─── */}
+      <section className="py-12 md:py-16" style={{ backgroundColor: BLEU }}>
+        <div className="container">
+          <div className="mx-auto max-w-3xl space-y-8">
+            <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: INK, opacity: 0.5 }}>Questions fréquentes</p>
+            <h2 className="text-center" style={{ color: INK }}>Tout ce que vous voulez savoir sur la création de site web</h2>
+            <div className="space-y-0">
+              {faqItems.map((f, i) => (
+                <div key={i} className="border-b first:border-t" style={{ borderColor: "rgba(43,30,63,0.1)" }}>
+                  <button
+                    onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                    className="flex w-full items-center justify-between gap-4 py-5 text-left"
+                  >
+                    <h3 className="font-bold" style={{ color: INK }}>{f.q}</h3>
+                    <ChevronDown size={18} className={`shrink-0 transition-transform ${openFaq === i ? "rotate-180" : ""}`} style={{ color: INK, opacity: 0.5 }} />
+                  </button>
+                  {openFaq === i && (
+                    <p className="pb-5 leading-relaxed" style={{ color: INK, opacity: 0.7 }}>{f.a}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ─── LocationSection — bloc 11 → BEIGE ─── */}
       <LocationSection backgroundColor={BEIGE} />
 
-      {/* ─── Formulaire — bloc 10 → BLEU ─── */}
+      {/* ─── Formulaire — bloc 12 → BLEU ─── */}
       <section className="py-12 md:py-16" style={{ backgroundColor: BLEU }}>
         <div className="container">
           <div className="mx-auto max-w-2xl">
@@ -390,7 +593,7 @@ const CreationSite = () => {
           <p className="text-sm font-semibold mb-2" style={{ color: INK }}>Geoffrey, Expert Produit Google</p>
           <h2 className="mb-4" style={{ color: INK }}>Prêt à lancer votre site web ?</h2>
           <p className="mb-8 max-w-xl" style={{ color: INK, opacity: 0.7 }}>
-            Demandez un devis gratuit pour la création de votre site web professionnel. Réponse sous 24h.
+            Demandez un devis gratuit pour la création de votre site web professionnel à Paris ou dans le 92. Réponse sous 24h.
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
