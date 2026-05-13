@@ -33,6 +33,7 @@ const Geo = lazy(() => import("./pages/Geo"));
 const RendezVous = lazy(() => import("./pages/RendezVous"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const FormulaireClient = lazy(() => import("./pages/FormulaireClient"));
+const Declicweb = lazy(() => import("./pages/Declicweb"));
 
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -92,6 +93,7 @@ const App = () => (
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/geo" element={<GeoRedirect />} />
                 <Route path="/brief" element={<FormulaireClient />} />
+                <Route path="/declicweb" element={<Declicweb />} />
 
                 <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
