@@ -9,6 +9,7 @@ interface PageLayoutProps {
   children: ReactNode;
   hideBlogCarousel?: boolean;
   noAlternate?: boolean;
+  blogCarouselBg?: string;
 }
 
 function flattenChildren(children: ReactNode): ReactNode[] {
@@ -25,10 +26,10 @@ const PageLayout = ({
   children,
   hideBlogCarousel = false,
   noAlternate = false,
+  blogCarouselBg,
 }: PageLayoutProps) => {
   const location = useLocation();
   const flat = flattenChildren(children);
-
   return (
     <div className="flex min-h-screen flex-col">
       <Header />
@@ -36,7 +37,7 @@ const PageLayout = ({
         {flat}
       </main>
       <Suspense fallback={<div style={{ minHeight: 400 }} />}>
-        {!hideBlogCarousel && <BlogCarousel />}
+        {!hideBlogCarousel && <BlogCarousel backgroundColor={blogCarouselBg} />}
         <Footer />
       </Suspense>
       <AdminEditBar />
