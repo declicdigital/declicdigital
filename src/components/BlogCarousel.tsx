@@ -29,7 +29,11 @@ const SkeletonCard = () => (
   </div>
 );
 
-const BlogCarousel = ({ backgroundColor = "#E9F2F4" }: { backgroundColor?: string }) => {
+interface BlogCarouselProps {
+  backgroundColor: string;
+}
+
+const BlogCarousel = ({ backgroundColor }: BlogCarouselProps) => {
   const [latest, setLatest] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const fetchedRef = useRef(false);
