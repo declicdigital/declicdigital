@@ -28,10 +28,10 @@ const pillars = [
 ];
 
 const benefits = [
-  { num: "01", title: "Vous captez des clients qui cherchent exactement ce que vous offrez", desc: "Un internaute qui tape \"électricien Bordeaux tableau électrique\" cherche précisément ce que vous proposez. C'est un prospect chaud, prêt à agir. Le SEO vous met face à lui au bon moment." },
+  { num: "01", title: "Vous captez des clients qui cherchent exactement ce que vous offrez", desc: "Un internaute qui tape \"électricien Asnières-sur-Seine tableau électrique\" cherche précisément ce que vous proposez. C'est un prospect chaud, prêt à agir. Le SEO vous met face à lui au bon moment." },
   { num: "02", title: "C'est un investissement rentable sur le long terme", desc: "Contrairement à la publicité qui s'arrête dès que vous coupez le budget, une page bien référencée continue d'attirer des visiteurs pendant des mois, voire des années, sans coût supplémentaire." },
   { num: "03", title: "Le SEO local nivelle le terrain en votre faveur", desc: "Sur les recherches \"[métier] + [ville]\", un artisan local avec un bon SEO et de bons avis Google peut régulièrement devancer des grandes enseignes ou des franchises. Google valorise la proximité et la pertinence." },
-  { num: "04", title: "Votre expertise de niche est un avantage SEO énorme", desc: "Vous êtes le seul menuisier spécialisé dans l'escalier sur mesure à Lyon ? Cette spécialité, si elle est bien communiquée sur votre site, est un formidable levier SEO." },
+  { num: "04", title: "Votre expertise de niche est un avantage SEO énorme", desc: "Vous êtes le seul menuisier spécialisé dans l'escalier sur mesure à Boulogne-Billancourt ? Cette spécialité, si elle est bien communiquée sur votre site, est un formidable levier SEO." },
   { num: "05", title: "Ça crédibilise votre entreprise durablement", desc: "Être en première page de Google, c'est envoyer un signal fort à vos prospects : \"cette entreprise est sérieuse, établie, reconnue.\" Le SEO construit votre réputation numérique." },
   { num: "06", title: "Vous réduisez votre dépendance aux plateformes tierces", desc: "Leboncoin, Pages Jaunes, ManoMano, Malt - utiles, mais vous ne maîtrisez pas ces canaux. Avec votre propre SEO, vous construisez un actif numérique qui vous appartient." },
 ];
@@ -97,6 +97,8 @@ const faqItems = [
   { q: "Combien coûte une stratégie SEO pour une TPE ou un artisan ?", a: "Les actions de base sont gratuites en temps : optimiser votre fiche Google Business, rédiger de bonnes pages de services, collecter des avis. Si vous souhaitez déléguer à un professionnel, comptez entre 400 et 1 200 € par mois pour une stratégie SEO locale sérieuse." },
   { q: "Le SEO local est-il vraiment efficace pour les artisans ?", a: "Oui, c'est l'un des segments les plus rentables du SEO. Les recherches locales ont une intention d'achat très forte : quelqu'un qui tape \"plombier urgence Nantes\" cherche à agir maintenant. Selon Google, 76 % des recherches locales sur mobile aboutissent à une visite ou un appel dans les 24 heures." },
   { q: "Faut-il tenir un blog pour faire du SEO ?", a: "Un blog est un excellent outil SEO mais n'est pas obligatoire pour commencer. Vous pouvez déjà obtenir de bons résultats avec des pages de services bien optimisées, une fiche Google Business complète et une présence sur les annuaires. Si vous avez du temps pour rédiger, un article de fond par mois peut considérablement renforcer votre autorité thématique." },
+  { q: "Vous êtes une agence SEO dans le 92 ou à Paris ?", a: "Oui, nous sommes basés à Paris 15e et nous intervenons dans toute l'Île-de-France, avec une expertise particulière sur les Hauts-de-Seine (92). Nous accompagnons des artisans, commerçants et indépendants à Asnières-sur-Seine, Boulogne-Billancourt, Levallois-Perret, Neuilly-sur-Seine, Clichy, Nanterre, Suresnes et dans tout le 92. Notre connaissance du tissu économique local est un vrai avantage pour votre référencement naturel." },
+  { q: "Quelle est la différence entre SEO et GEO ?", a: "Le SEO optimise votre visibilité sur Google et les moteurs de recherche traditionnels. Le GEO (Generative Engine Optimization) optimise votre présence dans les réponses des intelligences artificielles comme ChatGPT, Perplexity ou Gemini. Les deux sont complémentaires : un site bien optimisé pour le SEO a de meilleures chances d'être cité par les IA. Nous proposons les deux approches pour maximiser votre visibilité en 2026." },
 ];
 
 const ReferencementSeo = () => {
@@ -115,8 +117,8 @@ const ReferencementSeo = () => {
   const articleSchema = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: "SEO pour TPE, artisans et indépendants : pourquoi c'est votre meilleur investissement",
-    description: "Guide complet sur le référencement naturel pour les petites entreprises, artisans et freelances.",
+    headline: "Agence SEO Paris et 92 : référencement naturel pour TPE, artisans et indépendants",
+    description: "Guide complet sur le référencement naturel pour les petites entreprises, artisans et freelances à Paris et dans les Hauts-de-Seine.",
     author: { "@type": "LocalBusiness", name: "Déclic Digital", url: "https://declicdigital.net" },
     datePublished: "2026-01-01",
     mainEntityOfPage: { "@type": "WebPage", "@id": "https://declicdigital.net/referencement-seo/" },
@@ -125,12 +127,12 @@ const ReferencementSeo = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>SEO pour artisans et TPE : attirer des clients sans pub</title>
-        <meta name="description" content="Référencement naturel pour artisans, indépendants et TPE. Apparaissez en 1ère page Google sans budget pub. Audit SEO gratuit en 48h." />
+        <title>Agence SEO Paris et 92 : référencement naturel TPE et artisans</title>
+        <meta name="description" content="Agence SEO à Paris et dans le 92. Référencement naturel pour artisans, TPE et indépendants. Consultant SEO local, audit gratuit en 48h. Résultats mesurables." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://declicdigital.net/referencement-seo/" />
-        <meta property="og:title" content="SEO pour artisans et TPE : attirer des clients sans pub" />
-        <meta property="og:description" content="Référencement naturel pour artisans, indépendants et TPE. Apparaissez en 1ère page Google sans budget pub. Audit SEO gratuit en 48h." />
+        <meta property="og:title" content="Agence SEO Paris et 92 : référencement naturel TPE et artisans" />
+        <meta property="og:description" content="Agence SEO à Paris et dans le 92. Référencement naturel pour artisans, TPE et indépendants. Consultant SEO local, audit gratuit en 48h. Résultats mesurables." />
         <meta property="og:type" content="article" />
         <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
@@ -147,9 +149,9 @@ const ReferencementSeo = () => {
         <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.93) 0%, hsl(263,36%,18%,0.78) 55%, hsl(183,70%,40%,0.55) 100%)" }} />
         <div className="container relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-2xl">
-            <span className="mb-4 inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold border border-white/20" style={{ color: "rgba(246,241,233,0.8)" }}>Référencement naturel · SEO</span>
+            <span className="mb-4 inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold border border-white/20" style={{ color: "rgba(246,241,233,0.8)" }}>Référencement naturel · SEO · Paris & 92</span>
             <h1 className="mb-6 leading-tight" style={{ color: "#F6F1E9" }}>
-              Le SEO : le meilleur allié de l'entrepreneur solo
+              Référencement SEO à Paris et dans le 92 : visibilité Google pour artisans et TPE
             </h1>
             <p className="mb-8 text-lg leading-relaxed italic" style={{ color: "rgba(246,241,233,0.75)" }}>
               Vous n'avez pas le budget d'une multinationale. Vous n'avez pas une équipe marketing. Mais vous avez quelque chose qu'aucune grande entreprise ne peut acheter : une vraie expertise, un vrai territoire, une vraie relation client. Le SEO est l'outil qui transforme ça en visibilité.
@@ -187,7 +189,7 @@ const ReferencementSeo = () => {
               </p>
             </div>
             <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-              Imaginez un plombier à Strasbourg. Quand quelqu'un tape « plombier urgence Strasbourg » sur Google à 22h, il y a deux façons d'apparaître dans les résultats : payer Google Ads pour chaque clic - ou être là naturellement, grâce au SEO. Le premier coûte à chaque fois. Le second, une fois en place, travaille pour vous 24h/24.
+              Imaginez un <Link to="/creation-site-web/metier/plombier" className="text-primary font-semibold">plombier</Link> à Asnières-sur-Seine. Quand quelqu'un tape "plombier urgence Asnières" sur Google à 22h, il y a deux façons d'apparaître dans les résultats : payer Google Ads pour chaque clic - ou être là naturellement, grâce au SEO. Le premier coûte à chaque fois. Le second, une fois en place, travaille pour vous 24h/24.
             </p>
             <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>Le SEO repose sur trois piliers fondamentaux que Google évalue en permanence :</p>
             <div className="space-y-0 rounded-2xl overflow-hidden shadow-card">
@@ -231,7 +233,7 @@ const ReferencementSeo = () => {
               ))}
             </div>
             <div className="rounded-2xl border border-green-300/30 bg-green-50/50 p-5">
-              <p className="font-bold text-green-700 mb-2">💡 Le chiffre qui convainc</p>
+              <p className="font-bold text-green-700 mb-2">Le chiffre qui convainc</p>
               <p style={{ color: "#2B1E3F", opacity: 0.7 }}>Les leads issus du SEO ont un taux de conversion moyen de <strong>14,6 %</strong> contre 1,7 % pour les leads issus de la publicité outbound classique (flyers, cold call, affichage). Source : Search Engine Journal. Autrement dit : les gens qui vous trouvent via Google sont bien plus enclins à devenir clients.</p>
             </div>
           </div>
@@ -267,7 +269,7 @@ const ReferencementSeo = () => {
               <div className="relative z-10 ml-auto max-w-xl space-y-5 py-10">
                 <h2 style={{ color: "#2B1E3F" }}>Suivez vos résultats en temps réel</h2>
                 <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-                  Le SEO n'est pas une boîte noire. Grâce aux outils d'analyse, vous suivez chaque progression : mots-clés qui montent, trafic organique, demandes de devis générées par votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link>.
+                  Le SEO n'est pas une boîte noire. Grâce aux outils d'analyse, vous suivez chaque progression : mots-clés qui montent, trafic organique, demandes de devis générées par votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link>. Notre <Link to="/blog/audit-seo-gratuit-ce-quon-analyse" className="text-primary font-semibold">audit SEO gratuit</Link> vous donne une première lecture claire de votre situation.
                 </p>
                 <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
                   C'est cette transparence qui fait du SEO un investissement mesurable, contrairement à bien d'autres canaux marketing.
@@ -308,7 +310,7 @@ const ReferencementSeo = () => {
               </table>
             </div>
             <div className="rounded-2xl border border-amber-300/30 bg-amber-50/50 p-5">
-              <p className="font-bold text-amber-700 mb-2">⚠️ Google Ads n'est pas votre ennemi</p>
+              <p className="font-bold text-amber-700 mb-2">Google Ads n'est pas votre ennemi</p>
               <p style={{ color: "#2B1E3F", opacity: 0.7 }}>Google Ads reste un outil utile, notamment pour lancer une activité ou capter de la demande en urgence. Mais il ne construit rien de durable. Le combo idéal pour une TPE : <strong>SEO pour le long terme + Google Ads en appoint ponctuel</strong> pendant la montée en puissance du référencement naturel. Découvrez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link>.</p>
             </div>
           </div>
@@ -340,6 +342,12 @@ const ReferencementSeo = () => {
                   </ul>
                 </div>
               ))}
+            </div>
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5 mt-4">
+              <p className="font-bold text-primary mb-2">Votre métier a sa propre page</p>
+              <p style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                Nous créons des sites web et des stratégies SEO adaptés à chaque activité : <Link to="/creation-site-web/metier/plombier" className="text-primary font-semibold">plombier</Link>, <Link to="/creation-site-web/metier/electricien" className="text-primary font-semibold">électricien</Link>, <Link to="/creation-site-web/metier/coach-sportif" className="text-primary font-semibold">coach sportif</Link> et bien d'autres. Consultez <Link to="/nos-metiers" className="text-primary font-semibold">tous nos métiers</Link>.
+              </p>
             </div>
           </div>
         </div>
@@ -407,8 +415,8 @@ const ReferencementSeo = () => {
               ))}
             </div>
             <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
-              <p className="font-bold text-primary mb-2">📌 Conseil pratique</p>
-              <p style={{ color: "#2B1E3F", opacity: 0.7 }}>Avant tout investissement SEO, vérifiez que votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link> se charge en moins de 3 secondes sur mobile et qu'il est responsive. Un site lent est pénalisé par Google et fait fuir vos visiteurs. Testez avec <strong>PageSpeed Insights</strong> de Google - c'est gratuit et prend 30 secondes. Consultez aussi notre article sur <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold">l'impact de la vitesse sur votre chiffre d'affaires</Link>.</p>
+              <p className="font-bold text-primary mb-2">Conseil pratique</p>
+              <p style={{ color: "#2B1E3F", opacity: 0.7 }}>Avant tout investissement SEO, vérifiez que votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link> se charge en moins de 3 secondes sur mobile et qu'il est responsive. Un site lent est pénalisé par Google et fait fuir vos visiteurs. Consultez aussi notre article sur <Link to="/blog/core-web-vitals-google-experience-utilisateur" className="text-primary font-semibold">les Core Web Vitals</Link> et <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold">l'impact de la vitesse sur votre chiffre d'affaires</Link>.</p>
             </div>
           </div>
         </div>
@@ -424,9 +432,13 @@ const ReferencementSeo = () => {
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to right, #F6F1E9 0%, rgba(246,241,233,0.3) 40%, transparent 70%)" }} />
               </div>
               <div className="relative z-10 max-w-xl space-y-5 py-10">
-                <h2 style={{ color: "#2B1E3F" }}>Le SEO local : votre arme secrète dans le 92</h2>
-                <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>Les recherches "près de moi" ont explosé de 500% en 5 ans. Quand un client cherche votre métier sur Google Maps, il veut trouver le professionnel le plus proche et le mieux noté.</p>
-                <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>Avec un site optimisé + une fiche Google Business complète + des avis clients, vous captez cette demande locale avant vos concurrents.</p>
+                <h2 style={{ color: "#2B1E3F" }}>Consultant SEO local dans le 92 et à Paris</h2>
+                <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                  Les recherches "près de moi" ont explosé de 500% en 5 ans. Nous accompagnons les professionnels de <Link to="/referencement-seo/asnieres-sur-seine" className="text-primary font-semibold">Asnières-sur-Seine</Link>, <Link to="/referencement-seo/boulogne-billancourt" className="text-primary font-semibold">Boulogne-Billancourt</Link>, <Link to="/referencement-seo/neuilly-sur-seine" className="text-primary font-semibold">Neuilly-sur-Seine</Link>, <Link to="/referencement-seo/levallois-perret" className="text-primary font-semibold">Levallois-Perret</Link>, <Link to="/referencement-seo/clichy" className="text-primary font-semibold">Clichy</Link> et <Link to="/referencement-seo/nanterre" className="text-primary font-semibold">Nanterre</Link> à dominer les résultats locaux de Google.
+                </p>
+                <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                  Avec un site optimisé + une fiche Google Business complète + des avis clients, vous captez cette demande locale avant vos concurrents. Consultez notre article sur le <Link to="/blog/seo-local-paris-artisan-google-maps" className="text-primary font-semibold">SEO local pour artisans à Paris</Link>.
+                </p>
               </div>
             </div>
           </div>
@@ -518,16 +530,19 @@ const ReferencementSeo = () => {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {[
-              { slug: "paris-1er", label: "SEO Paris 1er" },
+              { slug: "asnieres-sur-seine", label: "SEO Asnières-sur-Seine" },
               { slug: "boulogne-billancourt", label: "SEO Boulogne-Billancourt" },
               { slug: "neuilly-sur-seine", label: "SEO Neuilly-sur-Seine" },
               { slug: "levallois-perret", label: "SEO Levallois-Perret" },
+              { slug: "clichy", label: "SEO Clichy" },
+              { slug: "nanterre", label: "SEO Nanterre" },
               { slug: "issy-les-moulineaux", label: "SEO Issy-les-Moulineaux" },
               { slug: "courbevoie", label: "SEO Courbevoie" },
-              { slug: "nanterre", label: "SEO Nanterre" },
+              { slug: "suresnes", label: "SEO Suresnes" },
+              { slug: "la-garenne-colombes", label: "SEO La Garenne-Colombes" },
               { slug: "rueil-malmaison", label: "SEO Rueil-Malmaison" },
               { slug: "montrouge", label: "SEO Montrouge" },
-              { slug: "asnieres-sur-seine", label: "SEO Asnières-sur-Seine" },
+              { slug: "paris-1er", label: "SEO Paris 1er" },
             ].map((c) => (
               <Link
                 key={c.slug}
