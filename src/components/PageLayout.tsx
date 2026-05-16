@@ -1,7 +1,12 @@
+// src/components/PageLayout.tsx
+// Ajout : StickyBar en haut de page
+
 import { lazy, ReactNode, Suspense, Children } from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
 import AdminEditBar from "./AdminEditBar";
+import StickyBar from "./StickyBar";
+
 const Footer = lazy(() => import("./Footer"));
 const BlogCarousel = lazy(() => import("./BlogCarousel"));
 
@@ -28,10 +33,12 @@ const PageLayout = ({
   noAlternate = false,
   blogCarouselBg = "#E9F2F4",
 }: PageLayoutProps) => {
-  const location = useLocation();
   const flat = flattenChildren(children);
+
   return (
     <div className="flex min-h-screen flex-col">
+      {/* Sticky bar globale - au-dessus du header */}
+      <StickyBar />
       <Header />
       <main className={`flex-1 page-main${noAlternate ? " no-alternate" : ""}`}>
         {flat}
