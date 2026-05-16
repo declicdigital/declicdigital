@@ -48,6 +48,8 @@ const AdminTarifs = lazy(() => import("./pages/admin/AdminTarifs"));
 const AdminRealisations = lazy(() => import("./pages/admin/AdminRealisations"));
 const AdminPageOverrides = lazy(() => import("./pages/admin/AdminPageOverrides"));
 const AdminPageOverridesEditor = lazy(() => import("./pages/admin/AdminPageOverridesEditor"));
+const AdminCityContent = lazy(() => import("./pages/admin/AdminCityContent"));
+const AdminCityContentEditor = lazy(() => import("./pages/admin/AdminCityContentEditor"));
 
 const ConnexionClient = lazy(() => import("./pages/ConnexionClient"));
 const EspaceClient = lazy(() => import("./pages/EspaceClient"));
@@ -109,6 +111,8 @@ const App = () => (
                 <Route path="/admin/realisations" element={<AdminRealisations />} />
                 <Route path="/admin/pages" element={<AdminPageOverrides />} />
                 <Route path="/admin/pages/:pageKey" element={<AdminPageOverridesEditor />} />
+                <Route path="/admin/villes" element={<AdminCityContent />} />
+                <Route path="/admin/villes/:slug" element={<AdminCityContentEditor />} />
 
                 <Route path="/connexion" element={<ConnexionClient />} />
                 <Route path="/espace-client" element={<EspaceClient />} />
