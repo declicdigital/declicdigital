@@ -306,6 +306,8 @@ export default function AdminPageOverridesEditor() {
   const [activeTab, setActiveTab] = useState<"seo" | "contenu" | "html" | "stickybar">("seo");
   const [showAddBlock, setShowAddBlock] = useState(false);
   const [imageUploading, setImageUploading] = useState(false);
+  const [htmlContent, setHtmlContent] = useState("");
+  const [copied, setCopied] = useState(false);
 
   const [stickyBar, setStickyBar] = useState<StickyBarConfig>(STICKY_DEFAULT);
   const [stickyBarId, setStickyBarId] = useState<string | null>(null);
@@ -340,6 +342,43 @@ export default function AdminPageOverridesEditor() {
     }
     load();
   }, [isAdmin, pageKey, pageType]);
+
+
+  function generateFullHtml(f: FormState): string {
+    const parts: string[] = [];
+    if (f.seo_h1) parts.push(`<h1>${f.seo_h1}</h1>`);
+    if (f.hero_intro) parts.push(f.hero_intro);
+    f.content_blocks
+      .filter(b => b.visible !== false)
+      .forEach(b => {
+        switch (b.type) {
+          case "h2":    parts.push(`<h2>${b.content}</h2>`); break;
+          case "h3":    parts.push(`<h3>${b.content}</h3>`); break;
+          case "h4":    parts.push(`<h4>${b.content}</h4>`); break;
+          case "p":     parts.push(b.content); break;
+          case "html":  parts.push(b.content); break;
+          case "image": parts.push(`<img src="${b.content}" alt="${b.label ?? ""}" />`); break;
+          case "link":  parts.push(`<a href="${b.content}">${b.label ?? b.content}</a>`); break;
+        }
+      });
+    if (f.custom_html) parts.push(f.custom_html);
+    return parts.filter(Boolean).join("\n\n");
+  }
+
+  function switchToHtml() {
+    setHtmlContent(generateFullHtml(form));
+    setActiveTab("html");
+  }
+
+  function applyHtmlToForm(html: string) {
+    setForm(prev => ({ ...prev, custom_html: html, content_blocks: [], hero_intro: "" }));
+  }
+
+  function handleCopyHtml() {
+    navigator.clipboard.writeText(htmlContent);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }
 
   function updateField<K extends keyof FormState>(key: K, value: FormState[K]) {
     setForm(prev => ({ ...prev, [key]: value }));
@@ -383,6 +422,7 @@ export default function AdminPageOverridesEditor() {
   }
 
   async function handleSave(publish?: boolean) {
+    const isHtmlMode = activeTab === "html";
     setSaving(true);
     const payload = {
       page_key: pageKey,
@@ -392,10 +432,10 @@ export default function AdminPageOverridesEditor() {
       seo_title: form.seo_title || null,
       seo_description: form.seo_description || null,
       seo_h1: form.seo_h1 || null,
-      hero_intro: form.hero_intro || null,
+      hero_intro: isHtmlMode ? null : (form.hero_intro || null),
       hero_bg_image_url: form.hero_bg_image_url || null,
-      content_blocks: form.content_blocks,
-      custom_html: form.custom_html || null,
+      content_blocks: isHtmlMode ? [] : form.content_blocks,
+      custom_html: isHtmlMode ? (htmlContent || null) : (form.custom_html || null),
       // Compat legacy
       sections: [],
       creation_seo_text_1: null,
@@ -532,7 +572,7 @@ export default function AdminPageOverridesEditor() {
         <div className="flex gap-1 mb-6 p-1 rounded-xl overflow-x-auto"
           style={{ background: "hsl(263, 36%, 13%)", border: "1px solid rgba(255,255,255,0.07)" }}>
           {TABS.map(tab => (
-            <button key={tab.key} onClick={() => setActiveTab(tab.key)}
+            <button key={tab.key} onClick={() => tab.key === "html" ? switchToHtml() : setActiveTab(tab.key as any)}
               className="flex-1 py-2 rounded-lg text-xs font-semibold transition-all flex items-center justify-center gap-1 whitespace-nowrap px-2"
               style={activeTab === tab.key
                 ? { background: "linear-gradient(135deg, hsl(183,70%,63%), hsl(284,65%,66%))", color: "white" }
@@ -676,34 +716,67 @@ export default function AdminPageOverridesEditor() {
 
         {/* ── HTML brut ── */}
         {activeTab === "html" && (
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className="rounded-xl p-3 flex gap-2"
               style={{ background: "rgba(99,179,237,0.08)", border: "1px solid rgba(99,179,237,0.2)" }}>
               <Code size={14} className="shrink-0 mt-0.5" style={{ color: "rgb(99,179,237)" }} />
               <div>
-                <p className="text-xs font-medium text-white mb-1">HTML personnalise global</p>
+                <p className="text-xs font-medium text-white mb-0.5">HTML complet de la page</p>
                 <p className="text-xs" style={{ color: "rgba(255,255,255,0.50)" }}>
-                  Injecte apres le contenu principal. Utile pour des tableaux complexes, des widgets ou du code specifique.
+                  Tout le contenu de la page en un seul bloc. Modifie et sauvegarde pour remplacer integralement.
                 </p>
               </div>
             </div>
+            <div className="flex gap-2">
+              <button onClick={handleCopyHtml}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium"
+                style={{ background: "rgba(255,255,255,0.07)", color: copied ? "rgb(74,222,128)" : "rgba(255,255,255,0.60)" }}>
+                {copied ? <Check size={12} /> : <Code size={12} />}
+                {copied ? "Copie !" : "Copier tout"}
+              </button>
+              <button onClick={() => setHtmlContent(generateFullHtml(form))}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium"
+                style={{ background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.60)" }}>
+                Regenerer depuis les blocs
+              </button>
+              <button onClick={() => setHtmlContent("")}
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium"
+                style={{ background: "rgba(255,255,255,0.07)", color: "rgba(255,255,255,0.40)" }}>
+                Vider
+              </button>
+            </div>
             <textarea
-              value={form.custom_html}
-              onChange={e => updateField("custom_html", e.target.value)}
-              rows={20}
-              placeholder={"<section>\n  <h2>Titre supplementaire</h2>\n  <p>Contenu avec du <strong>gras</strong>.</p>\n  <ul>\n    <li>Element 1</li>\n    <li>Element 2</li>\n  </ul>\n</section>"}
-              className="w-full rounded-xl px-4 py-3 text-sm text-white focus:outline-none resize-y"
+              value={htmlContent}
+              onChange={e => setHtmlContent(e.target.value)}
+              className="w-full focus:outline-none"
               style={{
-                background: "rgba(0,0,0,0.3)",
+                background: "rgba(0,0,0,0.4)",
                 border: "1px solid rgba(99,179,237,0.25)",
+                borderRadius: "12px",
+                padding: "14px",
                 fontFamily: "monospace",
-                fontSize: "13px",
-                lineHeight: "1.6",
+                fontSize: "12px",
+                lineHeight: "1.7",
+                color: "rgba(255,255,255,0.85)",
+                minHeight: "500px",
+                height: "500px",
+                resize: "vertical",
+                outline: "none",
               }}
+              placeholder={"<h1>Titre</h1>\n\n<p>Paragraphe...</p>\n\n<h2>Section</h2>\n<p>Contenu...</p>"}
+              spellCheck={false}
             />
-            <p className="text-xs" style={{ color: "rgba(99,179,237,0.6)" }}>
-              Balises acceptees : p, h2, h3, h4, ul, ol, li, strong, em, a, br, span, div, section, table, tr, td, th
-            </p>
+            <div className="flex items-center justify-between">
+              <p className="text-xs" style={{ color: "rgba(99,179,237,0.5)" }}>
+                {htmlContent.length} caracteres
+              </p>
+              <button
+                onClick={() => applyHtmlToForm(htmlContent)}
+                className="text-xs px-3 py-1.5 rounded-lg font-medium"
+                style={{ background: "rgba(99,179,237,0.15)", color: "rgb(99,179,237)" }}>
+                Appliquer dans les blocs
+              </button>
+            </div>
           </div>
         )}
 
