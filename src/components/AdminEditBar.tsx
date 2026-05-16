@@ -192,7 +192,8 @@ export default function AdminEditBar() {
     if (data) {
       setOverride(data as PageOverride);
       setExistingId(data.id);
-      setHtmlContent(generateFullHtml(data as PageOverride));
+      // HTML sera genere depuis le DOM au moment du switch vers l'onglet HTML
+      setHtmlContent("");
     } else {
       setOverride({});
       setExistingId(null);
@@ -205,9 +206,21 @@ export default function AdminEditBar() {
     setOverride(prev => ({ ...prev, [key]: value }));
   }
 
-  // Quand on change l'onglet HTML, regenerer le HTML depuis l'etat actuel
+  // Capture le HTML rendu depuis le vrai DOM de la page
   function switchToHtml() {
-    setHtmlContent(generateFullHtml(override));
+    // On cible le contenu principal de la page, en excluant la barre admin
+    const main = document.querySelector("main");
+    if (main) {
+      // Nettoyer : retirer les elements admin qui seraient dans le main
+      const clone = main.cloneNode(true) as HTMLElement;
+      // Retirer les eventuels elements avec data-admin
+      clone.querySelectorAll("[data-admin], .admin-only").forEach(el => el.remove());
+      // Formatter le HTML proprement
+      setHtmlContent(clone.innerHTML.trim());
+    } else {
+      // Fallback sur les donnees en base
+      setHtmlContent(generateFullHtml(override));
+    }
     setActiveTab("html");
   }
 
