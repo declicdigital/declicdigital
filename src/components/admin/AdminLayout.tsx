@@ -1,18 +1,19 @@
 import { ReactNode, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { LayoutDashboard, Users, FileText, LogOut, Menu, X, BookOpen, Layout, DollarSign, ImagePlay, Globe } from "lucide-react";
+import { LayoutDashboard, Users, FileText, LogOut, Menu, X, BookOpen, Layout, DollarSign, ImagePlay, Globe, MapPin } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import logo from "@/assets/logo-declic-digital-new.webp";
 
 const navItems = [
-  { to: "/admin/dashboard", icon: LayoutDashboard, label: "Tableau de bord" },
-  { to: "/admin/clients", icon: Users, label: "Clients" },
-  { to: "/admin/soumissions", icon: FileText, label: "Soumissions" },
-  { to: "/admin/blog", icon: BookOpen, label: "Blog" },
-  { to: "/admin/realisations", icon: ImagePlay, label: "Réalisations" },
-  { to: "/admin/cms", icon: Layout, label: "CMS Pages" },
-  { to: "/admin/pages", icon: Globe, label: "Pages du site" },
-  { to: "/admin/tarifs", icon: DollarSign, label: "Tarifs" },
+  { to: "/admin/dashboard",   icon: LayoutDashboard, label: "Tableau de bord" },
+  { to: "/admin/clients",     icon: Users,           label: "Clients" },
+  { to: "/admin/soumissions", icon: FileText,        label: "Soumissions" },
+  { to: "/admin/blog",        icon: BookOpen,        label: "Blog" },
+  { to: "/admin/realisations",icon: ImagePlay,       label: "Réalisations" },
+  { to: "/admin/cms",         icon: Layout,          label: "CMS Pages" },
+  { to: "/admin/pages",       icon: Globe,           label: "Pages du site" },
+  { to: "/admin/villes",      icon: MapPin,          label: "Contenu villes" },
+  { to: "/admin/tarifs",      icon: DollarSign,      label: "Tarifs" },
 ];
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
@@ -45,15 +46,12 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
         <nav className="flex-1 p-4 space-y-1">
           {navItems.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
+            <Link key={item.to} to={item.to}
               className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all"
               style={isActive(item.to)
                 ? { background: "linear-gradient(135deg, hsl(183,70%,63%,0.15), hsl(284,65%,66%,0.15))", color: "white", borderLeft: "2px solid hsl(183,70%,63%)" }
                 : { color: "rgba(255,255,255,0.45)" }
-              }
-            >
+              }>
               <item.icon size={16} />
               {item.label}
             </Link>
@@ -89,16 +87,12 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
         <div className="lg:hidden fixed inset-0 z-40 pt-14" style={{ background: "hsl(263, 36%, 13%)" }}>
           <nav className="p-4 space-y-1">
             {navItems.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                onClick={() => setMenuOpen(false)}
+              <Link key={item.to} to={item.to} onClick={() => setMenuOpen(false)}
                 className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all"
                 style={isActive(item.to)
                   ? { background: "rgba(255,255,255,0.08)", color: "white" }
                   : { color: "rgba(255,255,255,0.45)" }
-                }
-              >
+                }>
                 <item.icon size={16} />
                 {item.label}
               </Link>
