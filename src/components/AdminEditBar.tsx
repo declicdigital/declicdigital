@@ -192,14 +192,23 @@ export default function AdminEditBar() {
     if (data) {
       setOverride(data as PageOverride);
       setExistingId(data.id);
-      // HTML sera genere depuis le DOM au moment du switch vers l'onglet HTML
-      setHtmlContent("");
     } else {
       setOverride({});
       setExistingId(null);
-      setHtmlContent("");
     }
     setLoading(false);
+
+    // Si on ouvre directement sur l'onglet HTML, capturer le DOM apres rendu
+    if (tab === "html") {
+      setTimeout(() => {
+        const main = document.querySelector("main");
+        if (main) {
+          const clone = main.cloneNode(true) as HTMLElement;
+          clone.querySelectorAll("[data-admin], .admin-only").forEach(el => el.remove());
+          setHtmlContent(clone.innerHTML.trim());
+        }
+      }, 100);
+    }
   }
 
   function updateField(key: keyof PageOverride, value: string) {
@@ -208,20 +217,18 @@ export default function AdminEditBar() {
 
   // Capture le HTML rendu depuis le vrai DOM de la page
   function switchToHtml() {
-    // On cible le contenu principal de la page, en excluant la barre admin
-    const main = document.querySelector("main");
-    if (main) {
-      // Nettoyer : retirer les elements admin qui seraient dans le main
-      const clone = main.cloneNode(true) as HTMLElement;
-      // Retirer les eventuels elements avec data-admin
-      clone.querySelectorAll("[data-admin], .admin-only").forEach(el => el.remove());
-      // Formatter le HTML proprement
-      setHtmlContent(clone.innerHTML.trim());
-    } else {
-      // Fallback sur les donnees en base
-      setHtmlContent(generateFullHtml(override));
-    }
     setActiveTab("html");
+    // Capturer apres le rendu du panneau
+    setTimeout(() => {
+      const main = document.querySelector("main");
+      if (main) {
+        const clone = main.cloneNode(true) as HTMLElement;
+        clone.querySelectorAll("[data-admin], .admin-only").forEach(el => el.remove());
+        setHtmlContent(clone.innerHTML.trim());
+      } else {
+        setHtmlContent(generateFullHtml(override));
+      }
+    }, 50);
   }
 
   async function handleSave(publish?: boolean) {
