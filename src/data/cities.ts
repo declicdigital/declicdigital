@@ -31,6 +31,7 @@ export const cities: CityData[] = [
   { slug: "paris-20eme", name: "Paris 20ème arrondissement", nameShort: "Paris 20ème", description: "dans le 20ème arrondissement de Paris (Belleville, Ménilmontant, Père-Lachaise)", postalCode: "75020", region: "paris" },
   // Hauts-de-Seine (92) - toutes les villes
   { slug: "antony", name: "Antony", nameShort: "Antony", description: "à Antony (92), ville résidentielle et familiale du sud des Hauts-de-Seine", postalCode: "92160", region: "hauts-de-seine" },
+  { slug: "asnieres-sur-seine", name: "Asnières-sur-Seine", nameShort: "Asnières-sur-Seine", description: "à Asnières-sur-Seine (92), aux portes de Paris", postalCode: "92600", region: "hauts-de-seine" },
   { slug: "bagneux", name: "Bagneux", nameShort: "Bagneux", description: "à Bagneux (92), ville en pleine transformation avec le métro ligne 4", postalCode: "92220", region: "hauts-de-seine" },
   { slug: "bois-colombes", name: "Bois-Colombes", nameShort: "Bois-Colombes", description: "à Bois-Colombes (92), petite ville résidentielle et familiale", postalCode: "92270", region: "hauts-de-seine" },
   { slug: "boulogne-billancourt", name: "Boulogne-Billancourt", nameShort: "Boulogne-Billancourt", description: "à Boulogne-Billancourt (92), première ville des Hauts-de-Seine", postalCode: "92100", region: "hauts-de-seine" },
