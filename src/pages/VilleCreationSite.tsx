@@ -38,7 +38,6 @@ const VilleCreationSite = () => {
 
   const seo = getSeoMeta("creation", city.slug, city.nameShort);
 
-  // Hook page_overrides (SEO meta + hero)
   const { content } = usePageContent(`creation/${city.slug}`, {
     seoTitle: seo.title,
     seoDescription: seo.description,
@@ -51,7 +50,6 @@ const VilleCreationSite = () => {
     localFact: "",
   });
 
-  // Hook city_content (contenu riche editable)
   const { content: cityData } = useCityContent(city.slug);
 
   const nearCities = cities
@@ -59,14 +57,13 @@ const VilleCreationSite = () => {
     .slice(0, 6);
   const faqs = creationFaqsByRegion[city.region] || creationFaqsByRegion.paris;
 
-  // Priorite : page_overrides > city_content > statique
   const heroIntro = content.heroIntro || cityData.creationIntro;
   const creationWhyText = content.creationWhyText || cityData.creationWhyText;
-  const creationSeoText = content.creationSeoText.length
-    ? content.creationSeoText
-    : cityData.creationSeoText;
+  const creationSeoText = content.creationSeoText.length ? content.creationSeoText : cityData.creationSeoText;
   const localFact = content.localFact || cityData.localFact;
-  const seoLocalText = content.seoLocalText || cityData.seoLocalText;
+
+  // ── custom_html : si defini, remplace tout le contenu de la page ──
+  const customHtml = (content.override as any)?.custom_html;
 
   return (
     <PageLayout>
@@ -92,24 +89,277 @@ const VilleCreationSite = () => {
         { label: city.nameShort },
       ]} />
 
-      {/* Section 1 - Hero */}
-      <section style={{ backgroundColor: "#F6F1E9" }} className="py-16 md:py-24">
-        <div className="container">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
-              <span className="mb-4 inline-block rounded-full px-4 py-1.5 text-xs font-semibold"
-                style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}>
-                Agence web {city.description}
-              </span>
-              <h1 className="mb-6" style={{ color: "#2B1E3F" }}>
-                {content.seoH1}
-              </h1>
-              <div
-                className="mb-8 text-lg leading-relaxed"
-                style={{ color: "#2B1E3F", opacity: 0.75 }}
-                dangerouslySetInnerHTML={{ __html: heroIntro || `Vous etes une TPE ou un independant ${city.description} ? Declic Digital cree votre site internet professionnel, responsive et optimise pour Google.` }}
-              />
-              <div className="flex flex-col gap-3 sm:flex-row">
+      {/* ── MODE HTML BRUT : si custom_html est defini dans Supabase ── */}
+      {customHtml ? (
+        <div
+          className="page-custom-html"
+          dangerouslySetInnerHTML={{ __html: customHtml }}
+        />
+      ) : (
+        <>
+          {/* Section 1 - Hero */}
+          <section style={{ backgroundColor: "#F6F1E9" }} className="py-16 md:py-24">
+            <div className="container">
+              <div className="grid items-center gap-10 lg:grid-cols-2">
+                <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
+                  <span className="mb-4 inline-block rounded-full px-4 py-1.5 text-xs font-semibold"
+                    style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}>
+                    Agence web {city.description}
+                  </span>
+                  <h1 className="mb-6" style={{ color: "#2B1E3F" }}>{content.seoH1}</h1>
+                  <div className="mb-8 text-lg leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.75 }}
+                    dangerouslySetInnerHTML={{ __html: heroIntro || `Vous etes une TPE ou un independant ${city.description} ? Declic Digital cree votre site internet professionnel, responsive et optimise pour Google.` }} />
+                  <div className="flex flex-col gap-3 sm:flex-row">
+                    <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
+                      <Link to="/rendez-vous">Prendre rendez-vous</Link>
+                    </Button>
+                    <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-bold shadow-glow">
+                      <Link to="/contact">Audit SEO gratuit</Link>
+                    </Button>
+                  </div>
+                </motion.div>
+                <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
+                  <div className="rounded-2xl p-8 text-center max-w-sm" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
+                    <img src={geoffreyPhoto} alt={`Geoffrey, fondateur Declic Digital - creation site web ${city.nameShort}`}
+                      className="mx-auto mb-4 h-32 w-32 rounded-full object-cover" loading="lazy" decoding="async" width={128} height={128} />
+                    <p className="font-bold text-lg" style={{ color: "#2B1E3F" }}>Geoffrey</p>
+                    <p className="text-sm" style={{ color: "#2B1E3F", opacity: 0.6 }}>Expert Produit Google</p>
+                    <p className="text-sm mt-2" style={{ color: "#2B1E3F", opacity: 0.6 }}>
+                      Fondateur de Declic Digital, j'accompagne les entreprises {city.description} dans leur transformation digitale.
+                    </p>
+                  </div>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+
+          {/* Section 2 - Avantages */}
+          <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
+            <div className="container">
+              <h2 className="text-center mb-4" style={{ color: "#2B1E3F" }}>
+                {`Pourquoi les professionnels de ${city.nameShort} ont besoin d'un site web`}
+              </h2>
+              <div className="text-center max-w-2xl mx-auto mb-10" style={{ color: "#2B1E3F", opacity: 0.7 }}
+                dangerouslySetInnerHTML={{ __html: creationWhyText || `Un site internet professionnel est indispensable pour les entreprises ${city.description}.` }} />
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                {[
+                  { icon: Monitor, title: "Design professionnel", desc: `Un site qui reflete le serieux de votre entreprise ${city.description}.` },
+                  { icon: Smartphone, title: "100% responsive", desc: "Votre site s'affiche parfaitement sur mobile, tablette et ordinateur." },
+                  { icon: TrendingUp, title: "Optimise SEO", desc: `Referencement local pour apparaitre en premiere page Google sur "${city.nameShort}".` },
+                  { icon: Zap, title: "Rapide et performant", desc: "Temps de chargement optimise (LCP < 2,5s) pour une meilleure experience." },
+                ].map((item, i) => (
+                  <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                    className="rounded-2xl p-6 text-center" style={{ backgroundColor: "#F6F1E9", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
+                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary" style={{ color: "#2B1E3F" }}>
+                      <item.icon size={26} />
+                    </div>
+                    <h3 className="mb-2 font-bold" style={{ color: "#2B1E3F" }}>{item.title}</h3>
+                    <p className="text-sm" style={{ color: "#2B1E3F", opacity: 0.7 }}>{item.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Section 3 - Ce que nous livrons */}
+          <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
+            <div className="container">
+              <h2 className="text-center mb-4" style={{ color: "#2B1E3F" }}>Ce que comprend votre site web a {city.nameShort}</h2>
+              <p className="text-center max-w-2xl mx-auto mb-10" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                Chaque site est concu sur-mesure, optimise pour le referencement local et livre en 2 a 3 semaines.
+              </p>
+              <div className="grid gap-6 md:grid-cols-3">
+                {[
+                  { title: "Site vitrine", desc: `Presentez votre activite ${city.description} avec un site elegant et optimise.`, features: ["Design sur mesure", "Formulaire de contact", "Fiche Google Maps integree", "Optimisation SEO local", "Bouton d'appel direct", "Galerie photos / portfolio"] },
+                  { title: "Site e-commerce", desc: `Vendez vos produits en ligne depuis ${city.nameShort}. Boutique complete avec paiement securise.`, features: ["Catalogue produits illimite", "Paiement securise (CB, PayPal)", "Gestion des commandes", "Suivi de livraison", "Optimisation conversion", "Statistiques de vente"] },
+                  { title: "Site sur mesure", desc: `Un site web unique pour votre entreprise ${city.description}.`, features: ["Fonctionnalites sur mesure", "Espace client / reservation", "Integrations API tierces", "Evolutif et scalable", "Formation a l'utilisation", "Support technique dedie"] },
+                ].map((item, i) => (
+                  <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                    className="rounded-2xl p-8" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
+                    <h3 className="mb-3 text-xl font-bold" style={{ color: "#2B1E3F" }}>{item.title}</h3>
+                    <p className="mb-4" style={{ color: "#2B1E3F", opacity: 0.7 }}>{item.desc}</p>
+                    <ul className="space-y-2">
+                      {item.features.map((f, j) => (
+                        <li key={j} className="flex items-center gap-2 text-sm">
+                          <CheckCircle size={16} className="shrink-0" style={{ color: "#4361EE" }} />
+                          <span style={{ color: "#2B1E3F", opacity: 0.7 }}>{f}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Section 4 - SEO local + Map */}
+          {(creationSeoText.length > 0 || localFact) && (
+            <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
+              <div className="container">
+                <div className="mx-auto max-w-3xl space-y-6">
+                  <h2 className="text-center" style={{ color: "#2B1E3F" }}>
+                    Referencement local {city.nameShort} : apparaissez dans Google Maps
+                  </h2>
+                  {creationSeoText.map((text, i) => (
+                    <div key={i} className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}
+                      dangerouslySetInnerHTML={{ __html: text }} />
+                  ))}
+                  <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                    Un site web seul ne suffit pas : il doit etre accompagne d'une fiche Google Business Profile optimisee. Nous creons et optimisons votre fiche avec photos professionnelles, categorie adaptee, zone de service et collecte d'avis clients.
+                  </p>
+                  <div className="pt-4">
+                    <MapEmbed title="Declic Digital, votre agence web"
+                      subtitle={`Bases a Paris 15e, nous accompagnons les professionnels de ${city.nameShort} dans leur visibilite en ligne.`} />
+                  </div>
+                  <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                    Decouvrez nos <Link to="/tarifs" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>tarifs adaptes aux TPE</Link>, nos <Link to="/realisations" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>realisations</Link> ou demandez un <Link to="/contact" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>audit SEO gratuit</Link>.
+                  </p>
+                  {localFact && (
+                    <div className="rounded-2xl p-6" style={{ backgroundColor: "#F6F1E9", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
+                      <p className="text-sm font-semibold mb-1" style={{ color: "#4361EE" }}>Le saviez-vous ?</p>
+                      <div className="text-sm" style={{ color: "#2B1E3F", opacity: 0.7 }} dangerouslySetInnerHTML={{ __html: localFact }} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Section 5 - Guide ville */}
+          {(cityData.guideCreationTitle || cityData.guideCreationSections.length > 0) && (
+            <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
+              <div className="container">
+                <div className="mx-auto max-w-3xl space-y-6">
+                  {cityData.guideCreationTitle && (
+                    <h2 className="text-center" style={{ color: "#2B1E3F" }}>{cityData.guideCreationTitle}</h2>
+                  )}
+                  {cityData.guideCreationSections.map((section, i) => (
+                    <div key={i}>
+                      {section.heading && <h3 style={{ color: "#2B1E3F" }}>{section.heading}</h3>}
+                      <div className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}
+                        dangerouslySetInnerHTML={{ __html: section.text }} />
+                    </div>
+                  ))}
+                  <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                    Pret a creer votre site web a {city.nameShort} ? <Link to="/rendez-vous" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>Prenez rendez-vous</Link>, consultez <Link to="/tarifs" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>nos tarifs</Link> ou decouvrez <Link to="/realisations" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>nos realisations</Link>.
+                  </p>
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* Section 6 - Process */}
+          <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
+            <div className="container">
+              <h2 className="text-center mb-10" style={{ color: "#2B1E3F" }}>Comment se deroule votre projet ?</h2>
+              <div className="grid gap-6 md:grid-cols-4">
+                {[
+                  { icon: Search, step: "1", title: "Echange et analyse", desc: "Nous echangeons sur vos besoins, votre activite et vos objectifs pour definir le cahier des charges ideal." },
+                  { icon: Monitor, step: "2", title: "Maquette et design", desc: "Nous creons une maquette visuelle que vous validez avant le developpement. Aucune surprise." },
+                  { icon: Shield, step: "3", title: "Developpement", desc: "Votre site est developpe avec les meilleures technologies, optimise pour le SEO et la performance." },
+                  { icon: Clock, step: "4", title: "Mise en ligne", desc: "Votre site est mis en ligne et indexe sur Google. Formation et suivi technique inclus." },
+                ].map((item, i) => (
+                  <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">
+                    <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full gradient-primary font-bold text-xl" style={{ color: "#2B1E3F" }}>
+                      {item.step}
+                    </div>
+                    <h3 className="mb-2 font-bold" style={{ color: "#2B1E3F" }}>{item.title}</h3>
+                    <p className="text-sm" style={{ color: "#2B1E3F", opacity: 0.65 }}>{item.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* Section 7 - FAQ */}
+          <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
+            <div className="container">
+              <h2 className="text-center mb-10" style={{ color: "#2B1E3F" }}>
+                Questions frequentes sur la creation de site a {city.nameShort}
+              </h2>
+              <div className="mx-auto max-w-3xl space-y-4">
+                {faqs.map((faq, i) => (
+                  <details key={i} className="group rounded-2xl p-6" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
+                    <summary className="flex cursor-pointer items-center gap-3 font-bold list-none" style={{ color: "#2B1E3F" }}>
+                      <HelpCircle size={18} className="shrink-0" style={{ color: "#4361EE" }} />
+                      {faq.q}
+                    </summary>
+                    <p className="mt-3 leading-relaxed pl-8" style={{ color: "#2B1E3F", opacity: 0.7 }}>{faq.a}</p>
+                  </details>
+                ))}
+              </div>
+              <p className="text-center mt-6">
+                <Link to="/faq" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>Voir toutes les questions frequentes</Link>
+              </p>
+            </div>
+          </section>
+
+          {/* Section 8 - Liens services */}
+          <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
+            <div className="container">
+              <div className="mx-auto max-w-3xl text-center">
+                <h2 className="mb-4" style={{ color: "#2B1E3F" }}>Decouvrez aussi nos autres services</h2>
+                <div className="flex flex-wrap justify-center gap-3">
+                  {[
+                    { to: "/referencement-seo", label: "Referencement SEO et GEO" },
+                    { to: `/referencement-seo/${city.slug}`, label: `SEO a ${city.nameShort}` },
+                    { to: "/contact", label: "Audit SEO gratuit" },
+                    { to: "/tarifs", label: "Nos tarifs" },
+                    { to: "/nos-metiers", label: "Nos metiers" },
+                    { to: "/nos-villes", label: "Toutes nos villes" },
+                  ].map((l) => (
+                    <Link key={l.to} to={l.to} className="rounded-full px-4 py-2 text-sm font-medium"
+                      style={{ border: "1px solid rgba(43,30,63,0.2)", backgroundColor: "#F6F1E9", color: "#2B1E3F" }}>
+                      {l.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </section>
+
+          {/* Section 9 - Villes proches */}
+          {nearCities.length > 0 && (
+            <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
+              <div className="container">
+                <h2 className="text-center mb-6" style={{ color: "#2B1E3F" }}>
+                  Creation de site web pres de {city.nameShort}
+                </h2>
+                <p className="text-center mb-8" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                  Nous intervenons egalement dans les villes voisines pour la creation de sites internet professionnels.
+                </p>
+                <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {nearCities.map((c) => (
+                    <div key={c.slug} className="rounded-2xl p-4" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
+                      <h3 className="font-bold mb-2" style={{ color: "#2B1E3F" }}>{c.nameShort}</h3>
+                      <div className="flex flex-wrap gap-2">
+                        <Link to={`/creation-site-web/${c.slug}`} className="rounded-full px-3 py-1.5 text-xs font-semibold"
+                          style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}>
+                          Creation de site
+                        </Link>
+                        <Link to={`/referencement-seo/${c.slug}`} className="rounded-full px-3 py-1.5 text-xs font-semibold"
+                          style={{ backgroundColor: "rgba(156,79,255,0.12)", color: "#9C4FFF" }}>
+                          SEO
+                        </Link>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {/* CTA texture */}
+          <section data-alternate="skip" className="relative overflow-hidden py-16">
+            <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+            <div className="container relative z-10 text-center">
+              <h2 className="mb-4" style={{ color: "#2B1E3F" }}>
+                Vous etes base(e) a {city.nameShort} ? Parlons de votre projet.
+              </h2>
+              <p className="mb-8" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                Contactez-nous pour un devis gratuit et personnalise. Premier mois de mise en service + 50 EUR/mois.
+              </p>
+              <div className="flex flex-col sm:flex-row justify-center gap-4">
                 <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
                   <Link to="/rendez-vous">Prendre rendez-vous</Link>
                 </Button>
@@ -117,267 +367,10 @@ const VilleCreationSite = () => {
                   <Link to="/contact">Audit SEO gratuit</Link>
                 </Button>
               </div>
-            </motion.div>
-            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.2 }} className="flex justify-center">
-              <div className="rounded-2xl p-8 text-center max-w-sm"
-                style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
-                <img src={geoffreyPhoto} alt={`Geoffrey, fondateur Declic Digital - creation site web ${city.nameShort}`}
-                  className="mx-auto mb-4 h-32 w-32 rounded-full object-cover" loading="lazy" decoding="async" width={128} height={128} />
-                <p className="font-bold text-lg" style={{ color: "#2B1E3F" }}>Geoffrey</p>
-                <p className="text-sm" style={{ color: "#2B1E3F", opacity: 0.6 }}>Expert Produit Google</p>
-                <p className="text-sm mt-2" style={{ color: "#2B1E3F", opacity: 0.6 }}>
-                  Fondateur de Declic Digital, j'accompagne les entreprises {city.description} dans leur transformation digitale.
-                </p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 2 - Avantages */}
-      <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
-        <div className="container">
-          <h2 className="text-center mb-4" style={{ color: "#2B1E3F" }}>
-            {`Pourquoi les professionnels de ${city.nameShort} ont besoin d'un site web`}
-          </h2>
-          <div
-            className="text-center max-w-2xl mx-auto mb-10"
-            style={{ color: "#2B1E3F", opacity: 0.7 }}
-            dangerouslySetInnerHTML={{ __html: creationWhyText || `Un site internet professionnel est indispensable pour les entreprises ${city.description}.` }}
-          />
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { icon: Monitor, title: "Design professionnel", desc: `Un site qui reflete le serieux de votre entreprise ${city.description}. Premiere impression decisive en moins de 3 secondes.` },
-              { icon: Smartphone, title: "100% responsive", desc: "Votre site s'affiche parfaitement sur mobile, tablette et ordinateur. Plus de 70% du trafic web est mobile." },
-              { icon: TrendingUp, title: "Optimise SEO", desc: `Referencement local pour apparaitre en premiere page Google sur "${city.nameShort}" et vos mots cles metier.` },
-              { icon: Zap, title: "Rapide et performant", desc: "Temps de chargement optimise (LCP < 2,5s) pour une meilleure experience et un meilleur positionnement Google." },
-            ].map((item, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="rounded-2xl p-6 text-center" style={{ backgroundColor: "#F6F1E9", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-xl gradient-primary" style={{ color: "#2B1E3F" }}>
-                  <item.icon size={26} />
-                </div>
-                <h3 className="mb-2 font-bold" style={{ color: "#2B1E3F" }}>{item.title}</h3>
-                <p className="text-sm" style={{ color: "#2B1E3F", opacity: 0.7 }}>{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Section 3 - Ce que nous livrons */}
-      <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
-        <div className="container">
-          <h2 className="text-center mb-4" style={{ color: "#2B1E3F" }}>
-            Ce que comprend votre site web a {city.nameShort}
-          </h2>
-          <p className="text-center max-w-2xl mx-auto mb-10" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-            Chaque site est concu sur-mesure, optimise pour le referencement local et livre en 2 a 3 semaines.
-          </p>
-          <div className="grid gap-6 md:grid-cols-3">
-            {[
-              { title: "Site vitrine", desc: `Presentez votre activite ${city.description} avec un site elegant et optimise. Ideal pour les artisans, professions liberales et commerces locaux.`, features: ["Design sur mesure", "Formulaire de contact", "Fiche Google Maps integree", "Optimisation SEO local", "Bouton d'appel direct", "Galerie photos / portfolio"] },
-              { title: "Site e-commerce", desc: `Vendez vos produits en ligne depuis ${city.nameShort}. Boutique en ligne complete avec paiement securise et gestion des stocks.`, features: ["Catalogue produits illimite", "Paiement securise (CB, PayPal)", "Gestion des commandes", "Suivi de livraison", "Optimisation conversion", "Statistiques de vente"] },
-              { title: "Site sur mesure", desc: `Un site web unique pour votre entreprise ${city.description}. Fonctionnalites avancees selon vos besoins specifiques.`, features: ["Fonctionnalites sur mesure", "Espace client / reservation", "Integrations API tierces", "Evolutif et scalable", "Formation a l'utilisation", "Support technique dedie"] },
-            ].map((item, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="rounded-2xl p-8" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
-                <h3 className="mb-3 text-xl font-bold" style={{ color: "#2B1E3F" }}>{item.title}</h3>
-                <p className="mb-4" style={{ color: "#2B1E3F", opacity: 0.7 }}>{item.desc}</p>
-                <ul className="space-y-2">
-                  {item.features.map((f, j) => (
-                    <li key={j} className="flex items-center gap-2 text-sm">
-                      <CheckCircle size={16} className="shrink-0" style={{ color: "#4361EE" }} />
-                      <span style={{ color: "#2B1E3F", opacity: 0.7 }}>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Section 4 - SEO local + Map */}
-      {(creationSeoText.length > 0 || localFact) && (
-        <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
-          <div className="container">
-            <div className="mx-auto max-w-3xl space-y-6">
-              <h2 className="text-center" style={{ color: "#2B1E3F" }}>
-                Referencement local {city.nameShort} : apparaissez dans Google Maps
-              </h2>
-              {creationSeoText.map((text, i) => (
-                <div key={i} className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}
-                  dangerouslySetInnerHTML={{ __html: text }} />
-              ))}
-              <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-                Un site web seul ne suffit pas : il doit etre accompagne d'une fiche Google Business Profile optimisee pour apparaitre dans le pack local Google Maps. Nous creons et optimisons votre fiche avec photos professionnelles, categorie adaptee, zone de service et collecte d'avis clients.
-              </p>
-              <div className="pt-4">
-                <MapEmbed title="Declic Digital, votre agence web"
-                  subtitle={`Bases a Paris 15e, nous accompagnons les professionnels de ${city.nameShort} dans leur visibilite en ligne.`} />
-              </div>
-              <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-                Decouvrez nos <Link to="/tarifs" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>tarifs adaptes aux TPE</Link>, nos <Link to="/realisations" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>realisations</Link> ou demandez un <Link to="/contact" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>audit SEO gratuit</Link>.
-              </p>
-              {localFact && (
-                <div className="rounded-2xl p-6" style={{ backgroundColor: "#F6F1E9", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
-                  <p className="text-sm font-semibold mb-1" style={{ color: "#4361EE" }}>Le saviez-vous ?</p>
-                  <div className="text-sm" style={{ color: "#2B1E3F", opacity: 0.7 }}
-                    dangerouslySetInnerHTML={{ __html: localFact }} />
-                </div>
-              )}
             </div>
-          </div>
-        </section>
+          </section>
+        </>
       )}
-
-      {/* Section 5 - Guide ville (depuis city_content Supabase) */}
-      {(cityData.guideCreationTitle || cityData.guideCreationSections.length > 0) && (
-        <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
-          <div className="container">
-            <div className="mx-auto max-w-3xl space-y-6">
-              {cityData.guideCreationTitle && (
-                <h2 className="text-center" style={{ color: "#2B1E3F" }}>{cityData.guideCreationTitle}</h2>
-              )}
-              {cityData.guideCreationSections.map((section, i) => (
-                <div key={i}>
-                  {section.heading && (
-                    <h3 style={{ color: "#2B1E3F" }}>{section.heading}</h3>
-                  )}
-                  <div className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}
-                    dangerouslySetInnerHTML={{ __html: section.text }} />
-                </div>
-              ))}
-              <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-                Pret a creer votre site web a {city.nameShort} ? <Link to="/rendez-vous" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>Prenez rendez-vous</Link>, consultez <Link to="/tarifs" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>nos tarifs</Link> ou decouvrez <Link to="/realisations" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>nos realisations</Link>.
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* Section 6 - Process */}
-      <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
-        <div className="container">
-          <h2 className="text-center mb-10" style={{ color: "#2B1E3F" }}>Comment se deroule votre projet ?</h2>
-          <div className="grid gap-6 md:grid-cols-4">
-            {[
-              { icon: Search, step: "1", title: "Echange et analyse", desc: "Nous echangeons sur vos besoins, votre activite et vos objectifs pour definir le cahier des charges ideal." },
-              { icon: Monitor, step: "2", title: "Maquette et design", desc: "Nous creons une maquette visuelle que vous validez avant le developpement. Aucune surprise." },
-              { icon: Shield, step: "3", title: "Developpement", desc: "Votre site est developpe avec les meilleures technologies, optimise pour le SEO et la performance." },
-              { icon: Clock, step: "4", title: "Mise en ligne", desc: "Votre site est mis en ligne et indexe sur Google. Formation et suivi technique inclus." },
-            ].map((item, i) => (
-              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="text-center">
-                <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full gradient-primary font-bold text-xl" style={{ color: "#2B1E3F" }}>
-                  {item.step}
-                </div>
-                <h3 className="mb-2 font-bold" style={{ color: "#2B1E3F" }}>{item.title}</h3>
-                <p className="text-sm" style={{ color: "#2B1E3F", opacity: 0.65 }}>{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Section 7 - FAQ */}
-      <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
-        <div className="container">
-          <h2 className="text-center mb-10" style={{ color: "#2B1E3F" }}>
-            Questions frequentes sur la creation de site a {city.nameShort}
-          </h2>
-          <div className="mx-auto max-w-3xl space-y-4">
-            {faqs.map((faq, i) => (
-              <details key={i} className="group rounded-2xl p-6" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
-                <summary className="flex cursor-pointer items-center gap-3 font-bold list-none" style={{ color: "#2B1E3F" }}>
-                  <HelpCircle size={18} className="shrink-0" style={{ color: "#4361EE" }} />
-                  {faq.q}
-                </summary>
-                <p className="mt-3 leading-relaxed pl-8" style={{ color: "#2B1E3F", opacity: 0.7 }}>{faq.a}</p>
-              </details>
-            ))}
-          </div>
-          <p className="text-center mt-6">
-            <Link to="/faq" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>Voir toutes les questions frequentes</Link>
-          </p>
-        </div>
-      </section>
-
-      {/* Section 8 - Liens services */}
-      <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
-        <div className="container">
-          <div className="mx-auto max-w-3xl text-center">
-            <h2 className="mb-4" style={{ color: "#2B1E3F" }}>Decouvrez aussi nos autres services</h2>
-            <div className="flex flex-wrap justify-center gap-3">
-              {[
-                { to: "/referencement-seo", label: "Referencement SEO et GEO" },
-                { to: `/referencement-seo/${city.slug}`, label: `SEO a ${city.nameShort}` },
-                { to: "/contact", label: "Audit SEO gratuit" },
-                { to: "/tarifs", label: "Nos tarifs" },
-                { to: "/nos-metiers", label: "Nos metiers" },
-                { to: "/nos-villes", label: "Toutes nos villes" },
-              ].map((l) => (
-                <Link key={l.to} to={l.to} className="rounded-full px-4 py-2 text-sm font-medium transition-colors"
-                  style={{ border: "1px solid rgba(43,30,63,0.2)", backgroundColor: "#F6F1E9", color: "#2B1E3F" }}>
-                  {l.label}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Section 9 - Villes proches */}
-      {nearCities.length > 0 && (
-        <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
-          <div className="container">
-            <h2 className="text-center mb-6" style={{ color: "#2B1E3F" }}>
-              Creation de site web pres de {city.nameShort}
-            </h2>
-            <p className="text-center mb-8" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-              Nous intervenons egalement dans les villes voisines pour la creation de sites internet professionnels.
-            </p>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {nearCities.map((c) => (
-                <div key={c.slug} className="rounded-2xl p-4" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
-                  <h3 className="font-bold mb-2" style={{ color: "#2B1E3F" }}>{c.nameShort}</h3>
-                  <div className="flex flex-wrap gap-2">
-                    <Link to={`/creation-site-web/${c.slug}`} className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
-                      style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}>
-                      Creation de site
-                    </Link>
-                    <Link to={`/referencement-seo/${c.slug}`} className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
-                      style={{ backgroundColor: "rgba(156,79,255,0.12)", color: "#9C4FFF" }}>
-                      SEO
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* CTA texture */}
-      <section data-alternate="skip" className="relative overflow-hidden py-16">
-        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
-        <div className="container relative z-10 text-center">
-          <h2 className="mb-4" style={{ color: "#2B1E3F" }}>
-            Vous etes base(e) a {city.nameShort} ? Parlons de votre projet.
-          </h2>
-          <p className="mb-8" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-            Contactez-nous pour un devis gratuit et personnalise. Premier mois de mise en service + 50 EUR/mois.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
-              <Link to="/rendez-vous">Prendre rendez-vous</Link>
-            </Button>
-            <Button asChild variant="custom" size="lg" className="gradient-primary btn-glow rounded-full px-8 font-bold shadow-glow">
-              <Link to="/contact">Audit SEO gratuit</Link>
-            </Button>
-          </div>
-        </div>
-      </section>
     </PageLayout>
   );
 };
