@@ -684,10 +684,10 @@ export const cityGuideContent: Record<string, CityGuide> = {
       {
         heading: "Votre partenaire SEO local à Asnières-sur-Seine",
         text: "Votre entreprise est implantée à Asnières-sur-Seine et vous cherchez à gagner de la visibilité sur Google ? Déclic Digital est votre agence SEO locale, spécialisée dans le référencement naturel, le GEO et les stratégies de netlinking adaptées aux entreprises des Hauts-de-Seine.",
-      },
-    ],
+     },
   },
 },
+};
 
 // Fonction utilitaire pour obtenir le guide d'une ville
 export function getCityGuide(slug: string): CityGuide | undefined {
