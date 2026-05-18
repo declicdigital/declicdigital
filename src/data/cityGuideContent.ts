@@ -664,7 +664,7 @@ export const cityGuideContent: Record<string, CityGuide> = {
     },
   },
 
-  "asnieres-sur-seine": {
+"asnieres-sur-seine": {
   creation: {
     title: "Créer un site web à Asnières-sur-Seine : une ville connectée aux portes de Paris",
     sections: [
@@ -678,7 +678,7 @@ export const cityGuideContent: Record<string, CityGuide> = {
       },
       {
         heading: "Un site web ancré dans la réalité asnièroise",
-        text: "Nous créons des sites web adaptés à l'identité d'Asnières : professionnels et modernes pour refléter le dynamisme de la ville, avec un contenu ancré dans les réalités locales — noms de quartiers, axes de transport, commerces de référence. Chaque projet intègre un référencement local ciblé sur les requêtes de vos clients asnièrois.",
+        text: "Nous créons des sites web adaptés à l'identité d'Asnières : professionnels et modernes pour refléter le dynamisme de la ville, avec un contenu ancré dans les réalités locales - noms de quartiers, axes de transport, commerces de référence. Chaque projet intègre un référencement local ciblé sur les requêtes de vos clients asnièrois.",
       },
       {
         heading: "Proximité de Paris, marché élargi vers Clichy, Levallois et Colombes",
@@ -691,11 +691,11 @@ export const cityGuideContent: Record<string, CityGuide> = {
     sections: [
       {
         heading: "Votre agence SEO locale à Asnières-sur-Seine",
-        text: "Votre entreprise est implantée à Asnières-sur-Seine et vous souhaitez développer votre visibilité sur Google ? Déclic Digital, basée dans le 92, est votre agence SEO locale spécialisée dans le référencement naturel, le GEO et le netlinking pour les TPE et indépendants des Hauts-de-Seine. Avec 90 000 habitants connectés et une forte culture de consommation locale, Asnières est un territoire où le SEO offre un excellent retour sur investissement.",
+        text: "Votre entreprise est implantée à Asnières-sur-Seine et vous souhaitez développer votre visibilité sur Google ? Déclic Digital, basée dans le 92, est votre agence SEO locale spécialisée dans le référencement naturel, le GEO et le netlinking pour les TPE et indépendants des Hauts-de-Seine.",
       },
       {
         heading: "Les requêtes locales asnièroises : un volume quotidien significatif",
-        text: "Les 90 000 habitants d'Asnières-sur-Seine utilisent Google comme premier réflexe pour trouver leurs prestataires locaux. Les requêtes 'plombier Asnières-sur-Seine', 'médecin Asnières 92600', 'restaurant bords de Seine Asnières', 'agence immobilière Asnières', 'avocat Asnières' sont effectuées chaque jour par des centaines d'Asnièrois. Se positionner sur ces requêtes, c'est capter un trafic qualifié prêt à passer à l'action.",
+        text: "Les 90 000 habitants d'Asnières-sur-Seine utilisent Google comme premier réflexe pour trouver leurs prestataires locaux. Les requêtes 'plombier Asnières-sur-Seine', 'médecin Asnières 92600', 'restaurant bords de Seine Asnières' sont effectuées chaque jour par des centaines d'Asnièrois.",
       },
       {
         heading: "Une stratégie SEO par quartier : centre-ville, Bac-Bécon, Grésillons",
@@ -706,7 +706,7 @@ export const cityGuideContent: Record<string, CityGuide> = {
         text: "La ville est également attractive pour les habitants de Bois-Colombes, Colombes, Clichy et Gennevilliers qui cherchent des services dans leur zone de proximité. Notre stratégie intègre ces requêtes élargies pour maximiser votre visibilité sur l'ensemble du bassin de clientèle autour d'Asnières-sur-Seine.",
       },
     ],
- },
+  },
 },
 
 };
