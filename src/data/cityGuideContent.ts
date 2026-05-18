@@ -665,27 +665,49 @@ export const cityGuideContent: Record<string, CityGuide> = {
   },
 
   "asnieres-sur-seine": {
-    creation: {
-      title: "Créer un site web à Asnières-sur-Seine : une ville connectée aux portes de Paris",
-      sections: [
-        {
-          heading: "Une ville en plein essor digital",
-          text: "Asnières-sur-Seine, avec ses 90 000 habitants et sa proximité immédiate avec Paris, offre un bassin de clientèle considérable pour les entreprises locales. Un site web professionnel et bien référencé est indispensable pour capter cette audience connectée et exigeante.",
-        },
-      ],
-    },
-    seo: {
-      title: "Référencement SEO à Asnières-sur-Seine : agence locale Hauts-de-Seine",
-      sections: [
-        {
-          heading: "Votre partenaire SEO local à Asnières-sur-Seine",
-          text: "Votre entreprise est implantée à Asnières-sur-Seine et vous cherchez à gagner de la visibilité sur Google ? Déclic Digital est votre agence SEO locale, spécialisée dans le référencement naturel, le GEO et les stratégies de netlinking adaptées aux entreprises des Hauts-de-Seine.",
-        },
-      ],
-    },
+  creation: {
+    title: "Créer un site web à Asnières-sur-Seine : une ville connectée aux portes de Paris",
+    sections: [
+      {
+        heading: "90 000 habitants aux portes de Paris : un marché local considérable",
+        text: "Asnières-sur-Seine est une ville dynamique de 90 000 habitants, directement connectée à Paris par le métro ligne 13 et le RER C. Ville résidentielle en plein essor avec ses bords de Seine pittoresques, ses quartiers en transformation et son tissu économique diversifié, Asnières offre un marché local considérable pour les entreprises bien positionnées en ligne.",
+      },
+      {
+        heading: "Une clientèle locale qui cherche ses prestataires sur Google",
+        text: "Les habitants d'Asnières ont des habitudes de consommation de proximité très marquées : ils cherchent leurs prestataires locaux sur Google plutôt que de se déplacer à Paris. Du centre-ville autour de la mairie aux Grésillons en passant par le quartier Bac-Bécon et les bords de Seine, chaque quartier a ses propres besoins en services et commerces.",
+      },
+      {
+        heading: "Un site web ancré dans la réalité asnièroise",
+        text: "Nous créons des sites web adaptés à l'identité d'Asnières : professionnels et modernes pour refléter le dynamisme de la ville, avec un contenu ancré dans les réalités locales — noms de quartiers, axes de transport, commerces de référence. Chaque projet intègre un référencement local ciblé sur les requêtes de vos clients asnièrois.",
+      },
+      {
+        heading: "Proximité de Paris, marché élargi vers Clichy, Levallois et Colombes",
+        text: "Asnières-sur-Seine est limitrophe de Clichy, Colombes, Gennevilliers et Levallois-Perret. Cette position géographique permet de cibler une zone de chalandise élargie. Les habitants des communes voisines cherchent régulièrement des services à Asnières, ce qu'un site bien référencé peut capter.",
+      },
+    ],
   },
-
-};
+  seo: {
+    title: "Référencement SEO à Asnières-sur-Seine : agence locale Hauts-de-Seine",
+    sections: [
+      {
+        heading: "Votre agence SEO locale à Asnières-sur-Seine",
+        text: "Votre entreprise est implantée à Asnières-sur-Seine et vous souhaitez développer votre visibilité sur Google ? Déclic Digital, basée dans le 92, est votre agence SEO locale spécialisée dans le référencement naturel, le GEO et le netlinking pour les TPE et indépendants des Hauts-de-Seine. Avec 90 000 habitants connectés et une forte culture de consommation locale, Asnières est un territoire où le SEO offre un excellent retour sur investissement.",
+      },
+      {
+        heading: "Les requêtes locales asnièroises : un volume quotidien significatif",
+        text: "Les 90 000 habitants d'Asnières-sur-Seine utilisent Google comme premier réflexe pour trouver leurs prestataires locaux. Les requêtes 'plombier Asnières-sur-Seine', 'médecin Asnières 92600', 'restaurant bords de Seine Asnières', 'agence immobilière Asnières', 'avocat Asnières' sont effectuées chaque jour par des centaines d'Asnièrois. Se positionner sur ces requêtes, c'est capter un trafic qualifié prêt à passer à l'action.",
+      },
+      {
+        heading: "Une stratégie SEO par quartier : centre-ville, Bac-Bécon, Grésillons",
+        text: "Notre stratégie SEO pour Asnières-sur-Seine cible les zones structurantes de la ville : le centre-ville autour de la mairie et de la rue de Belfort pour les commerces de proximité, les bords de Seine et le quartier de la gare pour la restauration et les loisirs, le quartier Bac-Bécon pour les services résidentiels, et les Grésillons pour les activités économiques.",
+      },
+      {
+        heading: "Zone de chalandise élargie : Clichy, Levallois, Colombes, Gennevilliers",
+        text: "La ville est également attractive pour les habitants de Bois-Colombes, Colombes, Clichy et Gennevilliers qui cherchent des services dans leur zone de proximité. Notre stratégie intègre ces requêtes élargies pour maximiser votre visibilité sur l'ensemble du bassin de clientèle autour d'Asnières-sur-Seine.",
+      },
+    ],
+  },
+},
 
 // Fonction utilitaire pour obtenir le guide d'une ville
 export function getCityGuide(slug: string): CityGuide | undefined {
