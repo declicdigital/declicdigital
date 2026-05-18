@@ -706,8 +706,10 @@ export const cityGuideContent: Record<string, CityGuide> = {
         text: "La ville est également attractive pour les habitants de Bois-Colombes, Colombes, Clichy et Gennevilliers qui cherchent des services dans leur zone de proximité. Notre stratégie intègre ces requêtes élargies pour maximiser votre visibilité sur l'ensemble du bassin de clientèle autour d'Asnières-sur-Seine.",
       },
     ],
-  },
+ },
 },
+
+};
 
 // Fonction utilitaire pour obtenir le guide d'une ville
 export function getCityGuide(slug: string): CityGuide | undefined {
