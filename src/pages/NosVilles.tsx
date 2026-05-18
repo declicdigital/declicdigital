@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
-import { MapPin } from "lucide-react";
+import { MapPin, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import { cities } from "@/data/cities";
@@ -21,7 +21,7 @@ const NosVilles = () => (
       <link rel="canonical" href="https://declicdigital.net/nos-villes" />
     </Helmet>
 
-    {/* Section 1 — Hero sombre fond image, texte centré — skip alternance */}
+    {/* Section 1 — Hero */}
     <section className="relative overflow-hidden py-16 md:py-24 min-h-[500px] flex items-center">
       <img
         src={heroVilles}
@@ -55,7 +55,7 @@ const NosVilles = () => (
       </div>
     </section>
 
-    {/* Section 2 — Paris #F6F1E9 */}
+    {/* Section 2 — Paris */}
     <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
       <div className="container">
         <h2 className="text-3xl font-extrabold md:text-4xl mb-4 text-center" style={{ color: "#2B1E3F" }}>
@@ -100,7 +100,7 @@ const NosVilles = () => (
       </div>
     </section>
 
-    {/* Section 3 — Hauts-de-Seine #E9F2F4 */}
+    {/* Section 3 — Hauts-de-Seine */}
     <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
       <div className="container">
         <h2 className="text-3xl font-extrabold md:text-4xl mb-4 text-center" style={{ color: "#2B1E3F" }}>
@@ -110,6 +110,34 @@ const NosVilles = () => (
         <p className="text-center max-w-2xl mx-auto mb-10" style={{ color: "#2B1E3F", opacity: 0.7 }}>
           Nous accompagnons les entreprises des Hauts-de-Seine pour développer leur visibilité en ligne avec des sites web performants et un référencement SEO et GEO ciblé.
         </p>
+
+        {/* Carte spéciale Asnières */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="rounded-2xl p-6 mb-6"
+          style={{ backgroundColor: "#F6F1E9", border: "2px solid rgba(67,97,238,0.3)", boxShadow: "0 4px 24px rgba(67,97,238,0.12)" }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <Star size={16} style={{ color: "#4361EE" }} />
+            <span className="text-xs font-semibold" style={{ color: "#4361EE" }}>Page dédiée disponible</span>
+          </div>
+          <h3 className="font-bold text-lg mb-2" style={{ color: "#2B1E3F" }}>Asnières-sur-Seine</h3>
+          <p className="text-sm mb-4" style={{ color: "#2B1E3F", opacity: 0.6 }}>
+            à Asnières-sur-Seine (92), aux portes de Paris - 90 000 habitants, ligne 13
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              to="/agence-web-asnieres-sur-seine"
+              className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
+              style={{ backgroundColor: "rgba(67,97,238,0.15)", color: "#4361EE", border: "1px solid rgba(67,97,238,0.3)" }}
+            >
+              Agence web et SEO Asnières
+            </Link>
+          </div>
+        </motion.div>
+
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {hdsCities.map((city, i) => (
             <motion.div
@@ -145,7 +173,7 @@ const NosVilles = () => (
       </div>
     </section>
 
-    {/* Section 4 — Contenu SEO #F6F1E9 */}
+    {/* Section 4 — Contenu SEO */}
     <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
       <div className="container">
         <div className="mx-auto max-w-3xl space-y-6">
@@ -172,7 +200,7 @@ const NosVilles = () => (
       </div>
     </section>
 
-    {/* Section 5 — Liens services #E9F2F4 */}
+    {/* Section 5 — Liens services */}
     <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
@@ -192,7 +220,7 @@ const NosVilles = () => (
       </div>
     </section>
 
-    {/* CTA texture — skip alternance */}
+    {/* CTA texture */}
     <section data-alternate="skip" className="relative overflow-hidden py-16">
       <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
       <div className="container relative z-10 text-center">
