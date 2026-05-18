@@ -128,11 +128,6 @@ const creationMeta: Record<string, SeoMeta> = {
     description: "Agence web Nanterre (92000). Site professionnel pour TPE et artisans. Préfecture du 92, à deux pas de La Défense. SEO local inclus. Devis gratuit.",
     h1: "Création de site web Nanterre - Préfecture du 92, porte de La Défense",
   },
-  "asnieres-sur-seine": {
-    title: "Création site web Asnières-sur-Seine | Déclic Digital",
-    description: "Agence web Asnières-sur-Seine (92600). Site pro pour TPE et indépendants. Ligne 13 - 10 min de Paris. SEO local et GEO inclus. Devis gratuit.",
-    h1: "Création de site web Asnières-sur-Seine - Hauts-de-Seine (92)",
-  },
   "issy-les-moulineaux": {
     title: "Création site web Issy-les-Moulineaux | Déclic Digital",
     description: "Agence web Issy-les-Moulineaux (92130). Site pro pour TPE et artisans. Ville la plus connectée de France. SEO local inclus. Devis gratuit.",
@@ -414,11 +409,6 @@ const seoPageMeta: Record<string, SeoMeta> = {
     title: "SEO local Nanterre - Préfecture du 92 | Déclic Digital",
     description: "Référencement Google Nanterre (92000). Préfecture du 92 aux portes de La Défense. Déclic Digital booste votre visibilité locale. Audit SEO gratuit.",
     h1: "Référencement SEO local Nanterre - Préfecture du 92, porte de La Défense",
-  },
-  "asnieres-sur-seine": {
-    title: "Agence SEO Asnières-sur-Seine | Déclic Digital 92",
-    description: "Référencement naturel, GEO et netlinking à Asnières-sur-Seine (92600). Résultats mesurables en 3 à 6 mois. Audit SEO offert, sans engagement.",
-    h1: "Référencement SEO et GEO Asnières-sur-Seine - Hauts-de-Seine (92)",
   },
   "issy-les-moulineaux": {
     title: "SEO local Issy-les-Moulineaux - Ville digitale | 92",
