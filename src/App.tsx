@@ -34,6 +34,7 @@ const RendezVous = lazy(() => import("./pages/RendezVous"));
 const ResetPassword = lazy(() => import("./pages/ResetPassword"));
 const FormulaireClient = lazy(() => import("./pages/FormulaireClient"));
 const Declicweb = lazy(() => import("./pages/Declicweb"));
+const AsnièresSurSeine = lazy(() => import("./pages/AsnièresSurSeine"));
 
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -96,6 +97,7 @@ const App = () => (
                 <Route path="/geo" element={<GeoRedirect />} />
                 <Route path="/brief" element={<FormulaireClient />} />
                 <Route path="/declicweb" element={<Declicweb />} />
+                <Route path="/agence-web-asnieres-sur-seine" element={<AsnièresSurSeine />} />
 
                 <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
