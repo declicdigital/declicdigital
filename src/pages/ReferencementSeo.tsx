@@ -8,7 +8,6 @@ import PageBreadcrumb from "@/components/PageBreadcrumb";
 import GoogleReviewsSection from "@/components/GoogleReviewsSection";
 import LocationSection from "@/components/LocationSection";
 import { ChevronDown, CheckCircle2, Building2, Hammer, Laptop } from "lucide-react";
-import { cities } from "@/data/cities";
 import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
 import heroSeo from "@/assets/seo-hero-businessman.webp";
 import imgSearchConsole from "@/assets/google-search-console-resultats-seo.webp";
@@ -30,7 +29,7 @@ const pillars = [
 const benefits = [
   { num: "01", title: "Vous captez des clients qui cherchent exactement ce que vous offrez", desc: "Un internaute qui tape \"électricien Asnières-sur-Seine tableau électrique\" cherche précisément ce que vous proposez. C'est un prospect chaud, prêt à agir. Le SEO vous met face à lui au bon moment." },
   { num: "02", title: "C'est un investissement rentable sur le long terme", desc: "Contrairement à la publicité qui s'arrête dès que vous coupez le budget, une page bien référencée continue d'attirer des visiteurs pendant des mois, voire des années, sans coût supplémentaire." },
-  { num: "03", title: "Le SEO local nivelle le terrain en votre faveur", desc: "Sur les recherches \"[métier] + [ville]\", un artisan local avec un bon SEO et de bons avis Google peut régulièrement devancer des grandes enseignes ou des franchises. Google valorise la proximité et la pertinence." },
+  { num: "03", title: "Le SEO local nivelle le terrain en votre faveur", desc: "Sur les recherches \"[métier] + [ville]\", un artisan local avec un bon SEO et de bons avis Google peut régulièrement devancer des grandes enseignes. Google valorise la proximité et la pertinence." },
   { num: "04", title: "Votre expertise de niche est un avantage SEO énorme", desc: "Vous êtes le seul menuisier spécialisé dans l'escalier sur mesure à Boulogne-Billancourt ? Cette spécialité, si elle est bien communiquée sur votre site, est un formidable levier SEO." },
   { num: "05", title: "Ça crédibilise votre entreprise durablement", desc: "Être en première page de Google, c'est envoyer un signal fort à vos prospects : \"cette entreprise est sérieuse, établie, reconnue.\" Le SEO construit votre réputation numérique." },
   { num: "06", title: "Vous réduisez votre dépendance aux plateformes tierces", desc: "Leboncoin, Pages Jaunes, ManoMano, Malt - utiles, mais vous ne maîtrisez pas ces canaux. Avec votre propre SEO, vous construisez un actif numérique qui vous appartient." },
@@ -52,7 +51,7 @@ const profiles = [
     items: ["Capter les urgences locales 24h/24", "Afficher des avis Google en évidence", "Cibler chaque ville de votre zone d'intervention", "Montrer vos réalisations en photos (SEO image)", "Dominer \"[métier] + [ville]\" sur Google Maps"],
   },
   {
-    icon: Laptop, title: "Indépendant", sub: "Consultant - Graphiste - Coach - Comptable…",
+    icon: Laptop, title: "Indépendant", sub: "Consultant SEO - Graphiste - Coach - Comptable…",
     items: ["Positionner votre expertise sur des mots-clés de niche", "Attirer des clients au-delà de votre réseau", "Publier des articles qui démontrent votre valeur", "Réduire la dépendance aux plateformes freelance", "Construire une autorité thématique reconnue"],
   },
   {
@@ -94,11 +93,11 @@ const faqItems = [
   { q: "Qu'est-ce que le SEO exactement ?", a: "Le SEO, ou Search Engine Optimization (référencement naturel en français), désigne l'ensemble des techniques permettant à un site web d'apparaître en bonne position dans les résultats naturels des moteurs de recherche - Google en tête - sans payer de publicité. Il repose sur trois piliers : la technique (votre site est rapide, sécurisé, lisible par Google), le contenu (vos pages répondent aux questions de vos clients avec des mots-clés pertinents) et l'autorité (d'autres sites web reconnus font référence au vôtre)." },
   { q: "Combien de temps avant de voir des résultats SEO ?", a: "En SEO local (sur des recherches de type \"[métier] + [ville]\"), les premières améliorations peuvent se voir en 4 à 8 semaines, notamment grâce à l'optimisation de votre fiche Google Business et à la collecte d'avis. Pour un positionnement solide et stable sur des mots-clés plus compétitifs, comptez 3 à 6 mois." },
   { q: "Est-ce que le SEO est vraiment utile pour un artisan ou un indépendant ?", a: "Oui, et c'est même l'un des canaux les plus efficaces pour ce profil. Les artisans et indépendants ont deux atouts SEO majeurs : une expertise précise (valorisée par Google) et une zone géographique délimitée (peu concurrencée). Un artisan avec un bon SEO local peut régulièrement apparaître avant de grandes enseignes." },
-  { q: "Combien coûte une stratégie SEO pour une TPE ou un artisan ?", a: "Les actions de base sont gratuites en temps : optimiser votre fiche Google Business, rédiger de bonnes pages de services, collecter des avis. Si vous souhaitez déléguer à un professionnel, comptez entre 400 et 1 200 € par mois pour une stratégie SEO locale sérieuse." },
-  { q: "Le SEO local est-il vraiment efficace pour les artisans ?", a: "Oui, c'est l'un des segments les plus rentables du SEO. Les recherches locales ont une intention d'achat très forte : quelqu'un qui tape \"plombier urgence Nantes\" cherche à agir maintenant. Selon Google, 76 % des recherches locales sur mobile aboutissent à une visite ou un appel dans les 24 heures." },
-  { q: "Faut-il tenir un blog pour faire du SEO ?", a: "Un blog est un excellent outil SEO mais n'est pas obligatoire pour commencer. Vous pouvez déjà obtenir de bons résultats avec des pages de services bien optimisées, une fiche Google Business complète et une présence sur les annuaires. Si vous avez du temps pour rédiger, un article de fond par mois peut considérablement renforcer votre autorité thématique." },
-  { q: "Vous êtes une agence SEO dans le 92 ou à Paris ?", a: "Oui, nous sommes basés à Paris 15e et nous intervenons dans toute l'Île-de-France, avec une expertise particulière sur les Hauts-de-Seine (92). Nous accompagnons des artisans, commerçants et indépendants à Asnières-sur-Seine, Boulogne-Billancourt, Levallois-Perret, Neuilly-sur-Seine, Clichy, Nanterre, Suresnes et dans tout le 92. Notre connaissance du tissu économique local est un vrai avantage pour votre référencement naturel." },
+  { q: "Combien coûte une stratégie SEO pour une TPE ou un artisan ?", a: "Les actions de base sont gratuites en temps : optimiser votre fiche Google Business, rédiger de bonnes pages de services, collecter des avis. Si vous souhaitez déléguer à un professionnel, comptez entre 400 et 1 200 € par mois pour une stratégie SEO locale sérieuse. Consultez nos tarifs pour nos forfaits." },
+  { q: "Vous êtes une agence SEO dans le 92 ou à Paris ?", a: "Oui, Déclic Digital est basée à Paris 15e et intervient dans toute l'Île-de-France, avec une expertise particulière sur les Hauts-de-Seine (92). Nous accompagnons des artisans, commerçants et indépendants à Asnières-sur-Seine, Boulogne-Billancourt, Levallois-Perret, Neuilly-sur-Seine, Clichy, Nanterre, Suresnes, Courbevoie et dans tout le 92. Notre connaissance du tissu économique local est un vrai avantage pour votre référencement naturel." },
+  { q: "Qu'est-ce que le référencement Google local et comment l'obtenir ?", a: "Le référencement Google local désigne le positionnement de votre entreprise dans les résultats géolocalisés de Google - notamment le pack de 3 résultats qui apparaît avec une carte. Pour l'obtenir : optimisez votre fiche Google Business Profile, collectez des avis clients, créez des pages de services géolocalisées, et assurez-vous que votre NAP (nom, adresse, téléphone) est identique partout en ligne." },
   { q: "Quelle est la différence entre SEO et GEO ?", a: "Le SEO optimise votre visibilité sur Google et les moteurs de recherche traditionnels. Le GEO (Generative Engine Optimization) optimise votre présence dans les réponses des intelligences artificielles comme ChatGPT, Perplexity ou Gemini. Les deux sont complémentaires : un site bien optimisé pour le SEO a de meilleures chances d'être cité par les IA. Nous proposons les deux approches pour maximiser votre visibilité en 2026." },
+  { q: "Faut-il tenir un blog pour faire du SEO ?", a: "Un blog est un excellent outil SEO mais n'est pas obligatoire pour commencer. Vous pouvez déjà obtenir de bons résultats avec des pages de services bien optimisées, une fiche Google Business complète et une présence sur les annuaires. Si vous avez du temps pour rédiger, un article de fond par mois peut considérablement renforcer votre autorité thématique." },
 ];
 
 const ReferencementSeo = () => {
@@ -121,18 +120,18 @@ const ReferencementSeo = () => {
     description: "Guide complet sur le référencement naturel pour les petites entreprises, artisans et freelances à Paris et dans les Hauts-de-Seine.",
     author: { "@type": "LocalBusiness", name: "Déclic Digital", url: "https://declicdigital.net" },
     datePublished: "2026-01-01",
-    mainEntityOfPage: { "@type": "WebPage", "@id": "https://declicdigital.net/referencement-seo/" },
+    mainEntityOfPage: { "@type": "WebPage", "@id": "https://declicdigital.net/referencement-seo" },
   };
 
   return (
     <PageLayout>
       <Helmet>
         <title>Agence SEO Paris et 92 : référencement naturel TPE et artisans</title>
-        <meta name="description" content="Agence SEO à Paris et dans le 92. Référencement naturel pour artisans, TPE et indépendants. Consultant SEO local, audit gratuit en 48h. Résultats mesurables." />
+        <meta name="description" content="Agence SEO Paris et Hauts-de-Seine (92) : référencement naturel, consultant SEO local et GEO pour artisans, TPE et indépendants. Audit gratuit 48h. Résultats mesurables en 3 à 6 mois." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://declicdigital.net/referencement-seo/" />
+        <link rel="canonical" href="https://declicdigital.net/referencement-seo" />
         <meta property="og:title" content="Agence SEO Paris et 92 : référencement naturel TPE et artisans" />
-        <meta property="og:description" content="Agence SEO à Paris et dans le 92. Référencement naturel pour artisans, TPE et indépendants. Consultant SEO local, audit gratuit en 48h. Résultats mesurables." />
+        <meta property="og:description" content="Agence SEO Paris et Hauts-de-Seine (92) : référencement naturel, consultant SEO local et GEO pour artisans, TPE et indépendants. Audit gratuit 48h." />
         <meta property="og:type" content="article" />
         <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
@@ -143,18 +142,34 @@ const ReferencementSeo = () => {
         { label: "Référencement SEO" },
       ]} />
 
-      {/* ─── Hero sombre — fond image, skip alternance ────────────────────────── */}
+      {/* ─── Hero ─── */}
       <section className="relative overflow-hidden py-16 md:py-24 min-h-[500px] flex items-center">
-        <img src={heroSeo} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover object-center" />
+        <img
+          src={heroSeo}
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover object-center"
+          fetchPriority="high"
+          loading="eager"
+          decoding="sync"
+          width={1200}
+          height={600}
+        />
         <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.93) 0%, hsl(263,36%,18%,0.78) 55%, hsl(183,70%,40%,0.55) 100%)" }} />
         <div className="container relative z-10">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} className="max-w-2xl">
-            <span className="mb-4 inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold border border-white/20" style={{ color: "rgba(246,241,233,0.8)" }}>Référencement naturel · SEO · Paris & 92</span>
+            <span className="mb-4 inline-block rounded-full bg-white/10 px-4 py-1.5 text-xs font-semibold border border-white/20" style={{ color: "rgba(246,241,233,0.8)" }}>
+              Référencement naturel · SEO · GEO · Paris et Hauts-de-Seine (92)
+            </span>
             <h1 className="mb-6 leading-tight" style={{ color: "#F6F1E9" }}>
-              Référencement SEO à Paris et dans le 92 : visibilité Google pour artisans et TPE
+              Agence SEO Paris et 92 : référencement naturel pour artisans, TPE et indépendants
             </h1>
-            <p className="mb-8 text-lg leading-relaxed italic" style={{ color: "rgba(246,241,233,0.75)" }}>
-              Vous n'avez pas le budget d'une multinationale. Vous n'avez pas une équipe marketing. Mais vous avez quelque chose qu'aucune grande entreprise ne peut acheter : une vraie expertise, un vrai territoire, une vraie relation client. Le SEO est l'outil qui transforme ça en visibilité.
+            <p className="mb-8 text-lg leading-relaxed" style={{ color: "rgba(246,241,233,0.75)" }}>
+              Consultant SEO local basé à Paris 15e, Déclic Digital accompagne les TPE et artisans des Hauts-de-Seine à dominer Google dans leur zone de chalandise. De{" "}
+              <Link to="/agence-web-asnieres-sur-seine" className="font-semibold underline" style={{ color: "rgba(246,241,233,0.9)" }}>Asnières-sur-Seine</Link>{" "}
+              à{" "}
+              <Link to="/referencement-seo/boulogne-billancourt" className="font-semibold underline" style={{ color: "rgba(246,241,233,0.9)" }}>Boulogne-Billancourt</Link>,
+              nous transformons votre expertise locale en visibilité Google durable.
             </p>
             <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
               <Link to="/contact">Demander un audit SEO gratuit</Link>
@@ -163,7 +178,7 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── Stats strip — skip alternance ───────────────────────────────────── */}
+      {/* ─── Stats ─── */}
       <section className="py-10" style={{ backgroundColor: "hsl(263,36%,18%)" }}>
         <div className="container">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
@@ -177,19 +192,23 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── 01 Définition — bloc 1 → #F6F1E9 ───────────────────────────────── */}
+      {/* ─── 01 Définition ─── */}
       <section id="definition" className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl space-y-6">
             <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "#2B1E3F", opacity: 0.5 }}>01 - Comprendre les bases</p>
-            <h2 style={{ color: "#2B1E3F" }}>Qu'est-ce que le SEO, concrètement ?</h2>
+            <h2 style={{ color: "#2B1E3F" }}>Qu'est-ce que le référencement naturel (SEO) pour une TPE ou un artisan ?</h2>
             <div className="rounded-2xl border-l-4 border-primary p-6 shadow-card" style={{ backgroundColor: "#E9F2F4" }}>
               <p className="text-lg leading-relaxed italic" style={{ color: "#2B1E3F" }}>
-                Le <strong className="text-primary">SEO (Search Engine Optimization)</strong> - ou référencement naturel en français - désigne l'ensemble des techniques qui permettent à votre site d'apparaître en tête des résultats Google lorsqu'un client potentiel tape une recherche liée à votre activité. Sans payer de publicité.
+                Le <strong className="text-primary">SEO (Search Engine Optimization)</strong> - ou référencement naturel - désigne l'ensemble des techniques qui permettent à votre site d'apparaître en tête des résultats Google lorsqu'un client potentiel tape une recherche liée à votre activité. Sans payer de publicité.
               </p>
             </div>
             <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-              Imaginez un <Link to="/creation-site-web/metier/plombier" className="text-primary font-semibold">plombier</Link> à Asnières-sur-Seine. Quand quelqu'un tape "plombier urgence Asnières" sur Google à 22h, il y a deux façons d'apparaître dans les résultats : payer Google Ads pour chaque clic - ou être là naturellement, grâce au SEO. Le premier coûte à chaque fois. Le second, une fois en place, travaille pour vous 24h/24.
+              Imaginez un{" "}
+              <Link to="/creation-site-web/metier/plombier" className="text-primary font-semibold">plombier</Link>{" "}
+              à Asnières-sur-Seine. Quand quelqu'un tape "plombier urgence Asnières" sur Google à 22h, il y a deux façons d'apparaître : payer Google Ads pour chaque clic - ou être là naturellement, grâce au référencement SEO. Le premier coûte à chaque fois. Le second, une fois en place, travaille pour vous 24h/24.
+              Découvrez aussi notre article sur le{" "}
+              <Link to="/blog/referencement-naturel-independant-2026" className="text-primary font-semibold">référencement naturel pour indépendants en 2026</Link>.
             </p>
             <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>Le SEO repose sur trois piliers fondamentaux que Google évalue en permanence :</p>
             <div className="space-y-0 rounded-2xl overflow-hidden shadow-card">
@@ -209,13 +228,18 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── 02 Pourquoi — bloc 2 → #E9F2F4 ─────────────────────────────────── */}
+      {/* ─── 02 Pourquoi ─── */}
       <section id="pourquoi" className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl space-y-6">
-            <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "#2B1E3F", opacity: 0.5 }}>02 - Le cœur du sujet</p>
-            <h2 style={{ color: "#2B1E3F" }}>Pourquoi le SEO est particulièrement adapté aux TPE, artisans et indépendants</h2>
-            <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>Les grandes entreprises ont des budgets publicitaires que vous ne pourrez jamais égaler. Mais en SEO, la taille ne fait pas la loi - la pertinence, si. Et sur ce terrain, vous avez des atouts considérables.</p>
+            <p className="text-xs font-bold uppercase tracking-widest" style={{ color: "#2B1E3F", opacity: 0.5 }}>02 - Le coeur du sujet</p>
+            <h2 style={{ color: "#2B1E3F" }}>Pourquoi le SEO local est particulièrement adapté aux TPE, artisans et indépendants du 92</h2>
+            <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+              Les grandes entreprises ont des budgets publicitaires que vous ne pourrez jamais égaler. Mais en référencement naturel, la taille ne fait pas la loi - la pertinence, si. Et sur ce terrain, vous avez des atouts considérables.
+              Notre article sur le{" "}
+              <Link to="/blog/seo-local-paris-artisan-google-maps" className="text-primary font-semibold">SEO local pour artisans à Paris</Link>{" "}
+              détaille ces opportunités.
+            </p>
             <div className="rounded-2xl border-l-4 border-primary pl-6 py-2">
               <p className="text-xl font-extrabold leading-snug" style={{ color: "#2B1E3F" }}>Un artisan qui maîtrise son SEO local peut surclasser une enseigne nationale sur ses propres mots-clés. Google préfère le résultat le plus pertinent, pas le plus riche.</p>
             </div>
@@ -234,18 +258,22 @@ const ReferencementSeo = () => {
             </div>
             <div className="rounded-2xl border border-green-300/30 bg-green-50/50 p-5">
               <p className="font-bold text-green-700 mb-2">Le chiffre qui convainc</p>
-              <p style={{ color: "#2B1E3F", opacity: 0.7 }}>Les leads issus du SEO ont un taux de conversion moyen de <strong>14,6 %</strong> contre 1,7 % pour les leads issus de la publicité outbound classique (flyers, cold call, affichage). Source : Search Engine Journal. Autrement dit : les gens qui vous trouvent via Google sont bien plus enclins à devenir clients.</p>
+              <p style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                Les leads issus du SEO ont un taux de conversion moyen de <strong>14,6 %</strong> contre 1,7 % pour les leads issus de la publicité outbound classique. Autrement dit : les gens qui vous trouvent via Google sont bien plus enclins à devenir clients. Consultez notre{" "}
+                <Link to="/blog/audit-seo-gratuit-ce-quon-analyse" className="text-primary font-semibold">guide de l'audit SEO gratuit</Link>{" "}
+                pour savoir par où commencer.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── CTA texture 1 — skip alternance ─────────────────────────────────── */}
+      {/* ─── CTA texture 1 ─── */}
       <section className="relative overflow-hidden py-14" data-alternate="skip">
-        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="container relative z-10 text-center">
           <h2 className="mb-4" style={{ color: "#2B1E3F" }}>Prêt à attirer vos premiers clients via Google ?</h2>
-          <p className="mb-6 max-w-xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>Nos experts analysent votre site et identifient les quick wins SEO pour votre activité.</p>
+          <p className="mb-6 max-w-xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>Nos experts analysent votre site et identifient les quick wins SEO pour votre activité à Paris ou dans les Hauts-de-Seine.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
               <Link to="/contact">Audit SEO gratuit</Link>
@@ -257,22 +285,27 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── SearchConsole overlap — bloc 3 → #F6F1E9 ───────────────────────── */}
+      {/* ─── SearchConsole overlap ─── */}
       <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="mx-auto max-w-5xl">
             <div className="relative min-h-[320px] flex items-center">
               <div className="hidden lg:block absolute left-0 top-0 h-full w-1/2 rounded-2xl overflow-hidden">
-                <img src={imgSearchConsole} alt="Google Search Console résultats SEO en hausse" className="w-full h-full object-cover" loading="lazy" />
+                <img src={imgSearchConsole} alt="Google Search Console résultats SEO en hausse - agence SEO Paris 92" className="w-full h-full object-cover" loading="lazy" width={500} height={320} />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to left, #F6F1E9 0%, rgba(246,241,233,0.3) 40%, transparent 70%)" }} />
               </div>
               <div className="relative z-10 ml-auto max-w-xl space-y-5 py-10">
-                <h2 style={{ color: "#2B1E3F" }}>Suivez vos résultats en temps réel</h2>
+                <h2 style={{ color: "#2B1E3F" }}>Suivez vos résultats en temps réel avec Google Search Console</h2>
                 <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-                  Le SEO n'est pas une boîte noire. Grâce aux outils d'analyse, vous suivez chaque progression : mots-clés qui montent, trafic organique, demandes de devis générées par votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link>. Notre <Link to="/blog/audit-seo-gratuit-ce-quon-analyse" className="text-primary font-semibold">audit SEO gratuit</Link> vous donne une première lecture claire de votre situation.
+                  Le référencement SEO n'est pas une boîte noire. Grâce aux outils d'analyse, vous suivez chaque progression : mots-clés qui montent, trafic organique, demandes de devis générées par votre{" "}
+                  <Link to="/creation-site-web" className="text-primary font-semibold">site web professionnel</Link>.
+                  Notre{" "}
+                  <Link to="/blog/audit-seo-gratuit-ce-quon-analyse" className="text-primary font-semibold">audit SEO gratuit</Link>{" "}
+                  vous donne une première lecture claire de votre situation en 48h.
                 </p>
                 <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-                  C'est cette transparence qui fait du SEO un investissement mesurable, contrairement à bien d'autres canaux marketing.
+                  C'est cette transparence qui fait du référencement naturel un investissement mesurable, contrairement à bien d'autres canaux marketing. Consultez aussi notre article{" "}
+                  <Link to="/blog/comment-ameliorer-referencement-naturel" className="text-primary font-semibold">comment améliorer son référencement naturel</Link>.
                 </p>
               </div>
             </div>
@@ -280,7 +313,7 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── 03 Comparaison — bloc 4 → #E9F2F4 ──────────────────────────────── */}
+      {/* ─── 03 Comparaison ─── */}
       <section id="comparaison" className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="mx-auto max-w-4xl space-y-6">
@@ -311,19 +344,23 @@ const ReferencementSeo = () => {
             </div>
             <div className="rounded-2xl border border-amber-300/30 bg-amber-50/50 p-5">
               <p className="font-bold text-amber-700 mb-2">Google Ads n'est pas votre ennemi</p>
-              <p style={{ color: "#2B1E3F", opacity: 0.7 }}>Google Ads reste un outil utile, notamment pour lancer une activité ou capter de la demande en urgence. Mais il ne construit rien de durable. Le combo idéal pour une TPE : <strong>SEO pour le long terme + Google Ads en appoint ponctuel</strong> pendant la montée en puissance du référencement naturel. Découvrez <Link to="/tarifs" className="text-primary font-semibold">nos tarifs</Link>.</p>
+              <p style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                Google Ads reste un outil utile, notamment pour lancer une activité ou capter de la demande en urgence. Le combo idéal pour une TPE : <strong>SEO pour le long terme + Google Ads en appoint ponctuel</strong> pendant la montée en puissance du référencement naturel. Découvrez{" "}
+                <Link to="/tarifs" className="text-primary font-semibold">nos tarifs SEO</Link>{" "}
+                adaptés aux budgets des TPE et artisans du 92.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── 04 Profils — bloc 5 → #F6F1E9 ──────────────────────────────────── */}
+      {/* ─── 04 Profils ─── */}
       <section id="profils" className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="mx-auto max-w-4xl space-y-8">
             <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>04 - Cas concrets</p>
-            <h2 className="text-center" style={{ color: "#2B1E3F" }}>Ce que le SEO change concrètement selon votre profil</h2>
-            <p className="text-center max-w-2xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>Le SEO ne se déploie pas de la même façon selon que vous êtes artisan, freelance ou dirigeant de TPE. Voici les opportunités spécifiques à chaque profil.</p>
+            <h2 className="text-center" style={{ color: "#2B1E3F" }}>Ce que le référencement SEO change concrètement selon votre profil</h2>
+            <p className="text-center max-w-2xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>Le SEO ne se déploie pas de la même façon selon que vous êtes artisan, consultant SEO freelance ou dirigeant de TPE. Voici les opportunités spécifiques à chaque profil.</p>
             <div className="grid gap-6 md:grid-cols-3">
               {profiles.map((p, i) => (
                 <div key={i} className="rounded-2xl p-6 shadow-card border-t-4 border-primary" style={{ backgroundColor: "#E9F2F4" }}>
@@ -346,17 +383,24 @@ const ReferencementSeo = () => {
             <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5 mt-4">
               <p className="font-bold text-primary mb-2">Votre métier a sa propre page</p>
               <p style={{ color: "#2B1E3F", opacity: 0.7 }}>
-                Nous créons des sites web et des stratégies SEO adaptés à chaque activité : <Link to="/creation-site-web/metier/plombier" className="text-primary font-semibold">plombier</Link>, <Link to="/creation-site-web/metier/electricien" className="text-primary font-semibold">électricien</Link>, <Link to="/creation-site-web/metier/coach-sportif" className="text-primary font-semibold">coach sportif</Link> et bien d'autres. Consultez <Link to="/nos-metiers" className="text-primary font-semibold">tous nos métiers</Link>.
+                Nous créons des sites web et des stratégies SEO adaptés à chaque activité :{" "}
+                <Link to="/creation-site-web/metier/plombier" className="text-primary font-semibold">plombier</Link>,{" "}
+                <Link to="/creation-site-web/metier/electricien" className="text-primary font-semibold">électricien</Link>,{" "}
+                <Link to="/creation-site-web/metier/coach-sportif" className="text-primary font-semibold">coach sportif</Link>,{" "}
+                <Link to="/creation-site-web/metier/decorateur-interieur" className="text-primary font-semibold">décorateur d'intérieur</Link>,{" "}
+                <Link to="/creation-site-web/metier/climaticien" className="text-primary font-semibold">climaticien</Link>{" "}
+                et bien d'autres. Consultez{" "}
+                <Link to="/nos-metiers" className="text-primary font-semibold">tous nos métiers</Link>.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── GoogleReviews — bloc 6 → #E9F2F4 ────────────────────────────────── */}
+      {/* ─── GoogleReviews ─── */}
       <GoogleReviewsSection compact maxReviews={3} backgroundColor="#E9F2F4" />
 
-      {/* ─── 05 Mythes — bloc 7 → #F6F1E9 ───────────────────────────────────── */}
+      {/* ─── 05 Mythes ─── */}
       <section id="idees-recues" className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl space-y-8">
@@ -382,25 +426,25 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── CTA texture 2 — skip alternance ─────────────────────────────────── */}
+      {/* ─── CTA texture 2 ─── */}
       <section className="relative overflow-hidden py-14" data-alternate="skip">
-        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="container relative z-10 text-center">
           <h2 className="mb-4" style={{ color: "#2B1E3F" }}>Vous vous reconnaissez dans ces freins ?</h2>
-          <p className="mb-6 max-w-xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>On démystifie le SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
+          <p className="mb-6 max-w-xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>On démystifie le référencement SEO et on vous accompagne pas à pas. Premier diagnostic gratuit en 48h.</p>
           <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
             <Link to="/contact">Demander un audit SEO gratuit</Link>
           </Button>
         </div>
       </section>
 
-      {/* ─── 06 Comment démarrer — bloc 8 → #E9F2F4 ─────────────────────────── */}
+      {/* ─── 06 Comment démarrer ─── */}
       <section id="demarrer" className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl space-y-8">
             <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>06 - Passer à l'action</p>
-            <h2 className="text-center" style={{ color: "#2B1E3F" }}>Par où commencer quand on est artisan ou indépendant ?</h2>
-            <p className="text-center max-w-2xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>La bonne nouvelle : les premières actions SEO ne coûtent que du temps. Voici la progression logique pour démarrer efficacement.</p>
+            <h2 className="text-center" style={{ color: "#2B1E3F" }}>Par où commencer le référencement Google quand on est artisan ou indépendant ?</h2>
+            <p className="text-center max-w-2xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>La bonne nouvelle : les premières actions SEO ne coûtent que du temps. Voici la progression logique pour démarrer efficacement votre référencement naturel.</p>
             <div className="space-y-0">
               {steps.map((s, i) => (
                 <div key={i} className="flex gap-5 py-7 border-b last:border-0" style={{ borderColor: "rgba(43,30,63,0.1)" }}>
@@ -416,28 +460,55 @@ const ReferencementSeo = () => {
             </div>
             <div className="rounded-2xl border border-primary/20 bg-primary/5 p-5">
               <p className="font-bold text-primary mb-2">Conseil pratique</p>
-              <p style={{ color: "#2B1E3F", opacity: 0.7 }}>Avant tout investissement SEO, vérifiez que votre <Link to="/creation-site-web" className="text-primary font-semibold">site web</Link> se charge en moins de 3 secondes sur mobile et qu'il est responsive. Un site lent est pénalisé par Google et fait fuir vos visiteurs. Consultez aussi notre article sur <Link to="/blog/core-web-vitals-google-experience-utilisateur" className="text-primary font-semibold">les Core Web Vitals</Link> et <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold">l'impact de la vitesse sur votre chiffre d'affaires</Link>.</p>
+              <p style={{ color: "#2B1E3F", opacity: 0.7 }}>
+                Avant tout investissement SEO, vérifiez que votre{" "}
+                <Link to="/creation-site-web" className="text-primary font-semibold">site web professionnel</Link>{" "}
+                se charge en moins de 3 secondes sur mobile et qu'il est responsive. Un site lent est pénalisé par Google et fait fuir vos visiteurs. Consultez aussi notre article sur{" "}
+                <Link to="/blog/core-web-vitals-google-experience-utilisateur" className="text-primary font-semibold">les Core Web Vitals</Link>{" "}
+                et{" "}
+                <Link to="/blog/vitesse-site-web-impact-chiffre-affaires" className="text-primary font-semibold">l'impact de la vitesse sur votre chiffre d'affaires</Link>.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── GoogleMaps overlap — bloc 9 → #F6F1E9 ──────────────────────────── */}
+      {/* ─── GoogleMaps overlap ─── */}
       <section className="py-12 md:py-16 overflow-hidden" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="mx-auto max-w-5xl">
             <div className="relative min-h-[360px] flex items-center">
               <div className="hidden lg:block absolute right-0 top-0 h-full w-1/2 rounded-2xl overflow-hidden">
-                <img src={imgGoogleMaps} alt="SEO local Google Maps Boulogne-Billancourt" className="w-full h-full object-cover" loading="lazy" />
+                <img
+                  src={imgGoogleMaps}
+                  alt="SEO local Google Maps Boulogne-Billancourt Hauts-de-Seine 92"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                  width={500}
+                  height={360}
+                />
                 <div className="absolute inset-0" style={{ background: "linear-gradient(to right, #F6F1E9 0%, rgba(246,241,233,0.3) 40%, transparent 70%)" }} />
               </div>
               <div className="relative z-10 max-w-xl space-y-5 py-10">
-                <h2 style={{ color: "#2B1E3F" }}>Consultant SEO local dans le 92 et à Paris</h2>
+                <h2 style={{ color: "#2B1E3F" }}>Agence SEO et consultant référencement dans le 92 et à Paris</h2>
                 <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-                  Les recherches "près de moi" ont explosé de 500% en 5 ans. Nous accompagnons les professionnels de <Link to="/referencement-seo/asnieres-sur-seine" className="text-primary font-semibold">Asnières-sur-Seine</Link>, <Link to="/referencement-seo/boulogne-billancourt" className="text-primary font-semibold">Boulogne-Billancourt</Link>, <Link to="/referencement-seo/neuilly-sur-seine" className="text-primary font-semibold">Neuilly-sur-Seine</Link>, <Link to="/referencement-seo/levallois-perret" className="text-primary font-semibold">Levallois-Perret</Link>, <Link to="/referencement-seo/clichy" className="text-primary font-semibold">Clichy</Link> et <Link to="/referencement-seo/nanterre" className="text-primary font-semibold">Nanterre</Link> à dominer les résultats locaux de Google.
+                  Les recherches "près de moi" ont explosé de 500% en 5 ans. Nous accompagnons les professionnels de{" "}
+                  <Link to="/agence-web-asnieres-sur-seine" className="text-primary font-semibold">Asnières-sur-Seine</Link>,{" "}
+                  <Link to="/referencement-seo/boulogne-billancourt" className="text-primary font-semibold">Boulogne-Billancourt</Link>,{" "}
+                  <Link to="/referencement-seo/neuilly-sur-seine" className="text-primary font-semibold">Neuilly-sur-Seine</Link>,{" "}
+                  <Link to="/referencement-seo/levallois-perret" className="text-primary font-semibold">Levallois-Perret</Link>,{" "}
+                  <Link to="/referencement-seo/clichy" className="text-primary font-semibold">Clichy</Link>,{" "}
+                  <Link to="/referencement-seo/nanterre" className="text-primary font-semibold">Nanterre</Link>,{" "}
+                  <Link to="/referencement-seo/suresnes" className="text-primary font-semibold">Suresnes</Link>{" "}
+                  et{" "}
+                  <Link to="/referencement-seo/courbevoie" className="text-primary font-semibold">Courbevoie</Link>{" "}
+                  à dominer les résultats locaux de Google.
                 </p>
                 <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-                  Avec un site optimisé + une fiche Google Business complète + des avis clients, vous captez cette demande locale avant vos concurrents. Consultez notre article sur le <Link to="/blog/seo-local-paris-artisan-google-maps" className="text-primary font-semibold">SEO local pour artisans à Paris</Link>.
+                  Agence SEO Hauts-de-Seine, nous combinons référencement naturel classique et{" "}
+                  <Link to="/visibilite-ia" className="text-primary font-semibold">visibilité IA (GEO)</Link>{" "}
+                  pour une présence maximale sur tous les moteurs. Découvrez notre article sur le{" "}
+                  <Link to="/blog/geo-ia-independant-asnieres-boulogne-billancourt" className="text-primary font-semibold">GEO pour indépendants du 92</Link>.
                 </p>
               </div>
             </div>
@@ -445,13 +516,16 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── 07 Checklist — bloc 10 → #E9F2F4 ────────────────────────────────── */}
+      {/* ─── 07 Checklist ─── */}
       <section id="checklist" className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl space-y-8">
             <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>07 - Auto-évaluation</p>
-            <h2 className="text-center" style={{ color: "#2B1E3F" }}>Votre checklist SEO de départ</h2>
-            <p className="text-center" style={{ color: "#2B1E3F", opacity: 0.7 }}>Chaque point non coché est une opportunité d'amélioration concrète.</p>
+            <h2 className="text-center" style={{ color: "#2B1E3F" }}>Votre checklist référencement SEO de départ</h2>
+            <p className="text-center" style={{ color: "#2B1E3F", opacity: 0.7 }}>
+              Chaque point non coché est une opportunité d'amélioration concrète. Pour un audit complet, consultez notre article{" "}
+              <Link to="/blog/comment-faire-audit-seo" className="text-primary font-semibold">comment faire un audit SEO</Link>.
+            </p>
             <div className="grid gap-3 sm:grid-cols-2">
               {checklist.map((item, i) => (
                 <div key={i} className="flex gap-3 rounded-2xl border p-4 shadow-card" style={{ backgroundColor: "#F6F1E9", borderColor: "rgba(43,30,63,0.1)" }}>
@@ -464,12 +538,12 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── CTA texture 3 — skip alternance ─────────────────────────────────── */}
+      {/* ─── CTA texture 3 ─── */}
       <section className="relative overflow-hidden py-14" data-alternate="skip">
-        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
+        <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
         <div className="container relative z-10 text-center">
-          <h2 className="mb-4" style={{ color: "#2B1E3F" }}>Votre SEO peut travailler pour vous dès aujourd'hui</h2>
-          <p className="mb-6 max-w-xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>Nos experts analysent votre site, identifient les quick wins SEO et construisent une stratégie adaptée à votre activité, votre zone et votre budget.</p>
+          <h2 className="mb-4" style={{ color: "#2B1E3F" }}>Votre référencement SEO peut travailler pour vous dès aujourd'hui</h2>
+          <p className="mb-6 max-w-xl mx-auto" style={{ color: "#2B1E3F", opacity: 0.7 }}>Nos experts analysent votre site, identifient les quick wins SEO et construisent une stratégie adaptée à votre activité, votre ville dans le 92 et votre budget.</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Button asChild variant="custom" size="lg" className="gradient-miami btn-glow rounded-full px-8 font-bold shadow-glow">
               <Link to="/contact">Audit SEO gratuit</Link>
@@ -481,12 +555,12 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── 08 FAQ — bloc 11 → #F6F1E9 ─────────────────────────────────────── */}
+      {/* ─── 08 FAQ ─── */}
       <section id="faq" className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl space-y-8">
             <p className="text-xs font-bold uppercase tracking-widest text-center" style={{ color: "#2B1E3F", opacity: 0.5 }}>08 - Questions fréquentes</p>
-            <h2 className="text-center" style={{ color: "#2B1E3F" }}>Vos questions sur le SEO, nos réponses honnêtes</h2>
+            <h2 className="text-center" style={{ color: "#2B1E3F" }}>Vos questions sur le référencement SEO et GEO, nos réponses honnêtes</h2>
             <div className="space-y-0">
               {faqItems.map((f, i) => (
                 <div key={i} className="border-b first:border-t" style={{ borderColor: "rgba(43,30,63,0.1)" }}>
@@ -503,50 +577,60 @@ const ReferencementSeo = () => {
                 </div>
               ))}
             </div>
+            <p className="text-center">
+              <Link to="/faq" className="text-primary font-semibold hover:underline">Voir toutes les questions fréquentes</Link>
+            </p>
           </div>
         </div>
       </section>
 
-      {/* ─── GEO encart — bloc 12 → #E9F2F4 ─────────────────────────────────── */}
+      {/* ─── GEO encart ─── */}
       <section className="py-12 md:py-16" style={{ backgroundColor: "#E9F2F4" }}>
         <div className="container">
           <div className="mx-auto max-w-3xl">
             <div className="rounded-2xl border border-primary/20 bg-primary/5 p-6 md:p-8">
-              <h2 style={{ color: "#2B1E3F" }}>Au-delà du SEO : la visibilité dans les moteurs IA</h2>
+              <h2 style={{ color: "#2B1E3F" }}>Au-delà du SEO : la visibilité dans les moteurs IA (GEO)</h2>
               <p className="leading-relaxed mt-3" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-                Au-delà du SEO traditionnel, nous vous aidons aussi à apparaître dans les réponses des intelligences artificielles. ChatGPT, Perplexity, Gemini : ces moteurs génératifs deviennent un canal d'acquisition incontournable. Découvrez notre stratégie d'<Link to="/visibilite-ia" className="text-primary font-semibold">optimisation pour les moteurs IA (GEO)</Link>.
+                Au-delà du référencement SEO traditionnel, nous vous aidons aussi à apparaître dans les réponses des intelligences artificielles. ChatGPT, Perplexity, Gemini : ces moteurs génératifs deviennent un canal d'acquisition incontournable. Découvrez notre stratégie d'{" "}
+                <Link to="/visibilite-ia" className="text-primary font-semibold">optimisation pour les moteurs IA (GEO)</Link>{" "}
+                et notre article sur le{" "}
+                <Link to="/blog/geo-generative-engine-optimization-chatgpt-perplexity" className="text-primary font-semibold">GEO : Generative Engine Optimization</Link>.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ─── Zones d'intervention — bloc 13 → #F6F1E9 ───────────────────────── */}
+      {/* ─── Zones d'intervention ─── */}
       <section className="py-12 md:py-16" style={{ backgroundColor: "#F6F1E9" }}>
         <div className="container">
-          <h2 className="text-center mb-6" style={{ color: "#2B1E3F" }}>Nos zones d'intervention SEO</h2>
+          <h2 className="text-center mb-4" style={{ color: "#2B1E3F" }}>Agence SEO Hauts-de-Seine : nos zones d'intervention</h2>
           <p className="text-center mb-8" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-            Nous proposons un <Link to="/nos-villes" className="text-primary font-semibold">référencement SEO local</Link> à Paris et dans les Hauts-de-Seine.
+            Nous proposons un{" "}
+            <Link to="/nos-villes" className="text-primary font-semibold">référencement SEO local</Link>{" "}
+            à Paris et dans toutes les communes des Hauts-de-Seine (92). Agence SEO 92, consultant référencement naturel disponible pour votre ville.
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             {[
-              { slug: "asnieres-sur-seine", label: "SEO Asnières-sur-Seine" },
-              { slug: "boulogne-billancourt", label: "SEO Boulogne-Billancourt" },
-              { slug: "neuilly-sur-seine", label: "SEO Neuilly-sur-Seine" },
-              { slug: "levallois-perret", label: "SEO Levallois-Perret" },
-              { slug: "clichy", label: "SEO Clichy" },
-              { slug: "nanterre", label: "SEO Nanterre" },
-              { slug: "issy-les-moulineaux", label: "SEO Issy-les-Moulineaux" },
-              { slug: "courbevoie", label: "SEO Courbevoie" },
-              { slug: "suresnes", label: "SEO Suresnes" },
-              { slug: "la-garenne-colombes", label: "SEO La Garenne-Colombes" },
-              { slug: "rueil-malmaison", label: "SEO Rueil-Malmaison" },
-              { slug: "montrouge", label: "SEO Montrouge" },
-              { slug: "paris-1er", label: "SEO Paris 1er" },
+              { to: "/agence-web-asnieres-sur-seine", label: "SEO Asnières-sur-Seine" },
+              { to: "/referencement-seo/boulogne-billancourt", label: "SEO Boulogne-Billancourt" },
+              { to: "/referencement-seo/neuilly-sur-seine", label: "SEO Neuilly-sur-Seine" },
+              { to: "/referencement-seo/levallois-perret", label: "SEO Levallois-Perret" },
+              { to: "/referencement-seo/clichy", label: "SEO Clichy" },
+              { to: "/referencement-seo/nanterre", label: "SEO Nanterre" },
+              { to: "/referencement-seo/issy-les-moulineaux", label: "SEO Issy-les-Moulineaux" },
+              { to: "/referencement-seo/courbevoie", label: "SEO Courbevoie" },
+              { to: "/referencement-seo/suresnes", label: "SEO Suresnes" },
+              { to: "/referencement-seo/la-garenne-colombes", label: "SEO La Garenne-Colombes" },
+              { to: "/referencement-seo/rueil-malmaison", label: "SEO Rueil-Malmaison" },
+              { to: "/referencement-seo/montrouge", label: "SEO Montrouge" },
+              { to: "/referencement-seo/antony", label: "SEO Antony" },
+              { to: "/referencement-seo/clamart", label: "SEO Clamart" },
+              { to: "/referencement-seo/paris-1er", label: "SEO Paris 1er" },
             ].map((c) => (
               <Link
-                key={c.slug}
-                to={`/referencement-seo/${c.slug}`}
+                key={c.to}
+                to={c.to}
                 className="rounded-full border px-4 py-2 text-sm font-medium transition-colors"
                 style={{ backgroundColor: "#E9F2F4", color: "#2B1E3F", borderColor: "rgba(43,30,63,0.2)" }}
               >
@@ -564,7 +648,7 @@ const ReferencementSeo = () => {
         </div>
       </section>
 
-      {/* ─── LocationSection — bloc 14 → #E9F2F4 ─────────────────────────────── */}
+      {/* ─── LocationSection ─── */}
       <LocationSection backgroundColor="#E9F2F4" />
     </PageLayout>
   );
