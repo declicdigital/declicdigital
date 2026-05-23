@@ -16,6 +16,15 @@ const navItems = [
   { to: "/admin/tarifs",      icon: DollarSign,      label: "Tarifs" },
 ];
 
+const BG_MAIN = "#F6F1E9";
+const BG_SIDEBAR = "#EDE8DF";
+const INK = "#2B1E3F";
+const INK_LIGHT = "rgba(43,30,63,0.45)";
+const INK_XLIGHT = "rgba(43,30,63,0.20)";
+const BORDER = "rgba(43,30,63,0.10)";
+const ACTIVE_BG = "rgba(67,97,238,0.10)";
+const ACTIVE_COLOR = "#4361EE";
+
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const location = useLocation();
   const navigate = useNavigate();
@@ -29,17 +38,17 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const isActive = (to: string) => location.pathname.startsWith(to);
 
   return (
-    <div className="min-h-screen flex" style={{ background: "hsl(263, 36%, 10%)" }}>
+    <div className="min-h-screen flex" style={{ background: BG_MAIN }}>
 
       {/* Sidebar desktop */}
       <aside className="hidden lg:flex flex-col w-64 fixed h-full border-r"
-        style={{ background: "hsl(263, 36%, 13%)", borderColor: "rgba(255,255,255,0.07)" }}>
-        <div className="p-5 border-b" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
+        style={{ background: BG_SIDEBAR, borderColor: BORDER }}>
+        <div className="p-5 border-b" style={{ borderColor: BORDER }}>
           <Link to="/" target="_blank" rel="noopener noreferrer">
             <img src={logo} alt="Déclic Digital" className="h-12 w-auto object-contain" />
           </Link>
           <p className="text-xs font-semibold uppercase tracking-widest mt-3"
-            style={{ color: "rgba(255,255,255,0.25)" }}>
+            style={{ color: INK_XLIGHT }}>
             Back-office admin
           </p>
         </div>
@@ -49,8 +58,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             <Link key={item.to} to={item.to}
               className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all"
               style={isActive(item.to)
-                ? { background: "linear-gradient(135deg, hsl(183,70%,63%,0.15), hsl(284,65%,66%,0.15))", color: "white", borderLeft: "2px solid hsl(183,70%,63%)" }
-                : { color: "rgba(255,255,255,0.45)" }
+                ? { background: ACTIVE_BG, color: ACTIVE_COLOR, borderLeft: `2px solid ${ACTIVE_COLOR}` }
+                : { color: INK_LIGHT }
               }>
               <item.icon size={16} />
               {item.label}
@@ -58,15 +67,15 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           ))}
         </nav>
 
-        <div className="p-4 border-t" style={{ borderColor: "rgba(255,255,255,0.07)" }}>
+        <div className="p-4 border-t" style={{ borderColor: BORDER }}>
           <a href="https://declicdigital.net" target="_blank" rel="noopener noreferrer"
             className="flex items-center gap-2 px-4 py-2 rounded-xl text-xs transition-all mb-2"
-            style={{ color: "rgba(255,255,255,0.30)" }}>
+            style={{ color: INK_XLIGHT }}>
             ↗ Voir le site
           </a>
           <button onClick={handleLogout}
             className="flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition-all w-full hover:bg-red-500/10"
-            style={{ color: "rgba(255,255,255,0.35)" }}>
+            style={{ color: "rgba(180,50,50,0.6)" }}>
             <LogOut size={16} />
             Déconnexion
           </button>
@@ -75,23 +84,23 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
       {/* Mobile header */}
       <div className="lg:hidden fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-4 h-14 border-b"
-        style={{ background: "hsl(263, 36%, 13%)", borderColor: "rgba(255,255,255,0.07)" }}>
+        style={{ background: BG_SIDEBAR, borderColor: BORDER }}>
         <img src={logo} alt="Déclic Digital" className="h-9 w-auto object-contain" />
-        <button onClick={() => setMenuOpen(!menuOpen)} style={{ color: "rgba(255,255,255,0.7)" }}>
+        <button onClick={() => setMenuOpen(!menuOpen)} style={{ color: INK_LIGHT }}>
           {menuOpen ? <X size={20} /> : <Menu size={20} />}
         </button>
       </div>
 
       {/* Mobile menu */}
       {menuOpen && (
-        <div className="lg:hidden fixed inset-0 z-40 pt-14" style={{ background: "hsl(263, 36%, 13%)" }}>
+        <div className="lg:hidden fixed inset-0 z-40 pt-14" style={{ background: BG_SIDEBAR }}>
           <nav className="p-4 space-y-1">
             {navItems.map((item) => (
               <Link key={item.to} to={item.to} onClick={() => setMenuOpen(false)}
                 className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all"
                 style={isActive(item.to)
-                  ? { background: "rgba(255,255,255,0.08)", color: "white" }
-                  : { color: "rgba(255,255,255,0.45)" }
+                  ? { background: ACTIVE_BG, color: ACTIVE_COLOR }
+                  : { color: INK_LIGHT }
                 }>
                 <item.icon size={16} />
                 {item.label}
@@ -99,7 +108,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
             ))}
             <button onClick={handleLogout}
               className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium w-full"
-              style={{ color: "rgba(255,255,255,0.35)" }}>
+              style={{ color: "rgba(180,50,50,0.6)" }}>
               <LogOut size={16} />
               Déconnexion
             </button>
