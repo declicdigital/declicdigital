@@ -1,9 +1,20 @@
 [[redirects]]
+  from = "/referencement-seo/levallois-perret"
+  to = "/agence-web-levallois-perret"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/creation-site-web/levallois-perret"
+  to = "/agence-web-levallois-perret"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/:splat/"
   to = "/:splat"
   status = 301
   force = true
-  conditions = {Path = ["/:splat/"]}
 
 [[redirects]]
   from = "/sitemap.xml"
