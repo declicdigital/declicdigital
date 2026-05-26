@@ -10,7 +10,7 @@ import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
 import heroVilles from "@/assets/nos-villes-paris-hauts-de-seine-92.webp";
 
 const parisCities = cities.filter((c) => c.region === "paris");
-const hdsCities = cities.filter((c) => c.region === "hauts-de-seine");
+const hdsCities = cities.filter((c) => c.region === "hauts-de-seine" && c.slug !== "levallois-perret");
 
 const NosVilles = () => (
   <PageLayout>
@@ -21,7 +21,7 @@ const NosVilles = () => (
       <link rel="canonical" href="https://declicdigital.net/nos-villes" />
     </Helmet>
 
-    {/* Section 1 — Hero */}
+    {/* Section 1 - Hero */}
     <section className="relative overflow-hidden py-16 md:py-24 min-h-[500px] flex items-center">
       <img
         src={heroVilles}
@@ -55,7 +55,7 @@ const NosVilles = () => (
       </div>
     </section>
 
-    {/* Section 2 — Paris */}
+    {/* Section 2 - Paris */}
     <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
       <div className="container">
         <h2 className="text-3xl font-extrabold md:text-4xl mb-4 text-center" style={{ color: "#2B1E3F" }}>
@@ -100,7 +100,7 @@ const NosVilles = () => (
       </div>
     </section>
 
-    {/* Section 3 — Hauts-de-Seine */}
+    {/* Section 3 - Hauts-de-Seine */}
     <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
       <div className="container">
         <h2 className="text-3xl font-extrabold md:text-4xl mb-4 text-center" style={{ color: "#2B1E3F" }}>
@@ -111,12 +111,12 @@ const NosVilles = () => (
           Nous accompagnons les entreprises des Hauts-de-Seine pour développer leur visibilité en ligne avec des sites web performants et un référencement SEO et GEO ciblé.
         </p>
 
-        {/* Carte spéciale Asnières */}
+        {/* Carte Asnières */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="rounded-2xl p-6 mb-6"
+          className="rounded-2xl p-6 mb-4"
           style={{ backgroundColor: "#F6F1E9", border: "2px solid rgba(67,97,238,0.3)", boxShadow: "0 4px 24px rgba(67,97,238,0.12)" }}
         >
           <div className="flex items-center gap-2 mb-2">
@@ -134,6 +134,33 @@ const NosVilles = () => (
               style={{ backgroundColor: "rgba(67,97,238,0.15)", color: "#4361EE", border: "1px solid rgba(67,97,238,0.3)" }}
             >
               Agence web et SEO Asnières
+            </Link>
+          </div>
+        </motion.div>
+
+        {/* Carte Levallois-Perret */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="rounded-2xl p-6 mb-6"
+          style={{ backgroundColor: "#F6F1E9", border: "2px solid rgba(67,97,238,0.3)", boxShadow: "0 4px 24px rgba(67,97,238,0.12)" }}
+        >
+          <div className="flex items-center gap-2 mb-2">
+            <Star size={16} style={{ color: "#4361EE" }} />
+            <span className="text-xs font-semibold" style={{ color: "#4361EE" }}>Page dédiée disponible</span>
+          </div>
+          <h3 className="font-bold text-lg mb-2" style={{ color: "#2B1E3F" }}>Levallois-Perret</h3>
+          <p className="text-sm mb-4" style={{ color: "#2B1E3F", opacity: 0.6 }}>
+            à Levallois-Perret (92), ville la plus dense de France - 70 000 habitants, ligne 3
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <Link
+              to="/agence-web-levallois-perret"
+              className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
+              style={{ backgroundColor: "rgba(67,97,238,0.15)", color: "#4361EE", border: "1px solid rgba(67,97,238,0.3)" }}
+            >
+              Agence web et SEO Levallois-Perret
             </Link>
           </div>
         </motion.div>
@@ -173,7 +200,7 @@ const NosVilles = () => (
       </div>
     </section>
 
-    {/* Section 4 — Contenu SEO */}
+    {/* Section 4 - Contenu SEO */}
     <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
       <div className="container">
         <div className="mx-auto max-w-3xl space-y-6">
@@ -200,7 +227,7 @@ const NosVilles = () => (
       </div>
     </section>
 
-    {/* Section 5 — Liens services */}
+    {/* Section 5 - Liens services */}
     <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
       <div className="container">
         <div className="mx-auto max-w-2xl text-center">
