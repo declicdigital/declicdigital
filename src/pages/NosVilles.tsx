@@ -12,11 +12,27 @@ import heroVilles from "@/assets/nos-villes-paris-hauts-de-seine-92.webp";
 const parisCities = cities.filter((c) => c.region === "paris");
 const hdsCities = cities.filter((c) => c.region === "hauts-de-seine");
 
-// Villes avec page dédiée unique (remplace les deux liens création + SEO)
+// Pages dédiées — remplacent les deux liens création + SEO dans la grille
+// Clé = slug exact de cities.ts (ou slug manuel pour les villes hors cities.ts)
 const dedicatedPages: Record<string, { to: string; label: string }> = {
   "asnieres-sur-seine": { to: "/agence-web-asnieres-sur-seine", label: "Agence web et SEO Asnières" },
   "levallois-perret": { to: "/agence-web-levallois-perret", label: "Agence web et SEO Levallois-Perret" },
 };
+
+// Villes avec page dédiée qui ne sont PAS dans cities.ts (ajout manuel)
+const extraCities = [
+  {
+    slug: "asnieres-sur-seine",
+    name: "Asnières-sur-Seine",
+    description: "à Asnières-sur-Seine (92), aux portes de Paris - 90 000 habitants, ligne 13",
+  },
+];
+
+// On fusionne : extraCities + hdsCities, triés alphabétiquement par name
+const allHdsCities = [
+  ...extraCities.map((c) => ({ ...c, region: "hauts-de-seine" as const, postalCode: "", nameShort: c.name })),
+  ...hdsCities,
+].sort((a, b) => a.name.localeCompare(b.name, "fr"));
 
 const NosVilles = () => (
   <PageLayout>
@@ -87,7 +103,7 @@ const NosVilles = () => (
           Nous accompagnons les entreprises des Hauts-de-Seine pour développer leur visibilité en ligne avec des sites web performants et un référencement SEO et GEO ciblé.
         </p>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {hdsCities.map((city, i) => {
+          {allHdsCities.map((city, i) => {
             const dedicated = dedicatedPages[city.slug];
             return (
               <motion.div key={city.slug} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
@@ -136,7 +152,7 @@ const NosVilles = () => (
           <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
             Chez Déclic Digital, nous optimisons chaque{" "}
             <Link to="/creation-site-web" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>site web</Link>{" "}
-            pour le référencement local : fiche Google Business Profile, pages dédiées par ville, contenu géolocalisé et citations sur les annuaires locaux. Cette approche vous permet de dominer les résultats Google dans votre zone de chalandise. Demandez votre{" "}
+            pour le référencement local : fiche Google Business Profile, pages dédiées par ville, contenu géolocalisé et citations sur les annuaires locaux. Demandez votre{" "}
             <Link to="/contact" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>audit SEO gratuit</Link>{" "}
             pour évaluer votre situation.
           </p>
