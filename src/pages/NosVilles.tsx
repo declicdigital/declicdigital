@@ -10,7 +10,13 @@ import imgTexture from "@/assets/texture-fond-section-violet-turquoise.webp";
 import heroVilles from "@/assets/nos-villes-paris-hauts-de-seine-92.webp";
 
 const parisCities = cities.filter((c) => c.region === "paris");
-const hdsCities = cities.filter((c) => c.region === "hauts-de-seine" && c.slug !== "levallois-perret");
+const hdsCities = cities.filter((c) => c.region === "hauts-de-seine");
+
+// Villes avec page dédiée unique (remplace les deux liens création + SEO)
+const dedicatedPages: Record<string, { to: string; label: string }> = {
+  "asnieres-sur-seine": { to: "/agence-web-asnieres-sur-seine", label: "Agence web et SEO Asnières" },
+  "levallois-perret": { to: "/agence-web-levallois-perret", label: "Agence web et SEO Levallois-Perret" },
+};
 
 const NosVilles = () => (
   <PageLayout>
@@ -23,26 +29,12 @@ const NosVilles = () => (
 
     {/* Section 1 - Hero */}
     <section className="relative overflow-hidden py-16 md:py-24 min-h-[500px] flex items-center">
-      <img
-        src={heroVilles}
-        alt="Agence web Paris et Hauts-de-Seine 92 - Déclic Digital"
-        className="absolute inset-0 w-full h-full object-cover object-center"
-      />
-      <div
-        className="absolute inset-0"
-        style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.93) 0%, hsl(263,36%,18%,0.78) 55%, hsl(183,70%,40%,0.55) 100%)" }}
-      />
+      <img src={heroVilles} alt="Agence web Paris et Hauts-de-Seine 92 - Déclic Digital" className="absolute inset-0 w-full h-full object-cover object-center" />
+      <div className="absolute inset-0" style={{ background: "linear-gradient(135deg, hsl(263,36%,18%,0.93) 0%, hsl(263,36%,18%,0.78) 55%, hsl(183,70%,40%,0.55) 100%)" }} />
       <div className="container relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="mx-auto max-w-3xl text-center"
-        >
-          <span
-            className="mb-4 inline-block rounded-full px-4 py-1.5 text-xs font-semibold border"
-            style={{ backgroundColor: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.2)", color: "rgba(246,241,233,0.8)" }}
-          >
+        <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="mx-auto max-w-3xl text-center">
+          <span className="mb-4 inline-block rounded-full px-4 py-1.5 text-xs font-semibold border"
+            style={{ backgroundColor: "rgba(255,255,255,0.1)", borderColor: "rgba(255,255,255,0.2)", color: "rgba(246,241,233,0.8)" }}>
             Zone d'intervention
           </span>
           <h1 className="mb-4 leading-tight" style={{ color: "#F6F1E9" }}>
@@ -67,32 +59,16 @@ const NosVilles = () => (
         </p>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {parisCities.map((city, i) => (
-            <motion.div
-              key={city.slug}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
+            <motion.div key={city.slug} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
               className="rounded-2xl p-6"
-              style={{ backgroundColor: "#E9F2F4", border: "1px solid rgba(43,30,63,0.1)", boxShadow: "0 4px 16px rgba(43,30,63,0.07)" }}
-            >
+              style={{ backgroundColor: "#E9F2F4", border: "1px solid rgba(43,30,63,0.1)", boxShadow: "0 4px 16px rgba(43,30,63,0.07)" }}>
               <h3 className="font-bold text-lg mb-2" style={{ color: "#2B1E3F" }}>{city.name}</h3>
               <p className="text-sm mb-4" style={{ color: "#2B1E3F", opacity: 0.6 }}>{city.description}</p>
               <div className="flex flex-wrap gap-2">
-                <Link
-                  to={`/creation-site-web/${city.slug}`}
-                  className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
-                  style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}
-                >
-                  Création de site
-                </Link>
-                <Link
-                  to={`/referencement-seo/${city.slug}`}
-                  className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
-                  style={{ backgroundColor: "rgba(156,79,255,0.12)", color: "#9C4FFF" }}
-                >
-                  SEO et GEO
-                </Link>
+                <Link to={`/creation-site-web/${city.slug}`} className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
+                  style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}>Création de site</Link>
+                <Link to={`/referencement-seo/${city.slug}`} className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
+                  style={{ backgroundColor: "rgba(156,79,255,0.12)", color: "#9C4FFF" }}>SEO et GEO</Link>
               </div>
             </motion.div>
           ))}
@@ -110,92 +86,39 @@ const NosVilles = () => (
         <p className="text-center max-w-2xl mx-auto mb-10" style={{ color: "#2B1E3F", opacity: 0.7 }}>
           Nous accompagnons les entreprises des Hauts-de-Seine pour développer leur visibilité en ligne avec des sites web performants et un référencement SEO et GEO ciblé.
         </p>
-
-        {/* Carte Asnières */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="rounded-2xl p-6 mb-4"
-          style={{ backgroundColor: "#F6F1E9", border: "2px solid rgba(67,97,238,0.3)", boxShadow: "0 4px 24px rgba(67,97,238,0.12)" }}
-        >
-          <div className="flex items-center gap-2 mb-2">
-            <Star size={16} style={{ color: "#4361EE" }} />
-            <span className="text-xs font-semibold" style={{ color: "#4361EE" }}>Page dédiée disponible</span>
-          </div>
-          <h3 className="font-bold text-lg mb-2" style={{ color: "#2B1E3F" }}>Asnières-sur-Seine</h3>
-          <p className="text-sm mb-4" style={{ color: "#2B1E3F", opacity: 0.6 }}>
-            à Asnières-sur-Seine (92), aux portes de Paris - 90 000 habitants, ligne 13
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <Link
-              to="/agence-web-asnieres-sur-seine"
-              className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
-              style={{ backgroundColor: "rgba(67,97,238,0.15)", color: "#4361EE", border: "1px solid rgba(67,97,238,0.3)" }}
-            >
-              Agence web et SEO Asnières
-            </Link>
-          </div>
-        </motion.div>
-
-        {/* Carte Levallois-Perret */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="rounded-2xl p-6 mb-6"
-          style={{ backgroundColor: "#F6F1E9", border: "2px solid rgba(67,97,238,0.3)", boxShadow: "0 4px 24px rgba(67,97,238,0.12)" }}
-        >
-          <div className="flex items-center gap-2 mb-2">
-            <Star size={16} style={{ color: "#4361EE" }} />
-            <span className="text-xs font-semibold" style={{ color: "#4361EE" }}>Page dédiée disponible</span>
-          </div>
-          <h3 className="font-bold text-lg mb-2" style={{ color: "#2B1E3F" }}>Levallois-Perret</h3>
-          <p className="text-sm mb-4" style={{ color: "#2B1E3F", opacity: 0.6 }}>
-            à Levallois-Perret (92), ville la plus dense de France - 70 000 habitants, ligne 3
-          </p>
-          <div className="flex flex-wrap gap-2">
-            <Link
-              to="/agence-web-levallois-perret"
-              className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
-              style={{ backgroundColor: "rgba(67,97,238,0.15)", color: "#4361EE", border: "1px solid rgba(67,97,238,0.3)" }}
-            >
-              Agence web et SEO Levallois-Perret
-            </Link>
-          </div>
-        </motion.div>
-
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {hdsCities.map((city, i) => (
-            <motion.div
-              key={city.slug}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.05 }}
-              className="rounded-2xl p-6"
-              style={{ backgroundColor: "#F6F1E9", border: "1px solid rgba(43,30,63,0.1)", boxShadow: "0 4px 16px rgba(43,30,63,0.07)" }}
-            >
-              <h3 className="font-bold text-lg mb-2" style={{ color: "#2B1E3F" }}>{city.name}</h3>
-              <p className="text-sm mb-4" style={{ color: "#2B1E3F", opacity: 0.6 }}>{city.description}</p>
-              <div className="flex flex-wrap gap-2">
-                <Link
-                  to={`/creation-site-web/${city.slug}`}
-                  className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
-                  style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}
-                >
-                  Création de site
-                </Link>
-                <Link
-                  to={`/referencement-seo/${city.slug}`}
-                  className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
-                  style={{ backgroundColor: "rgba(156,79,255,0.12)", color: "#9C4FFF" }}
-                >
-                  SEO et GEO
-                </Link>
-              </div>
-            </motion.div>
-          ))}
+          {hdsCities.map((city, i) => {
+            const dedicated = dedicatedPages[city.slug];
+            return (
+              <motion.div key={city.slug} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}
+                className="rounded-2xl p-6"
+                style={{ backgroundColor: "#F6F1E9", border: dedicated ? "2px solid rgba(67,97,238,0.25)" : "1px solid rgba(43,30,63,0.1)", boxShadow: "0 4px 16px rgba(43,30,63,0.07)" }}>
+                {dedicated && (
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <Star size={13} style={{ color: "#4361EE" }} />
+                    <span className="text-xs font-semibold" style={{ color: "#4361EE" }}>Page dédiée</span>
+                  </div>
+                )}
+                <h3 className="font-bold text-lg mb-2" style={{ color: "#2B1E3F" }}>{city.name}</h3>
+                <p className="text-sm mb-4" style={{ color: "#2B1E3F", opacity: 0.6 }}>{city.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {dedicated ? (
+                    <Link to={dedicated.to} className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
+                      style={{ backgroundColor: "rgba(67,97,238,0.15)", color: "#4361EE", border: "1px solid rgba(67,97,238,0.3)" }}>
+                      {dedicated.label}
+                    </Link>
+                  ) : (
+                    <>
+                      <Link to={`/creation-site-web/${city.slug}`} className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
+                        style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}>Création de site</Link>
+                      <Link to={`/referencement-seo/${city.slug}`} className="rounded-full px-3 py-1.5 text-xs font-semibold transition-colors"
+                        style={{ backgroundColor: "rgba(156,79,255,0.12)", color: "#9C4FFF" }}>SEO et GEO</Link>
+                    </>
+                  )}
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
