@@ -20,7 +20,7 @@ const faqs = [
   },
   {
     q: "Travaillez-vous uniquement avec des entreprises de Levallois-Perret ?",
-    a: "Non. Declic Digital accompagne des clients dans tout le departement des Hauts-de-Seine — Boulogne-Billancourt, Nanterre, Clichy, Neuilly-sur-Seine, Courbevoie — et a Paris. Notre ancrage local dans le 92 est un avantage pour comprendre votre marche de proximite."
+    a: "Non. Declic Digital accompagne des clients dans tout le departement des Hauts-de-Seine , notamment Boulogne-Billancourt, Nanterre, Clichy, Neuilly-sur-Seine et Courbevoie, et a Paris. Notre ancrage local dans le 92 est un avantage pour comprendre votre marche de proximite."
   },
   {
     q: "Mon site est deja en ligne, peut-il etre optimise sans refonte ?",
@@ -28,7 +28,7 @@ const faqs = [
   },
   {
     q: "Quelle difference entre le SEO et Google Ads pour une entreprise a Levallois ?",
-    a: "Google Ads donne des resultats immediats mais facture chaque clic — des que vous coupez le budget, vous disparaissez. Le referencement naturel demande plus de temps mais cree une visibilite durable et gratuite sur le long terme. Nous recommandons souvent les deux en complement au demarrage."
+    a: "Google Ads donne des resultats immediats mais facture chaque clic : des que vous coupez le budget, vous disparaissez. Le referencement naturel demande plus de temps mais cree une visibilite durable et gratuite sur le long terme. Nous recommandons souvent les deux en complement au demarrage."
   },
   {
     q: "Pouvez-vous m'aider a apparaitre sur Google Maps a Levallois-Perret ?",
@@ -60,20 +60,20 @@ const LevalloisPerret = () => (
       { label: "Levallois-Perret" }
     ]} />
 
-    {/* ── Section 1 — Hero ─────────────────────────────────────── */}
+    {/* ── Section 1 - Hero ─────────────────────────────────────── */}
     <section style={{ backgroundColor: "#F6F1E9" }} className="py-16 md:py-24">
       <div className="container">
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <motion.div initial={{ opacity: 0, x: -40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
             <span className="mb-4 inline-block rounded-full px-4 py-1.5 text-xs font-semibold"
               style={{ backgroundColor: "rgba(67,97,238,0.12)", color: "#4361EE" }}>
-              Agence web et SEO — Levallois-Perret (92)
+              Agence web et SEO - Levallois-Perret (92)
             </span>
             <h1 className="mb-6" style={{ color: "#2B1E3F" }}>
               Agence SEO et création de site web à Levallois-Perret
             </h1>
             <p className="mb-4 text-lg leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.75 }}>
-              Votre entreprise à Levallois-Perret mérite d'être trouvée sur Google. Declic Digital crée votre <Link to="/creation-site-web" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>site web professionnel</Link> et optimise votre <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>référencement local</Link> pour attirer des clients qualifiés en continu — sans budget publicitaire variable.
+              Votre entreprise à Levallois-Perret mérite d'être trouvée sur Google. Declic Digital crée votre <Link to="/creation-site-web" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>site web professionnel</Link> et optimise votre <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>référencement local</Link> pour attirer des clients qualifiés en continu, sans budget publicitaire variable.
             </p>
             <p className="mb-8 text-base leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.65 }}>
               Geoffrey, Expert Produit Google certifié, accompagne les TPE, artisans et indépendants de Levallois-Perret et des Hauts-de-Seine depuis notre agence parisienne. Audit SEO offert, réponse en 48h.
@@ -102,7 +102,7 @@ const LevalloisPerret = () => (
       </div>
     </section>
 
-    {/* ── Section 2 — Chiffres SEO ─────────────────────────────── */}
+    {/* ── Section 2 - Chiffres SEO ─────────────────────────────── */}
     <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
       <div className="container">
         <h2 className="text-center mb-10" style={{ color: "#2B1E3F" }}>Pourquoi le référencement local change tout à Levallois</h2>
@@ -123,7 +123,7 @@ const LevalloisPerret = () => (
       </div>
     </section>
 
-    {/* ── Section 3 — Création de site web ─────────────────────── */}
+    {/* ── Section 3 - Création de site web ─────────────────────── */}
     <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
       <div className="container">
         <h2 className="text-center mb-4" style={{ color: "#2B1E3F" }}>
@@ -135,9 +135,9 @@ const LevalloisPerret = () => (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {[
             { icon: Monitor, title: "Design professionnel", desc: "Un site qui reflète le sérieux de votre entreprise à Levallois-Perret, livré en 2 à 3 semaines." },
-            { icon: Smartphone, title: "100% responsive", desc: "Affiché parfaitement sur mobile — 70% des recherches locales se font depuis un smartphone." },
+            { icon: Smartphone, title: "100% responsive", desc: "Affiché parfaitement sur mobile : 70% des des recherches locales se font depuis un smartphone." },
             { icon: TrendingUp, title: "Optimisé SEO local", desc: "Chaque page est conçue pour apparaître sur les requêtes de vos clients à Levallois et dans le 92." },
-            { icon: Zap, title: "Rapide et performant", desc: "Temps de chargement < 2,5s. Google pénalise les sites lents — les nôtres passent PageSpeed > 90." },
+            { icon: Zap, title: "Rapide et performant", desc: "Temps de chargement < 2,5s. Google pénalise les sites lents : les nôtres passent PageSpeed > 90." },
           ].map((item, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
               className="rounded-2xl p-6 text-center" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
@@ -178,7 +178,7 @@ const LevalloisPerret = () => (
       </div>
     </section>
 
-    {/* ── Section 4 — SEO Levallois ─────────────────────────────── */}
+    {/* ── Section 4 - SEO Levallois ─────────────────────────────── */}
     <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
       <div className="container">
         <h2 className="text-center mb-4" style={{ color: "#2B1E3F" }}>
@@ -217,7 +217,7 @@ const LevalloisPerret = () => (
       </div>
     </section>
 
-    {/* ── Section 5 — Contenu local + Map ──────────────────────── */}
+    {/* ── Section 5 - Contenu local + Map ──────────────────────── */}
     <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
       <div className="container">
         <div className="mx-auto max-w-3xl space-y-6">
@@ -225,17 +225,17 @@ const LevalloisPerret = () => (
             Apparaître sur Google Maps à Levallois-Perret
           </h2>
           <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-            Levallois-Perret est l'une des villes les plus denses de France avec près de 70 000 habitants sur 2,4 km². Cette concentration crée un bassin de clients potentiels exceptionnellement proche, mais aussi une concurrence locale réelle entre les professionnels du même secteur. Le pack local Google Maps — les trois établissements affichés avec une carte en haut des résultats — capte entre 60 et 75% des clics sur les requêtes locales. Être dans ce pack, c'est capter la majorité des contacts sans dépenser un euro en publicité.
+            Levallois-Perret est l'une des villes les plus denses de France avec près de 70 000 habitants sur 2,4 km². Cette concentration crée un bassin de clients potentiels exceptionnellement proche, mais aussi une concurrence locale réelle entre les professionnels du même secteur. Le pack local Google Maps (les trois établissements affichés avec une carte en haut des résultats) capte entre 60 et 75% des clics sur les requêtes locales. Être dans ce pack, c'est capter la majorité des contacts sans dépenser un euro en publicité.
           </p>
           <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
-            Pour y apparaître, votre fiche Google Business Profile doit être complète et active : photos récentes de vos locaux ou réalisations, catégorie principale précise, description qui mentionne naturellement Levallois-Perret et vos services, horaires à jour, et surtout des avis clients réguliers. Les établissements qui publient un Google Post par semaine sont systématiquement favorisés par l'algorithme de classement local. La <Link to="/visibilite-ia" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>visibilité sur les moteurs IA</Link> comme ChatGPT et Perplexity suit les mêmes logiques d'autorité locale — travailler votre présence Google renforce aussi votre citation dans ces nouveaux canaux.
+            Pour y apparaître, votre fiche Google Business Profile doit être complète et active : photos récentes de vos locaux ou réalisations, catégorie principale précise, description qui mentionne naturellement Levallois-Perret et vos services, horaires à jour, et surtout des avis clients réguliers. Les établissements qui publient un Google Post par semaine sont systématiquement favorisés par l'algorithme de classement local. La <Link to="/visibilite-ia" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>visibilité sur les moteurs IA</Link> comme ChatGPT et Perplexity suit les mêmes logiques d'autorité locale : travailler votre présence Google renforce aussi votre citation dans ces nouveaux canaux.
           </p>
           <p className="leading-relaxed" style={{ color: "#2B1E3F", opacity: 0.7 }}>
             La proximité de Levallois-Perret avec Neuilly-sur-Seine, Clichy et Courbevoie crée aussi une opportunité de maillage géographique : des pages dédiées à chacune de ces communes voisines permettent d'étendre votre visibilité au-delà de Levallois sur des requêtes de type "plombier Clichy" ou "électricien Neuilly" sans créer de nouveau site. C'est une stratégie que nous mettons en place dans chaque <Link to="/referencement-seo" className="font-semibold hover:underline" style={{ color: "#4361EE" }}>accompagnement SEO local</Link>.
           </p>
           <div className="pt-4">
             <MapEmbed
-              title="Déclic Digital — agence web et SEO"
+              title="Déclic Digital - agence web et SEO"
               subtitle="Basés à Paris 15e, nous accompagnons les professionnels de Levallois-Perret et du 92 dans leur visibilité en ligne." />
           </div>
           <div className="rounded-2xl p-6" style={{ backgroundColor: "#E9F2F4", boxShadow: "0 4px 24px rgba(43,30,63,0.08)" }}>
@@ -251,7 +251,7 @@ const LevalloisPerret = () => (
       </div>
     </section>
 
-    {/* ── Section 6 — Process ───────────────────────────────────── */}
+    {/* ── Section 6 - Process ───────────────────────────────────── */}
     <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
       <div className="container">
         <h2 className="text-center mb-10" style={{ color: "#2B1E3F" }}>Comment se déroule votre projet ?</h2>
@@ -274,11 +274,11 @@ const LevalloisPerret = () => (
       </div>
     </section>
 
-    {/* ── Section 7 — FAQ ───────────────────────────────────────── */}
+    {/* ── Section 7 - FAQ ───────────────────────────────────────── */}
     <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
       <div className="container">
         <h2 className="text-center mb-10" style={{ color: "#2B1E3F" }}>
-          Questions fréquentes — agence web et SEO à Levallois-Perret
+          Questions fréquentes - agence web et SEO à Levallois-Perret
         </h2>
         <div className="mx-auto max-w-3xl space-y-4">
           {faqs.map((faq, i) => (
@@ -297,7 +297,7 @@ const LevalloisPerret = () => (
       </div>
     </section>
 
-    {/* ── Section 8 — Liens services ───────────────────────────── */}
+    {/* ── Section 8 - Liens services ───────────────────────────── */}
     <section style={{ backgroundColor: "#E9F2F4" }} className="py-12 md:py-16">
       <div className="container">
         <div className="mx-auto max-w-3xl text-center">
@@ -322,7 +322,7 @@ const LevalloisPerret = () => (
       </div>
     </section>
 
-    {/* ── Section 9 — Villes voisines ──────────────────────────── */}
+    {/* ── Section 9 - Villes voisines ──────────────────────────── */}
     <section style={{ backgroundColor: "#F6F1E9" }} className="py-12 md:py-16">
       <div className="container">
         <h2 className="text-center mb-6" style={{ color: "#2B1E3F" }}>
