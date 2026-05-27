@@ -37,6 +37,7 @@ const Declicweb = lazy(() => import("./pages/Declicweb"));
 const AsnièresSurSeine = lazy(() => import("./pages/AsnièresSurSeine"));
 const LevalloisPerret = lazy(() => import("./pages/LevalloisPerret"));
 const Suresnes = lazy(() => import("./pages/Suresnes"));
+const DecorateurInterieur = lazy(() => import("./pages/DecorateurInterieur"));
 
 const AdminLogin = lazy(() => import("./pages/admin/AdminLogin"));
 const AdminDashboard = lazy(() => import("./pages/admin/AdminDashboard"));
@@ -102,6 +103,7 @@ const App = () => (
                 <Route path="/agence-web-asnieres-sur-seine" element={<AsnièresSurSeine />} />
                 <Route path="/agence-web-levallois-perret" element={<LevalloisPerret />} />
                 <Route path="/agence-web-suresnes" element={<Suresnes />} />
+                <Route path="/site-web-decorateur-interieur" element={<DecorateurInterieur />} />
 
                 <Route path="/admin" element={<Navigate to="/admin/login" replace />} />
                 <Route path="/admin/login" element={<AdminLogin />} />
