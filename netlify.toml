@@ -1,4 +1,16 @@
 [[redirects]]
+  from = "/referencement-seo/asnieres-sur-seine"
+  to = "/agence-web-asnieres-sur-seine"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/creation-site-web/asnieres-sur-seine"
+  to = "/agence-web-asnieres-sur-seine"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/referencement-seo/levallois-perret"
   to = "/agence-web-levallois-perret"
   status = 301
@@ -7,6 +19,18 @@
 [[redirects]]
   from = "/creation-site-web/levallois-perret"
   to = "/agence-web-levallois-perret"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/referencement-seo/suresnes"
+  to = "/agence-web-suresnes"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/creation-site-web/suresnes"
+  to = "/agence-web-suresnes"
   status = 301
   force = true
 
