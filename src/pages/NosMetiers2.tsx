@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import { Helmet } from "react-helmet-async";
+import { Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import PageLayout from "@/components/PageLayout";
 import PageBreadcrumb from "@/components/PageBreadcrumb";
@@ -9,6 +10,11 @@ import heroMetiers from "@/assets/nos-metiers-artisans-tpe-independants-paris.we
 import { trades, tradeCategories } from "@/data/trades";
 
 const bgAlternance = ["#F6F1E9", "#E9F2F4"];
+
+// Métiers avec page dédiée — remplace le lien /creation-site-web/metier/[slug]
+const dedicatedPages: Record<string, { to: string }> = {
+  "decorateur-interieur": { to: "/site-web-decorateur-interieur" },
+};
 
 const NosMetiers = () => (
   <PageLayout>
@@ -20,7 +26,7 @@ const NosMetiers = () => (
     </Helmet>
     <PageBreadcrumb items={[{ label: "Accueil", href: "/" }, { label: "Création de site web", href: "/creation-site-web" }, { label: "Nos métiers" }]} />
 
-    {/* Section 1 — Hero sombre fond image, texte centré — skip alternance */}
+    {/* Section 1 - Hero */}
     <section className="relative overflow-hidden py-16 md:py-24 min-h-[500px] flex items-center">
       <img
         src={heroMetiers}
@@ -58,7 +64,7 @@ const NosMetiers = () => (
       </div>
     </section>
 
-    {/* Métiers par catégorie — alternance à partir de #F6F1E9 */}
+    {/* Métiers par catégorie */}
     {tradeCategories.map((cat, catIndex) => {
       const catTrades = trades.filter((t) => t.category === cat.key);
       if (catTrades.length === 0) return null;
@@ -69,33 +75,43 @@ const NosMetiers = () => (
           <div className="container">
             <h2 className="text-2xl font-extrabold md:text-3xl mb-6" style={{ color: "#2B1E3F" }}>{cat.label}</h2>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {catTrades.map((trade) => (
-                <Link
-                  key={trade.slug}
-                  to={`/creation-site-web/metier/${trade.slug}`}
-                  className="group flex items-start gap-4 rounded-2xl p-5 transition-all hover:-translate-y-0.5"
-                  style={{
-                    backgroundColor: cardBg,
-                    border: "1px solid rgba(43,30,63,0.1)",
-                    boxShadow: "0 4px 16px rgba(43,30,63,0.07)",
-                  }}
-                >
-                  <span className="text-2xl">{trade.icon}</span>
-                  <div className="min-w-0">
-                    <h3 className="font-bold transition-colors" style={{ color: "#2B1E3F" }}>{trade.name}</h3>
-                    <p className="text-sm mt-1 line-clamp-2" style={{ color: "#2B1E3F", opacity: 0.6 }}>
-                      {trade.whyWebsite.slice(0, 100)}...
-                    </p>
-                  </div>
-                </Link>
-              ))}
+              {catTrades.map((trade) => {
+                const dedicated = dedicatedPages[trade.slug];
+                const href = dedicated ? dedicated.to : `/creation-site-web/metier/${trade.slug}`;
+                return (
+                  <Link
+                    key={trade.slug}
+                    to={href}
+                    className="group flex items-start gap-4 rounded-2xl p-5 transition-all hover:-translate-y-0.5"
+                    style={{
+                      backgroundColor: cardBg,
+                      border: dedicated ? "2px solid rgba(67,97,238,0.25)" : "1px solid rgba(43,30,63,0.1)",
+                      boxShadow: "0 4px 16px rgba(43,30,63,0.07)",
+                    }}
+                  >
+                    <span className="text-2xl">{trade.icon}</span>
+                    <div className="min-w-0">
+                      {dedicated && (
+                        <div className="flex items-center gap-1 mb-1">
+                          <Star size={11} style={{ color: "#4361EE" }} />
+                          <span className="text-xs font-semibold" style={{ color: "#4361EE" }}>Page dédiée</span>
+                        </div>
+                      )}
+                      <h3 className="font-bold transition-colors" style={{ color: "#2B1E3F" }}>{trade.name}</h3>
+                      <p className="text-sm mt-1 line-clamp-2" style={{ color: "#2B1E3F", opacity: 0.6 }}>
+                        {trade.whyWebsite.slice(0, 100)}...
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </section>
       );
     })}
 
-    {/* CTA texture — skip alternance */}
+    {/* CTA texture */}
     <section data-alternate="skip" className="relative overflow-hidden py-16">
       <img src={imgTexture} alt="" aria-hidden="true" className="absolute inset-0 w-full h-full object-cover" />
       <div className="container relative z-10 text-center">
