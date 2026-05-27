@@ -17,6 +17,7 @@ const hdsCities = cities.filter((c) => c.region === "hauts-de-seine");
 const dedicatedPages: Record<string, { to: string; label: string }> = {
   "asnieres-sur-seine": { to: "/agence-web-asnieres-sur-seine", label: "Agence web et SEO Asnières" },
   "levallois-perret": { to: "/agence-web-levallois-perret", label: "Agence web et SEO Levallois-Perret" },
+  "suresnes": { to: "/agence-web-suresnes", label: "Agence web et SEO Suresnes" },
 };
 
 // Villes avec page dédiée qui ne sont PAS dans cities.ts (ajout manuel)
