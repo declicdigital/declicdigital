@@ -39,13 +39,6 @@ const Header = () => {
   const isActive = (to: string) =>
     location.pathname === to || (to !== "/" && location.pathname.startsWith(to));
 
-  const linkClass = (to: string) =>
-    `rounded-lg px-2 xl:px-3 py-2 text-[13px] xl:text-[15px] font-medium whitespace-nowrap transition-colors ${
-      isActive(to)
-        ? "color-active"
-        : ""
-    }`;
-
   return (
     <header
       className="sticky top-0 z-50 backdrop-blur-lg"
@@ -60,7 +53,14 @@ const Header = () => {
           className="flex shrink-0 items-center"
           onClick={() => { if (window.location.pathname === '/') { window.scrollTo({ top: 0, behavior: 'smooth' }); } }}
         >
-          <img src={logo} alt="Déclic Digital" className="h-14 md:h-16 w-auto object-contain" width={160} height={88} />
+          <img
+            src={logo}
+            alt="Déclic Digital"
+            className="w-auto object-contain"
+            style={{ height: "clamp(44px, 7vw, 64px)" }}
+            width={320}
+            height={176}
+          />
         </Link>
 
         <nav className="hidden items-center gap-0.5 lg:flex">
