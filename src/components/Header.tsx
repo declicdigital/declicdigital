@@ -57,7 +57,7 @@ const Header = () => {
             src={logo}
             alt="Déclic Digital"
             className="w-auto object-contain"
-            style={{ height: "clamp(44px, 7vw, 64px)" }}
+            style={{ height: "clamp(56px, 8vw, 72px)" }}
             width={320}
             height={176}
           />
