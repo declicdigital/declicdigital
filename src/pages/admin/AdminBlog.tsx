@@ -56,7 +56,7 @@ export default function AdminBlog() {
     const { data } = await supabase
       .from("cms_blog_posts")
       .select("id, title, slug, status, category, tags, read_time, created_at, updated_at, scheduled_at, cover_image_url")
-      .order("updated_at", { ascending: false });
+      .order("created_at", { ascending: false });
     setPosts(data ?? []);
     setLoadingData(false);
   }
@@ -162,7 +162,7 @@ export default function AdminBlog() {
                         <span className={`text-xs font-medium px-2 py-0.5 rounded-full ${sl.color}`}>{sl.label}</span>
                         {isScheduled(post) && post.scheduled_at && (
                           <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: "rgba(234,88,12,0.08)", color: "rgb(234,88,12)" }}>
-                            ⏰ {new Date(post.scheduled_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}
+                            {new Date(post.scheduled_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short" })}
                           </span>
                         )}
                         <span className="text-xs px-2 py-0.5 rounded-full" style={{ background: "rgba(43,30,63,0.06)", color: INK_LIGHT }}>
