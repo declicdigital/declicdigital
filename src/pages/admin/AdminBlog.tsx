@@ -25,6 +25,7 @@ const INK_XLIGHT = "rgba(43,30,63,0.25)";
 const BG_CARD = "#EDE8DF";
 const BG_MAIN = "#F6F1E9";
 const BORDER = "rgba(43,30,63,0.08)";
+const VIOLET = "#9C4FFF";
 
 function getStatusDisplay(post: BlogPost): { label: string; color: string } {
   if (post.status === "draft" && post.scheduled_at && new Date(post.scheduled_at) > new Date()) {
@@ -171,11 +172,11 @@ export default function AdminBlog() {
                       </div>
                       <h3 className="font-semibold text-sm leading-snug line-clamp-1" style={{ color: INK }}>{post.title}</h3>
                       <div className="flex items-center gap-3 mt-1">
-                        <span className="flex items-center gap-1 text-xs" style={{ color: INK_XLIGHT }}>
+                        <span className="flex items-center gap-1 text-xs" style={{ color: VIOLET }}>
                           <Calendar size={11} />
                           {new Date(post.created_at).toLocaleDateString("fr-FR", { day: "numeric", month: "short", year: "numeric" })}
                         </span>
-                        <span className="flex items-center gap-1 text-xs" style={{ color: INK_XLIGHT }}>
+                        <span className="flex items-center gap-1 text-xs" style={{ color: VIOLET }}>
                           <Clock size={11} /> {post.read_time}
                         </span>
                       </div>
