@@ -189,6 +189,7 @@ const GoogleReviewsSection = ({
                       rel="noopener noreferrer"
                       className="shrink-0 ml-2"
                       style={{ color: "#2B1E3F", opacity: 0.4 }}
+                      aria-label={`Voir le profil Google de ${review.author_name}`}
                     >
                       <ExternalLink size={14} />
                     </a>
