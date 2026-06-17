@@ -1,0 +1,24 @@
+# Déclic Digital
+
+> Agence web et SEO basée à Paris, spécialisée dans la création de sites internet et le référencement (SEO/GEO) pour les TPE, artisans et indépendants à Paris et dans les Hauts-de-Seine (92).
+
+Déclic Digital accompagne les professionnels indépendants dans leur présence en ligne : création de site internet sur mesure, référencement naturel (SEO), et optimisation pour les moteurs de recherche génératifs (GEO) comme ChatGPT ou Perplexity.
+
+## Services
+- [Création de site internet](https://declicdigital.net/creation-site-web): Sites vitrines et e-commerce sur mesure pour TPE et indépendants.
+- [Référencement SEO](https://declicdigital.net/referencement-seo): Stratégies de référencement naturel local et national.
+- [Visibilité IA (GEO)](https://declicdigital.net/visibilite-ia): Optimisation pour les moteurs de recherche génératifs.
+- [Tarifs](https://declicdigital.net/tarifs): Grille tarifaire des prestations.
+
+## Zones d'intervention
+- [Nos villes](https://declicdigital.net/nos-villes): Liste des villes couvertes à Paris et dans les Hauts-de-Seine.
+- [Nos métiers](https://declicdigital.net/nos-metiers): Secteurs d'activité accompagnés.
+
+## À propos
+- [Qui sommes-nous](https://declicdigital.net/qui-sommes-nous): Présentation de l'agence et de son fondateur.
+- [Réalisations](https://declicdigital.net/realisations): Exemples de projets livrés.
+- [FAQ](https://declicdigital.net/faq): Questions fréquentes.
+- [Contact](https://declicdigital.net/contact): Prendre rendez-vous ou demander un devis.
+
+## Optional
+- [Blog](https://declicdigital.net/blog): Articles sur le web, le SEO et l'intelligence artificielle.
