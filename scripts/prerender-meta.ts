@@ -29,6 +29,7 @@ import { fileURLToPath } from "node:url";
 import { cities } from "../src/data/cities";
 import { trades } from "../src/data/trades";
 import { getSeoMeta } from "../src/data/seoMeta";
+import { getTradeSeoMeta } from "../src/data/tradeSeoMeta";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST_DIR = path.resolve(__dirname, "../dist");
@@ -198,11 +199,14 @@ function buildCityRoutes(): RouteMeta[] {
 //    Même formule que dans src/pages/MetierCreationSite.tsx
 // ------------------------------------------------------------------
 function buildTradeRoutes(): RouteMeta[] {
-  return trades.map((trade) => ({
-    urlPath: `/creation-site-web/metier/${trade.slug}`,
-    title: `Création site internet ${trade.nameShort} | Déclic Digital Paris`,
-    description: `Création de site web professionnel pour ${trade.name.toLowerCase()}. ${trade.whyWebsite.slice(0, 100)}. Devis gratuit en 24h.`,
-  }));
+  return trades.map((trade) => {
+    const seo = getTradeSeoMeta(trade);
+    return {
+      urlPath: `/creation-site-web/metier/${trade.slug}`,
+      title: seo.title,
+      description: seo.description,
+    };
+  });
 }
 
 // ------------------------------------------------------------------
