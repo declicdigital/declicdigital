@@ -93,8 +93,8 @@ const Geo = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>Visibilité IA : apparaître dans ChatGPT et Google AI</title>
-        <meta name="description" content="Optimisez votre présence dans les IA génératives. Déclic Digital vous aide à être cité par ChatGPT, Perplexity et Gemini. Audit gratuit." />
+        <title>Êtes-vous visible sur ChatGPT ? Testez votre GEO</title>
+        <meta name="description" content="ChatGPT et Perplexity recommandent déjà vos concurrents à vos clients. Découvrez votre visibilité IA et corrigez-la. Audit gratuit." />
         <meta name="robots" content="index, follow" />
         <link rel="canonical" href="https://declicdigital.net/visibilite-ia" />
         <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
