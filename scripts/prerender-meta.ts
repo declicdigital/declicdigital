@@ -65,9 +65,9 @@ const staticPages: RouteMeta[] = [
   },
   {
     urlPath: "/visibilite-ia",
-    title: "Visibilité IA : apparaître dans ChatGPT et Google AI",
+    title: "Êtes-vous visible sur ChatGPT ? Testez votre GEO",
     description:
-      "Optimisez votre présence dans les IA génératives. Déclic Digital vous aide à être cité par ChatGPT, Perplexity et Gemini. Audit gratuit.",
+      "ChatGPT et Perplexity recommandent déjà vos concurrents à vos clients. Découvrez votre visibilité IA et corrigez-la. Audit gratuit.",
   },
   {
     urlPath: "/tarifs",
