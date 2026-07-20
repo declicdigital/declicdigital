@@ -12,6 +12,7 @@ import metierComptable from "@/assets/metier-expert-comptable.webp";
 import metierPlombier from "@/assets/metier-plombier.webp";
 import metierElectricien from "@/assets/metier-electricien.webp";
 import { getTradeBySlug, trades, tradeCategories } from "@/data/trades";
+import { getTradeSeoMeta } from "@/data/tradeSeoMeta";
 import imgPlombierPortrait from "@/assets/plombier-paris-11-salle-de-bain.webp";
 import imgArtisanBoutique from "@/assets/artisan-ebeniste-paris-boutique.webp";
 import imgChefPortrait from "@/assets/chef-cuisinier-portrait-cuisine-paris.webp";
@@ -97,6 +98,8 @@ const MetierCreationSite = () => {
 
   if (!trade) return <Navigate to="/nos-metiers" replace />;
 
+  const seo = getTradeSeoMeta(trade);
+
   const relatedTrades = trades
     .filter((t) => t.category === trade.category && t.slug !== trade.slug)
     .slice(0, 6);
@@ -146,8 +149,8 @@ const MetierCreationSite = () => {
   return (
     <PageLayout>
       <Helmet>
-        <title>{`Création site internet ${trade.nameShort} | Déclic Digital Paris`}</title>
-        <meta name="description" content={`Création de site web professionnel pour ${trade.name.toLowerCase()}. ${trade.whyWebsite.slice(0, 100)}. Devis gratuit en 24h.`} />
+        <title>{seo.title}</title>
+        <meta name="description" content={seo.description} />
         <meta name="robots" content="index, follow" />
         {/* Canonical sans trailing slash */}
         <link rel="canonical" href={`https://declicdigital.net/creation-site-web/metier/${trade.slug}`} />
