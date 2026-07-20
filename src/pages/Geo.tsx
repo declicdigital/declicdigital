@@ -88,7 +88,7 @@ const Geo = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const faqSchema = { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: faqItems.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) };
-  const articleSchema = { "@context": "https://schema.org", "@type": "Article", headline: "GEO (Generative Engine Optimization) : Le guide complet pour TPE, artisans et indépendants", description: "Tout comprendre sur le GEO, la nouvelle discipline d'optimisation pour les moteurs génératifs basés sur l'IA.", author: { "@type": "LocalBusiness", name: "Déclic Digital", url: "https://declicdigital.net" }, datePublished: "2026-06-01", mainEntityOfPage: { "@type": "WebPage", "@id": "https://declicdigital.net/visibilite-ia/" } };
+  const articleSchema = { "@context": "https://schema.org", "@type": "Article", headline: "GEO (Generative Engine Optimization) : Le guide complet pour TPE, artisans et indépendants", description: "Tout comprendre sur le GEO, la nouvelle discipline d'optimisation pour les moteurs génératifs basés sur l'IA.", author: { "@type": "LocalBusiness", name: "Déclic Digital", url: "https://declicdigital.net" }, datePublished: "2026-06-01", mainEntityOfPage: { "@type": "WebPage", "@id": "https://declicdigital.net/visibilite-ia" } };
 
   return (
     <PageLayout>
@@ -96,7 +96,7 @@ const Geo = () => {
         <title>Visibilité IA : apparaître dans ChatGPT et Google AI</title>
         <meta name="description" content="Optimisez votre présence dans les IA génératives. Déclic Digital vous aide à être cité par ChatGPT, Perplexity et Gemini. Audit gratuit." />
         <meta name="robots" content="index, follow" />
-        <link rel="canonical" href="https://declicdigital.net/visibilite-ia/" />
+        <link rel="canonical" href="https://declicdigital.net/visibilite-ia" />
         <script type="application/ld+json">{JSON.stringify(articleSchema)}</script>
         <script type="application/ld+json">{JSON.stringify(faqSchema)}</script>
       </Helmet>
