@@ -12,6 +12,25 @@ import { useAdminAuth } from "@/hooks/useAdminAuth";
 
 const CATEGORIES = ["Création de site", "SEO & Performance", "Stratégie digitale", "GEO, Visibilité IA", "Business"];
 
+// Convertit une valeur UTC stockée en DB (ex: "2026-07-27T05:00:00.000Z")
+// vers les champs <input type="date"> / <input type="time"> en heure locale du navigateur.
+// Ne JAMAIS faire de .split("T") sur une valeur UTC pour en extraire la date/heure :
+// ça affiche l'heure UTC brute au lieu de la reconvertir en heure locale (bug de drift à chaque sauvegarde).
+function toLocalDateInput(isoUtc: string): string {
+  const d = new Date(isoUtc);
+  const yyyy = d.getFullYear();
+  const mm = String(d.getMonth() + 1).padStart(2, "0");
+  const dd = String(d.getDate()).padStart(2, "0");
+  return `${yyyy}-${mm}-${dd}`;
+}
+
+function toLocalTimeInput(isoUtc: string): string {
+  const d = new Date(isoUtc);
+  const hh = String(d.getHours()).padStart(2, "0");
+  const min = String(d.getMinutes()).padStart(2, "0");
+  return `${hh}:${min}`;
+}
+
 const INK = "#2B1E3F";
 const INK_LIGHT = "rgba(43,30,63,0.50)";
 const INK_XLIGHT = "rgba(43,30,63,0.30)";
@@ -456,8 +475,8 @@ export default function AdminBlogEditor() {
         related_slugs: data.related_slugs ?? [], meta_title: data.meta_title ?? "",
         meta_description: data.meta_description ?? "",
         created_at: data.created_at ? data.created_at.split("T")[0] : new Date().toISOString().split("T")[0],
-        scheduled_at: data.scheduled_at ? data.scheduled_at.split("T")[0] : "",
-        scheduled_time: data.scheduled_at ? data.scheduled_at.split("T")[1]?.slice(0, 5) : "09:00",
+        scheduled_at: data.scheduled_at ? toLocalDateInput(data.scheduled_at) : "",
+        scheduled_time: data.scheduled_at ? toLocalTimeInput(data.scheduled_at) : "09:00",
       });
     });
   }, [isAdmin, id, isNew]);
