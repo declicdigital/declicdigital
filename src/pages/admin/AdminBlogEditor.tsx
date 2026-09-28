@@ -4,11 +4,12 @@ import {
   ArrowLeft, Save, Eye, Upload, X, Plus, Loader2, Calendar,
   Bold, Italic, Underline, Link as LinkIcon, List, ListOrdered,
   Heading2, Heading3, Quote, Code, AlignLeft, Image as ImageIcon,
-  RotateCcw, RotateCw, Minus, Zap, Pencil, Check
+  RotateCcw, RotateCw, Minus, Zap, Pencil, Check, FileUp
 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import AdminLayout from "@/components/admin/AdminLayout";
 import { useAdminAuth } from "@/hooks/useAdminAuth";
+import { importDocxArticle } from "@/lib/importDocxArticle";
 
 const CATEGORIES = ["Création de site", "SEO & Performance", "Stratégie digitale", "GEO, Visibilité IA", "Business"];
 
@@ -444,6 +445,10 @@ export default function AdminBlogEditor() {
   const { isAdmin, loading } = useAdminAuth();
   const navigate = useNavigate();
   const imageInputRef = useRef<HTMLInputElement>(null);
+  const docxInputRef = useRef<HTMLInputElement>(null);
+  const [importing, setImporting] = useState(false);
+  const [imported, setImported] = useState(false);
+  const [editorKey, setEditorKey] = useState(0);
 
   const [saving, setSaving] = useState(false);
   const [uploading, setUploading] = useState(false);
@@ -518,6 +523,36 @@ export default function AdminBlogEditor() {
     finally { setUploading(false); setUploadProgress(""); if (imageInputRef.current) imageInputRef.current.value = ""; }
   }
 
+  async function handleImportDocx(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0];
+    if (docxInputRef.current) docxInputRef.current.value = "";
+    if (!file) return;
+    if ((form.title || form.content) && !confirm("Remplacer le contenu actuel par celui du fichier Word ?")) return;
+    setImporting(true);
+    try {
+      const a = await importDocxArticle(file, CATEGORIES);
+      setForm((prev) => ({
+        ...prev,
+        title: a.title || prev.title,
+        slug: a.slug || prev.slug,
+        excerpt: a.excerpt || prev.excerpt,
+        content: a.content || prev.content,
+        category: a.category ?? prev.category,
+        meta_title: a.meta_title || prev.meta_title,
+        meta_description: a.meta_description || prev.meta_description,
+        tags: a.tags.length ? a.tags : prev.tags,
+        read_time: a.read_time || prev.read_time,
+      }));
+      setEditorKey((k) => k + 1); // recharge l'éditeur avec le nouveau contenu
+      if (a.warnings.length) alert("Import terminé, à vérifier :\n• " + a.warnings.join("\n• "));
+      setImported(true); setTimeout(() => setImported(false), 3000);
+    } catch (err: any) {
+      alert("Import impossible : " + err.message);
+    } finally {
+      setImporting(false);
+    }
+  }
+
   async function handleSave(publishNow = false) {
     if (!form.title || !form.slug) { alert("Le titre et le slug sont obligatoires."); return; }
     setSaving(true);
@@ -560,6 +595,14 @@ export default function AdminBlogEditor() {
             <h1 className="text-lg font-bold truncate max-w-xs" style={{ color: INK }}>{isNew ? "Nouvel article" : form.title || "Modifier"}</h1>
           </div>
           <div className="flex gap-2">
+            <input ref={docxInputRef} type="file" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document" onChange={handleImportDocx} className="hidden" />
+            <button onClick={() => docxInputRef.current?.click()} disabled={importing}
+              title="Remplir automatiquement l'article depuis un fichier Word (.docx)"
+              className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-sm font-medium disabled:opacity-50"
+              style={{ background: BG_CARD, color: INK, border: `1px dashed ${BORDER_INPUT}` }}>
+              {importing ? <Loader2 size={14} className="animate-spin" /> : <FileUp size={14} />}
+              {importing ? "Import..." : imported ? "✓ Importé" : "Importer un Word"}
+            </button>
             {!isNew && form.slug && (
               <a href={`/blog/${form.slug}`} target="_blank" rel="noopener noreferrer"
                 className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-sm font-medium"
@@ -612,7 +655,7 @@ export default function AdminBlogEditor() {
               <label className="block text-xs font-medium mb-2" style={{ color: INK_LIGHT }}>
                 Contenu * <span style={{ color: INK_XLIGHT }}>({form.content.length} caractères)</span>
               </label>
-              <WysiwygEditor value={form.content} onChange={(val) => update("content", val)} />
+              <WysiwygEditor key={editorKey} value={form.content} onChange={(val) => update("content", val)} />
             </div>
 
             <div className="rounded-2xl p-5 space-y-4" style={{ background: BG_CARD, border: `1px solid ${BORDER}` }}>
