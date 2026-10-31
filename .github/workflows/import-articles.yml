@@ -1,0 +1,36 @@
+name: Import des articles de blog
+
+# Se lance :
+#  - à la main (Actions > "Import des articles de blog" > Run workflow), sur la branche de votre choix
+#  - automatiquement quand des fichiers de content/articles/ sont fusionnés sur main
+on:
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Contrôle à blanc seulement (rien n'est écrit)"
+        type: boolean
+        default: false
+  push:
+    branches: [main]
+    paths:
+      - "content/articles/**"
+      - "scripts/import-articles.mjs"
+
+permissions:
+  contents: read
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Installer le client Supabase
+        run: npm install --no-save --no-package-lock @supabase/supabase-js@2
+      - name: Importer les articles
+        env:
+          SUPABASE_URL: https://iskxljribvfypkyappku.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ inputs.dry_run && '' || secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: node scripts/import-articles.mjs
